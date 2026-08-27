@@ -44,8 +44,15 @@ export default defineConfig({
             return "postprocessing";
           }
 
+          if (
+            id.includes("/three/examples/") ||
+            id.includes("/three/addons/")
+          ) {
+            return "three-extras";
+          }
+
           if (id.includes("/three/")) {
-            return "three";
+            return "three-core";
           }
 
           return undefined;
