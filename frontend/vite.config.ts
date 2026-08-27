@@ -3,22 +3,57 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   plugins: [react()],
+
   preview: {
     allowedHosts: true,
   },
+
   build: {
     target: "es2022",
     sourcemap: true,
+    chunkSizeWarningLimit: 500,
+
     rollupOptions: {
       output: {
-        manualChunks: {
-          react: ["react", "react-dom"],
-          cinematic: ["three", "@react-three/fiber"],
-          post: ["postprocessing", "@react-three/postprocessing"],
+        manualChunks(id) {
+          if (!id.includes("node_modules")) {
+            return undefined;
+          }
+
+          if (
+            id.includes("/react/") ||
+            id.includes("/react-dom/") ||
+            id.includes("/scheduler/")
+          ) {
+            return "react";
+          }
+
+          if (id.includes("/gsap/")) {
+            return "motion";
+          }
+
+          if (id.includes("@react-three/fiber")) {
+            return "r3f";
+          }
+
+          if (id.includes("@react-three/postprocessing")) {
+            return "r3-post";
+          }
+
+          if (id.includes("/postprocessing/")) {
+            return "postprocessing";
+          }
+
+          if (id.includes("/three/")) {
+            return "three";
+          }
+
+          return undefined;
         },
       },
     },
   },
+
   test: {
     environment: "jsdom",
     setupFiles: "./src/test/setup.ts",
