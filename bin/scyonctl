@@ -1,0 +1,972 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import json
+import os
+import subprocess
+import sys
+from pathlib import Path
+from typing import Any
+
+
+ROOT = Path(
+    "/root/savant-runtime"
+).resolve()
+
+KERNEL = (
+    ROOT
+    / "runtime/scyon/scyon_kernel.py"
+)
+
+REGISTRY = (
+    ROOT
+    / "runtime/scyon/focals/registry.json"
+)
+
+CONTRACT_VALIDATOR = (
+    ROOT
+    / "assurance/validators/"
+    "validate_savant_scyon_focal_contract.py"
+)
+
+AUTHORITY_VALIDATOR = (
+    ROOT
+    / "assurance/validators/"
+    "validate_scyon_focal_authority.sh"
+)
+
+LIVING_INTEGRATION_VALIDATOR = (
+    ROOT
+    / "assurance/validators/"
+    "validate_living_scyon_integration.py"
+)
+
+CONTRACT = (
+    ROOT
+    / "canon/structure/"
+    "SAVANT_SCYON_FOCAL_CONTRACT_v1.0.0.json"
+)
+
+
+class ScyonCtlError(RuntimeError):
+    pass
+
+
+def run(
+    command: list[str],
+) -> int:
+    return subprocess.run(
+        command,
+        cwd=str(ROOT),
+        check=False,
+    ).returncode
+
+
+def require_file(
+    path: Path,
+    label: str,
+) -> None:
+    if not path.is_file():
+        raise ScyonCtlError(
+            f"{label} missing: {path}"
+        )
+
+    if path.stat().st_size <= 0:
+        raise ScyonCtlError(
+            f"{label} empty: {path}"
+        )
+
+
+def load_registry() -> dict[str, Any]:
+    require_file(
+        REGISTRY,
+        "Scyon Focal registry",
+    )
+
+    try:
+        value = json.loads(
+            REGISTRY.read_text(
+                encoding="utf-8"
+            )
+        )
+
+    except json.JSONDecodeError as exc:
+        raise ScyonCtlError(
+            "invalid Focal registry JSON: "
+            f"{exc}"
+        ) from exc
+
+    if not isinstance(
+        value,
+        dict,
+    ):
+        raise ScyonCtlError(
+            "Focal registry root must be object"
+        )
+
+    if value.get(
+        "authority_state"
+    ) != "projection":
+        raise ScyonCtlError(
+            "Focal registry must remain a projection"
+        )
+
+    instances = value.get(
+        "instances"
+    )
+
+    if not isinstance(
+        instances,
+        list,
+    ):
+        raise ScyonCtlError(
+            "Focal registry instances must be list"
+        )
+
+    return value
+
+
+def safe_runtime_path(
+    raw: Any,
+) -> Path:
+    if not isinstance(
+        raw,
+        str,
+    ) or not raw:
+        raise ScyonCtlError(
+            "invalid Focal runtime path"
+        )
+
+    path = Path(
+        raw
+    ).resolve()
+
+    try:
+        path.relative_to(
+            ROOT
+        )
+
+    except ValueError as exc:
+        raise ScyonCtlError(
+            (
+                "Focal runtime escapes "
+                f"Savant root: {path}"
+            )
+        ) from exc
+
+    require_file(
+        path,
+        "Focal runtime",
+    )
+
+    if path.suffix != ".py":
+        raise ScyonCtlError(
+            (
+                "Focal runtime must be "
+                f"Python source: {path}"
+            )
+        )
+
+    return path
+
+
+def validate_contract() -> int:
+    require_file(
+        CONTRACT_VALIDATOR,
+        "Scyon contract validator",
+    )
+
+    require_file(
+        CONTRACT,
+        "Scyon contract",
+    )
+
+    return run(
+        [
+            sys.executable,
+            str(
+                CONTRACT_VALIDATOR
+            ),
+            str(
+                CONTRACT
+            ),
+        ]
+    )
+
+
+def validate_authority() -> int:
+    require_file(
+        AUTHORITY_VALIDATOR,
+        "Scyon authority validator",
+    )
+
+    return run(
+        [
+            str(
+                AUTHORITY_VALIDATOR
+            ),
+        ]
+    )
+
+
+def validate_living() -> int:
+    require_file(
+        LIVING_INTEGRATION_VALIDATOR,
+        (
+            "Living Scyon "
+            "integration validator"
+        ),
+    )
+
+    return run(
+        [
+            sys.executable,
+            str(
+                LIVING_INTEGRATION_VALIDATOR
+            ),
+        ]
+    )
+
+
+def focal_alias_map(
+    registry: dict[str, Any],
+) -> dict[str, dict[str, Any]]:
+    result: dict[
+        str,
+        dict[str, Any],
+    ] = {}
+
+    instances = registry[
+        "instances"
+    ]
+
+    for instance in instances:
+        if not isinstance(
+            instance,
+            dict,
+        ):
+            raise ScyonCtlError(
+                "Focal registry instance "
+                "must be object"
+            )
+
+        focal_id = instance.get(
+            "focal_id"
+        )
+
+        focal_kind = instance.get(
+            "focal_kind"
+        )
+
+        if not isinstance(
+            focal_id,
+            str,
+        ) or not focal_id:
+            raise ScyonCtlError(
+                "registered Focal missing focal_id"
+            )
+
+        aliases: list[str] = []
+
+        raw_aliases = instance.get(
+            "aliases",
+            [],
+        )
+
+        if not isinstance(
+            raw_aliases,
+            list,
+        ):
+            raise ScyonCtlError(
+                (
+                    "aliases must be list "
+                    f"for {focal_id}"
+                )
+            )
+
+        for alias in raw_aliases:
+            if not isinstance(
+                alias,
+                str,
+            ) or not alias:
+                raise ScyonCtlError(
+                    (
+                        "invalid alias for "
+                        f"{focal_id}"
+                    )
+                )
+
+            aliases.append(
+                alias
+            )
+
+        if isinstance(
+            focal_kind,
+            str,
+        ) and focal_kind:
+            aliases.append(
+                focal_kind
+            )
+
+        aliases.append(
+            focal_id
+        )
+
+        for alias in sorted(
+            set(
+                aliases
+            )
+        ):
+            existing = result.get(
+                alias
+            )
+
+            if (
+                existing is not None
+                and existing is not instance
+            ):
+                raise ScyonCtlError(
+                    (
+                        "duplicate Focal alias: "
+                        f"{alias}"
+                    )
+                )
+
+            result[
+                alias
+            ] = instance
+
+    return result
+
+
+def dispatch_focal(
+    instance: dict[str, Any],
+    arguments: list[str],
+) -> int:
+    focal_id = str(
+        instance.get(
+            "focal_id"
+        )
+    )
+
+    surface = instance.get(
+        "command_surface"
+    )
+
+    if not isinstance(
+        surface,
+        dict,
+    ):
+        raise ScyonCtlError(
+            (
+                "registered Focal has no "
+                f"command_surface: {focal_id}"
+            )
+        )
+
+    default_runtime = (
+        safe_runtime_path(
+            surface.get(
+                "default_runtime"
+            )
+        )
+    )
+
+    passthrough = surface.get(
+        "passthrough_commands",
+        [],
+    )
+
+    routes = surface.get(
+        "routes",
+        {},
+    )
+
+    if not isinstance(
+        passthrough,
+        list,
+    ):
+        raise ScyonCtlError(
+            (
+                "passthrough_commands "
+                f"must be list: {focal_id}"
+            )
+        )
+
+    if not isinstance(
+        routes,
+        dict,
+    ):
+        raise ScyonCtlError(
+            (
+                "routes must be object: "
+                f"{focal_id}"
+            )
+        )
+
+    if not arguments:
+        return focal_usage(
+            instance
+        )
+
+    command = arguments[
+        0
+    ]
+
+    remaining = arguments[
+        1:
+    ]
+
+    if command in {
+        "help",
+        "--help",
+        "-h",
+    }:
+        return focal_usage(
+            instance
+        )
+
+    if command in routes:
+        route = routes[
+            command
+        ]
+
+        if not isinstance(
+            route,
+            dict,
+        ):
+            raise ScyonCtlError(
+                (
+                    "invalid command route "
+                    f"{focal_id}:{command}"
+                )
+            )
+
+        runtime = safe_runtime_path(
+            route.get(
+                "runtime"
+            )
+        )
+
+        target_command = route.get(
+            "command"
+        )
+
+        if not isinstance(
+            target_command,
+            str,
+        ) or not target_command:
+            raise ScyonCtlError(
+                (
+                    "route target command "
+                    "missing for "
+                    f"{focal_id}:{command}"
+                )
+            )
+
+        return run(
+            [
+                sys.executable,
+                str(
+                    runtime
+                ),
+                *remaining,
+                target_command,
+            ]
+        )
+
+    if command in passthrough:
+        return run(
+            [
+                sys.executable,
+                str(
+                    default_runtime
+                ),
+                *remaining,
+                command,
+            ]
+        )
+
+    print(
+        (
+            "ERROR: unknown command for "
+            f"{focal_id}: {command}"
+        ),
+        file=sys.stderr,
+    )
+
+    return focal_usage(
+        instance,
+        exit_code=2,
+    )
+
+
+def focal_usage(
+    instance: dict[str, Any],
+    *,
+    exit_code: int = 0,
+) -> int:
+    focal_id = str(
+        instance.get(
+            "focal_id",
+            "unknown",
+        )
+    )
+
+    aliases = instance.get(
+        "aliases",
+        [],
+    )
+
+    surface = instance.get(
+        "command_surface",
+        {},
+    )
+
+    passthrough = (
+        surface.get(
+            "passthrough_commands",
+            [],
+        )
+        if isinstance(
+            surface,
+            dict,
+        )
+        else []
+    )
+
+    routes = (
+        surface.get(
+            "routes",
+            {},
+        )
+        if isinstance(
+            surface,
+            dict,
+        )
+        else {}
+    )
+
+    print(
+        f"Focal: {focal_id}"
+    )
+
+    if aliases:
+        print(
+            "Aliases: "
+            + ", ".join(
+                sorted(
+                    str(item)
+                    for item in aliases
+                )
+            )
+        )
+
+    print(
+        "Commands:"
+    )
+
+    commands = sorted(
+        set(
+            [
+                str(item)
+                for item in passthrough
+            ]
+            + [
+                str(item)
+                for item in routes
+            ]
+        )
+    )
+
+    for command in commands:
+        print(
+            f"  {command}"
+        )
+
+    return exit_code
+
+
+def list_focals(
+    registry: dict[str, Any],
+) -> int:
+    instances = registry[
+        "instances"
+    ]
+
+    if not instances:
+        print(
+            "No registered Focals."
+        )
+
+        return 0
+
+    for instance in sorted(
+        instances,
+        key=lambda item: str(
+            item.get(
+                "focal_id",
+                "",
+            )
+        ),
+    ):
+        focal_id = instance.get(
+            "focal_id"
+        )
+
+        kind = instance.get(
+            "focal_kind"
+        )
+
+        status = instance.get(
+            "status"
+        )
+
+        aliases = instance.get(
+            "aliases",
+            [],
+        )
+
+        alias_text = ", ".join(
+            str(alias)
+            for alias in aliases
+        )
+
+        print(
+            (
+                f"{focal_id}"
+                f"\tkind={kind}"
+                f"\tstatus={status}"
+                f"\taliases={alias_text}"
+            )
+        )
+
+    return 0
+
+
+def usage(
+    registry: dict[str, Any] | None = None,
+) -> int:
+    print(
+        "Usage:"
+    )
+
+    print(
+        "  scyonctl [KERNEL_COMMAND ...]"
+    )
+
+    print(
+        "  scyonctl validate"
+    )
+
+    print(
+        "  scyonctl validate-authority"
+    )
+
+    print(
+        "  scyonctl validate-living"
+    )
+
+    print(
+        "  scyonctl verify"
+    )
+
+    print(
+        "  scyonctl focals"
+    )
+
+    print(
+        "  scyonctl focal <alias> <command> [ARGS ...]"
+    )
+
+    print(
+        "  scyonctl <focal-alias> <command> [ARGS ...]"
+    )
+
+    if registry is not None:
+        aliases = focal_alias_map(
+            registry
+        )
+
+        public_aliases = sorted(
+            alias
+            for alias in aliases
+            if not alias.startswith(
+                "focal:"
+            )
+        )
+
+        if public_aliases:
+            print()
+            print(
+                "Registered Focal aliases:"
+            )
+
+            for alias in public_aliases:
+                print(
+                    f"  {alias}"
+                )
+
+    return 0
+
+
+def verify(
+    registry: dict[str, Any],
+) -> int:
+    stages: list[
+        tuple[
+            str,
+            Any,
+        ]
+    ] = [
+        (
+            "contract",
+            validate_contract,
+        ),
+        (
+            "authority",
+            validate_authority,
+        ),
+    ]
+
+    if (
+        LIVING_INTEGRATION_VALIDATOR
+        .is_file()
+    ):
+        stages.append(
+            (
+                "living-integration",
+                validate_living,
+            )
+        )
+
+    aliases = focal_alias_map(
+        registry
+    )
+
+    living_structure = (
+        aliases.get(
+            "living-structure"
+        )
+    )
+
+    if living_structure is not None:
+        surface = (
+            living_structure.get(
+                "command_surface",
+                {},
+            )
+        )
+
+        routes = (
+            surface.get(
+                "routes",
+                {},
+            )
+            if isinstance(
+                surface,
+                dict,
+            )
+            else {}
+        )
+
+        if "state-test" in routes:
+            stages.append(
+                (
+                    "living-structure-state",
+                    lambda: dispatch_focal(
+                        living_structure,
+                        [
+                            "state-test"
+                        ],
+                    ),
+                )
+            )
+
+    for label, function in stages:
+        result = function()
+
+        if result != 0:
+            print(
+                (
+                    "ERROR: Scyon verification "
+                    f"failed: {label}"
+                ),
+                file=sys.stderr,
+            )
+
+            return result
+
+    print(
+        "SCYON VERIFY: passed"
+    )
+
+    return 0
+
+
+def kernel_passthrough(
+    arguments: list[str],
+) -> int:
+    require_file(
+        KERNEL,
+        "Scyon kernel",
+    )
+
+    result = (
+        validate_contract()
+    )
+
+    if result != 0:
+        print(
+            (
+                "ERROR: Scyon contract "
+                "validation failed"
+            ),
+            file=sys.stderr,
+        )
+
+        return result
+
+    os.execv(
+        sys.executable,
+        [
+            sys.executable,
+            str(
+                KERNEL
+            ),
+            *arguments,
+        ],
+    )
+
+    return 0
+
+
+def main() -> int:
+    arguments = sys.argv[
+        1:
+    ]
+
+    registry = (
+        load_registry()
+    )
+
+    aliases = focal_alias_map(
+        registry
+    )
+
+    if not arguments:
+        return kernel_passthrough(
+            []
+        )
+
+    command = arguments[
+        0
+    ]
+
+    remaining = arguments[
+        1:
+    ]
+
+    if command in {
+        "help",
+        "--help",
+        "-h",
+    }:
+        return usage(
+            registry
+        )
+
+    if command == "validate":
+        return validate_contract()
+
+    if command == "validate-authority":
+        return validate_authority()
+
+    if command == "validate-living":
+        return validate_living()
+
+    if command == "verify":
+        return verify(
+            registry
+        )
+
+    if command == "focals":
+        return list_focals(
+            registry
+        )
+
+    if command == "focal":
+        if not remaining:
+            print(
+                "ERROR: Focal alias required",
+                file=sys.stderr,
+            )
+
+            return usage(
+                registry
+            )
+
+        alias = remaining[
+            0
+        ]
+
+        instance = aliases.get(
+            alias
+        )
+
+        if instance is None:
+            print(
+                (
+                    "ERROR: unknown Focal: "
+                    f"{alias}"
+                ),
+                file=sys.stderr,
+            )
+
+            return 2
+
+        return dispatch_focal(
+            instance,
+            remaining[
+                1:
+            ],
+        )
+
+    instance = aliases.get(
+        command
+    )
+
+    if instance is not None:
+        return dispatch_focal(
+            instance,
+            remaining,
+        )
+
+    return kernel_passthrough(
+        arguments
+    )
+
+
+if __name__ == "__main__":
+    try:
+        raise SystemExit(
+            main()
+        )
+
+    except (
+        OSError,
+        ValueError,
+        KeyError,
+        ScyonCtlError,
+    ) as exc:
+        print(
+            (
+                "ERROR: "
+                f"{type(exc).__name__}: "
+                f"{exc}"
+            ),
+            file=sys.stderr,
+        )
+
+        raise SystemExit(1)

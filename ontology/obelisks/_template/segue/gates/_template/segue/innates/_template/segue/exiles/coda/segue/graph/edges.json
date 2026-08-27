@@ -1,0 +1,18 @@
+{
+  "id": "coda.segue.edges",
+  "owner": "coda",
+  "type": "segue_edge_registry",
+  "status": "active",
+  "edges": [
+    {
+      "source": "exile:palaver",
+      "target": "exile:coda",
+      "relation": "delegates_filesystem_mutation_to",
+      "operations": [
+        "replace_text"
+      ],
+      "authority_transfer": false,
+      "authority_effect": "none"
+    }
+  ]
+}

@@ -1,0 +1,1071 @@
+schema: savant://lexicon/terminology-evolution/2.0.0
+ledger_id: savant.lexicon.terminology-evolution
+version: 2.0.0
+authority:
+  state: accepted
+  source: user
+  accepted_at: '2026-08-09'
+  mutable_history: false
+  precedence: current-user-directive
+laws:
+- Canonical terminology changes are appended, never erased.
+- A superseded term remains historical evidence but ceases to be canonical.
+- Compatibility aliases may resolve old terms to current terms.
+- Compatibility aliases never make a superseded term canonical again.
+- New implementation uses the current canonical term.
+- Historical documents are not rewritten merely to conceal prior terminology.
+- Generated wavres prefer the current canonical term.
+- Filesystem presence does not establish lexical authority.
+- Lexical migrations preserve lineage and provenance.
+- Terminology evolution preserves every accepted lexical transition.
+- A terminology change never silently destroys the identity of the concept it renames.
+- Canonical terminology is governed through the Lexicon.
+- The Lexicon is a Cyphor Tidal specialization.
+- Historical aliases are readable but never preferred for canonical writes.
+- Tidals obey the same supersession laws as every other Savant concept.
+- Shard remains globally canonical.
+- Mote replaces Shard only as the historical second identity-tier label.
+- Kindred does not replace Lineage.
+- Evidence and Attestation remain distinct concepts.
+- Mutation remains Mutation.
+- Convex supersedes Arc.
+- Tomb supersedes Vault.
+tidals:
+  canonical_family:
+    singular: tidal
+    plural: tidals
+    display: Tidals
+  definition: 'Savant''s canonical family of nine reusable, shadeable, fluid, specialization-driven modular
+    living elements. Each Tidal defines a distinct reusable capability domain and may be instantiated
+    through a specialized centra, credenda, parameters, sidecars, visages, veneers, ruts, and wavres without
+    duplicating the underlying Tidal substance.
+
+    '
+  cardinality:
+    canonical_count: 9
+    extensible_family: false
+    extension_requires_explicit_authority: true
+  members:
+  - id: tidal:scyon
+    term: scyon
+    display: Scyon
+  - id: tidal:splyce
+    term: splyce
+    display: Splyce
+  - id: tidal:scrybe
+    term: scrybe
+    display: Scrybe
+  - id: tidal:pryme
+    term: pryme
+    display: Pryme
+  - id: tidal:cyphor
+    term: cyphor
+    display: Cyphor
+  - id: tidal:thryce
+    term: thryce
+    display: Thryce
+  - id: tidal:spyral
+    term: spyral
+    display: Spyral
+  - id: tidal:lythe
+    term: lythe
+    display: Lythe
+  - id: tidal:dryve
+    term: dryve
+    display: Dryve
+  lexicon_binding:
+    owner: tidal:cyphor
+    shade: cyphor:lexicon
+    centra: centra:lexical-governance
+    jurisdiction:
+      canonical_lexemes: true
+      terminology_evolution: true
+      alias_resolution: true
+      supersession_resolution: true
+      lexical_normalization: true
+      semantic_equivalence: true
+      compatibility_vocabulary: true
+      lexical_translation: true
+      lexical_collision_detection: true
+      lexical_validation_wavres: true
+    consumers:
+      scyon:
+        role: lexical-structure-consumer
+      splyce:
+        role: lexical-presentation-consumer
+      scrybe:
+        role: lexical-history-consumer
+      pryme:
+        role: lexical-authority-consumer
+      cyphor:
+        role: lexical-governance-owner
+      thryce:
+        role: lexical-validation-consumer
+      spyral:
+        role: lexical-evolution-consumer
+      lythe:
+        role: lexical-wavre-consumer
+      dryve:
+        role: lexical-migration-consumer
+    invariants:
+      independent_lexicon_store: false
+      duplicate_lexical_authority: false
+      historical_lineage_preserved: true
+      provenance_preserved: true
+      canonical_write_terms_only: true
+      historical_alias_reads_allowed: true
+      destructive_rename_allowed: false
+      wavres_authoritative: false
+current_identity_hierarchy:
+  cardinality: 9
+  tiers:
+  - ordinal: 1
+    canonical: iota
+  - ordinal: 2
+    canonical: mote
+    historical_tier_aliases:
+    - shard
+  - ordinal: 3
+    canonical: ink
+    historical_aliases:
+    - trait
+  - ordinal: 4
+    canonical: quirk
+  - ordinal: 5
+    canonical: prodigal
+  - ordinal: 6
+    canonical: exile
+  - ordinal: 7
+    canonical: innate
+  - ordinal: 8
+    canonical: wyrmhole
+    historical_aliases:
+    - gate
+    - portal
+  - ordinal: 9
+    canonical: obelisk
+  shard_exception:
+    shard_globally_canonical: true
+    mote_replaces_global_shard: false
+    mapping_scope: identity-tier-2-only
+changes:
+- change_id: lexchange:entity-form-swarm-riot
+  concept_id: concept:riot
+  status: accepted
+  canonical:
+    term: riot
+    display: Riot
+  definition: 'The current Savant architectural concept historically called Entity, then Form, then Swarm.
+
+    '
+  lineage:
+    sequence:
+    - entity
+    - form
+    - swarm
+    - riot
+    supersedes:
+    - entity
+    - form
+    - swarm
+    superseded_by: null
+  compatibility:
+    aliases:
+      entity: riot
+      form: riot
+      swarm: riot
+    write_policy:
+      canonical_only: true
+    read_policy:
+      historical_aliases_allowed: true
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:nomenclature-lexicon
+  concept_id: concept:lexicon
+  status: accepted
+  canonical:
+    term: lexicon
+    display: Lexicon
+  lineage:
+    sequence:
+    - nomenclature
+    - lexicon
+    supersedes:
+    - nomenclature
+    superseded_by: null
+  compatibility:
+    aliases:
+      nomenclature: lexicon
+  tidal:
+    owner: cyphor
+    shade: cyphor:lexicon
+    centra: centra:lexical-governance
+  provenance:
+    authority: user
+    date: '2025-12-22'
+- change_id: lexchange:omnistructure-anomaly
+  concept_id: concept:anomaly
+  status: accepted
+  canonical:
+    term: anomaly
+    display: Anomaly
+  lineage:
+    sequence:
+    - omnistructure
+    - anomaly
+    supersedes:
+    - omnistructure
+    superseded_by: null
+  compatibility:
+    aliases:
+      omnistructure: anomaly
+  provenance:
+    authority: user
+    date: '2025-11-20'
+- change_id: lexchange:living-substrates-tidals
+  concept_id: concept:tidals
+  status: accepted
+  canonical:
+    term: tidals
+    singular: tidal
+    display: Tidals
+  members:
+  - scyon
+  - splyce
+  - scrybe
+  - pryme
+  - cyphor
+  - thryce
+  - spyral
+  - lythe
+  - dryve
+  lineage:
+    sequence:
+    - living substrates
+    - living substrate family
+    - fluid templates
+    - fluid modular elements
+    - living modular elements
+    - tidals
+    supersedes:
+    - living substrates
+    - living substrate family
+    - fluid templates
+    - fluid modular elements
+    - living modular elements
+    superseded_by: null
+  compatibility:
+    aliases:
+      living substrates: tidals
+      living substrate family: tidals
+      fluid templates: tidals
+      fluid modular elements: tidals
+      living modular elements: tidals
+  cardinality:
+    canonical_count: 9
+    extensible_family: false
+    extension_requires_explicit_authority: true
+  provenance:
+    authority: user
+    date: '2026-08-08'
+- change_id: lexchange:cypher-cyphor
+  concept_id: concept:tidal:cyphor
+  status: accepted
+  canonical:
+    term: cyphor
+    display: Cyphor
+  lineage:
+    sequence:
+    - cypher
+    - cyphor
+    supersedes:
+    - cypher
+    superseded_by: null
+  compatibility:
+    aliases:
+      cypher: cyphor
+    identifiers:
+      tidal:cypher: tidal:cyphor
+      cypher:lexicon: cyphor:lexicon
+      binding:lexicon:cypher: binding:lexicon:cyphor
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:trait-ink
+  concept_id: concept:identity-tier-3
+  status: accepted
+  canonical:
+    term: ink
+    display: Ink
+  lineage:
+    sequence:
+    - trait
+    - ink
+    supersedes:
+    - trait
+    superseded_by: null
+  compatibility:
+    aliases:
+      trait: ink
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:gate-portal-wyrmhole
+  concept_id: concept:identity-tier-8
+  status: accepted
+  canonical:
+    term: wyrmhole
+    display: Wyrmhole
+  lineage:
+    sequence:
+    - gate
+    - portal
+    - wyrmhole
+    supersedes:
+    - gate
+    - portal
+    superseded_by: null
+  compatibility:
+    aliases:
+      gate: wyrmhole
+      portal: wyrmhole
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:identity-tier-shard-mote
+  concept_id: concept:identity-tier-2
+  status: accepted
+  canonical:
+    term: mote
+    display: Mote
+  lineage:
+    sequence:
+    - shard
+    - mote
+  compatibility:
+    aliases:
+      shard: mote
+  scope:
+    identity_tier_only: true
+    tier: 2
+    global_shard_affected: false
+  invariants:
+    shard_remains_global_primitive: true
+    shard_remains_canonical: true
+    mote_does_not_supersede_global_shard: true
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:focal-central-centra
+  concept_id: concept:centra
+  status: accepted
+  canonical:
+    term: centra
+    display: Centra
+  lineage:
+    sequence:
+    - focal
+    - central
+    - centra
+  supersedes:
+  - focal
+  - central
+  compatibility:
+    aliases:
+      focal: centra
+      central: centra
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:instance-shade
+  concept_id: concept:shade
+  status: accepted
+  canonical:
+    term: shade
+    display: Shade
+  supersedes:
+  - instance
+  compatibility:
+    aliases:
+      instance: shade
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:slot-rut
+  concept_id: concept:rut
+  status: accepted
+  canonical:
+    term: rut
+    display: Rut
+  supersedes:
+  - slot
+  compatibility:
+    aliases:
+      slot: rut
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:mask-visage
+  concept_id: concept:visage
+  status: accepted
+  canonical:
+    term: visage
+    display: Visage
+  supersedes:
+  - mask
+  compatibility:
+    aliases:
+      mask: visage
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:attachment-sidecar
+  concept_id: concept:sidecar
+  status: accepted
+  canonical:
+    term: sidecar
+    display: Sidecar
+  supersedes:
+  - attachment
+  compatibility:
+    aliases:
+      attachment: sidecar
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:overlay-veneer
+  concept_id: concept:veneer
+  status: accepted
+  canonical:
+    term: veneer
+    display: Veneer
+  supersedes:
+  - overlay
+  compatibility:
+    aliases:
+      overlay: veneer
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:policy-credenda
+  concept_id: concept:credenda
+  status: accepted
+  canonical:
+    term: credenda
+    display: Credenda
+  supersedes:
+  - policy
+  compatibility:
+    aliases:
+      policy: credenda
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:projection-wavre
+  concept_id: concept:wavre
+  status: accepted
+  canonical:
+    term: wavre
+    display: Wavre
+  supersedes:
+  - projection
+  compatibility:
+    aliases:
+      projection: wavre
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:registry-sear
+  concept_id: concept:sear
+  status: accepted
+  canonical:
+    term: sear
+    display: Sear
+  supersedes:
+  - registry
+  compatibility:
+    aliases:
+      registry: sear
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:runtime-igneo
+  concept_id: concept:igneo
+  status: accepted
+  canonical:
+    term: igneo
+    display: Igneo
+  supersedes:
+  - runtime
+  compatibility:
+    aliases:
+      runtime: igneo
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:interface-inface
+  concept_id: concept:inface
+  status: accepted
+  canonical:
+    term: inface
+    display: Inface
+  supersedes:
+  - interface
+  compatibility:
+    aliases:
+      interface: inface
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:graph-gridd
+  concept_id: concept:gridd
+  status: accepted
+  canonical:
+    term: gridd
+    display: Gridd
+  supersedes:
+  - graph
+  compatibility:
+    aliases:
+      graph: gridd
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:state-vitae
+  concept_id: concept:vitae
+  status: accepted
+  canonical:
+    term: vitae
+    display: Vitae
+  supersedes:
+  - state
+  - moot
+  compatibility:
+    aliases:
+      state: vitae
+      moot: vitae
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:token-coinage
+  concept_id: concept:coinage
+  status: accepted
+  canonical:
+    term: coinage
+    display: Coinage
+  supersedes:
+  - token
+  compatibility:
+    aliases:
+      token: coinage
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:function-oblast
+  concept_id: concept:oblast
+  status: accepted
+  canonical:
+    term: oblast
+    display: Oblast
+  supersedes:
+  - function
+  - frisk
+  compatibility:
+    aliases:
+      function: oblast
+      frisk: oblast
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:variable-variant
+  concept_id: concept:variant
+  status: accepted
+  canonical:
+    term: variant
+    display: Variant
+  lineage:
+    sequence:
+    - variable
+    - wanderer
+    - unset
+    - variate
+    - variant
+  supersedes:
+  - variable
+  - wanderer
+  - unset
+  - variate
+  compatibility:
+    aliases:
+      variable: variant
+      wanderer: variant
+      unset: variant
+      variate: variant
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:import-insend
+  concept_id: concept:insend
+  status: accepted
+  canonical:
+    term: insend
+    display: Insend
+  supersedes:
+  - import
+  - florate
+  compatibility:
+    aliases:
+      import: insend
+      florate: insend
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:export-outsend
+  concept_id: concept:outsend
+  status: accepted
+  canonical:
+    term: outsend
+    display: Outsend
+  supersedes:
+  - export
+  - fascate
+  compatibility:
+    aliases:
+      export: outsend
+      fascate: outsend
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:adapter-linka
+  concept_id: concept:linka
+  status: accepted
+  canonical:
+    term: linka
+    display: Linka
+  supersedes:
+  - adapter
+  - glove
+  compatibility:
+    aliases:
+      adapter: linka
+      glove: linka
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:sandbox-arkade
+  concept_id: concept:arkade
+  status: accepted
+  canonical:
+    term: arkade
+    display: Arkade
+  supersedes:
+  - sandbox
+  - nullix
+  compatibility:
+    aliases:
+      sandbox: arkade
+      nullix: arkade
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:component-secton
+  concept_id: concept:secton
+  status: accepted
+  canonical:
+    term: secton
+    display: Secton
+  supersedes:
+  - component
+  - exacto
+  compatibility:
+    aliases:
+      component: secton
+      exacto: secton
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:module-slab
+  concept_id: concept:slab
+  status: accepted
+  canonical:
+    term: slab
+    display: Slab
+  supersedes:
+  - module
+  compatibility:
+    aliases:
+      module: slab
+  notes:
+  - Slab is canonical for Module.
+  - Historical Token use of Slab is superseded by Coinage.
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:object-forma
+  concept_id: concept:forma
+  status: accepted
+  canonical:
+    term: forma
+    display: Forma
+  supersedes:
+  - object
+  compatibility:
+    aliases:
+      object: forma
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:record-almanac
+  concept_id: concept:almanac
+  status: accepted
+  canonical:
+    term: almanac
+    display: Almanac
+  supersedes:
+  - record
+  compatibility:
+    aliases:
+      record: almanac
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:node-tox
+  concept_id: concept:tox
+  status: accepted
+  canonical:
+    term: tox
+    display: Tox
+  supersedes:
+  - node
+  compatibility:
+    aliases:
+      node: tox
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:schema-tracery
+  concept_id: concept:tracery
+  status: accepted
+  canonical:
+    term: tracery
+    display: Tracery
+  supersedes:
+  - schema
+  compatibility:
+    aliases:
+      schema: tracery
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:validator-cert
+  concept_id: concept:cert
+  status: accepted
+  canonical:
+    term: cert
+    display: Cert
+  supersedes:
+  - validator
+  compatibility:
+    aliases:
+      validator: cert
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:recovery-rebirth
+  concept_id: concept:rebirth
+  status: accepted
+  canonical:
+    term: rebirth
+    display: Rebirth
+  supersedes:
+  - recovery
+  compatibility:
+    aliases:
+      recovery: rebirth
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:arc-convex
+  concept_id: concept:convex
+  status: accepted
+  canonical:
+    term: convex
+    display: Convex
+  lineage:
+    sequence:
+    - arc
+    - convex
+  supersedes:
+  - arc
+  compatibility:
+    aliases:
+      arc: convex
+  exclusions:
+  - mutation
+  - vault
+  - tomb
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:vault-tomb
+  concept_id: concept:tomb
+  status: accepted
+  canonical:
+    term: tomb
+    display: Tomb
+  lineage:
+    sequence:
+    - vault
+    - tomb
+  supersedes:
+  - vault
+  compatibility:
+    aliases:
+      vault: tomb
+  exclusions:
+  - arc
+  - convex
+  - mutation
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:caelus-caevas
+  concept_id: concept:caevas
+  status: accepted
+  canonical:
+    term: caevas
+    display: Caevas
+  lineage:
+    sequence:
+    - caelus
+    - chamberlain
+    - occam
+    - caelus
+    - caevas
+  supersedes:
+  - caelus
+  - chamberlain
+  - occam
+  compatibility:
+    aliases:
+      caelus: caevas
+      chamberlain: caevas
+      occam: caevas
+  provenance:
+    authority: user
+    date: '2026-08-09'
+- change_id: lexchange:kindred-distinct
+  concept_id: concept:kindred
+  status: accepted
+  canonical:
+    term: kindred
+    display: Kindred
+  definition: Canonical relationship methodology and universal typed relationship system.
+  lineage:
+    sequence:
+    - kindred
+    supersedes: []
+    superseded_by: null
+  compatibility:
+    aliases: {}
+    write_policy:
+      canonical_only: true
+    read_policy:
+      historical_aliases_allowed: true
+  relationships:
+  - type: consumed_by
+    target: service:kinship
+  provenance:
+    authority: accepted
+    source: constitutional-bootstrap and current user directive
+    date: '2026-08-09'
+- change_id: lexchange:kinship-distinct
+  concept_id: concept:service:kinship
+  status: accepted
+  canonical:
+    term: kinship
+    display: Kinship
+  definition: Functional relationship-plane service consuming Kindred.
+  lineage:
+    sequence:
+    - kinship
+    supersedes: []
+    superseded_by: null
+  dependencies:
+  - system:kindred
+  relationships:
+  - type: depends_on
+    target: system:kindred
+  - type: implemented_through
+    target: exile:modus
+  implementation:
+    service: service:kinship
+    runtime: runtime/kinship
+  compatibility:
+    aliases: {}
+    write_policy:
+      canonical_only: true
+    read_policy:
+      historical_aliases_allowed: true
+  provenance:
+    authority: accepted
+    source: constitutional-bootstrap and current user directive
+    date: '2026-08-09'
+retained_terms:
+  ontology:
+    canonical: ontology
+    rejected_proposals:
+    - pyramid
+  authority:
+    canonical: authority
+    rejected_proposals:
+    - warrant
+  lineage:
+    canonical: lineage
+    distinct_from:
+    - kindred
+  provenance:
+    canonical: provenance
+    rejected_proposals:
+    - genysis
+  evidence:
+    canonical: evidence
+    rejected_proposals:
+    - testa
+  admission:
+    canonical: admission
+    rejected_proposals:
+    - entra
+  attestation:
+    canonical: attestation
+    rejected_proposals:
+    - testa
+  mutation:
+    canonical: mutation
+    distinct_from:
+    - arc
+    - convex
+  shard:
+    canonical: shard
+    globally_canonical: true
+    distinct_from:
+    - mote
+  kindred:
+    canonical: kindred
+    role: relationship-methodology-system
+    distinct_from:
+    - kinship
+  kinship:
+    canonical: kinship
+    role: functional-relationship-plane-service
+    depends_on:
+    - system:kindred
+    distinct_from:
+    - kindred
+compatibility:
+  historical_alias_reads: true
+  canonical_writes_only: true
+  aliases:
+    entity: riot
+    form: riot
+    swarm: riot
+    nomenclature: lexicon
+    omnistructure: anomaly
+    cypher: cyphor
+    trait: ink
+    gate: wyrmhole
+    portal: wyrmhole
+    focal: centra
+    central: centra
+    instance: shade
+    slot: rut
+    mask: visage
+    attachment: sidecar
+    overlay: veneer
+    policy: credenda
+    projection: wavre
+    registry: sear
+    runtime: igneo
+    interface: inface
+    graph: gridd
+    state: vitae
+    token: coinage
+    function: oblast
+    variable: variant
+    wanderer: variant
+    unset: variant
+    variate: variant
+    import: insend
+    florate: insend
+    export: outsend
+    fascate: outsend
+    adapter: linka
+    glove: linka
+    sandbox: arkade
+    nullix: arkade
+    component: secton
+    exacto: secton
+    module: slab
+    object: forma
+    record: almanac
+    node: tox
+    schema: tracery
+    validator: cert
+    recovery: rebirth
+    arc: convex
+    vault: tomb
+    caelus: caevas
+    chamberlain: caevas
+    occam: caevas
+rejected:
+  pyramid:
+    intended_concept: ontology
+    status: rejected
+  warrant:
+    intended_concept: authority
+    status: rejected
+  genysis:
+    intended_concept: provenance
+    status: rejected
+  testa:
+    intended_concepts:
+    - evidence
+    - attestation
+    status: rejected
+  entra:
+    intended_concept: admission
+    status: rejected
+invariants:
+  tidal_count: 9
+  identity_hierarchy_count: 9
+  cyphor_is_tidal: true
+  cypher_is_historical: true
+  lexicon_owned_by_cyphor: true
+  shard_is_globally_canonical: true
+  mote_only_replaces_identity_tier_shard: true
+  identity_tier_3_is_ink: true
+  identity_tier_8_is_wyrmhole: true
+  riot_supersedes_swarm: true
+  centra_supersedes_focal: true
+  shade_supersedes_instance: true
+  rut_supersedes_slot: true
+  visage_supersedes_mask: true
+  sidecar_supersedes_attachment: true
+  veneer_supersedes_overlay: true
+  credenda_supersedes_policy: true
+  wavre_supersedes_projection: true
+  convex_supersedes_arc: true
+  tomb_supersedes_vault: true
+  mutation_remains_mutation: true
+  lineage_is_not_kindred: true
+  evidence_is_not_attestation: true
+  kindred_is_active: true
+  kinship_is_active: true
+  kindred_is_not_kinship: true
+  kinship_is_not_kindred: true
+  kinship_depends_on_kindred: true
+  kinship_does_not_supersede_kindred: true
+  kindred_does_not_supersede_kinship: true
+mutation_authorized: false
+physical_migration_authorized: false

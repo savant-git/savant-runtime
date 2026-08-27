@@ -1,0 +1,286 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import json
+import subprocess
+import sys
+from pathlib import Path
+
+
+ROOT = Path("/root/savant-runtime")
+
+PYTHON = (
+    ROOT
+    / "bin"
+    / "identity-quality-python"
+)
+
+BUILDER = (
+    ROOT
+    / "tools"
+    / "identity_quality"
+    / "promotion"
+    / "build_identity_promotion_queue.py"
+)
+
+REPORT_ROOT = (
+    ROOT
+    / "reports"
+    / "identity_quality"
+    / "promotion"
+)
+
+LATEST_JSON = (
+    REPORT_ROOT
+    / "latest.json"
+)
+
+LATEST_MARKDOWN = (
+    REPORT_ROOT
+    / "latest.md"
+)
+
+TASKS = (
+    REPORT_ROOT
+    / "tasks.md"
+)
+
+
+def execute(
+    command: list[str],
+) -> int:
+    return subprocess.run(
+        command,
+        cwd=str(ROOT),
+        check=False,
+    ).returncode
+
+
+def print_file(
+    path: Path,
+) -> int:
+    if not path.is_file():
+        print(
+            f"ERROR: file does not exist: {path}",
+            file=sys.stderr,
+        )
+
+        return 1
+
+    print(
+        path.read_text(
+            encoding="utf-8",
+        ),
+        end="",
+    )
+
+    return 0
+
+
+def status() -> int:
+    result: dict[str, object] = {
+        "builder": str(BUILDER),
+        "builder_exists": (
+            BUILDER.is_file()
+        ),
+        "latest_json": str(
+            LATEST_JSON
+        ),
+        "latest_json_exists": (
+            LATEST_JSON.is_file()
+        ),
+        "latest_markdown": str(
+            LATEST_MARKDOWN
+        ),
+        "latest_markdown_exists": (
+            LATEST_MARKDOWN.is_file()
+        ),
+        "tasks": str(TASKS),
+        "tasks_exists": (
+            TASKS.is_file()
+        ),
+    }
+
+    if LATEST_JSON.is_file():
+        try:
+            value = json.loads(
+                LATEST_JSON.read_text(
+                    encoding="utf-8",
+                )
+            )
+
+            if isinstance(value, dict):
+                result["generated_at"] = (
+                    value.get(
+                        "generated_at"
+                    )
+                )
+
+                result["digest"] = (
+                    value.get(
+                        "digest"
+                    )
+                )
+
+                result["statistics"] = (
+                    value.get(
+                        "statistics"
+                    )
+                )
+
+                queue = value.get(
+                    "queue"
+                )
+
+                if (
+                    isinstance(queue, list)
+                    and queue
+                ):
+                    result["next"] = (
+                        queue[0]
+                    )
+
+        except Exception as exc:
+            result["read_error"] = (
+                repr(exc)
+            )
+
+    print(
+        json.dumps(
+            result,
+            ensure_ascii=False,
+            indent=2,
+            sort_keys=True,
+        )
+    )
+
+    return 0
+
+
+def next_subject() -> int:
+    if not LATEST_JSON.is_file():
+        return 1
+
+    value = json.loads(
+        LATEST_JSON.read_text(
+            encoding="utf-8",
+        )
+    )
+
+    queue = value.get(
+        "queue"
+    )
+
+    if (
+        not isinstance(queue, list)
+        or not queue
+    ):
+        print(
+            json.dumps(
+                {
+                    "next": None,
+                    "queue_empty": True,
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+
+        return 0
+
+    print(
+        json.dumps(
+            queue[0],
+            ensure_ascii=False,
+            indent=2,
+            sort_keys=True,
+        )
+    )
+
+    return 0
+
+
+def usage() -> int:
+    print(
+        """
+identity-promotionctl build
+identity-promotionctl strict
+identity-promotionctl status
+identity-promotionctl next
+identity-promotionctl show
+identity-promotionctl tasks
+identity-promotionctl json
+"""
+    )
+
+    return 0
+
+
+def main() -> int:
+    arguments = sys.argv[1:]
+
+    if not arguments:
+        return usage()
+
+    command = arguments[0]
+    remaining = arguments[1:]
+
+    if command in {
+        "help",
+        "--help",
+        "-h",
+    }:
+        return usage()
+
+    if command == "build":
+        return execute(
+            [
+                str(PYTHON),
+                str(BUILDER),
+                *remaining,
+            ]
+        )
+
+    if command == "strict":
+        return execute(
+            [
+                str(PYTHON),
+                str(BUILDER),
+                "--strict",
+                *remaining,
+            ]
+        )
+
+    if command == "status":
+        return status()
+
+    if command == "next":
+        return next_subject()
+
+    if command == "show":
+        return print_file(
+            LATEST_MARKDOWN
+        )
+
+    if command == "tasks":
+        return print_file(
+            TASKS
+        )
+
+    if command == "json":
+        return print_file(
+            LATEST_JSON
+        )
+
+    print(
+        f"ERROR: unknown command: {command}",
+        file=sys.stderr,
+    )
+
+    return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

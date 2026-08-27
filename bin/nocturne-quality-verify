@@ -1,0 +1,110 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+ROOT="/root/savant-runtime"
+REPORT_ROOT="$ROOT/reports/identity_quality/nocturne"
+TIMESTAMP="$(date -u +%Y%m%dT%H%M%SZ)"
+REPORT="$REPORT_ROOT/verification-$TIMESTAMP.txt"
+LATEST="$REPORT_ROOT/verification-latest.txt"
+
+mkdir -p "$REPORT_ROOT"
+
+exec > >(tee "$REPORT") 2>&1
+
+printf '%s\n' \
+  "============================================================" \
+  "NOCTURNE REFERENCE QUALITY VERIFICATION" \
+  "============================================================" \
+  "generated_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+  "root=$ROOT" \
+  ""
+
+passed=1
+
+run_stage() {
+    local name="$1"
+    shift
+
+    printf '%s\n' \
+      "------------------------------------------------------------" \
+      "stage=$name" \
+      "------------------------------------------------------------"
+
+    if "$@"; then
+        printf 'stage_result=%s:passed\n\n' \
+          "$name"
+    else
+        local status=$?
+
+        printf 'stage_result=%s:failed:%s\n\n' \
+          "$name" \
+          "$status"
+
+        passed=0
+    fi
+}
+
+run_stage \
+  "veil" \
+  "$ROOT/bin/veilctl" \
+  verify
+
+run_stage \
+  "lantern" \
+  "$ROOT/bin/lanternctl" \
+  verify
+
+run_stage \
+  "scribe" \
+  "$ROOT/bin/scribectl" \
+  verify
+
+run_stage \
+  "echo" \
+  "$ROOT/bin/echoctl" \
+  verify
+
+run_stage \
+  "nocturne" \
+  "$ROOT/bin/nocturnectl" \
+  verify
+
+run_stage \
+  "opus-nocturne-adapter" \
+  "$ROOT/bin/opus-nocturnectl" \
+  verify
+
+run_stage \
+  "identity-audit" \
+  "$ROOT/bin/identityqualityctl" \
+  audit
+
+run_stage \
+  "identity-validation" \
+  "$ROOT/bin/identityqualityctl" \
+  validate
+
+run_stage \
+  "nocturne-upgrade-plan" \
+  "$ROOT/bin/identity-quality-python" \
+  "$ROOT/tools/identity_quality/build_nocturne_upgrade_plan.py"
+
+run_stage \
+  "reference-attestation" \
+  "$ROOT/bin/nocturne-attest" \
+  strict
+
+printf '%s\n' \
+  "============================================================" \
+  "FINAL" \
+  "============================================================" \
+  "passed=$passed" \
+  "report=$REPORT"
+
+cp -f \
+  "$REPORT" \
+  "$LATEST"
+
+if [[ "$passed" -ne 1 ]]; then
+    exit 1
+fi

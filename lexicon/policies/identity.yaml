@@ -1,0 +1,89 @@
+policy: SAVANT_LEXICON_IDENTITY
+version: 1
+
+identity:
+
+  format:
+    "lex:<namespace>:<name>"
+
+  pattern:
+    "^lex:[a-z][a-z0-9_-]*:[a-z][a-z0-9_-]*$"
+
+  immutable:
+    true
+
+  globally_unique:
+    true
+
+  reusable:
+    false
+
+  reference_mode:
+    identity_first
+
+  display_name_is_identity:
+    false
+
+canonical_lexeme:
+
+  immutable:
+    true
+
+  globally_unique:
+    true
+
+  one_concept_only:
+    true
+
+concept:
+
+  one_canonical_lexeme_only:
+    true
+
+  semantic_identity_required:
+    true
+
+aliases:
+
+  authoritative:
+    false
+
+  identity_bearing:
+    false
+
+  mutable:
+    true
+
+  globally_unique:
+    true
+
+  resolvable_to_exactly_one_identity:
+    true
+
+supersession:
+
+  preserves_identity:
+    true
+
+  preserves_history:
+    true
+
+  deletes_predecessor:
+    false
+
+  permits_identity_reuse:
+    false
+
+references:
+
+  canonical_storage:
+    lexeme_id
+
+  display_projection:
+    canonical_lexeme
+
+  unresolved_reference:
+    validation_error
+
+  ambiguous_reference:
+    validation_error

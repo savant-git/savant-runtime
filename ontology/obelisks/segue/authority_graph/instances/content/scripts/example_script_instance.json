@@ -1,0 +1,32 @@
+{
+  "id": "script.example",
+  "kind": "instance",
+  "status": "example",
+  "authority": "SCRIPT_COMPOSITION_RULE",
+  "template": "template.script_instance",
+  "hierarchy": "content",
+  "level": "script",
+  "lineage": {
+    "composed_from": [
+      "snippet.example.header",
+      "snippet.example.body"
+    ]
+  },
+  "provenance": {
+    "created_by": "manual.nano",
+    "reason": "Demonstrate script composed from snippets."
+  },
+  "dependencies": [],
+  "relationships": [],
+  "segues": [],
+  "snippets": [
+    "snippet.example.header",
+    "snippet.example.body"
+  ],
+  "projection": {
+    "target": "file",
+    "path": "ontology/segue/authority_graph/projections/scripts/example.sh"
+  },
+  "extensions": {},
+  "future_extensions": {}
+}

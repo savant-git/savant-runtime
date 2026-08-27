@@ -1,0 +1,35 @@
+{
+  "id": "segue:prodigal:modus:coalesce",
+  "type": "segue",
+  "status": "active",
+  "owner": "prodigal:modus:coalesce",
+  "parent": "prodigal:modus:coalesce",
+  "source_type": "prodigal",
+  "target_type": "quirk",
+  "purpose": "Govern transition, inheritance, attachment, validation, lineage, and composition between Coalesce and its Quirk instances.",
+  "rule": "Coalesce Quirks are instantiated beneath this segue and remain reusable, graph-addressable, independently extensible functional compositions.",
+  "authority_effect": "none",
+  "lineage": {
+    "parent": "prodigal:modus:coalesce",
+    "template": "prodigals.template.segue"
+  },
+  "provenance": {
+    "basis": "canonical Prodigal-to-Quirk hierarchy",
+    "owner": "prodigal:modus:coalesce"
+  },
+  "children": {
+    "type": "quirk",
+    "path": "quirks"
+  },
+  "extensions": {
+    "inheritance": null,
+    "validation": null,
+    "policy": null,
+    "projection": null,
+    "linka": null,
+    "cert": null,
+    "mood": null,
+    "graph": null,
+    "runtime": null
+  }
+}

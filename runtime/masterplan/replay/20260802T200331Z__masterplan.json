@@ -1,0 +1,5183 @@
+{
+  "attestations": [],
+  "authority": {
+    "accepted_at": "2026-08-01T18:43:45-04:00",
+    "accepted_by": "project-owner",
+    "authority_class": "project-owner-directed",
+    "confidence": 1.0,
+    "source": "docs/SAVANT_MASTER_TASKS.md",
+    "state": "authoritative",
+    "tier": 0
+  },
+  "decisions": [
+    {
+      "authority": {
+        "accepted_at": "2026-08-02T20:03:10+00:00",
+        "accepted_by": "project-owner",
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "runtime/masterplan/decision-proposals/latest.json",
+        "state": "accepted",
+        "tier": 1
+      },
+      "decision": "approve_duplicate_segue_reconciliation",
+      "extensions": {
+        "acceptance": {
+          "accepted_at": "2026-08-02T20:03:10+00:00",
+          "accepted_by": "project-owner",
+          "basis": "Explicit project-owner instruction to continue the governed Masterplan implementation sequence.",
+          "proposal_path": "runtime/masterplan/decision-proposals/latest.json",
+          "proposal_semantic_digest": "55d3b7cde3714fc03c882c05f36de5d4250d16535e1ed01d91003c5e926ce580",
+          "proposal_sha256": "ca71260378ebd5d2f20dc0bb40eb99c690248f38de9b66d26ab28babd160121a"
+        },
+        "acceptance_required": true,
+        "application_command": "masterplan-segue-reconcile apply decision-0bdef648c233a5e06d3601cf",
+        "application_tool": "bin/masterplan-segue-reconcile",
+        "payload": {
+          "graph_semantic_digest": "e75bb280b1db83b58aa0a7de03b1fc9415870cc42cc82557bec0e4fcc2e82b5d",
+          "plan_semantic_digest": "8100bd726eb8c7863d0dc2535ee36a28567f140dbeeada6708f9cb9800753291",
+          "proposed_segue_count": 42,
+          "removal_count": 0,
+          "removal_ids": []
+        }
+      },
+      "id": "decision-0bdef648c233a5e06d3601cf",
+      "occurred_at": "2026-08-02T20:03:10+00:00",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-02T20:03:10+00:00",
+        "generated_by": "prodigal.niche.masterplan.accept_duplicate_segue_reconciliation_decision",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "source_id": "8100bd726eb8c7863d0dc2535ee36a28567f140dbeeada6708f9cb9800753291",
+            "source_kind": "segue-reconciliation-plan",
+            "source_path": "reports/niche/masterplan/segue-reconciliation/latest.json"
+          },
+          {
+            "authority_state": "proposed",
+            "source_id": "55d3b7cde3714fc03c882c05f36de5d4250d16535e1ed01d91003c5e926ce580",
+            "source_kind": "decision-proposal",
+            "source_path": "runtime/masterplan/decision-proposals/latest.json"
+          }
+        ],
+        "transformations": [
+          "validate_reconciliation_plan",
+          "bind_exact_plan_digest",
+          "bind_exact_graph_digest",
+          "bind_exact_removal_set",
+          "project_decision_proposal",
+          "validate_proposal_digest",
+          "validate_authorization_payload",
+          "record_explicit_project_owner_acceptance",
+          "promote_proposed_decision_to_accepted"
+        ]
+      },
+      "rationale": "Remove only the explicitly identified duplicate segue records while retaining one authoritative segue for every unique semantic relationship. Preserve all lineage through the accepted decision, transaction backup, event, receipt, and post-application snapshot.",
+      "schema": "savant://niche/masterplan/decision-proposal/1.0.0",
+      "semantic_digest": "f4a3de88c1ad14652bba31f9e899ef453e82c050ff3b108b8070ffc5022824d8",
+      "subject": "SAV-P4A-003"
+    },
+    {
+      "authority": {
+        "accepted_at": "2026-08-02T19:37:47+00:00",
+        "accepted_by": "project-owner",
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "runtime/masterplan/decision-proposals/latest.json",
+        "state": "accepted",
+        "tier": 1
+      },
+      "decision": "approve_duplicate_segue_reconciliation",
+      "extensions": {
+        "acceptance": {
+          "accepted_at": "2026-08-02T19:37:47+00:00",
+          "accepted_by": "project-owner",
+          "basis": "Explicit project-owner instruction to continue the governed Masterplan implementation sequence.",
+          "proposal_path": "runtime/masterplan/decision-proposals/latest.json",
+          "proposal_semantic_digest": "cff08c9269f0db047ca831d62232a9c9dc514c8687cf60824506824bd04e5f5a",
+          "proposal_sha256": "9db14f242057e229fd8d6f460e7ac5a645a496382e4183bbb64bc22ab48e3b5a"
+        },
+        "acceptance_required": true,
+        "application_command": "masterplan-segue-reconcile apply decision-706b690abcf266fd6dacd74f",
+        "application_tool": "bin/masterplan-segue-reconcile",
+        "payload": {
+          "graph_semantic_digest": "63db8daf950920f24f1cb0cf7151a86c9cce8144f6343345448677d8ce50f8e2",
+          "plan_semantic_digest": "a7eab11440974f9ef45353f599db56e7296afbc2c0f6771563102c99e4209b3c",
+          "proposed_segue_count": 42,
+          "removal_count": 42,
+          "removal_ids": [
+            "segue-25496ff92a2409d8fa1bc6ef",
+            "segue-2b11db2d11c9fb35dcdfcd2f",
+            "segue-2bbd367d63a5db769a97f391",
+            "segue-2cc3a67e00284a8b262cc7ff",
+            "segue-324a0f35b063224ad66803bd",
+            "segue-4286124a65c9700a2de2eaff",
+            "segue-56cfac4130328c176baeac70",
+            "segue-7477da3f25d8c21085d6b3fe",
+            "segue-76db978555f9160b2a10f551",
+            "segue-7bfd6365eb7eaf6676a9699c",
+            "segue-89bbf17e4b7fbcaef754e5ff",
+            "segue-9399054bc08f54a2ff6041c2",
+            "segue-ac831f28436746a02d988a07",
+            "segue-b7794551d5322b5528009c71",
+            "segue-c256baef9ee859eb337c16f7",
+            "segue-c4b85dd87e56034b81c8f695",
+            "segue-c71c5d7e9723174e5fd3e529",
+            "segue-ca15212d3a8d04af793bf49b",
+            "segue-ca3c8b692cc1c620bd0df73c",
+            "segue-ccb519d16167418306e4ecba",
+            "segue-cd3edc04d2424c3e0c4c63be",
+            "segue-cfd0ba7bf09eb4830b9b7da7",
+            "segue-d179bbfeaa3a6397423c4021",
+            "segue-d201bd4b426c66f34ae6c2dd",
+            "segue-d34e59d1115728e1c82e2314",
+            "segue-d5c75ef04eb28b9848a6174a",
+            "segue-de6ba9b13b81e05a656b68f6",
+            "segue-e208bd5e30f67e7a0b74692d",
+            "segue-e5fbb14716fa875da0176f88",
+            "segue-e7120cfbd8a4cfa9efadf716",
+            "segue-e7280c9c630bcdb1c1ff1f36",
+            "segue-e8048c36070d86a7c0d8cdc7",
+            "segue-e9758f42276d3d294383d2c0",
+            "segue-eb61c29e513ef3c6f973534b",
+            "segue-ecc3f308c87fc28d7f5838bf",
+            "segue-eff150dfaede95c713a7fce3",
+            "segue-f00689309e4ff387baae01c8",
+            "segue-f01985b9cf390801e9fa8b13",
+            "segue-f18a2a7e57572ed6b68aadd7",
+            "segue-f9105936eb8f8744d4854245",
+            "segue-fd5c2ada4bda9f274c966142",
+            "segue-fde2aede31a8c49f480ec8ee"
+          ]
+        }
+      },
+      "id": "decision-706b690abcf266fd6dacd74f",
+      "occurred_at": "2026-08-02T19:37:47+00:00",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-02T19:37:47+00:00",
+        "generated_by": "prodigal.niche.masterplan.accept_duplicate_segue_reconciliation_decision",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "source_id": "a7eab11440974f9ef45353f599db56e7296afbc2c0f6771563102c99e4209b3c",
+            "source_kind": "segue-reconciliation-plan",
+            "source_path": "reports/niche/masterplan/segue-reconciliation/latest.json"
+          },
+          {
+            "authority_state": "proposed",
+            "source_id": "cff08c9269f0db047ca831d62232a9c9dc514c8687cf60824506824bd04e5f5a",
+            "source_kind": "decision-proposal",
+            "source_path": "runtime/masterplan/decision-proposals/latest.json"
+          }
+        ],
+        "transformations": [
+          "validate_reconciliation_plan",
+          "bind_exact_plan_digest",
+          "bind_exact_graph_digest",
+          "bind_exact_removal_set",
+          "project_decision_proposal",
+          "validate_proposal_digest",
+          "validate_authorization_payload",
+          "record_explicit_project_owner_acceptance",
+          "promote_proposed_decision_to_accepted"
+        ]
+      },
+      "rationale": "Remove only the explicitly identified duplicate segue records while retaining one authoritative segue for every unique semantic relationship. Preserve all lineage through the accepted decision, transaction backup, event, receipt, and post-application snapshot.",
+      "schema": "savant://niche/masterplan/decision-proposal/1.0.0",
+      "semantic_digest": "4eea7152281246923c05a3b35efc1c5401c85bd38d20947c066cbaf6bb35d165",
+      "subject": "SAV-P4A-003"
+    },
+    {
+      "authority": {
+        "accepted_at": "2026-08-02T19:41:30+00:00",
+        "accepted_by": "project-owner",
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "runtime/masterplan/decision-proposals/latest.json",
+        "state": "accepted",
+        "tier": 1
+      },
+      "decision": "approve_duplicate_segue_reconciliation",
+      "extensions": {
+        "acceptance": {
+          "accepted_at": "2026-08-02T19:41:30+00:00",
+          "accepted_by": "project-owner",
+          "basis": "Explicit project-owner instruction to continue the governed Masterplan implementation sequence.",
+          "proposal_path": "runtime/masterplan/decision-proposals/latest.json",
+          "proposal_semantic_digest": "f180c0bdabd0a1d127d5a0c9efc0c7eecf38e71db3790c74a27546f1f2c3ba2b",
+          "proposal_sha256": "4e5eb736a03520f0a045f318048c854cffd52ab2e6330eb1c8d5c976841baf48"
+        },
+        "acceptance_required": true,
+        "application_command": "masterplan-segue-reconcile apply decision-8039a2c3a32e59d3c2f4fe77",
+        "application_tool": "bin/masterplan-segue-reconcile",
+        "payload": {
+          "graph_semantic_digest": "484218151f172c4a2385797ad7373ba71354df6c5644552327276edd765c51c2",
+          "plan_semantic_digest": "6c9a1d4c26ef64cf75cc6313736034670781c72f7fed765a9d3a357253b0fbcf",
+          "proposed_segue_count": 42,
+          "removal_count": 21,
+          "removal_ids": [
+            "segue-2bbd367d63a5db769a97f391",
+            "segue-2cc3a67e00284a8b262cc7ff",
+            "segue-4286124a65c9700a2de2eaff",
+            "segue-56cfac4130328c176baeac70",
+            "segue-76db978555f9160b2a10f551",
+            "segue-c71c5d7e9723174e5fd3e529",
+            "segue-ca15212d3a8d04af793bf49b",
+            "segue-ccb519d16167418306e4ecba",
+            "segue-d179bbfeaa3a6397423c4021",
+            "segue-d201bd4b426c66f34ae6c2dd",
+            "segue-d34e59d1115728e1c82e2314",
+            "segue-de6ba9b13b81e05a656b68f6",
+            "segue-e208bd5e30f67e7a0b74692d",
+            "segue-e8048c36070d86a7c0d8cdc7",
+            "segue-ecc3f308c87fc28d7f5838bf",
+            "segue-eff150dfaede95c713a7fce3",
+            "segue-f00689309e4ff387baae01c8",
+            "segue-f18a2a7e57572ed6b68aadd7",
+            "segue-f9105936eb8f8744d4854245",
+            "segue-fd5c2ada4bda9f274c966142",
+            "segue-fde2aede31a8c49f480ec8ee"
+          ]
+        }
+      },
+      "id": "decision-8039a2c3a32e59d3c2f4fe77",
+      "occurred_at": "2026-08-02T19:41:30+00:00",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-02T19:41:30+00:00",
+        "generated_by": "prodigal.niche.masterplan.accept_duplicate_segue_reconciliation_decision",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "source_id": "6c9a1d4c26ef64cf75cc6313736034670781c72f7fed765a9d3a357253b0fbcf",
+            "source_kind": "segue-reconciliation-plan",
+            "source_path": "reports/niche/masterplan/segue-reconciliation/latest.json"
+          },
+          {
+            "authority_state": "proposed",
+            "source_id": "f180c0bdabd0a1d127d5a0c9efc0c7eecf38e71db3790c74a27546f1f2c3ba2b",
+            "source_kind": "decision-proposal",
+            "source_path": "runtime/masterplan/decision-proposals/latest.json"
+          }
+        ],
+        "transformations": [
+          "validate_reconciliation_plan",
+          "bind_exact_plan_digest",
+          "bind_exact_graph_digest",
+          "bind_exact_removal_set",
+          "project_decision_proposal",
+          "validate_proposal_digest",
+          "validate_authorization_payload",
+          "record_explicit_project_owner_acceptance",
+          "promote_proposed_decision_to_accepted"
+        ]
+      },
+      "rationale": "Remove only the explicitly identified duplicate segue records while retaining one authoritative segue for every unique semantic relationship. Preserve all lineage through the accepted decision, transaction backup, event, receipt, and post-application snapshot.",
+      "schema": "savant://niche/masterplan/decision-proposal/1.0.0",
+      "semantic_digest": "ac5318b5290a40a8cf149165651407b682ad9a86cd16aae2de0760045e06ae4a",
+      "subject": "SAV-P4A-003"
+    },
+    {
+      "authority": {
+        "accepted_at": "2026-08-02T19:43:11+00:00",
+        "accepted_by": "project-owner",
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "runtime/masterplan/decision-proposals/latest.json",
+        "state": "accepted",
+        "tier": 1
+      },
+      "decision": "approve_duplicate_segue_reconciliation",
+      "extensions": {
+        "acceptance": {
+          "accepted_at": "2026-08-02T19:43:11+00:00",
+          "accepted_by": "project-owner",
+          "basis": "Explicit project-owner instruction to continue the governed Masterplan implementation sequence.",
+          "proposal_path": "runtime/masterplan/decision-proposals/latest.json",
+          "proposal_semantic_digest": "6c68e936be70c3f0e2a39bdc999a076f7fc3d343bd7edca1f7db542128d64f2e",
+          "proposal_sha256": "c68c4c6e49ddbd7ceb320a9d8e8774fbcc459d188503badc79ad44097a66bbff"
+        },
+        "acceptance_required": true,
+        "application_command": "masterplan-segue-reconcile apply decision-ed69063836d8817cb9bbb3b5",
+        "application_tool": "bin/masterplan-segue-reconcile",
+        "payload": {
+          "graph_semantic_digest": "3a8c20dd048509f633baddc3f85aef0a2a3117acc5bbdcc9b32d8a7e3ba2cd0a",
+          "plan_semantic_digest": "f8b85e8fba23fa0c90c2f79ee58f8149d8ffc32a87c7876f84d4e14ddf1baced",
+          "proposed_segue_count": 42,
+          "removal_count": 21,
+          "removal_ids": [
+            "segue-2bbd367d63a5db769a97f391",
+            "segue-2cc3a67e00284a8b262cc7ff",
+            "segue-4286124a65c9700a2de2eaff",
+            "segue-56cfac4130328c176baeac70",
+            "segue-76db978555f9160b2a10f551",
+            "segue-c71c5d7e9723174e5fd3e529",
+            "segue-ca15212d3a8d04af793bf49b",
+            "segue-ccb519d16167418306e4ecba",
+            "segue-d179bbfeaa3a6397423c4021",
+            "segue-d201bd4b426c66f34ae6c2dd",
+            "segue-d34e59d1115728e1c82e2314",
+            "segue-de6ba9b13b81e05a656b68f6",
+            "segue-e208bd5e30f67e7a0b74692d",
+            "segue-e8048c36070d86a7c0d8cdc7",
+            "segue-ecc3f308c87fc28d7f5838bf",
+            "segue-eff150dfaede95c713a7fce3",
+            "segue-f00689309e4ff387baae01c8",
+            "segue-f18a2a7e57572ed6b68aadd7",
+            "segue-f9105936eb8f8744d4854245",
+            "segue-fd5c2ada4bda9f274c966142",
+            "segue-fde2aede31a8c49f480ec8ee"
+          ]
+        }
+      },
+      "id": "decision-ed69063836d8817cb9bbb3b5",
+      "occurred_at": "2026-08-02T19:43:11+00:00",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-02T19:43:11+00:00",
+        "generated_by": "prodigal.niche.masterplan.accept_duplicate_segue_reconciliation_decision",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "source_id": "f8b85e8fba23fa0c90c2f79ee58f8149d8ffc32a87c7876f84d4e14ddf1baced",
+            "source_kind": "segue-reconciliation-plan",
+            "source_path": "reports/niche/masterplan/segue-reconciliation/latest.json"
+          },
+          {
+            "authority_state": "proposed",
+            "source_id": "6c68e936be70c3f0e2a39bdc999a076f7fc3d343bd7edca1f7db542128d64f2e",
+            "source_kind": "decision-proposal",
+            "source_path": "runtime/masterplan/decision-proposals/latest.json"
+          }
+        ],
+        "transformations": [
+          "validate_reconciliation_plan",
+          "bind_exact_plan_digest",
+          "bind_exact_graph_digest",
+          "bind_exact_removal_set",
+          "project_decision_proposal",
+          "validate_proposal_digest",
+          "validate_authorization_payload",
+          "record_explicit_project_owner_acceptance",
+          "promote_proposed_decision_to_accepted"
+        ]
+      },
+      "rationale": "Remove only the explicitly identified duplicate segue records while retaining one authoritative segue for every unique semantic relationship. Preserve all lineage through the accepted decision, transaction backup, event, receipt, and post-application snapshot.",
+      "schema": "savant://niche/masterplan/decision-proposal/1.0.0",
+      "semantic_digest": "100dd0576e4c3e51fd6016c39c26e37622ce551147a6404f0ea1b340b44a99a9",
+      "subject": "SAV-P4A-003"
+    }
+  ],
+  "events": [
+    {
+      "authority": {
+        "accepted_at": "2026-08-02T19:37:47+00:00",
+        "accepted_by": "project-owner",
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "runtime/masterplan/decision-proposals/latest.json",
+        "state": "accepted",
+        "tier": 1
+      },
+      "event_type": "masterplan.segues.duplicates.reconciled",
+      "extensions": {
+        "decision_id": "decision-706b690abcf266fd6dacd74f",
+        "graph_digest_after": "f3bdbb9246a38ed2bd356c7a42dedbfe86546b5793ebc05ab45a03ffaaec303d",
+        "graph_digest_before": "63db8daf950920f24f1cb0cf7151a86c9cce8144f6343345448677d8ce50f8e2",
+        "plan_semantic_digest": "a7eab11440974f9ef45353f599db56e7296afbc2c0f6771563102c99e4209b3c",
+        "removal_ids": [
+          "segue-25496ff92a2409d8fa1bc6ef",
+          "segue-2b11db2d11c9fb35dcdfcd2f",
+          "segue-2bbd367d63a5db769a97f391",
+          "segue-2cc3a67e00284a8b262cc7ff",
+          "segue-324a0f35b063224ad66803bd",
+          "segue-4286124a65c9700a2de2eaff",
+          "segue-56cfac4130328c176baeac70",
+          "segue-7477da3f25d8c21085d6b3fe",
+          "segue-76db978555f9160b2a10f551",
+          "segue-7bfd6365eb7eaf6676a9699c",
+          "segue-89bbf17e4b7fbcaef754e5ff",
+          "segue-9399054bc08f54a2ff6041c2",
+          "segue-ac831f28436746a02d988a07",
+          "segue-b7794551d5322b5528009c71",
+          "segue-c256baef9ee859eb337c16f7",
+          "segue-c4b85dd87e56034b81c8f695",
+          "segue-c71c5d7e9723174e5fd3e529",
+          "segue-ca15212d3a8d04af793bf49b",
+          "segue-ca3c8b692cc1c620bd0df73c",
+          "segue-ccb519d16167418306e4ecba",
+          "segue-cd3edc04d2424c3e0c4c63be",
+          "segue-cfd0ba7bf09eb4830b9b7da7",
+          "segue-d179bbfeaa3a6397423c4021",
+          "segue-d201bd4b426c66f34ae6c2dd",
+          "segue-d34e59d1115728e1c82e2314",
+          "segue-d5c75ef04eb28b9848a6174a",
+          "segue-de6ba9b13b81e05a656b68f6",
+          "segue-e208bd5e30f67e7a0b74692d",
+          "segue-e5fbb14716fa875da0176f88",
+          "segue-e7120cfbd8a4cfa9efadf716",
+          "segue-e7280c9c630bcdb1c1ff1f36",
+          "segue-e8048c36070d86a7c0d8cdc7",
+          "segue-e9758f42276d3d294383d2c0",
+          "segue-eb61c29e513ef3c6f973534b",
+          "segue-ecc3f308c87fc28d7f5838bf",
+          "segue-eff150dfaede95c713a7fce3",
+          "segue-f00689309e4ff387baae01c8",
+          "segue-f01985b9cf390801e9fa8b13",
+          "segue-f18a2a7e57572ed6b68aadd7",
+          "segue-f9105936eb8f8744d4854245",
+          "segue-fd5c2ada4bda9f274c966142",
+          "segue-fde2aede31a8c49f480ec8ee"
+        ]
+      },
+      "id": "event-647ab600a6ff0f78ce01bc78",
+      "occurred_at": "2026-08-02T19:39:19+00:00",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-02T19:39:19+00:00",
+        "generated_by": "prodigal.niche.masterplan.apply_duplicate_segue_reconciliation",
+        "sources": [
+          {
+            "authority_state": "accepted",
+            "source_id": "decision-706b690abcf266fd6dacd74f",
+            "source_kind": "accepted-decision",
+            "source_path": "authority/task-graph/decisions/decision-706b690abcf266fd6dacd74f.json"
+          },
+          {
+            "authority_state": "proposed",
+            "source_id": "a7eab11440974f9ef45353f599db56e7296afbc2c0f6771563102c99e4209b3c",
+            "source_kind": "segue-reconciliation-plan",
+            "source_path": "reports/niche/masterplan/segue-reconciliation/latest.json"
+          }
+        ],
+        "transformations": [
+          "validate_plan_graph_digest",
+          "validate_decision_authority",
+          "validate_exact_plan_authorization",
+          "remove_authorized_duplicate_segues"
+        ]
+      },
+      "task_id": "SAV-P4A-003"
+    },
+    {
+      "authority": {
+        "accepted_at": "2026-08-02T19:41:30+00:00",
+        "accepted_by": "project-owner",
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "runtime/masterplan/decision-proposals/latest.json",
+        "state": "accepted",
+        "tier": 1
+      },
+      "event_type": "masterplan.segues.duplicates.reconciled",
+      "extensions": {
+        "decision_id": "decision-8039a2c3a32e59d3c2f4fe77",
+        "graph_digest_after": "70c04dca621431a77aa08060a1cff15cff52097c4df19648238c395d258e6375",
+        "graph_digest_before": "484218151f172c4a2385797ad7373ba71354df6c5644552327276edd765c51c2",
+        "plan_semantic_digest": "6c9a1d4c26ef64cf75cc6313736034670781c72f7fed765a9d3a357253b0fbcf",
+        "removal_ids": [
+          "segue-2bbd367d63a5db769a97f391",
+          "segue-2cc3a67e00284a8b262cc7ff",
+          "segue-4286124a65c9700a2de2eaff",
+          "segue-56cfac4130328c176baeac70",
+          "segue-76db978555f9160b2a10f551",
+          "segue-c71c5d7e9723174e5fd3e529",
+          "segue-ca15212d3a8d04af793bf49b",
+          "segue-ccb519d16167418306e4ecba",
+          "segue-d179bbfeaa3a6397423c4021",
+          "segue-d201bd4b426c66f34ae6c2dd",
+          "segue-d34e59d1115728e1c82e2314",
+          "segue-de6ba9b13b81e05a656b68f6",
+          "segue-e208bd5e30f67e7a0b74692d",
+          "segue-e8048c36070d86a7c0d8cdc7",
+          "segue-ecc3f308c87fc28d7f5838bf",
+          "segue-eff150dfaede95c713a7fce3",
+          "segue-f00689309e4ff387baae01c8",
+          "segue-f18a2a7e57572ed6b68aadd7",
+          "segue-f9105936eb8f8744d4854245",
+          "segue-fd5c2ada4bda9f274c966142",
+          "segue-fde2aede31a8c49f480ec8ee"
+        ]
+      },
+      "id": "event-c1ecc45bbc0bafba75bc7558",
+      "occurred_at": "2026-08-02T19:41:38+00:00",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-02T19:41:38+00:00",
+        "generated_by": "prodigal.niche.masterplan.apply_duplicate_segue_reconciliation",
+        "sources": [
+          {
+            "authority_state": "accepted",
+            "source_id": "decision-8039a2c3a32e59d3c2f4fe77",
+            "source_kind": "accepted-decision",
+            "source_path": "authority/task-graph/decisions/decision-8039a2c3a32e59d3c2f4fe77.json"
+          },
+          {
+            "authority_state": "proposed",
+            "source_id": "6c9a1d4c26ef64cf75cc6313736034670781c72f7fed765a9d3a357253b0fbcf",
+            "source_kind": "segue-reconciliation-plan",
+            "source_path": "reports/niche/masterplan/segue-reconciliation/latest.json"
+          }
+        ],
+        "transformations": [
+          "validate_plan_graph_digest",
+          "validate_decision_authority",
+          "validate_exact_plan_authorization",
+          "remove_authorized_duplicate_segues"
+        ]
+      },
+      "task_id": "SAV-P4A-003"
+    },
+    {
+      "authority": {
+        "accepted_at": "2026-08-02T20:03:10+00:00",
+        "accepted_by": "project-owner",
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "runtime/masterplan/decision-proposals/latest.json",
+        "state": "accepted",
+        "tier": 1
+      },
+      "event_type": "masterplan.segues.duplicates.reconciled",
+      "extensions": {
+        "decision_id": "decision-0bdef648c233a5e06d3601cf",
+        "graph_digest_after": "e75bb280b1db83b58aa0a7de03b1fc9415870cc42cc82557bec0e4fcc2e82b5d",
+        "graph_digest_before": "e75bb280b1db83b58aa0a7de03b1fc9415870cc42cc82557bec0e4fcc2e82b5d",
+        "plan_semantic_digest": "8100bd726eb8c7863d0dc2535ee36a28567f140dbeeada6708f9cb9800753291",
+        "removal_ids": []
+      },
+      "id": "event-e5bbadf878da20eb0b275383",
+      "occurred_at": "2026-08-02T20:03:20+00:00",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-02T20:03:20+00:00",
+        "generated_by": "prodigal.niche.masterplan.apply_duplicate_segue_reconciliation",
+        "sources": [
+          {
+            "authority_state": "accepted",
+            "source_id": "decision-0bdef648c233a5e06d3601cf",
+            "source_kind": "accepted-decision",
+            "source_path": "authority/task-graph/decisions/decision-0bdef648c233a5e06d3601cf.json"
+          },
+          {
+            "authority_state": "proposed",
+            "source_id": "8100bd726eb8c7863d0dc2535ee36a28567f140dbeeada6708f9cb9800753291",
+            "source_kind": "segue-reconciliation-plan",
+            "source_path": "reports/niche/masterplan/segue-reconciliation/latest.json"
+          }
+        ],
+        "transformations": [
+          "validate_plan_graph_digest",
+          "validate_decision_authority",
+          "validate_exact_plan_authorization",
+          "remove_authorized_duplicate_segues"
+        ]
+      },
+      "task_id": "SAV-P4A-003"
+    },
+    {
+      "authority": {
+        "accepted_at": "2026-08-02T19:43:11+00:00",
+        "accepted_by": "project-owner",
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "runtime/masterplan/decision-proposals/latest.json",
+        "state": "accepted",
+        "tier": 1
+      },
+      "event_type": "masterplan.segues.duplicates.reconciled",
+      "extensions": {
+        "decision_id": "decision-ed69063836d8817cb9bbb3b5",
+        "graph_digest_after": "b394c7d9ff60bc8593ba5888cdaef7040f98eebab364a82a334d650d7916d027",
+        "graph_digest_before": "3a8c20dd048509f633baddc3f85aef0a2a3117acc5bbdcc9b32d8a7e3ba2cd0a",
+        "plan_semantic_digest": "f8b85e8fba23fa0c90c2f79ee58f8149d8ffc32a87c7876f84d4e14ddf1baced",
+        "removal_ids": [
+          "segue-2bbd367d63a5db769a97f391",
+          "segue-2cc3a67e00284a8b262cc7ff",
+          "segue-4286124a65c9700a2de2eaff",
+          "segue-56cfac4130328c176baeac70",
+          "segue-76db978555f9160b2a10f551",
+          "segue-c71c5d7e9723174e5fd3e529",
+          "segue-ca15212d3a8d04af793bf49b",
+          "segue-ccb519d16167418306e4ecba",
+          "segue-d179bbfeaa3a6397423c4021",
+          "segue-d201bd4b426c66f34ae6c2dd",
+          "segue-d34e59d1115728e1c82e2314",
+          "segue-de6ba9b13b81e05a656b68f6",
+          "segue-e208bd5e30f67e7a0b74692d",
+          "segue-e8048c36070d86a7c0d8cdc7",
+          "segue-ecc3f308c87fc28d7f5838bf",
+          "segue-eff150dfaede95c713a7fce3",
+          "segue-f00689309e4ff387baae01c8",
+          "segue-f18a2a7e57572ed6b68aadd7",
+          "segue-f9105936eb8f8744d4854245",
+          "segue-fd5c2ada4bda9f274c966142",
+          "segue-fde2aede31a8c49f480ec8ee"
+        ]
+      },
+      "id": "event-e76abfee584208d9624dd42a",
+      "occurred_at": "2026-08-02T19:43:11+00:00",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-02T19:43:11+00:00",
+        "generated_by": "prodigal.niche.masterplan.apply_duplicate_segue_reconciliation",
+        "sources": [
+          {
+            "authority_state": "accepted",
+            "source_id": "decision-ed69063836d8817cb9bbb3b5",
+            "source_kind": "accepted-decision",
+            "source_path": "authority/task-graph/decisions/decision-ed69063836d8817cb9bbb3b5.json"
+          },
+          {
+            "authority_state": "proposed",
+            "source_id": "f8b85e8fba23fa0c90c2f79ee58f8149d8ffc32a87c7876f84d4e14ddf1baced",
+            "source_kind": "segue-reconciliation-plan",
+            "source_path": "reports/niche/masterplan/segue-reconciliation/latest.json"
+          }
+        ],
+        "transformations": [
+          "validate_plan_graph_digest",
+          "validate_decision_authority",
+          "validate_exact_plan_authorization",
+          "remove_authorized_duplicate_segues"
+        ]
+      },
+      "task_id": "SAV-P4A-003"
+    }
+  ],
+  "evidence": [],
+  "graph_id": "savant.masterplan",
+  "receipts": [
+    {
+      "evidence": [
+        "event-c1ecc45bbc0bafba75bc7558"
+      ],
+      "extensions": {
+        "backup": "backups/masterplan/segue-reconciliation/20260802T194138Z__084378dc849b8bd1/masterplan.json",
+        "event_id": "event-c1ecc45bbc0bafba75bc7558",
+        "graph_digest_after": "8c6665cbe06237f3e5e5f1480e68c093232c79ac006bd7592e02a90e34332945",
+        "graph_digest_before": "484218151f172c4a2385797ad7373ba71354df6c5644552327276edd765c51c2",
+        "snapshot": "authority/task-graph/snapshots/20260802T194138Z__084378dc849b8bd1__segue-reconciliation.json"
+      },
+      "id": "receipt-14c3ff9564868b9644d8d8f1",
+      "occurred_at": "2026-08-02T19:41:38+00:00",
+      "operation": "masterplan.segues.duplicate-reconciliation",
+      "outputs": [
+        "authority/task-graph/masterplan.json",
+        "authority/task-graph/snapshots/20260802T194138Z__084378dc849b8bd1__segue-reconciliation.json"
+      ],
+      "passed": true,
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-02T19:41:38+00:00",
+        "generated_by": "prodigal.niche.masterplan.apply_duplicate_segue_reconciliation",
+        "sources": [
+          {
+            "authority_state": "accepted",
+            "source_id": "decision-8039a2c3a32e59d3c2f4fe77",
+            "source_kind": "accepted-decision",
+            "source_path": "authority/task-graph/decisions/decision-8039a2c3a32e59d3c2f4fe77.json"
+          },
+          {
+            "authority_state": "proposed",
+            "source_id": "6c9a1d4c26ef64cf75cc6313736034670781c72f7fed765a9d3a357253b0fbcf",
+            "source_kind": "segue-reconciliation-plan",
+            "source_path": "reports/niche/masterplan/segue-reconciliation/latest.json"
+          }
+        ],
+        "transformations": [
+          "validate_plan_graph_digest",
+          "validate_decision_authority",
+          "validate_exact_plan_authorization",
+          "remove_authorized_duplicate_segues"
+        ]
+      },
+      "task_id": "SAV-P4A-003"
+    },
+    {
+      "evidence": [
+        "event-647ab600a6ff0f78ce01bc78"
+      ],
+      "extensions": {
+        "backup": "backups/masterplan/segue-reconciliation/20260802T193919Z__3fa0bfb82cf4e219/masterplan.json",
+        "event_id": "event-647ab600a6ff0f78ce01bc78",
+        "graph_digest_after": "26947d63314c831c53d77796fcd7e242187bb33e5e153596ddc4fdcb200549ce",
+        "graph_digest_before": "63db8daf950920f24f1cb0cf7151a86c9cce8144f6343345448677d8ce50f8e2",
+        "snapshot": "authority/task-graph/snapshots/20260802T193919Z__3fa0bfb82cf4e219__segue-reconciliation.json"
+      },
+      "id": "receipt-86b33697d597cf88e6189b9b",
+      "occurred_at": "2026-08-02T19:39:19+00:00",
+      "operation": "masterplan.segues.duplicate-reconciliation",
+      "outputs": [
+        "authority/task-graph/masterplan.json",
+        "authority/task-graph/snapshots/20260802T193919Z__3fa0bfb82cf4e219__segue-reconciliation.json"
+      ],
+      "passed": true,
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-02T19:39:19+00:00",
+        "generated_by": "prodigal.niche.masterplan.apply_duplicate_segue_reconciliation",
+        "sources": [
+          {
+            "authority_state": "accepted",
+            "source_id": "decision-706b690abcf266fd6dacd74f",
+            "source_kind": "accepted-decision",
+            "source_path": "authority/task-graph/decisions/decision-706b690abcf266fd6dacd74f.json"
+          },
+          {
+            "authority_state": "proposed",
+            "source_id": "a7eab11440974f9ef45353f599db56e7296afbc2c0f6771563102c99e4209b3c",
+            "source_kind": "segue-reconciliation-plan",
+            "source_path": "reports/niche/masterplan/segue-reconciliation/latest.json"
+          }
+        ],
+        "transformations": [
+          "validate_plan_graph_digest",
+          "validate_decision_authority",
+          "validate_exact_plan_authorization",
+          "remove_authorized_duplicate_segues"
+        ]
+      },
+      "task_id": "SAV-P4A-003"
+    },
+    {
+      "evidence": [
+        "event-e5bbadf878da20eb0b275383"
+      ],
+      "extensions": {
+        "backup": "backups/masterplan/segue-reconciliation/20260802T200320Z__041fae888743966d/masterplan.json",
+        "event_id": "event-e5bbadf878da20eb0b275383",
+        "graph_digest_after": "1c260b1162c71db994b2802d93e6a61314c9f86d27c71e6559bc14ceacec5094",
+        "graph_digest_before": "e75bb280b1db83b58aa0a7de03b1fc9415870cc42cc82557bec0e4fcc2e82b5d",
+        "snapshot": "authority/task-graph/snapshots/20260802T200320Z__041fae888743966d__segue-reconciliation.json"
+      },
+      "id": "receipt-a00c880c0dbf216893488daf",
+      "occurred_at": "2026-08-02T20:03:20+00:00",
+      "operation": "masterplan.segues.duplicate-reconciliation",
+      "outputs": [
+        "authority/task-graph/masterplan.json",
+        "authority/task-graph/snapshots/20260802T200320Z__041fae888743966d__segue-reconciliation.json"
+      ],
+      "passed": true,
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-02T20:03:20+00:00",
+        "generated_by": "prodigal.niche.masterplan.apply_duplicate_segue_reconciliation",
+        "sources": [
+          {
+            "authority_state": "accepted",
+            "source_id": "decision-0bdef648c233a5e06d3601cf",
+            "source_kind": "accepted-decision",
+            "source_path": "authority/task-graph/decisions/decision-0bdef648c233a5e06d3601cf.json"
+          },
+          {
+            "authority_state": "proposed",
+            "source_id": "8100bd726eb8c7863d0dc2535ee36a28567f140dbeeada6708f9cb9800753291",
+            "source_kind": "segue-reconciliation-plan",
+            "source_path": "reports/niche/masterplan/segue-reconciliation/latest.json"
+          }
+        ],
+        "transformations": [
+          "validate_plan_graph_digest",
+          "validate_decision_authority",
+          "validate_exact_plan_authorization",
+          "remove_authorized_duplicate_segues"
+        ]
+      },
+      "task_id": "SAV-P4A-003"
+    },
+    {
+      "evidence": [
+        "event-e76abfee584208d9624dd42a"
+      ],
+      "extensions": {
+        "backup": "backups/masterplan/segue-reconciliation/20260802T194311Z__42f34272c2d19c5e/masterplan.json",
+        "event_id": "event-e76abfee584208d9624dd42a",
+        "graph_digest_after": "42526af867411610b616d7c66f0aecfffe394bb7a11d68700c2ff986982d85d4",
+        "graph_digest_before": "3a8c20dd048509f633baddc3f85aef0a2a3117acc5bbdcc9b32d8a7e3ba2cd0a",
+        "snapshot": "authority/task-graph/snapshots/20260802T194311Z__42f34272c2d19c5e__segue-reconciliation.json"
+      },
+      "id": "receipt-d0746edf53958906fd40d282",
+      "occurred_at": "2026-08-02T19:43:11+00:00",
+      "operation": "masterplan.segues.duplicate-reconciliation",
+      "outputs": [
+        "authority/task-graph/masterplan.json",
+        "authority/task-graph/snapshots/20260802T194311Z__42f34272c2d19c5e__segue-reconciliation.json"
+      ],
+      "passed": true,
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-02T19:43:11+00:00",
+        "generated_by": "prodigal.niche.masterplan.apply_duplicate_segue_reconciliation",
+        "sources": [
+          {
+            "authority_state": "accepted",
+            "source_id": "decision-ed69063836d8817cb9bbb3b5",
+            "source_kind": "accepted-decision",
+            "source_path": "authority/task-graph/decisions/decision-ed69063836d8817cb9bbb3b5.json"
+          },
+          {
+            "authority_state": "proposed",
+            "source_id": "f8b85e8fba23fa0c90c2f79ee58f8149d8ffc32a87c7876f84d4e14ddf1baced",
+            "source_kind": "segue-reconciliation-plan",
+            "source_path": "reports/niche/masterplan/segue-reconciliation/latest.json"
+          }
+        ],
+        "transformations": [
+          "validate_plan_graph_digest",
+          "validate_decision_authority",
+          "validate_exact_plan_authorization",
+          "remove_authorized_duplicate_segues"
+        ]
+      },
+      "task_id": "SAV-P4A-003"
+    }
+  ],
+  "records": [
+    {
+      "acceptance": [
+        "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+      ],
+      "authority": {
+        "accepted_at": "2026-08-01T18:43:45-04:00",
+        "accepted_by": "project-owner",
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "docs/SAVANT_MASTER_TASKS.md",
+        "state": "accepted",
+        "tier": 1
+      },
+      "description": "",
+      "evidence_requirements": [],
+      "extensions": {
+        "source_record": {
+          "authority_locked": true,
+          "id": "SAV-P0-001",
+          "priority": "P0",
+          "rule": "No lower-priority implementation may supersede this task without an explicit accepted override.",
+          "status": "active",
+          "title": "Reconcile all canon authority"
+        }
+      },
+      "id": "SAV-P0-001",
+      "kind": "task",
+      "lineage": {
+        "source": "docs/SAVANT_MASTER_TASKS.md",
+        "source_task_id": "SAV-P0-001"
+      },
+      "outputs": [],
+      "priority": {
+        "authority_locked": true,
+        "band": "P0",
+        "ordinal": 1,
+        "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+      },
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "accepted",
+            "captured_at": null,
+            "source_id": "docs/SAVANT_MASTER_TASKS.md",
+            "source_kind": "authoritative-roadmap",
+            "source_path": "docs/SAVANT_MASTER_TASKS.md",
+            "source_sha256": "6c8526ddc06ecdae636308fa2b5b83a74c59fd752c8a7e1132d9f7f77570c0f9"
+          }
+        ],
+        "transformations": [
+          "source_task_to_authoritative_record"
+        ]
+      },
+      "purpose": "Reconcile all canon authority",
+      "risks": [],
+      "scope": {
+        "depends_on": [],
+        "source_status": "active"
+      },
+      "security": {
+        "authority_transfer": false,
+        "requires_explicit_completion_evidence": true
+      },
+      "status": "active",
+      "title": "Reconcile all canon authority"
+    },
+    {
+      "acceptance": [
+        "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+      ],
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "description": "",
+      "evidence_requirements": [],
+      "extensions": {
+        "current_work_observation": {
+          "id": "SAV-P2A-001",
+          "outputs": [
+            "tools/identity_quality/promotion/build_identity_promotion_queue.py",
+            "bin/identity-promotionctl",
+            "reports/identity_quality/promotion/latest.json",
+            "reports/identity_quality/promotion/latest.md"
+          ],
+          "priority": "P2A",
+          "status": "started",
+          "title": "Build deterministic identity-promotion discovery and priority queue"
+        },
+        "source_record": {
+          "id": "SAV-P2A-001",
+          "outputs": [
+            "tools/identity_quality/promotion/build_identity_promotion_queue.py",
+            "bin/identity-promotionctl",
+            "reports/identity_quality/promotion/latest.json",
+            "reports/identity_quality/promotion/latest.md"
+          ],
+          "priority": "P2A",
+          "status": "started",
+          "title": "Build deterministic identity-promotion discovery and priority queue"
+        }
+      },
+      "id": "SAV-P2A-001",
+      "kind": "task",
+      "lineage": {
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "source_task_id": "SAV-P2A-001"
+      },
+      "outputs": [
+        "tools/identity_quality/promotion/build_identity_promotion_queue.py",
+        "bin/identity-promotionctl",
+        "reports/identity_quality/promotion/latest.json",
+        "reports/identity_quality/promotion/latest.md"
+      ],
+      "priority": {
+        "authority_locked": false,
+        "band": "P2A",
+        "ordinal": 1,
+        "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+      },
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "purpose": "Build deterministic identity-promotion discovery and priority queue",
+      "risks": [],
+      "scope": {
+        "depends_on": [],
+        "source_status": "started"
+      },
+      "security": {
+        "authority_transfer": false,
+        "requires_explicit_completion_evidence": true
+      },
+      "status": "proposed",
+      "title": "Build deterministic identity-promotion discovery and priority queue"
+    },
+    {
+      "acceptance": [
+        "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+      ],
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "description": "",
+      "evidence_requirements": [],
+      "extensions": {
+        "current_work_observation": {
+          "depends_on": [
+            "SAV-P2A-001"
+          ],
+          "id": "SAV-P2A-002",
+          "outputs": [
+            "tools/identity_quality/promotion/build_next_promotion_packet.py",
+            "bin/identity-promote-next"
+          ],
+          "priority": "P2A",
+          "status": "started",
+          "title": "Build authoritative next-subject promotion packet"
+        },
+        "source_record": {
+          "depends_on": [
+            "SAV-P2A-001"
+          ],
+          "id": "SAV-P2A-002",
+          "outputs": [
+            "tools/identity_quality/promotion/build_next_promotion_packet.py",
+            "bin/identity-promote-next"
+          ],
+          "priority": "P2A",
+          "status": "started",
+          "title": "Build authoritative next-subject promotion packet"
+        }
+      },
+      "id": "SAV-P2A-002",
+      "kind": "task",
+      "lineage": {
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "source_task_id": "SAV-P2A-002"
+      },
+      "outputs": [
+        "tools/identity_quality/promotion/build_next_promotion_packet.py",
+        "bin/identity-promote-next"
+      ],
+      "priority": {
+        "authority_locked": false,
+        "band": "P2A",
+        "ordinal": 2,
+        "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+      },
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "purpose": "Build authoritative next-subject promotion packet",
+      "risks": [],
+      "scope": {
+        "depends_on": [
+          "SAV-P2A-001"
+        ],
+        "source_status": "started"
+      },
+      "security": {
+        "authority_transfer": false,
+        "requires_explicit_completion_evidence": true
+      },
+      "status": "proposed",
+      "title": "Build authoritative next-subject promotion packet"
+    },
+    {
+      "acceptance": [
+        "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+      ],
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "description": "",
+      "evidence_requirements": [],
+      "extensions": {
+        "current_work_observation": {
+          "depends_on": [
+            "SAV-P2A-002"
+          ],
+          "id": "SAV-P2A-003",
+          "outputs": [
+            "tools/identity_quality/promotion/build_promotion_scaffold.py",
+            "bin/identity-promotion-scaffold"
+          ],
+          "priority": "P2A",
+          "status": "started",
+          "title": "Build promotion scaffold projection"
+        },
+        "source_record": {
+          "depends_on": [
+            "SAV-P2A-002"
+          ],
+          "id": "SAV-P2A-003",
+          "outputs": [
+            "tools/identity_quality/promotion/build_promotion_scaffold.py",
+            "bin/identity-promotion-scaffold"
+          ],
+          "priority": "P2A",
+          "status": "started",
+          "title": "Build promotion scaffold projection"
+        }
+      },
+      "id": "SAV-P2A-003",
+      "kind": "task",
+      "lineage": {
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "source_task_id": "SAV-P2A-003"
+      },
+      "outputs": [
+        "tools/identity_quality/promotion/build_promotion_scaffold.py",
+        "bin/identity-promotion-scaffold"
+      ],
+      "priority": {
+        "authority_locked": false,
+        "band": "P2A",
+        "ordinal": 3,
+        "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+      },
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "purpose": "Build promotion scaffold projection",
+      "risks": [],
+      "scope": {
+        "depends_on": [
+          "SAV-P2A-002"
+        ],
+        "source_status": "started"
+      },
+      "security": {
+        "authority_transfer": false,
+        "requires_explicit_completion_evidence": true
+      },
+      "status": "proposed",
+      "title": "Build promotion scaffold projection"
+    },
+    {
+      "acceptance": [
+        "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+      ],
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "description": "",
+      "evidence_requirements": [],
+      "extensions": {
+        "current_work_observation": {
+          "depends_on": [
+            "SAV-P2A-003"
+          ],
+          "id": "SAV-P2A-004",
+          "outputs": [
+            "tools/identity_quality/promotion/build_promotion_execution_packet.py",
+            "bin/identity-promotion-execution"
+          ],
+          "priority": "P2A",
+          "status": "started",
+          "title": "Build promotion execution packet"
+        },
+        "source_record": {
+          "depends_on": [
+            "SAV-P2A-003"
+          ],
+          "id": "SAV-P2A-004",
+          "outputs": [
+            "tools/identity_quality/promotion/build_promotion_execution_packet.py",
+            "bin/identity-promotion-execution"
+          ],
+          "priority": "P2A",
+          "status": "started",
+          "title": "Build promotion execution packet"
+        }
+      },
+      "id": "SAV-P2A-004",
+      "kind": "task",
+      "lineage": {
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "source_task_id": "SAV-P2A-004"
+      },
+      "outputs": [
+        "tools/identity_quality/promotion/build_promotion_execution_packet.py",
+        "bin/identity-promotion-execution"
+      ],
+      "priority": {
+        "authority_locked": false,
+        "band": "P2A",
+        "ordinal": 4,
+        "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+      },
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "purpose": "Build promotion execution packet",
+      "risks": [],
+      "scope": {
+        "depends_on": [
+          "SAV-P2A-003"
+        ],
+        "source_status": "started"
+      },
+      "security": {
+        "authority_transfer": false,
+        "requires_explicit_completion_evidence": true
+      },
+      "status": "proposed",
+      "title": "Build promotion execution packet"
+    },
+    {
+      "acceptance": [
+        "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+      ],
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "description": "",
+      "evidence_requirements": [],
+      "extensions": {
+        "current_work_observation": {
+          "depends_on": [
+            "SAV-P2A-004"
+          ],
+          "id": "SAV-P2A-005",
+          "outputs": [
+            "tools/identity_quality/promotion/run_promotion_execution.py",
+            "bin/identity-promotion-run"
+          ],
+          "priority": "P2A",
+          "status": "started",
+          "title": "Build transaction-safe promotion execution runner"
+        },
+        "source_record": {
+          "depends_on": [
+            "SAV-P2A-004"
+          ],
+          "id": "SAV-P2A-005",
+          "outputs": [
+            "tools/identity_quality/promotion/run_promotion_execution.py",
+            "bin/identity-promotion-run"
+          ],
+          "priority": "P2A",
+          "status": "started",
+          "title": "Build transaction-safe promotion execution runner"
+        }
+      },
+      "id": "SAV-P2A-005",
+      "kind": "task",
+      "lineage": {
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "source_task_id": "SAV-P2A-005"
+      },
+      "outputs": [
+        "tools/identity_quality/promotion/run_promotion_execution.py",
+        "bin/identity-promotion-run"
+      ],
+      "priority": {
+        "authority_locked": false,
+        "band": "P2A",
+        "ordinal": 5,
+        "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+      },
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "purpose": "Build transaction-safe promotion execution runner",
+      "risks": [],
+      "scope": {
+        "depends_on": [
+          "SAV-P2A-004"
+        ],
+        "source_status": "started"
+      },
+      "security": {
+        "authority_transfer": false,
+        "requires_explicit_completion_evidence": true
+      },
+      "status": "proposed",
+      "title": "Build transaction-safe promotion execution runner"
+    },
+    {
+      "acceptance": [
+        "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+      ],
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "description": "",
+      "evidence_requirements": [],
+      "extensions": {
+        "current_work_observation": {
+          "depends_on": [
+            "SAV-P2A-003"
+          ],
+          "id": "SAV-P2A-006",
+          "outputs": [
+            "tools/identity_quality/promotion/build_promotion_content_bundle.py",
+            "bin/identity-promotion-content"
+          ],
+          "priority": "P2A",
+          "status": "started",
+          "title": "Build provisional promotion content bundle generator"
+        },
+        "source_record": {
+          "depends_on": [
+            "SAV-P2A-003"
+          ],
+          "id": "SAV-P2A-006",
+          "outputs": [
+            "tools/identity_quality/promotion/build_promotion_content_bundle.py",
+            "bin/identity-promotion-content"
+          ],
+          "priority": "P2A",
+          "status": "started",
+          "title": "Build provisional promotion content bundle generator"
+        }
+      },
+      "id": "SAV-P2A-006",
+      "kind": "task",
+      "lineage": {
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "source_task_id": "SAV-P2A-006"
+      },
+      "outputs": [
+        "tools/identity_quality/promotion/build_promotion_content_bundle.py",
+        "bin/identity-promotion-content"
+      ],
+      "priority": {
+        "authority_locked": false,
+        "band": "P2A",
+        "ordinal": 6,
+        "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+      },
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "purpose": "Build provisional promotion content bundle generator",
+      "risks": [],
+      "scope": {
+        "depends_on": [
+          "SAV-P2A-003"
+        ],
+        "source_status": "started"
+      },
+      "security": {
+        "authority_transfer": false,
+        "requires_explicit_completion_evidence": true
+      },
+      "status": "proposed",
+      "title": "Build provisional promotion content bundle generator"
+    },
+    {
+      "acceptance": [
+        "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+      ],
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "description": "",
+      "evidence_requirements": [],
+      "extensions": {
+        "current_work_observation": {
+          "depends_on": [
+            "SAV-P2A-006"
+          ],
+          "id": "SAV-P2A-007",
+          "outputs": [
+            "tools/identity_quality/promotion/admit_promotion_content_bundle.py",
+            "bin/identity-promotion-admit"
+          ],
+          "priority": "P2A",
+          "status": "started",
+          "title": "Build transaction-safe content admission engine"
+        },
+        "source_record": {
+          "depends_on": [
+            "SAV-P2A-006"
+          ],
+          "id": "SAV-P2A-007",
+          "outputs": [
+            "tools/identity_quality/promotion/admit_promotion_content_bundle.py",
+            "bin/identity-promotion-admit"
+          ],
+          "priority": "P2A",
+          "status": "started",
+          "title": "Build transaction-safe content admission engine"
+        }
+      },
+      "id": "SAV-P2A-007",
+      "kind": "task",
+      "lineage": {
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "source_task_id": "SAV-P2A-007"
+      },
+      "outputs": [
+        "tools/identity_quality/promotion/admit_promotion_content_bundle.py",
+        "bin/identity-promotion-admit"
+      ],
+      "priority": {
+        "authority_locked": false,
+        "band": "P2A",
+        "ordinal": 7,
+        "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+      },
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "purpose": "Build transaction-safe content admission engine",
+      "risks": [],
+      "scope": {
+        "depends_on": [
+          "SAV-P2A-006"
+        ],
+        "source_status": "started"
+      },
+      "security": {
+        "authority_transfer": false,
+        "requires_explicit_completion_evidence": true
+      },
+      "status": "proposed",
+      "title": "Build transaction-safe content admission engine"
+    },
+    {
+      "acceptance": [
+        "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+      ],
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "description": "",
+      "evidence_requirements": [],
+      "extensions": {
+        "current_work_observation": {
+          "depends_on": [
+            "SAV-P2A-007"
+          ],
+          "id": "SAV-P2A-008",
+          "outputs": [
+            "tools/identity_quality/promotion/verify_promotion_admission.py",
+            "bin/identity-promotion-verify"
+          ],
+          "priority": "P2A",
+          "status": "started",
+          "title": "Build promotion admission verifier"
+        },
+        "source_record": {
+          "depends_on": [
+            "SAV-P2A-007"
+          ],
+          "id": "SAV-P2A-008",
+          "outputs": [
+            "tools/identity_quality/promotion/verify_promotion_admission.py",
+            "bin/identity-promotion-verify"
+          ],
+          "priority": "P2A",
+          "status": "started",
+          "title": "Build promotion admission verifier"
+        }
+      },
+      "id": "SAV-P2A-008",
+      "kind": "task",
+      "lineage": {
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "source_task_id": "SAV-P2A-008"
+      },
+      "outputs": [
+        "tools/identity_quality/promotion/verify_promotion_admission.py",
+        "bin/identity-promotion-verify"
+      ],
+      "priority": {
+        "authority_locked": false,
+        "band": "P2A",
+        "ordinal": 8,
+        "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+      },
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "purpose": "Build promotion admission verifier",
+      "risks": [],
+      "scope": {
+        "depends_on": [
+          "SAV-P2A-007"
+        ],
+        "source_status": "started"
+      },
+      "security": {
+        "authority_transfer": false,
+        "requires_explicit_completion_evidence": true
+      },
+      "status": "proposed",
+      "title": "Build promotion admission verifier"
+    },
+    {
+      "acceptance": [
+        "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+      ],
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "description": "",
+      "evidence_requirements": [],
+      "extensions": {
+        "current_work_observation": {
+          "depends_on": [
+            "SAV-P2A-007"
+          ],
+          "id": "SAV-P2A-009",
+          "outputs": [
+            "tools/identity_quality/promotion/attach_promotion_definition.py",
+            "bin/identity-promotion-attach"
+          ],
+          "priority": "P2A",
+          "status": "started",
+          "title": "Attach admitted runtime evidence to identity definition"
+        },
+        "source_record": {
+          "depends_on": [
+            "SAV-P2A-007"
+          ],
+          "id": "SAV-P2A-009",
+          "outputs": [
+            "tools/identity_quality/promotion/attach_promotion_definition.py",
+            "bin/identity-promotion-attach"
+          ],
+          "priority": "P2A",
+          "status": "started",
+          "title": "Attach admitted runtime evidence to identity definition"
+        }
+      },
+      "id": "SAV-P2A-009",
+      "kind": "task",
+      "lineage": {
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "source_task_id": "SAV-P2A-009"
+      },
+      "outputs": [
+        "tools/identity_quality/promotion/attach_promotion_definition.py",
+        "bin/identity-promotion-attach"
+      ],
+      "priority": {
+        "authority_locked": false,
+        "band": "P2A",
+        "ordinal": 9,
+        "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+      },
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "purpose": "Attach admitted runtime evidence to identity definition",
+      "risks": [],
+      "scope": {
+        "depends_on": [
+          "SAV-P2A-007"
+        ],
+        "source_status": "started"
+      },
+      "security": {
+        "authority_transfer": false,
+        "requires_explicit_completion_evidence": true
+      },
+      "status": "proposed",
+      "title": "Attach admitted runtime evidence to identity definition"
+    },
+    {
+      "acceptance": [
+        "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+      ],
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "description": "",
+      "evidence_requirements": [],
+      "extensions": {
+        "current_work_observation": {
+          "depends_on": [
+            "SAV-P2A-009"
+          ],
+          "id": "SAV-P2A-010",
+          "outputs": [
+            "tools/identity_quality/promotion/attach_promotion_parent.py",
+            "bin/identity-promotion-parent"
+          ],
+          "priority": "P2A",
+          "status": "started",
+          "title": "Build reversible parent attachment without authority transfer"
+        },
+        "source_record": {
+          "depends_on": [
+            "SAV-P2A-009"
+          ],
+          "id": "SAV-P2A-010",
+          "outputs": [
+            "tools/identity_quality/promotion/attach_promotion_parent.py",
+            "bin/identity-promotion-parent"
+          ],
+          "priority": "P2A",
+          "status": "started",
+          "title": "Build reversible parent attachment without authority transfer"
+        }
+      },
+      "id": "SAV-P2A-010",
+      "kind": "task",
+      "lineage": {
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "source_task_id": "SAV-P2A-010"
+      },
+      "outputs": [
+        "tools/identity_quality/promotion/attach_promotion_parent.py",
+        "bin/identity-promotion-parent"
+      ],
+      "priority": {
+        "authority_locked": false,
+        "band": "P2A",
+        "ordinal": 10,
+        "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+      },
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "purpose": "Build reversible parent attachment without authority transfer",
+      "risks": [],
+      "scope": {
+        "depends_on": [
+          "SAV-P2A-009"
+        ],
+        "source_status": "started"
+      },
+      "security": {
+        "authority_transfer": false,
+        "requires_explicit_completion_evidence": true
+      },
+      "status": "proposed",
+      "title": "Build reversible parent attachment without authority transfer"
+    },
+    {
+      "acceptance": [
+        "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+      ],
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "description": "",
+      "evidence_requirements": [],
+      "extensions": {
+        "current_work_observation": {
+          "depends_on": [
+            "SAV-P2A-010"
+          ],
+          "id": "SAV-P2A-011",
+          "outputs": [
+            "tools/identity_quality/promotion/verify_promotion_parent.py",
+            "bin/identity-promotion-parent-verify"
+          ],
+          "priority": "P2A",
+          "status": "started",
+          "title": "Verify parent attachment and authority boundary"
+        },
+        "source_record": {
+          "depends_on": [
+            "SAV-P2A-010"
+          ],
+          "id": "SAV-P2A-011",
+          "outputs": [
+            "tools/identity_quality/promotion/verify_promotion_parent.py",
+            "bin/identity-promotion-parent-verify"
+          ],
+          "priority": "P2A",
+          "status": "started",
+          "title": "Verify parent attachment and authority boundary"
+        }
+      },
+      "id": "SAV-P2A-011",
+      "kind": "verification",
+      "lineage": {
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "source_task_id": "SAV-P2A-011"
+      },
+      "outputs": [
+        "tools/identity_quality/promotion/verify_promotion_parent.py",
+        "bin/identity-promotion-parent-verify"
+      ],
+      "priority": {
+        "authority_locked": false,
+        "band": "P2A",
+        "ordinal": 11,
+        "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+      },
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "purpose": "Verify parent attachment and authority boundary",
+      "risks": [],
+      "scope": {
+        "depends_on": [
+          "SAV-P2A-010"
+        ],
+        "source_status": "started"
+      },
+      "security": {
+        "authority_transfer": false,
+        "requires_explicit_completion_evidence": true
+      },
+      "status": "proposed",
+      "title": "Verify parent attachment and authority boundary"
+    },
+    {
+      "acceptance": [
+        "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+      ],
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "description": "",
+      "evidence_requirements": [],
+      "extensions": {
+        "current_work_observation": {
+          "depends_on": [
+            "SAV-P2A-011"
+          ],
+          "id": "SAV-P2A-012",
+          "outputs": [
+            "tools/identity_quality/promotion/build_promotion_attestation.py",
+            "bin/identity-promotion-attest"
+          ],
+          "priority": "P2A",
+          "status": "started",
+          "title": "Build deterministic promotion attestation"
+        },
+        "source_record": {
+          "depends_on": [
+            "SAV-P2A-011"
+          ],
+          "id": "SAV-P2A-012",
+          "outputs": [
+            "tools/identity_quality/promotion/build_promotion_attestation.py",
+            "bin/identity-promotion-attest"
+          ],
+          "priority": "P2A",
+          "status": "started",
+          "title": "Build deterministic promotion attestation"
+        }
+      },
+      "id": "SAV-P2A-012",
+      "kind": "attestation",
+      "lineage": {
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "source_task_id": "SAV-P2A-012"
+      },
+      "outputs": [
+        "tools/identity_quality/promotion/build_promotion_attestation.py",
+        "bin/identity-promotion-attest"
+      ],
+      "priority": {
+        "authority_locked": false,
+        "band": "P2A",
+        "ordinal": 12,
+        "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+      },
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "purpose": "Build deterministic promotion attestation",
+      "risks": [],
+      "scope": {
+        "depends_on": [
+          "SAV-P2A-011"
+        ],
+        "source_status": "started"
+      },
+      "security": {
+        "authority_transfer": false,
+        "requires_explicit_completion_evidence": true
+      },
+      "status": "proposed",
+      "title": "Build deterministic promotion attestation"
+    },
+    {
+      "acceptance": [
+        "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+      ],
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "description": "",
+      "evidence_requirements": [],
+      "extensions": {
+        "current_work_observation": {
+          "depends_on": [
+            "SAV-P2A-007",
+            "SAV-P2A-009",
+            "SAV-P2A-010"
+          ],
+          "id": "SAV-P2A-013",
+          "priority": "P2A",
+          "status": "proposed",
+          "title": "Build promotion rollback and restoration controller"
+        },
+        "source_record": {
+          "depends_on": [
+            "SAV-P2A-007",
+            "SAV-P2A-009",
+            "SAV-P2A-010"
+          ],
+          "id": "SAV-P2A-013",
+          "priority": "P2A",
+          "status": "proposed",
+          "title": "Build promotion rollback and restoration controller"
+        }
+      },
+      "id": "SAV-P2A-013",
+      "kind": "task",
+      "lineage": {
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "source_task_id": "SAV-P2A-013"
+      },
+      "outputs": [],
+      "priority": {
+        "authority_locked": false,
+        "band": "P2A",
+        "ordinal": 13,
+        "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+      },
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "purpose": "Build promotion rollback and restoration controller",
+      "risks": [],
+      "scope": {
+        "depends_on": [
+          "SAV-P2A-007",
+          "SAV-P2A-009",
+          "SAV-P2A-010"
+        ],
+        "source_status": "proposed"
+      },
+      "security": {
+        "authority_transfer": false,
+        "requires_explicit_completion_evidence": true
+      },
+      "status": "proposed",
+      "title": "Build promotion rollback and restoration controller"
+    },
+    {
+      "acceptance": [
+        "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+      ],
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "description": "",
+      "evidence_requirements": [],
+      "extensions": {
+        "current_work_observation": {
+          "depends_on": [
+            "SAV-P2A-012",
+            "SAV-P2A-013"
+          ],
+          "id": "SAV-P2A-014",
+          "priority": "P2A",
+          "status": "proposed",
+          "title": "Build deterministic promotion replay engine"
+        },
+        "source_record": {
+          "depends_on": [
+            "SAV-P2A-012",
+            "SAV-P2A-013"
+          ],
+          "id": "SAV-P2A-014",
+          "priority": "P2A",
+          "status": "proposed",
+          "title": "Build deterministic promotion replay engine"
+        }
+      },
+      "id": "SAV-P2A-014",
+      "kind": "task",
+      "lineage": {
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "source_task_id": "SAV-P2A-014"
+      },
+      "outputs": [],
+      "priority": {
+        "authority_locked": false,
+        "band": "P2A",
+        "ordinal": 14,
+        "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+      },
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "purpose": "Build deterministic promotion replay engine",
+      "risks": [],
+      "scope": {
+        "depends_on": [
+          "SAV-P2A-012",
+          "SAV-P2A-013"
+        ],
+        "source_status": "proposed"
+      },
+      "security": {
+        "authority_transfer": false,
+        "requires_explicit_completion_evidence": true
+      },
+      "status": "proposed",
+      "title": "Build deterministic promotion replay engine"
+    },
+    {
+      "acceptance": [
+        "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+      ],
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "description": "",
+      "evidence_requirements": [],
+      "extensions": {
+        "current_work_observation": {
+          "depends_on": [
+            "SAV-P2A-005",
+            "SAV-P2A-007",
+            "SAV-P2A-009",
+            "SAV-P2A-010"
+          ],
+          "id": "SAV-P2A-015",
+          "priority": "P2A",
+          "status": "proposed",
+          "title": "Build immutable promotion transaction journal"
+        },
+        "source_record": {
+          "depends_on": [
+            "SAV-P2A-005",
+            "SAV-P2A-007",
+            "SAV-P2A-009",
+            "SAV-P2A-010"
+          ],
+          "id": "SAV-P2A-015",
+          "priority": "P2A",
+          "status": "proposed",
+          "title": "Build immutable promotion transaction journal"
+        }
+      },
+      "id": "SAV-P2A-015",
+      "kind": "task",
+      "lineage": {
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "source_task_id": "SAV-P2A-015"
+      },
+      "outputs": [],
+      "priority": {
+        "authority_locked": false,
+        "band": "P2A",
+        "ordinal": 15,
+        "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+      },
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "purpose": "Build immutable promotion transaction journal",
+      "risks": [],
+      "scope": {
+        "depends_on": [
+          "SAV-P2A-005",
+          "SAV-P2A-007",
+          "SAV-P2A-009",
+          "SAV-P2A-010"
+        ],
+        "source_status": "proposed"
+      },
+      "security": {
+        "authority_transfer": false,
+        "requires_explicit_completion_evidence": true
+      },
+      "status": "proposed",
+      "title": "Build immutable promotion transaction journal"
+    },
+    {
+      "acceptance": [
+        "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+      ],
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "description": "",
+      "evidence_requirements": [],
+      "extensions": {
+        "current_work_observation": {
+          "depends_on": [
+            "SAV-P2-002",
+            "SAV-P2A-004"
+          ],
+          "id": "SAV-P2A-016",
+          "priority": "P2A",
+          "status": "proposed",
+          "title": "Build identity graph diff and impact projection"
+        },
+        "source_record": {
+          "depends_on": [
+            "SAV-P2-002",
+            "SAV-P2A-004"
+          ],
+          "id": "SAV-P2A-016",
+          "priority": "P2A",
+          "status": "proposed",
+          "title": "Build identity graph diff and impact projection"
+        }
+      },
+      "id": "SAV-P2A-016",
+      "kind": "task",
+      "lineage": {
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "source_task_id": "SAV-P2A-016"
+      },
+      "outputs": [],
+      "priority": {
+        "authority_locked": false,
+        "band": "P2A",
+        "ordinal": 16,
+        "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+      },
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "purpose": "Build identity graph diff and impact projection",
+      "risks": [],
+      "scope": {
+        "depends_on": [
+          "SAV-P2-002",
+          "SAV-P2A-004"
+        ],
+        "source_status": "proposed"
+      },
+      "security": {
+        "authority_transfer": false,
+        "requires_explicit_completion_evidence": true
+      },
+      "status": "proposed",
+      "title": "Build identity graph diff and impact projection"
+    },
+    {
+      "acceptance": [
+        "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+      ],
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "description": "",
+      "evidence_requirements": [],
+      "extensions": {
+        "current_work_observation": {
+          "depends_on": [
+            "SAV-P2-001",
+            "SAV-P2-002",
+            "SAV-P2A-016"
+          ],
+          "id": "SAV-P2A-017",
+          "priority": "P2A",
+          "status": "proposed",
+          "title": "Build promotion conflict and contradiction resolver"
+        },
+        "source_record": {
+          "depends_on": [
+            "SAV-P2-001",
+            "SAV-P2-002",
+            "SAV-P2A-016"
+          ],
+          "id": "SAV-P2A-017",
+          "priority": "P2A",
+          "status": "proposed",
+          "title": "Build promotion conflict and contradiction resolver"
+        }
+      },
+      "id": "SAV-P2A-017",
+      "kind": "task",
+      "lineage": {
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "source_task_id": "SAV-P2A-017"
+      },
+      "outputs": [],
+      "priority": {
+        "authority_locked": false,
+        "band": "P2A",
+        "ordinal": 17,
+        "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+      },
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "purpose": "Build promotion conflict and contradiction resolver",
+      "risks": [],
+      "scope": {
+        "depends_on": [
+          "SAV-P2-001",
+          "SAV-P2-002",
+          "SAV-P2A-016"
+        ],
+        "source_status": "proposed"
+      },
+      "security": {
+        "authority_transfer": false,
+        "requires_explicit_completion_evidence": true
+      },
+      "status": "proposed",
+      "title": "Build promotion conflict and contradiction resolver"
+    },
+    {
+      "acceptance": [
+        "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+      ],
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "description": "",
+      "evidence_requirements": [],
+      "extensions": {
+        "current_work_observation": {
+          "depends_on": [
+            "SAV-P2A-012",
+            "SAV-P2A-014",
+            "SAV-P2A-017"
+          ],
+          "id": "SAV-P2A-018",
+          "priority": "P2A",
+          "status": "proposed",
+          "title": "Build governed batch promotion planner"
+        },
+        "source_record": {
+          "depends_on": [
+            "SAV-P2A-012",
+            "SAV-P2A-014",
+            "SAV-P2A-017"
+          ],
+          "id": "SAV-P2A-018",
+          "priority": "P2A",
+          "status": "proposed",
+          "title": "Build governed batch promotion planner"
+        }
+      },
+      "id": "SAV-P2A-018",
+      "kind": "task",
+      "lineage": {
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "source_task_id": "SAV-P2A-018"
+      },
+      "outputs": [],
+      "priority": {
+        "authority_locked": false,
+        "band": "P2A",
+        "ordinal": 18,
+        "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+      },
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "purpose": "Build governed batch promotion planner",
+      "risks": [],
+      "scope": {
+        "depends_on": [
+          "SAV-P2A-012",
+          "SAV-P2A-014",
+          "SAV-P2A-017"
+        ],
+        "source_status": "proposed"
+      },
+      "security": {
+        "authority_transfer": false,
+        "requires_explicit_completion_evidence": true
+      },
+      "status": "proposed",
+      "title": "Build governed batch promotion planner"
+    },
+    {
+      "acceptance": [
+        "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+      ],
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "description": "",
+      "evidence_requirements": [],
+      "extensions": {
+        "current_work_observation": {
+          "depends_on": [
+            "SAV-P8-001",
+            "SAV-P2A-015"
+          ],
+          "id": "SAV-P2A-019",
+          "priority": "P2A",
+          "status": "proposed",
+          "title": "Build promotion observatory and queue projections"
+        },
+        "source_record": {
+          "depends_on": [
+            "SAV-P8-001",
+            "SAV-P2A-015"
+          ],
+          "id": "SAV-P2A-019",
+          "priority": "P2A",
+          "status": "proposed",
+          "title": "Build promotion observatory and queue projections"
+        }
+      },
+      "id": "SAV-P2A-019",
+      "kind": "task",
+      "lineage": {
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "source_task_id": "SAV-P2A-019"
+      },
+      "outputs": [],
+      "priority": {
+        "authority_locked": false,
+        "band": "P2A",
+        "ordinal": 19,
+        "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+      },
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "purpose": "Build promotion observatory and queue projections",
+      "risks": [],
+      "scope": {
+        "depends_on": [
+          "SAV-P8-001",
+          "SAV-P2A-015"
+        ],
+        "source_status": "proposed"
+      },
+      "security": {
+        "authority_transfer": false,
+        "requires_explicit_completion_evidence": true
+      },
+      "status": "proposed",
+      "title": "Build promotion observatory and queue projections"
+    },
+    {
+      "acceptance": [
+        "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+      ],
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "description": "",
+      "evidence_requirements": [],
+      "extensions": {
+        "current_work_observation": {
+          "depends_on": [
+            "SAV-P2-001",
+            "SAV-P2-003",
+            "SAV-P2A-017"
+          ],
+          "id": "SAV-P2A-020",
+          "priority": "P2A",
+          "status": "proposed",
+          "title": "Integrate promotion with Consensus"
+        },
+        "source_record": {
+          "depends_on": [
+            "SAV-P2-001",
+            "SAV-P2-003",
+            "SAV-P2A-017"
+          ],
+          "id": "SAV-P2A-020",
+          "priority": "P2A",
+          "status": "proposed",
+          "title": "Integrate promotion with Consensus"
+        }
+      },
+      "id": "SAV-P2A-020",
+      "kind": "task",
+      "lineage": {
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "source_task_id": "SAV-P2A-020"
+      },
+      "outputs": [],
+      "priority": {
+        "authority_locked": false,
+        "band": "P2A",
+        "ordinal": 20,
+        "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+      },
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "purpose": "Integrate promotion with Consensus",
+      "risks": [],
+      "scope": {
+        "depends_on": [
+          "SAV-P2-001",
+          "SAV-P2-003",
+          "SAV-P2A-017"
+        ],
+        "source_status": "proposed"
+      },
+      "security": {
+        "authority_transfer": false,
+        "requires_explicit_completion_evidence": true
+      },
+      "status": "proposed",
+      "title": "Integrate promotion with Consensus"
+    },
+    {
+      "acceptance": [
+        "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+      ],
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "description": "",
+      "evidence_requirements": [],
+      "extensions": {
+        "current_work_observation": {
+          "depends_on": [
+            "SAV-P2A-014",
+            "SAV-P10-002",
+            "SAV-P10-004"
+          ],
+          "id": "SAV-P2A-021",
+          "priority": "P2A",
+          "status": "proposed",
+          "title": "Build promotion performance and determinism benchmark suite"
+        },
+        "source_record": {
+          "depends_on": [
+            "SAV-P2A-014",
+            "SAV-P10-002",
+            "SAV-P10-004"
+          ],
+          "id": "SAV-P2A-021",
+          "priority": "P2A",
+          "status": "proposed",
+          "title": "Build promotion performance and determinism benchmark suite"
+        }
+      },
+      "id": "SAV-P2A-021",
+      "kind": "task",
+      "lineage": {
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "source_task_id": "SAV-P2A-021"
+      },
+      "outputs": [],
+      "priority": {
+        "authority_locked": false,
+        "band": "P2A",
+        "ordinal": 21,
+        "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+      },
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "purpose": "Build promotion performance and determinism benchmark suite",
+      "risks": [],
+      "scope": {
+        "depends_on": [
+          "SAV-P2A-014",
+          "SAV-P10-002",
+          "SAV-P10-004"
+        ],
+        "source_status": "proposed"
+      },
+      "security": {
+        "authority_transfer": false,
+        "requires_explicit_completion_evidence": true
+      },
+      "status": "proposed",
+      "title": "Build promotion performance and determinism benchmark suite"
+    },
+    {
+      "acceptance": [
+        "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+      ],
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "description": "",
+      "evidence_requirements": [],
+      "extensions": {
+        "current_work_observation": {
+          "id": "SAV-P4A-001",
+          "priority": "P4A",
+          "status": "started",
+          "title": "Establish Masterplan as a Prodigal of Niche"
+        },
+        "source_record": {
+          "id": "SAV-P4A-001",
+          "priority": "P4A",
+          "status": "started",
+          "title": "Establish Masterplan as a Prodigal of Niche"
+        }
+      },
+      "id": "SAV-P4A-001",
+      "kind": "task",
+      "lineage": {
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "source_task_id": "SAV-P4A-001"
+      },
+      "outputs": [],
+      "priority": {
+        "authority_locked": false,
+        "band": "P4A",
+        "ordinal": 1,
+        "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+      },
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "purpose": "Establish Masterplan as a Prodigal of Niche",
+      "risks": [],
+      "scope": {
+        "depends_on": [],
+        "source_status": "started"
+      },
+      "security": {
+        "authority_transfer": false,
+        "requires_explicit_completion_evidence": true
+      },
+      "status": "proposed",
+      "title": "Establish Masterplan as a Prodigal of Niche"
+    },
+    {
+      "acceptance": [
+        "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+      ],
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "description": "",
+      "evidence_requirements": [],
+      "extensions": {
+        "current_work_observation": {
+          "depends_on": [
+            "SAV-P2-001",
+            "SAV-P2-002",
+            "SAV-P2-003",
+            "SAV-P4A-001"
+          ],
+          "id": "SAV-P4A-002",
+          "priority": "P4A",
+          "status": "proposed",
+          "title": "Migrate Markdown roadmap into authoritative task records"
+        },
+        "source_record": {
+          "depends_on": [
+            "SAV-P2-001",
+            "SAV-P2-002",
+            "SAV-P2-003",
+            "SAV-P4A-001"
+          ],
+          "id": "SAV-P4A-002",
+          "priority": "P4A",
+          "status": "proposed",
+          "title": "Migrate Markdown roadmap into authoritative task records"
+        }
+      },
+      "id": "SAV-P4A-002",
+      "kind": "task",
+      "lineage": {
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "source_task_id": "SAV-P4A-002"
+      },
+      "outputs": [],
+      "priority": {
+        "authority_locked": false,
+        "band": "P4A",
+        "ordinal": 2,
+        "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+      },
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "purpose": "Migrate Markdown roadmap into authoritative task records",
+      "risks": [],
+      "scope": {
+        "depends_on": [
+          "SAV-P2-001",
+          "SAV-P2-002",
+          "SAV-P2-003",
+          "SAV-P4A-001"
+        ],
+        "source_status": "proposed"
+      },
+      "security": {
+        "authority_transfer": false,
+        "requires_explicit_completion_evidence": true
+      },
+      "status": "proposed",
+      "title": "Migrate Markdown roadmap into authoritative task records"
+    },
+    {
+      "acceptance": [
+        "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+      ],
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "description": "",
+      "evidence_requirements": [],
+      "extensions": {
+        "current_work_observation": {
+          "depends_on": [
+            "SAV-P4A-002"
+          ],
+          "id": "SAV-P4A-003",
+          "priority": "P4A",
+          "status": "proposed",
+          "title": "Represent dependencies and blockers as typed task segues"
+        },
+        "source_record": {
+          "depends_on": [
+            "SAV-P4A-002"
+          ],
+          "id": "SAV-P4A-003",
+          "priority": "P4A",
+          "status": "proposed",
+          "title": "Represent dependencies and blockers as typed task segues"
+        }
+      },
+      "id": "SAV-P4A-003",
+      "kind": "task",
+      "lineage": {
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "source_task_id": "SAV-P4A-003"
+      },
+      "outputs": [],
+      "priority": {
+        "authority_locked": false,
+        "band": "P4A",
+        "ordinal": 3,
+        "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+      },
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "purpose": "Represent dependencies and blockers as typed task segues",
+      "risks": [],
+      "scope": {
+        "depends_on": [
+          "SAV-P4A-002"
+        ],
+        "source_status": "proposed"
+      },
+      "security": {
+        "authority_transfer": false,
+        "requires_explicit_completion_evidence": true
+      },
+      "status": "proposed",
+      "title": "Represent dependencies and blockers as typed task segues"
+    },
+    {
+      "acceptance": [
+        "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+      ],
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "description": "",
+      "evidence_requirements": [],
+      "extensions": {
+        "current_work_observation": {
+          "depends_on": [
+            "SAV-P4A-003"
+          ],
+          "id": "SAV-P4A-004",
+          "priority": "P4A",
+          "status": "proposed",
+          "title": "Build deterministic executable-task resolver"
+        },
+        "source_record": {
+          "depends_on": [
+            "SAV-P4A-003"
+          ],
+          "id": "SAV-P4A-004",
+          "priority": "P4A",
+          "status": "proposed",
+          "title": "Build deterministic executable-task resolver"
+        }
+      },
+      "id": "SAV-P4A-004",
+      "kind": "task",
+      "lineage": {
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "source_task_id": "SAV-P4A-004"
+      },
+      "outputs": [],
+      "priority": {
+        "authority_locked": false,
+        "band": "P4A",
+        "ordinal": 4,
+        "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+      },
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "purpose": "Build deterministic executable-task resolver",
+      "risks": [],
+      "scope": {
+        "depends_on": [
+          "SAV-P4A-003"
+        ],
+        "source_status": "proposed"
+      },
+      "security": {
+        "authority_transfer": false,
+        "requires_explicit_completion_evidence": true
+      },
+      "status": "proposed",
+      "title": "Build deterministic executable-task resolver"
+    },
+    {
+      "acceptance": [
+        "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+      ],
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "description": "",
+      "evidence_requirements": [],
+      "extensions": {
+        "current_work_observation": {
+          "depends_on": [
+            "SAV-P1-004",
+            "SAV-P4A-002"
+          ],
+          "id": "SAV-P4A-005",
+          "priority": "P4A",
+          "status": "proposed",
+          "title": "Build immutable task transition event journal"
+        },
+        "source_record": {
+          "depends_on": [
+            "SAV-P1-004",
+            "SAV-P4A-002"
+          ],
+          "id": "SAV-P4A-005",
+          "priority": "P4A",
+          "status": "proposed",
+          "title": "Build immutable task transition event journal"
+        }
+      },
+      "id": "SAV-P4A-005",
+      "kind": "task",
+      "lineage": {
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "source_task_id": "SAV-P4A-005"
+      },
+      "outputs": [],
+      "priority": {
+        "authority_locked": false,
+        "band": "P4A",
+        "ordinal": 5,
+        "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+      },
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "purpose": "Build immutable task transition event journal",
+      "risks": [],
+      "scope": {
+        "depends_on": [
+          "SAV-P1-004",
+          "SAV-P4A-002"
+        ],
+        "source_status": "proposed"
+      },
+      "security": {
+        "authority_transfer": false,
+        "requires_explicit_completion_evidence": true
+      },
+      "status": "proposed",
+      "title": "Build immutable task transition event journal"
+    },
+    {
+      "acceptance": [
+        "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+      ],
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "description": "",
+      "evidence_requirements": [],
+      "extensions": {
+        "current_work_observation": {
+          "depends_on": [
+            "SAV-P2-003",
+            "SAV-P4A-005"
+          ],
+          "id": "SAV-P4A-006",
+          "priority": "P4A",
+          "status": "proposed",
+          "title": "Build task completion evidence and attestation gates"
+        },
+        "source_record": {
+          "depends_on": [
+            "SAV-P2-003",
+            "SAV-P4A-005"
+          ],
+          "id": "SAV-P4A-006",
+          "priority": "P4A",
+          "status": "proposed",
+          "title": "Build task completion evidence and attestation gates"
+        }
+      },
+      "id": "SAV-P4A-006",
+      "kind": "attestation",
+      "lineage": {
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "source_task_id": "SAV-P4A-006"
+      },
+      "outputs": [],
+      "priority": {
+        "authority_locked": false,
+        "band": "P4A",
+        "ordinal": 6,
+        "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+      },
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "purpose": "Build task completion evidence and attestation gates",
+      "risks": [],
+      "scope": {
+        "depends_on": [
+          "SAV-P2-003",
+          "SAV-P4A-005"
+        ],
+        "source_status": "proposed"
+      },
+      "security": {
+        "authority_transfer": false,
+        "requires_explicit_completion_evidence": true
+      },
+      "status": "proposed",
+      "title": "Build task completion evidence and attestation gates"
+    },
+    {
+      "acceptance": [
+        "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+      ],
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "description": "",
+      "evidence_requirements": [],
+      "extensions": {
+        "current_work_observation": {
+          "depends_on": [
+            "SAV-P4A-002",
+            "SAV-P4A-003",
+            "SAV-P4A-005"
+          ],
+          "id": "SAV-P4A-007",
+          "priority": "P4A",
+          "status": "proposed",
+          "title": "Generate SAVANT_MASTER_TASKS.md from authoritative graph"
+        },
+        "source_record": {
+          "depends_on": [
+            "SAV-P4A-002",
+            "SAV-P4A-003",
+            "SAV-P4A-005"
+          ],
+          "id": "SAV-P4A-007",
+          "priority": "P4A",
+          "status": "proposed",
+          "title": "Generate SAVANT_MASTER_TASKS.md from authoritative graph"
+        }
+      },
+      "id": "SAV-P4A-007",
+      "kind": "task",
+      "lineage": {
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "source_task_id": "SAV-P4A-007"
+      },
+      "outputs": [],
+      "priority": {
+        "authority_locked": false,
+        "band": "P4A",
+        "ordinal": 7,
+        "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+      },
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "purpose": "Generate SAVANT_MASTER_TASKS.md from authoritative graph",
+      "risks": [],
+      "scope": {
+        "depends_on": [
+          "SAV-P4A-002",
+          "SAV-P4A-003",
+          "SAV-P4A-005"
+        ],
+        "source_status": "proposed"
+      },
+      "security": {
+        "authority_transfer": false,
+        "requires_explicit_completion_evidence": true
+      },
+      "status": "proposed",
+      "title": "Generate SAVANT_MASTER_TASKS.md from authoritative graph"
+    },
+    {
+      "acceptance": [
+        "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+      ],
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "description": "",
+      "evidence_requirements": [],
+      "extensions": {
+        "current_work_observation": {
+          "depends_on": [
+            "SAV-P4A-004",
+            "SAV-P4A-007"
+          ],
+          "id": "SAV-P4A-008",
+          "priority": "P4A",
+          "status": "proposed",
+          "title": "Build Codex mandatory masterplan context gate"
+        },
+        "source_record": {
+          "depends_on": [
+            "SAV-P4A-004",
+            "SAV-P4A-007"
+          ],
+          "id": "SAV-P4A-008",
+          "priority": "P4A",
+          "status": "proposed",
+          "title": "Build Codex mandatory masterplan context gate"
+        }
+      },
+      "id": "SAV-P4A-008",
+      "kind": "gate",
+      "lineage": {
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "source_task_id": "SAV-P4A-008"
+      },
+      "outputs": [],
+      "priority": {
+        "authority_locked": false,
+        "band": "P4A",
+        "ordinal": 8,
+        "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+      },
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "purpose": "Build Codex mandatory masterplan context gate",
+      "risks": [],
+      "scope": {
+        "depends_on": [
+          "SAV-P4A-004",
+          "SAV-P4A-007"
+        ],
+        "source_status": "proposed"
+      },
+      "security": {
+        "authority_transfer": false,
+        "requires_explicit_completion_evidence": true
+      },
+      "status": "proposed",
+      "title": "Build Codex mandatory masterplan context gate"
+    },
+    {
+      "acceptance": [
+        "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+      ],
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "description": "",
+      "evidence_requirements": [],
+      "extensions": {
+        "current_work_observation": {
+          "depends_on": [
+            "SAV-P4A-006",
+            "SAV-P4A-007"
+          ],
+          "id": "SAV-P4A-009",
+          "priority": "P4A",
+          "status": "proposed",
+          "title": "Build roadmap drift, orphan work, and invalid completion audit"
+        },
+        "source_record": {
+          "depends_on": [
+            "SAV-P4A-006",
+            "SAV-P4A-007"
+          ],
+          "id": "SAV-P4A-009",
+          "priority": "P4A",
+          "status": "proposed",
+          "title": "Build roadmap drift, orphan work, and invalid completion audit"
+        }
+      },
+      "id": "SAV-P4A-009",
+      "kind": "audit",
+      "lineage": {
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "source_task_id": "SAV-P4A-009"
+      },
+      "outputs": [],
+      "priority": {
+        "authority_locked": false,
+        "band": "P4A",
+        "ordinal": 9,
+        "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+      },
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "purpose": "Build roadmap drift, orphan work, and invalid completion audit",
+      "risks": [],
+      "scope": {
+        "depends_on": [
+          "SAV-P4A-006",
+          "SAV-P4A-007"
+        ],
+        "source_status": "proposed"
+      },
+      "security": {
+        "authority_transfer": false,
+        "requires_explicit_completion_evidence": true
+      },
+      "status": "proposed",
+      "title": "Build roadmap drift, orphan work, and invalid completion audit"
+    },
+    {
+      "acceptance": [
+        "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+      ],
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "description": "",
+      "evidence_requirements": [],
+      "extensions": {
+        "current_work_observation": {
+          "depends_on": [
+            "SAV-P4A-005",
+            "SAV-P4A-007",
+            "SAV-P9-002",
+            "SAV-P9-003"
+          ],
+          "id": "SAV-P4A-010",
+          "priority": "P4A",
+          "status": "proposed",
+          "title": "Build deterministic roadmap replay and recovery"
+        },
+        "source_record": {
+          "depends_on": [
+            "SAV-P4A-005",
+            "SAV-P4A-007",
+            "SAV-P9-002",
+            "SAV-P9-003"
+          ],
+          "id": "SAV-P4A-010",
+          "priority": "P4A",
+          "status": "proposed",
+          "title": "Build deterministic roadmap replay and recovery"
+        }
+      },
+      "id": "SAV-P4A-010",
+      "kind": "task",
+      "lineage": {
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "source_task_id": "SAV-P4A-010"
+      },
+      "outputs": [],
+      "priority": {
+        "authority_locked": false,
+        "band": "P4A",
+        "ordinal": 10,
+        "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+      },
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "purpose": "Build deterministic roadmap replay and recovery",
+      "risks": [],
+      "scope": {
+        "depends_on": [
+          "SAV-P4A-005",
+          "SAV-P4A-007",
+          "SAV-P9-002",
+          "SAV-P9-003"
+        ],
+        "source_status": "proposed"
+      },
+      "security": {
+        "authority_transfer": false,
+        "requires_explicit_completion_evidence": true
+      },
+      "status": "proposed",
+      "title": "Build deterministic roadmap replay and recovery"
+    }
+  ],
+  "schema_version": "1.0.0",
+  "segues": [
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-0503dac53181459b89a980e2",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P2A-007",
+      "target": "SAV-P2A-006",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-06b62efd178d6667e0a8c766",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P4A-007",
+      "target": "SAV-P4A-003",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-0848dfb869015b67b9fc92a3",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P4A-008",
+      "target": "SAV-P4A-004",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-0baad6e50e36d4977e0aefe1",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P2A-020",
+      "target": "SAV-P2A-017",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-11f24909ba01ceb15f30c4b1",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P2A-015",
+      "target": "SAV-P2A-007",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-18954c78f6b78494ec617e8b",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P4A-010",
+      "target": "SAV-P4A-005",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-18e6131ebaf68958a807b22e",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P2A-010",
+      "target": "SAV-P2A-009",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-1c8302562a4b423823ea247a",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P2A-014",
+      "target": "SAV-P2A-013",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-20761409e9660181a4ff2842",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P4A-003",
+      "target": "SAV-P4A-002",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-20da560a47433ee76f5e526e",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P2A-018",
+      "target": "SAV-P2A-014",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-228c82129bebd14d8efbfa40",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P4A-007",
+      "target": "SAV-P4A-005",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-245012a62436348cfa94693c",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P4A-005",
+      "target": "SAV-P4A-002",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-2cb8aa550a4f72f237807762",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P2A-016",
+      "target": "SAV-P2A-004",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-2ec9731cd762f2efd8fe88e1",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P2A-006",
+      "target": "SAV-P2A-003",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-31cfafec6f2792151e840490",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P2A-004",
+      "target": "SAV-P2A-003",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-3c2bbe3b03f1ffdb0f446b54",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P2A-017",
+      "target": "SAV-P2A-016",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-3fe905a92a592694118a940b",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P2A-018",
+      "target": "SAV-P2A-012",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-412e5591ad83a74db915340e",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P2A-015",
+      "target": "SAV-P2A-010",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-42928f421ed792c2fbc57f9e",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P4A-006",
+      "target": "SAV-P4A-005",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-4c57cbd3610b1328f790a5ad",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P2A-014",
+      "target": "SAV-P2A-012",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-573aa7cfc2c7a2d5b8927d77",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P2A-008",
+      "target": "SAV-P2A-007",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-60e2c1a90951d16b46339076",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P2A-019",
+      "target": "SAV-P2A-015",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-63537df149621aaaee4f7027",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P4A-010",
+      "target": "SAV-P4A-007",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-65719527d6403a5f3aa27476",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P2A-009",
+      "target": "SAV-P2A-007",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-66bf05881afb3b31f8f1c35b",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P2A-021",
+      "target": "SAV-P2A-014",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-6aeff94096af127266e9aace",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P2A-018",
+      "target": "SAV-P2A-017",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-7f4542010c772d28f8616702",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P2A-003",
+      "target": "SAV-P2A-002",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-8906f7120d60ebe0cdaf65a4",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P2A-013",
+      "target": "SAV-P2A-007",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-8f962a1e80f64b51c33dbcb7",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P2A-015",
+      "target": "SAV-P2A-005",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-8f9e0a3f3e5ef3067899ac06",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P4A-009",
+      "target": "SAV-P4A-006",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-8fe88564c7885e2a99b9eca6",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P4A-009",
+      "target": "SAV-P4A-007",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-90c4a71cf05048cf3faf5530",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P2A-012",
+      "target": "SAV-P2A-011",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-9554b7486ef8023e857682e7",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P4A-002",
+      "target": "SAV-P4A-001",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-98970254e50e346422964aea",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P2A-013",
+      "target": "SAV-P2A-010",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-a1d4aeefbdc1e23f4505dc4e",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P4A-007",
+      "target": "SAV-P4A-002",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-a3c8532ca9914b1dd265f3c9",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P2A-005",
+      "target": "SAV-P2A-004",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-acefca2e8f413d256ae150db",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P2A-011",
+      "target": "SAV-P2A-010",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-bfd2aeb4e081ced6f010a9e4",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P4A-008",
+      "target": "SAV-P4A-007",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-c07df851c73f2b38af6e5ceb",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P4A-004",
+      "target": "SAV-P4A-003",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-c4986cf6456349d8fae78a56",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P2A-002",
+      "target": "SAV-P2A-001",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-c99651fd43052e6af03b3b65",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P2A-015",
+      "target": "SAV-P2A-009",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-dfac4253307bf02467495726",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "hierarchies/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P2A-013",
+      "target": "SAV-P2A-009",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "schema": "savant://runtime/thryce/instance/1.0.0",
+  "instance_id": "thryce:notary",
+  "substrate": "thryce",
+  "owner": "exile:notary",
+  "focal": "assurance",
+  "authority_state": "provisional",
+  "authoritative": false,
+  "mutation_authorized": false,
+  "attestation_authorized": false,
+  "evidence_admission_authorized": false,
+  "policy": {
+    "fail_closed": true,
+    "deterministic_ordering": true,
+    "preserve_failures": true,
+    "preserve_unknown": true,
+    "regression_sensitive": true,
+    "invariant_sensitive": true,
+    "dependency_sensitive": true,
+    "replay_sensitive": true,
+    "explain_results": true
+  },
+  "enhancement_groups": {
+    "invariants": [
+      "named invariant registry",
+      "typed invariant outcomes",
+      "deterministic invariant ordering"
+    ],
+    "validation": [
+      "composable validation checks",
+      "batch validation execution",
+      "fail-closed validation policy"
+    ],
+    "regression": [
+      "baseline comparison",
+      "regression classification",
+      "regression explanation"
+    ],
+    "health": [
+      "nine-dimensional health projection",
+      "weighted health summaries",
+      "unknown-state preservation"
+    ],
+    "dependencies": [
+      "dependency-aware checks",
+      "dependent-impact projection",
+      "integration-boundary validation"
+    ],
+    "replay": [
+      "replay compatibility checks",
+      "deterministic receipt digests",
+      "historical comparison support"
+    ],
+    "evidence": [
+      "evidence-candidate projection",
+      "evidence provenance preservation",
+      "non-admission authority boundary"
+    ],
+    "observability": [
+      "structured assurance receipts",
+      "failure explanation",
+      "machine-readable diagnostics"
+    ],
+    "composition": [
+      "instance overlays",
+      "domain-specific assurance policies",
+      "shared Thryce substrate reuse"
+    ]
+  }
+}

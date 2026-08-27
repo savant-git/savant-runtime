@@ -1,0 +1,32 @@
+[
+  {
+    "id": "line.example.shebang",
+    "kind": "instance",
+    "status": "example",
+    "authority": "SCRIPT_COMPOSITION_RULE",
+    "template": "template.line_instance",
+    "hierarchy": "content",
+    "level": "line",
+    "characters": "#!/usr/bin/env bash"
+  },
+  {
+    "id": "line.example.strict",
+    "kind": "instance",
+    "status": "example",
+    "authority": "SCRIPT_COMPOSITION_RULE",
+    "template": "template.line_instance",
+    "hierarchy": "content",
+    "level": "line",
+    "characters": "set -euo pipefail"
+  },
+  {
+    "id": "line.example.echo",
+    "kind": "instance",
+    "status": "example",
+    "authority": "SCRIPT_COMPOSITION_RULE",
+    "template": "template.line_instance",
+    "hierarchy": "content",
+    "level": "line",
+    "characters": "echo \"Savant script projection example\""
+  }
+]

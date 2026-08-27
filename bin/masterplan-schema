@@ -1,0 +1,208 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import subprocess
+import sys
+from pathlib import Path
+
+
+ROOT = Path("/root/savant-runtime")
+
+PYTHON = (
+    ROOT
+    / "bin"
+    / "identity-quality-python"
+)
+
+REGISTRY = (
+    ROOT
+    / "hierarchies"
+    / "identity"
+    / "exiles"
+    / "niche"
+    / "prodigals"
+    / "masterplan"
+    / "schema"
+    / "masterplan_schema_registry.py"
+)
+
+PROJECT = (
+    ROOT
+    / "bin"
+    / "masterplan-project"
+)
+
+GATE = (
+    ROOT
+    / "bin"
+    / "masterplan-gate"
+)
+
+AUDIT = (
+    ROOT
+    / "bin"
+    / "masterplan-audit"
+)
+
+
+def execute(
+    command: list[str],
+) -> int:
+    return subprocess.run(
+        command,
+        cwd=str(
+            ROOT
+        ),
+        check=False,
+    ).returncode
+
+
+def usage() -> int:
+    print(
+        """
+masterplan-schema status
+masterplan-schema validate
+masterplan-schema registry
+masterplan-schema plan VERSION [--owner OWNER]
+masterplan-schema apply VERSION [--owner OWNER]
+masterplan-schema apply-strict VERSION [--owner OWNER]
+"""
+    )
+
+    return 0
+
+
+def run_registry(
+    arguments: list[str],
+) -> int:
+    return execute(
+        [
+            str(
+                PYTHON
+            ),
+            str(
+                REGISTRY
+            ),
+            *arguments,
+        ]
+    )
+
+
+def apply_schema(
+    arguments: list[str],
+    *,
+    strict: bool,
+) -> int:
+    status = run_registry(
+        [
+            "apply",
+            *arguments,
+        ]
+    )
+
+    if status:
+        return status
+
+    for stage in (
+        [
+            str(
+                PROJECT
+            ),
+            "strict",
+        ],
+        [
+            str(
+                GATE
+            ),
+            "context",
+        ],
+        [
+            str(
+                AUDIT
+            ),
+            (
+                "strict"
+                if strict
+                else "audit"
+            ),
+        ],
+    ):
+        status = execute(
+            stage
+        )
+
+        if status:
+            return status
+
+    return 0
+
+
+def main() -> int:
+    arguments = sys.argv[
+        1:
+    ]
+
+    if not arguments:
+        return usage()
+
+    command = arguments[
+        0
+    ]
+
+    remaining = arguments[
+        1:
+    ]
+
+    if command in {
+        "help",
+        "--help",
+        "-h",
+    }:
+        return usage()
+
+    if command in {
+        "status",
+        "validate",
+        "registry",
+    }:
+        return run_registry(
+            [
+                command,
+            ]
+        )
+
+    if command == "plan":
+        return run_registry(
+            [
+                "plan",
+                *remaining,
+            ]
+        )
+
+    if command == "apply":
+        return apply_schema(
+            remaining,
+            strict=False,
+        )
+
+    if command == "apply-strict":
+        return apply_schema(
+            remaining,
+            strict=True,
+        )
+
+    print(
+        (
+            "ERROR: unknown schema command: "
+            f"{command}"
+        ),
+        file=sys.stderr,
+    )
+
+    return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

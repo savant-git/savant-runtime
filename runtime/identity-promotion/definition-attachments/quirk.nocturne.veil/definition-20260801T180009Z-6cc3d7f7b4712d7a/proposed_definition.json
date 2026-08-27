@@ -1,0 +1,262 @@
+{
+  "apertures": [
+    {
+      "admission": "Requires compatible contract, validated authority, explicit lineage, and complete provenance.",
+      "id": "quirk.nocturne.veil.future",
+      "purpose": "Admit future compatible attachments without replacing this identity."
+    },
+    {
+      "admission": "Requires explicit authority, versioned contracts, provenance, deterministic behavior, security review, and passing tests.",
+      "id": "quirk.nocturne.veil.attachment",
+      "purpose": "Admit compatible future attachments without replacing the identity."
+    }
+  ],
+  "authority": {
+    "class": "identity_definition",
+    "owner": "quirk.nocturne.veil",
+    "precedence": 700,
+    "source": "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/definition.json"
+  },
+  "capabilities": [
+    {
+      "description": "Circuit rotation, traffic mixing, timing obfuscation, and identity blending across the Tor network.",
+      "id": "quirk.nocturne.veil.declared_purpose",
+      "status": "proposed"
+    }
+  ],
+  "composition": {
+    "children": [],
+    "composition_policy": "Compose authoritative children through typed relationships without duplicating their source authority.",
+    "maximum_children": 4,
+    "minimum_children": 2,
+    "shared_children": []
+  },
+  "contracts": {
+    "errors": [
+      {
+        "code": "implementation.unavailable",
+        "condition": "Required executable behavior is absent, incomplete, or unverified.",
+        "recoverable": true
+      }
+    ],
+    "inputs": [],
+    "modules": [
+      {
+        "path": "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/contracts/veil_contracts.py",
+        "sha256": "b34c37c325e8464dffc8b1cee44953f835590c165ba21ce881b8c183dad03807",
+        "version": "1.0.0"
+      }
+    ],
+    "outputs": []
+  },
+  "dependencies": {
+    "external": [],
+    "optional": [],
+    "required": [
+      {
+        "id": "python.pydantic",
+        "kind": "library",
+        "required": true
+      }
+    ],
+    "runtime": [
+      {
+        "id": "quirk.nocturne.veil.contracts",
+        "kind": "contract_module",
+        "path": "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/contracts/veil_contracts.py",
+        "required": true,
+        "sha256": "b34c37c325e8464dffc8b1cee44953f835590c165ba21ce881b8c183dad03807"
+      }
+    ]
+  },
+  "dna": {
+    "core_traits": [
+      "circuit_rotation",
+      "traffic_mixing",
+      "timing_obfuscation",
+      "path_diversification"
+    ]
+  },
+  "id": "quirk.nocturne.veil",
+  "identity": {
+    "aliases": [],
+    "domain": "Traffic Obfuscation & Identity Protection",
+    "historical_names": [],
+    "name": "Veil"
+  },
+  "implementation_evidence": {
+    "contracts": {
+      "path": "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/contracts/veil_contracts.py",
+      "sha256": "b34c37c325e8464dffc8b1cee44953f835590c165ba21ce881b8c183dad03807"
+    },
+    "controller": {
+      "path": "bin/veilctl",
+      "sha256": "a7a49fa9b6451a2e5029bbc17ad5f22812a5a04fc520410667f1b7b8647d3d9c"
+    },
+    "runtime": {
+      "path": "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/runtime/veil_runtime.py",
+      "sha256": "561f33470fbbae22236c988287599e871452f5e01c2268eafdd2383ff4b1a5a6"
+    },
+    "tests": {
+      "path": "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/tests/test_veil_runtime.py",
+      "sha256": "fb486da3720c401f2fe1815f8763311efb0e019a38abd43e6f751ff60328c3b6"
+    }
+  },
+  "kind": "quirk",
+  "level": 2,
+  "lifecycle": {
+    "allowed_transitions": [
+      "proposed",
+      "canonical",
+      "active",
+      "deprecated",
+      "superseded",
+      "retired"
+    ],
+    "attestation_required": true,
+    "implementation_state": "complete",
+    "state": "canonical",
+    "verification_required": true
+  },
+  "lineage": {
+    "parents": [
+      "prodigal.nocturne"
+    ],
+    "sources": [
+      "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/definition.json"
+    ],
+    "superseded_by": [],
+    "supersedes": []
+  },
+  "observability": {
+    "audit": true,
+    "events": [
+      "identity.invoked",
+      "identity.completed",
+      "identity.failed",
+      "quirk.nocturne.veil.request.accepted",
+      "quirk.nocturne.veil.request.rejected",
+      "quirk.nocturne.veil.execution.completed",
+      "quirk.nocturne.veil.execution.failed"
+    ],
+    "health": [
+      "definition_valid",
+      "dependencies_available",
+      "runtime_available"
+    ],
+    "metrics": [
+      "execution_count",
+      "success_count",
+      "failure_count",
+      "duration_seconds",
+      "admitted_capability_count"
+    ]
+  },
+  "parent_prodigal": "nocturne",
+  "provenance": {
+    "captured_by": "savant.identity-quality.promotion-definition-attachment",
+    "created_from": [
+      "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/definition.json",
+      "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/contracts/veil_contracts.py",
+      "bin/veilctl",
+      "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/runtime/veil_runtime.py",
+      "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/tests/test_veil_runtime.py"
+    ],
+    "source_hashes": {
+      "bin/veilctl": "a7a49fa9b6451a2e5029bbc17ad5f22812a5a04fc520410667f1b7b8647d3d9c",
+      "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/contracts/veil_contracts.py": "b34c37c325e8464dffc8b1cee44953f835590c165ba21ce881b8c183dad03807",
+      "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/definition.json": "abcb9f5d6b0670b074fb2bb4326fbb578827956dd1b4457f9c95386904d7db83",
+      "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/runtime/veil_runtime.py": "561f33470fbbae22236c988287599e871452f5e01c2268eafdd2383ff4b1a5a6",
+      "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/tests/test_veil_runtime.py": "fb486da3720c401f2fe1815f8763311efb0e019a38abd43e6f751ff60328c3b6"
+    }
+  },
+  "purpose": "Circuit rotation, traffic mixing, timing obfuscation, and identity blending across the Tor network.",
+  "relationships": [
+    {
+      "direction": "outbound",
+      "target": "prodigal.nocturne",
+      "type": "composition"
+    },
+    {
+      "authority_transfer": false,
+      "direction": "outbound",
+      "reversible": true,
+      "target": "prodigal.nocturne",
+      "type": "attaches_to"
+    },
+    {
+      "direction": "outbound",
+      "sha256": "561f33470fbbae22236c988287599e871452f5e01c2268eafdd2383ff4b1a5a6",
+      "target": "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/runtime/veil_runtime.py",
+      "type": "implemented_by"
+    },
+    {
+      "direction": "outbound",
+      "sha256": "fb486da3720c401f2fe1815f8763311efb0e019a38abd43e6f751ff60328c3b6",
+      "target": "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/tests/test_veil_runtime.py",
+      "type": "validated_by"
+    }
+  ],
+  "runtime": {
+    "commands": [
+      "bin/veilctl"
+    ],
+    "deterministic": true,
+    "entrypoints": [
+      "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/runtime/veil_runtime.py"
+    ],
+    "hooks": [
+      "admission",
+      "authority_resolution",
+      "contract_validation",
+      "execution",
+      "projection",
+      "provenance_propagation",
+      "attestation"
+    ],
+    "implementation": "complete",
+    "side_effects": []
+  },
+  "security": {
+    "boundary": "Deny undeclared access; require explicit authority for filesystem, network, provider, secret, and subprocess operations.",
+    "data_classification": "unclassified",
+    "network_policy": "deny_by_default",
+    "permissions": [],
+    "sandbox": true
+  },
+  "status": "canonical",
+  "validation": {
+    "acceptance": [
+      "Definition validates against the identity quality schema.",
+      "Authority, lineage, provenance, dependencies, and relationships are exposed.",
+      "Existing authoritative fields remain unchanged unless explicitly migrated.",
+      "Runtime capability is never fabricated from absent implementation evidence.",
+      "Generated compatibility views remain disposable projections.",
+      "Future extensions can attach without architectural replacement.",
+      "Runtime remains independently executable.",
+      "Equal requests produce equal authoritative result digests.",
+      "Volatile telemetry does not alter deterministic identity.",
+      "No undeclared external authority is admitted.",
+      "All results preserve provenance.",
+      "Existing authoritative primitives remain preserved."
+    ],
+    "integration_tests": [],
+    "property_tests": [
+      "canonical_serialization_is_stable",
+      "identity_is_graph_addressable",
+      "lineage_contains_no_self_cycle",
+      "equal_requests_produce_equal_result_digests",
+      "volatile_telemetry_does_not_change_identity"
+    ],
+    "security_tests": [
+      "undeclared_access_is_denied",
+      "runtime_rejects_undeclared_capability",
+      "runtime_rejects_external_authority",
+      "projection_remains_proposed"
+    ],
+    "unit_tests": [
+      "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/tests/test_veil_runtime.py"
+    ]
+  },
+  "version": "2.1"
+}

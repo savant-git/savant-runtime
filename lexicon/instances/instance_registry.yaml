@@ -1,0 +1,181 @@
+registry_id: savant_instance_registry
+version: 1
+authority:
+  source: constitutional_runtime
+  revision: 1
+  timestamp: "2026-07-26T00:00:00Z"
+
+instances:
+  - id: instance:lexicon:registry
+    canonical: Lexicon Registry Instance
+    description: >
+      Addressable runtime manifestation of the authoritative lexicon registry.
+    status: active
+    kindreds:
+      - kindred:primitive
+      - kindred:instance
+    ontology:
+      - primitive
+      - structure
+    source:
+      type: file
+      reference: registry.yaml
+      revision: 1
+      digest: null
+    state:
+      authoritative: true
+      mutable: false
+      projected: false
+    dependencies: []
+    relationships:
+      - type: governed_by
+        target: instance:lexicon:constitution
+    projections:
+      - canonical_index
+      - alias_index
+      - reserved_index
+      - graph
+      - search_index
+      - audit_index
+    provenance:
+      source: constitutional_runtime
+      confidence: confirmed
+      evidence:
+        - registry.yaml
+    lineage:
+      derived_from:
+        - registry.yaml
+      supersedes: []
+      superseded_by: null
+    history:
+      - revision: 1
+        action: created
+        timestamp: "2026-07-26T00:00:00Z"
+
+  - id: instance:lexicon:constitution
+    canonical: Lexicon Constitution Instance
+    description: >
+      Addressable runtime manifestation of the lexicon constitution.
+    status: active
+    kindreds:
+      - kindred:primitive
+      - kindred:instance
+    ontology:
+      - primitive
+      - structure
+    source:
+      type: file
+      reference: constitution_engine/constitution_registry.yaml
+      revision: 1
+      digest: null
+    state:
+      authoritative: true
+      mutable: false
+      projected: false
+    dependencies: []
+    relationships:
+      - type: governs
+        target: instance:lexicon:registry
+    projections: []
+    provenance:
+      source: constitutional_runtime
+      confidence: confirmed
+      evidence:
+        - constitution_engine/constitution_registry.yaml
+    lineage:
+      derived_from:
+        - constitution_engine/constitution_registry.yaml
+      supersedes: []
+      superseded_by: null
+    history:
+      - revision: 1
+        action: created
+        timestamp: "2026-07-26T00:00:00Z"
+      - revision: 2
+        action: source_reference_corrected
+        timestamp: "2026-08-18T22:24:06Z"
+
+  - id: instance:ontology:registry
+    canonical: Ontology Registry Instance
+    description: >
+      Addressable runtime manifestation of the ontology registry.
+    status: active
+    kindreds:
+      - kindred:primitive
+      - kindred:instance
+    ontology:
+      - primitive
+      - structure
+    source:
+      type: file
+      reference: ontology/ontology_registry.yaml
+      revision: 1
+      digest: null
+    state:
+      authoritative: true
+      mutable: false
+      projected: false
+    dependencies:
+      - instance:lexicon:registry
+    relationships:
+      - type: classifies
+        target: instance:lexicon:registry
+    projections:
+      - graph
+    provenance:
+      source: constitutional_runtime
+      confidence: confirmed
+      evidence:
+        - ontology/ontology_registry.yaml
+    lineage:
+      derived_from:
+        - ontology/ontology_registry.yaml
+      supersedes: []
+      superseded_by: null
+    history:
+      - revision: 1
+        action: created
+        timestamp: "2026-07-26T00:00:00Z"
+
+  - id: instance:kindred:registry
+    canonical: Kindred Registry Instance
+    description: >
+      Addressable runtime manifestation of the kindred registry.
+    status: active
+    kindreds:
+      - kindred:primitive
+      - kindred:instance
+    ontology:
+      - primitive
+      - structure
+    source:
+      type: file
+      reference: kindred/kindred_registry.yaml
+      revision: 1
+      digest: null
+    state:
+      authoritative: true
+      mutable: false
+      projected: false
+    dependencies:
+      - instance:lexicon:registry
+      - instance:ontology:registry
+    relationships:
+      - type: groups
+        target: instance:lexicon:registry
+    projections:
+      - graph
+    provenance:
+      source: constitutional_runtime
+      confidence: confirmed
+      evidence:
+        - kindred/kindred_registry.yaml
+    lineage:
+      derived_from:
+        - kindred/kindred_registry.yaml
+      supersedes: []
+      superseded_by: null
+    history:
+      - revision: 1
+        action: created
+        timestamp: "2026-07-26T00:00:00Z"

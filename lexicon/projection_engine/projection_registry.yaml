@@ -1,0 +1,293 @@
+registry_id: registry:projection:core
+version: 1.0.0
+authority: lexicon:constitution
+
+projections:
+
+  - id: projection:instance:graph_node
+    canonical: Instance Graph Node
+    description: >
+      Deterministically projects authoritative instance primitives into
+      graph-addressable node records.
+    status: active
+    version: 1.0.0
+    authority: lexicon:constitution
+    source_type: instance
+
+    conditions:
+      - path: id
+        operator: exists
+
+    fields:
+
+      - source: id
+        target: id
+        required: true
+        transform: string
+
+      - source: canonical
+        target: label
+        required: true
+        transform: string
+
+      - source: description
+        target: description
+        default: ""
+        transform: string
+
+      - source: status
+        target: status
+        default: active
+        transform: string
+
+      - source: kindreds
+        target: classification.kindreds
+        default: []
+        transform: unique
+
+      - source: ontology
+        target: classification.ontology
+        default: []
+        transform: unique
+
+      - source: dependencies
+        target: dependencies
+        default: []
+        transform: unique
+
+      - source: relationships
+        target: relationships
+        default: []
+        transform: copy
+
+      - source: state
+        target: state
+        default: {}
+        transform: copy
+
+      - source: provenance
+        target: provenance
+        default: {}
+        transform: copy
+
+      - source: lineage
+        target: lineage
+        default: {}
+        transform: copy
+
+    operations:
+
+      - operation: set
+        target: type
+        value: instance
+
+      - operation: copy
+        source: source
+        target: authority_source
+
+    output: instance_graph_nodes
+
+    dependencies:
+      - instance:lexicon:registry
+      - instance:ontology:registry
+      - instance:kindred:registry
+
+    provenance:
+      source: projection_registry.yaml
+      confidence: confirmed
+      evidence:
+        - instance_registry.yaml
+        - instance.schema.yaml
+
+    lineage:
+      derived_from:
+        - schema:instance
+        - registry:instance:core
+      supersedes: []
+      history:
+        - version: 1.0.0
+          change: Initial graph-node projection
+
+  - id: projection:segue:graph_edge
+    canonical: Segue Graph Edge
+    description: >
+      Deterministically projects authoritative segue primitives into
+      graph-addressable edge records.
+    status: active
+    version: 1.0.0
+    authority: lexicon:constitution
+    source_type: segue
+
+    conditions:
+      - path: id
+        operator: exists
+
+    fields:
+
+      - source: id
+        target: id
+        required: true
+        transform: string
+
+      - source: canonical
+        target: label
+        required: true
+        transform: string
+
+      - source: description
+        target: description
+        default: ""
+        transform: string
+
+      - source: status
+        target: status
+        default: active
+        transform: string
+
+      - source: from
+        target: source
+        required: true
+        transform: string
+
+      - source: to
+        target: target
+        required: true
+        transform: string
+
+      - source: relation
+        target: relation
+        required: true
+        transform: string
+
+      - source: direction
+        target: direction
+        default: directed
+        transform: string
+
+      - source: conditions
+        target: conditions
+        default: []
+        transform: copy
+
+      - source: effects
+        target: effects
+        default: []
+        transform: copy
+
+      - source: dependencies
+        target: dependencies
+        default: []
+        transform: unique
+
+      - source: metadata
+        target: metadata
+        default: {}
+        transform: copy
+
+      - source: provenance
+        target: provenance
+        default: {}
+        transform: copy
+
+      - source: lineage
+        target: lineage
+        default: {}
+        transform: copy
+
+    operations:
+
+      - operation: set
+        target: type
+        value: segue
+
+    output: segue_graph_edges
+
+    dependencies:
+      - instance:lexicon:registry
+
+    provenance:
+      source: projection_registry.yaml
+      confidence: confirmed
+      evidence:
+        - segue_registry.yaml
+        - segue.schema.yaml
+
+    lineage:
+      derived_from:
+        - schema:segue
+        - registry:segue:core
+      supersedes: []
+      history:
+        - version: 1.0.0
+          change: Initial graph-edge projection
+
+  - id: projection:instance:dependency_manifest
+    canonical: Instance Dependency Manifest
+    description: >
+      Projects instance dependency, provenance, lineage, and relationship
+      primitives into deterministic dependency manifests.
+    status: active
+    version: 1.0.0
+    authority: lexicon:constitution
+    source_type: instance
+
+    conditions:
+      - path: id
+        operator: exists
+
+    fields:
+
+      - source: id
+        target: instance
+        required: true
+        transform: string
+
+      - source: dependencies
+        target: dependencies
+        default: []
+        transform: unique
+
+      - source: relationships
+        target: relationships
+        default: []
+        transform: copy
+
+      - source: projections
+        target: projections
+        default: []
+        transform: unique
+
+      - source: provenance
+        target: provenance
+        default: {}
+        transform: copy
+
+      - source: lineage
+        target: lineage
+        default: {}
+        transform: copy
+
+    operations:
+
+      - operation: set
+        target: manifest_type
+        value: instance_dependency
+
+    output: instance_dependency_manifests
+
+    dependencies:
+      - instance:lexicon:registry
+
+    provenance:
+      source: projection_registry.yaml
+      confidence: confirmed
+      evidence:
+        - instance_registry.yaml
+
+    lineage:
+      derived_from:
+        - projection:instance:graph_node
+      supersedes: []
+      history:
+        - version: 1.0.0
+          change: Initial dependency-manifest projection

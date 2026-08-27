@@ -1,0 +1,73 @@
+{
+  "schema": "savant://runtime/cypher/instance/1.0.0",
+  "instance_id": "cypher:runtime",
+  "substrate": "cypher",
+  "owner": "savant:runtime",
+  "focal": "runtime-exchange",
+  "authority_state": "provisional",
+  "authoritative": false,
+  "mutation_authorized": false,
+  "supported_encodings": [
+    "json",
+    "yaml",
+    "text"
+  ],
+  "exchange": {
+    "strict_envelopes": true,
+    "canonical_serialization": true,
+    "preserve_unknown_fields": true,
+    "preserve_provenance": true,
+    "preserve_lineage": true,
+    "preserve_authority": true,
+    "stable_field_order": true,
+    "idempotent_translation": true,
+    "fail_closed": true
+  },
+  "enhancement_groups": {
+    "identity": [
+      "stable exchange identities",
+      "content-addressed fingerprints",
+      "deterministic envelope identities"
+    ],
+    "translation": [
+      "typed translation registry",
+      "bidirectional transformations",
+      "loss detection"
+    ],
+    "serialization": [
+      "canonical JSON serialization",
+      "deterministic YAML normalization",
+      "UTF-8 text normalization"
+    ],
+    "contracts": [
+      "source contract validation",
+      "target contract validation",
+      "fail-closed unsupported routes"
+    ],
+    "preservation": [
+      "authority preservation",
+      "lineage preservation",
+      "provenance preservation"
+    ],
+    "compatibility": [
+      "version-aware adapters",
+      "unknown-field preservation",
+      "backward-compatible envelopes"
+    ],
+    "routing": [
+      "typed route resolution",
+      "stable adapter selection",
+      "route explanation"
+    ],
+    "observability": [
+      "translation receipts",
+      "nine-dimensional health",
+      "nine-dimensional validation"
+    ],
+    "composition": [
+      "instance overlays",
+      "domain adapter composition",
+      "shared Cypher substrate reuse"
+    ]
+  }
+}

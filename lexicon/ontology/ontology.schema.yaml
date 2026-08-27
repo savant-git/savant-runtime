@@ -1,0 +1,90 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+
+title: Savant Ontology Schema
+
+type: object
+
+required:
+  - ontology_id
+  - version
+  - root
+  - classes
+
+properties:
+
+  ontology_id:
+    type: string
+
+  version:
+    type: integer
+
+  root:
+    type: string
+
+  classes:
+
+    type: array
+
+    items:
+
+      type: object
+
+      required:
+        - id
+        - canonical
+        - description
+
+      properties:
+
+        id:
+          type: string
+
+        canonical:
+          type: string
+
+        description:
+          type: string
+
+        parents:
+
+          type: array
+
+          items:
+            type: string
+
+        children:
+
+          type: array
+
+          items:
+            type: string
+
+        allowed_children:
+
+          type: array
+
+          items:
+            type: string
+
+        allowed_instances:
+
+          type: array
+
+          items:
+            type: string
+
+        required_fields:
+
+          type: array
+
+          items:
+            type: string
+
+        validators:
+
+          type: array
+
+          items:
+            type: string
+
+additionalProperties: true

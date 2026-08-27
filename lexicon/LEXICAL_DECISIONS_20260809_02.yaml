@@ -1,0 +1,516 @@
+schema: savant://lexicon/accepted-decisions/1.3.0
+decision_set_id: lexicon:accepted-decisions:20260809:02
+version: 1.3.0
+
+authority:
+  state: accepted
+  source: user
+  accepted_at: "2026-08-09"
+  immutable: true
+  precedence: current-user-directive
+
+purpose: >
+  Consolidate accepted 2026-08-09 lexical decisions while preserving
+  supersession, compatibility, lineage, provenance, and explicitly retained
+  Savant terminology.
+
+laws:
+  - Current user lexical directives supersede earlier lexical naming decisions.
+  - Every Savant-owned proper concept has one current canonical lexeme.
+  - Superseded lexemes remain reserved historical evidence.
+  - Historical lexical lineage is never destructively rewritten.
+  - Compatibility aliases may resolve historical terms but are never canonical.
+  - Canonical writes use the latest accepted lexeme.
+  - Distinct concepts must not share one canonical lexeme.
+  - Generic terms may remain canonical when explicitly retained by user authority.
+  - Shard remains globally canonical and is not globally superseded by Mote.
+  - The historical Shard-to-Mote mapping applies only to identity-tier-2.
+  - Kindred does not replace Lineage.
+  - Evidence and Attestation remain distinct.
+  - Convex supersedes Arc only.
+  - Tomb supersedes Vault only.
+  - Mutation remains Mutation.
+
+canonical_replacements:
+  trait: ink
+  cypher: cyphor
+  swarm: riot
+  babel: chaote
+  query: quarx
+  channel: chatter
+  clone: doppelgangre
+  registry: sear
+  runtime: igneo
+  interface: inface
+  graph: gridd
+  projection: wavre
+  instance: shade
+  state: vitae
+  token: coinage
+  function: oblast
+  variable: variant
+  import: insend
+  export: outsend
+  adapter: linka
+  sandbox: arkade
+  component: secton
+  module: slab
+  object: forma
+  record: almanac
+  node: tox
+  schema: tracery
+  policy: credenda
+  overlay: veneer
+  fabric: substra
+  portal: wyrmhole
+  slot: rut
+  mask: visage
+  attachment: sidecar
+  focal: centra
+  validator: cert
+  recovery: rebirth
+  arc: convex
+  vault: tomb
+  caelus: caevas
+
+retained_terms:
+  shard: shard
+  ontology: ontology
+  authority: authority
+  lineage: lineage
+  provenance: provenance
+  evidence: evidence
+  admission: admission
+  attestation: attestation
+  mutation: mutation
+
+decisions:
+
+  shard:
+    canonical: shard
+    globally_canonical: true
+    globally_superseded: false
+
+    identity_hierarchy_exception:
+      historical_term: shard
+      canonical_term: mote
+      scope: identity-tier-2-only
+
+  trait:
+    canonical: ink
+    supersedes:
+      - trait
+
+  cypher:
+    canonical: cyphor
+    supersedes:
+      - cypher
+
+  swarm:
+    canonical: riot
+    lineage:
+      - entity
+      - form
+      - swarm
+      - riot
+    supersedes:
+      - entity
+      - form
+      - swarm
+
+  babel:
+    canonical: chaote
+    supersedes:
+      - babel
+
+  query:
+    canonical: quarx
+    supersedes:
+      - query
+
+  channel:
+    canonical: chatter
+    supersedes:
+      - channel
+
+  clone:
+    canonical: doppelgangre
+    supersedes:
+      - clone
+
+  registry:
+    canonical: sear
+    supersedes:
+      - registry
+
+  runtime:
+    canonical: igneo
+    supersedes:
+      - runtime
+
+  interface:
+    canonical: inface
+    supersedes:
+      - interface
+
+  graph:
+    canonical: gridd
+    supersedes:
+      - graph
+
+  projection:
+    canonical: wavre
+    supersedes:
+      - projection
+
+  instance:
+    canonical: shade
+    supersedes:
+      - instance
+
+  state:
+    canonical: vitae
+    supersedes:
+      - state
+
+  token:
+    canonical: coinage
+    supersedes:
+      - token
+
+  function:
+    canonical: oblast
+    supersedes:
+      - function
+
+  variable:
+    canonical: variant
+    lineage:
+      - variable
+      - wanderer
+      - unset
+      - variate
+      - variant
+    supersedes:
+      - variable
+      - wanderer
+      - unset
+      - variate
+
+  import:
+    canonical: insend
+    supersedes:
+      - import
+
+  export:
+    canonical: outsend
+    supersedes:
+      - export
+
+  adapter:
+    canonical: linka
+    supersedes:
+      - adapter
+
+  sandbox:
+    canonical: arkade
+    supersedes:
+      - sandbox
+
+  component:
+    canonical: secton
+    supersedes:
+      - component
+
+  module:
+    canonical: slab
+    supersedes:
+      - module
+
+  object:
+    canonical: forma
+    supersedes:
+      - object
+
+  record:
+    canonical: almanac
+    supersedes:
+      - record
+
+  node:
+    canonical: tox
+    supersedes:
+      - node
+
+  schema:
+    canonical: tracery
+    supersedes:
+      - schema
+
+  policy:
+    canonical: credenda
+    supersedes:
+      - policy
+
+  overlay:
+    canonical: veneer
+    supersedes:
+      - overlay
+
+  fabric:
+    canonical: substra
+    supersedes:
+      - fabric
+
+  portal:
+    canonical: wyrmhole
+    lineage:
+      - gate
+      - portal
+      - wyrmhole
+    supersedes:
+      - gate
+      - portal
+
+  slot:
+    canonical: rut
+    supersedes:
+      - slot
+
+  mask:
+    canonical: visage
+    supersedes:
+      - mask
+
+  attachment:
+    canonical: sidecar
+    supersedes:
+      - attachment
+
+  focal:
+    canonical: centra
+    lineage:
+      - focal
+      - central
+      - centra
+    supersedes:
+      - focal
+      - central
+
+  validator:
+    canonical: cert
+    supersedes:
+      - validator
+
+  recovery:
+    canonical: rebirth
+    supersedes:
+      - recovery
+
+  arc:
+    canonical: convex
+    supersedes:
+      - arc
+    scope: secondary-level-concept
+    exclusions:
+      - mutation
+      - vault
+
+  vault:
+    canonical: tomb
+    supersedes:
+      - vault
+    scope: vault-concept
+    exclusions:
+      - arc
+      - convex
+      - mutation
+
+  caelus:
+    canonical: caevas
+    lineage:
+      - caelus
+      - chamberlain
+      - occam
+      - caelus
+      - caevas
+    supersedes:
+      - caelus
+      - chamberlain
+      - occam
+
+  ontology:
+    canonical: ontology
+    retained: true
+    rejected_proposals:
+      - pyramid
+
+  authority:
+    canonical: authority
+    retained: true
+    rejected_proposals:
+      - warrant
+
+  lineage:
+    canonical: lineage
+    retained: true
+    not_equivalent_to:
+      - kindred
+
+  provenance:
+    canonical: provenance
+    retained: true
+    rejected_proposals:
+      - genysis
+
+  evidence:
+    canonical: evidence
+    retained: true
+    rejected_proposals:
+      - testa
+
+  admission:
+    canonical: admission
+    retained: true
+    rejected_proposals:
+      - entra
+
+  attestation:
+    canonical: attestation
+    retained: true
+    rejected_proposals:
+      - testa
+
+  mutation:
+    canonical: mutation
+    retained: true
+    not_equivalent_to:
+      - arc
+      - convex
+
+current_hierarchy:
+  - iota
+  - mote
+  - ink
+  - quirk
+  - prodigal
+  - exile
+  - innate
+  - wyrmhole
+  - obelisk
+
+current_tidals:
+  - scyon
+  - splyce
+  - scrybe
+  - pryme
+  - cyphor
+  - thryce
+  - spyral
+  - lythe
+  - dryve
+
+compatibility:
+  read_aliases:
+    trait: ink
+    cypher: cyphor
+
+    entity: riot
+    form: riot
+    swarm: riot
+
+    babel: chaote
+    query: quarx
+    channel: chatter
+    clone: doppelgangre
+    registry: sear
+    runtime: igneo
+    interface: inface
+    graph: gridd
+    projection: wavre
+    instance: shade
+    state: vitae
+    token: coinage
+    function: oblast
+
+    variable: variant
+    wanderer: variant
+    unset: variant
+    variate: variant
+
+    import: insend
+    export: outsend
+    adapter: linka
+    sandbox: arkade
+    component: secton
+    module: slab
+    object: forma
+    record: almanac
+    node: tox
+    schema: tracery
+    policy: credenda
+    overlay: veneer
+    fabric: substra
+
+    gate: wyrmhole
+    portal: wyrmhole
+
+    slot: rut
+    mask: visage
+    attachment: sidecar
+
+    focal: centra
+    central: centra
+
+    validator: cert
+    recovery: rebirth
+
+    arc: convex
+    vault: tomb
+
+    caelus: caevas
+    chamberlain: caevas
+    occam: caevas
+
+rejected_or_superseded_proposals:
+  pyramid: ontology
+  warrant: authority
+  genysis: provenance
+  testa:
+    - evidence
+    - attestation
+  entra: admission
+
+  mutation_to_arc:
+    status: rejected
+
+  mutation_to_convex:
+    status: rejected
+
+  vault_to_convex:
+    status: rejected
+
+invariants:
+  shard_is_shard: true
+  identity_tier_2_is_mote: true
+
+  arc_is_convex: true
+  vault_is_tomb: true
+  mutation_is_mutation: true
+
+  convex_is_not_tomb: true
+  tomb_is_not_convex: true
+
+  ontology_is_ontology: true
+  authority_is_authority: true
+  lineage_is_lineage: true
+  provenance_is_provenance: true
+  evidence_is_evidence: true
+  admission_is_admission: true
+  attestation_is_attestation: true
+
+  current_hierarchy_cardinality: 9
+  current_tidal_cardinality: 9
+
+mutation_authorized: false
+physical_migration_authorized: false

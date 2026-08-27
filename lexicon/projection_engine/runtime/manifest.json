@@ -1,0 +1,47 @@
+{
+  "projection_count": 3,
+  "projections": {
+    "projection:instance:dependency_manifest": {
+      "files": [
+        "projection.json",
+        "snapshot.json"
+      ],
+      "output": "/root/savant-runtime/lexicon/projection_engine/runtime/instance_dependency_manifests",
+      "projection": "projection:instance:dependency_manifest",
+      "snapshot": {
+        "digest": "2003f034aef8273ab01fafc49b11c973a522143847cc5d15cc1ed2583e3c337d",
+        "projected_count": 4,
+        "projection": "projection:instance:dependency_manifest",
+        "skipped_count": 0
+      }
+    },
+    "projection:instance:graph_node": {
+      "files": [
+        "projection.json",
+        "snapshot.json"
+      ],
+      "output": "/root/savant-runtime/lexicon/projection_engine/runtime/instance_graph_nodes",
+      "projection": "projection:instance:graph_node",
+      "snapshot": {
+        "digest": "6019df0ae6ca2a30f9499a5839439e2de0712f6b6a45ce47309889b6a85407bc",
+        "projected_count": 4,
+        "projection": "projection:instance:graph_node",
+        "skipped_count": 0
+      }
+    },
+    "projection:segue:graph_edge": {
+      "files": [
+        "projection.json",
+        "snapshot.json"
+      ],
+      "output": "/root/savant-runtime/lexicon/projection_engine/runtime/segue_graph_edges",
+      "projection": "projection:segue:graph_edge",
+      "snapshot": {
+        "digest": "1d751482dcd5a2929d80ea3cd7ebfdde0877a34cb8b05b0fcb103a94423e39a2",
+        "projected_count": 3,
+        "projection": "projection:segue:graph_edge",
+        "skipped_count": 0
+      }
+    }
+  }
+}

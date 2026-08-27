@@ -1,0 +1,95 @@
+policy: SAVANT_LEXICON_NORMALIZATION
+version: 1
+
+canonical:
+
+  preserve_original:
+    true
+
+  unicode_form:
+    NFKC
+
+  trim_outer_whitespace:
+    true
+
+  collapse_internal_whitespace:
+    true
+
+  case_sensitive_identity:
+    true
+
+  normalized_comparison:
+    casefold
+
+  punctuation:
+    preserve
+
+  diacritics:
+    preserve
+
+  separators:
+
+    normalize_hyphen_variants:
+      true
+
+    normalize_apostrophe_variants:
+      true
+
+    normalize_slash_spacing:
+      true
+
+identifiers:
+
+  unicode_form:
+    NFKC
+
+  case:
+    lower
+
+  whitespace:
+    replace_with_underscore
+
+  allowed_pattern:
+    "^[a-z][a-z0-9_]*$"
+
+  collapse_repeated_underscores:
+    true
+
+  trim_underscores:
+    true
+
+aliases:
+
+  apply_canonical_normalization:
+    true
+
+  compare_using:
+    normalized_casefold
+
+  canonical_collision:
+    forbidden
+
+  alias_collision:
+    forbidden
+
+reserved_spellings:
+
+  apply_canonical_normalization:
+    true
+
+  comparison:
+    normalized_casefold
+
+  reuse:
+    forbidden
+
+paths:
+
+  resolve:
+    true
+
+  require_repository_relative_projection:
+    true
+
+  reject_parent_escape:
+    true

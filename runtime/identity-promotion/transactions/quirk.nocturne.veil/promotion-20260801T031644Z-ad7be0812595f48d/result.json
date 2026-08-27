@@ -1,0 +1,469 @@
+{
+  "digest": "2ba78c5d22dcfff2e5916d1a7aa00ae391f358dd62cf3f3f63a682f88b7632bc",
+  "generated_at": "2026-08-01T03:16:44+00:00",
+  "halted": false,
+  "mode": "plan",
+  "operation": "run_promotion_execution",
+  "packet": {
+    "digest": "28a5152bcce4f4ec0845072204bd9330cc79e03eba4975187bfa5b19daf3277c",
+    "path": "reports/identity_quality/promotion/execution/quirk.nocturne.veil/latest.json",
+    "sha256": "3638d0682132ef6d75302d2f1f350af8ee2a2dd93d4a74f4f7a4c2f0357894cb"
+  },
+  "passed": true,
+  "rollback": null,
+  "schema": "savant://identity-quality/promotion-run/1.0.0",
+  "stages": [
+    {
+      "apply": false,
+      "body": {
+        "passed": true,
+        "results": [
+          {
+            "id": "root.exists",
+            "passed": true,
+            "value": "/root/savant-runtime"
+          },
+          {
+            "id": "subject.identifier",
+            "passed": true,
+            "value": "quirk.nocturne.veil"
+          },
+          {
+            "id": "subject.definition",
+            "passed": true,
+            "value": "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/definition.json"
+          },
+          {
+            "id": "scaffold.digest",
+            "passed": true,
+            "value": "14cdc99f3866aa9e8a01957091b8442b4d98c10feab1c4d5f499bd809895e3cb"
+          },
+          {
+            "id": "action.definition.extend_target_exists",
+            "passed": true,
+            "value": "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/definition.json"
+          },
+          {
+            "id": "action.runtime.extend_target_exists",
+            "passed": true,
+            "value": "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/runtime/veil_runtime.py"
+          },
+          {
+            "id": "action.tests.extend_target_exists",
+            "passed": true,
+            "value": "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/tests/test_veil_runtime.py"
+          },
+          {
+            "id": "action.controller.extend_target_exists",
+            "passed": true,
+            "value": "bin/veilctl"
+          },
+          {
+            "id": "action.definition_attachment.extend_target_exists",
+            "passed": true,
+            "value": "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/definition.json"
+          }
+        ]
+      },
+      "finished_at": "2026-08-01T03:16:44+00:00",
+      "id": "preflight",
+      "passed": true,
+      "started_at": "2026-08-01T03:16:44+00:00",
+      "state": "completed"
+    },
+    {
+      "apply": false,
+      "body": {
+        "passed": true,
+        "results": [
+          {
+            "copied_sha256": "6b20ead72b31d84152b2b3e493b77ac09aef4017c4b621a4b0c201c4e65a512b",
+            "declared_destination": "backups/identity-quality/promotion/quirk.nocturne.veil/20260801T031644Z/hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/definition.json",
+            "passed": true,
+            "source": "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/definition.json",
+            "source_sha256": "6b20ead72b31d84152b2b3e493b77ac09aef4017c4b621a4b0c201c4e65a512b",
+            "transaction_destination": "runtime/identity-promotion/transactions/quirk.nocturne.veil/promotion-20260801T031644Z-ad7be0812595f48d/backup/hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/definition.json"
+          },
+          {
+            "copied_sha256": "778b99a100467d7ef7771695c7431d864a1874141dded5b00acd70d49db69a32",
+            "declared_destination": "backups/identity-quality/promotion/quirk.nocturne.veil/20260801T031644Z/hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/runtime/veil_runtime.py",
+            "passed": true,
+            "source": "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/runtime/veil_runtime.py",
+            "source_sha256": "778b99a100467d7ef7771695c7431d864a1874141dded5b00acd70d49db69a32",
+            "transaction_destination": "runtime/identity-promotion/transactions/quirk.nocturne.veil/promotion-20260801T031644Z-ad7be0812595f48d/backup/hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/runtime/veil_runtime.py"
+          },
+          {
+            "copied_sha256": "d8a0bba98254577257e7a0a897bda562ba20a6e755c8d2c418162c23931162f7",
+            "declared_destination": "backups/identity-quality/promotion/quirk.nocturne.veil/20260801T031644Z/hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/tests/test_veil_runtime.py",
+            "passed": true,
+            "source": "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/tests/test_veil_runtime.py",
+            "source_sha256": "d8a0bba98254577257e7a0a897bda562ba20a6e755c8d2c418162c23931162f7",
+            "transaction_destination": "runtime/identity-promotion/transactions/quirk.nocturne.veil/promotion-20260801T031644Z-ad7be0812595f48d/backup/hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/tests/test_veil_runtime.py"
+          },
+          {
+            "copied_sha256": "7353dd5874e4567699d0fd011e8933d683406c932ce4c793e339ed4bc77dfdd6",
+            "declared_destination": "backups/identity-quality/promotion/quirk.nocturne.veil/20260801T031644Z/bin/veilctl",
+            "passed": true,
+            "source": "bin/veilctl",
+            "source_sha256": "7353dd5874e4567699d0fd011e8933d683406c932ce4c793e339ed4bc77dfdd6",
+            "transaction_destination": "runtime/identity-promotion/transactions/quirk.nocturne.veil/promotion-20260801T031644Z-ad7be0812595f48d/backup/bin/veilctl"
+          },
+          {
+            "copied_sha256": "6b20ead72b31d84152b2b3e493b77ac09aef4017c4b621a4b0c201c4e65a512b",
+            "declared_destination": "backups/identity-quality/promotion/quirk.nocturne.veil/20260801T031644Z/hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/definition.json",
+            "passed": true,
+            "source": "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/definition.json",
+            "source_sha256": "6b20ead72b31d84152b2b3e493b77ac09aef4017c4b621a4b0c201c4e65a512b",
+            "transaction_destination": "runtime/identity-promotion/transactions/quirk.nocturne.veil/promotion-20260801T031644Z-ad7be0812595f48d/backup/hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/definition.json"
+          }
+        ]
+      },
+      "finished_at": "2026-08-01T03:16:44+00:00",
+      "id": "backup",
+      "passed": true,
+      "started_at": "2026-08-01T03:16:44+00:00",
+      "state": "completed"
+    },
+    {
+      "apply": false,
+      "body": {
+        "blocked_reason": "Content implementation requires explicit file contents and cannot be inferred safely from the execution packet alone.",
+        "operations": [
+          {
+            "authority_effect": "none",
+            "operation": "create",
+            "path": "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/contracts/veil_contracts.py",
+            "path_state": {
+              "absolute_path": "/root/savant-runtime/hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/contracts/veil_contracts.py",
+              "exists": false,
+              "kind": "file",
+              "path": "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/contracts/veil_contracts.py"
+            },
+            "position": 2,
+            "replacement_forbidden": false,
+            "requires_backup": false,
+            "role": "contracts"
+          }
+        ],
+        "passed": true,
+        "planned_only": true
+      },
+      "finished_at": "2026-08-01T03:16:44+00:00",
+      "id": "contracts",
+      "passed": true,
+      "started_at": "2026-08-01T03:16:44+00:00",
+      "state": "completed"
+    },
+    {
+      "apply": false,
+      "body": {
+        "blocked_reason": "Content implementation requires explicit file contents and cannot be inferred safely from the execution packet alone.",
+        "operations": [
+          {
+            "authority_effect": "none",
+            "operation": "extend",
+            "path": "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/runtime/veil_runtime.py",
+            "path_state": {
+              "absolute_path": "/root/savant-runtime/hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/runtime/veil_runtime.py",
+              "exists": true,
+              "kind": "file",
+              "mode": "0o755",
+              "path": "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/runtime/veil_runtime.py",
+              "sha256": "778b99a100467d7ef7771695c7431d864a1874141dded5b00acd70d49db69a32",
+              "size": 15151
+            },
+            "position": 3,
+            "replacement_forbidden": true,
+            "requires_backup": true,
+            "role": "runtime"
+          }
+        ],
+        "passed": true,
+        "planned_only": true
+      },
+      "finished_at": "2026-08-01T03:16:44+00:00",
+      "id": "runtime",
+      "passed": true,
+      "started_at": "2026-08-01T03:16:44+00:00",
+      "state": "completed"
+    },
+    {
+      "apply": false,
+      "body": {
+        "blocked_reason": "Content implementation requires explicit file contents and cannot be inferred safely from the execution packet alone.",
+        "operations": [
+          {
+            "authority_effect": "none",
+            "operation": "extend",
+            "path": "bin/veilctl",
+            "path_state": {
+              "absolute_path": "/root/savant-runtime/bin/veilctl",
+              "exists": true,
+              "kind": "file",
+              "mode": "0o755",
+              "path": "bin/veilctl",
+              "sha256": "7353dd5874e4567699d0fd011e8933d683406c932ce4c793e339ed4bc77dfdd6",
+              "size": 3605
+            },
+            "position": 5,
+            "replacement_forbidden": true,
+            "requires_backup": true,
+            "role": "controller"
+          }
+        ],
+        "passed": true,
+        "planned_only": true
+      },
+      "finished_at": "2026-08-01T03:16:44+00:00",
+      "id": "controller",
+      "passed": true,
+      "started_at": "2026-08-01T03:16:44+00:00",
+      "state": "completed"
+    },
+    {
+      "apply": false,
+      "body": {
+        "blocked_reason": "Content implementation requires explicit file contents and cannot be inferred safely from the execution packet alone.",
+        "operations": [
+          {
+            "authority_effect": "none",
+            "operation": "extend",
+            "path": "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/tests/test_veil_runtime.py",
+            "path_state": {
+              "absolute_path": "/root/savant-runtime/hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/tests/test_veil_runtime.py",
+              "exists": true,
+              "kind": "file",
+              "mode": "0o755",
+              "path": "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/tests/test_veil_runtime.py",
+              "sha256": "d8a0bba98254577257e7a0a897bda562ba20a6e755c8d2c418162c23931162f7",
+              "size": 5149
+            },
+            "position": 4,
+            "replacement_forbidden": true,
+            "requires_backup": true,
+            "role": "tests"
+          }
+        ],
+        "passed": true,
+        "planned_only": true
+      },
+      "finished_at": "2026-08-01T03:16:44+00:00",
+      "id": "tests",
+      "passed": true,
+      "started_at": "2026-08-01T03:16:44+00:00",
+      "state": "completed"
+    },
+    {
+      "apply": false,
+      "body": {
+        "blocked_reason": "Content implementation requires explicit file contents and cannot be inferred safely from the execution packet alone.",
+        "operations": [
+          {
+            "authority_effect": "none",
+            "operation": "extend",
+            "path": "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/definition.json",
+            "path_state": {
+              "absolute_path": "/root/savant-runtime/hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/definition.json",
+              "exists": true,
+              "kind": "file",
+              "mode": "0o644",
+              "path": "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/definition.json",
+              "sha256": "6b20ead72b31d84152b2b3e493b77ac09aef4017c4b621a4b0c201c4e65a512b",
+              "size": 4430
+            },
+            "position": 1,
+            "replacement_forbidden": true,
+            "requires_backup": true,
+            "role": "definition"
+          },
+          {
+            "authority_effect": "extend_declared_authority_metadata",
+            "operation": "extend",
+            "path": "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/definition.json",
+            "path_state": {
+              "absolute_path": "/root/savant-runtime/hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/definition.json",
+              "exists": true,
+              "kind": "file",
+              "mode": "0o644",
+              "path": "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/definition.json",
+              "sha256": "6b20ead72b31d84152b2b3e493b77ac09aef4017c4b621a4b0c201c4e65a512b",
+              "size": 4430
+            },
+            "position": 7,
+            "replacement_forbidden": true,
+            "requires_backup": true,
+            "role": "definition_attachment"
+          }
+        ],
+        "passed": true,
+        "planned_only": true
+      },
+      "finished_at": "2026-08-01T03:16:44+00:00",
+      "id": "definition_attachment",
+      "passed": true,
+      "started_at": "2026-08-01T03:16:44+00:00",
+      "state": "completed"
+    },
+    {
+      "apply": false,
+      "body": {
+        "blocked_reason": "Content implementation requires explicit file contents and cannot be inferred safely from the execution packet alone.",
+        "operations": [
+          {
+            "authority_effect": "extend_declared_authority_metadata",
+            "operation": "create_or_extend",
+            "path": null,
+            "path_state": null,
+            "position": 8,
+            "replacement_forbidden": true,
+            "requires_backup": false,
+            "role": "parent_attachment"
+          }
+        ],
+        "passed": true,
+        "planned_only": true
+      },
+      "finished_at": "2026-08-01T03:16:44+00:00",
+      "id": "parent_attachment",
+      "passed": true,
+      "started_at": "2026-08-01T03:16:44+00:00",
+      "state": "completed"
+    },
+    {
+      "apply": false,
+      "body": {
+        "operations": [
+          {
+            "command": [
+              "/root/savant-runtime/bin/veilctl",
+              "verify"
+            ],
+            "role": "subject_controller_verify"
+          },
+          {
+            "command": [
+              "/root/savant-runtime/bin/identityqualityctl",
+              "audit"
+            ],
+            "role": "identity_audit"
+          },
+          {
+            "command": [
+              "/root/savant-runtime/bin/identityqualityctl",
+              "validate"
+            ],
+            "role": "identity_validation"
+          }
+        ],
+        "passed": true,
+        "planned_only": true
+      },
+      "finished_at": "2026-08-01T03:16:44+00:00",
+      "id": "verification",
+      "passed": true,
+      "started_at": "2026-08-01T03:16:44+00:00",
+      "state": "completed"
+    },
+    {
+      "apply": false,
+      "body": {
+        "blocked_reason": "Content implementation requires explicit file contents and cannot be inferred safely from the execution packet alone.",
+        "operations": [
+          {
+            "authority_effect": "none",
+            "operation": "create",
+            "path": "reports/identity_quality/veil",
+            "path_state": {
+              "absolute_path": "/root/savant-runtime/reports/identity_quality/veil",
+              "exists": false,
+              "kind": "directory",
+              "path": "reports/identity_quality/veil"
+            },
+            "position": 6,
+            "replacement_forbidden": false,
+            "requires_backup": false,
+            "role": "reports"
+          },
+          {
+            "authority_effect": "none",
+            "operation": "create_or_extend",
+            "path": "bin/veil-quality-verify",
+            "path_state": {
+              "absolute_path": "/root/savant-runtime/bin/veil-quality-verify",
+              "exists": false,
+              "kind": "file",
+              "path": "bin/veil-quality-verify"
+            },
+            "position": 9,
+            "replacement_forbidden": true,
+            "requires_backup": false,
+            "role": "quality_verifier"
+          },
+          {
+            "authority_effect": "none",
+            "operation": "create_or_extend",
+            "path": "tools/identity_quality/promotion/attestations/veil/build_reference_attestation.py",
+            "path_state": {
+              "absolute_path": "/root/savant-runtime/tools/identity_quality/promotion/attestations/veil/build_reference_attestation.py",
+              "exists": false,
+              "kind": "file",
+              "path": "tools/identity_quality/promotion/attestations/veil/build_reference_attestation.py"
+            },
+            "position": 10,
+            "replacement_forbidden": true,
+            "requires_backup": false,
+            "role": "attestation_builder"
+          }
+        ],
+        "passed": true,
+        "planned_only": true
+      },
+      "finished_at": "2026-08-01T03:16:44+00:00",
+      "id": "attestation",
+      "passed": true,
+      "started_at": "2026-08-01T03:16:44+00:00",
+      "state": "completed"
+    },
+    {
+      "apply": false,
+      "body": {
+        "operations": [
+          {
+            "command": [
+              "/root/savant-runtime/bin/identity-promotionctl",
+              "strict"
+            ],
+            "role": "promotion_queue_refresh"
+          }
+        ],
+        "passed": true,
+        "planned_only": true
+      },
+      "finished_at": "2026-08-01T03:16:44+00:00",
+      "id": "promotion_queue_refresh",
+      "passed": true,
+      "started_at": "2026-08-01T03:16:44+00:00",
+      "state": "completed"
+    }
+  ],
+  "statistics": {
+    "failed_count": 0,
+    "passed_count": 11,
+    "planned_content_stage_count": 9,
+    "stage_count": 11
+  },
+  "subject": {
+    "definition": "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/definition.json",
+    "id": "quirk.nocturne.veil",
+    "kind": "quirk",
+    "name": "Veil",
+    "parent": "prodigal.nocturne",
+    "python_name": "veil",
+    "reference_subject": true
+  },
+  "transaction": {
+    "id": "promotion-20260801T031644Z-ad7be0812595f48d",
+    "packet_snapshot": "runtime/identity-promotion/transactions/quirk.nocturne.veil/promotion-20260801T031644Z-ad7be0812595f48d/execution_packet.json",
+    "root": "runtime/identity-promotion/transactions/quirk.nocturne.veil/promotion-20260801T031644Z-ad7be0812595f48d"
+  }
+}

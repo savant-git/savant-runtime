@@ -1,0 +1,209 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import subprocess
+import sys
+from pathlib import Path
+
+
+ROOT = Path("/root/savant-runtime")
+
+LOCKED_RUN = (
+    ROOT
+    / "bin"
+    / "masterplan-locked-run"
+)
+
+COMMANDS = {
+    "build": {
+        "operation": (
+            "masterplan.graph.build"
+        ),
+        "command": [
+            str(
+                ROOT
+                / "bin"
+                / "masterplan-build"
+            ),
+            "strict",
+        ],
+        "require_graph_change": False,
+    },
+    "decision": {
+        "operation": (
+            "masterplan.decision.apply"
+        ),
+        "command": [
+            str(
+                ROOT
+                / "bin"
+                / "masterplan-decision-apply"
+            ),
+            "apply-strict",
+        ],
+        "require_graph_change": True,
+    },
+    "evidence": {
+        "operation": (
+            "masterplan.evidence.admit"
+        ),
+        "command": [
+            str(
+                ROOT
+                / "bin"
+                / "masterplan-evidence"
+            ),
+            "apply",
+        ],
+        "require_graph_change": True,
+    },
+    "attest": {
+        "operation": (
+            "masterplan.attestation.admit"
+        ),
+        "command": [
+            str(
+                ROOT
+                / "bin"
+                / "masterplan-attest"
+            ),
+            "apply-strict",
+        ],
+        "require_graph_change": True,
+    },
+    "transition": {
+        "operation": (
+            "masterplan.task.transition"
+        ),
+        "command": [
+            str(
+                ROOT
+                / "bin"
+                / "masterplan-transition"
+            ),
+            "apply-strict",
+        ],
+        "require_graph_change": True,
+    },
+    "complete": {
+        "operation": (
+            "masterplan.task.complete"
+        ),
+        "command": [
+            str(
+                ROOT
+                / "bin"
+                / "masterplan-complete"
+            ),
+            "apply-strict",
+        ],
+        "require_graph_change": True,
+    },
+}
+
+
+def execute(
+    command: list[str],
+) -> int:
+    return subprocess.run(
+        command,
+        cwd=str(
+            ROOT
+        ),
+        check=False,
+    ).returncode
+
+
+def usage() -> int:
+    print(
+        """
+masterplan-mutate build
+masterplan-mutate decision DECISION_ID
+masterplan-mutate evidence TASK_ID KIND [OPTIONS]
+masterplan-mutate attest TASK_ID [OPTIONS]
+masterplan-mutate transition TASK_ID NEXT_STATE [OPTIONS]
+masterplan-mutate complete TASK_ID [OPTIONS]
+"""
+    )
+
+    return 0
+
+
+def main() -> int:
+    arguments = sys.argv[
+        1:
+    ]
+
+    if not arguments:
+        return usage()
+
+    command_name = arguments[
+        0
+    ]
+
+    remaining = arguments[
+        1:
+    ]
+
+    if command_name in {
+        "help",
+        "--help",
+        "-h",
+    }:
+        return usage()
+
+    if command_name not in COMMANDS:
+        print(
+            (
+                "ERROR: unknown mutation command: "
+                f"{command_name}"
+            ),
+            file=sys.stderr,
+        )
+
+        return 2
+
+    definition = COMMANDS[
+        command_name
+    ]
+
+    locked_command = [
+        str(
+            LOCKED_RUN
+        ),
+        "--owner",
+        "project-owner",
+        "--operation",
+        str(
+            definition[
+                "operation"
+            ]
+        ),
+    ]
+
+    if definition[
+        "require_graph_change"
+    ]:
+        locked_command.append(
+            "--require-graph-change"
+        )
+
+    locked_command.extend(
+        [
+            "--",
+            *definition[
+                "command"
+            ],
+            *remaining,
+        ]
+    )
+
+    return execute(
+        locked_command
+    )
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

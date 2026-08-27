@@ -1,0 +1,55 @@
+id: exile:zero
+kind: exile
+status: accepted
+version: 1
+title: zero
+authority:
+  state: accepted
+  tier: 2
+  confidence: 0.9
+purpose:
+  current:
+  - mathematics
+  - formal calculation
+  - quantitative invariants
+  status: accepted
+composition:
+  prodigals: []
+  quirks: []
+  rules:
+  - two to four prodigals normally compose an exile
+  - two to four quirks normally compose a prodigal
+  - shared prodigals and quirks should be instanced with masks rather than duplicated
+orchestration:
+  opus_ready: true
+  chain_alias: ze
+  accepted_inputs: []
+  emitted_outputs: []
+  hooks: []
+constraints:
+  must_not_overlap: []
+  requires: []
+  forbids: []
+future_slots:
+- prodigals
+- quirks
+- contracts
+- runtime_hooks
+- chain_masks
+- metrics
+- tests
+open_questions: []
+lineage:
+  parents:
+  - hierarchy:identity:4
+  supersedes: []
+  superseded_by: []
+provenance:
+  created_at: '2026-07-11T00:00:00Z'
+  created_by: canon_bootstrap
+  sources:
+  - sdump_savant-runtime_071026.txt
+  - project conversation
+dependencies: []
+relationships: []
+attachments: []

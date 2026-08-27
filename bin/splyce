@@ -1,0 +1,515 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+
+ROOT="/root/savant-runtime"
+
+UI_ROOT="${ROOT}/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/ui"
+
+COMPILER="${UI_ROOT}/scripts/compile_exile_instances.py"
+
+ACTIVE_INSTANCE="${UI_ROOT}/public/exile-ui.instance.json"
+
+REGISTRY="${UI_ROOT}/public/exile-ui.instances.json"
+
+
+EXILES=(
+    carbon
+    cataxis
+    coda
+    envoy
+    filament
+    graffiti
+    lore
+    mobius
+    modus
+    niche
+    notary
+    opus
+    pact
+    palaver
+    shatter
+    underscore
+    urge
+    zero
+)
+
+
+die() {
+    printf 'ERROR: %s\n' "$*" >&2
+    exit 1
+}
+
+
+require_file() {
+    local path="$1"
+
+    [[ -f "${path}" ]] \
+        || die "missing file: ${path}"
+}
+
+
+is_exile() {
+    local requested="$1"
+    local exile
+
+    for exile in "${EXILES[@]}"; do
+        if [[ "${requested}" == "${exile}" ]]; then
+            return 0
+        fi
+    done
+
+    return 1
+}
+
+
+usage() {
+    cat <<'EOF'
+SPLYCE — Savant Living Interface Substrate
+
+Usage:
+  splyce compile
+  splyce validate
+  splyce list
+  splyce select EXILE
+  splyce status
+  splyce build [EXILE]
+  splyce dev [EXILE]
+  splyce preview [EXILE]
+  splyce verify
+EOF
+}
+
+
+compile_instances() {
+    require_file "${COMPILER}"
+
+    python3 \
+        "${COMPILER}" \
+        compile
+}
+
+
+validate_instances() {
+    require_file "${COMPILER}"
+
+    python3 \
+        "${COMPILER}" \
+        validate
+}
+
+
+select_instance() {
+    local exile="$1"
+
+    is_exile "${exile}" \
+        || die "unknown Exile: ${exile}"
+
+    require_file "${COMPILER}"
+
+    python3 \
+        "${COMPILER}" \
+        select \
+        "${exile}"
+}
+
+
+ensure_instance() {
+    local exile="${1:-}"
+
+    if [[ -n "${exile}" ]]; then
+        select_instance \
+            "${exile}"
+
+        return
+    fi
+
+    if [[ ! -f "${ACTIVE_INSTANCE}" ]]; then
+        compile_instances
+
+        select_instance \
+            lore
+    fi
+}
+
+
+status() {
+    require_file "${ACTIVE_INSTANCE}"
+
+    python3 - \
+        "${ACTIVE_INSTANCE}" \
+        "${REGISTRY}" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+
+active_path = Path(
+    sys.argv[1]
+)
+
+registry_path = Path(
+    sys.argv[2]
+)
+
+
+active = json.loads(
+    active_path.read_text(
+        encoding="utf-8"
+    )
+)
+
+
+registry = (
+    json.loads(
+        registry_path.read_text(
+            encoding="utf-8"
+        )
+    )
+    if registry_path.is_file()
+    else {}
+)
+
+
+result = {
+    "module": "splyce",
+    "schema": "savant://ui/splyce/status/1.1.0",
+    "active_instance": active.get(
+        "instance_id"
+    ),
+    "exile": active.get(
+        "exile_id"
+    ),
+    "authority": active.get(
+        "authority",
+        {}
+    ).get(
+        "state"
+    ),
+    "capability_count": len(
+        active.get(
+            "capabilities",
+            []
+        )
+    ),
+    "priority_modes": len(
+        active.get(
+            "priority_modes",
+            []
+        )
+    ),
+    "pipeline_stages": len(
+        active.get(
+            "pipeline",
+            []
+        )
+    ),
+    "panels": len(
+        active.get(
+            "panels",
+            []
+        )
+    ),
+    "health_dimensions": len(
+        active.get(
+            "health",
+            []
+        )
+    ),
+    "validation_dimensions": len(
+        active.get(
+            "validation",
+            []
+        )
+    ),
+    "instance_population": registry.get(
+        "count"
+    ),
+    "projection_authoritative": (
+        active.get(
+            "projection",
+            {}
+        ).get(
+            "authoritative",
+            False
+        )
+    ),
+}
+
+
+print(
+    json.dumps(
+        result,
+        indent=2,
+        sort_keys=True
+    )
+)
+PY
+}
+
+
+build_ui() {
+    local exile="${1:-}"
+
+    ensure_instance \
+        "${exile}"
+
+    (
+        cd "${UI_ROOT}"
+
+        npm run build
+    )
+}
+
+
+dev_ui() {
+    local exile="${1:-}"
+
+    ensure_instance \
+        "${exile}"
+
+    (
+        cd "${UI_ROOT}"
+
+        exec npm run dev
+    )
+}
+
+
+preview_ui() {
+    local exile="${1:-}"
+
+    ensure_instance \
+        "${exile}"
+
+    if [[ ! -d "${UI_ROOT}/dist" ]]; then
+        build_ui
+    fi
+
+    (
+        cd "${UI_ROOT}"
+
+        exec npm run preview
+    )
+}
+
+
+verify() {
+    require_file "${COMPILER}"
+
+    python3 -m py_compile \
+        "${COMPILER}"
+
+    compile_instances
+
+    validate_instances
+
+    (
+        cd "${UI_ROOT}"
+
+        npm run validate
+
+        npm run build
+    )
+
+    require_file "${ACTIVE_INSTANCE}"
+    require_file "${REGISTRY}"
+
+    python3 - \
+        "${ACTIVE_INSTANCE}" \
+        "${REGISTRY}" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+
+active = json.loads(
+    Path(
+        sys.argv[1]
+    ).read_text(
+        encoding="utf-8"
+    )
+)
+
+
+registry = json.loads(
+    Path(
+        sys.argv[2]
+    ).read_text(
+        encoding="utf-8"
+    )
+)
+
+
+checks = {
+    "instance_population": (
+        registry.get(
+            "count"
+        ) == 18
+    ),
+    "purposes": (
+        len(
+            active.get(
+                "purposes",
+                []
+            )
+        ) == 3
+    ),
+    "priority_modes": (
+        len(
+            active.get(
+                "priority_modes",
+                []
+            )
+        ) == 3
+    ),
+    "pipeline": (
+        len(
+            active.get(
+                "pipeline",
+                []
+            )
+        ) == 18
+    ),
+    "panels": (
+        len(
+            active.get(
+                "panels",
+                []
+            )
+        ) == 9
+    ),
+    "health": (
+        len(
+            active.get(
+                "health",
+                []
+            )
+        ) == 9
+    ),
+    "validation": (
+        len(
+            active.get(
+                "validation",
+                []
+            )
+        ) == 9
+    ),
+    "non_authoritative_projection": (
+        active.get(
+            "projection",
+            {}
+        ).get(
+            "authoritative"
+        ) is False
+    ),
+}
+
+
+failed = [
+    key
+    for key, passed
+    in checks.items()
+    if not passed
+]
+
+
+result = {
+    "schema": (
+        "savant://assurance/"
+        "splyce/1.1.0"
+    ),
+    "checks": checks,
+    "failed": failed,
+    "valid": not failed,
+}
+
+
+print(
+    json.dumps(
+        result,
+        indent=2,
+        sort_keys=True
+    )
+)
+
+
+if failed:
+    raise SystemExit(1)
+PY
+
+    printf 'SPLYCE VERIFY: passed\n'
+}
+
+
+main() {
+    local command="${1:-}"
+
+    case "${command}" in
+        compile)
+            compile_instances
+            ;;
+
+        validate)
+            validate_instances
+            ;;
+
+        list)
+            python3 \
+                "${COMPILER}" \
+                list
+            ;;
+
+        select)
+            [[ $# -eq 2 ]] \
+                || die "select requires an Exile"
+
+            select_instance \
+                "$2"
+            ;;
+
+        status)
+            status
+            ;;
+
+        build)
+            [[ $# -le 2 ]] \
+                || die "build accepts at most one Exile"
+
+            build_ui \
+                "${2:-}"
+            ;;
+
+        dev)
+            [[ $# -le 2 ]] \
+                || die "dev accepts at most one Exile"
+
+            dev_ui \
+                "${2:-}"
+            ;;
+
+        preview)
+            [[ $# -le 2 ]] \
+                || die "preview accepts at most one Exile"
+
+            preview_ui \
+                "${2:-}"
+            ;;
+
+        verify)
+            verify
+            ;;
+
+        help|-h|--help|"")
+            usage
+            ;;
+
+        *)
+            die "unsupported command: ${command}"
+            ;;
+    esac
+}
+
+
+main "$@"

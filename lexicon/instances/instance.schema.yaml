@@ -1,0 +1,193 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+
+title: Savant Instance Schema
+
+type: object
+
+required:
+  - registry_id
+  - version
+  - instances
+
+properties:
+
+  registry_id:
+    type: string
+
+  version:
+    type: integer
+    minimum: 1
+
+  authority:
+    type: object
+
+  instances:
+    type: array
+
+    items:
+      type: object
+
+      required:
+        - id
+        - canonical
+        - kindreds
+        - source
+        - state
+        - provenance
+        - lineage
+
+      properties:
+
+        id:
+          type: string
+          pattern: "^instance:[a-z][a-z0-9_-]*(?::[a-z][a-z0-9_-]*)*$"
+
+        canonical:
+          type: string
+          minLength: 1
+
+        description:
+          type: string
+
+        status:
+          type: string
+          enum:
+            - active
+            - dormant
+            - deprecated
+            - superseded
+            - reserved
+
+        kindreds:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+            pattern: "^kindred:[a-z][a-z0-9_-]*$"
+
+        ontology:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+
+        source:
+          type: object
+
+          required:
+            - type
+            - reference
+
+          properties:
+
+            type:
+              type: string
+
+            reference:
+              type: string
+
+            revision:
+              type:
+                - string
+                - integer
+                - "null"
+
+            digest:
+              type:
+                - string
+                - "null"
+
+        state:
+          type: object
+
+        dependencies:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+
+        relationships:
+          type: array
+
+          items:
+            oneOf:
+
+              - type: string
+
+              - type: object
+
+                required:
+                  - type
+                  - target
+
+                properties:
+
+                  type:
+                    type: string
+
+                  target:
+                    type: string
+
+                  metadata:
+                    type: object
+
+        projections:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+
+        provenance:
+          type: object
+
+          required:
+            - source
+            - confidence
+
+          properties:
+
+            source:
+              type: string
+
+            confidence:
+              type: string
+              enum:
+                - confirmed
+                - inferred
+                - projected
+
+            evidence:
+              type: array
+              items:
+                type: string
+
+        lineage:
+          type: object
+
+          required:
+            - derived_from
+            - history
+
+          properties:
+
+            derived_from:
+              type: array
+              items:
+                type: string
+
+            supersedes:
+              type: array
+              items:
+                type: string
+
+            superseded_by:
+              type:
+                - string
+                - "null"
+
+            history:
+              type: array
+              items:
+                type: object
+
+additionalProperties: true

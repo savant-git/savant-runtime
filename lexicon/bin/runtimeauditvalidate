@@ -1,0 +1,42 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import subprocess
+import sys
+from pathlib import Path
+
+
+LEXICON_ROOT = Path(
+    __file__
+).resolve().parents[1]
+
+VALIDATOR = (
+    LEXICON_ROOT
+    / "runtime"
+    / "runtime_audit_validator.py"
+)
+
+
+def main() -> int:
+    return subprocess.run(
+        [
+            sys.executable,
+            str(
+                VALIDATOR
+            ),
+            *sys.argv[
+                1:
+            ],
+        ],
+        cwd=str(
+            VALIDATOR.parent
+        ),
+        check=False,
+    ).returncode
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

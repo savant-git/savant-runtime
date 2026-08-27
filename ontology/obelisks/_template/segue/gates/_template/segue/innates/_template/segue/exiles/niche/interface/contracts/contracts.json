@@ -1,0 +1,41 @@
+{
+  "id": "niche.contracts",
+  "owner": "niche",
+  "authority_owner": "exile:niche",
+  "type": "interface_contract_manifest",
+  "status": "active",
+  "implementation": "runtime/living_task.py",
+  "contracts": [
+    {
+      "id": "niche.task-governance",
+      "owner": "exile:niche",
+      "rule": "Niche owns task identity, task state, task priority, dependency governance, completion conditions, blockers, evidence receipts, decomposition references, and task transitions."
+    },
+    {
+      "id": "niche.dryve-boundary",
+      "owner": "exile:niche",
+      "mechanics_owner": "living:dryve",
+      "rule": "Dryve supplies reusable execution-lifecycle mechanics only and may not govern tasks, schedule tasks, set task priority, transition task state, or rewrite task dependencies."
+    },
+    {
+      "id": "niche.completion-evidence",
+      "owner": "exile:niche",
+      "rule": "A task may not transition to completed without at least one evidence or receipt reference."
+    },
+    {
+      "id": "niche.terminal-immutability",
+      "owner": "exile:niche",
+      "rule": "Completed, rejected, and superseded task states are terminal and immutable; later work must supersede or create a regression task rather than rewrite terminal history."
+    },
+    {
+      "id": "niche.dependency-readiness",
+      "owner": "exile:niche",
+      "rule": "A task may not enter ready, leased, active, or completed while direct dependencies remain unsatisfied."
+    },
+    {
+      "id": "niche.projection-authority",
+      "owner": "exile:niche",
+      "rule": "Task graph, reverse dependency, transitive dependency, readiness, bottleneck, health, and masterplan views are deterministic rebuildable projections and do not constitute independent authority."
+    }
+  ]
+}

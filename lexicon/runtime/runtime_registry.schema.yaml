@@ -1,0 +1,29 @@
+schema: runtime_registry
+
+version: 1
+
+fields:
+
+  address:
+    type: string
+
+  canonical:
+    type: string
+
+  authority:
+    type: string
+
+  aliases:
+    type: array
+
+  digest:
+    type: string
+
+  relationships:
+    type: object
+
+  source:
+    type: string
+
+  type:
+    type: string

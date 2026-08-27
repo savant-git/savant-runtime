@@ -1,0 +1,23 @@
+schema: namespace
+
+version: 1
+
+fields:
+
+  id:
+    type: string
+
+  description:
+    type: string
+
+  owner:
+    type: string
+
+  authority:
+    type: string
+
+  reserved:
+    type: boolean
+
+  collision_policy:
+    type: string

@@ -1,0 +1,678 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import json
+import subprocess
+import sys
+from pathlib import Path
+from typing import Any
+
+
+ROOT = Path("/root/savant-runtime")
+
+PYTHON = (
+    ROOT
+    / "bin"
+    / "identity-quality-python"
+)
+
+SUBJECT_ROOT = (
+    ROOT
+    / "hierarchies"
+    / "identity"
+    / "exiles"
+    / "niche"
+    / "prodigals"
+    / "masterplan"
+)
+
+CONTRACTS = (
+    SUBJECT_ROOT
+    / "contracts"
+    / "masterplan_contracts.py"
+)
+
+RUNTIME = (
+    SUBJECT_ROOT
+    / "runtime"
+    / "masterplan_runtime.py"
+)
+
+TESTS = (
+    SUBJECT_ROOT
+    / "tests"
+    / "test_masterplan_runtime.py"
+)
+
+AUTHORITY_ROOT = (
+    ROOT
+    / "authority"
+    / "task-graph"
+)
+
+GRAPH = (
+    AUTHORITY_ROOT
+    / "masterplan.json"
+)
+
+REPORT_ROOT = (
+    ROOT
+    / "reports"
+    / "niche"
+    / "masterplan"
+)
+
+REQUEST_ROOT = (
+    ROOT
+    / "runtime"
+    / "masterplan"
+    / "requests"
+)
+
+
+def execute(
+    command: list[str],
+) -> int:
+    return subprocess.run(
+        command,
+        cwd=str(ROOT),
+        check=False,
+    ).returncode
+
+
+def load_json(
+    path: Path,
+) -> dict[str, Any]:
+    value = json.loads(
+        path.read_text(
+            encoding="utf-8",
+        )
+    )
+
+    if not isinstance(value, dict):
+        raise ValueError(
+            f"Expected JSON object: {path}"
+        )
+
+    return value
+
+
+def graph_exists() -> bool:
+    return GRAPH.is_file()
+
+
+def require_graph() -> int:
+    if graph_exists():
+        return 0
+
+    print(
+        (
+            "ERROR: authoritative task graph does not exist: "
+            f"{GRAPH}"
+        ),
+        file=sys.stderr,
+    )
+
+    return 1
+
+
+def build_request(
+    operation: str,
+    *,
+    projection: str | None = None,
+) -> Path:
+    if require_graph():
+        raise FileNotFoundError(GRAPH)
+
+    graph = load_json(GRAPH)
+
+    REQUEST_ROOT.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    request_path = (
+        REQUEST_ROOT
+        / f"{operation}.json"
+    )
+
+    request = {
+        "request_id": (
+            f"masterplan-{operation}"
+        ),
+        "operation": operation,
+        "graph": graph,
+        "query": None,
+        "projection": projection,
+        "authority": {
+            "state": "accepted",
+            "authority_class": (
+                "project-owner-directed"
+            ),
+            "tier": 1,
+            "source": (
+                "masterplanctl"
+            ),
+            "accepted_by": (
+                "project-owner"
+            ),
+            "accepted_at": (
+                "2026-08-01T18:43:45-04:00"
+            ),
+            "confidence": 1.0,
+        },
+        "provenance": {
+            "sources": [
+                {
+                    "source_id": (
+                        "savant.masterplan"
+                    ),
+                    "source_kind": (
+                        "authoritative-task-graph"
+                    ),
+                    "source_path": str(
+                        GRAPH
+                    ),
+                    "source_sha256": None,
+                    "authority_state": (
+                        "authoritative"
+                    ),
+                    "captured_at": None,
+                }
+            ],
+            "transformations": [],
+            "generated_by": (
+                "masterplanctl"
+            ),
+            "generated_at": (
+                "2026-08-01T18:43:45-04:00"
+            ),
+            "contract_version": "1.0.0",
+        },
+    }
+
+    request_path.write_text(
+        json.dumps(
+            request,
+            ensure_ascii=False,
+            indent=2,
+            sort_keys=True,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    return request_path
+
+
+def run_operation(
+    operation: str,
+    *,
+    projection: str | None = None,
+    output: Path | None = None,
+) -> int:
+    try:
+        request_path = build_request(
+            operation,
+            projection=projection,
+        )
+
+    except Exception as exc:
+        print(
+            f"ERROR: {exc}",
+            file=sys.stderr,
+        )
+
+        return 1
+
+    command = [
+        str(PYTHON),
+        str(RUNTIME),
+        "run",
+        "--input",
+        str(request_path),
+    ]
+
+    if output is not None:
+        output.parent.mkdir(
+            parents=True,
+            exist_ok=True,
+        )
+
+        command.extend(
+            [
+                "--output",
+                str(output),
+            ]
+        )
+
+    return execute(command)
+
+
+def status() -> int:
+    result = {
+        "subject_root": str(
+            SUBJECT_ROOT
+        ),
+        "subject_root_exists": (
+            SUBJECT_ROOT.is_dir()
+        ),
+        "contracts": str(
+            CONTRACTS
+        ),
+        "contracts_exist": (
+            CONTRACTS.is_file()
+        ),
+        "runtime": str(
+            RUNTIME
+        ),
+        "runtime_exists": (
+            RUNTIME.is_file()
+        ),
+        "tests": str(
+            TESTS
+        ),
+        "tests_exist": (
+            TESTS.is_file()
+        ),
+        "authority_root": str(
+            AUTHORITY_ROOT
+        ),
+        "authority_root_exists": (
+            AUTHORITY_ROOT.is_dir()
+        ),
+        "graph": str(
+            GRAPH
+        ),
+        "graph_exists": (
+            GRAPH.is_file()
+        ),
+        "report_root": str(
+            REPORT_ROOT
+        ),
+        "report_root_exists": (
+            REPORT_ROOT.is_dir()
+        ),
+    }
+
+    if GRAPH.is_file():
+        try:
+            graph = load_json(GRAPH)
+
+            result[
+                "graph_id"
+            ] = graph.get(
+                "graph_id"
+            )
+
+            result[
+                "schema_version"
+            ] = graph.get(
+                "schema_version"
+            )
+
+            result[
+                "record_count"
+            ] = len(
+                graph.get(
+                    "records",
+                    [],
+                )
+            )
+
+            result[
+                "segue_count"
+            ] = len(
+                graph.get(
+                    "segues",
+                    [],
+                )
+            )
+
+        except Exception as exc:
+            result[
+                "graph_error"
+            ] = {
+                "type": type(
+                    exc
+                ).__name__,
+                "message": str(
+                    exc
+                ),
+            }
+
+    print(
+        json.dumps(
+            result,
+            ensure_ascii=False,
+            indent=2,
+            sort_keys=True,
+        )
+    )
+
+    return 0
+
+
+def project(
+    projection: str,
+) -> int:
+    output = (
+        REPORT_ROOT
+        / projection
+        / "latest.json"
+    )
+
+    return run_operation(
+        "project",
+        projection=projection,
+        output=output,
+    )
+
+
+def show_projection(
+    projection: str,
+) -> int:
+    path = (
+        REPORT_ROOT
+        / projection
+        / "latest.json"
+    )
+
+    if not path.is_file():
+        status_code = project(
+            projection
+        )
+
+        if status_code:
+            return status_code
+
+    print(
+        path.read_text(
+            encoding="utf-8",
+        ),
+        end="",
+    )
+
+    return 0
+
+
+def verify() -> int:
+    REPORT_ROOT.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    stages = [
+        [
+            str(PYTHON),
+            "-m",
+            "py_compile",
+            str(CONTRACTS),
+            str(RUNTIME),
+            str(TESTS),
+            str(
+                ROOT
+                / "bin"
+                / "masterplanctl"
+            ),
+        ],
+        [
+            str(PYTHON),
+            "-m",
+            "pytest",
+            "-q",
+            str(TESTS),
+        ],
+    ]
+
+    if GRAPH.is_file():
+        validation_output = (
+            REPORT_ROOT
+            / "validation"
+            / "latest.json"
+        )
+
+        audit_output = (
+            REPORT_ROOT
+            / "audit"
+            / "latest.json"
+        )
+
+        queue_output = (
+            REPORT_ROOT
+            / "queue"
+            / "latest.json"
+        )
+
+        stages.extend(
+            [
+                [
+                    str(
+                        ROOT
+                        / "bin"
+                        / "masterplanctl"
+                    ),
+                    "validate",
+                    "--output",
+                    str(
+                        validation_output
+                    ),
+                ],
+                [
+                    str(
+                        ROOT
+                        / "bin"
+                        / "masterplanctl"
+                    ),
+                    "audit",
+                    "--output",
+                    str(
+                        audit_output
+                    ),
+                ],
+                [
+                    str(
+                        ROOT
+                        / "bin"
+                        / "masterplanctl"
+                    ),
+                    "next",
+                    "--output",
+                    str(
+                        queue_output
+                    ),
+                ],
+            ]
+        )
+
+    for stage in stages:
+        returncode = execute(stage)
+
+        if returncode:
+            return returncode
+
+    return 0
+
+
+def usage() -> int:
+    print(
+        """
+masterplanctl status
+masterplanctl schema
+masterplanctl test
+masterplanctl verify
+masterplanctl validate [--output PATH]
+masterplanctl audit [--output PATH]
+masterplanctl next [--output PATH]
+masterplanctl roadmap
+masterplanctl queue
+masterplanctl dependencies
+masterplanctl bottlenecks
+masterplanctl release
+masterplanctl agent-context
+masterplanctl show roadmap
+masterplanctl show queue
+masterplanctl show dependencies
+masterplanctl show bottlenecks
+masterplanctl show release
+masterplanctl show agent-context
+"""
+    )
+
+    return 0
+
+
+def output_argument(
+    arguments: list[str],
+) -> Path | None:
+    if "--output" not in arguments:
+        return None
+
+    index = arguments.index(
+        "--output"
+    )
+
+    try:
+        value = arguments[
+            index + 1
+        ]
+
+    except IndexError:
+        raise ValueError(
+            "--output requires a path."
+        )
+
+    return Path(value)
+
+
+def main() -> int:
+    arguments = sys.argv[1:]
+
+    if not arguments:
+        return usage()
+
+    command = arguments[0]
+    remaining = arguments[1:]
+
+    if command in {
+        "help",
+        "--help",
+        "-h",
+    }:
+        return usage()
+
+    if command == "status":
+        return status()
+
+    if command == "schema":
+        return execute(
+            [
+                str(PYTHON),
+                str(RUNTIME),
+                "schema",
+            ]
+        )
+
+    if command == "test":
+        return execute(
+            [
+                str(PYTHON),
+                "-m",
+                "pytest",
+                "-q",
+                str(TESTS),
+            ]
+        )
+
+    if command == "verify":
+        return verify()
+
+    if command == "validate":
+        return run_operation(
+            "validate",
+            output=output_argument(
+                remaining
+            ),
+        )
+
+    if command == "audit":
+        return run_operation(
+            "audit",
+            output=output_argument(
+                remaining
+            ),
+        )
+
+    if command == "next":
+        return run_operation(
+            "select_next",
+            output=output_argument(
+                remaining
+            ),
+        )
+
+    projection_map = {
+        "roadmap": "roadmap",
+        "queue": "queue",
+        "dependencies": (
+            "dependency_graph"
+        ),
+        "bottlenecks": (
+            "bottlenecks"
+        ),
+        "release": "release",
+        "agent-context": (
+            "agent_context"
+        ),
+    }
+
+    if command in projection_map:
+        return project(
+            projection_map[
+                command
+            ]
+        )
+
+    if command == "show":
+        if not remaining:
+            print(
+                (
+                    "ERROR: show requires "
+                    "a projection name."
+                ),
+                file=sys.stderr,
+            )
+
+            return 2
+
+        projection_name = remaining[0]
+
+        if projection_name not in projection_map:
+            print(
+                (
+                    "ERROR: unknown projection: "
+                    f"{projection_name}"
+                ),
+                file=sys.stderr,
+            )
+
+            return 2
+
+        return show_projection(
+            projection_map[
+                projection_name
+            ]
+        )
+
+    print(
+        f"ERROR: unknown command: {command}",
+        file=sys.stderr,
+    )
+
+    return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

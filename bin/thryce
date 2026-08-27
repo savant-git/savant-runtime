@@ -1,0 +1,182 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+
+ROOT = Path(
+    "/root/savant-runtime"
+)
+
+if str(ROOT) not in sys.path:
+    sys.path.insert(
+        0,
+        str(ROOT),
+    )
+
+
+from runtime.thryce import (  # noqa: E402
+    AssuranceCheck,
+    AssuranceResult,
+    Thryce,
+)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Thryce — Savant living "
+            "assurance substrate"
+        )
+    )
+
+    commands = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    commands.add_parser(
+        "profile"
+    )
+
+    commands.add_parser(
+        "validate"
+    )
+
+    commands.add_parser(
+        "health"
+    )
+
+    self_test = commands.add_parser(
+        "self-test"
+    )
+
+    self_test.add_argument(
+        "--fail",
+        action="store_true",
+    )
+
+    arguments = parser.parse_args()
+
+    thryce = Thryce()
+
+    if arguments.command == "profile":
+        result = thryce.profile()
+
+    elif arguments.command == "validate":
+        result = thryce.validate()
+
+    elif arguments.command == "health":
+        result = thryce.health()
+
+    elif arguments.command == "self-test":
+        def evaluator(
+            subject: object,
+        ) -> AssuranceResult:
+            passed = (
+                bool(subject)
+                and not arguments.fail
+            )
+
+            return AssuranceResult(
+                check_id=(
+                    "thryce:self-test"
+                ),
+                dimension="integration",
+                status=(
+                    "passed"
+                    if passed
+                    else "failed"
+                ),
+                message=(
+                    "focused Thryce "
+                    "self-test"
+                ),
+                observed=subject,
+                expected=True,
+                provenance={
+                    "source":
+                        "bin/thryce"
+                },
+            )
+
+        thryce.register(
+            AssuranceCheck(
+                check_id=(
+                    "thryce:self-test"
+                ),
+                dimension="integration",
+                evaluator=evaluator,
+            )
+        )
+
+        batch = thryce.evaluate_all(
+            True
+        )
+
+        candidate = (
+            thryce
+            .evidence_candidate(
+                batch,
+                provenance={
+                    "test":
+                        "focused"
+                },
+            )
+        )
+
+        result = {
+            "batch": batch,
+            "candidate": candidate,
+            "valid": (
+                batch["valid"]
+                and candidate[
+                    "candidate_only"
+                ]
+                is True
+                and candidate[
+                    "evidence_admitted"
+                ]
+                is False
+                and candidate[
+                    "attested"
+                ]
+                is False
+            ),
+        }
+
+    else:
+        raise RuntimeError(
+            "unsupported command"
+        )
+
+    print(
+        json.dumps(
+            result,
+            indent=2,
+            sort_keys=True,
+            default=str,
+        )
+    )
+
+    if (
+        arguments.command
+        in (
+            "validate",
+            "self-test",
+        )
+        and not result["valid"]
+    ):
+        return 1
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

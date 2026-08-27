@@ -1,0 +1,23 @@
+{
+  "id": "policy.content_composition",
+  "kind": "policy",
+  "status": "active",
+  "authority": "SCRIPT_COMPOSITION_RULE",
+  "hierarchy": [
+    "character",
+    "line",
+    "snippet",
+    "script",
+    "engine",
+    "subsystem",
+    "system",
+    "application"
+  ],
+  "rules": {
+    "scripts_are_composed_of": "snippets",
+    "snippets_are_composed_of": "lines",
+    "lines_are_composed_of": "characters",
+    "files_are": "projections",
+    "authority_is": "instance_composition_chain"
+  }
+}

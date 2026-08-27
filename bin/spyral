@@ -1,0 +1,225 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+
+ROOT = Path(
+    "/root/savant-runtime"
+)
+
+if str(ROOT) not in sys.path:
+    sys.path.insert(
+        0,
+        str(ROOT),
+    )
+
+
+from runtime.spyral import Spyral  # noqa: E402
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Spyral — Savant living "
+            "evolution substrate"
+        )
+    )
+
+    commands = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    commands.add_parser(
+        "profile"
+    )
+
+    commands.add_parser(
+        "validate"
+    )
+
+    commands.add_parser(
+        "health"
+    )
+
+    commands.add_parser(
+        "self-test"
+    )
+
+    arguments = parser.parse_args()
+
+    spyral = Spyral()
+
+    if arguments.command == "profile":
+        result = spyral.profile()
+
+    elif arguments.command == "validate":
+        result = spyral.validate()
+
+    elif arguments.command == "health":
+        result = spyral.health()
+
+    elif arguments.command == "self-test":
+        baseline = {
+            "id": "service:test",
+            "version": "1.0.0",
+            "schema": "test/1",
+            "value": "before",
+        }
+
+        target = {
+            "id": "service:test",
+            "version": "1.1.0",
+            "schema": "test/1",
+            "value": "after",
+        }
+
+        first = spyral.plan(
+            subject_id="service:test",
+            baseline=baseline,
+            target=target,
+            dependencies=(
+                "service:dependency",
+            ),
+            migration_steps=(
+                {
+                    "operation":
+                        "project-new-state",
+                },
+            ),
+            recovery_steps=(
+                {
+                    "operation":
+                        "restore-baseline",
+                },
+            ),
+            lineage={
+                "parent":
+                    "service:test@1.0.0"
+            },
+            provenance={
+                "source":
+                    "spyral:self-test"
+            },
+        )
+
+        second = spyral.plan(
+            subject_id="service:test",
+            baseline=baseline,
+            target=target,
+            dependencies=(
+                "service:dependency",
+            ),
+            migration_steps=(
+                {
+                    "operation":
+                        "project-new-state",
+                },
+            ),
+            recovery_steps=(
+                {
+                    "operation":
+                        "restore-baseline",
+                },
+            ),
+            lineage={
+                "parent":
+                    "service:test@1.0.0"
+            },
+            provenance={
+                "source":
+                    "spyral:self-test"
+            },
+        )
+
+        replay = (
+            spyral.compare_replay(
+                first,
+                second,
+            )
+        )
+
+        manifest = (
+            spyral
+            .migration_manifest(
+                first
+            )
+        )
+
+        recovery = (
+            spyral
+            .recovery_plan(
+                first
+            )
+        )
+
+        result = {
+            "transition":
+                first.projection(),
+            "manifest":
+                manifest,
+            "recovery":
+                recovery,
+            "replay":
+                replay,
+            "valid": (
+                first.compatibility
+                .state
+                == "compatible"
+                and recovery[
+                    "complete"
+                ]
+                is True
+                and replay[
+                    "diverged"
+                ]
+                is False
+                and manifest[
+                    "mutation_authorized"
+                ]
+                is False
+                and manifest[
+                    "execution_authorized"
+                ]
+                is False
+            ),
+        }
+
+    else:
+        raise RuntimeError(
+            "unsupported command"
+        )
+
+    print(
+        json.dumps(
+            result,
+            indent=2,
+            sort_keys=True,
+            default=str,
+        )
+    )
+
+    if (
+        arguments.command
+        in (
+            "validate",
+            "self-test",
+        )
+        and not result[
+            "valid"
+        ]
+    ):
+        return 1
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

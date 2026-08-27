@@ -1,0 +1,1272 @@
+registry_id: registry:constitution:canonical
+version: 1
+authority:
+  state: canonical
+  source: VISCERA NOVEL project directives
+  authority: user
+  captured_at: '2026-07-27T00:00:00Z'
+rules:
+- id: constitution:authority-before-inference
+  canonical: Authority before inference.
+  status: active
+  scope: constitution
+  subjects:
+  - constitution:authority-before-inference
+  severity: error
+  conditions: []
+  assertions:
+  - path: id
+    operator: equals
+    value: constitution:authority-before-inference
+  - path: canonical
+    operator: equals
+    value: Authority before inference.
+  - path: status
+    operator: equals
+    value: active
+  - path: scope
+    operator: equals
+    value: constitution
+  - path: provenance.authority
+    operator: equals
+    value: user
+  - path: lineage
+    operator: exists
+    value: null
+  - path: dependencies
+    operator: matches_type
+    value: list
+  - path: relationships
+    operator: matches_type
+    value: list
+  dependencies: []
+  lineage:
+    parents: []
+    supersedes: []
+    superseded_by: []
+  provenance:
+    source: VISCERA NOVEL project directives
+    authority: user
+    captured_at: '2026-07-27T00:00:00Z'
+  relationships: []
+  attachments: []
+  future_slots: []
+- id: constitution:authority-before-projection
+  canonical: Authority before projection.
+  status: active
+  scope: constitution
+  subjects:
+  - constitution:authority-before-projection
+  severity: error
+  conditions: []
+  assertions:
+  - path: id
+    operator: equals
+    value: constitution:authority-before-projection
+  - path: canonical
+    operator: equals
+    value: Authority before projection.
+  - path: status
+    operator: equals
+    value: active
+  - path: scope
+    operator: equals
+    value: constitution
+  - path: provenance.authority
+    operator: equals
+    value: user
+  - path: lineage
+    operator: exists
+    value: null
+  - path: dependencies
+    operator: matches_type
+    value: list
+  - path: relationships
+    operator: matches_type
+    value: list
+  dependencies:
+  - constitution:authority-before-inference
+  lineage:
+    parents: []
+    supersedes: []
+    superseded_by: []
+  provenance:
+    source: VISCERA NOVEL project directives
+    authority: user
+    captured_at: '2026-07-27T00:00:00Z'
+  relationships: []
+  attachments: []
+  future_slots: []
+- id: constitution:composition-before-duplication
+  canonical: Prefer composition over duplication.
+  status: active
+  scope: constitution
+  subjects:
+  - constitution:composition-before-duplication
+  severity: error
+  conditions: []
+  assertions:
+  - path: id
+    operator: equals
+    value: constitution:composition-before-duplication
+  - path: canonical
+    operator: equals
+    value: Prefer composition over duplication.
+  - path: status
+    operator: equals
+    value: active
+  - path: scope
+    operator: equals
+    value: constitution
+  - path: provenance.authority
+    operator: equals
+    value: user
+  - path: lineage
+    operator: exists
+    value: null
+  - path: dependencies
+    operator: matches_type
+    value: list
+  - path: relationships
+    operator: matches_type
+    value: list
+  dependencies:
+  - constitution:authority-before-inference
+  lineage:
+    parents: []
+    supersedes: []
+    superseded_by: []
+  provenance:
+    source: VISCERA NOVEL project directives
+    authority: user
+    captured_at: '2026-07-27T00:00:00Z'
+  relationships: []
+  attachments: []
+  future_slots: []
+- id: constitution:projection-before-storage
+  canonical: Prefer projection over storage.
+  status: active
+  scope: constitution
+  subjects:
+  - constitution:projection-before-storage
+  severity: error
+  conditions: []
+  assertions:
+  - path: id
+    operator: equals
+    value: constitution:projection-before-storage
+  - path: canonical
+    operator: equals
+    value: Prefer projection over storage.
+  - path: status
+    operator: equals
+    value: active
+  - path: scope
+    operator: equals
+    value: constitution
+  - path: provenance.authority
+    operator: equals
+    value: user
+  - path: lineage
+    operator: exists
+    value: null
+  - path: dependencies
+    operator: matches_type
+    value: list
+  - path: relationships
+    operator: matches_type
+    value: list
+  dependencies:
+  - constitution:authority-before-projection
+  lineage:
+    parents: []
+    supersedes: []
+    superseded_by: []
+  provenance:
+    source: VISCERA NOVEL project directives
+    authority: user
+    captured_at: '2026-07-27T00:00:00Z'
+  relationships: []
+  attachments: []
+  future_slots: []
+- id: constitution:emergence-before-hardcoding
+  canonical: Prefer emergence over hardcoding.
+  status: active
+  scope: constitution
+  subjects:
+  - constitution:emergence-before-hardcoding
+  severity: error
+  conditions: []
+  assertions:
+  - path: id
+    operator: equals
+    value: constitution:emergence-before-hardcoding
+  - path: canonical
+    operator: equals
+    value: Prefer emergence over hardcoding.
+  - path: status
+    operator: equals
+    value: active
+  - path: scope
+    operator: equals
+    value: constitution
+  - path: provenance.authority
+    operator: equals
+    value: user
+  - path: lineage
+    operator: exists
+    value: null
+  - path: dependencies
+    operator: matches_type
+    value: list
+  - path: relationships
+    operator: matches_type
+    value: list
+  dependencies:
+  - constitution:projection-before-storage
+  lineage:
+    parents: []
+    supersedes: []
+    superseded_by: []
+  provenance:
+    source: VISCERA NOVEL project directives
+    authority: user
+    captured_at: '2026-07-27T00:00:00Z'
+  relationships: []
+  attachments: []
+  future_slots: []
+- id: constitution:authoritative-primitives-only
+  canonical: Store only authoritative primitives.
+  status: active
+  scope: constitution
+  subjects:
+  - constitution:authoritative-primitives-only
+  severity: error
+  conditions: []
+  assertions:
+  - path: id
+    operator: equals
+    value: constitution:authoritative-primitives-only
+  - path: canonical
+    operator: equals
+    value: Store only authoritative primitives.
+  - path: status
+    operator: equals
+    value: active
+  - path: scope
+    operator: equals
+    value: constitution
+  - path: provenance.authority
+    operator: equals
+    value: user
+  - path: lineage
+    operator: exists
+    value: null
+  - path: dependencies
+    operator: matches_type
+    value: list
+  - path: relationships
+    operator: matches_type
+    value: list
+  dependencies:
+  - constitution:authority-before-inference
+  - constitution:projection-before-storage
+  lineage:
+    parents: []
+    supersedes: []
+    superseded_by: []
+  provenance:
+    source: VISCERA NOVEL project directives
+    authority: user
+    captured_at: '2026-07-27T00:00:00Z'
+  relationships: []
+  attachments: []
+  future_slots: []
+- id: constitution:deterministic-projection
+  canonical: Generate everything else through deterministic projection.
+  status: active
+  scope: constitution
+  subjects:
+  - constitution:deterministic-projection
+  severity: error
+  conditions: []
+  assertions:
+  - path: id
+    operator: equals
+    value: constitution:deterministic-projection
+  - path: canonical
+    operator: equals
+    value: Generate everything else through deterministic projection.
+  - path: status
+    operator: equals
+    value: active
+  - path: scope
+    operator: equals
+    value: constitution
+  - path: provenance.authority
+    operator: equals
+    value: user
+  - path: lineage
+    operator: exists
+    value: null
+  - path: dependencies
+    operator: matches_type
+    value: list
+  - path: relationships
+    operator: matches_type
+    value: list
+  dependencies:
+  - constitution:authoritative-primitives-only
+  lineage:
+    parents: []
+    supersedes: []
+    superseded_by: []
+  provenance:
+    source: VISCERA NOVEL project directives
+    authority: user
+    captured_at: '2026-07-27T00:00:00Z'
+  relationships: []
+  attachments: []
+  future_slots: []
+- id: constitution:instances-primary
+  canonical: Use instances as primary architectural primitives.
+  status: active
+  scope: constitution
+  subjects:
+  - constitution:instances-primary
+  severity: error
+  conditions: []
+  assertions:
+  - path: id
+    operator: equals
+    value: constitution:instances-primary
+  - path: canonical
+    operator: equals
+    value: Use instances as primary architectural primitives.
+  - path: status
+    operator: equals
+    value: active
+  - path: scope
+    operator: equals
+    value: constitution
+  - path: provenance.authority
+    operator: equals
+    value: user
+  - path: lineage
+    operator: exists
+    value: null
+  - path: dependencies
+    operator: matches_type
+    value: list
+  - path: relationships
+    operator: matches_type
+    value: list
+  dependencies:
+  - constitution:composition-before-duplication
+  lineage:
+    parents: []
+    supersedes: []
+    superseded_by: []
+  provenance:
+    source: VISCERA NOVEL project directives
+    authority: user
+    captured_at: '2026-07-27T00:00:00Z'
+  relationships: []
+  attachments: []
+  future_slots: []
+- id: constitution:segues-primary
+  canonical: Use segues as primary architectural primitives.
+  status: active
+  scope: constitution
+  subjects:
+  - constitution:segues-primary
+  severity: error
+  conditions: []
+  assertions:
+  - path: id
+    operator: equals
+    value: constitution:segues-primary
+  - path: canonical
+    operator: equals
+    value: Use segues as primary architectural primitives.
+  - path: status
+    operator: equals
+    value: active
+  - path: scope
+    operator: equals
+    value: constitution
+  - path: provenance.authority
+    operator: equals
+    value: user
+  - path: lineage
+    operator: exists
+    value: null
+  - path: dependencies
+    operator: matches_type
+    value: list
+  - path: relationships
+    operator: matches_type
+    value: list
+  dependencies:
+  - constitution:instances-primary
+  lineage:
+    parents: []
+    supersedes: []
+    superseded_by: []
+  provenance:
+    source: VISCERA NOVEL project directives
+    authority: user
+    captured_at: '2026-07-27T00:00:00Z'
+  relationships: []
+  attachments: []
+  future_slots: []
+- id: constitution:future-extension
+  canonical: Everything must support future extension.
+  status: active
+  scope: constitution
+  subjects:
+  - constitution:future-extension
+  severity: error
+  conditions: []
+  assertions:
+  - path: id
+    operator: equals
+    value: constitution:future-extension
+  - path: canonical
+    operator: equals
+    value: Everything must support future extension.
+  - path: status
+    operator: equals
+    value: active
+  - path: scope
+    operator: equals
+    value: constitution
+  - path: provenance.authority
+    operator: equals
+    value: user
+  - path: lineage
+    operator: exists
+    value: null
+  - path: dependencies
+    operator: matches_type
+    value: list
+  - path: relationships
+    operator: matches_type
+    value: list
+  dependencies:
+  - constitution:composition-before-duplication
+  lineage:
+    parents: []
+    supersedes: []
+    superseded_by: []
+  provenance:
+    source: VISCERA NOVEL project directives
+    authority: user
+    captured_at: '2026-07-27T00:00:00Z'
+  relationships: []
+  attachments: []
+  future_slots: []
+- id: constitution:future-attachment
+  canonical: Everything must support future attachment.
+  status: active
+  scope: constitution
+  subjects:
+  - constitution:future-attachment
+  severity: error
+  conditions: []
+  assertions:
+  - path: id
+    operator: equals
+    value: constitution:future-attachment
+  - path: canonical
+    operator: equals
+    value: Everything must support future attachment.
+  - path: status
+    operator: equals
+    value: active
+  - path: scope
+    operator: equals
+    value: constitution
+  - path: provenance.authority
+    operator: equals
+    value: user
+  - path: lineage
+    operator: exists
+    value: null
+  - path: dependencies
+    operator: matches_type
+    value: list
+  - path: relationships
+    operator: matches_type
+    value: list
+  dependencies:
+  - constitution:future-extension
+  lineage:
+    parents: []
+    supersedes: []
+    superseded_by: []
+  provenance:
+    source: VISCERA NOVEL project directives
+    authority: user
+    captured_at: '2026-07-27T00:00:00Z'
+  relationships: []
+  attachments: []
+  future_slots: []
+- id: constitution:lineage-exposed
+  canonical: Everything must expose lineage.
+  status: active
+  scope: constitution
+  subjects:
+  - constitution:lineage-exposed
+  severity: error
+  conditions: []
+  assertions:
+  - path: id
+    operator: equals
+    value: constitution:lineage-exposed
+  - path: canonical
+    operator: equals
+    value: Everything must expose lineage.
+  - path: status
+    operator: equals
+    value: active
+  - path: scope
+    operator: equals
+    value: constitution
+  - path: provenance.authority
+    operator: equals
+    value: user
+  - path: lineage
+    operator: exists
+    value: null
+  - path: dependencies
+    operator: matches_type
+    value: list
+  - path: relationships
+    operator: matches_type
+    value: list
+  dependencies:
+  - constitution:authoritative-primitives-only
+  lineage:
+    parents: []
+    supersedes: []
+    superseded_by: []
+  provenance:
+    source: VISCERA NOVEL project directives
+    authority: user
+    captured_at: '2026-07-27T00:00:00Z'
+  relationships: []
+  attachments: []
+  future_slots: []
+- id: constitution:provenance-exposed
+  canonical: Everything must expose provenance.
+  status: active
+  scope: constitution
+  subjects:
+  - constitution:provenance-exposed
+  severity: error
+  conditions: []
+  assertions:
+  - path: id
+    operator: equals
+    value: constitution:provenance-exposed
+  - path: canonical
+    operator: equals
+    value: Everything must expose provenance.
+  - path: status
+    operator: equals
+    value: active
+  - path: scope
+    operator: equals
+    value: constitution
+  - path: provenance.authority
+    operator: equals
+    value: user
+  - path: lineage
+    operator: exists
+    value: null
+  - path: dependencies
+    operator: matches_type
+    value: list
+  - path: relationships
+    operator: matches_type
+    value: list
+  dependencies:
+  - constitution:authoritative-primitives-only
+  lineage:
+    parents: []
+    supersedes: []
+    superseded_by: []
+  provenance:
+    source: VISCERA NOVEL project directives
+    authority: user
+    captured_at: '2026-07-27T00:00:00Z'
+  relationships: []
+  attachments: []
+  future_slots: []
+- id: constitution:dependencies-exposed
+  canonical: Everything must expose dependencies.
+  status: active
+  scope: constitution
+  subjects:
+  - constitution:dependencies-exposed
+  severity: error
+  conditions: []
+  assertions:
+  - path: id
+    operator: equals
+    value: constitution:dependencies-exposed
+  - path: canonical
+    operator: equals
+    value: Everything must expose dependencies.
+  - path: status
+    operator: equals
+    value: active
+  - path: scope
+    operator: equals
+    value: constitution
+  - path: provenance.authority
+    operator: equals
+    value: user
+  - path: lineage
+    operator: exists
+    value: null
+  - path: dependencies
+    operator: matches_type
+    value: list
+  - path: relationships
+    operator: matches_type
+    value: list
+  dependencies:
+  - constitution:lineage-exposed
+  - constitution:provenance-exposed
+  lineage:
+    parents: []
+    supersedes: []
+    superseded_by: []
+  provenance:
+    source: VISCERA NOVEL project directives
+    authority: user
+    captured_at: '2026-07-27T00:00:00Z'
+  relationships: []
+  attachments: []
+  future_slots: []
+- id: constitution:relationships-exposed
+  canonical: Everything must expose relationships.
+  status: active
+  scope: constitution
+  subjects:
+  - constitution:relationships-exposed
+  severity: error
+  conditions: []
+  assertions:
+  - path: id
+    operator: equals
+    value: constitution:relationships-exposed
+  - path: canonical
+    operator: equals
+    value: Everything must expose relationships.
+  - path: status
+    operator: equals
+    value: active
+  - path: scope
+    operator: equals
+    value: constitution
+  - path: provenance.authority
+    operator: equals
+    value: user
+  - path: lineage
+    operator: exists
+    value: null
+  - path: dependencies
+    operator: matches_type
+    value: list
+  - path: relationships
+    operator: matches_type
+    value: list
+  dependencies:
+  - constitution:dependencies-exposed
+  lineage:
+    parents: []
+    supersedes: []
+    superseded_by: []
+  provenance:
+    source: VISCERA NOVEL project directives
+    authority: user
+    captured_at: '2026-07-27T00:00:00Z'
+  relationships: []
+  attachments: []
+  future_slots: []
+- id: constitution:recursive-composition
+  canonical: Everything must be recursively composable.
+  status: active
+  scope: constitution
+  subjects:
+  - constitution:recursive-composition
+  severity: error
+  conditions: []
+  assertions:
+  - path: id
+    operator: equals
+    value: constitution:recursive-composition
+  - path: canonical
+    operator: equals
+    value: Everything must be recursively composable.
+  - path: status
+    operator: equals
+    value: active
+  - path: scope
+    operator: equals
+    value: constitution
+  - path: provenance.authority
+    operator: equals
+    value: user
+  - path: lineage
+    operator: exists
+    value: null
+  - path: dependencies
+    operator: matches_type
+    value: list
+  - path: relationships
+    operator: matches_type
+    value: list
+  dependencies:
+  - constitution:composition-before-duplication
+  - constitution:relationships-exposed
+  lineage:
+    parents: []
+    supersedes: []
+    superseded_by: []
+  provenance:
+    source: VISCERA NOVEL project directives
+    authority: user
+    captured_at: '2026-07-27T00:00:00Z'
+  relationships: []
+  attachments: []
+  future_slots: []
+- id: constitution:graph-addressability
+  canonical: Everything must be graph-addressable.
+  status: active
+  scope: constitution
+  subjects:
+  - constitution:graph-addressability
+  severity: error
+  conditions: []
+  assertions:
+  - path: id
+    operator: equals
+    value: constitution:graph-addressability
+  - path: canonical
+    operator: equals
+    value: Everything must be graph-addressable.
+  - path: status
+    operator: equals
+    value: active
+  - path: scope
+    operator: equals
+    value: constitution
+  - path: provenance.authority
+    operator: equals
+    value: user
+  - path: lineage
+    operator: exists
+    value: null
+  - path: dependencies
+    operator: matches_type
+    value: list
+  - path: relationships
+    operator: matches_type
+    value: list
+  dependencies:
+  - constitution:lineage-exposed
+  - constitution:provenance-exposed
+  - constitution:dependencies-exposed
+  - constitution:relationships-exposed
+  lineage:
+    parents: []
+    supersedes: []
+    superseded_by: []
+  provenance:
+    source: VISCERA NOVEL project directives
+    authority: user
+    captured_at: '2026-07-27T00:00:00Z'
+  relationships: []
+  attachments: []
+  future_slots: []
+- id: constitution:no-dead-end
+  canonical: No subsystem may become a dead end.
+  status: active
+  scope: constitution
+  subjects:
+  - constitution:no-dead-end
+  severity: error
+  conditions: []
+  assertions:
+  - path: id
+    operator: equals
+    value: constitution:no-dead-end
+  - path: canonical
+    operator: equals
+    value: No subsystem may become a dead end.
+  - path: status
+    operator: equals
+    value: active
+  - path: scope
+    operator: equals
+    value: constitution
+  - path: provenance.authority
+    operator: equals
+    value: user
+  - path: lineage
+    operator: exists
+    value: null
+  - path: dependencies
+    operator: matches_type
+    value: list
+  - path: relationships
+    operator: matches_type
+    value: list
+  dependencies:
+  - constitution:future-extension
+  - constitution:future-attachment
+  - constitution:recursive-composition
+  - constitution:graph-addressability
+  lineage:
+    parents: []
+    supersedes: []
+    superseded_by: []
+  provenance:
+    source: VISCERA NOVEL project directives
+    authority: user
+    captured_at: '2026-07-27T00:00:00Z'
+  relationships: []
+  attachments: []
+  future_slots: []
+- id: constitution:no-replacement-to-extend
+  canonical: No subsystem may require architectural replacement to extend.
+  status: active
+  scope: constitution
+  subjects:
+  - constitution:no-replacement-to-extend
+  severity: error
+  conditions: []
+  assertions:
+  - path: id
+    operator: equals
+    value: constitution:no-replacement-to-extend
+  - path: canonical
+    operator: equals
+    value: No subsystem may require architectural replacement to extend.
+  - path: status
+    operator: equals
+    value: active
+  - path: scope
+    operator: equals
+    value: constitution
+  - path: provenance.authority
+    operator: equals
+    value: user
+  - path: lineage
+    operator: exists
+    value: null
+  - path: dependencies
+    operator: matches_type
+    value: list
+  - path: relationships
+    operator: matches_type
+    value: list
+  dependencies:
+  - constitution:no-dead-end
+  lineage:
+    parents: []
+    supersedes: []
+    superseded_by: []
+  provenance:
+    source: VISCERA NOVEL project directives
+    authority: user
+    captured_at: '2026-07-27T00:00:00Z'
+  relationships: []
+  attachments: []
+  future_slots: []
+- id: constitution:extensibility
+  canonical: Optimize for extensibility.
+  status: active
+  scope: constitution
+  subjects:
+  - constitution:extensibility
+  severity: error
+  conditions: []
+  assertions:
+  - path: id
+    operator: equals
+    value: constitution:extensibility
+  - path: canonical
+    operator: equals
+    value: Optimize for extensibility.
+  - path: status
+    operator: equals
+    value: active
+  - path: scope
+    operator: equals
+    value: constitution
+  - path: provenance.authority
+    operator: equals
+    value: user
+  - path: lineage
+    operator: exists
+    value: null
+  - path: dependencies
+    operator: matches_type
+    value: list
+  - path: relationships
+    operator: matches_type
+    value: list
+  dependencies:
+  - constitution:future-extension
+  lineage:
+    parents: []
+    supersedes: []
+    superseded_by: []
+  provenance:
+    source: VISCERA NOVEL project directives
+    authority: user
+    captured_at: '2026-07-27T00:00:00Z'
+  relationships: []
+  attachments: []
+  future_slots: []
+- id: constitution:auditability
+  canonical: Optimize for auditability.
+  status: active
+  scope: constitution
+  subjects:
+  - constitution:auditability
+  severity: error
+  conditions: []
+  assertions:
+  - path: id
+    operator: equals
+    value: constitution:auditability
+  - path: canonical
+    operator: equals
+    value: Optimize for auditability.
+  - path: status
+    operator: equals
+    value: active
+  - path: scope
+    operator: equals
+    value: constitution
+  - path: provenance.authority
+    operator: equals
+    value: user
+  - path: lineage
+    operator: exists
+    value: null
+  - path: dependencies
+    operator: matches_type
+    value: list
+  - path: relationships
+    operator: matches_type
+    value: list
+  dependencies:
+  - constitution:lineage-exposed
+  - constitution:provenance-exposed
+  lineage:
+    parents: []
+    supersedes: []
+    superseded_by: []
+  provenance:
+    source: VISCERA NOVEL project directives
+    authority: user
+    captured_at: '2026-07-27T00:00:00Z'
+  relationships: []
+  attachments: []
+  future_slots: []
+- id: constitution:recoverability
+  canonical: Optimize for recoverability.
+  status: active
+  scope: constitution
+  subjects:
+  - constitution:recoverability
+  severity: error
+  conditions: []
+  assertions:
+  - path: id
+    operator: equals
+    value: constitution:recoverability
+  - path: canonical
+    operator: equals
+    value: Optimize for recoverability.
+  - path: status
+    operator: equals
+    value: active
+  - path: scope
+    operator: equals
+    value: constitution
+  - path: provenance.authority
+    operator: equals
+    value: user
+  - path: lineage
+    operator: exists
+    value: null
+  - path: dependencies
+    operator: matches_type
+    value: list
+  - path: relationships
+    operator: matches_type
+    value: list
+  dependencies:
+  - constitution:auditability
+  lineage:
+    parents: []
+    supersedes: []
+    superseded_by: []
+  provenance:
+    source: VISCERA NOVEL project directives
+    authority: user
+    captured_at: '2026-07-27T00:00:00Z'
+  relationships: []
+  attachments: []
+  future_slots: []
+- id: constitution:composability
+  canonical: Optimize for composability.
+  status: active
+  scope: constitution
+  subjects:
+  - constitution:composability
+  severity: error
+  conditions: []
+  assertions:
+  - path: id
+    operator: equals
+    value: constitution:composability
+  - path: canonical
+    operator: equals
+    value: Optimize for composability.
+  - path: status
+    operator: equals
+    value: active
+  - path: scope
+    operator: equals
+    value: constitution
+  - path: provenance.authority
+    operator: equals
+    value: user
+  - path: lineage
+    operator: exists
+    value: null
+  - path: dependencies
+    operator: matches_type
+    value: list
+  - path: relationships
+    operator: matches_type
+    value: list
+  dependencies:
+  - constitution:recursive-composition
+  lineage:
+    parents: []
+    supersedes: []
+    superseded_by: []
+  provenance:
+    source: VISCERA NOVEL project directives
+    authority: user
+    captured_at: '2026-07-27T00:00:00Z'
+  relationships: []
+  attachments: []
+  future_slots: []
+- id: constitution:determinism
+  canonical: Optimize for determinism.
+  status: active
+  scope: constitution
+  subjects:
+  - constitution:determinism
+  severity: error
+  conditions: []
+  assertions:
+  - path: id
+    operator: equals
+    value: constitution:determinism
+  - path: canonical
+    operator: equals
+    value: Optimize for determinism.
+  - path: status
+    operator: equals
+    value: active
+  - path: scope
+    operator: equals
+    value: constitution
+  - path: provenance.authority
+    operator: equals
+    value: user
+  - path: lineage
+    operator: exists
+    value: null
+  - path: dependencies
+    operator: matches_type
+    value: list
+  - path: relationships
+    operator: matches_type
+    value: list
+  dependencies:
+  - constitution:deterministic-projection
+  lineage:
+    parents: []
+    supersedes: []
+    superseded_by: []
+  provenance:
+    source: VISCERA NOVEL project directives
+    authority: user
+    captured_at: '2026-07-27T00:00:00Z'
+  relationships: []
+  attachments: []
+  future_slots: []
+- id: constitution:future-optionality
+  canonical: Optimize for future optionality.
+  status: active
+  scope: constitution
+  subjects:
+  - constitution:future-optionality
+  severity: error
+  conditions: []
+  assertions:
+  - path: id
+    operator: equals
+    value: constitution:future-optionality
+  - path: canonical
+    operator: equals
+    value: Optimize for future optionality.
+  - path: status
+    operator: equals
+    value: active
+  - path: scope
+    operator: equals
+    value: constitution
+  - path: provenance.authority
+    operator: equals
+    value: user
+  - path: lineage
+    operator: exists
+    value: null
+  - path: dependencies
+    operator: matches_type
+    value: list
+  - path: relationships
+    operator: matches_type
+    value: list
+  dependencies:
+  - constitution:future-extension
+  - constitution:future-attachment
+  lineage:
+    parents: []
+    supersedes: []
+    superseded_by: []
+  provenance:
+    source: VISCERA NOVEL project directives
+    authority: user
+    captured_at: '2026-07-27T00:00:00Z'
+  relationships: []
+  attachments: []
+  future_slots: []
+- id: constitution:kindred-canonical
+  canonical: Kindred is the canonical relationship methodology term.
+  status: active
+  scope: constitution
+  subjects:
+  - constitution:kindred-canonical
+  severity: error
+  conditions: []
+  assertions:
+  - path: id
+    operator: equals
+    value: constitution:kindred-canonical
+  - path: canonical
+    operator: equals
+    value: Kindred is the canonical relationship methodology term.
+  - path: status
+    operator: equals
+    value: active
+  - path: scope
+    operator: equals
+    value: constitution
+  - path: provenance.authority
+    operator: equals
+    value: user
+  - path: lineage
+    operator: exists
+    value: null
+  - path: dependencies
+    operator: matches_type
+    value: list
+  - path: relationships
+    operator: matches_type
+    value: list
+  dependencies:
+  - constitution:relationships-exposed
+  lineage:
+    parents: []
+    supersedes: []
+    superseded_by: []
+  provenance:
+    source: VISCERA NOVEL project directives
+    authority: user
+    captured_at: '2026-07-27T00:00:00Z'
+  relationships: []
+  attachments: []
+  future_slots: []
+- id: constitution:kinship-forbidden
+  canonical: The term kinship is forbidden where kindred is intended.
+  status: active
+  scope: constitution
+  subjects:
+  - constitution:kinship-forbidden
+  severity: error
+  conditions: []
+  assertions:
+  - path: id
+    operator: equals
+    value: constitution:kinship-forbidden
+  - path: canonical
+    operator: equals
+    value: The term kinship is forbidden where kindred is intended.
+  - path: status
+    operator: equals
+    value: active
+  - path: scope
+    operator: equals
+    value: constitution
+  - path: provenance.authority
+    operator: equals
+    value: user
+  - path: lineage
+    operator: exists
+    value: null
+  - path: dependencies
+    operator: matches_type
+    value: list
+  - path: relationships
+    operator: matches_type
+    value: list
+  dependencies:
+  - constitution:kindred-canonical
+  lineage:
+    parents: []
+    supersedes: []
+    superseded_by: []
+  provenance:
+    source: VISCERA NOVEL project directives
+    authority: user
+    captured_at: '2026-07-27T00:00:00Z'
+  relationships: []
+  attachments: []
+  future_slots: []
+lineage:
+  parents: []
+  supersedes: []
+  superseded_by: []
+provenance:
+  source: VISCERA NOVEL project directives
+  authority: user
+  captured_at: '2026-07-27T00:00:00Z'
+dependencies: []
+relationships: []
+attachments: []
+future_slots: []

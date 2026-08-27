@@ -1,0 +1,69 @@
+{
+  "id": "envoy.migration",
+  "type": "migration_projection",
+  "status": "ready",
+  "owner": "envoy",
+  "target": "savant-runtime",
+  "composition_level": "exile",
+  "runtime": {
+    "persona_engine": "runtime/persona_engine.py",
+    "voice_engine": "runtime/voice_engine.py",
+    "opus_bridge": "runtime/opus_bridge.py"
+  },
+  "dependencies": [
+    {
+      "id": "opus",
+      "relation": "delegates_provider_execution_to",
+      "required": true
+    }
+  ],
+  "dependents": [
+    {
+      "id": "palaver",
+      "relation": "delegates_persona_voice_resolution_to",
+      "required": true
+    }
+  ],
+  "routes": [
+    "text_inference_route",
+    "voice_tts_route"
+  ],
+  "authority": {
+    "conversation_owner": "palaver",
+    "persona_owner": "envoy",
+    "voice_owner": "envoy",
+    "provider_execution_owner": "opus",
+    "authority_transfer": false
+  },
+  "migration_invariants": [
+    "envoy remains the sole owner of persona identity and resolution",
+    "envoy remains the sole owner of voice identity and resolution",
+    "palaver remains the owner of conversation execution",
+    "opus remains the owner of provider selection and execution",
+    "provider credentials remain outside envoy",
+    "delegation does not imply authority inheritance",
+    "persona selection precedence remains request then workspace then default",
+    "orobouros remains the default envoy persona",
+    "text inference remains delegated through text_inference_route",
+    "voice synthesis remains delegated through voice_tts_route"
+  ],
+  "verified_behavior": {
+    "persona_resolution": true,
+    "non_default_persona_resolution": true,
+    "voice_resolution": true,
+    "opus_voice_delegation": true,
+    "palaver_voice_http_surface": true,
+    "provider_authority_boundary": true,
+    "audio_format_projection": true,
+    "live_voice_synthesis": true
+  },
+  "migration_policy": {
+    "preserve_paths": true,
+    "preserve_identity": true,
+    "preserve_lineage": true,
+    "preserve_authority_boundaries": true,
+    "preserve_runtime_behavior": true,
+    "allow_destructive_reconstruction": false
+  },
+  "ready": true
+}

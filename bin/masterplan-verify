@@ -1,0 +1,608 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import json
+import subprocess
+import sys
+from pathlib import Path
+from typing import Any
+
+
+ROOT = Path("/root/savant-runtime")
+
+PYTHON = (
+    ROOT
+    / "bin"
+    / "identity-quality-python"
+)
+
+SUBJECT_ROOT = (
+    ROOT
+    / "hierarchies"
+    / "identity"
+    / "exiles"
+    / "niche"
+    / "prodigals"
+    / "masterplan"
+)
+
+TEST_ROOT = (
+    SUBJECT_ROOT
+    / "tests"
+)
+
+MASTERPLAN_BUILD = (
+    ROOT
+    / "bin"
+    / "masterplan-build"
+)
+
+MASTERPLAN_PROJECT = (
+    ROOT
+    / "bin"
+    / "masterplan-project"
+)
+
+MASTERPLAN_GATE = (
+    ROOT
+    / "bin"
+    / "masterplan-gate"
+)
+
+MASTERPLAN_SCHEMA = (
+    ROOT
+    / "bin"
+    / "masterplan-schema"
+)
+
+MASTERPLAN_SCHEMA_VALIDATE = (
+    ROOT
+    / "bin"
+    / "masterplan-schema-validate"
+)
+
+MASTERPLAN_POLICY = (
+    ROOT
+    / "bin"
+    / "masterplan-policy"
+)
+
+MASTERPLAN_MANIFEST = (
+    ROOT
+    / "bin"
+    / "masterplan-manifest"
+)
+
+MASTERPLAN_INTEGRITY_TREE = (
+    ROOT
+    / "bin"
+    / "masterplan-integrity-tree"
+)
+
+MASTERPLAN_SEGUE_VERIFY = (
+    ROOT
+    / "bin"
+    / "masterplan-segue-verify"
+)
+
+MASTERPLAN_REPLAY = (
+    ROOT
+    / "bin"
+    / "masterplan-replay"
+)
+
+MASTERPLAN_AUDIT = (
+    ROOT
+    / "bin"
+    / "masterplan-audit"
+)
+
+REQUIRED_FILES = (
+    SUBJECT_ROOT
+    / "contracts"
+    / "masterplan_contracts.py",
+    SUBJECT_ROOT
+    / "runtime"
+    / "masterplan_runtime.py",
+    SUBJECT_ROOT
+    / "runtime"
+    / "masterplan_lock.py",
+    SUBJECT_ROOT
+    / "schema"
+    / "masterplan_schema_registry.py",
+    SUBJECT_ROOT
+    / "schema"
+    / "masterplan_graph.schema.json",
+    SUBJECT_ROOT
+    / "policies"
+    / "masterplan_policy_runtime.py",
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "build_authoritative_task_graph.py",
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "project_masterplan_markdown.py",
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "enforce_masterplan_gate.py",
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "run_masterplan_guarded.py",
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "run_masterplan_locked.py",
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "validate_masterplan_json_schema.py",
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "build_masterplan_artifact_manifest.py",
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "build_masterplan_merkle_tree.py",
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "apply_masterplan_transition.py",
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "admit_masterplan_decision.py",
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "apply_masterplan_decision.py",
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "admit_masterplan_evidence.py",
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "build_masterplan_attestation.py",
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "complete_masterplan_task.py",
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "replay_masterplan_graph.py",
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "audit_masterplan_integrity.py",
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "inspect_duplicate_segues.py",
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "plan_duplicate_segue_reconciliation.py",
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "apply_duplicate_segue_reconciliation.py",
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "check_segue_reconciliation_state.py",
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "verify_segue_reconciliation.py",
+    ROOT
+    / "bin"
+    / "masterplan-policy",
+    ROOT
+    / "bin"
+    / "masterplan-manifest",
+    ROOT
+    / "bin"
+    / "masterplan-integrity-tree",
+    ROOT
+    / "bin"
+    / "masterplan-segue-verify",
+)
+
+
+EXECUTABLE_FILES = (
+    MASTERPLAN_BUILD,
+    MASTERPLAN_PROJECT,
+    MASTERPLAN_GATE,
+    MASTERPLAN_SCHEMA,
+    MASTERPLAN_SCHEMA_VALIDATE,
+    MASTERPLAN_POLICY,
+    MASTERPLAN_MANIFEST,
+    MASTERPLAN_INTEGRITY_TREE,
+    MASTERPLAN_SEGUE_VERIFY,
+    MASTERPLAN_REPLAY,
+    MASTERPLAN_AUDIT,
+)
+
+
+def execute(
+    command: list[str],
+) -> dict[str, Any]:
+    completed = subprocess.run(
+        command,
+        cwd=str(ROOT),
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    return {
+        "command": command,
+        "returncode": completed.returncode,
+        "passed": (
+            completed.returncode
+            == 0
+        ),
+        "stdout": completed.stdout,
+        "stderr": completed.stderr,
+    }
+
+
+def file_check() -> dict[str, Any]:
+    missing = [
+        str(path)
+        for path in REQUIRED_FILES
+        if not path.is_file()
+    ]
+
+    non_executable = [
+        str(path)
+        for path in EXECUTABLE_FILES
+        if (
+            path.is_file()
+            and not (
+                path.stat().st_mode
+                & 0o111
+            )
+        )
+    ]
+
+    return {
+        "passed": (
+            not missing
+            and not non_executable
+        ),
+        "required_count": len(
+            REQUIRED_FILES
+        ),
+        "executable_count": len(
+            EXECUTABLE_FILES
+        ),
+        "missing": missing,
+        "non_executable": (
+            non_executable
+        ),
+    }
+
+
+def test_files() -> list[Path]:
+    return sorted(
+        (
+            path
+            for path in TEST_ROOT.glob(
+                "test_masterplan*.py"
+            )
+            if path.is_file()
+        ),
+        key=lambda path: path.name,
+    )
+
+
+def stage(
+    stage_id: str,
+    command: list[str],
+) -> dict[str, Any]:
+    result = execute(
+        command
+    )
+
+    result[
+        "stage_id"
+    ] = stage_id
+
+    return result
+
+
+def main() -> int:
+    strict = (
+        "--strict"
+        in sys.argv[1:]
+    )
+
+    unknown_arguments = [
+        argument
+        for argument in sys.argv[1:]
+        if argument != "--strict"
+    ]
+
+    if unknown_arguments:
+        print(
+            json.dumps(
+                {
+                    "operation": (
+                        "verify_masterplan_prodigal"
+                    ),
+                    "passed": False,
+                    "error": {
+                        "type": "ArgumentError",
+                        "message": (
+                            "Unknown arguments: "
+                            + " ".join(
+                                unknown_arguments
+                            )
+                        ),
+                    },
+                },
+                ensure_ascii=False,
+                indent=2,
+                sort_keys=True,
+            )
+        )
+
+        return 2
+
+    files = file_check()
+    tests = test_files()
+
+    stages: list[
+        dict[str, Any]
+    ] = []
+
+    stage_definitions = [
+        (
+            "compile",
+            [
+                str(PYTHON),
+                "-m",
+                "py_compile",
+                *[
+                    str(path)
+                    for path in REQUIRED_FILES
+                    if path.suffix == ".py"
+                ],
+                *[
+                    str(path)
+                    for path in tests
+                ],
+            ],
+        ),
+        (
+            "tests",
+            [
+                str(PYTHON),
+                "-m",
+                "pytest",
+                "-q",
+                *[
+                    str(path)
+                    for path in tests
+                ],
+            ],
+        ),
+        (
+            "schema-registry",
+            [
+                str(MASTERPLAN_SCHEMA),
+                "registry",
+            ],
+        ),
+        (
+            "schema-runtime-validation",
+            [
+                str(MASTERPLAN_SCHEMA),
+                "validate",
+            ],
+        ),
+        (
+            "json-schema-validation",
+            [
+                str(
+                    MASTERPLAN_SCHEMA_VALIDATE
+                ),
+                "publish-strict",
+            ],
+        ),
+        (
+            "policy-runtime",
+            [
+                str(MASTERPLAN_POLICY),
+                "verify",
+            ],
+        ),
+        (
+            "graph-build",
+            [
+                str(MASTERPLAN_BUILD),
+                "strict",
+            ],
+        ),
+        (
+            "roadmap-projection",
+            [
+                str(MASTERPLAN_PROJECT),
+                "strict",
+            ],
+        ),
+        (
+            "agent-context",
+            [
+                str(MASTERPLAN_GATE),
+                "context",
+            ],
+        ),
+        (
+            "segue-reconciliation",
+            [
+                str(
+                    MASTERPLAN_SEGUE_VERIFY
+                ),
+            ],
+        ),
+        (
+            "artifact-manifests",
+            [
+                str(MASTERPLAN_MANIFEST),
+                "persist-all",
+            ],
+        ),
+        (
+            "merkle-integrity-tree",
+            [
+                str(
+                    MASTERPLAN_INTEGRITY_TREE
+                ),
+                "refresh-verify",
+            ],
+        ),
+        (
+            "graph-replay",
+            [
+                str(MASTERPLAN_REPLAY),
+                "strict",
+            ],
+        ),
+        (
+            "integrity-audit",
+            [
+                str(MASTERPLAN_AUDIT),
+                "strict",
+            ],
+        ),
+    ]
+
+    if files["passed"] and tests:
+        for stage_id, command in (
+            stage_definitions
+        ):
+            result = stage(
+                stage_id,
+                command,
+            )
+
+            stages.append(
+                result
+            )
+
+            if not result[
+                "passed"
+            ]:
+                break
+
+    passed = all(
+        (
+            files["passed"],
+            bool(tests),
+            len(stages)
+            == len(
+                stage_definitions
+            ),
+            all(
+                stage_result[
+                    "passed"
+                ]
+                for stage_result
+                in stages
+            ),
+        )
+    )
+
+    payload = {
+        "schema": (
+            "savant://niche/masterplan/"
+            "integrated-verification/1.2.0"
+        ),
+        "operation": (
+            "verify_masterplan_prodigal"
+        ),
+        "passed": passed,
+        "strict": strict,
+        "files": files,
+        "tests": {
+            "count": len(tests),
+            "paths": [
+                str(path)
+                for path in tests
+            ],
+        },
+        "statistics": {
+            "planned_stage_count": len(
+                stage_definitions
+            ),
+            "executed_stage_count": len(
+                stages
+            ),
+            "passed_stage_count": sum(
+                result[
+                    "passed"
+                ]
+                for result in stages
+            ),
+            "failed_stage_count": sum(
+                not result[
+                    "passed"
+                ]
+                for result in stages
+            ),
+        },
+        "stages": stages,
+    }
+
+    print(
+        json.dumps(
+            payload,
+            ensure_ascii=False,
+            indent=2,
+            sort_keys=True,
+        )
+    )
+
+    if strict and not passed:
+        return 1
+
+    return (
+        0
+        if passed
+        else 1
+    )
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

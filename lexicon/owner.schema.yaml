@@ -1,0 +1,27 @@
+schema: owner
+
+version: 1
+
+fields:
+
+  id:
+    type: string
+    required: true
+
+  name:
+    type: string
+    required: true
+
+  namespace:
+    type: string
+    required: true
+
+  authority:
+    type: string
+    required: true
+
+  lexemes:
+    type: array
+
+  metadata:
+    type: object

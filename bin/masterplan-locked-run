@@ -1,0 +1,88 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import subprocess
+import sys
+from pathlib import Path
+
+
+ROOT = Path("/root/savant-runtime")
+
+PYTHON = (
+    ROOT
+    / "bin"
+    / "identity-quality-python"
+)
+
+RUNNER = (
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "run_masterplan_locked.py"
+)
+
+
+def execute(
+    command: list[str],
+) -> int:
+    return subprocess.run(
+        command,
+        cwd=str(
+            ROOT
+        ),
+        check=False,
+    ).returncode
+
+
+def usage() -> int:
+    print(
+        """
+masterplan-locked-run \
+  --owner NAME \
+  --operation OPERATION \
+  [--expected-graph-digest SHA256] \
+  [--timeout-seconds N] \
+  [--poll-seconds N] \
+  [--lease-seconds N] \
+  [--require-graph-change] \
+  [--forbid-graph-change] \
+  -- COMMAND [ARG ...]
+"""
+    )
+
+    return 0
+
+
+def main() -> int:
+    arguments = sys.argv[
+        1:
+    ]
+
+    if not arguments:
+        return usage()
+
+    if arguments[0] in {
+        "help",
+        "--help",
+        "-h",
+    }:
+        return usage()
+
+    return execute(
+        [
+            str(
+                PYTHON
+            ),
+            str(
+                RUNNER
+            ),
+            *arguments,
+        ]
+    )
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

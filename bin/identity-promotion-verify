@@ -1,0 +1,528 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import json
+import subprocess
+import sys
+from pathlib import Path
+from typing import Any
+
+
+ROOT = Path(
+    "/root/savant-runtime"
+)
+
+PYTHON = (
+    ROOT
+    / "bin"
+    / "identity-quality-python"
+)
+
+ADMISSION_CONTROLLER = (
+    ROOT
+    / "bin"
+    / "identity-promotion-admit"
+)
+
+VERIFIER = (
+    ROOT
+    / "tools"
+    / "identity_quality"
+    / "promotion"
+    / "verify_promotion_admission.py"
+)
+
+REPORT_ROOT = (
+    ROOT
+    / "reports"
+    / "identity_quality"
+    / "promotion"
+    / "admission-verifications"
+)
+
+
+def execute(
+    command: list[str],
+) -> int:
+    return subprocess.run(
+        command,
+        cwd=str(
+            ROOT
+        ),
+        check=False,
+    ).returncode
+
+
+def latest_paths() -> list[Path]:
+    if not REPORT_ROOT.is_dir():
+        return []
+
+    return sorted(
+        (
+            path
+            for path in REPORT_ROOT.glob(
+                "*/latest.json"
+            )
+            if path.is_file()
+        ),
+        key=lambda path: (
+            path.stat().st_mtime_ns,
+            path.as_posix(),
+        ),
+        reverse=True,
+    )
+
+
+def latest_path() -> Path | None:
+    paths = latest_paths()
+
+    if not paths:
+        return None
+
+    return paths[
+        0
+    ]
+
+
+def load_json(
+    path: Path,
+) -> dict[str, Any]:
+    value = json.loads(
+        path.read_text(
+            encoding="utf-8",
+        )
+    )
+
+    if not isinstance(
+        value,
+        dict,
+    ):
+        raise ValueError(
+            f"Expected JSON object: {path}"
+        )
+
+    return value
+
+
+def print_file(
+    path: Path | None,
+) -> int:
+    if (
+        path is None
+        or not path.is_file()
+    ):
+        print(
+            "ERROR: no promotion verification exists.",
+            file=sys.stderr,
+        )
+
+        return 1
+
+    print(
+        path.read_text(
+            encoding="utf-8",
+        ),
+        end="",
+    )
+
+    return 0
+
+
+def verify(
+    *,
+    refresh_admission: bool,
+    apply: bool,
+    approve_existing: bool,
+    strict: bool,
+    skip_identity_checks: bool,
+    remaining: list[str],
+) -> int:
+    if refresh_admission:
+        admission_command = [
+            str(
+                ADMISSION_CONTROLLER
+            ),
+        ]
+
+        if apply:
+            admission_command.append(
+                (
+                    "refresh-apply-approved-strict"
+                    if (
+                        approve_existing
+                        and strict
+                    )
+                    else (
+                        "refresh-apply-approved"
+                        if approve_existing
+                        else (
+                            "apply-strict"
+                            if strict
+                            else "apply"
+                        )
+                    )
+                )
+            )
+
+        else:
+            admission_command.append(
+                (
+                    "refresh-plan-strict"
+                    if strict
+                    else "refresh-plan"
+                )
+            )
+
+        status = execute(
+            admission_command
+        )
+
+        if status:
+            return status
+
+    command = [
+        str(
+            PYTHON
+        ),
+        str(
+            VERIFIER
+        ),
+    ]
+
+    if skip_identity_checks:
+        command.append(
+            "--skip-identity-checks"
+        )
+
+    if strict:
+        command.append(
+            "--strict"
+        )
+
+    command.extend(
+        remaining
+    )
+
+    return execute(
+        command
+    )
+
+
+def status() -> int:
+    path = latest_path()
+
+    result: dict[
+        str,
+        object,
+    ] = {
+        "verifier": str(
+            VERIFIER
+        ),
+        "verifier_exists": (
+            VERIFIER.is_file()
+        ),
+        "report_root": str(
+            REPORT_ROOT
+        ),
+        "report_root_exists": (
+            REPORT_ROOT.is_dir()
+        ),
+        "latest_verification": (
+            str(
+                path
+            )
+            if path
+            else None
+        ),
+        "latest_verification_exists": (
+            path.is_file()
+            if path
+            else False
+        ),
+    }
+
+    if (
+        path is not None
+        and path.is_file()
+    ):
+        try:
+            value = load_json(
+                path
+            )
+
+            result[
+                "generated_at"
+            ] = value.get(
+                "generated_at"
+            )
+
+            result[
+                "passed"
+            ] = value.get(
+                "passed"
+            )
+
+            result[
+                "digest"
+            ] = value.get(
+                "digest"
+            )
+
+            result[
+                "subject"
+            ] = value.get(
+                "subject"
+            )
+
+            result[
+                "statistics"
+            ] = value.get(
+                "statistics"
+            )
+
+            result[
+                "files"
+            ] = value.get(
+                "files"
+            )
+
+            result[
+                "commands"
+            ] = value.get(
+                "commands"
+            )
+
+        except Exception as exc:
+            result[
+                "read_error"
+            ] = {
+                "type": type(
+                    exc
+                ).__name__,
+                "message": str(
+                    exc
+                ),
+            }
+
+    print(
+        json.dumps(
+            result,
+            ensure_ascii=False,
+            indent=2,
+            sort_keys=True,
+        )
+    )
+
+    return 0
+
+
+def commands() -> int:
+    path = latest_path()
+
+    if (
+        path is None
+        or not path.is_file()
+    ):
+        print(
+            "ERROR: no promotion verification exists.",
+            file=sys.stderr,
+        )
+
+        return 1
+
+    value = load_json(
+        path
+    )
+
+    print(
+        json.dumps(
+            {
+                "subject": value.get(
+                    "subject"
+                ),
+                "passed": value.get(
+                    "passed"
+                ),
+                "files": value.get(
+                    "files"
+                ),
+                "commands": value.get(
+                    "commands"
+                ),
+                "statistics": value.get(
+                    "statistics"
+                ),
+            },
+            ensure_ascii=False,
+            indent=2,
+            sort_keys=True,
+        )
+    )
+
+    return 0
+
+
+def usage() -> int:
+    print(
+        """
+identity-promotion-verify verify
+identity-promotion-verify strict
+identity-promotion-verify local
+identity-promotion-verify local-strict
+identity-promotion-verify refresh-plan
+identity-promotion-verify refresh-plan-strict
+identity-promotion-verify refresh-apply-approved
+identity-promotion-verify refresh-apply-approved-strict
+identity-promotion-verify status
+identity-promotion-verify commands
+identity-promotion-verify json
+identity-promotion-verify show
+"""
+    )
+
+    return 0
+
+
+def main() -> int:
+    arguments = sys.argv[
+        1:
+    ]
+
+    if not arguments:
+        return usage()
+
+    command = arguments[
+        0
+    ]
+
+    remaining = arguments[
+        1:
+    ]
+
+    if command in {
+        "help",
+        "--help",
+        "-h",
+    }:
+        return usage()
+
+    if command == "verify":
+        return verify(
+            refresh_admission=False,
+            apply=False,
+            approve_existing=False,
+            strict=False,
+            skip_identity_checks=False,
+            remaining=remaining,
+        )
+
+    if command == "strict":
+        return verify(
+            refresh_admission=False,
+            apply=False,
+            approve_existing=False,
+            strict=True,
+            skip_identity_checks=False,
+            remaining=remaining,
+        )
+
+    if command == "local":
+        return verify(
+            refresh_admission=False,
+            apply=False,
+            approve_existing=False,
+            strict=False,
+            skip_identity_checks=True,
+            remaining=remaining,
+        )
+
+    if command == "local-strict":
+        return verify(
+            refresh_admission=False,
+            apply=False,
+            approve_existing=False,
+            strict=True,
+            skip_identity_checks=True,
+            remaining=remaining,
+        )
+
+    if command == "refresh-plan":
+        return verify(
+            refresh_admission=True,
+            apply=False,
+            approve_existing=False,
+            strict=False,
+            skip_identity_checks=True,
+            remaining=remaining,
+        )
+
+    if command == "refresh-plan-strict":
+        return verify(
+            refresh_admission=True,
+            apply=False,
+            approve_existing=False,
+            strict=True,
+            skip_identity_checks=True,
+            remaining=remaining,
+        )
+
+    if command == "refresh-apply-approved":
+        return verify(
+            refresh_admission=True,
+            apply=True,
+            approve_existing=True,
+            strict=False,
+            skip_identity_checks=False,
+            remaining=remaining,
+        )
+
+    if (
+        command
+        == "refresh-apply-approved-strict"
+    ):
+        return verify(
+            refresh_admission=True,
+            apply=True,
+            approve_existing=True,
+            strict=True,
+            skip_identity_checks=False,
+            remaining=remaining,
+        )
+
+    if command == "status":
+        return status()
+
+    if command == "commands":
+        return commands()
+
+    if command == "json":
+        return print_file(
+            latest_path()
+        )
+
+    if command == "show":
+        path = latest_path()
+
+        if path is None:
+            return print_file(
+                None
+            )
+
+        return print_file(
+            path.with_name(
+                "latest.md"
+            )
+        )
+
+    print(
+        f"ERROR: unknown command: {command}",
+        file=sys.stderr,
+    )
+
+    return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

@@ -1,0 +1,203 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import subprocess
+import sys
+from pathlib import Path
+
+
+ROOT = Path(
+    "/root/savant-runtime"
+)
+
+PYTHON = (
+    ROOT
+    / "bin"
+    / "identity-quality-python"
+)
+
+ECHO_ROOT = (
+    ROOT
+    / "hierarchies"
+    / "identity"
+    / "exiles"
+    / "opus"
+    / "prodigals"
+    / "nocturne"
+    / "quirks"
+    / "echo"
+)
+
+RUNTIME = (
+    ECHO_ROOT
+    / "runtime"
+    / "echo_runtime.py"
+)
+
+TESTS = (
+    ECHO_ROOT
+    / "tests"
+    / "test_echo_runtime.py"
+)
+
+REPORT_ROOT = (
+    ROOT
+    / "reports"
+    / "identity_quality"
+    / "nocturne"
+    / "echo"
+)
+
+
+def execute(
+    command: list[str],
+) -> int:
+    return subprocess.run(
+        command,
+        cwd=str(ROOT),
+        check=False,
+    ).returncode
+
+
+def usage() -> int:
+    print(
+        """
+echoctl example [--output PATH]
+echoctl run --input PATH [--output PATH]
+echoctl schema
+echoctl test
+echoctl verify
+"""
+    )
+    return 0
+
+
+def main() -> int:
+    arguments = sys.argv[1:]
+
+    if not arguments:
+        return usage()
+
+    command = arguments[0]
+    remaining = arguments[1:]
+
+    if command in {
+        "help",
+        "--help",
+        "-h",
+    }:
+        return usage()
+
+    if command == "example":
+        return execute(
+            [
+                str(PYTHON),
+                str(RUNTIME),
+                "example",
+                *remaining,
+            ]
+        )
+
+    if command == "run":
+        return execute(
+            [
+                str(PYTHON),
+                str(RUNTIME),
+                "run",
+                *remaining,
+            ]
+        )
+
+    if command == "schema":
+        return execute(
+            [
+                str(PYTHON),
+                str(RUNTIME),
+                "schema",
+            ]
+        )
+
+    if command == "test":
+        return execute(
+            [
+                str(PYTHON),
+                "-m",
+                "pytest",
+                "-q",
+                str(TESTS),
+            ]
+        )
+
+    if command == "verify":
+        REPORT_ROOT.mkdir(
+            parents=True,
+            exist_ok=True,
+        )
+
+        example = (
+            REPORT_ROOT
+            / "example_request.json"
+        )
+
+        result = (
+            REPORT_ROOT
+            / "example_result.json"
+        )
+
+        stages = [
+            [
+                str(PYTHON),
+                "-m",
+                "py_compile",
+                str(RUNTIME),
+                str(TESTS),
+            ],
+            [
+                str(PYTHON),
+                "-m",
+                "pytest",
+                "-q",
+                str(TESTS),
+            ],
+            [
+                str(PYTHON),
+                str(RUNTIME),
+                "example",
+                "--output",
+                str(example),
+            ],
+            [
+                str(PYTHON),
+                str(RUNTIME),
+                "run",
+                "--input",
+                str(example),
+                "--output",
+                str(result),
+            ],
+        ]
+
+        for stage in stages:
+            returncode = execute(
+                stage
+            )
+
+            if returncode:
+                return returncode
+
+        print(
+            str(result)
+        )
+        return 0
+
+    print(
+        f"ERROR: unknown command: {command}",
+        file=sys.stderr,
+    )
+    return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

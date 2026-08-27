@@ -1,0 +1,22 @@
+canon:
+  id: savant
+  title: savant dynamic canon
+  version: 0.1.1
+  status: active
+  authority_root: authority
+  projection_root: projections
+  history_root: history
+  schema_root: schemas
+  rules:
+    - authority_before_inference
+    - authority_before_projection
+    - store_authoritative_primitives_only
+    - project_human_readable_markdown
+    - preserve_lineage
+    - preserve_provenance
+    - preserve_supersession_history
+    - allow_explicit_unknowns
+    - allow_provisional_fields
+    - never_delete_history
+    - snapshot_evidence_never_promotes_authority
+    - redaction_preserves_unknowns

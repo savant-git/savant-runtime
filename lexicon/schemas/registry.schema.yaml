@@ -1,0 +1,354 @@
+schema: SAVANT_LEXICON_REGISTRY_SCHEMA
+version: 2
+required:
+- registry_id
+- version
+- authority
+- constitution
+- schema
+- policies
+- validators
+- projections
+- lexemes
+- reserved
+fields:
+  registry_id:
+    type: string
+    required: true
+    immutable: true
+    expected: savant.lexicon
+  version:
+    type: integer
+    required: true
+    minimum: 1
+  authority:
+    type: object
+    required:
+    - source
+    - revision
+    - timestamp
+    fields:
+      source:
+        type: string
+        required: true
+      revision:
+        type: string
+        required: true
+      timestamp:
+        type:
+        - string
+        - 'null'
+        required: true
+  constitution:
+    type: string
+    required: true
+    path: true
+  schema:
+    type: string
+    required: true
+    path: true
+  policies:
+    type: list
+    required: true
+    unique: true
+    items:
+      type: string
+      path: true
+  validators:
+    type: list
+    required: true
+    unique: true
+    items:
+      type: string
+      path: true
+  projections:
+    type: list
+    required: true
+    unique: true
+    items:
+      type: string
+      path: true
+  namespaces:
+    type: list
+    required: false
+    unique: true
+  owners:
+    type: list
+    required: false
+    unique: true
+  reserved:
+    type: list
+    required: true
+    unique_casefold: true
+    items:
+      type: string
+  historical:
+    type: list
+    required: false
+    unique_casefold: true
+    items:
+      type: string
+  deprecated:
+    type: list
+    required: false
+    unique_casefold: true
+    items:
+      type: string
+  forbidden:
+    type: list
+    required: false
+    unique_casefold: true
+    items:
+      type: string
+  aliases:
+    type: object
+    required: false
+  lexemes:
+    type: list
+    required: true
+    minimum_items: 1
+    item_schema: schemas/lexeme.schema.yaml
+    identity_field: id
+    canonical_field: canonical
+    concept_field: concept
+    status_field: status
+    lineage_field: lineage
+    provenance_field: provenance
+  metadata:
+    type: object
+    required: false
+rules:
+  registry_identity_immutable: true
+  registry_identity_unique: true
+  registry_version_monotonic: true
+  authority_required: true
+  authority_source_required: true
+  authority_revision_required: true
+  authority_timestamp_required: true
+  constitution_required: true
+  declared_paths_must_exist: true
+  lexeme_schema_required: true
+  lexeme_identity_unique: true
+  canonical_unique: true
+  concept_unique_for_active_lexemes: true
+  aliases_unique: true
+  alias_cannot_equal_canonical: true
+  alias_cannot_claim_other_canonical: true
+  canonical_never_changes: true
+  identity_never_reused: true
+  superseded_never_deleted: true
+  superseded_never_reactivated_without_new_authority: true
+  reserved_never_reused: true
+  reserved_case_insensitive: true
+  deprecated_never_preferred: true
+  historical_never_preferred: true
+  forbidden_never_canonical: true
+  active_lexeme_requires_lineage: true
+  active_lexeme_requires_provenance: true
+  superseded_lexeme_requires_successor: true
+  active_lexeme_cannot_have_superseded_by: true
+  supersession_graph_acyclic: true
+  supersession_graph_deterministic: true
+  dependency_graph_acyclic_where_required: true
+  inheritance_graph_acyclic: true
+  ontology_graph_valid: true
+  relationship_graph_valid: true
+  projection_only_from_authority: true
+  authority_before_inference: true
+  authority_before_projection: true
+  historical_alias_reads_allowed: true
+  canonical_writes_only: true
+  lexical_history_immutable: true
+  lineage_preserved: true
+  provenance_preserved: true
+  no_destructive_rename: true
+  no_duplicate_lexical_authority: true
+  no_silent_collision_resolution: true
+  no_filesystem_authority_inference: true
+  current_user_directive_precedence: true
+special_rules:
+  shard:
+    globally_canonical: true
+    identity_tier_exception:
+      historical_label: Shard
+      canonical_label: Mote
+      tier: 2
+      scope: identity-hierarchy-only
+    global_supersession_forbidden: true
+  kindred:
+    canonical: Kindred
+    status: active
+    role: relationship-methodology-system
+    distinct_from:
+    - Kinship
+    supersedes_kinship: false
+    superseded_by_kinship: false
+  identity_hierarchy:
+    cardinality: 9
+    canonical:
+    - Iota
+    - Mote
+    - Ink
+    - Quirk
+    - Prodigal
+    - Exile
+    - Innate
+    - Wyrmhole
+    - Obelisk
+  tidals:
+    cardinality: 9
+    canonical:
+    - Scyon
+    - Splyce
+    - Scrybe
+    - Pryme
+    - Cyphor
+    - Thryce
+    - Spyral
+    - Lythe
+    - Dryve
+  cyphor:
+    canonical: Cyphor
+    historical_aliases:
+    - Cypher
+    lexicon_owner: true
+  riot:
+    canonical: Riot
+    historical_chain:
+    - Entity
+    - Form
+    - Swarm
+    - Riot
+  centra:
+    canonical: Centra
+    historical_chain:
+    - Focal
+    - Central
+    - Centra
+  convex:
+    canonical: Convex
+    historical_chain:
+    - Arc
+    - Convex
+    not_equivalent_to:
+    - Mutation
+    - Tomb
+  tomb:
+    canonical: Tomb
+    historical_chain:
+    - Vault
+    - Tomb
+    not_equivalent_to:
+    - Arc
+    - Convex
+    - Mutation
+  retained:
+    canonical:
+    - Ontology
+    - Authority
+    - Lineage
+    - Provenance
+    - Evidence
+    - Admission
+    - Attestation
+    - Mutation
+  rejected_proposals:
+    Pyramid: Ontology
+    Warrant: Authority
+    Genysis: Provenance
+    Testa:
+    - Evidence
+    - Attestation
+    Entra: Admission
+  kinship:
+    canonical: Kinship
+    status: active
+    role: functional-relationship-plane-service
+    distinct_from:
+    - Kindred
+    depends_on:
+    - Kindred
+    supersedes_kindred: false
+    superseded_by_kindred: false
+compatibility:
+  historical_alias_resolution: true
+  aliases:
+    Entity: Riot
+    Form: Riot
+    Swarm: Riot
+    Nomenclature: Lexicon
+    Omnistructure: Anomaly
+    Cypher: Cyphor
+    Trait: Ink
+    Gate: Wyrmhole
+    Portal: Wyrmhole
+    Focal: Centra
+    Central: Centra
+    Instance: Shade
+    Projection: Wavre
+    Validator: Cert
+    Slot: Rut
+    Mask: Visage
+    Attachment: Sidecar
+    Overlay: Veneer
+    Policy: Credenda
+    Fabric: Substra
+    Registry: Sear
+    Runtime: Igneo
+    Interface: Inface
+    Graph: Gridd
+    State: Vitae
+    Token: Coinage
+    Function: Oblast
+    Frisk: Oblast
+    Variable: Variant
+    Wanderer: Variant
+    Unset: Variant
+    Variate: Variant
+    Import: Insend
+    Florate: Insend
+    Export: Outsend
+    Fascate: Outsend
+    Adapter: Linka
+    Glove: Linka
+    Sandbox: Arkade
+    Nullix: Arkade
+    Component: Secton
+    Exacto: Secton
+    Module: Slab
+    Object: Forma
+    Record: Almanac
+    Node: Tox
+    Schema: Tracery
+    Recovery: Rebirth
+    Arc: Convex
+    Vault: Tomb
+    Caelus: Caevas
+    Chamberlain: Caevas
+    Occam: Caevas
+invariants:
+  one_concept_one_canonical_lexeme: true
+  one_canonical_lexeme_one_concept: true
+  canonical_lexeme_immutable: true
+  superseded_lexeme_permanently_reserved: true
+  canonical_lexeme_never_reused: true
+  aliases_non_authoritative: true
+  lineage_required: true
+  provenance_required: true
+  deterministic_resolution: true
+  fail_closed_on_ambiguity: true
+  shard_is_shard: true
+  mote_is_identity_tier_2: true
+  ink_is_identity_tier_3: true
+  wyrmhole_is_identity_tier_8: true
+  cyphor_is_tidal: true
+  riot_is_current_aggregate_term: true
+  convex_is_arc_successor: true
+  tomb_is_vault_successor: true
+  mutation_is_mutation: true
+  kindred_active: true
+  kinship_active: true
+  kindred_and_kinship_distinct: true
+  kinship_depends_on_kindred: true
+  no_kindred_kinship_alias: true
+  no_kindred_kinship_supersession: true

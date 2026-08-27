@@ -1,0 +1,213 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import json
+import subprocess
+import sys
+from pathlib import Path
+
+
+ROOT = Path("/root/savant-runtime")
+
+PYTHON = (
+    ROOT
+    / "bin"
+    / "identity-quality-python"
+)
+
+RUNTIME = (
+    ROOT
+    / 'hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/runtime/veil_runtime.py'
+)
+
+TESTS = (
+    ROOT
+    / 'hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/tests/test_veil_runtime.py'
+)
+
+REPORT_ROOT = (
+    ROOT
+    / 'reports/identity_quality/veil'
+)
+
+
+def execute(
+    command: list[str],
+) -> int:
+    return subprocess.run(
+        command,
+        cwd=str(ROOT),
+        check=False,
+    ).returncode
+
+
+def usage() -> int:
+    print(
+        """
+veilctl example [--output PATH]
+veilctl run --input PATH [--output PATH]
+veilctl schema
+veilctl test
+veilctl verify
+veilctl status
+"""
+    )
+
+    return 0
+
+
+def status() -> int:
+    result = {
+        "runtime": str(RUNTIME),
+        "runtime_exists": RUNTIME.is_file(),
+        "tests": str(TESTS),
+        "tests_exist": TESTS.is_file(),
+        "report_root": str(REPORT_ROOT),
+        "report_root_exists": REPORT_ROOT.is_dir(),
+    }
+
+    print(
+        json.dumps(
+            result,
+            indent=2,
+            sort_keys=True,
+        )
+    )
+
+    return 0
+
+
+def main() -> int:
+    arguments = sys.argv[1:]
+
+    if not arguments:
+        return usage()
+
+    command = arguments[0]
+    remaining = arguments[1:]
+
+    if command in {
+        "help",
+        "--help",
+        "-h",
+    }:
+        return usage()
+
+    if command == "example":
+        return execute(
+            [
+                str(PYTHON),
+                str(RUNTIME),
+                "example",
+                *remaining,
+            ]
+        )
+
+    if command == "run":
+        return execute(
+            [
+                str(PYTHON),
+                str(RUNTIME),
+                "run",
+                *remaining,
+            ]
+        )
+
+    if command == "schema":
+        return execute(
+            [
+                str(PYTHON),
+                str(RUNTIME),
+                "schema",
+            ]
+        )
+
+    if command == "test":
+        return execute(
+            [
+                str(PYTHON),
+                "-m",
+                "pytest",
+                "-q",
+                str(TESTS),
+            ]
+        )
+
+    if command == "verify":
+        REPORT_ROOT.mkdir(
+            parents=True,
+            exist_ok=True,
+        )
+
+        example = (
+            REPORT_ROOT
+            / "example_request.json"
+        )
+
+        result = (
+            REPORT_ROOT
+            / "example_result.json"
+        )
+
+        stages = [
+            [
+                str(PYTHON),
+                "-m",
+                "py_compile",
+                str(RUNTIME),
+                str(TESTS),
+            ],
+            [
+                str(PYTHON),
+                "-m",
+                "pytest",
+                "-q",
+                str(TESTS),
+            ],
+            [
+                str(PYTHON),
+                str(RUNTIME),
+                "example",
+                "--output",
+                str(example),
+            ],
+            [
+                str(PYTHON),
+                str(RUNTIME),
+                "run",
+                "--input",
+                str(example),
+                "--output",
+                str(result),
+            ],
+        ]
+
+        for stage in stages:
+            returncode = execute(
+                stage
+            )
+
+            if returncode:
+                return returncode
+
+        print(
+            str(result)
+        )
+
+        return 0
+
+    if command == "status":
+        return status()
+
+    print(
+        f"ERROR: unknown command: {command}",
+        file=sys.stderr,
+    )
+
+    return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

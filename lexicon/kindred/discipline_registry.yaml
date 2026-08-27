@@ -1,0 +1,409 @@
+registry_id: savant_kindred_discipline_registry
+version: 1
+
+authority:
+  source: current_user_directive
+  state: accepted
+  purpose: >
+    Extend Kindred with eighteen symmetric relationship disciplines
+    without replacing the existing nine Kindred trees, nine relation
+    families, or compatibility surfaces.
+
+grammar:
+  system: Kindred
+  hierarchy:
+    - Discipline
+    - Relation
+    - Edge
+  law: >
+    A Kindred Edge instantiates one Relation belonging to one Discipline.
+    Kindred owns common relationship mechanics. Stewards retain domain
+    semantics and jurisdiction.
+  direct_edge_first: true
+  derive_inverse_when_possible: true
+  immutable_history: true
+  projection_not_authority: true
+
+disciplines:
+
+  - id: discipline:containment
+    canonical: Containment
+    steward: Kindred
+    purpose: hierarchy and containment relationships
+    relations:
+      - relation:contains
+      - relation:contained_by
+
+  - id: discipline:dependency
+    canonical: Dependency
+    steward: Kindred
+    purpose: prerequisite and dependency relationships
+    relations:
+      - relation:depends_on
+      - relation:required_by
+
+  - id: discipline:provenance
+    canonical: Provenance
+    steward: Notary
+    purpose: source and provenance relationships
+    relations:
+      - relation:sourced_from
+      - relation:source_of
+
+  - id: discipline:lineage
+    canonical: Lineage
+    steward: Kindred
+    purpose: origin and descent relationships
+    relations:
+      - relation:derived_from
+      - relation:origin_of
+
+  - id: discipline:revision
+    canonical: Revision
+    steward: Spyral
+    purpose: revision and supersession relationships
+    relations:
+      - relation:supersedes
+      - relation:superseded_by
+
+  - id: discipline:affinity
+    canonical: Affinity
+    steward: Kindred
+    purpose: affinity alliance opposition and general relatedness
+    relations:
+      - relation:related_to
+      - relation:allied_with
+      - relation:opposes
+
+  - id: discipline:composition
+    canonical: Composition
+    steward: Modus
+    purpose: composition and membership relationships
+    relations:
+      - relation:composes
+      - relation:constituent_of
+
+  - id: discipline:attachment
+    canonical: Attachment
+    steward: Slot
+    purpose: attachment relationships
+    relations:
+      - relation:attaches
+      - relation:attached_to
+
+  - id: discipline:compatibility
+    canonical: Compatibility
+    steward: Cypher
+    purpose: compatibility and interoperability relationships
+    relations:
+      - relation:compatible_with
+      - relation:incompatible_with
+
+  - id: discipline:tasking
+    canonical: Tasking
+    steward: Niche
+    purpose: task blocking and task dependency relationships
+    relations:
+      - relation:blocks
+      - relation:blocked_by
+
+  - id: discipline:evidence
+    canonical: Evidence
+    steward: Notary
+    purpose: evidentiary support contradiction and corroboration
+    relations:
+      - relation:supports
+      - relation:contradicts
+      - relation:corroborates
+
+  - id: discipline:capability
+    canonical: Capability
+    steward: Opus
+    purpose: provider and capability association
+    relations:
+      - relation:provides
+      - relation:provided_by
+      - relation:capable_of
+
+  - id: discipline:persona
+    canonical: Persona
+    steward: Envoy
+    purpose: persona and trait association
+    relations:
+      - relation:expresses
+      - relation:expressed_by
+
+  - id: discipline:projection
+    canonical: Projection
+    steward: Filament
+    purpose: projection and projection-source relationships
+    relations:
+      - relation:projects
+      - relation:projected_from
+
+  - id: discipline:implementation
+    canonical: Implementation
+    steward: Scyon
+    purpose: specification and implementation relationships
+    relations:
+      - relation:implements
+      - relation:implemented_by
+
+  - id: discipline:temporal
+    canonical: Temporal
+    steward: Cataxis
+    purpose: temporal ordering and temporal association
+    relations:
+      - relation:precedes
+      - relation:follows
+      - relation:concurrent_with
+
+  - id: discipline:simulation
+    canonical: Simulation
+    steward: Carbon
+    purpose: simulation ancestry branching and divergence
+    relations:
+      - relation:branched_from
+      - relation:branches_to
+
+  - id: discipline:authority
+    canonical: Authority
+    steward: Pryme
+    purpose: authority governance jurisdiction and delegation
+    relations:
+      - relation:governs
+      - relation:governed_by
+      - relation:authorizes
+      - relation:delegates_to
+
+relations:
+
+  relation:contains:
+    discipline: discipline:containment
+    inverse: relation:contained_by
+    directionality: directed
+    transitive: true
+    cycle_policy: forbid
+
+  relation:contained_by:
+    discipline: discipline:containment
+    inverse: relation:contains
+    directionality: directed
+    derived: true
+
+  relation:depends_on:
+    discipline: discipline:dependency
+    inverse: relation:required_by
+    directionality: directed
+    transitive: false
+    cycle_policy: forbid
+
+  relation:required_by:
+    discipline: discipline:dependency
+    inverse: relation:depends_on
+    directionality: directed
+    derived: true
+
+  relation:sourced_from:
+    discipline: discipline:provenance
+    inverse: relation:source_of
+    directionality: directed
+
+  relation:source_of:
+    discipline: discipline:provenance
+    inverse: relation:sourced_from
+    directionality: directed
+    derived: true
+
+  relation:derived_from:
+    discipline: discipline:lineage
+    inverse: relation:origin_of
+    directionality: directed
+
+  relation:origin_of:
+    discipline: discipline:lineage
+    inverse: relation:derived_from
+    directionality: directed
+    derived: true
+
+  relation:supersedes:
+    discipline: discipline:revision
+    inverse: relation:superseded_by
+    directionality: directed
+    cycle_policy: forbid
+
+  relation:superseded_by:
+    discipline: discipline:revision
+    inverse: relation:supersedes
+    directionality: directed
+    derived: true
+
+  relation:related_to:
+    discipline: discipline:affinity
+    inverse: relation:related_to
+    directionality: symmetric
+
+  relation:allied_with:
+    discipline: discipline:affinity
+    inverse: relation:allied_with
+    directionality: symmetric
+
+  relation:opposes:
+    discipline: discipline:affinity
+    inverse: relation:opposes
+    directionality: symmetric
+
+  relation:composes:
+    discipline: discipline:composition
+    inverse: relation:constituent_of
+    directionality: directed
+    cycle_policy: forbid
+
+  relation:constituent_of:
+    discipline: discipline:composition
+    inverse: relation:composes
+    directionality: directed
+    derived: true
+
+  relation:attaches:
+    discipline: discipline:attachment
+    inverse: relation:attached_to
+    directionality: directed
+
+  relation:attached_to:
+    discipline: discipline:attachment
+    inverse: relation:attaches
+    directionality: directed
+    derived: true
+
+  relation:compatible_with:
+    discipline: discipline:compatibility
+    inverse: relation:compatible_with
+    directionality: symmetric
+
+  relation:incompatible_with:
+    discipline: discipline:compatibility
+    inverse: relation:incompatible_with
+    directionality: symmetric
+
+  relation:blocks:
+    discipline: discipline:tasking
+    inverse: relation:blocked_by
+    directionality: directed
+    cycle_policy: forbid
+
+  relation:blocked_by:
+    discipline: discipline:tasking
+    inverse: relation:blocks
+    directionality: directed
+    derived: true
+
+  relation:supports:
+    discipline: discipline:evidence
+    directionality: directed
+
+  relation:contradicts:
+    discipline: discipline:evidence
+    inverse: relation:contradicts
+    directionality: symmetric
+
+  relation:corroborates:
+    discipline: discipline:evidence
+    inverse: relation:corroborates
+    directionality: symmetric
+
+  relation:provides:
+    discipline: discipline:capability
+    inverse: relation:provided_by
+    directionality: directed
+
+  relation:provided_by:
+    discipline: discipline:capability
+    inverse: relation:provides
+    directionality: directed
+    derived: true
+
+  relation:capable_of:
+    discipline: discipline:capability
+    directionality: directed
+
+  relation:expresses:
+    discipline: discipline:persona
+    inverse: relation:expressed_by
+    directionality: directed
+
+  relation:expressed_by:
+    discipline: discipline:persona
+    inverse: relation:expresses
+    directionality: directed
+    derived: true
+
+  relation:projects:
+    discipline: discipline:projection
+    inverse: relation:projected_from
+    directionality: directed
+
+  relation:projected_from:
+    discipline: discipline:projection
+    inverse: relation:projects
+    directionality: directed
+    derived: true
+
+  relation:implements:
+    discipline: discipline:implementation
+    inverse: relation:implemented_by
+    directionality: directed
+
+  relation:implemented_by:
+    discipline: discipline:implementation
+    inverse: relation:implements
+    directionality: directed
+    derived: true
+
+  relation:precedes:
+    discipline: discipline:temporal
+    inverse: relation:follows
+    directionality: directed
+    cycle_policy: forbid
+
+  relation:follows:
+    discipline: discipline:temporal
+    inverse: relation:precedes
+    directionality: directed
+    derived: true
+
+  relation:concurrent_with:
+    discipline: discipline:temporal
+    inverse: relation:concurrent_with
+    directionality: symmetric
+
+  relation:branched_from:
+    discipline: discipline:simulation
+    inverse: relation:branches_to
+    directionality: directed
+    cycle_policy: forbid
+
+  relation:branches_to:
+    discipline: discipline:simulation
+    inverse: relation:branched_from
+    directionality: directed
+    derived: true
+
+  relation:governs:
+    discipline: discipline:authority
+    inverse: relation:governed_by
+    directionality: directed
+
+  relation:governed_by:
+    discipline: discipline:authority
+    inverse: relation:governs
+    directionality: directed
+    derived: true
+
+  relation:authorizes:
+    discipline: discipline:authority
+    directionality: directed
+
+  relation:delegates_to:
+    discipline: discipline:authority
+    directionality: directed

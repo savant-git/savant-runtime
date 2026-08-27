@@ -1,0 +1,37 @@
+{
+  "admission": {
+    "digest": "8e27ca919554b9f489c867d743a2bd06bf187b039abc20a84ad82e262535ec54",
+    "path": "reports/identity_quality/promotion/admissions/quirk.nocturne.veil/latest.json",
+    "sha256": "e1456b60469916bfebdde57fb100640b8f9770afa865a21373288352cd0aade4"
+  },
+  "definition": {
+    "after_sha256": "4979769c4f1f1506e9550bb0aa259c8bb4b352e26d8ceef56db108ad4479aa9c",
+    "applied": true,
+    "backup": "backups/identity-quality/promotion-definitions/quirk.nocturne.veil/definition-20260801T180009Z-6cc3d7f7b4712d7a/hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/definition.json",
+    "before_sha256": "6b20ead72b31d84152b2b3e493b77ac09aef4017c4b621a4b0c201c4e65a512b",
+    "path": "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/definition.json",
+    "proposed_digest": "6cc3d7f7b4712d7ab040cd785d7e6c4d8b0718ad6434997a0f2d869edfe52fa3"
+  },
+  "digest": "af15c2b5302ebfa4691e0d75d9f60a87fb9f10ce84536bff5fcba6c3c50d7c7a",
+  "generated_at": "2026-08-01T18:00:09+00:00",
+  "mode": "apply",
+  "operation": "attach_promotion_definition",
+  "passed": true,
+  "rollback": null,
+  "schema": "savant://identity-quality/promotion-definition-attachment/1.0.0",
+  "subject": {
+    "definition": "hierarchies/identity/exiles/opus/prodigals/nocturne/quirks/veil/definition.json",
+    "id": "quirk.nocturne.veil",
+    "kind": "quirk",
+    "name": "Veil",
+    "parent": "prodigal.nocturne",
+    "python_name": "veil",
+    "reference_subject": true
+  },
+  "transaction": {
+    "admission_snapshot": "runtime/identity-promotion/definition-attachments/quirk.nocturne.veil/definition-20260801T180009Z-6cc3d7f7b4712d7a/admission.json",
+    "id": "definition-20260801T180009Z-6cc3d7f7b4712d7a",
+    "proposed_definition": "runtime/identity-promotion/definition-attachments/quirk.nocturne.veil/definition-20260801T180009Z-6cc3d7f7b4712d7a/proposed_definition.json",
+    "root": "runtime/identity-promotion/definition-attachments/quirk.nocturne.veil/definition-20260801T180009Z-6cc3d7f7b4712d7a"
+  }
+}

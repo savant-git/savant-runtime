@@ -1,0 +1,1169 @@
+{
+  "artifacts": {
+    "checkpoint_head": {
+      "checkpoint_id": "runtime-checkpoint-000000000001-a49de7522fd2",
+      "digest": "f0b2e81f1c9dd8af147669987625d63dcf36220c4221cbc104d58ece564b6b4c",
+      "manifest_digest": "ecb255889b9cfb37d534aa6faf5ed0e18bd3bba36baf6c99aed487617511b98b",
+      "manifest_path": "/root/savant-runtime/lexicon/runtime/checkpoints/manifests/runtime-checkpoint-000000000001-a49de7522fd2.json",
+      "ref_id": "runtime:checkpoint:ref:HEAD",
+      "sequence": 1,
+      "tree_digest": "9626f8f1bb438128d95cdee7d4d3ce078a0afada927bdda8228254a1ca12cbe2",
+      "updated_at": "2026-07-27T04:57:40Z"
+    },
+    "runtime_address_index": {
+      "exists": true,
+      "path": "/root/savant-runtime/lexicon/runtime/compiled/runtime_address_index.json",
+      "sha256": "fb0c947c7358b87f330c67bb1dd01d1a7e88b62c80d69e4ddd62ed8bdac41b9b"
+    },
+    "runtime_audit_report": {
+      "exists": true,
+      "path": "/root/savant-runtime/lexicon/runtime/compiled/runtime_audit_report.json",
+      "sha256": "7a63f54293f511c4f600b0c7e7ec270e109c5fb0c98099c621252bbb4da7f73e"
+    },
+    "transaction_head": null
+  },
+  "dependencies": {
+    "controllers": [
+      "runtimeaddressctl",
+      "runtimeaddressctl",
+      "runtimetransactionctl",
+      "runtimetransactionctl",
+      "runtimeauditctl",
+      "runtimeauditvalidate"
+    ],
+    "plan": [
+      {
+        "arguments": [
+          "build"
+        ],
+        "controller": "runtimeaddressctl",
+        "name": "address-build",
+        "required": true
+      },
+      {
+        "arguments": [
+          "materialize"
+        ],
+        "controller": "runtimeaddressctl",
+        "name": "address-materialize",
+        "required": true
+      },
+      {
+        "arguments": [
+          "run",
+          "validate"
+        ],
+        "controller": "runtimetransactionctl",
+        "name": "transaction-validate",
+        "required": true
+      },
+      {
+        "arguments": [
+          "verify"
+        ],
+        "controller": "runtimetransactionctl",
+        "name": "transaction-verify",
+        "required": true
+      },
+      {
+        "arguments": [
+          "audit",
+          "--action",
+          "validate"
+        ],
+        "controller": "runtimeauditctl",
+        "name": "audit",
+        "required": true
+      },
+      {
+        "arguments": [],
+        "controller": "runtimeauditvalidate",
+        "name": "audit-validate",
+        "required": true
+      }
+    ]
+  },
+  "digest": "f6647349909fa360be1f3aabd8b93cd08376e761fb6ad7b767ea8d056c3d2b89",
+  "executed_step_count": 3,
+  "failed_required_count": 1,
+  "finished_at": "2026-07-27T08:29:46Z",
+  "lineage": {
+    "derived_from": [
+      "bfca993bed88a722d4702e966677427a16c46d91a9f7dde399607b0cf74df682",
+      "f72021231028aed4d1ad3a32af578ca63254eee2189c598d44edd2b17077775a",
+      "1d3bc0b2ae06e447ef399708b53ef5b9d2bc882747da82723b6244e7ff437cc9"
+    ]
+  },
+  "mode": "validate",
+  "passed": false,
+  "planned_step_count": 6,
+  "provenance": {
+    "generator": "/root/savant-runtime/lexicon/runtime/runtime_orchestrator.py",
+    "runtime_root": "/root/savant-runtime/lexicon/runtime"
+  },
+  "run_id": "runtime-orchestration-000000000002",
+  "sequence": 2,
+  "started_at": "2026-07-27T08:29:46Z",
+  "steps": [
+    {
+      "controller": "runtimeaddressctl",
+      "controller_path": "/root/savant-runtime/lexicon/bin/runtimeaddressctl",
+      "controller_sha256": "4e600e404f4ef43059d281ee90493cabb8b85ecee46815b59a7778ad9f467bc1",
+      "digest": "bfca993bed88a722d4702e966677427a16c46d91a9f7dde399607b0cf74df682",
+      "name": "address-build",
+      "passed": true,
+      "required": true,
+      "result": {
+        "command": [
+          "/root/savant-runtime/lexicon/bin/runtimeaddressctl",
+          "build"
+        ],
+        "digest": "b53dafb016c197ad48471de3150512b528f238b076fbdb9ccb18d78ad68d8117",
+        "finished_at": "2026-07-27T08:29:46Z",
+        "parsed_stdout": {
+          "alias_count": 24,
+          "aliases": {
+            "constitution": "runtime:subsystem:constitution",
+            "instance": "runtime:subsystem:instance",
+            "kindred": "runtime:subsystem:kindred",
+            "lexicon": "runtime:subsystem:lexicon",
+            "ontology": "runtime:subsystem:ontology",
+            "projection": "runtime:subsystem:projection",
+            "runtime": "runtime:savant:lexicon",
+            "runtime:constitution": "runtime:subsystem:constitution",
+            "runtime:instance": "runtime:subsystem:instance",
+            "runtime:kindred": "runtime:subsystem:kindred",
+            "runtime:lexicon": "runtime:subsystem:lexicon",
+            "runtime:ontology": "runtime:subsystem:ontology",
+            "runtime:projection": "runtime:subsystem:projection",
+            "runtime:root": "runtime:savant:lexicon",
+            "runtime:segue": "runtime:subsystem:segue",
+            "savant:runtime": "runtime:savant:lexicon",
+            "segue": "runtime:subsystem:segue",
+            "subsystem:constitution": "runtime:subsystem:constitution",
+            "subsystem:instance": "runtime:subsystem:instance",
+            "subsystem:kindred": "runtime:subsystem:kindred",
+            "subsystem:lexicon": "runtime:subsystem:lexicon",
+            "subsystem:ontology": "runtime:subsystem:ontology",
+            "subsystem:projection": "runtime:subsystem:projection",
+            "subsystem:segue": "runtime:subsystem:segue"
+          },
+          "digest": "87f3f8817a8d32af3d8585ecdc2c82c2fc9df7e70927e38ab07d5837567e9cc0",
+          "index_id": "runtime:index:address",
+          "lineage": {
+            "derived_from": [
+              "runtime:savant:lexicon",
+              "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml"
+            ]
+          },
+          "provenance": {
+            "generator": "/root/savant-runtime/lexicon/runtime/runtime_address.py",
+            "source": "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml"
+          },
+          "record_count": 15,
+          "records": {
+            "registry:constitution:core": {
+              "address": "registry:constitution:core",
+              "aliases": [],
+              "canonical": "registry:constitution:core",
+              "digest": "3c408edb951a94590b3bf156c09590c4919e315cc7cb39a9adf2b15e894f8941",
+              "relationships": {
+                "required_by": [
+                  "runtime:savant:lexicon"
+                ]
+              },
+              "source": "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml",
+              "type": "external_dependency"
+            },
+            "registry:instance:core": {
+              "address": "registry:instance:core",
+              "aliases": [],
+              "canonical": "registry:instance:core",
+              "digest": "53ec50336acde4ac21d3cc062f33a9c12800433611bc866801850d789a013887",
+              "relationships": {
+                "required_by": [
+                  "runtime:savant:lexicon"
+                ]
+              },
+              "source": "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml",
+              "type": "external_dependency"
+            },
+            "registry:kindred:core": {
+              "address": "registry:kindred:core",
+              "aliases": [],
+              "canonical": "registry:kindred:core",
+              "digest": "8abdee0ff3aec9665a5662ccbc0e086af9b8a4b550d06113a3a2be98d199f94f",
+              "relationships": {
+                "required_by": [
+                  "runtime:savant:lexicon"
+                ]
+              },
+              "source": "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml",
+              "type": "external_dependency"
+            },
+            "registry:lexicon:core": {
+              "address": "registry:lexicon:core",
+              "aliases": [],
+              "canonical": "registry:lexicon:core",
+              "digest": "ae09694ffb0f63d3f70b01e4a8b3a8a4fe21e815a57f68aa1133432d8a85586f",
+              "relationships": {
+                "required_by": [
+                  "runtime:savant:lexicon"
+                ]
+              },
+              "source": "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml",
+              "type": "external_dependency"
+            },
+            "registry:ontology:core": {
+              "address": "registry:ontology:core",
+              "aliases": [],
+              "canonical": "registry:ontology:core",
+              "digest": "aa19c1036330f013982d8ca84140bfac20f825f13557a2318513392caeaa352c",
+              "relationships": {
+                "required_by": [
+                  "runtime:savant:lexicon"
+                ]
+              },
+              "source": "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml",
+              "type": "external_dependency"
+            },
+            "registry:projection:core": {
+              "address": "registry:projection:core",
+              "aliases": [],
+              "canonical": "registry:projection:core",
+              "digest": "4742792c9febd7b80e57e6f03fe4b8a240bccc2657324946130314c3184b4fc3",
+              "relationships": {
+                "required_by": [
+                  "runtime:savant:lexicon"
+                ]
+              },
+              "source": "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml",
+              "type": "external_dependency"
+            },
+            "registry:segue:core": {
+              "address": "registry:segue:core",
+              "aliases": [],
+              "canonical": "registry:segue:core",
+              "digest": "78bd6c698fa9fc4e7bbfcd943501d9928b0e1b822193c70121d4b0e38d493d01",
+              "relationships": {
+                "required_by": [
+                  "runtime:savant:lexicon"
+                ]
+              },
+              "source": "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml",
+              "type": "external_dependency"
+            },
+            "runtime:savant:lexicon": {
+              "address": "runtime:savant:lexicon",
+              "aliases": [
+                "runtime",
+                "runtime:root",
+                "savant:runtime"
+              ],
+              "authority": "lexicon:constitution",
+              "canonical": "Savant Lexicon Runtime",
+              "digest": "3b3f0d280c005d219e4a8ac49c81119cf14afb830e33a7f768b3af14c360ae32",
+              "relationships": {
+                "contains": [
+                  "runtime:subsystem:constitution",
+                  "runtime:subsystem:instance",
+                  "runtime:subsystem:kindred",
+                  "runtime:subsystem:lexicon",
+                  "runtime:subsystem:ontology",
+                  "runtime:subsystem:projection",
+                  "runtime:subsystem:segue"
+                ],
+                "depends_on": [
+                  "registry:constitution:core",
+                  "registry:instance:core",
+                  "registry:kindred:core",
+                  "registry:lexicon:core",
+                  "registry:ontology:core",
+                  "registry:projection:core",
+                  "registry:segue:core"
+                ]
+              },
+              "source": "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml",
+              "status": "active",
+              "type": "runtime",
+              "version": "1.0.0"
+            },
+            "runtime:subsystem:constitution": {
+              "actions": {
+                "compile": "compile",
+                "integrity": "integrity",
+                "validate": "validate"
+              },
+              "address": "runtime:subsystem:constitution",
+              "aliases": [
+                "constitution",
+                "subsystem:constitution",
+                "runtime:constitution"
+              ],
+              "canonical": "constitution",
+              "controller": "bin/constitutionctl",
+              "controller_executable": true,
+              "controller_exists": true,
+              "controller_path": "/root/savant-runtime/lexicon/bin/constitutionctl",
+              "digest": "27c28180e206a0ec8c064c982627bdac4cc91ddaaf88fbf1cfbfed6f45600b4c",
+              "position": 6,
+              "relationships": {
+                "contained_by": [
+                  "runtime:savant:lexicon"
+                ],
+                "depends_on": [],
+                "follows": [
+                  "runtime:subsystem:projection"
+                ],
+                "precedes": []
+              },
+              "required": true,
+              "source": "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml",
+              "type": "runtime_subsystem"
+            },
+            "runtime:subsystem:instance": {
+              "actions": {
+                "compile": "compile",
+                "integrity": "integrity",
+                "validate": "validate"
+              },
+              "address": "runtime:subsystem:instance",
+              "aliases": [
+                "instance",
+                "subsystem:instance",
+                "runtime:instance"
+              ],
+              "canonical": "instance",
+              "controller": "bin/instancectl",
+              "controller_executable": true,
+              "controller_exists": true,
+              "controller_path": "/root/savant-runtime/lexicon/bin/instancectl",
+              "digest": "443411425c4789de0e7d068071d135a8cdbcfd04745d67f73996413c30988e4e",
+              "position": 3,
+              "relationships": {
+                "contained_by": [
+                  "runtime:savant:lexicon"
+                ],
+                "depends_on": [],
+                "follows": [
+                  "runtime:subsystem:kindred"
+                ],
+                "precedes": [
+                  "runtime:subsystem:segue"
+                ]
+              },
+              "required": true,
+              "source": "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml",
+              "type": "runtime_subsystem"
+            },
+            "runtime:subsystem:kindred": {
+              "actions": {
+                "compile": "compile",
+                "integrity": "integrity",
+                "validate": "validate"
+              },
+              "address": "runtime:subsystem:kindred",
+              "aliases": [
+                "kindred",
+                "subsystem:kindred",
+                "runtime:kindred"
+              ],
+              "canonical": "kindred",
+              "controller": "bin/kindredctl",
+              "controller_executable": true,
+              "controller_exists": true,
+              "controller_path": "/root/savant-runtime/lexicon/bin/kindredctl",
+              "digest": "141df8215de807c1153d9a9a6afa113a8829ecf389943af2d2c19f20c44c71af",
+              "position": 2,
+              "relationships": {
+                "contained_by": [
+                  "runtime:savant:lexicon"
+                ],
+                "depends_on": [],
+                "follows": [
+                  "runtime:subsystem:ontology"
+                ],
+                "precedes": [
+                  "runtime:subsystem:instance"
+                ]
+              },
+              "required": true,
+              "source": "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml",
+              "type": "runtime_subsystem"
+            },
+            "runtime:subsystem:lexicon": {
+              "actions": {
+                "compile": "compile",
+                "integrity": "integrity",
+                "validate": "validate"
+              },
+              "address": "runtime:subsystem:lexicon",
+              "aliases": [
+                "lexicon",
+                "subsystem:lexicon",
+                "runtime:lexicon"
+              ],
+              "canonical": "lexicon",
+              "controller": "bin/lexiconctl",
+              "controller_executable": true,
+              "controller_exists": true,
+              "controller_path": "/root/savant-runtime/lexicon/bin/lexiconctl",
+              "digest": "53290abbe2d2061c17596ae646559c33619c9348f44bf3bcba16e767dde3caf3",
+              "position": 0,
+              "relationships": {
+                "contained_by": [
+                  "runtime:savant:lexicon"
+                ],
+                "depends_on": [],
+                "follows": [],
+                "precedes": [
+                  "runtime:subsystem:ontology"
+                ]
+              },
+              "required": true,
+              "source": "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml",
+              "type": "runtime_subsystem"
+            },
+            "runtime:subsystem:ontology": {
+              "actions": {
+                "compile": "compile",
+                "integrity": "integrity",
+                "validate": "validate"
+              },
+              "address": "runtime:subsystem:ontology",
+              "aliases": [
+                "ontology",
+                "subsystem:ontology",
+                "runtime:ontology"
+              ],
+              "canonical": "ontology",
+              "controller": "bin/ontologyctl",
+              "controller_executable": true,
+              "controller_exists": true,
+              "controller_path": "/root/savant-runtime/lexicon/bin/ontologyctl",
+              "digest": "71dc425d7e157271ef8c61e6b44c64102be56278751cc6c67bcde4628562fa1d",
+              "position": 1,
+              "relationships": {
+                "contained_by": [
+                  "runtime:savant:lexicon"
+                ],
+                "depends_on": [],
+                "follows": [
+                  "runtime:subsystem:lexicon"
+                ],
+                "precedes": [
+                  "runtime:subsystem:kindred"
+                ]
+              },
+              "required": true,
+              "source": "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml",
+              "type": "runtime_subsystem"
+            },
+            "runtime:subsystem:projection": {
+              "actions": {
+                "compile": "compile",
+                "integrity": "integrity",
+                "validate": "validate"
+              },
+              "address": "runtime:subsystem:projection",
+              "aliases": [
+                "projection",
+                "subsystem:projection",
+                "runtime:projection"
+              ],
+              "canonical": "projection",
+              "controller": "bin/projectionctl",
+              "controller_executable": true,
+              "controller_exists": true,
+              "controller_path": "/root/savant-runtime/lexicon/bin/projectionctl",
+              "digest": "dbb1499f76290a7639dbfd2f5d86173e5a0f48ba53081d9706c9d8d7399ad066",
+              "position": 5,
+              "relationships": {
+                "contained_by": [
+                  "runtime:savant:lexicon"
+                ],
+                "depends_on": [],
+                "follows": [
+                  "runtime:subsystem:segue"
+                ],
+                "precedes": [
+                  "runtime:subsystem:constitution"
+                ]
+              },
+              "required": true,
+              "source": "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml",
+              "type": "runtime_subsystem"
+            },
+            "runtime:subsystem:segue": {
+              "actions": {
+                "compile": "compile",
+                "integrity": "integrity",
+                "validate": "validate"
+              },
+              "address": "runtime:subsystem:segue",
+              "aliases": [
+                "segue",
+                "subsystem:segue",
+                "runtime:segue"
+              ],
+              "canonical": "segue",
+              "controller": "bin/seguectl",
+              "controller_executable": true,
+              "controller_exists": true,
+              "controller_path": "/root/savant-runtime/lexicon/bin/seguectl",
+              "digest": "071f505a670b680b3c8c850ecbda8ef80d9547ac81380193fd5077cef1ce0bd9",
+              "position": 4,
+              "relationships": {
+                "contained_by": [
+                  "runtime:savant:lexicon"
+                ],
+                "depends_on": [],
+                "follows": [
+                  "runtime:subsystem:instance"
+                ],
+                "precedes": [
+                  "runtime:subsystem:projection"
+                ]
+              },
+              "required": true,
+              "source": "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml",
+              "type": "runtime_subsystem"
+            }
+          },
+          "runtime": "runtime:savant:lexicon",
+          "version": "1.0.0"
+        },
+        "passed": true,
+        "returncode": 0,
+        "started_at": "2026-07-27T08:29:46Z",
+        "stderr": "",
+        "stderr_digest": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "stdout": "{\n  \"alias_count\": 24,\n  \"aliases\": {\n    \"constitution\": \"runtime:subsystem:constitution\",\n    \"instance\": \"runtime:subsystem:instance\",\n    \"kindred\": \"runtime:subsystem:kindred\",\n    \"lexicon\": \"runtime:subsystem:lexicon\",\n    \"ontology\": \"runtime:subsystem:ontology\",\n    \"projection\": \"runtime:subsystem:projection\",\n    \"runtime\": \"runtime:savant:lexicon\",\n    \"runtime:constitution\": \"runtime:subsystem:constitution\",\n    \"runtime:instance\": \"runtime:subsystem:instance\",\n    \"runtime:kindred\": \"runtime:subsystem:kindred\",\n    \"runtime:lexicon\": \"runtime:subsystem:lexicon\",\n    \"runtime:ontology\": \"runtime:subsystem:ontology\",\n    \"runtime:projection\": \"runtime:subsystem:projection\",\n    \"runtime:root\": \"runtime:savant:lexicon\",\n    \"runtime:segue\": \"runtime:subsystem:segue\",\n    \"savant:runtime\": \"runtime:savant:lexicon\",\n    \"segue\": \"runtime:subsystem:segue\",\n    \"subsystem:constitution\": \"runtime:subsystem:constitution\",\n    \"subsystem:instance\": \"runtime:subsystem:instance\",\n    \"subsystem:kindred\": \"runtime:subsystem:kindred\",\n    \"subsystem:lexicon\": \"runtime:subsystem:lexicon\",\n    \"subsystem:ontology\": \"runtime:subsystem:ontology\",\n    \"subsystem:projection\": \"runtime:subsystem:projection\",\n    \"subsystem:segue\": \"runtime:subsystem:segue\"\n  },\n  \"digest\": \"87f3f8817a8d32af3d8585ecdc2c82c2fc9df7e70927e38ab07d5837567e9cc0\",\n  \"index_id\": \"runtime:index:address\",\n  \"lineage\": {\n    \"derived_from\": [\n      \"runtime:savant:lexicon\",\n      \"/root/savant-runtime/lexicon/runtime/runtime_registry.yaml\"\n    ]\n  },\n  \"provenance\": {\n    \"generator\": \"/root/savant-runtime/lexicon/runtime/runtime_address.py\",\n    \"source\": \"/root/savant-runtime/lexicon/runtime/runtime_registry.yaml\"\n  },\n  \"record_count\": 15,\n  \"records\": {\n    \"registry:constitution:core\": {\n      \"address\": \"registry:constitution:core\",\n      \"aliases\": [],\n      \"canonical\": \"registry:constitution:core\",\n      \"digest\": \"3c408edb951a94590b3bf156c09590c4919e315cc7cb39a9adf2b15e894f8941\",\n      \"relationships\": {\n        \"required_by\": [\n          \"runtime:savant:lexicon\"\n        ]\n      },\n      \"source\": \"/root/savant-runtime/lexicon/runtime/runtime_registry.yaml\",\n      \"type\": \"external_dependency\"\n    },\n    \"registry:instance:core\": {\n      \"address\": \"registry:instance:core\",\n      \"aliases\": [],\n      \"canonical\": \"registry:instance:core\",\n      \"digest\": \"53ec50336acde4ac21d3cc062f33a9c12800433611bc866801850d789a013887\",\n      \"relationships\": {\n        \"required_by\": [\n          \"runtime:savant:lexicon\"\n        ]\n      },\n      \"source\": \"/root/savant-runtime/lexicon/runtime/runtime_registry.yaml\",\n      \"type\": \"external_dependency\"\n    },\n    \"registry:kindred:core\": {\n      \"address\": \"registry:kindred:core\",\n      \"aliases\": [],\n      \"canonical\": \"registry:kindred:core\",\n      \"digest\": \"8abdee0ff3aec9665a5662ccbc0e086af9b8a4b550d06113a3a2be98d199f94f\",\n      \"relationships\": {\n        \"required_by\": [\n          \"runtime:savant:lexicon\"\n        ]\n      },\n      \"source\": \"/root/savant-runtime/lexicon/runtime/runtime_registry.yaml\",\n      \"type\": \"external_dependency\"\n    },\n    \"registry:lexicon:core\": {\n      \"address\": \"registry:lexicon:core\",\n      \"aliases\": [],\n      \"canonical\": \"registry:lexicon:core\",\n      \"digest\": \"ae09694ffb0f63d3f70b01e4a8b3a8a4fe21e815a57f68aa1133432d8a85586f\",\n      \"relationships\": {\n        \"required_by\": [\n          \"runtime:savant:lexicon\"\n        ]\n      },\n      \"source\": \"/root/savant-runtime/lexicon/runtime/runtime_registry.yaml\",\n      \"type\": \"external_dependency\"\n    },\n    \"registry:ontology:core\": {\n      \"address\": \"registry:ontology:core\",\n      \"aliases\": [],\n      \"canonical\": \"registry:ontology:core\",\n      \"digest\": \"aa19c1036330f013982d8ca84140bfac20f825f13557a2318513392caeaa352c\",\n      \"relationships\": {\n        \"required_by\": [\n          \"runtime:savant:lexicon\"\n        ]\n      },\n      \"source\": \"/root/savant-runtime/lexicon/runtime/runtime_registry.yaml\",\n      \"type\": \"external_dependency\"\n    },\n    \"registry:projection:core\": {\n      \"address\": \"registry:projection:core\",\n      \"aliases\": [],\n      \"canonical\": \"registry:projection:core\",\n      \"digest\": \"4742792c9febd7b80e57e6f03fe4b8a240bccc2657324946130314c3184b4fc3\",\n      \"relationships\": {\n        \"required_by\": [\n          \"runtime:savant:lexicon\"\n        ]\n      },\n      \"source\": \"/root/savant-runtime/lexicon/runtime/runtime_registry.yaml\",\n      \"type\": \"external_dependency\"\n    },\n    \"registry:segue:core\": {\n      \"address\": \"registry:segue:core\",\n      \"aliases\": [],\n      \"canonical\": \"registry:segue:core\",\n      \"digest\": \"78bd6c698fa9fc4e7bbfcd943501d9928b0e1b822193c70121d4b0e38d493d01\",\n      \"relationships\": {\n        \"required_by\": [\n          \"runtime:savant:lexicon\"\n        ]\n      },\n      \"source\": \"/root/savant-runtime/lexicon/runtime/runtime_registry.yaml\",\n      \"type\": \"external_dependency\"\n    },\n    \"runtime:savant:lexicon\": {\n      \"address\": \"runtime:savant:lexicon\",\n      \"aliases\": [\n        \"runtime\",\n        \"runtime:root\",\n        \"savant:runtime\"\n      ],\n      \"authority\": \"lexicon:constitution\",\n      \"canonical\": \"Savant Lexicon Runtime\",\n      \"digest\": \"3b3f0d280c005d219e4a8ac49c81119cf14afb830e33a7f768b3af14c360ae32\",\n      \"relationships\": {\n        \"contains\": [\n          \"runtime:subsystem:constitution\",\n          \"runtime:subsystem:instance\",\n          \"runtime:subsystem:kindred\",\n          \"runtime:subsystem:lexicon\",\n          \"runtime:subsystem:ontology\",\n          \"runtime:subsystem:projection\",\n          \"runtime:subsystem:segue\"\n        ],\n        \"depends_on\": [\n          \"registry:constitution:core\",\n          \"registry:instance:core\",\n          \"registry:kindred:core\",\n          \"registry:lexicon:core\",\n          \"registry:ontology:core\",\n          \"registry:projection:core\",\n          \"registry:segue:core\"\n        ]\n      },\n      \"source\": \"/root/savant-runtime/lexicon/runtime/runtime_registry.yaml\",\n      \"status\": \"active\",\n      \"type\": \"runtime\",\n      \"version\": \"1.0.0\"\n    },\n    \"runtime:subsystem:constitution\": {\n      \"actions\": {\n        \"compile\": \"compile\",\n        \"integrity\": \"integrity\",\n        \"validate\": \"validate\"\n      },\n      \"address\": \"runtime:subsystem:constitution\",\n      \"aliases\": [\n        \"constitution\",\n        \"subsystem:constitution\",\n        \"runtime:constitution\"\n      ],\n      \"canonical\": \"constitution\",\n      \"controller\": \"bin/constitutionctl\",\n      \"controller_executable\": true,\n      \"controller_exists\": true,\n      \"controller_path\": \"/root/savant-runtime/lexicon/bin/constitutionctl\",\n      \"digest\": \"27c28180e206a0ec8c064c982627bdac4cc91ddaaf88fbf1cfbfed6f45600b4c\",\n      \"position\": 6,\n      \"relationships\": {\n        \"contained_by\": [\n          \"runtime:savant:lexicon\"\n        ],\n        \"depends_on\": [],\n        \"follows\": [\n          \"runtime:subsystem:projection\"\n        ],\n        \"precedes\": []\n      },\n      \"required\": true,\n      \"source\": \"/root/savant-runtime/lexicon/runtime/runtime_registry.yaml\",\n      \"type\": \"runtime_subsystem\"\n    },\n    \"runtime:subsystem:instance\": {\n      \"actions\": {\n        \"compile\": \"compile\",\n        \"integrity\": \"integrity\",\n        \"validate\": \"validate\"\n      },\n      \"address\": \"runtime:subsystem:instance\",\n      \"aliases\": [\n        \"instance\",\n        \"subsystem:instance\",\n        \"runtime:instance\"\n      ],\n      \"canonical\": \"instance\",\n      \"controller\": \"bin/instancectl\",\n      \"controller_executable\": true,\n      \"controller_exists\": true,\n      \"controller_path\": \"/root/savant-runtime/lexicon/bin/instancectl\",\n      \"digest\": \"443411425c4789de0e7d068071d135a8cdbcfd04745d67f73996413c30988e4e\",\n      \"position\": 3,\n      \"relationships\": {\n        \"contained_by\": [\n          \"runtime:savant:lexicon\"\n        ],\n        \"depends_on\": [],\n        \"follows\": [\n          \"runtime:subsystem:kindred\"\n        ],\n        \"precedes\": [\n          \"runtime:subsystem:segue\"\n        ]\n      },\n      \"required\": true,\n      \"source\": \"/root/savant-runtime/lexicon/runtime/runtime_registry.yaml\",\n      \"type\": \"runtime_subsystem\"\n    },\n    \"runtime:subsystem:kindred\": {\n      \"actions\": {\n        \"compile\": \"compile\",\n        \"integrity\": \"integrity\",\n        \"validate\": \"validate\"\n      },\n      \"address\": \"runtime:subsystem:kindred\",\n      \"aliases\": [\n        \"kindred\",\n        \"subsystem:kindred\",\n        \"runtime:kindred\"\n      ],\n      \"canonical\": \"kindred\",\n      \"controller\": \"bin/kindredctl\",\n      \"controller_executable\": true,\n      \"controller_exists\": true,\n      \"controller_path\": \"/root/savant-runtime/lexicon/bin/kindredctl\",\n      \"digest\": \"141df8215de807c1153d9a9a6afa113a8829ecf389943af2d2c19f20c44c71af\",\n      \"position\": 2,\n      \"relationships\": {\n        \"contained_by\": [\n          \"runtime:savant:lexicon\"\n        ],\n        \"depends_on\": [],\n        \"follows\": [\n          \"runtime:subsystem:ontology\"\n        ],\n        \"precedes\": [\n          \"runtime:subsystem:instance\"\n        ]\n      },\n      \"required\": true,\n      \"source\": \"/root/savant-runtime/lexicon/runtime/runtime_registry.yaml\",\n      \"type\": \"runtime_subsystem\"\n    },\n    \"runtime:subsystem:lexicon\": {\n      \"actions\": {\n        \"compile\": \"compile\",\n        \"integrity\": \"integrity\",\n        \"validate\": \"validate\"\n      },\n      \"address\": \"runtime:subsystem:lexicon\",\n      \"aliases\": [\n        \"lexicon\",\n        \"subsystem:lexicon\",\n        \"runtime:lexicon\"\n      ],\n      \"canonical\": \"lexicon\",\n      \"controller\": \"bin/lexiconctl\",\n      \"controller_executable\": true,\n      \"controller_exists\": true,\n      \"controller_path\": \"/root/savant-runtime/lexicon/bin/lexiconctl\",\n      \"digest\": \"53290abbe2d2061c17596ae646559c33619c9348f44bf3bcba16e767dde3caf3\",\n      \"position\": 0,\n      \"relationships\": {\n        \"contained_by\": [\n          \"runtime:savant:lexicon\"\n        ],\n        \"depends_on\": [],\n        \"follows\": [],\n        \"precedes\": [\n          \"runtime:subsystem:ontology\"\n        ]\n      },\n      \"required\": true,\n      \"source\": \"/root/savant-runtime/lexicon/runtime/runtime_registry.yaml\",\n      \"type\": \"runtime_subsystem\"\n    },\n    \"runtime:subsystem:ontology\": {\n      \"actions\": {\n        \"compile\": \"compile\",\n        \"integrity\": \"integrity\",\n        \"validate\": \"validate\"\n      },\n      \"address\": \"runtime:subsystem:ontology\",\n      \"aliases\": [\n        \"ontology\",\n        \"subsystem:ontology\",\n        \"runtime:ontology\"\n      ],\n      \"canonical\": \"ontology\",\n      \"controller\": \"bin/ontologyctl\",\n      \"controller_executable\": true,\n      \"controller_exists\": true,\n      \"controller_path\": \"/root/savant-runtime/lexicon/bin/ontologyctl\",\n      \"digest\": \"71dc425d7e157271ef8c61e6b44c64102be56278751cc6c67bcde4628562fa1d\",\n      \"position\": 1,\n      \"relationships\": {\n        \"contained_by\": [\n          \"runtime:savant:lexicon\"\n        ],\n        \"depends_on\": [],\n        \"follows\": [\n          \"runtime:subsystem:lexicon\"\n        ],\n        \"precedes\": [\n          \"runtime:subsystem:kindred\"\n        ]\n      },\n      \"required\": true,\n      \"source\": \"/root/savant-runtime/lexicon/runtime/runtime_registry.yaml\",\n      \"type\": \"runtime_subsystem\"\n    },\n    \"runtime:subsystem:projection\": {\n      \"actions\": {\n        \"compile\": \"compile\",\n        \"integrity\": \"integrity\",\n        \"validate\": \"validate\"\n      },\n      \"address\": \"runtime:subsystem:projection\",\n      \"aliases\": [\n        \"projection\",\n        \"subsystem:projection\",\n        \"runtime:projection\"\n      ],\n      \"canonical\": \"projection\",\n      \"controller\": \"bin/projectionctl\",\n      \"controller_executable\": true,\n      \"controller_exists\": true,\n      \"controller_path\": \"/root/savant-runtime/lexicon/bin/projectionctl\",\n      \"digest\": \"dbb1499f76290a7639dbfd2f5d86173e5a0f48ba53081d9706c9d8d7399ad066\",\n      \"position\": 5,\n      \"relationships\": {\n        \"contained_by\": [\n          \"runtime:savant:lexicon\"\n        ],\n        \"depends_on\": [],\n        \"follows\": [\n          \"runtime:subsystem:segue\"\n        ],\n        \"precedes\": [\n          \"runtime:subsystem:constitution\"\n        ]\n      },\n      \"required\": true,\n      \"source\": \"/root/savant-runtime/lexicon/runtime/runtime_registry.yaml\",\n      \"type\": \"runtime_subsystem\"\n    },\n    \"runtime:subsystem:segue\": {\n      \"actions\": {\n        \"compile\": \"compile\",\n        \"integrity\": \"integrity\",\n        \"validate\": \"validate\"\n      },\n      \"address\": \"runtime:subsystem:segue\",\n      \"aliases\": [\n        \"segue\",\n        \"subsystem:segue\",\n        \"runtime:segue\"\n      ],\n      \"canonical\": \"segue\",\n      \"controller\": \"bin/seguectl\",\n      \"controller_executable\": true,\n      \"controller_exists\": true,\n      \"controller_path\": \"/root/savant-runtime/lexicon/bin/seguectl\",\n      \"digest\": \"071f505a670b680b3c8c850ecbda8ef80d9547ac81380193fd5077cef1ce0bd9\",\n      \"position\": 4,\n      \"relationships\": {\n        \"contained_by\": [\n          \"runtime:savant:lexicon\"\n        ],\n        \"depends_on\": [],\n        \"follows\": [\n          \"runtime:subsystem:instance\"\n        ],\n        \"precedes\": [\n          \"runtime:subsystem:projection\"\n        ]\n      },\n      \"required\": true,\n      \"source\": \"/root/savant-runtime/lexicon/runtime/runtime_registry.yaml\",\n      \"type\": \"runtime_subsystem\"\n    }\n  },\n  \"runtime\": \"runtime:savant:lexicon\",\n  \"version\": \"1.0.0\"\n}\n",
+        "stdout_digest": "0071826e6c5ffe9c56b29c5ba3826a0889df46cce4b66951c09fc402c5c61aaa"
+      },
+      "skipped": false
+    },
+    {
+      "controller": "runtimeaddressctl",
+      "controller_path": "/root/savant-runtime/lexicon/bin/runtimeaddressctl",
+      "controller_sha256": "4e600e404f4ef43059d281ee90493cabb8b85ecee46815b59a7778ad9f467bc1",
+      "digest": "f72021231028aed4d1ad3a32af578ca63254eee2189c598d44edd2b17077775a",
+      "name": "address-materialize",
+      "passed": true,
+      "required": true,
+      "result": {
+        "command": [
+          "/root/savant-runtime/lexicon/bin/runtimeaddressctl",
+          "materialize"
+        ],
+        "digest": "42e6a11ccfe3d0a50d3402c261076e323d859f9bc16e86dc8ec6a65b0d26ab18",
+        "finished_at": "2026-07-27T08:29:46Z",
+        "parsed_stdout": {
+          "alias_count": 24,
+          "digest": "87f3f8817a8d32af3d8585ecdc2c82c2fc9df7e70927e38ab07d5837567e9cc0",
+          "operation": "materialize",
+          "passed": true,
+          "path": "/root/savant-runtime/lexicon/runtime/compiled/runtime_address_index.json",
+          "record_count": 15
+        },
+        "passed": true,
+        "returncode": 0,
+        "started_at": "2026-07-27T08:29:46Z",
+        "stderr": "",
+        "stderr_digest": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "stdout": "{\n  \"alias_count\": 24,\n  \"digest\": \"87f3f8817a8d32af3d8585ecdc2c82c2fc9df7e70927e38ab07d5837567e9cc0\",\n  \"operation\": \"materialize\",\n  \"passed\": true,\n  \"path\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_address_index.json\",\n  \"record_count\": 15\n}\n",
+        "stdout_digest": "69a5c31d0280dda622d4170d29b57c5f86d166ca3aef8ccbb731c04929947dad"
+      },
+      "skipped": false
+    },
+    {
+      "controller": "runtimetransactionctl",
+      "controller_path": "/root/savant-runtime/lexicon/bin/runtimetransactionctl",
+      "controller_sha256": "fd4ef3444e60d7eba402a0a99428e3aeb0644b57b25723df34b17979671f01e0",
+      "digest": "1d3bc0b2ae06e447ef399708b53ef5b9d2bc882747da82723b6244e7ff437cc9",
+      "name": "transaction-validate",
+      "passed": false,
+      "required": true,
+      "result": {
+        "command": [
+          "/root/savant-runtime/lexicon/bin/runtimetransactionctl",
+          "run",
+          "validate"
+        ],
+        "digest": "3c3fefc39aa03e99ec9ffb0633cdce4fe6e83cc6e19f5958e08a7971cfd5b3e6",
+        "finished_at": "2026-07-27T08:29:46Z",
+        "parsed_stdout": {
+          "begin": {
+            "event": {
+              "digest": "711fd5e6ce83c40469a4c73ae5f27bfb5a5d6e36aed8aac2de02bee85582f9ae",
+              "event_id": "runtime:transaction:event:000000000013",
+              "event_type": "begin",
+              "payload": {
+                "action": "validate",
+                "snapshot_digest": "200d953cb2343b8cb3a5cb72179a520b63b699eabb1aa611e2c4ecef75244a60",
+                "subsystems": [
+                  "lexicon",
+                  "ontology",
+                  "kindred",
+                  "instance",
+                  "segue",
+                  "projection",
+                  "constitution"
+                ]
+              },
+              "previous_digest": "49c803cb2a2918dbd864d6cd3b328fb09d736f101a4d4f07752c4a964d894680",
+              "sequence": 13,
+              "timestamp": "2026-07-27T08:29:46Z",
+              "transaction_id": "runtime-transaction-000000000005-3b1a79753526"
+            },
+            "operation": "begin",
+            "passed": true,
+            "path": "/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526",
+            "snapshot": {
+              "created_at": "2026-07-27T08:29:46Z",
+              "digest": "200d953cb2343b8cb3a5cb72179a520b63b699eabb1aa611e2c4ecef75244a60",
+              "record_count": 11,
+              "records": [
+                {
+                  "relative_path": "runtime/compiled/runtime_address_index.json",
+                  "sha256": "fb0c947c7358b87f330c67bb1dd01d1a7e88b62c80d69e4ddd62ed8bdac41b9b",
+                  "size": 13341,
+                  "source": "/root/savant-runtime/lexicon/runtime/compiled/runtime_address_index.json",
+                  "type": "file"
+                },
+                {
+                  "relative_path": "runtime/compiled/runtime_audit.jsonl",
+                  "sha256": "9d5e788e61e6cb027255e633105f6dbe9fbf8425f4f131912f147af28f939303",
+                  "size": 631,
+                  "source": "/root/savant-runtime/lexicon/runtime/compiled/runtime_audit.jsonl",
+                  "type": "file"
+                },
+                {
+                  "relative_path": "runtime/compiled/runtime_audit_manifest.json",
+                  "sha256": "6176e50f3aa540c01804ae6f1f6266d46e458236b239e82bda358865287b91cd",
+                  "size": 1002,
+                  "source": "/root/savant-runtime/lexicon/runtime/compiled/runtime_audit_manifest.json",
+                  "type": "file"
+                },
+                {
+                  "relative_path": "runtime/compiled/runtime_audit_report.json",
+                  "sha256": "7a63f54293f511c4f600b0c7e7ec270e109c5fb0c98099c621252bbb4da7f73e",
+                  "size": 73828,
+                  "source": "/root/savant-runtime/lexicon/runtime/compiled/runtime_audit_report.json",
+                  "type": "file"
+                },
+                {
+                  "relative_path": "runtime/compiled/runtime_audit_state.json",
+                  "sha256": "cf418c10820c819012357ba8a5241efaf8da37ed35a321b1a64599514700d6c7",
+                  "size": 400,
+                  "source": "/root/savant-runtime/lexicon/runtime/compiled/runtime_audit_state.json",
+                  "type": "file"
+                },
+                {
+                  "relative_path": "runtime/compiled/runtime_dependencies.json",
+                  "sha256": "278bd1adcdd5744320adc3c3d00b42cd6aa38f56186ab1b9243eee3a362b64aa",
+                  "size": 1640,
+                  "source": "/root/savant-runtime/lexicon/runtime/compiled/runtime_dependencies.json",
+                  "type": "file"
+                },
+                {
+                  "relative_path": "runtime/compiled/runtime_graph.json",
+                  "sha256": "67148d0eb5918c5d6a0d552fe9abc12b77af4eebce6fee478bc3e0f50b5800eb",
+                  "size": 7081,
+                  "source": "/root/savant-runtime/lexicon/runtime/compiled/runtime_graph.json",
+                  "type": "file"
+                },
+                {
+                  "relative_path": "runtime/compiled/runtime_graph_manifest.json",
+                  "sha256": "8f371c46e257fa4db58de1f682659aef5ee22ea0a1ef27829ada01f8357bdead",
+                  "size": 2869,
+                  "source": "/root/savant-runtime/lexicon/runtime/compiled/runtime_graph_manifest.json",
+                  "type": "file"
+                },
+                {
+                  "relative_path": "runtime/compiled/runtime_lineage.json",
+                  "sha256": "b90620677f751990222be067a8ebbae86a0952ee96297c20b2375761298d59ca",
+                  "size": 568,
+                  "source": "/root/savant-runtime/lexicon/runtime/compiled/runtime_lineage.json",
+                  "type": "file"
+                },
+                {
+                  "relative_path": "runtime/compiled/runtime_provenance.json",
+                  "sha256": "2f25c968eea364a968566c5ddac9755bbb3179c04dc95ac80ddae26de5765841",
+                  "size": 414,
+                  "source": "/root/savant-runtime/lexicon/runtime/compiled/runtime_provenance.json",
+                  "type": "file"
+                },
+                {
+                  "relative_path": "runtime/compiled/runtime_snapshot.json",
+                  "sha256": "520852e4ff0ae877bca6f64255554f065d4e0b5cb88100f99d8955f37c59b8a0",
+                  "size": 2349,
+                  "source": "/root/savant-runtime/lexicon/runtime/compiled/runtime_snapshot.json",
+                  "type": "file"
+                }
+              ],
+              "root": "/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot",
+              "snapshot_id": "runtime:transaction:snapshot:runtime-transaction-000000000005-3b1a79753526",
+              "transaction_id": "runtime-transaction-000000000005-3b1a79753526"
+            },
+            "state": "active",
+            "transaction_id": "runtime-transaction-000000000005-3b1a79753526"
+          },
+          "execution": {
+            "action": "validate",
+            "digest": "44aa2c07c03a371eae4d96eb48a3402748aaad736468670a6b0921d4903c6941",
+            "failed_count": 1,
+            "halted": true,
+            "operation": "execute",
+            "passed": false,
+            "passed_count": 0,
+            "result_count": 1,
+            "results": [
+              {
+                "action": "validate",
+                "controller": "/root/savant-runtime/lexicon/bin/lexiconctl",
+                "controller_sha256": "dbd80c4929e6163f9167ebd75ad756baee55434d2a83b09fb9ac608e38347d4a",
+                "digest": "551421abc72212968f454166e2c45edc6f2a9cfdac0a8633a6fca5cf2e93b932",
+                "finished_at": "2026-07-27T08:29:46Z",
+                "parsed_stdout": {
+                  "error_count": 6,
+                  "issues": [
+                    {
+                      "code": "structure.authority_field_missing",
+                      "field": "authority.timestamp",
+                      "message": "Authority field is missing: timestamp",
+                      "severity": "error",
+                      "validator": "structure"
+                    },
+                    {
+                      "code": "structure.path_missing",
+                      "field": "constitution",
+                      "message": "Declared file does not exist.",
+                      "path": "/root/savant-runtime/lexicon/docs/LEXICON_CONSTITUTION.md",
+                      "severity": "error",
+                      "validator": "structure",
+                      "value": "docs/LEXICON_CONSTITUTION.md"
+                    },
+                    {
+                      "code": "schema.lineage_missing",
+                      "field": "lineage",
+                      "lexeme_id": "lex:core:authority",
+                      "message": "Lexeme does not expose lineage.",
+                      "severity": "warning",
+                      "validator": "schema"
+                    },
+                    {
+                      "code": "schema.provenance_missing",
+                      "field": "provenance",
+                      "lexeme_id": "lex:core:authority",
+                      "message": "Lexeme does not expose provenance.",
+                      "severity": "warning",
+                      "validator": "schema"
+                    },
+                    {
+                      "code": "schema.lineage_missing",
+                      "field": "lineage",
+                      "lexeme_id": "lex:core:instance",
+                      "message": "Lexeme does not expose lineage.",
+                      "severity": "warning",
+                      "validator": "schema"
+                    },
+                    {
+                      "code": "schema.provenance_missing",
+                      "field": "provenance",
+                      "lexeme_id": "lex:core:instance",
+                      "message": "Lexeme does not expose provenance.",
+                      "severity": "warning",
+                      "validator": "schema"
+                    },
+                    {
+                      "code": "schema.lineage_missing",
+                      "field": "lineage",
+                      "lexeme_id": "lex:core:segue",
+                      "message": "Lexeme does not expose lineage.",
+                      "severity": "warning",
+                      "validator": "schema"
+                    },
+                    {
+                      "code": "schema.provenance_missing",
+                      "field": "provenance",
+                      "lexeme_id": "lex:core:segue",
+                      "message": "Lexeme does not expose provenance.",
+                      "severity": "warning",
+                      "validator": "schema"
+                    },
+                    {
+                      "code": "schema.lineage_missing",
+                      "field": "lineage",
+                      "lexeme_id": "lex:core:projection",
+                      "message": "Lexeme does not expose lineage.",
+                      "severity": "warning",
+                      "validator": "schema"
+                    },
+                    {
+                      "code": "schema.provenance_missing",
+                      "field": "provenance",
+                      "lexeme_id": "lex:core:projection",
+                      "message": "Lexeme does not expose provenance.",
+                      "severity": "warning",
+                      "validator": "schema"
+                    },
+                    {
+                      "code": "schema.lineage_missing",
+                      "field": "lineage",
+                      "lexeme_id": "lex:core:lineage",
+                      "message": "Lexeme does not expose lineage.",
+                      "severity": "warning",
+                      "validator": "schema"
+                    },
+                    {
+                      "code": "schema.provenance_missing",
+                      "field": "provenance",
+                      "lexeme_id": "lex:core:lineage",
+                      "message": "Lexeme does not expose provenance.",
+                      "severity": "warning",
+                      "validator": "schema"
+                    },
+                    {
+                      "code": "schema.lineage_missing",
+                      "field": "lineage",
+                      "lexeme_id": "lex:core:provenance",
+                      "message": "Lexeme does not expose lineage.",
+                      "severity": "warning",
+                      "validator": "schema"
+                    },
+                    {
+                      "code": "schema.provenance_missing",
+                      "field": "provenance",
+                      "lexeme_id": "lex:core:provenance",
+                      "message": "Lexeme does not expose provenance.",
+                      "severity": "warning",
+                      "validator": "schema"
+                    },
+                    {
+                      "code": "schema.lineage_missing",
+                      "field": "lineage",
+                      "lexeme_id": "lex:core:kindred",
+                      "message": "Lexeme does not expose lineage.",
+                      "severity": "warning",
+                      "validator": "schema"
+                    },
+                    {
+                      "code": "schema.provenance_missing",
+                      "field": "provenance",
+                      "lexeme_id": "lex:core:kindred",
+                      "message": "Lexeme does not expose provenance.",
+                      "severity": "warning",
+                      "validator": "schema"
+                    },
+                    {
+                      "code": "schema.lineage_missing",
+                      "field": "lineage",
+                      "lexeme_id": "lex:core:lexeme",
+                      "message": "Lexeme does not expose lineage.",
+                      "severity": "warning",
+                      "validator": "schema"
+                    },
+                    {
+                      "code": "schema.provenance_missing",
+                      "field": "provenance",
+                      "lexeme_id": "lex:core:lexeme",
+                      "message": "Lexeme does not expose provenance.",
+                      "severity": "warning",
+                      "validator": "schema"
+                    },
+                    {
+                      "code": "schema.lineage_missing",
+                      "field": "lineage",
+                      "lexeme_id": "lex:core:ontology",
+                      "message": "Lexeme does not expose lineage.",
+                      "severity": "warning",
+                      "validator": "schema"
+                    },
+                    {
+                      "code": "schema.provenance_missing",
+                      "field": "provenance",
+                      "lexeme_id": "lex:core:ontology",
+                      "message": "Lexeme does not expose provenance.",
+                      "severity": "warning",
+                      "validator": "schema"
+                    },
+                    {
+                      "code": "schema.lineage_missing",
+                      "field": "lineage",
+                      "lexeme_id": "lex:core:validator",
+                      "message": "Lexeme does not expose lineage.",
+                      "severity": "warning",
+                      "validator": "schema"
+                    },
+                    {
+                      "code": "schema.provenance_missing",
+                      "field": "provenance",
+                      "lexeme_id": "lex:core:validator",
+                      "message": "Lexeme does not expose provenance.",
+                      "severity": "warning",
+                      "validator": "schema"
+                    },
+                    {
+                      "code": "terminology.forbidden_term_in_file",
+                      "line": 95,
+                      "message": "Forbidden terminology detected in repository file.",
+                      "path": "/root/savant-runtime/lexicon/registry.yaml",
+                      "severity": "error",
+                      "validator": "terminology",
+                      "value": "kinship"
+                    },
+                    {
+                      "code": "terminology.forbidden_term_in_file",
+                      "line": 96,
+                      "message": "Forbidden terminology detected in repository file.",
+                      "path": "/root/savant-runtime/lexicon/registry.yaml",
+                      "severity": "error",
+                      "validator": "terminology",
+                      "value": "kinship"
+                    },
+                    {
+                      "code": "terminology.forbidden_term_in_file",
+                      "line": 119,
+                      "message": "Forbidden terminology detected in repository file.",
+                      "path": "/root/savant-runtime/lexicon/schemas/registry.schema.yaml",
+                      "severity": "error",
+                      "validator": "terminology",
+                      "value": "kinship"
+                    },
+                    {
+                      "code": "terminology.forbidden_term_in_file",
+                      "line": 120,
+                      "message": "Forbidden terminology detected in repository file.",
+                      "path": "/root/savant-runtime/lexicon/schemas/registry.schema.yaml",
+                      "severity": "error",
+                      "validator": "terminology",
+                      "value": "kinship"
+                    }
+                  ],
+                  "reports": {
+                    "errors": "/root/savant-runtime/lexicon/reports/errors.json",
+                    "full": "/root/savant-runtime/lexicon/reports/validation_report.json",
+                    "graph": "/root/savant-runtime/lexicon/reports/graph.json",
+                    "manifest": "/root/savant-runtime/lexicon/reports/manifest.json",
+                    "summary": "/root/savant-runtime/lexicon/reports/summary.json",
+                    "warnings": "/root/savant-runtime/lexicon/reports/warnings.json"
+                  },
+                  "statistics": {
+                    "alias_count": 0,
+                    "canonical_count": 10,
+                    "concept_count": 10,
+                    "counts_by_code": {
+                      "schema.lineage_missing": 10,
+                      "schema.provenance_missing": 10,
+                      "structure.authority_field_missing": 1,
+                      "structure.path_missing": 1,
+                      "terminology.forbidden_term_in_file": 4
+                    },
+                    "counts_by_validator": {
+                      "schema": 20,
+                      "structure": 2,
+                      "terminology": 4
+                    },
+                    "error_count": 6,
+                    "identity_count": 10,
+                    "issue_count": 26,
+                    "lexeme_count": 10,
+                    "registry_sha256": "e8b266736c3a5b57ed55b7bc5ed2d138cb6d7cb0b6a677c0ee1fcd2790c54ece",
+                    "reserved_count": 11,
+                    "valid": false,
+                    "warning_count": 20
+                  },
+                  "valid": false,
+                  "warning_count": 20
+                },
+                "passed": false,
+                "returncode": 1,
+                "started_at": "2026-07-27T08:29:46Z",
+                "stderr": "",
+                "stderr_digest": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+                "stdout": "{\n  \"error_count\": 6,\n  \"issues\": [\n    {\n      \"code\": \"structure.authority_field_missing\",\n      \"field\": \"authority.timestamp\",\n      \"message\": \"Authority field is missing: timestamp\",\n      \"severity\": \"error\",\n      \"validator\": \"structure\"\n    },\n    {\n      \"code\": \"structure.path_missing\",\n      \"field\": \"constitution\",\n      \"message\": \"Declared file does not exist.\",\n      \"path\": \"/root/savant-runtime/lexicon/docs/LEXICON_CONSTITUTION.md\",\n      \"severity\": \"error\",\n      \"validator\": \"structure\",\n      \"value\": \"docs/LEXICON_CONSTITUTION.md\"\n    },\n    {\n      \"code\": \"schema.lineage_missing\",\n      \"field\": \"lineage\",\n      \"lexeme_id\": \"lex:core:authority\",\n      \"message\": \"Lexeme does not expose lineage.\",\n      \"severity\": \"warning\",\n      \"validator\": \"schema\"\n    },\n    {\n      \"code\": \"schema.provenance_missing\",\n      \"field\": \"provenance\",\n      \"lexeme_id\": \"lex:core:authority\",\n      \"message\": \"Lexeme does not expose provenance.\",\n      \"severity\": \"warning\",\n      \"validator\": \"schema\"\n    },\n    {\n      \"code\": \"schema.lineage_missing\",\n      \"field\": \"lineage\",\n      \"lexeme_id\": \"lex:core:instance\",\n      \"message\": \"Lexeme does not expose lineage.\",\n      \"severity\": \"warning\",\n      \"validator\": \"schema\"\n    },\n    {\n      \"code\": \"schema.provenance_missing\",\n      \"field\": \"provenance\",\n      \"lexeme_id\": \"lex:core:instance\",\n      \"message\": \"Lexeme does not expose provenance.\",\n      \"severity\": \"warning\",\n      \"validator\": \"schema\"\n    },\n    {\n      \"code\": \"schema.lineage_missing\",\n      \"field\": \"lineage\",\n      \"lexeme_id\": \"lex:core:segue\",\n      \"message\": \"Lexeme does not expose lineage.\",\n      \"severity\": \"warning\",\n      \"validator\": \"schema\"\n    },\n    {\n      \"code\": \"schema.provenance_missing\",\n      \"field\": \"provenance\",\n      \"lexeme_id\": \"lex:core:segue\",\n      \"message\": \"Lexeme does not expose provenance.\",\n      \"severity\": \"warning\",\n      \"validator\": \"schema\"\n    },\n    {\n      \"code\": \"schema.lineage_missing\",\n      \"field\": \"lineage\",\n      \"lexeme_id\": \"lex:core:projection\",\n      \"message\": \"Lexeme does not expose lineage.\",\n      \"severity\": \"warning\",\n      \"validator\": \"schema\"\n    },\n    {\n      \"code\": \"schema.provenance_missing\",\n      \"field\": \"provenance\",\n      \"lexeme_id\": \"lex:core:projection\",\n      \"message\": \"Lexeme does not expose provenance.\",\n      \"severity\": \"warning\",\n      \"validator\": \"schema\"\n    },\n    {\n      \"code\": \"schema.lineage_missing\",\n      \"field\": \"lineage\",\n      \"lexeme_id\": \"lex:core:lineage\",\n      \"message\": \"Lexeme does not expose lineage.\",\n      \"severity\": \"warning\",\n      \"validator\": \"schema\"\n    },\n    {\n      \"code\": \"schema.provenance_missing\",\n      \"field\": \"provenance\",\n      \"lexeme_id\": \"lex:core:lineage\",\n      \"message\": \"Lexeme does not expose provenance.\",\n      \"severity\": \"warning\",\n      \"validator\": \"schema\"\n    },\n    {\n      \"code\": \"schema.lineage_missing\",\n      \"field\": \"lineage\",\n      \"lexeme_id\": \"lex:core:provenance\",\n      \"message\": \"Lexeme does not expose lineage.\",\n      \"severity\": \"warning\",\n      \"validator\": \"schema\"\n    },\n    {\n      \"code\": \"schema.provenance_missing\",\n      \"field\": \"provenance\",\n      \"lexeme_id\": \"lex:core:provenance\",\n      \"message\": \"Lexeme does not expose provenance.\",\n      \"severity\": \"warning\",\n      \"validator\": \"schema\"\n    },\n    {\n      \"code\": \"schema.lineage_missing\",\n      \"field\": \"lineage\",\n      \"lexeme_id\": \"lex:core:kindred\",\n      \"message\": \"Lexeme does not expose lineage.\",\n      \"severity\": \"warning\",\n      \"validator\": \"schema\"\n    },\n    {\n      \"code\": \"schema.provenance_missing\",\n      \"field\": \"provenance\",\n      \"lexeme_id\": \"lex:core:kindred\",\n      \"message\": \"Lexeme does not expose provenance.\",\n      \"severity\": \"warning\",\n      \"validator\": \"schema\"\n    },\n    {\n      \"code\": \"schema.lineage_missing\",\n      \"field\": \"lineage\",\n      \"lexeme_id\": \"lex:core:lexeme\",\n      \"message\": \"Lexeme does not expose lineage.\",\n      \"severity\": \"warning\",\n      \"validator\": \"schema\"\n    },\n    {\n      \"code\": \"schema.provenance_missing\",\n      \"field\": \"provenance\",\n      \"lexeme_id\": \"lex:core:lexeme\",\n      \"message\": \"Lexeme does not expose provenance.\",\n      \"severity\": \"warning\",\n      \"validator\": \"schema\"\n    },\n    {\n      \"code\": \"schema.lineage_missing\",\n      \"field\": \"lineage\",\n      \"lexeme_id\": \"lex:core:ontology\",\n      \"message\": \"Lexeme does not expose lineage.\",\n      \"severity\": \"warning\",\n      \"validator\": \"schema\"\n    },\n    {\n      \"code\": \"schema.provenance_missing\",\n      \"field\": \"provenance\",\n      \"lexeme_id\": \"lex:core:ontology\",\n      \"message\": \"Lexeme does not expose provenance.\",\n      \"severity\": \"warning\",\n      \"validator\": \"schema\"\n    },\n    {\n      \"code\": \"schema.lineage_missing\",\n      \"field\": \"lineage\",\n      \"lexeme_id\": \"lex:core:validator\",\n      \"message\": \"Lexeme does not expose lineage.\",\n      \"severity\": \"warning\",\n      \"validator\": \"schema\"\n    },\n    {\n      \"code\": \"schema.provenance_missing\",\n      \"field\": \"provenance\",\n      \"lexeme_id\": \"lex:core:validator\",\n      \"message\": \"Lexeme does not expose provenance.\",\n      \"severity\": \"warning\",\n      \"validator\": \"schema\"\n    },\n    {\n      \"code\": \"terminology.forbidden_term_in_file\",\n      \"line\": 95,\n      \"message\": \"Forbidden terminology detected in repository file.\",\n      \"path\": \"/root/savant-runtime/lexicon/registry.yaml\",\n      \"severity\": \"error\",\n      \"validator\": \"terminology\",\n      \"value\": \"kinship\"\n    },\n    {\n      \"code\": \"terminology.forbidden_term_in_file\",\n      \"line\": 96,\n      \"message\": \"Forbidden terminology detected in repository file.\",\n      \"path\": \"/root/savant-runtime/lexicon/registry.yaml\",\n      \"severity\": \"error\",\n      \"validator\": \"terminology\",\n      \"value\": \"kinship\"\n    },\n    {\n      \"code\": \"terminology.forbidden_term_in_file\",\n      \"line\": 119,\n      \"message\": \"Forbidden terminology detected in repository file.\",\n      \"path\": \"/root/savant-runtime/lexicon/schemas/registry.schema.yaml\",\n      \"severity\": \"error\",\n      \"validator\": \"terminology\",\n      \"value\": \"kinship\"\n    },\n    {\n      \"code\": \"terminology.forbidden_term_in_file\",\n      \"line\": 120,\n      \"message\": \"Forbidden terminology detected in repository file.\",\n      \"path\": \"/root/savant-runtime/lexicon/schemas/registry.schema.yaml\",\n      \"severity\": \"error\",\n      \"validator\": \"terminology\",\n      \"value\": \"kinship\"\n    }\n  ],\n  \"reports\": {\n    \"errors\": \"/root/savant-runtime/lexicon/reports/errors.json\",\n    \"full\": \"/root/savant-runtime/lexicon/reports/validation_report.json\",\n    \"graph\": \"/root/savant-runtime/lexicon/reports/graph.json\",\n    \"manifest\": \"/root/savant-runtime/lexicon/reports/manifest.json\",\n    \"summary\": \"/root/savant-runtime/lexicon/reports/summary.json\",\n    \"warnings\": \"/root/savant-runtime/lexicon/reports/warnings.json\"\n  },\n  \"statistics\": {\n    \"alias_count\": 0,\n    \"canonical_count\": 10,\n    \"concept_count\": 10,\n    \"counts_by_code\": {\n      \"schema.lineage_missing\": 10,\n      \"schema.provenance_missing\": 10,\n      \"structure.authority_field_missing\": 1,\n      \"structure.path_missing\": 1,\n      \"terminology.forbidden_term_in_file\": 4\n    },\n    \"counts_by_validator\": {\n      \"schema\": 20,\n      \"structure\": 2,\n      \"terminology\": 4\n    },\n    \"error_count\": 6,\n    \"identity_count\": 10,\n    \"issue_count\": 26,\n    \"lexeme_count\": 10,\n    \"registry_sha256\": \"e8b266736c3a5b57ed55b7bc5ed2d138cb6d7cb0b6a677c0ee1fcd2790c54ece\",\n    \"reserved_count\": 11,\n    \"valid\": false,\n    \"warning_count\": 20\n  },\n  \"valid\": false,\n  \"warning_count\": 20\n}\n",
+                "stdout_digest": "965e6a48531f350b63ebd4d84ff95eae94ea69d8fe9b774260f8e3d3bde246f9",
+                "subsystem": "lexicon"
+              }
+            ],
+            "subsystems": [
+              "lexicon",
+              "ontology",
+              "kindred",
+              "instance",
+              "segue",
+              "projection",
+              "constitution"
+            ],
+            "transaction_id": "runtime-transaction-000000000005-3b1a79753526"
+          },
+          "final": {
+            "event": {
+              "digest": "13a077796dabd0964512fc0c2ee6309ebf5a8ddf6b958b450fe2a80ebe917f64",
+              "event_id": "runtime:transaction:event:000000000015",
+              "event_type": "rollback",
+              "payload": {
+                "digest": "96cb3f25d0cee3b58bcdd05016caa9f29edb5ea516c18a2646631798fb132165",
+                "reason": "automatic rollback after execution failure",
+                "restoration": {
+                  "digest": "7a418d4cdc8f8bb1b884a15723cd7b9c30272ee681622a1ee43c7bd41fa4c053",
+                  "records": [
+                    {
+                      "destination": "/root/savant-runtime/lexicon/runtime/compiled/runtime_address_index.json",
+                      "sha256": "fb0c947c7358b87f330c67bb1dd01d1a7e88b62c80d69e4ddd62ed8bdac41b9b",
+                      "source": "/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_address_index.json"
+                    },
+                    {
+                      "destination": "/root/savant-runtime/lexicon/runtime/compiled/runtime_audit.jsonl",
+                      "sha256": "9d5e788e61e6cb027255e633105f6dbe9fbf8425f4f131912f147af28f939303",
+                      "source": "/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_audit.jsonl"
+                    },
+                    {
+                      "destination": "/root/savant-runtime/lexicon/runtime/compiled/runtime_audit_manifest.json",
+                      "sha256": "6176e50f3aa540c01804ae6f1f6266d46e458236b239e82bda358865287b91cd",
+                      "source": "/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_audit_manifest.json"
+                    },
+                    {
+                      "destination": "/root/savant-runtime/lexicon/runtime/compiled/runtime_audit_report.json",
+                      "sha256": "7a63f54293f511c4f600b0c7e7ec270e109c5fb0c98099c621252bbb4da7f73e",
+                      "source": "/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_audit_report.json"
+                    },
+                    {
+                      "destination": "/root/savant-runtime/lexicon/runtime/compiled/runtime_audit_state.json",
+                      "sha256": "cf418c10820c819012357ba8a5241efaf8da37ed35a321b1a64599514700d6c7",
+                      "source": "/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_audit_state.json"
+                    },
+                    {
+                      "destination": "/root/savant-runtime/lexicon/runtime/compiled/runtime_dependencies.json",
+                      "sha256": "278bd1adcdd5744320adc3c3d00b42cd6aa38f56186ab1b9243eee3a362b64aa",
+                      "source": "/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_dependencies.json"
+                    },
+                    {
+                      "destination": "/root/savant-runtime/lexicon/runtime/compiled/runtime_graph.json",
+                      "sha256": "67148d0eb5918c5d6a0d552fe9abc12b77af4eebce6fee478bc3e0f50b5800eb",
+                      "source": "/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_graph.json"
+                    },
+                    {
+                      "destination": "/root/savant-runtime/lexicon/runtime/compiled/runtime_graph_manifest.json",
+                      "sha256": "8f371c46e257fa4db58de1f682659aef5ee22ea0a1ef27829ada01f8357bdead",
+                      "source": "/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_graph_manifest.json"
+                    },
+                    {
+                      "destination": "/root/savant-runtime/lexicon/runtime/compiled/runtime_lineage.json",
+                      "sha256": "b90620677f751990222be067a8ebbae86a0952ee96297c20b2375761298d59ca",
+                      "source": "/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_lineage.json"
+                    },
+                    {
+                      "destination": "/root/savant-runtime/lexicon/runtime/compiled/runtime_provenance.json",
+                      "sha256": "2f25c968eea364a968566c5ddac9755bbb3179c04dc95ac80ddae26de5765841",
+                      "source": "/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_provenance.json"
+                    },
+                    {
+                      "destination": "/root/savant-runtime/lexicon/runtime/compiled/runtime_snapshot.json",
+                      "sha256": "520852e4ff0ae877bca6f64255554f065d4e0b5cb88100f99d8955f37c59b8a0",
+                      "source": "/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_snapshot.json"
+                    }
+                  ],
+                  "restored_at": "2026-07-27T08:29:46Z",
+                  "restored_count": 11,
+                  "snapshot_digest": "200d953cb2343b8cb3a5cb72179a520b63b699eabb1aa611e2c4ecef75244a60"
+                },
+                "rolled_back_at": "2026-07-27T08:29:46Z"
+              },
+              "previous_digest": "9482febbfed479eff3b55dca27764d1a56f2f92c6b33adfee6d2604d5abe704f",
+              "sequence": 15,
+              "timestamp": "2026-07-27T08:29:46Z",
+              "transaction_id": "runtime-transaction-000000000005-3b1a79753526"
+            },
+            "operation": "rollback",
+            "passed": true,
+            "path": "/root/savant-runtime/lexicon/runtime/transactions/rolled_back/runtime-transaction-000000000005-3b1a79753526",
+            "rollback": {
+              "digest": "96cb3f25d0cee3b58bcdd05016caa9f29edb5ea516c18a2646631798fb132165",
+              "reason": "automatic rollback after execution failure",
+              "restoration": {
+                "digest": "7a418d4cdc8f8bb1b884a15723cd7b9c30272ee681622a1ee43c7bd41fa4c053",
+                "records": [
+                  {
+                    "destination": "/root/savant-runtime/lexicon/runtime/compiled/runtime_address_index.json",
+                    "sha256": "fb0c947c7358b87f330c67bb1dd01d1a7e88b62c80d69e4ddd62ed8bdac41b9b",
+                    "source": "/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_address_index.json"
+                  },
+                  {
+                    "destination": "/root/savant-runtime/lexicon/runtime/compiled/runtime_audit.jsonl",
+                    "sha256": "9d5e788e61e6cb027255e633105f6dbe9fbf8425f4f131912f147af28f939303",
+                    "source": "/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_audit.jsonl"
+                  },
+                  {
+                    "destination": "/root/savant-runtime/lexicon/runtime/compiled/runtime_audit_manifest.json",
+                    "sha256": "6176e50f3aa540c01804ae6f1f6266d46e458236b239e82bda358865287b91cd",
+                    "source": "/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_audit_manifest.json"
+                  },
+                  {
+                    "destination": "/root/savant-runtime/lexicon/runtime/compiled/runtime_audit_report.json",
+                    "sha256": "7a63f54293f511c4f600b0c7e7ec270e109c5fb0c98099c621252bbb4da7f73e",
+                    "source": "/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_audit_report.json"
+                  },
+                  {
+                    "destination": "/root/savant-runtime/lexicon/runtime/compiled/runtime_audit_state.json",
+                    "sha256": "cf418c10820c819012357ba8a5241efaf8da37ed35a321b1a64599514700d6c7",
+                    "source": "/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_audit_state.json"
+                  },
+                  {
+                    "destination": "/root/savant-runtime/lexicon/runtime/compiled/runtime_dependencies.json",
+                    "sha256": "278bd1adcdd5744320adc3c3d00b42cd6aa38f56186ab1b9243eee3a362b64aa",
+                    "source": "/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_dependencies.json"
+                  },
+                  {
+                    "destination": "/root/savant-runtime/lexicon/runtime/compiled/runtime_graph.json",
+                    "sha256": "67148d0eb5918c5d6a0d552fe9abc12b77af4eebce6fee478bc3e0f50b5800eb",
+                    "source": "/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_graph.json"
+                  },
+                  {
+                    "destination": "/root/savant-runtime/lexicon/runtime/compiled/runtime_graph_manifest.json",
+                    "sha256": "8f371c46e257fa4db58de1f682659aef5ee22ea0a1ef27829ada01f8357bdead",
+                    "source": "/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_graph_manifest.json"
+                  },
+                  {
+                    "destination": "/root/savant-runtime/lexicon/runtime/compiled/runtime_lineage.json",
+                    "sha256": "b90620677f751990222be067a8ebbae86a0952ee96297c20b2375761298d59ca",
+                    "source": "/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_lineage.json"
+                  },
+                  {
+                    "destination": "/root/savant-runtime/lexicon/runtime/compiled/runtime_provenance.json",
+                    "sha256": "2f25c968eea364a968566c5ddac9755bbb3179c04dc95ac80ddae26de5765841",
+                    "source": "/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_provenance.json"
+                  },
+                  {
+                    "destination": "/root/savant-runtime/lexicon/runtime/compiled/runtime_snapshot.json",
+                    "sha256": "520852e4ff0ae877bca6f64255554f065d4e0b5cb88100f99d8955f37c59b8a0",
+                    "source": "/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_snapshot.json"
+                  }
+                ],
+                "restored_at": "2026-07-27T08:29:46Z",
+                "restored_count": 11,
+                "snapshot_digest": "200d953cb2343b8cb3a5cb72179a520b63b699eabb1aa611e2c4ecef75244a60"
+              },
+              "rolled_back_at": "2026-07-27T08:29:46Z"
+            },
+            "state": "rolled_back",
+            "transaction_id": "runtime-transaction-000000000005-3b1a79753526"
+          },
+          "operation": "run",
+          "passed": false,
+          "transaction_id": "runtime-transaction-000000000005-3b1a79753526"
+        },
+        "passed": false,
+        "returncode": 1,
+        "started_at": "2026-07-27T08:29:46Z",
+        "stderr": "",
+        "stderr_digest": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "stdout": "{\n  \"begin\": {\n    \"event\": {\n      \"digest\": \"711fd5e6ce83c40469a4c73ae5f27bfb5a5d6e36aed8aac2de02bee85582f9ae\",\n      \"event_id\": \"runtime:transaction:event:000000000013\",\n      \"event_type\": \"begin\",\n      \"payload\": {\n        \"action\": \"validate\",\n        \"snapshot_digest\": \"200d953cb2343b8cb3a5cb72179a520b63b699eabb1aa611e2c4ecef75244a60\",\n        \"subsystems\": [\n          \"lexicon\",\n          \"ontology\",\n          \"kindred\",\n          \"instance\",\n          \"segue\",\n          \"projection\",\n          \"constitution\"\n        ]\n      },\n      \"previous_digest\": \"49c803cb2a2918dbd864d6cd3b328fb09d736f101a4d4f07752c4a964d894680\",\n      \"sequence\": 13,\n      \"timestamp\": \"2026-07-27T08:29:46Z\",\n      \"transaction_id\": \"runtime-transaction-000000000005-3b1a79753526\"\n    },\n    \"operation\": \"begin\",\n    \"passed\": true,\n    \"path\": \"/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526\",\n    \"snapshot\": {\n      \"created_at\": \"2026-07-27T08:29:46Z\",\n      \"digest\": \"200d953cb2343b8cb3a5cb72179a520b63b699eabb1aa611e2c4ecef75244a60\",\n      \"record_count\": 11,\n      \"records\": [\n        {\n          \"relative_path\": \"runtime/compiled/runtime_address_index.json\",\n          \"sha256\": \"fb0c947c7358b87f330c67bb1dd01d1a7e88b62c80d69e4ddd62ed8bdac41b9b\",\n          \"size\": 13341,\n          \"source\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_address_index.json\",\n          \"type\": \"file\"\n        },\n        {\n          \"relative_path\": \"runtime/compiled/runtime_audit.jsonl\",\n          \"sha256\": \"9d5e788e61e6cb027255e633105f6dbe9fbf8425f4f131912f147af28f939303\",\n          \"size\": 631,\n          \"source\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_audit.jsonl\",\n          \"type\": \"file\"\n        },\n        {\n          \"relative_path\": \"runtime/compiled/runtime_audit_manifest.json\",\n          \"sha256\": \"6176e50f3aa540c01804ae6f1f6266d46e458236b239e82bda358865287b91cd\",\n          \"size\": 1002,\n          \"source\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_audit_manifest.json\",\n          \"type\": \"file\"\n        },\n        {\n          \"relative_path\": \"runtime/compiled/runtime_audit_report.json\",\n          \"sha256\": \"7a63f54293f511c4f600b0c7e7ec270e109c5fb0c98099c621252bbb4da7f73e\",\n          \"size\": 73828,\n          \"source\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_audit_report.json\",\n          \"type\": \"file\"\n        },\n        {\n          \"relative_path\": \"runtime/compiled/runtime_audit_state.json\",\n          \"sha256\": \"cf418c10820c819012357ba8a5241efaf8da37ed35a321b1a64599514700d6c7\",\n          \"size\": 400,\n          \"source\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_audit_state.json\",\n          \"type\": \"file\"\n        },\n        {\n          \"relative_path\": \"runtime/compiled/runtime_dependencies.json\",\n          \"sha256\": \"278bd1adcdd5744320adc3c3d00b42cd6aa38f56186ab1b9243eee3a362b64aa\",\n          \"size\": 1640,\n          \"source\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_dependencies.json\",\n          \"type\": \"file\"\n        },\n        {\n          \"relative_path\": \"runtime/compiled/runtime_graph.json\",\n          \"sha256\": \"67148d0eb5918c5d6a0d552fe9abc12b77af4eebce6fee478bc3e0f50b5800eb\",\n          \"size\": 7081,\n          \"source\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_graph.json\",\n          \"type\": \"file\"\n        },\n        {\n          \"relative_path\": \"runtime/compiled/runtime_graph_manifest.json\",\n          \"sha256\": \"8f371c46e257fa4db58de1f682659aef5ee22ea0a1ef27829ada01f8357bdead\",\n          \"size\": 2869,\n          \"source\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_graph_manifest.json\",\n          \"type\": \"file\"\n        },\n        {\n          \"relative_path\": \"runtime/compiled/runtime_lineage.json\",\n          \"sha256\": \"b90620677f751990222be067a8ebbae86a0952ee96297c20b2375761298d59ca\",\n          \"size\": 568,\n          \"source\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_lineage.json\",\n          \"type\": \"file\"\n        },\n        {\n          \"relative_path\": \"runtime/compiled/runtime_provenance.json\",\n          \"sha256\": \"2f25c968eea364a968566c5ddac9755bbb3179c04dc95ac80ddae26de5765841\",\n          \"size\": 414,\n          \"source\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_provenance.json\",\n          \"type\": \"file\"\n        },\n        {\n          \"relative_path\": \"runtime/compiled/runtime_snapshot.json\",\n          \"sha256\": \"520852e4ff0ae877bca6f64255554f065d4e0b5cb88100f99d8955f37c59b8a0\",\n          \"size\": 2349,\n          \"source\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_snapshot.json\",\n          \"type\": \"file\"\n        }\n      ],\n      \"root\": \"/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot\",\n      \"snapshot_id\": \"runtime:transaction:snapshot:runtime-transaction-000000000005-3b1a79753526\",\n      \"transaction_id\": \"runtime-transaction-000000000005-3b1a79753526\"\n    },\n    \"state\": \"active\",\n    \"transaction_id\": \"runtime-transaction-000000000005-3b1a79753526\"\n  },\n  \"execution\": {\n    \"action\": \"validate\",\n    \"digest\": \"44aa2c07c03a371eae4d96eb48a3402748aaad736468670a6b0921d4903c6941\",\n    \"failed_count\": 1,\n    \"halted\": true,\n    \"operation\": \"execute\",\n    \"passed\": false,\n    \"passed_count\": 0,\n    \"result_count\": 1,\n    \"results\": [\n      {\n        \"action\": \"validate\",\n        \"controller\": \"/root/savant-runtime/lexicon/bin/lexiconctl\",\n        \"controller_sha256\": \"dbd80c4929e6163f9167ebd75ad756baee55434d2a83b09fb9ac608e38347d4a\",\n        \"digest\": \"551421abc72212968f454166e2c45edc6f2a9cfdac0a8633a6fca5cf2e93b932\",\n        \"finished_at\": \"2026-07-27T08:29:46Z\",\n        \"parsed_stdout\": {\n          \"error_count\": 6,\n          \"issues\": [\n            {\n              \"code\": \"structure.authority_field_missing\",\n              \"field\": \"authority.timestamp\",\n              \"message\": \"Authority field is missing: timestamp\",\n              \"severity\": \"error\",\n              \"validator\": \"structure\"\n            },\n            {\n              \"code\": \"structure.path_missing\",\n              \"field\": \"constitution\",\n              \"message\": \"Declared file does not exist.\",\n              \"path\": \"/root/savant-runtime/lexicon/docs/LEXICON_CONSTITUTION.md\",\n              \"severity\": \"error\",\n              \"validator\": \"structure\",\n              \"value\": \"docs/LEXICON_CONSTITUTION.md\"\n            },\n            {\n              \"code\": \"schema.lineage_missing\",\n              \"field\": \"lineage\",\n              \"lexeme_id\": \"lex:core:authority\",\n              \"message\": \"Lexeme does not expose lineage.\",\n              \"severity\": \"warning\",\n              \"validator\": \"schema\"\n            },\n            {\n              \"code\": \"schema.provenance_missing\",\n              \"field\": \"provenance\",\n              \"lexeme_id\": \"lex:core:authority\",\n              \"message\": \"Lexeme does not expose provenance.\",\n              \"severity\": \"warning\",\n              \"validator\": \"schema\"\n            },\n            {\n              \"code\": \"schema.lineage_missing\",\n              \"field\": \"lineage\",\n              \"lexeme_id\": \"lex:core:instance\",\n              \"message\": \"Lexeme does not expose lineage.\",\n              \"severity\": \"warning\",\n              \"validator\": \"schema\"\n            },\n            {\n              \"code\": \"schema.provenance_missing\",\n              \"field\": \"provenance\",\n              \"lexeme_id\": \"lex:core:instance\",\n              \"message\": \"Lexeme does not expose provenance.\",\n              \"severity\": \"warning\",\n              \"validator\": \"schema\"\n            },\n            {\n              \"code\": \"schema.lineage_missing\",\n              \"field\": \"lineage\",\n              \"lexeme_id\": \"lex:core:segue\",\n              \"message\": \"Lexeme does not expose lineage.\",\n              \"severity\": \"warning\",\n              \"validator\": \"schema\"\n            },\n            {\n              \"code\": \"schema.provenance_missing\",\n              \"field\": \"provenance\",\n              \"lexeme_id\": \"lex:core:segue\",\n              \"message\": \"Lexeme does not expose provenance.\",\n              \"severity\": \"warning\",\n              \"validator\": \"schema\"\n            },\n            {\n              \"code\": \"schema.lineage_missing\",\n              \"field\": \"lineage\",\n              \"lexeme_id\": \"lex:core:projection\",\n              \"message\": \"Lexeme does not expose lineage.\",\n              \"severity\": \"warning\",\n              \"validator\": \"schema\"\n            },\n            {\n              \"code\": \"schema.provenance_missing\",\n              \"field\": \"provenance\",\n              \"lexeme_id\": \"lex:core:projection\",\n              \"message\": \"Lexeme does not expose provenance.\",\n              \"severity\": \"warning\",\n              \"validator\": \"schema\"\n            },\n            {\n              \"code\": \"schema.lineage_missing\",\n              \"field\": \"lineage\",\n              \"lexeme_id\": \"lex:core:lineage\",\n              \"message\": \"Lexeme does not expose lineage.\",\n              \"severity\": \"warning\",\n              \"validator\": \"schema\"\n            },\n            {\n              \"code\": \"schema.provenance_missing\",\n              \"field\": \"provenance\",\n              \"lexeme_id\": \"lex:core:lineage\",\n              \"message\": \"Lexeme does not expose provenance.\",\n              \"severity\": \"warning\",\n              \"validator\": \"schema\"\n            },\n            {\n              \"code\": \"schema.lineage_missing\",\n              \"field\": \"lineage\",\n              \"lexeme_id\": \"lex:core:provenance\",\n              \"message\": \"Lexeme does not expose lineage.\",\n              \"severity\": \"warning\",\n              \"validator\": \"schema\"\n            },\n            {\n              \"code\": \"schema.provenance_missing\",\n              \"field\": \"provenance\",\n              \"lexeme_id\": \"lex:core:provenance\",\n              \"message\": \"Lexeme does not expose provenance.\",\n              \"severity\": \"warning\",\n              \"validator\": \"schema\"\n            },\n            {\n              \"code\": \"schema.lineage_missing\",\n              \"field\": \"lineage\",\n              \"lexeme_id\": \"lex:core:kindred\",\n              \"message\": \"Lexeme does not expose lineage.\",\n              \"severity\": \"warning\",\n              \"validator\": \"schema\"\n            },\n            {\n              \"code\": \"schema.provenance_missing\",\n              \"field\": \"provenance\",\n              \"lexeme_id\": \"lex:core:kindred\",\n              \"message\": \"Lexeme does not expose provenance.\",\n              \"severity\": \"warning\",\n              \"validator\": \"schema\"\n            },\n            {\n              \"code\": \"schema.lineage_missing\",\n              \"field\": \"lineage\",\n              \"lexeme_id\": \"lex:core:lexeme\",\n              \"message\": \"Lexeme does not expose lineage.\",\n              \"severity\": \"warning\",\n              \"validator\": \"schema\"\n            },\n            {\n              \"code\": \"schema.provenance_missing\",\n              \"field\": \"provenance\",\n              \"lexeme_id\": \"lex:core:lexeme\",\n              \"message\": \"Lexeme does not expose provenance.\",\n              \"severity\": \"warning\",\n              \"validator\": \"schema\"\n            },\n            {\n              \"code\": \"schema.lineage_missing\",\n              \"field\": \"lineage\",\n              \"lexeme_id\": \"lex:core:ontology\",\n              \"message\": \"Lexeme does not expose lineage.\",\n              \"severity\": \"warning\",\n              \"validator\": \"schema\"\n            },\n            {\n              \"code\": \"schema.provenance_missing\",\n              \"field\": \"provenance\",\n              \"lexeme_id\": \"lex:core:ontology\",\n              \"message\": \"Lexeme does not expose provenance.\",\n              \"severity\": \"warning\",\n              \"validator\": \"schema\"\n            },\n            {\n              \"code\": \"schema.lineage_missing\",\n              \"field\": \"lineage\",\n              \"lexeme_id\": \"lex:core:validator\",\n              \"message\": \"Lexeme does not expose lineage.\",\n              \"severity\": \"warning\",\n              \"validator\": \"schema\"\n            },\n            {\n              \"code\": \"schema.provenance_missing\",\n              \"field\": \"provenance\",\n              \"lexeme_id\": \"lex:core:validator\",\n              \"message\": \"Lexeme does not expose provenance.\",\n              \"severity\": \"warning\",\n              \"validator\": \"schema\"\n            },\n            {\n              \"code\": \"terminology.forbidden_term_in_file\",\n              \"line\": 95,\n              \"message\": \"Forbidden terminology detected in repository file.\",\n              \"path\": \"/root/savant-runtime/lexicon/registry.yaml\",\n              \"severity\": \"error\",\n              \"validator\": \"terminology\",\n              \"value\": \"kinship\"\n            },\n            {\n              \"code\": \"terminology.forbidden_term_in_file\",\n              \"line\": 96,\n              \"message\": \"Forbidden terminology detected in repository file.\",\n              \"path\": \"/root/savant-runtime/lexicon/registry.yaml\",\n              \"severity\": \"error\",\n              \"validator\": \"terminology\",\n              \"value\": \"kinship\"\n            },\n            {\n              \"code\": \"terminology.forbidden_term_in_file\",\n              \"line\": 119,\n              \"message\": \"Forbidden terminology detected in repository file.\",\n              \"path\": \"/root/savant-runtime/lexicon/schemas/registry.schema.yaml\",\n              \"severity\": \"error\",\n              \"validator\": \"terminology\",\n              \"value\": \"kinship\"\n            },\n            {\n              \"code\": \"terminology.forbidden_term_in_file\",\n              \"line\": 120,\n              \"message\": \"Forbidden terminology detected in repository file.\",\n              \"path\": \"/root/savant-runtime/lexicon/schemas/registry.schema.yaml\",\n              \"severity\": \"error\",\n              \"validator\": \"terminology\",\n              \"value\": \"kinship\"\n            }\n          ],\n          \"reports\": {\n            \"errors\": \"/root/savant-runtime/lexicon/reports/errors.json\",\n            \"full\": \"/root/savant-runtime/lexicon/reports/validation_report.json\",\n            \"graph\": \"/root/savant-runtime/lexicon/reports/graph.json\",\n            \"manifest\": \"/root/savant-runtime/lexicon/reports/manifest.json\",\n            \"summary\": \"/root/savant-runtime/lexicon/reports/summary.json\",\n            \"warnings\": \"/root/savant-runtime/lexicon/reports/warnings.json\"\n          },\n          \"statistics\": {\n            \"alias_count\": 0,\n            \"canonical_count\": 10,\n            \"concept_count\": 10,\n            \"counts_by_code\": {\n              \"schema.lineage_missing\": 10,\n              \"schema.provenance_missing\": 10,\n              \"structure.authority_field_missing\": 1,\n              \"structure.path_missing\": 1,\n              \"terminology.forbidden_term_in_file\": 4\n            },\n            \"counts_by_validator\": {\n              \"schema\": 20,\n              \"structure\": 2,\n              \"terminology\": 4\n            },\n            \"error_count\": 6,\n            \"identity_count\": 10,\n            \"issue_count\": 26,\n            \"lexeme_count\": 10,\n            \"registry_sha256\": \"e8b266736c3a5b57ed55b7bc5ed2d138cb6d7cb0b6a677c0ee1fcd2790c54ece\",\n            \"reserved_count\": 11,\n            \"valid\": false,\n            \"warning_count\": 20\n          },\n          \"valid\": false,\n          \"warning_count\": 20\n        },\n        \"passed\": false,\n        \"returncode\": 1,\n        \"started_at\": \"2026-07-27T08:29:46Z\",\n        \"stderr\": \"\",\n        \"stderr_digest\": \"12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126\",\n        \"stdout\": \"{\\n  \\\"error_count\\\": 6,\\n  \\\"issues\\\": [\\n    {\\n      \\\"code\\\": \\\"structure.authority_field_missing\\\",\\n      \\\"field\\\": \\\"authority.timestamp\\\",\\n      \\\"message\\\": \\\"Authority field is missing: timestamp\\\",\\n      \\\"severity\\\": \\\"error\\\",\\n      \\\"validator\\\": \\\"structure\\\"\\n    },\\n    {\\n      \\\"code\\\": \\\"structure.path_missing\\\",\\n      \\\"field\\\": \\\"constitution\\\",\\n      \\\"message\\\": \\\"Declared file does not exist.\\\",\\n      \\\"path\\\": \\\"/root/savant-runtime/lexicon/docs/LEXICON_CONSTITUTION.md\\\",\\n      \\\"severity\\\": \\\"error\\\",\\n      \\\"validator\\\": \\\"structure\\\",\\n      \\\"value\\\": \\\"docs/LEXICON_CONSTITUTION.md\\\"\\n    },\\n    {\\n      \\\"code\\\": \\\"schema.lineage_missing\\\",\\n      \\\"field\\\": \\\"lineage\\\",\\n      \\\"lexeme_id\\\": \\\"lex:core:authority\\\",\\n      \\\"message\\\": \\\"Lexeme does not expose lineage.\\\",\\n      \\\"severity\\\": \\\"warning\\\",\\n      \\\"validator\\\": \\\"schema\\\"\\n    },\\n    {\\n      \\\"code\\\": \\\"schema.provenance_missing\\\",\\n      \\\"field\\\": \\\"provenance\\\",\\n      \\\"lexeme_id\\\": \\\"lex:core:authority\\\",\\n      \\\"message\\\": \\\"Lexeme does not expose provenance.\\\",\\n      \\\"severity\\\": \\\"warning\\\",\\n      \\\"validator\\\": \\\"schema\\\"\\n    },\\n    {\\n      \\\"code\\\": \\\"schema.lineage_missing\\\",\\n      \\\"field\\\": \\\"lineage\\\",\\n      \\\"lexeme_id\\\": \\\"lex:core:instance\\\",\\n      \\\"message\\\": \\\"Lexeme does not expose lineage.\\\",\\n      \\\"severity\\\": \\\"warning\\\",\\n      \\\"validator\\\": \\\"schema\\\"\\n    },\\n    {\\n      \\\"code\\\": \\\"schema.provenance_missing\\\",\\n      \\\"field\\\": \\\"provenance\\\",\\n      \\\"lexeme_id\\\": \\\"lex:core:instance\\\",\\n      \\\"message\\\": \\\"Lexeme does not expose provenance.\\\",\\n      \\\"severity\\\": \\\"warning\\\",\\n      \\\"validator\\\": \\\"schema\\\"\\n    },\\n    {\\n      \\\"code\\\": \\\"schema.lineage_missing\\\",\\n      \\\"field\\\": \\\"lineage\\\",\\n      \\\"lexeme_id\\\": \\\"lex:core:segue\\\",\\n      \\\"message\\\": \\\"Lexeme does not expose lineage.\\\",\\n      \\\"severity\\\": \\\"warning\\\",\\n      \\\"validator\\\": \\\"schema\\\"\\n    },\\n    {\\n      \\\"code\\\": \\\"schema.provenance_missing\\\",\\n      \\\"field\\\": \\\"provenance\\\",\\n      \\\"lexeme_id\\\": \\\"lex:core:segue\\\",\\n      \\\"message\\\": \\\"Lexeme does not expose provenance.\\\",\\n      \\\"severity\\\": \\\"warning\\\",\\n      \\\"validator\\\": \\\"schema\\\"\\n    },\\n    {\\n      \\\"code\\\": \\\"schema.lineage_missing\\\",\\n      \\\"field\\\": \\\"lineage\\\",\\n      \\\"lexeme_id\\\": \\\"lex:core:projection\\\",\\n      \\\"message\\\": \\\"Lexeme does not expose lineage.\\\",\\n      \\\"severity\\\": \\\"warning\\\",\\n      \\\"validator\\\": \\\"schema\\\"\\n    },\\n    {\\n      \\\"code\\\": \\\"schema.provenance_missing\\\",\\n      \\\"field\\\": \\\"provenance\\\",\\n      \\\"lexeme_id\\\": \\\"lex:core:projection\\\",\\n      \\\"message\\\": \\\"Lexeme does not expose provenance.\\\",\\n      \\\"severity\\\": \\\"warning\\\",\\n      \\\"validator\\\": \\\"schema\\\"\\n    },\\n    {\\n      \\\"code\\\": \\\"schema.lineage_missing\\\",\\n      \\\"field\\\": \\\"lineage\\\",\\n      \\\"lexeme_id\\\": \\\"lex:core:lineage\\\",\\n      \\\"message\\\": \\\"Lexeme does not expose lineage.\\\",\\n      \\\"severity\\\": \\\"warning\\\",\\n      \\\"validator\\\": \\\"schema\\\"\\n    },\\n    {\\n      \\\"code\\\": \\\"schema.provenance_missing\\\",\\n      \\\"field\\\": \\\"provenance\\\",\\n      \\\"lexeme_id\\\": \\\"lex:core:lineage\\\",\\n      \\\"message\\\": \\\"Lexeme does not expose provenance.\\\",\\n      \\\"severity\\\": \\\"warning\\\",\\n      \\\"validator\\\": \\\"schema\\\"\\n    },\\n    {\\n      \\\"code\\\": \\\"schema.lineage_missing\\\",\\n      \\\"field\\\": \\\"lineage\\\",\\n      \\\"lexeme_id\\\": \\\"lex:core:provenance\\\",\\n      \\\"message\\\": \\\"Lexeme does not expose lineage.\\\",\\n      \\\"severity\\\": \\\"warning\\\",\\n      \\\"validator\\\": \\\"schema\\\"\\n    },\\n    {\\n      \\\"code\\\": \\\"schema.provenance_missing\\\",\\n      \\\"field\\\": \\\"provenance\\\",\\n      \\\"lexeme_id\\\": \\\"lex:core:provenance\\\",\\n      \\\"message\\\": \\\"Lexeme does not expose provenance.\\\",\\n      \\\"severity\\\": \\\"warning\\\",\\n      \\\"validator\\\": \\\"schema\\\"\\n    },\\n    {\\n      \\\"code\\\": \\\"schema.lineage_missing\\\",\\n      \\\"field\\\": \\\"lineage\\\",\\n      \\\"lexeme_id\\\": \\\"lex:core:kindred\\\",\\n      \\\"message\\\": \\\"Lexeme does not expose lineage.\\\",\\n      \\\"severity\\\": \\\"warning\\\",\\n      \\\"validator\\\": \\\"schema\\\"\\n    },\\n    {\\n      \\\"code\\\": \\\"schema.provenance_missing\\\",\\n      \\\"field\\\": \\\"provenance\\\",\\n      \\\"lexeme_id\\\": \\\"lex:core:kindred\\\",\\n      \\\"message\\\": \\\"Lexeme does not expose provenance.\\\",\\n      \\\"severity\\\": \\\"warning\\\",\\n      \\\"validator\\\": \\\"schema\\\"\\n    },\\n    {\\n      \\\"code\\\": \\\"schema.lineage_missing\\\",\\n      \\\"field\\\": \\\"lineage\\\",\\n      \\\"lexeme_id\\\": \\\"lex:core:lexeme\\\",\\n      \\\"message\\\": \\\"Lexeme does not expose lineage.\\\",\\n      \\\"severity\\\": \\\"warning\\\",\\n      \\\"validator\\\": \\\"schema\\\"\\n    },\\n    {\\n      \\\"code\\\": \\\"schema.provenance_missing\\\",\\n      \\\"field\\\": \\\"provenance\\\",\\n      \\\"lexeme_id\\\": \\\"lex:core:lexeme\\\",\\n      \\\"message\\\": \\\"Lexeme does not expose provenance.\\\",\\n      \\\"severity\\\": \\\"warning\\\",\\n      \\\"validator\\\": \\\"schema\\\"\\n    },\\n    {\\n      \\\"code\\\": \\\"schema.lineage_missing\\\",\\n      \\\"field\\\": \\\"lineage\\\",\\n      \\\"lexeme_id\\\": \\\"lex:core:ontology\\\",\\n      \\\"message\\\": \\\"Lexeme does not expose lineage.\\\",\\n      \\\"severity\\\": \\\"warning\\\",\\n      \\\"validator\\\": \\\"schema\\\"\\n    },\\n    {\\n      \\\"code\\\": \\\"schema.provenance_missing\\\",\\n      \\\"field\\\": \\\"provenance\\\",\\n      \\\"lexeme_id\\\": \\\"lex:core:ontology\\\",\\n      \\\"message\\\": \\\"Lexeme does not expose provenance.\\\",\\n      \\\"severity\\\": \\\"warning\\\",\\n      \\\"validator\\\": \\\"schema\\\"\\n    },\\n    {\\n      \\\"code\\\": \\\"schema.lineage_missing\\\",\\n      \\\"field\\\": \\\"lineage\\\",\\n      \\\"lexeme_id\\\": \\\"lex:core:validator\\\",\\n      \\\"message\\\": \\\"Lexeme does not expose lineage.\\\",\\n      \\\"severity\\\": \\\"warning\\\",\\n      \\\"validator\\\": \\\"schema\\\"\\n    },\\n    {\\n      \\\"code\\\": \\\"schema.provenance_missing\\\",\\n      \\\"field\\\": \\\"provenance\\\",\\n      \\\"lexeme_id\\\": \\\"lex:core:validator\\\",\\n      \\\"message\\\": \\\"Lexeme does not expose provenance.\\\",\\n      \\\"severity\\\": \\\"warning\\\",\\n      \\\"validator\\\": \\\"schema\\\"\\n    },\\n    {\\n      \\\"code\\\": \\\"terminology.forbidden_term_in_file\\\",\\n      \\\"line\\\": 95,\\n      \\\"message\\\": \\\"Forbidden terminology detected in repository file.\\\",\\n      \\\"path\\\": \\\"/root/savant-runtime/lexicon/registry.yaml\\\",\\n      \\\"severity\\\": \\\"error\\\",\\n      \\\"validator\\\": \\\"terminology\\\",\\n      \\\"value\\\": \\\"kinship\\\"\\n    },\\n    {\\n      \\\"code\\\": \\\"terminology.forbidden_term_in_file\\\",\\n      \\\"line\\\": 96,\\n      \\\"message\\\": \\\"Forbidden terminology detected in repository file.\\\",\\n      \\\"path\\\": \\\"/root/savant-runtime/lexicon/registry.yaml\\\",\\n      \\\"severity\\\": \\\"error\\\",\\n      \\\"validator\\\": \\\"terminology\\\",\\n      \\\"value\\\": \\\"kinship\\\"\\n    },\\n    {\\n      \\\"code\\\": \\\"terminology.forbidden_term_in_file\\\",\\n      \\\"line\\\": 119,\\n      \\\"message\\\": \\\"Forbidden terminology detected in repository file.\\\",\\n      \\\"path\\\": \\\"/root/savant-runtime/lexicon/schemas/registry.schema.yaml\\\",\\n      \\\"severity\\\": \\\"error\\\",\\n      \\\"validator\\\": \\\"terminology\\\",\\n      \\\"value\\\": \\\"kinship\\\"\\n    },\\n    {\\n      \\\"code\\\": \\\"terminology.forbidden_term_in_file\\\",\\n      \\\"line\\\": 120,\\n      \\\"message\\\": \\\"Forbidden terminology detected in repository file.\\\",\\n      \\\"path\\\": \\\"/root/savant-runtime/lexicon/schemas/registry.schema.yaml\\\",\\n      \\\"severity\\\": \\\"error\\\",\\n      \\\"validator\\\": \\\"terminology\\\",\\n      \\\"value\\\": \\\"kinship\\\"\\n    }\\n  ],\\n  \\\"reports\\\": {\\n    \\\"errors\\\": \\\"/root/savant-runtime/lexicon/reports/errors.json\\\",\\n    \\\"full\\\": \\\"/root/savant-runtime/lexicon/reports/validation_report.json\\\",\\n    \\\"graph\\\": \\\"/root/savant-runtime/lexicon/reports/graph.json\\\",\\n    \\\"manifest\\\": \\\"/root/savant-runtime/lexicon/reports/manifest.json\\\",\\n    \\\"summary\\\": \\\"/root/savant-runtime/lexicon/reports/summary.json\\\",\\n    \\\"warnings\\\": \\\"/root/savant-runtime/lexicon/reports/warnings.json\\\"\\n  },\\n  \\\"statistics\\\": {\\n    \\\"alias_count\\\": 0,\\n    \\\"canonical_count\\\": 10,\\n    \\\"concept_count\\\": 10,\\n    \\\"counts_by_code\\\": {\\n      \\\"schema.lineage_missing\\\": 10,\\n      \\\"schema.provenance_missing\\\": 10,\\n      \\\"structure.authority_field_missing\\\": 1,\\n      \\\"structure.path_missing\\\": 1,\\n      \\\"terminology.forbidden_term_in_file\\\": 4\\n    },\\n    \\\"counts_by_validator\\\": {\\n      \\\"schema\\\": 20,\\n      \\\"structure\\\": 2,\\n      \\\"terminology\\\": 4\\n    },\\n    \\\"error_count\\\": 6,\\n    \\\"identity_count\\\": 10,\\n    \\\"issue_count\\\": 26,\\n    \\\"lexeme_count\\\": 10,\\n    \\\"registry_sha256\\\": \\\"e8b266736c3a5b57ed55b7bc5ed2d138cb6d7cb0b6a677c0ee1fcd2790c54ece\\\",\\n    \\\"reserved_count\\\": 11,\\n    \\\"valid\\\": false,\\n    \\\"warning_count\\\": 20\\n  },\\n  \\\"valid\\\": false,\\n  \\\"warning_count\\\": 20\\n}\\n\",\n        \"stdout_digest\": \"965e6a48531f350b63ebd4d84ff95eae94ea69d8fe9b774260f8e3d3bde246f9\",\n        \"subsystem\": \"lexicon\"\n      }\n    ],\n    \"subsystems\": [\n      \"lexicon\",\n      \"ontology\",\n      \"kindred\",\n      \"instance\",\n      \"segue\",\n      \"projection\",\n      \"constitution\"\n    ],\n    \"transaction_id\": \"runtime-transaction-000000000005-3b1a79753526\"\n  },\n  \"final\": {\n    \"event\": {\n      \"digest\": \"13a077796dabd0964512fc0c2ee6309ebf5a8ddf6b958b450fe2a80ebe917f64\",\n      \"event_id\": \"runtime:transaction:event:000000000015\",\n      \"event_type\": \"rollback\",\n      \"payload\": {\n        \"digest\": \"96cb3f25d0cee3b58bcdd05016caa9f29edb5ea516c18a2646631798fb132165\",\n        \"reason\": \"automatic rollback after execution failure\",\n        \"restoration\": {\n          \"digest\": \"7a418d4cdc8f8bb1b884a15723cd7b9c30272ee681622a1ee43c7bd41fa4c053\",\n          \"records\": [\n            {\n              \"destination\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_address_index.json\",\n              \"sha256\": \"fb0c947c7358b87f330c67bb1dd01d1a7e88b62c80d69e4ddd62ed8bdac41b9b\",\n              \"source\": \"/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_address_index.json\"\n            },\n            {\n              \"destination\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_audit.jsonl\",\n              \"sha256\": \"9d5e788e61e6cb027255e633105f6dbe9fbf8425f4f131912f147af28f939303\",\n              \"source\": \"/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_audit.jsonl\"\n            },\n            {\n              \"destination\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_audit_manifest.json\",\n              \"sha256\": \"6176e50f3aa540c01804ae6f1f6266d46e458236b239e82bda358865287b91cd\",\n              \"source\": \"/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_audit_manifest.json\"\n            },\n            {\n              \"destination\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_audit_report.json\",\n              \"sha256\": \"7a63f54293f511c4f600b0c7e7ec270e109c5fb0c98099c621252bbb4da7f73e\",\n              \"source\": \"/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_audit_report.json\"\n            },\n            {\n              \"destination\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_audit_state.json\",\n              \"sha256\": \"cf418c10820c819012357ba8a5241efaf8da37ed35a321b1a64599514700d6c7\",\n              \"source\": \"/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_audit_state.json\"\n            },\n            {\n              \"destination\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_dependencies.json\",\n              \"sha256\": \"278bd1adcdd5744320adc3c3d00b42cd6aa38f56186ab1b9243eee3a362b64aa\",\n              \"source\": \"/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_dependencies.json\"\n            },\n            {\n              \"destination\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_graph.json\",\n              \"sha256\": \"67148d0eb5918c5d6a0d552fe9abc12b77af4eebce6fee478bc3e0f50b5800eb\",\n              \"source\": \"/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_graph.json\"\n            },\n            {\n              \"destination\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_graph_manifest.json\",\n              \"sha256\": \"8f371c46e257fa4db58de1f682659aef5ee22ea0a1ef27829ada01f8357bdead\",\n              \"source\": \"/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_graph_manifest.json\"\n            },\n            {\n              \"destination\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_lineage.json\",\n              \"sha256\": \"b90620677f751990222be067a8ebbae86a0952ee96297c20b2375761298d59ca\",\n              \"source\": \"/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_lineage.json\"\n            },\n            {\n              \"destination\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_provenance.json\",\n              \"sha256\": \"2f25c968eea364a968566c5ddac9755bbb3179c04dc95ac80ddae26de5765841\",\n              \"source\": \"/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_provenance.json\"\n            },\n            {\n              \"destination\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_snapshot.json\",\n              \"sha256\": \"520852e4ff0ae877bca6f64255554f065d4e0b5cb88100f99d8955f37c59b8a0\",\n              \"source\": \"/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_snapshot.json\"\n            }\n          ],\n          \"restored_at\": \"2026-07-27T08:29:46Z\",\n          \"restored_count\": 11,\n          \"snapshot_digest\": \"200d953cb2343b8cb3a5cb72179a520b63b699eabb1aa611e2c4ecef75244a60\"\n        },\n        \"rolled_back_at\": \"2026-07-27T08:29:46Z\"\n      },\n      \"previous_digest\": \"9482febbfed479eff3b55dca27764d1a56f2f92c6b33adfee6d2604d5abe704f\",\n      \"sequence\": 15,\n      \"timestamp\": \"2026-07-27T08:29:46Z\",\n      \"transaction_id\": \"runtime-transaction-000000000005-3b1a79753526\"\n    },\n    \"operation\": \"rollback\",\n    \"passed\": true,\n    \"path\": \"/root/savant-runtime/lexicon/runtime/transactions/rolled_back/runtime-transaction-000000000005-3b1a79753526\",\n    \"rollback\": {\n      \"digest\": \"96cb3f25d0cee3b58bcdd05016caa9f29edb5ea516c18a2646631798fb132165\",\n      \"reason\": \"automatic rollback after execution failure\",\n      \"restoration\": {\n        \"digest\": \"7a418d4cdc8f8bb1b884a15723cd7b9c30272ee681622a1ee43c7bd41fa4c053\",\n        \"records\": [\n          {\n            \"destination\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_address_index.json\",\n            \"sha256\": \"fb0c947c7358b87f330c67bb1dd01d1a7e88b62c80d69e4ddd62ed8bdac41b9b\",\n            \"source\": \"/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_address_index.json\"\n          },\n          {\n            \"destination\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_audit.jsonl\",\n            \"sha256\": \"9d5e788e61e6cb027255e633105f6dbe9fbf8425f4f131912f147af28f939303\",\n            \"source\": \"/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_audit.jsonl\"\n          },\n          {\n            \"destination\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_audit_manifest.json\",\n            \"sha256\": \"6176e50f3aa540c01804ae6f1f6266d46e458236b239e82bda358865287b91cd\",\n            \"source\": \"/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_audit_manifest.json\"\n          },\n          {\n            \"destination\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_audit_report.json\",\n            \"sha256\": \"7a63f54293f511c4f600b0c7e7ec270e109c5fb0c98099c621252bbb4da7f73e\",\n            \"source\": \"/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_audit_report.json\"\n          },\n          {\n            \"destination\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_audit_state.json\",\n            \"sha256\": \"cf418c10820c819012357ba8a5241efaf8da37ed35a321b1a64599514700d6c7\",\n            \"source\": \"/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_audit_state.json\"\n          },\n          {\n            \"destination\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_dependencies.json\",\n            \"sha256\": \"278bd1adcdd5744320adc3c3d00b42cd6aa38f56186ab1b9243eee3a362b64aa\",\n            \"source\": \"/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_dependencies.json\"\n          },\n          {\n            \"destination\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_graph.json\",\n            \"sha256\": \"67148d0eb5918c5d6a0d552fe9abc12b77af4eebce6fee478bc3e0f50b5800eb\",\n            \"source\": \"/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_graph.json\"\n          },\n          {\n            \"destination\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_graph_manifest.json\",\n            \"sha256\": \"8f371c46e257fa4db58de1f682659aef5ee22ea0a1ef27829ada01f8357bdead\",\n            \"source\": \"/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_graph_manifest.json\"\n          },\n          {\n            \"destination\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_lineage.json\",\n            \"sha256\": \"b90620677f751990222be067a8ebbae86a0952ee96297c20b2375761298d59ca\",\n            \"source\": \"/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_lineage.json\"\n          },\n          {\n            \"destination\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_provenance.json\",\n            \"sha256\": \"2f25c968eea364a968566c5ddac9755bbb3179c04dc95ac80ddae26de5765841\",\n            \"source\": \"/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_provenance.json\"\n          },\n          {\n            \"destination\": \"/root/savant-runtime/lexicon/runtime/compiled/runtime_snapshot.json\",\n            \"sha256\": \"520852e4ff0ae877bca6f64255554f065d4e0b5cb88100f99d8955f37c59b8a0\",\n            \"source\": \"/root/savant-runtime/lexicon/runtime/transactions/active/runtime-transaction-000000000005-3b1a79753526/snapshot/runtime/compiled/runtime_snapshot.json\"\n          }\n        ],\n        \"restored_at\": \"2026-07-27T08:29:46Z\",\n        \"restored_count\": 11,\n        \"snapshot_digest\": \"200d953cb2343b8cb3a5cb72179a520b63b699eabb1aa611e2c4ecef75244a60\"\n      },\n      \"rolled_back_at\": \"2026-07-27T08:29:46Z\"\n    },\n    \"state\": \"rolled_back\",\n    \"transaction_id\": \"runtime-transaction-000000000005-3b1a79753526\"\n  },\n  \"operation\": \"run\",\n  \"passed\": false,\n  \"transaction_id\": \"runtime-transaction-000000000005-3b1a79753526\"\n}\n",
+        "stdout_digest": "bb430a53687a0c37a05baa4084e9194812dc7091e56cbac771e2c4428df729b7"
+      },
+      "skipped": false
+    }
+  ],
+  "stop_on_failure": true
+}
