@@ -1,0 +1,70 @@
+{
+  "authoritative": false,
+  "child_profile": "child",
+  "deterministic_hash": "284a443513ede7b4848bc7295354e2e1509b1db43d8d8cf3b34653d503edfa70",
+  "domain": "global",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "lineage.composition.4048a8e87b9f165cd3e1",
+  "impeti": [],
+  "namespace": "preview.kindred",
+  "parent_profile": "parent",
+  "plane": "lineage",
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "role": "composition",
+  "schema": "savant.kindred.preview.lineage_segue.v2",
+  "source": "runtime.filament.projection_engine",
+  "source_record": {
+    "axis": "containment",
+    "canonical_source": "runtime.filament.projection_engine",
+    "canonical_target": "authority_db.savant",
+    "continuation": "neutral",
+    "id": "lineage.composition.4048a8e87b9f165cd3e1",
+    "inheritance": {
+      "conflict_policy": "child_wins",
+      "exclude": [],
+      "fields": [],
+      "mode": "reference"
+    },
+    "inverse": "component",
+    "kind": "contains",
+    "metadata": {
+      "adapter": "authority",
+      "source_field": "composition.children",
+      "source_path": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/projections/json/runtime__filament__projection_engine.json"
+    },
+    "order": 0,
+    "propagation": {
+      "channels": [
+        "validation",
+        "projection",
+        "regeneration"
+      ],
+      "enabled": true
+    },
+    "provenance": {
+      "created_by": "authority_adapter",
+      "created_from": [
+        "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/projections/json/runtime__filament__projection_engine.json"
+      ],
+      "source_files": [
+        "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/projections/json/runtime__filament__projection_engine.json"
+      ]
+    },
+    "role": "composition",
+    "scope": "global",
+    "source": "runtime.filament.projection_engine",
+    "status": "active",
+    "symbolic_child_alias": "child",
+    "symbolic_parent_alias": "parent",
+    "target": "authority_db.savant",
+    "weight": 2
+  },
+  "state": "active",
+  "synthetic": false,
+  "target": "authority_db.savant"
+}

@@ -1,0 +1,330 @@
+savant-runtime [savant-runtime] <directory> state=active slot=root authority=delegated collapsed=34 internal_relationships=7
+├── foundation:dynamic-canon [foundation:dynamic-canon] <foundation> state=active slot=10_foundations authority=authoritative collapsed=0 internal_relationships=0
+├── authority_graph [authority_graph] <directory> state=active slot=20_authority authority=authoritative collapsed=20 internal_relationships=20
+├── canon [canon] <directory> state=active slot=20_authority authority=authoritative collapsed=13 internal_relationships=13
+│   └── palaver [canon/palaver] <directory> state=active slot=20_authority authority=authoritative collapsed=1 internal_relationships=1
+├── canon-system [canon-system] <directory> state=active slot=20_authority authority=delegated collapsed=54 internal_relationships=54
+│   ├── authority [canon-system/authority] <directory> state=active slot=20_authority authority=delegated collapsed=16 internal_relationships=16
+│   │   └── exiles [canon-system/authority/exiles] <directory> state=active slot=20_authority authority=delegated collapsed=0 internal_relationships=0
+│   │       ├── carbon.yaml [canon-system/authority/exiles/carbon.yaml] <file> state=active slot=20_authority authority=delegated collapsed=0 internal_relationships=0
+│   │       ├── cataxis.yaml [canon-system/authority/exiles/cataxis.yaml] <file> state=active slot=20_authority authority=delegated collapsed=0 internal_relationships=0
+│   │       ├── coda.yaml [canon-system/authority/exiles/coda.yaml] <file> state=active slot=20_authority authority=delegated collapsed=0 internal_relationships=0
+│   │       ├── envoy.yaml [canon-system/authority/exiles/envoy.yaml] <file> state=active slot=20_authority authority=delegated collapsed=0 internal_relationships=0
+│   │       ├── filament.yaml [canon-system/authority/exiles/filament.yaml] <file> state=active slot=20_authority authority=delegated collapsed=0 internal_relationships=0
+│   │       ├── graffiti.yaml [canon-system/authority/exiles/graffiti.yaml] <file> state=active slot=20_authority authority=delegated collapsed=0 internal_relationships=0
+│   │       ├── lore.yaml [canon-system/authority/exiles/lore.yaml] <file> state=active slot=20_authority authority=delegated collapsed=0 internal_relationships=0
+│   │       ├── mobius.yaml [canon-system/authority/exiles/mobius.yaml] <file> state=active slot=20_authority authority=delegated collapsed=0 internal_relationships=0
+│   │       ├── modus.yaml [canon-system/authority/exiles/modus.yaml] <file> state=active slot=20_authority authority=delegated collapsed=0 internal_relationships=0
+│   │       ├── niche.yaml [canon-system/authority/exiles/niche.yaml] <file> state=active slot=20_authority authority=delegated collapsed=0 internal_relationships=0
+│   │       ├── notary.yaml [canon-system/authority/exiles/notary.yaml] <file> state=active slot=20_authority authority=delegated collapsed=0 internal_relationships=0
+│   │       ├── opus.yaml [canon-system/authority/exiles/opus.yaml] <file> state=active slot=20_authority authority=delegated collapsed=0 internal_relationships=0
+│   │       ├── pact.yaml [canon-system/authority/exiles/pact.yaml] <file> state=active slot=20_authority authority=delegated collapsed=0 internal_relationships=0
+│   │       ├── palaver.yaml [canon-system/authority/exiles/palaver.yaml] <file> state=active slot=20_authority authority=delegated collapsed=0 internal_relationships=0
+│   │       ├── shatter.yaml [canon-system/authority/exiles/shatter.yaml] <file> state=active slot=20_authority authority=delegated collapsed=0 internal_relationships=0
+│   │       ├── underscore.yaml [canon-system/authority/exiles/underscore.yaml] <file> state=active slot=20_authority authority=delegated collapsed=0 internal_relationships=0
+│   │       ├── urge.yaml [canon-system/authority/exiles/urge.yaml] <file> state=active slot=20_authority authority=delegated collapsed=0 internal_relationships=0
+│   │       └── zero.yaml [canon-system/authority/exiles/zero.yaml] <file> state=active slot=20_authority authority=delegated collapsed=0 internal_relationships=0
+│   └── runtime [canon-system/runtime] <directory> state=active slot=20_authority authority=delegated collapsed=3 internal_relationships=3
+├── policy.content_composition [policy.content_composition] <policy> state=active slot=20_authority authority=authoritative collapsed=0 internal_relationships=0
+├── policy.functional_lineage [policy.functional_lineage] <policy> state=active slot=20_authority authority=authoritative collapsed=0 internal_relationships=0
+├── policy.future_attachment [policy.future_attachment] <policy> state=active slot=20_authority authority=authoritative collapsed=0 internal_relationships=0
+├── policy.recursive_composition [policy.recursive_composition] <policy> state=active slot=20_authority authority=authoritative collapsed=0 internal_relationships=0
+├── policy:emergence [policy:emergence] <policy> state=active slot=20_authority authority=authoritative collapsed=0 internal_relationships=0
+├── policy:projection [policy:projection] <policy> state=active slot=20_authority authority=authoritative collapsed=0 internal_relationships=0
+├── policy:supersession [policy:supersession] <policy> state=active slot=20_authority authority=authoritative collapsed=0 internal_relationships=0
+├── policy:unknowns [policy:unknowns] <policy> state=active slot=20_authority authority=authoritative collapsed=0 internal_relationships=0
+├── registry.lineage_roles [registry.lineage_roles] <registry> state=active slot=20_authority authority=authoritative collapsed=0 internal_relationships=0
+├── registry.lineage_roles.index [registry.lineage_roles.index] <role_registry_index> state=active slot=20_authority authority=authoritative collapsed=0 internal_relationships=0
+├── registry.lineage_roles.system [registry.lineage_roles.system] <role_registry_extension> state=active slot=20_authority authority=authoritative collapsed=0 internal_relationships=0
+├── template.composite_instance [template.composite_instance] <template> state=active slot=20_authority authority=authoritative collapsed=0 internal_relationships=0
+├── template.line_instance [template.line_instance] <template> state=active slot=20_authority authority=authoritative collapsed=0 internal_relationships=0
+│   ├── line.example.echo [line.example.echo] <instance> state=active slot=80_children authority=authoritative collapsed=0 internal_relationships=0
+│   │   └── snippet.example.body [snippet.example.body] <instance> state=active slot=80_children authority=authoritative collapsed=0 internal_relationships=0
+│   │       └── script.example [script.example] <instance> state=active slot=80_children authority=authoritative collapsed=0 internal_relationships=0
+│   ├── line.example.shebang [line.example.shebang] <instance> state=active slot=80_children authority=authoritative collapsed=0 internal_relationships=0
+│   │   └── snippet.example.header [snippet.example.header] <instance> state=active slot=80_children authority=authoritative collapsed=0 internal_relationships=0
+│   └── line.example.strict [line.example.strict] <instance> state=active slot=80_children authority=authoritative collapsed=0 internal_relationships=0
+├── template.lineage_segue [template.lineage_segue] <template> state=active slot=20_authority authority=authoritative collapsed=0 internal_relationships=0
+├── template.script_instance [template.script_instance] <template> state=active slot=20_authority authority=authoritative collapsed=0 internal_relationships=0
+├── template.snippet_instance [template.snippet_instance] <template> state=active slot=20_authority authority=authoritative collapsed=0 internal_relationships=0
+├── avatar_forge [carbon.apps.avatar_forge] <instance> state=active slot=30_ontology authority=delegated collapsed=0 internal_relationships=0
+├── carbon [exile:carbon] <exile> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+├── cataxis [exile:cataxis] <exile> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+├── coda [exile:coda] <exile> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+├── envoy [exile:envoy] <exile> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+├── filament [exile:filament] <exile> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+├── graffiti [exile:graffiti] <exile> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+├── lore [exile:lore] <exile> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+├── mobius [exile:mobius] <exile> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+├── modus [exile:modus] <exile> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+├── niche [exile:niche] <exile> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+├── notary [exile:notary] <exile> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+├── ontology [ontology] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│   └── obelisks [ontology/obelisks] <directory> state=active slot=30_ontology authority=authoritative collapsed=111 internal_relationships=111
+│       └── gates [ontology/obelisks/_template/segue/gates] <directory> state=active slot=30_ontology authority=authoritative collapsed=20 internal_relationships=20
+│           └── innates [ontology/obelisks/_template/segue/gates/_template/segue/innates] <directory> state=active slot=30_ontology authority=authoritative collapsed=20 internal_relationships=20
+│               └── exiles [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles] <directory> state=active slot=30_ontology authority=authoritative collapsed=237 internal_relationships=237
+│                   ├── carbon [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/carbon] <directory> state=active slot=30_ontology authority=authoritative collapsed=141 internal_relationships=141
+│                   │   └── prodigals [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/carbon/segue/prodigals] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   ├── cataxis [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/cataxis] <directory> state=active slot=30_ontology authority=authoritative collapsed=101 internal_relationships=101
+│                   │   └── prodigals [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/cataxis/segue/prodigals] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   ├── coda [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/coda] <directory> state=active slot=30_ontology authority=authoritative collapsed=101 internal_relationships=101
+│                   │   └── prodigals [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/coda/segue/prodigals] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   ├── envoy [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy] <directory> state=active slot=30_ontology authority=authoritative collapsed=126 internal_relationships=126
+│                   │   └── prodigals [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/segue/prodigals] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   ├── filament [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament] <directory> state=active slot=30_ontology authority=authoritative collapsed=116 internal_relationships=116
+│                   │   └── prodigals [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/segue/prodigals] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   ├── graffiti [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/graffiti] <directory> state=active slot=30_ontology authority=authoritative collapsed=101 internal_relationships=101
+│                   │   └── prodigals [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/graffiti/segue/prodigals] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   ├── lore [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/lore] <directory> state=active slot=30_ontology authority=authoritative collapsed=101 internal_relationships=101
+│                   │   └── prodigals [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/lore/segue/prodigals] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   ├── mobius [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/mobius] <directory> state=active slot=30_ontology authority=authoritative collapsed=101 internal_relationships=101
+│                   │   └── prodigals [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/mobius/segue/prodigals] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   ├── modus [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus] <directory> state=active slot=30_ontology authority=authoritative collapsed=101 internal_relationships=101
+│                   │   └── prodigals [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/segue/prodigals] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   ├── niche [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/niche] <directory> state=active slot=30_ontology authority=authoritative collapsed=101 internal_relationships=101
+│                   │   └── prodigals [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/niche/segue/prodigals] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   ├── notary [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/notary] <directory> state=active slot=30_ontology authority=authoritative collapsed=101 internal_relationships=101
+│                   │   └── prodigals [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/notary/segue/prodigals] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   ├── opus [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus] <directory> state=active slot=30_ontology authority=authoritative collapsed=146 internal_relationships=146
+│                   │   └── prodigals [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/segue/prodigals] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   ├── pact [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/pact] <directory> state=active slot=30_ontology authority=authoritative collapsed=101 internal_relationships=101
+│                   │   └── prodigals [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/pact/segue/prodigals] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   ├── prodigals [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals] <directory> state=active slot=30_ontology authority=authoritative collapsed=249 internal_relationships=249
+│                   │   ├── apps [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/apps] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   │   ├── authority [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/authority] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   │   ├── cache [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/cache] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   │   ├── canon [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/canon] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   │   ├── composition [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/composition] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   │   ├── dynamic [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/dynamic] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   │   ├── entity.json [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/entity.json] <file> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   │   ├── evolution [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/evolution] <directory> state=active slot=30_ontology authority=authoritative collapsed=5 internal_relationships=5
+│                   │   ├── facets [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/facets] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   │   ├── graph [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/graph] <directory> state=active slot=30_ontology authority=authoritative collapsed=4 internal_relationships=4
+│                   │   ├── interface [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/interface] <directory> state=active slot=30_ontology authority=authoritative collapsed=5 internal_relationships=5
+│                   │   ├── introspection [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/introspection] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   │   ├── lifecycle [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/lifecycle] <directory> state=active slot=30_ontology authority=authoritative collapsed=6 internal_relationships=6
+│                   │   ├── lineage [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/lineage] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   │   ├── metrics [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/metrics] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   │   ├── observatory [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/observatory] <directory> state=active slot=30_ontology authority=authoritative collapsed=5 internal_relationships=5
+│                   │   ├── README.md [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/README.md] <file> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   │   ├── registry [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/registry] <directory> state=active slot=30_ontology authority=authoritative collapsed=8 internal_relationships=8
+│                   │   ├── runtime [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/runtime] <directory> state=active slot=30_ontology authority=authoritative collapsed=12 internal_relationships=12
+│                   │   ├── sessions [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/sessions] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   │   ├── state [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/state] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   │   ├── static [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/static] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   │   ├── tests [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/tests] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   │   └── validation [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/validation] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   ├── palaver [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver] <directory> state=active slot=30_ontology authority=authoritative collapsed=263 internal_relationships=263
+│                   │   ├── prodigals [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/segue/prodigals] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   │   └── palaver [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/apps/webui-nextgen/src/palaver] <directory> state=active slot=30_ontology authority=authoritative collapsed=46 internal_relationships=46
+│                   ├── shatter [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/shatter] <directory> state=active slot=30_ontology authority=authoritative collapsed=101 internal_relationships=101
+│                   │   └── prodigals [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/shatter/segue/prodigals] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   ├── underscore [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/underscore] <directory> state=active slot=30_ontology authority=authoritative collapsed=101 internal_relationships=101
+│                   │   └── prodigals [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/underscore/segue/prodigals] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   ├── urge [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/urge] <directory> state=active slot=30_ontology authority=authoritative collapsed=101 internal_relationships=101
+│                   │   └── prodigals [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/urge/segue/prodigals] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+│                   └── zero [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/zero] <directory> state=active slot=30_ontology authority=authoritative collapsed=101 internal_relationships=101
+│                       └── prodigals [ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/zero/segue/prodigals] <directory> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+├── opus [exile:opus] <exile> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+├── pact [exile:pact] <exile> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+├── palaver [exile:palaver] <exile> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+├── shatter [exile:shatter] <exile> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+├── underscore [exile:underscore] <exile> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+├── urge [exile:urge] <exile> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+├── zero [exile:zero] <exile> state=active slot=30_ontology authority=authoritative collapsed=0 internal_relationships=0
+├── runtime [runtime] <directory> state=active slot=40_runtime authority=authoritative collapsed=18 internal_relationships=18
+│   ├── envoy [runtime/envoy] <directory> state=active slot=40_runtime authority=authoritative collapsed=1 internal_relationships=1
+│   └── palaver [runtime/palaver] <directory> state=active slot=40_runtime authority=authoritative collapsed=24 internal_relationships=24
+├── webui_ultra [webui_ultra] <directory> state=active slot=45_interfaces authority=delegated collapsed=0 internal_relationships=0
+├── vault [vault] <directory> state=active slot=50_projections authority=delegated collapsed=4 internal_relationships=4
+│   └── authority [vault/authority] <directory> state=active slot=50_projections authority=delegated collapsed=1 internal_relationships=1
+├── tools [tools] <directory> state=active slot=60_tools authority=delegated collapsed=16 internal_relationships=16
+│   └── authority_graph [tools/authority_graph] <directory> state=active slot=60_tools authority=delegated collapsed=1 internal_relationships=1
+├── bin [bin] <directory> state=active slot=80_children authority=delegated collapsed=1 internal_relationships=1
+├── prodigal_runtime [prodigal_runtime] <instance> state=active slot=80_children authority=authoritative collapsed=0 internal_relationships=0
+├── quirk_runtime [quirk_runtime] <instance> state=active slot=80_children authority=authoritative collapsed=0 internal_relationships=0
+├── quirks [quirks] <instance> state=active slot=80_children authority=authoritative collapsed=0 internal_relationships=0
+├── carbon [carbon] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── carbon.capabilities [carbon.capabilities] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── carbon.capabilities.avatar_forge [carbon.capabilities.avatar_forge] <simulation> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── carbon.contracts [carbon.contracts] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── carbon.dependencies [carbon.dependencies] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── carbon.exports [carbon.exports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── carbon.health [carbon.health] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── carbon.imports [carbon.imports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── carbon.lineage.avatar_forge [carbon.lineage.avatar_forge] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── carbon.observatory.avatar_forge_compatibility [carbon.observatory.avatar_forge_compatibility] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── cataxis [cataxis] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── cataxis.capabilities [cataxis.capabilities] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── cataxis.contracts [cataxis.contracts] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── cataxis.dependencies [cataxis.dependencies] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── cataxis.exports [cataxis.exports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── cataxis.health [cataxis.health] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── cataxis.imports [cataxis.imports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── coda [coda] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── coda.capabilities [coda.capabilities] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── coda.contracts [coda.contracts] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── coda.dependencies [coda.dependencies] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── coda.exports [coda.exports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── coda.health [coda.health] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── coda.imports [coda.imports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── contract.filament.projection_engine [contract.filament.projection_engine] <contract> state=active slot=80_children authority=authoritative collapsed=0 internal_relationships=0
+├── elevenlabs_tts [elevenlabs_tts] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── envoy [envoy] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── envoy-opus [envoy-opus] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── envoy-palaver [envoy-palaver] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── envoy.capabilities [envoy.capabilities] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── envoy.contracts [envoy.contracts] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── envoy.dependencies [envoy.dependencies] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── envoy.exports [envoy.exports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── envoy.health [envoy.health] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── envoy.imports [envoy.imports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── envoy:opus_voice_pipeline [envoy:opus_voice_pipeline] <instance> state=active slot=80_children authority=authoritative collapsed=0 internal_relationships=0
+├── envoy_voice_provider [envoy_voice_provider] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── exile.filament [exile.filament] <instance> state=active slot=80_children authority=authoritative collapsed=0 internal_relationships=0
+│   └── runtime.filament.projection_engine [runtime.filament.projection_engine] <instance> state=active slot=80_children authority=authoritative collapsed=0 internal_relationships=0
+│       └── authority_db.savant [authority_db.savant] <instance> state=active slot=80_children authority=authoritative collapsed=0 internal_relationships=0
+├── exile_runtime [exile_runtime] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── exiles [exiles] <reference> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── filament [filament] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── filament.capabilities [filament.capabilities] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── filament.contracts [filament.contracts] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── filament.dependencies [filament.dependencies] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── filament.exports [filament.exports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── filament.health [filament.health] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── filament.imports [filament.imports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── graffiti [graffiti] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── graffiti.capabilities [graffiti.capabilities] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── graffiti.contracts [graffiti.contracts] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── graffiti.dependencies [graffiti.dependencies] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── graffiti.exports [graffiti.exports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── graffiti.health [graffiti.health] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── graffiti.imports [graffiti.imports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── edifice:abstraction [edifice:abstraction] <edifice> state=active slot=80_children authority=authoritative collapsed=0 internal_relationships=0
+├── edifice:authority [edifice:authority] <edifice> state=active slot=80_children authority=authoritative collapsed=0 internal_relationships=0
+├── edifice:content [edifice:content] <edifice> state=active slot=80_children authority=authoritative collapsed=0 internal_relationships=0
+├── edifice:emergence [edifice:emergence] <edifice> state=active slot=80_children authority=authoritative collapsed=0 internal_relationships=0
+├── edifice:identity [edifice:identity] <edifice> state=active slot=80_children authority=authoritative collapsed=0 internal_relationships=0
+├── edifice:identity:4 [edifice:identity:4] <reference> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── edifice:projection [edifice:projection] <edifice> state=active slot=80_children authority=authoritative collapsed=0 internal_relationships=0
+├── edifice:scale [edifice:scale] <edifice> state=active slot=80_children authority=authoritative collapsed=0 internal_relationships=0
+├── edifice:segue [edifice:segue] <edifice> state=active slot=80_children authority=authoritative collapsed=0 internal_relationships=0
+├── edifice:temporal [edifice:temporal] <edifice> state=active slot=80_children authority=authoritative collapsed=0 internal_relationships=0
+├── lore [lore] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── lore.capabilities [lore.capabilities] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── lore.contracts [lore.contracts] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── lore.dependencies [lore.dependencies] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── lore.exports [lore.exports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── lore.health [lore.health] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── lore.imports [lore.imports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── manifest.filament.projection_engine [manifest.filament.projection_engine] <manifest> state=active slot=80_children authority=authoritative collapsed=0 internal_relationships=0
+├── meta_archetype.universal_artifact [meta_archetype.universal_artifact] <meta_archetype> state=active slot=80_children authority=authoritative collapsed=0 internal_relationships=0
+├── meta_archetype:universal_object [meta_archetype:universal_object] <meta_archetype> state=active slot=80_children authority=authoritative collapsed=0 internal_relationships=0
+│   └── archetype:universal_instance [archetype:universal_instance] <archetype> state=active slot=80_children authority=authoritative collapsed=0 internal_relationships=0
+│       └── template:base_instance [template:base_instance] <template> state=active slot=20_authority authority=authoritative collapsed=0 internal_relationships=0
+├── mobius [mobius] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── mobius.capabilities [mobius.capabilities] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── mobius.contracts [mobius.contracts] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── mobius.dependencies [mobius.dependencies] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── mobius.exports [mobius.exports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── mobius.health [mobius.health] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── mobius.imports [mobius.imports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── modus [modus] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── modus.capabilities [modus.capabilities] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── modus.contracts [modus.contracts] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── modus.dependencies [modus.dependencies] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── modus.exports [modus.exports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── modus.health [modus.health] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── modus.imports [modus.imports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── niche [niche] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── niche.capabilities [niche.capabilities] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── niche.contracts [niche.contracts] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── niche.dependencies [niche.dependencies] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── niche.exports [niche.exports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── niche.health [niche.health] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── niche.imports [niche.imports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── notary [notary] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── notary.capabilities [notary.capabilities] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── notary.contracts [notary.contracts] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── notary.dependencies [notary.dependencies] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── notary.exports [notary.exports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── notary.health [notary.health] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── notary.imports [notary.imports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── observatory-all [observatory-all] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── ontology.obelisks.segue [ontology.obelisks.segue] <segue> state=active slot=80_children authority=authoritative collapsed=0 internal_relationships=0
+├── openai_tts [openai_tts] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── opus [opus] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── opus-registry [opus-registry] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── opus-vault [opus-vault] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── opus.capabilities [opus.capabilities] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── opus.contracts [opus.contracts] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── opus.dependencies [opus.dependencies] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── opus.exports [opus.exports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── opus.health [opus.health] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── opus.imports [opus.imports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── opus:runtime_event_bus [opus:runtime_event_bus] <instance> state=active slot=80_children authority=authoritative collapsed=0 internal_relationships=0
+├── opus:voice_orchestration_pipeline [opus:voice_orchestration_pipeline] <instance> state=active slot=80_children authority=authoritative collapsed=0 internal_relationships=0
+├── opus_voice_orchestration_contract [opus_voice_orchestration_contract] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── opus_voice_request_contract [opus_voice_request_contract] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── pact [pact] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── pact.capabilities [pact.capabilities] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── pact.contracts [pact.contracts] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── pact.dependencies [pact.dependencies] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── pact.exports [pact.exports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── pact.health [pact.health] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── pact.imports [pact.imports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── palaver [palaver] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── palaver.capabilities [palaver.capabilities] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── palaver.contracts [palaver.contracts] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── palaver.dependencies [palaver.dependencies] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── palaver.exports [palaver.exports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── palaver.health [palaver.health] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── palaver.imports [palaver.imports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── palaver_voice_contract [palaver_voice_contract] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── prodigals [prodigals] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── projection [projection] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── projection.views [projection.views] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── runtime_event_types [runtime_event_types] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── runtime_request_schema [runtime_request_schema] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── segue.composition [segue.composition] <segue> state=active slot=80_children authority=authoritative collapsed=0 internal_relationships=0
+├── segue.contracts [segue.contracts] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── segue.edges [segue.edges] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── segue.inheritance [segue.inheritance] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── shatter [shatter] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── shatter.capabilities [shatter.capabilities] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── shatter.contracts [shatter.contracts] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── shatter.dependencies [shatter.dependencies] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── shatter.exports [shatter.exports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── shatter.health [shatter.health] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── shatter.imports [shatter.imports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── template.universal_instance [template.universal_instance] <instance> state=active slot=80_children authority=authoritative collapsed=0 internal_relationships=0
+├── underscore [underscore] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── underscore.capabilities [underscore.capabilities] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── underscore.contracts [underscore.contracts] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── underscore.dependencies [underscore.dependencies] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── underscore.exports [underscore.exports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── underscore.health [underscore.health] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── underscore.imports [underscore.imports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── urge [urge] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── urge.capabilities [urge.capabilities] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── urge.contracts [urge.contracts] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── urge.dependencies [urge.dependencies] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── urge.exports [urge.exports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── urge.health [urge.health] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── urge.imports [urge.imports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── voice_tts_policy [voice_tts_policy] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── voice_tts_route [voice_tts_route] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── zero [zero] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── zero.capabilities [zero.capabilities] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── zero.contracts [zero.contracts] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── zero.dependencies [zero.dependencies] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── zero.exports [zero.exports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── zero.health [zero.health] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+├── zero.imports [zero.imports] <instance> state=active slot=80_children authority=delegated collapsed=0 internal_relationships=0
+└── Synthetic Kindred State Demonstration [preview.synthetic.kindred-demo] <preview_family> state=provisional slot=95_preview_examples authority=derived collapsed=0 internal_relationships=0
+    ├── Active Engine Example [preview.synthetic.active-engine] <engine> state=active slot=40_runtime authority=delegated collapsed=0 internal_relationships=0
+    ├── Degraded Service Example [preview.synthetic.degraded-service] <service> state=degraded slot=40_runtime authority=delegated collapsed=0 internal_relationships=0
+    ├── Provisional Adapter Example [preview.synthetic.provisional-adapter] <adapter> state=provisional slot=40_runtime authority=provisional collapsed=0 internal_relationships=0
+    ├── Quarantined Importer Example [preview.synthetic.quarantined-importer] <adapter> state=quarantined slot=40_runtime authority=isolated collapsed=0 internal_relationships=0
+    └── Superseded Runtime Example [preview.synthetic.superseded-runtime] <runtime_instance> state=superseded slot=40_runtime authority=historical collapsed=0 internal_relationships=0

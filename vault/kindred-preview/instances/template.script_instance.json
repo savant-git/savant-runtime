@@ -1,0 +1,85 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "template.script_instance",
+  "deterministic_hash": "d36a779f5116495334980067810492b6df2bebe8888e350ee5556c50c934dc07",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "template.script_instance",
+  "kind": "template",
+  "label": "template.script_instance",
+  "namespace": "preview.kindred",
+  "path": null,
+  "placement": {
+    "domain": "unclassified",
+    "node": "template.script_instance",
+    "parent": "savant-runtime",
+    "placement_basis": "orphan_attachment",
+    "primary_relationship_id": null,
+    "rank": 180,
+    "slot": "20_authority",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.pattern.7a68c28a7b36d89fe6ab"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "template.script_instance",
+    "children": [
+      "script.example"
+    ],
+    "daughters": [
+      "script.example"
+    ],
+    "dependencies": [],
+    "fathers": [],
+    "id": "template.script_instance",
+    "kind": "template",
+    "label": "template.script_instance",
+    "legacy_id": null,
+    "lineage": [],
+    "metadata": {
+      "authority_source_path": "/root/savant-runtime/ontology/obelisks/segue/authority_graph/templates/script_instance.json",
+      "canonical_id": "template.script_instance",
+      "child_modes": {
+        "preserving": [
+          "script.example"
+        ]
+      },
+      "child_roles": {
+        "pattern": [
+          "script.example"
+        ]
+      },
+      "lineage_placeholder": false,
+      "parent_roles": {},
+      "projected_id": "template.script_instance"
+    },
+    "mothers": [],
+    "parents": [],
+    "path": null,
+    "provenance": {
+      "adapter": "authority_document",
+      "source_files": [
+        "/root/savant-runtime/ontology/obelisks/segue/authority_graph/templates/script_instance.json"
+      ]
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.pattern.7a68c28a7b36d89fe6ab"
+    ],
+    "size": 7,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

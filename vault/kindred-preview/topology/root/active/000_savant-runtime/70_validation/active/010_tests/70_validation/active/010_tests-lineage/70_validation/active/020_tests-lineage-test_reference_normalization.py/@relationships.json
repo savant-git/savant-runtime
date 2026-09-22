@@ -1,0 +1,76 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "a9b8ebdbf5219d193a86b46c2f4f324aeddcf1b9103ea25688e7cc268287e120",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "namespace": "preview.kindred",
+  "node": "tests/lineage/test_reference_normalization.py",
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationships": [
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.d7081bc0e6882979c04a",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "tests/lineage",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:tests/lineage",
+        "canonical_target": "fs:tests/lineage/test_reference_normalization.py",
+        "continuation": "projecting",
+        "id": "lineage.composition.d7081bc0e6882979c04a",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/tests/lineage/test_reference_normalization.py"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "tests/lineage",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "tests/lineage/test_reference_normalization.py",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "tests/lineage/test_reference_normalization.py"
+    }
+  ],
+  "schema": "savant.kindred.preview.relationship_projection.v2"
+}

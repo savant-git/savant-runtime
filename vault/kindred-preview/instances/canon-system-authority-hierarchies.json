@@ -1,0 +1,145 @@
+{
+  "authoritative": false,
+  "authority_tier": "delegated",
+  "canonical_id": "fs:canon-system/authority/edifices",
+  "deterministic_hash": "0819f6428bc2a8f655fd417d79ba218e627875b5cda18dbb783210b18afe364f",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "canon-system/authority/edifices",
+  "kind": "directory",
+  "label": "edifices",
+  "namespace": "preview.kindred",
+  "path": "canon-system/authority/edifices",
+  "placement": {
+    "domain": "filesystem",
+    "node": "canon-system/authority/edifices",
+    "parent": "canon-system/authority",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.9b7f5cb8f1bdcbf37cf2",
+    "rank": 30,
+    "slot": "20_authority",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.11763f3d3e94e612d138",
+    "lineage.composition.28f701cf083e71180727",
+    "lineage.composition.2cc930aec981bb4d0c8d",
+    "lineage.composition.3e06a4e99154eccbf29e",
+    "lineage.composition.5be307515fe1c5f8bd98",
+    "lineage.composition.690c248cb96476c3ed41",
+    "lineage.composition.7e7d90ac42c3edd6d782",
+    "lineage.composition.9b7f5cb8f1bdcbf37cf2",
+    "lineage.composition.ba94c495c8742bbb55a5",
+    "lineage.composition.ee072e9f6bee95fadf49"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": false,
+    "canonical_id": "fs:canon-system/authority/edifices",
+    "children": [
+      "canon-system/authority/edifices/content.yaml",
+      "canon-system/authority/edifices/authority.yaml",
+      "canon-system/authority/edifices/projection.yaml",
+      "canon-system/authority/edifices/segue.yaml",
+      "canon-system/authority/edifices/identity.yaml",
+      "canon-system/authority/edifices/scale.yaml",
+      "canon-system/authority/edifices/temporal.yaml",
+      "canon-system/authority/edifices/emergence.yaml",
+      "canon-system/authority/edifices/abstraction.yaml"
+    ],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "canon-system/authority/edifices",
+    "kind": "directory",
+    "label": "edifices",
+    "legacy_id": "canon-system/authority/edifices",
+    "lineage": [
+      "canon-system/authority"
+    ],
+    "metadata": {
+      "canonical_id": "fs:canon-system/authority/edifices",
+      "child_modes": {
+        "projecting": [
+          "fs:canon-system/authority/edifices/content.yaml",
+          "fs:canon-system/authority/edifices/authority.yaml",
+          "fs:canon-system/authority/edifices/projection.yaml",
+          "fs:canon-system/authority/edifices/segue.yaml",
+          "fs:canon-system/authority/edifices/identity.yaml",
+          "fs:canon-system/authority/edifices/scale.yaml",
+          "fs:canon-system/authority/edifices/temporal.yaml",
+          "fs:canon-system/authority/edifices/emergence.yaml",
+          "fs:canon-system/authority/edifices/abstraction.yaml"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:canon-system/authority/edifices/content.yaml",
+          "fs:canon-system/authority/edifices/authority.yaml",
+          "fs:canon-system/authority/edifices/projection.yaml",
+          "fs:canon-system/authority/edifices/segue.yaml",
+          "fs:canon-system/authority/edifices/identity.yaml",
+          "fs:canon-system/authority/edifices/scale.yaml",
+          "fs:canon-system/authority/edifices/temporal.yaml",
+          "fs:canon-system/authority/edifices/emergence.yaml",
+          "fs:canon-system/authority/edifices/abstraction.yaml"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:canon-system/authority"
+        ]
+      },
+      "projected_id": "canon-system/authority/edifices",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "canon-system/authority"
+    ],
+    "path": "canon-system/authority/edifices",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "canon-system/authority/edifices",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.11763f3d3e94e612d138",
+      "lineage.composition.28f701cf083e71180727",
+      "lineage.composition.2cc930aec981bb4d0c8d",
+      "lineage.composition.3e06a4e99154eccbf29e",
+      "lineage.composition.5be307515fe1c5f8bd98",
+      "lineage.composition.690c248cb96476c3ed41",
+      "lineage.composition.7e7d90ac42c3edd6d782",
+      "lineage.composition.9b7f5cb8f1bdcbf37cf2",
+      "lineage.composition.ba94c495c8742bbb55a5",
+      "lineage.composition.ee072e9f6bee95fadf49"
+    ],
+    "size": 12,
+    "sons": [
+      "canon-system/authority/edifices/content.yaml",
+      "canon-system/authority/edifices/authority.yaml",
+      "canon-system/authority/edifices/projection.yaml",
+      "canon-system/authority/edifices/segue.yaml",
+      "canon-system/authority/edifices/identity.yaml",
+      "canon-system/authority/edifices/scale.yaml",
+      "canon-system/authority/edifices/temporal.yaml",
+      "canon-system/authority/edifices/emergence.yaml",
+      "canon-system/authority/edifices/abstraction.yaml"
+    ]
+  },
+  "state": "active",
+  "synthetic": false
+}

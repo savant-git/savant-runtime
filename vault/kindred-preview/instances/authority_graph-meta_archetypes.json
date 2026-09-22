@@ -1,0 +1,97 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:authority_graph/meta_archetypes",
+  "deterministic_hash": "f6a1ee9fc6a389309995a9274f3f12bf0ba6803a3d3c2880666c030c426e04d0",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "authority_graph/meta_archetypes",
+  "kind": "directory",
+  "label": "meta_archetypes",
+  "namespace": "preview.kindred",
+  "path": "authority_graph/meta_archetypes",
+  "placement": {
+    "domain": "filesystem",
+    "node": "authority_graph/meta_archetypes",
+    "parent": "authority_graph",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.e20e7e6205a994b03431",
+    "rank": 30,
+    "slot": "20_authority",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.6e981068a412ef8a942e",
+    "lineage.composition.e20e7e6205a994b03431"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:authority_graph/meta_archetypes",
+    "children": [
+      "authority_graph/meta_archetypes/universal_object.json"
+    ],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "authority_graph/meta_archetypes",
+    "kind": "directory",
+    "label": "meta_archetypes",
+    "legacy_id": "authority_graph/meta_archetypes",
+    "lineage": [
+      "authority_graph"
+    ],
+    "metadata": {
+      "canonical_id": "fs:authority_graph/meta_archetypes",
+      "child_modes": {
+        "projecting": [
+          "fs:authority_graph/meta_archetypes/universal_object.json"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:authority_graph/meta_archetypes/universal_object.json"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:authority_graph"
+        ]
+      },
+      "projected_id": "authority_graph/meta_archetypes",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "authority_graph"
+    ],
+    "path": "authority_graph/meta_archetypes",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "authority_graph/meta_archetypes",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.6e981068a412ef8a942e",
+      "lineage.composition.e20e7e6205a994b03431"
+    ],
+    "size": 12,
+    "sons": [
+      "authority_graph/meta_archetypes/universal_object.json"
+    ]
+  },
+  "state": "active",
+  "synthetic": false
+}

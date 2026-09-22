@@ -1,0 +1,76 @@
+{
+  "authoritative": false,
+  "child_profile": "child",
+  "deterministic_hash": "58327e5cdb13b2bb37f739edce8b0c2a837ac2e6b04f0011ce19bfbf77858e93",
+  "domain": "global",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "lineage.source.1fc6b7ba4745e1dd067e",
+  "impeti": [],
+  "namespace": "preview.kindred",
+  "parent_profile": "mother",
+  "plane": "lineage",
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "role": "source",
+  "schema": "savant.kindred.preview.lineage_segue.v2",
+  "source": "line.example.echo",
+  "source_record": {
+    "axis": "substance",
+    "canonical_source": "line.example.echo",
+    "canonical_target": "snippet.example.body",
+    "continuation": "neutral",
+    "id": "lineage.source.1fc6b7ba4745e1dd067e",
+    "inheritance": {
+      "conflict_policy": "child_wins",
+      "exclude": [],
+      "fields": [
+        "dna",
+        "content",
+        "data",
+        "capabilities",
+        "metadata"
+      ],
+      "mode": "merge"
+    },
+    "inverse": "derived",
+    "kind": "source",
+    "metadata": {
+      "adapter": "authority",
+      "source_field": "lineage.composed_from",
+      "source_path": "/root/savant-runtime/ontology/obelisks/segue/authority_graph/instances/content/snippets/example_body.json"
+    },
+    "order": 0,
+    "propagation": {
+      "channels": [
+        "validation",
+        "projection",
+        "regeneration"
+      ],
+      "enabled": true
+    },
+    "provenance": {
+      "created_by": "authority_adapter",
+      "created_from": [
+        "/root/savant-runtime/ontology/obelisks/segue/authority_graph/instances/content/snippets/example_body.json"
+      ],
+      "source_files": [
+        "/root/savant-runtime/ontology/obelisks/segue/authority_graph/instances/content/snippets/example_body.json"
+      ]
+    },
+    "role": "source",
+    "scope": "global",
+    "source": "line.example.echo",
+    "status": "active",
+    "symbolic_child_alias": "child",
+    "symbolic_parent_alias": "mother",
+    "target": "snippet.example.body",
+    "weight": 2
+  },
+  "state": "active",
+  "synthetic": false,
+  "target": "snippet.example.body"
+}

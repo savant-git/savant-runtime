@@ -1,0 +1,83 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:runtime/palaver/registry/observatory_registry.py",
+  "deterministic_hash": "760348cf9a5c96c8ac9da67700c1964d0cc049abff4f444a6aace99710232d46",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "runtime/palaver/registry/observatory_registry.py",
+  "kind": "file",
+  "label": "observatory_registry.py",
+  "namespace": "preview.kindred",
+  "path": "runtime/palaver/registry/observatory_registry.py",
+  "placement": {
+    "domain": "filesystem",
+    "node": "runtime/palaver/registry/observatory_registry.py",
+    "parent": "runtime/palaver/registry",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.0dc381163ea298d50d0e",
+    "rank": 10,
+    "slot": "40_runtime",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.0dc381163ea298d50d0e"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "record",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:runtime/palaver/registry/observatory_registry.py",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "runtime/palaver/registry/observatory_registry.py",
+    "kind": "file",
+    "label": "observatory_registry.py",
+    "legacy_id": "runtime/palaver/registry/observatory_registry.py",
+    "lineage": [
+      "runtime/palaver/registry"
+    ],
+    "metadata": {
+      "canonical_id": "fs:runtime/palaver/registry/observatory_registry.py",
+      "child_modes": {},
+      "child_roles": {},
+      "is_directory": false,
+      "is_file": true,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:runtime/palaver/registry"
+        ]
+      },
+      "projected_id": "runtime/palaver/registry/observatory_registry.py",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "runtime/palaver/registry"
+    ],
+    "path": "runtime/palaver/registry/observatory_registry.py",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "runtime/palaver/registry/observatory_registry.py",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.0dc381163ea298d50d0e"
+    ],
+    "size": 7,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

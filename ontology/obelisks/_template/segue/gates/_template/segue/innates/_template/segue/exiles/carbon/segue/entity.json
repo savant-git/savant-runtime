@@ -1,0 +1,48 @@
+{
+  "id": "carbon.segue",
+  "type": "segue",
+  "status": "active",
+  "owner": "carbon",
+  "source": "exile:carbon",
+  "composition_level": "segue",
+  "singular_purpose": "Project Carbon simulation relationships across Savant boundaries without transferring authority.",
+  "exports": [
+    "simulation_definition",
+    "simulation_instance",
+    "simulation_state",
+    "simulation_branch",
+    "simulation_checkpoint",
+    "simulation_execution",
+    "simulation_comparison",
+    "simulation_interrogation",
+    "causal_trace",
+    "uncertainty_projection",
+    "simulation_receipt",
+    "simulation_lineage",
+    "simulation_provenance",
+    "oriel_specialization",
+    "oriel_capability_surface",
+    "oriel_projection_packet"
+  ],
+  "composition": {
+    "mode": "reference_first",
+    "nested_simulations": true,
+    "reusable_instances": true,
+    "replaceable_execution_attachments": true,
+    "specializations_by_reference": true,
+    "oriel_projection_owner": "filament",
+    "oriel_transformation_owner": "modus"
+  },
+  "invariants": {
+    "simulation_remains_derived": true,
+    "specialization_remains_contained": true,
+    "oriel_is_not_a_peer_exile": true,
+    "oriel_capability_surface_is_derived": true,
+    "oriel_projection_does_not_transfer_ownership": true,
+    "source_authority_preserved": true,
+    "external_historical_reality_authority_preserved": true,
+    "branch_lineage_preserved": true,
+    "provenance_preserved": true,
+    "authority_transfer": false
+  }
+}

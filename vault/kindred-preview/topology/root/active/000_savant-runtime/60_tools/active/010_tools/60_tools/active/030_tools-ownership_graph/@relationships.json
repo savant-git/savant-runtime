@@ -1,0 +1,137 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "15bf5d127f7fe3ec2d09069f7367a31b2500445857f805dc99f08223d9c31e58",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "namespace": "preview.kindred",
+  "node": "tools/ownership_graph",
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationships": [
+    {
+      "child_profile": "daughter",
+      "domain": "filesystem",
+      "id": "lineage.composition.51bc1a68a73ad4bb0156",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "tools",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:tools",
+        "canonical_target": "fs:tools/ownership_graph",
+        "continuation": "preserving",
+        "id": "lineage.composition.51bc1a68a73ad4bb0156",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/tools/ownership_graph"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "tools",
+        "status": "active",
+        "symbolic_child_alias": "daughter",
+        "symbolic_parent_alias": "parent",
+        "target": "tools/ownership_graph",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "tools/ownership_graph"
+    },
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.c0576ba86f55440b12c6",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "tools/ownership_graph",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:tools/ownership_graph",
+        "canonical_target": "fs:tools/ownership_graph/compile_canonical_ownership_graph.py",
+        "continuation": "projecting",
+        "id": "lineage.composition.c0576ba86f55440b12c6",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/tools/ownership_graph/compile_canonical_ownership_graph.py"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "tools/ownership_graph",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "tools/ownership_graph/compile_canonical_ownership_graph.py",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "tools/ownership_graph/compile_canonical_ownership_graph.py"
+    }
+  ],
+  "schema": "savant.kindred.preview.relationship_projection.v2"
+}

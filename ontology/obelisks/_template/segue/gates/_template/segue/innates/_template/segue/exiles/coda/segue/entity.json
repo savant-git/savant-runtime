@@ -1,0 +1,21 @@
+{
+  "id": "coda.segue",
+  "type": "segue",
+  "status": "active",
+  "owner": "coda",
+  "source": "exile:coda",
+  "composition_level": "segue",
+  "purpose": "Project Coda-owned durable filesystem mutation across exile boundaries without transferring mutation authority.",
+  "connections": [
+    {
+      "target": "exile:palaver",
+      "direction": "inbound",
+      "relation": "receives_filesystem_mutation_requests_from"
+    }
+  ],
+  "operations": [
+    "replace_text"
+  ],
+  "authority_transfer": false,
+  "authority_effect": "none"
+}

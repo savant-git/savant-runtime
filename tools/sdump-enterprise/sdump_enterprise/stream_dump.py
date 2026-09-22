@@ -18,8 +18,8 @@ from typing import Any, Iterable
 
 
 
-schema = "savant.sdump.stream.v7"
-command_schema = "savant.sdump.command.v7"
+schema = "savant.sdump.stream.v8"
+command_schema = "savant.sdump.command.v8"
 publish_schema = "savant.sdump.publish.v2"
 
 chunk_size = 4 * 1024 * 1024
@@ -48,13 +48,14 @@ source_extensions = frozenset({
     ".sh", ".bash", ".zsh", ".fish", ".ps1", ".bat", ".cmd",
     ".sql", ".graphql", ".gql",
     ".yaml", ".yml", ".toml", ".ini", ".cfg", ".conf",
+    ".json", ".jsonc", ".json5",
     ".html", ".htm", ".css", ".scss", ".sass", ".less",
     ".vue", ".svelte",
     ".xml", ".xsd", ".xsl", ".xslt",
     ".tf", ".tfvars", ".hcl",
     ".gradle", ".properties",
     ".proto", ".thrift",
-    ".md", ".mdx", ".rst", ".adoc",
+    ".md", ".mdx", ".rst", ".adoc", ".txt",
 })
 
 source_filenames = frozenset({
@@ -116,6 +117,8 @@ secret_names = frozenset({
 
 # These are known generated/recovery families, not architectural source.
 excluded_relative_prefixes = (
+    "_reports/",
+    "reports/",
     "assurance/",
     "audit/",
     "backups/",
@@ -491,6 +494,10 @@ def admitted(path: Path, root: Path, file_stat: os.stat_result) -> bool:
         return False
 
     parts = tuple(part.casefold() for part in Path(relative).parts[:-1])
+
+    if path.suffix.casefold() in {".json", ".jsonc", ".json5"}:
+        if "assets" in parts and file_stat.st_size > 8 * 1024 * 1024:
+            return False
     if any(part in excluded_dir_names for part in parts):
         return False
 

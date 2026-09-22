@@ -1,0 +1,39 @@
+{
+  "id": "carbon.imports",
+  "owner": "carbon",
+  "type": "composition_imports",
+  "status": "active",
+  "imports": [
+    {
+      "id": "source_instances",
+      "kind": "reference",
+      "purpose": "Reference authoritative entities and primitives participating in simulations.",
+      "authority_inherited": false
+    },
+    {
+      "id": "admitted_evidence",
+      "kind": "reference",
+      "purpose": "Reference admitted evidence when simulations require evidence-grounded initial conditions.",
+      "authority_inherited": false
+    },
+    {
+      "id": "accepted_decisions",
+      "kind": "reference",
+      "purpose": "Reference accepted decisions as fixed simulation constraints when explicitly applicable.",
+      "authority_inherited": false
+    },
+    {
+      "id": "execution_backends",
+      "kind": "replaceable_attachment",
+      "purpose": "Attach specialized engines without redefining Carbon or transferring authority.",
+      "authority_inherited": false
+    }
+  ],
+  "rules": {
+    "imports_are_references": true,
+    "imported_authority_remains_with_source": true,
+    "carbon_may_mutate_imported_authority": false,
+    "attachments_are_replaceable": true,
+    "authority_transfer": false
+  }
+}

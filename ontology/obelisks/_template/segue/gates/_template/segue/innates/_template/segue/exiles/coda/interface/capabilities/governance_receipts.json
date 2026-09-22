@@ -1,0 +1,43 @@
+{
+  "id": "coda.capability.governance_receipts",
+  "owner": "coda",
+  "type": "capability_descriptor",
+  "status": "active",
+  "authority_effect": "none",
+  "capabilities": [
+    {
+      "id": "governance_evaluation_receipt_linkage",
+      "kind": "durable_mutation_evidence",
+      "runtime": "runtime/governance_receipts.py",
+      "description": "Link a Living Governance evaluation receipt to a Coda mutation receipt while preserving separate ownership."
+    },
+    {
+      "id": "palaver_governed_mutation_bridge",
+      "kind": "mutation_boundary",
+      "runtime": "runtime/palaver_governed_bridge.py",
+      "description": "Delegate mutation to the live Palaver to Coda bridge and persist governance evaluation linkage when the evaluation and Coda mutation receipt are exposed."
+    },
+    {
+      "id": "governance_receipt_surface",
+      "kind": "introspection",
+      "runtime": "runtime/governance_surface.py",
+      "description": "Expose the Coda governance receipt-link surface without creating independent mutation or governance authority."
+    }
+  ],
+  "ownership": {
+    "mutation_apply": "coda",
+    "durable_mutation_receipts": "coda",
+    "governance_semantics": "living-governance",
+    "governance_evaluation_evidence": "living-governance",
+    "conversation_orchestration": "palaver"
+  },
+  "invariants": {
+    "live_palaver_bridge_replaced": false,
+    "coda_remains_mutation_owner": true,
+    "living_governance_remains_evaluation_owner": true,
+    "governance_link_is_mutation_authority": false,
+    "second_authority_store_created": false,
+    "source_mutation_receipt_must_be_rewritten": false,
+    "authority_transfer": false
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:runtime/palaver/graph",
+  "deterministic_hash": "8c33b37ace6d4683e0af73c4c61f10251112ca28d917c67c57541e134cc23c2f",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "runtime/palaver/graph",
+  "kind": "directory",
+  "label": "graph",
+  "namespace": "preview.kindred",
+  "path": "runtime/palaver/graph",
+  "placement": {
+    "domain": "filesystem",
+    "node": "runtime/palaver/graph",
+    "parent": "runtime/palaver",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.8a1e85aaa10a68e500d0",
+    "rank": 40,
+    "slot": "40_runtime",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.309264d5a8c079ed9a75",
+    "lineage.composition.8a1e85aaa10a68e500d0",
+    "lineage.composition.e639b95ce86f6941cd89"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:runtime/palaver/graph",
+    "children": [
+      "runtime/palaver/graph/runtime_graph_index.py",
+      "runtime/palaver/graph/runtime_graph_engine.py"
+    ],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "runtime/palaver/graph",
+    "kind": "directory",
+    "label": "graph",
+    "legacy_id": "runtime/palaver/graph",
+    "lineage": [
+      "runtime/palaver"
+    ],
+    "metadata": {
+      "canonical_id": "fs:runtime/palaver/graph",
+      "child_modes": {
+        "projecting": [
+          "fs:runtime/palaver/graph/runtime_graph_index.py",
+          "fs:runtime/palaver/graph/runtime_graph_engine.py"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:runtime/palaver/graph/runtime_graph_index.py",
+          "fs:runtime/palaver/graph/runtime_graph_engine.py"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:runtime/palaver"
+        ]
+      },
+      "projected_id": "runtime/palaver/graph",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "runtime/palaver"
+    ],
+    "path": "runtime/palaver/graph",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "runtime/palaver/graph",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.309264d5a8c079ed9a75",
+      "lineage.composition.8a1e85aaa10a68e500d0",
+      "lineage.composition.e639b95ce86f6941cd89"
+    ],
+    "size": 12,
+    "sons": [
+      "runtime/palaver/graph/runtime_graph_index.py",
+      "runtime/palaver/graph/runtime_graph_engine.py"
+    ]
+  },
+  "state": "active",
+  "synthetic": false
+}

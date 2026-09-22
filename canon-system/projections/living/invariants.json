@@ -1,0 +1,421 @@
+{
+  "digest": "22c1c751bc4eebbffa3b4def9a56d6104dcc734457364710e779b1ffb536e967",
+  "records": [
+    {
+      "authority": "current_user_directive",
+      "authority_rank": 0,
+      "dependencies": [],
+      "id": "invariant.authority",
+      "priority": 1,
+      "provenance": {
+        "asserted_by": "user",
+        "created_at": "2026-08-30T00:00:00Z",
+        "method": "living-governance-bootstrap",
+        "sources": [
+          "current user directive 2026-08-30",
+          "project sources and accepted savant authority"
+        ]
+      },
+      "relationships": [],
+      "schema": "savant.living-governance.v1",
+      "status": "active",
+      "stream": "invariants",
+      "supersedes": [],
+      "text": "derived state never outranks the authoritative primitive from which it was produced.",
+      "version": 1
+    },
+    {
+      "authority": "current_user_directive",
+      "authority_rank": 0,
+      "dependencies": [],
+      "id": "invariant.history",
+      "priority": 2,
+      "provenance": {
+        "asserted_by": "user",
+        "created_at": "2026-08-30T00:00:00Z",
+        "method": "living-governance-bootstrap",
+        "sources": [
+          "current user directive 2026-08-30",
+          "project sources and accepted savant authority"
+        ]
+      },
+      "relationships": [],
+      "schema": "savant.living-governance.v1",
+      "status": "active",
+      "stream": "invariants",
+      "supersedes": [],
+      "text": "accepted authoritative history is preserved.",
+      "version": 1
+    },
+    {
+      "authority": "current_user_directive",
+      "authority_rank": 0,
+      "dependencies": [],
+      "id": "invariant.identity",
+      "priority": 3,
+      "provenance": {
+        "asserted_by": "user",
+        "created_at": "2026-08-30T00:00:00Z",
+        "method": "living-governance-bootstrap",
+        "sources": [
+          "current user directive 2026-08-30",
+          "project sources and accepted savant authority"
+        ]
+      },
+      "relationships": [],
+      "schema": "savant.living-governance.v1",
+      "status": "active",
+      "stream": "invariants",
+      "supersedes": [],
+      "text": "semantic identity remains stable across compatible versions and supersessions.",
+      "version": 1
+    },
+    {
+      "authority": "current_user_directive",
+      "authority_rank": 0,
+      "dependencies": [],
+      "id": "invariant.determinism",
+      "priority": 4,
+      "provenance": {
+        "asserted_by": "user",
+        "created_at": "2026-08-30T00:00:00Z",
+        "method": "living-governance-bootstrap",
+        "sources": [
+          "current user directive 2026-08-30",
+          "project sources and accepted savant authority"
+        ]
+      },
+      "relationships": [],
+      "schema": "savant.living-governance.v1",
+      "status": "active",
+      "stream": "invariants",
+      "supersedes": [],
+      "text": "equal authority state produces equal deterministic projections.",
+      "version": 1
+    },
+    {
+      "authority": "current_user_directive",
+      "authority_rank": 0,
+      "dependencies": [],
+      "id": "invariant.provenance",
+      "priority": 5,
+      "provenance": {
+        "asserted_by": "user",
+        "created_at": "2026-08-30T00:00:00Z",
+        "method": "living-governance-bootstrap",
+        "sources": [
+          "current user directive 2026-08-30",
+          "project sources and accepted savant authority"
+        ]
+      },
+      "relationships": [],
+      "schema": "savant.living-governance.v1",
+      "status": "active",
+      "stream": "invariants",
+      "supersedes": [],
+      "text": "authoritative claims remain traceable to their provenance.",
+      "version": 1
+    },
+    {
+      "authority": "current_user_directive",
+      "authority_rank": 0,
+      "dependencies": [],
+      "id": "invariant.lineage",
+      "priority": 6,
+      "provenance": {
+        "asserted_by": "user",
+        "created_at": "2026-08-30T00:00:00Z",
+        "method": "living-governance-bootstrap",
+        "sources": [
+          "current user directive 2026-08-30",
+          "project sources and accepted savant authority"
+        ]
+      },
+      "relationships": [],
+      "schema": "savant.living-governance.v1",
+      "status": "active",
+      "stream": "invariants",
+      "supersedes": [],
+      "text": "supersession and derivation lineage remains queryable.",
+      "version": 1
+    },
+    {
+      "authority": "current_user_directive",
+      "authority_rank": 0,
+      "dependencies": [],
+      "id": "invariant.no-secret-projection",
+      "priority": 7,
+      "provenance": {
+        "asserted_by": "user",
+        "created_at": "2026-08-30T00:00:00Z",
+        "method": "living-governance-bootstrap",
+        "sources": [
+          "current user directive 2026-08-30",
+          "project sources and accepted savant authority"
+        ]
+      },
+      "relationships": [],
+      "schema": "savant.living-governance.v1",
+      "status": "active",
+      "stream": "invariants",
+      "supersedes": [],
+      "text": "secret credential values never appear in living projections.",
+      "version": 1
+    },
+    {
+      "authority": "current_user_directive",
+      "authority_rank": 0,
+      "dependencies": [],
+      "id": "invariant.kindred",
+      "priority": 8,
+      "provenance": {
+        "asserted_by": "user",
+        "created_at": "2026-08-30T00:00:00Z",
+        "method": "living-governance-bootstrap",
+        "sources": [
+          "current user directive 2026-08-30",
+          "project sources and accepted savant authority"
+        ]
+      },
+      "relationships": [],
+      "schema": "savant.living-governance.v1",
+      "status": "active",
+      "stream": "invariants",
+      "supersedes": [],
+      "text": "new relationship-methodology authority uses kindred terminology.",
+      "version": 1
+    },
+    {
+      "authority": "current_user_directive",
+      "authority_rank": 0,
+      "dependencies": [],
+      "id": "invariant.lowercase",
+      "priority": 9,
+      "provenance": {
+        "asserted_by": "user",
+        "created_at": "2026-08-30T00:00:00Z",
+        "method": "living-governance-bootstrap",
+        "sources": [
+          "current user directive 2026-08-30",
+          "project sources and accepted savant authority"
+        ]
+      },
+      "relationships": [],
+      "schema": "savant.living-governance.v1",
+      "status": "active",
+      "stream": "invariants",
+      "supersedes": [],
+      "text": "new savant-owned identifiers are lowercase unless compatibility or stronger authority prevents it.",
+      "version": 1
+    },
+    {
+      "authority": "current_user_directive",
+      "authority_rank": 0,
+      "dependencies": [],
+      "id": "invariant.no-duplicate-authority",
+      "priority": 10,
+      "provenance": {
+        "asserted_by": "user",
+        "created_at": "2026-08-30T00:00:00Z",
+        "method": "living-governance-bootstrap",
+        "sources": [
+          "current user directive 2026-08-30",
+          "project sources and accepted savant authority"
+        ]
+      },
+      "relationships": [],
+      "schema": "savant.living-governance.v1",
+      "status": "active",
+      "stream": "invariants",
+      "supersedes": [],
+      "text": "one semantic fact has one authoritative substance regardless of how many projections expose it.",
+      "version": 1
+    },
+    {
+      "authority": "current_user_directive",
+      "authority_rank": 0,
+      "dependencies": [],
+      "id": "invariant.no-dead-end",
+      "priority": 11,
+      "provenance": {
+        "asserted_by": "user",
+        "created_at": "2026-08-30T00:00:00Z",
+        "method": "living-governance-bootstrap",
+        "sources": [
+          "current user directive 2026-08-30",
+          "project sources and accepted savant authority"
+        ]
+      },
+      "relationships": [],
+      "schema": "savant.living-governance.v1",
+      "status": "active",
+      "stream": "invariants",
+      "supersedes": [],
+      "text": "new semantic components remain extensible and attachable.",
+      "version": 1
+    },
+    {
+      "authority": "current_user_directive",
+      "authority_rank": 0,
+      "dependencies": [],
+      "id": "invariant.unknown-preserved",
+      "priority": 12,
+      "provenance": {
+        "asserted_by": "user",
+        "created_at": "2026-08-30T00:00:00Z",
+        "method": "living-governance-bootstrap",
+        "sources": [
+          "current user directive 2026-08-30",
+          "project sources and accepted savant authority"
+        ]
+      },
+      "relationships": [],
+      "schema": "savant.living-governance.v1",
+      "status": "active",
+      "stream": "invariants",
+      "supersedes": [],
+      "text": "unresolved unknowns cannot disappear from projections until resolved or superseded.",
+      "version": 1
+    },
+    {
+      "authority": "current_user_directive",
+      "authority_rank": 0,
+      "dependencies": [],
+      "id": "invariant.dependencies",
+      "priority": 13,
+      "provenance": {
+        "asserted_by": "user",
+        "created_at": "2026-08-30T00:00:00Z",
+        "method": "living-governance-bootstrap",
+        "sources": [
+          "current user directive 2026-08-30",
+          "project sources and accepted savant authority"
+        ]
+      },
+      "relationships": [],
+      "schema": "savant.living-governance.v1",
+      "status": "active",
+      "stream": "invariants",
+      "supersedes": [],
+      "text": "material direct dependencies remain visible.",
+      "version": 1
+    },
+    {
+      "authority": "current_user_directive",
+      "authority_rank": 0,
+      "dependencies": [],
+      "id": "invariant.compatibility",
+      "priority": 14,
+      "provenance": {
+        "asserted_by": "user",
+        "created_at": "2026-08-30T00:00:00Z",
+        "method": "living-governance-bootstrap",
+        "sources": [
+          "current user directive 2026-08-30",
+          "project sources and accepted savant authority"
+        ]
+      },
+      "relationships": [],
+      "schema": "savant.living-governance.v1",
+      "status": "active",
+      "stream": "invariants",
+      "supersedes": [],
+      "text": "declared compatibility obligations cannot disappear through unrelated refactoring.",
+      "version": 1
+    },
+    {
+      "authority": "current_user_directive",
+      "authority_rank": 0,
+      "dependencies": [],
+      "id": "invariant.non-destructive",
+      "priority": 15,
+      "provenance": {
+        "asserted_by": "user",
+        "created_at": "2026-08-30T00:00:00Z",
+        "method": "living-governance-bootstrap",
+        "sources": [
+          "current user directive 2026-08-30",
+          "project sources and accepted savant authority"
+        ]
+      },
+      "relationships": [],
+      "schema": "savant.living-governance.v1",
+      "status": "active",
+      "stream": "invariants",
+      "supersedes": [],
+      "text": "evolution preserves recoverability.",
+      "version": 1
+    },
+    {
+      "authority": "current_user_directive",
+      "authority_rank": 0,
+      "dependencies": [],
+      "id": "invariant.task-bounds",
+      "priority": 16,
+      "provenance": {
+        "asserted_by": "user",
+        "created_at": "2026-08-30T00:00:00Z",
+        "method": "living-governance-bootstrap",
+        "sources": [
+          "current user directive 2026-08-30",
+          "project sources and accepted savant authority"
+        ]
+      },
+      "relationships": [],
+      "schema": "savant.living-governance.v1",
+      "status": "active",
+      "stream": "invariants",
+      "supersedes": [],
+      "text": "bounded work has a finite completion condition.",
+      "version": 1
+    },
+    {
+      "authority": "current_user_directive",
+      "authority_rank": 0,
+      "dependencies": [],
+      "id": "invariant.validation-evidence",
+      "priority": 17,
+      "provenance": {
+        "asserted_by": "user",
+        "created_at": "2026-08-30T00:00:00Z",
+        "method": "living-governance-bootstrap",
+        "sources": [
+          "current user directive 2026-08-30",
+          "project sources and accepted savant authority"
+        ]
+      },
+      "relationships": [],
+      "schema": "savant.living-governance.v1",
+      "status": "active",
+      "stream": "invariants",
+      "supersedes": [],
+      "text": "completion claims are evidence-backed.",
+      "version": 1
+    },
+    {
+      "authority": "current_user_directive",
+      "authority_rank": 0,
+      "dependencies": [],
+      "id": "invariant.projection-rebuild",
+      "priority": 18,
+      "provenance": {
+        "asserted_by": "user",
+        "created_at": "2026-08-30T00:00:00Z",
+        "method": "living-governance-bootstrap",
+        "sources": [
+          "current user directive 2026-08-30",
+          "project sources and accepted savant authority"
+        ]
+      },
+      "relationships": [],
+      "schema": "savant.living-governance.v1",
+      "status": "active",
+      "stream": "invariants",
+      "supersedes": [],
+      "text": "living human-readable documents are reproducible from authoritative living records.",
+      "version": 1
+    }
+  ],
+  "schema": "savant.living-projection.v1",
+  "stream": "invariants"
+}

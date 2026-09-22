@@ -1,0 +1,275 @@
+{
+  "instances": [
+    {
+      "authoritative": true,
+      "dependencies": [],
+      "id": "sdump.snippet.--init--",
+      "kind": "snippet_module",
+      "path": "sdump_enterprise/__init__.py",
+      "projection_only": false,
+      "sha256": "8b19b387a4f2ba2a68a24592359cc5ab4f719ba214ad0983706810d5cf85fbcc"
+    },
+    {
+      "authoritative": true,
+      "dependencies": [],
+      "id": "sdump.snippet.--main--",
+      "kind": "snippet_module",
+      "path": "sdump_enterprise/__main__.py",
+      "projection_only": false,
+      "sha256": "0dd072ac4488f65bf8c5864ce7a52efa1498fe3fe980353e07f148507de7c735"
+    },
+    {
+      "authoritative": true,
+      "dependencies": [
+        "sdump.snippet.model",
+        "sdump.snippet.profiles",
+        "sdump.snippet.receipt",
+        "sdump.snippet.render",
+        "sdump.snippet.scan",
+        "sdump.snippet.upload",
+        "sdump.snippet.util"
+      ],
+      "id": "sdump.snippet.cli",
+      "kind": "snippet_module",
+      "path": "sdump_enterprise/cli.py",
+      "projection_only": false,
+      "sha256": "5e4a2c417adac768dc1cbd7918cfddf7459ae8751f965c8a3f60f5e019e86441"
+    },
+    {
+      "authoritative": true,
+      "dependencies": [
+        "sdump.snippet.model",
+        "sdump.snippet.util"
+      ],
+      "id": "sdump.snippet.ignore",
+      "kind": "snippet_module",
+      "path": "sdump_enterprise/ignore.py",
+      "projection_only": false,
+      "sha256": "565c435e2b06fa061693412e7ecb3b86db887e7403191dabe2066c897b780e35"
+    },
+    {
+      "authoritative": true,
+      "dependencies": [],
+      "id": "sdump.snippet.model",
+      "kind": "snippet_module",
+      "path": "sdump_enterprise/model.py",
+      "projection_only": false,
+      "sha256": "03697df45886810968459c0c8378f2fe821a598c9a682ccebf84e6bbc15ba1bc"
+    },
+    {
+      "authoritative": true,
+      "dependencies": [
+        "sdump.snippet.model"
+      ],
+      "id": "sdump.snippet.profiles",
+      "kind": "snippet_module",
+      "path": "sdump_enterprise/profiles.py",
+      "projection_only": false,
+      "sha256": "dba511a43d92320578be568fc7bb50f87820d91d3b1561aa1b291bc67dc927d8"
+    },
+    {
+      "authoritative": true,
+      "dependencies": [
+        "sdump.snippet.model",
+        "sdump.snippet.util"
+      ],
+      "id": "sdump.snippet.receipt",
+      "kind": "snippet_module",
+      "path": "sdump_enterprise/receipt.py",
+      "projection_only": false,
+      "sha256": "70ce655e477b64b9a8aa6ee15558852da146696761731194667b19421b373900"
+    },
+    {
+      "authoritative": true,
+      "dependencies": [],
+      "id": "sdump.snippet.redact",
+      "kind": "snippet_module",
+      "path": "sdump_enterprise/redact.py",
+      "projection_only": false,
+      "sha256": "8207e9beff161e1e321bbca2386064fd90600821bab1fc7cadbefa0e4c5f7284"
+    },
+    {
+      "authoritative": true,
+      "dependencies": [
+        "sdump.snippet.model"
+      ],
+      "id": "sdump.snippet.render",
+      "kind": "snippet_module",
+      "path": "sdump_enterprise/render.py",
+      "projection_only": false,
+      "sha256": "214894043d022aae0c2667d4deb4ec216715db3dca3c4bd92aa9edffdb8765c3"
+    },
+    {
+      "authoritative": true,
+      "dependencies": [
+        "sdump.snippet.ignore",
+        "sdump.snippet.model",
+        "sdump.snippet.redact",
+        "sdump.snippet.util"
+      ],
+      "id": "sdump.snippet.scan",
+      "kind": "snippet_module",
+      "path": "sdump_enterprise/scan.py",
+      "projection_only": false,
+      "sha256": "63025472a40892bbf74ff81c95f9b287089941039decf411586dfe3496dabc93"
+    },
+    {
+      "authoritative": true,
+      "dependencies": [
+        "sdump.snippet.model",
+        "sdump.snippet.util"
+      ],
+      "id": "sdump.snippet.upload",
+      "kind": "snippet_module",
+      "path": "sdump_enterprise/upload.py",
+      "projection_only": false,
+      "sha256": "37e147ce82e434d3e75d424c70b39854b49ef689649e881583b2cc710cae1980"
+    },
+    {
+      "authoritative": true,
+      "dependencies": [],
+      "id": "sdump.snippet.util",
+      "kind": "snippet_module",
+      "path": "sdump_enterprise/util.py",
+      "projection_only": false,
+      "sha256": "bb7cae193050ad9df9247125aefde73f7ffe4af14fd209424957769bec20f8ea"
+    }
+  ],
+  "name": "sdump-enterprise",
+  "relationships": [
+    {
+      "id": "segue.depends.sdump.snippet.cli.sdump.snippet.model",
+      "plane": "dependency",
+      "role": "imports",
+      "source": "sdump.snippet.cli",
+      "target": "sdump.snippet.model"
+    },
+    {
+      "id": "segue.depends.sdump.snippet.cli.sdump.snippet.profiles",
+      "plane": "dependency",
+      "role": "imports",
+      "source": "sdump.snippet.cli",
+      "target": "sdump.snippet.profiles"
+    },
+    {
+      "id": "segue.depends.sdump.snippet.cli.sdump.snippet.receipt",
+      "plane": "dependency",
+      "role": "imports",
+      "source": "sdump.snippet.cli",
+      "target": "sdump.snippet.receipt"
+    },
+    {
+      "id": "segue.depends.sdump.snippet.cli.sdump.snippet.render",
+      "plane": "dependency",
+      "role": "imports",
+      "source": "sdump.snippet.cli",
+      "target": "sdump.snippet.render"
+    },
+    {
+      "id": "segue.depends.sdump.snippet.cli.sdump.snippet.scan",
+      "plane": "dependency",
+      "role": "imports",
+      "source": "sdump.snippet.cli",
+      "target": "sdump.snippet.scan"
+    },
+    {
+      "id": "segue.depends.sdump.snippet.cli.sdump.snippet.upload",
+      "plane": "dependency",
+      "role": "imports",
+      "source": "sdump.snippet.cli",
+      "target": "sdump.snippet.upload"
+    },
+    {
+      "id": "segue.depends.sdump.snippet.cli.sdump.snippet.util",
+      "plane": "dependency",
+      "role": "imports",
+      "source": "sdump.snippet.cli",
+      "target": "sdump.snippet.util"
+    },
+    {
+      "id": "segue.depends.sdump.snippet.ignore.sdump.snippet.model",
+      "plane": "dependency",
+      "role": "imports",
+      "source": "sdump.snippet.ignore",
+      "target": "sdump.snippet.model"
+    },
+    {
+      "id": "segue.depends.sdump.snippet.ignore.sdump.snippet.util",
+      "plane": "dependency",
+      "role": "imports",
+      "source": "sdump.snippet.ignore",
+      "target": "sdump.snippet.util"
+    },
+    {
+      "id": "segue.depends.sdump.snippet.profiles.sdump.snippet.model",
+      "plane": "dependency",
+      "role": "imports",
+      "source": "sdump.snippet.profiles",
+      "target": "sdump.snippet.model"
+    },
+    {
+      "id": "segue.depends.sdump.snippet.receipt.sdump.snippet.model",
+      "plane": "dependency",
+      "role": "imports",
+      "source": "sdump.snippet.receipt",
+      "target": "sdump.snippet.model"
+    },
+    {
+      "id": "segue.depends.sdump.snippet.receipt.sdump.snippet.util",
+      "plane": "dependency",
+      "role": "imports",
+      "source": "sdump.snippet.receipt",
+      "target": "sdump.snippet.util"
+    },
+    {
+      "id": "segue.depends.sdump.snippet.render.sdump.snippet.model",
+      "plane": "dependency",
+      "role": "imports",
+      "source": "sdump.snippet.render",
+      "target": "sdump.snippet.model"
+    },
+    {
+      "id": "segue.depends.sdump.snippet.scan.sdump.snippet.ignore",
+      "plane": "dependency",
+      "role": "imports",
+      "source": "sdump.snippet.scan",
+      "target": "sdump.snippet.ignore"
+    },
+    {
+      "id": "segue.depends.sdump.snippet.scan.sdump.snippet.model",
+      "plane": "dependency",
+      "role": "imports",
+      "source": "sdump.snippet.scan",
+      "target": "sdump.snippet.model"
+    },
+    {
+      "id": "segue.depends.sdump.snippet.scan.sdump.snippet.redact",
+      "plane": "dependency",
+      "role": "imports",
+      "source": "sdump.snippet.scan",
+      "target": "sdump.snippet.redact"
+    },
+    {
+      "id": "segue.depends.sdump.snippet.scan.sdump.snippet.util",
+      "plane": "dependency",
+      "role": "imports",
+      "source": "sdump.snippet.scan",
+      "target": "sdump.snippet.util"
+    },
+    {
+      "id": "segue.depends.sdump.snippet.upload.sdump.snippet.model",
+      "plane": "dependency",
+      "role": "imports",
+      "source": "sdump.snippet.upload",
+      "target": "sdump.snippet.model"
+    },
+    {
+      "id": "segue.depends.sdump.snippet.upload.sdump.snippet.util",
+      "plane": "dependency",
+      "role": "imports",
+      "source": "sdump.snippet.upload",
+      "target": "sdump.snippet.util"
+    }
+  ],
+  "schema": "savant.snippet_registry.v1"
+}

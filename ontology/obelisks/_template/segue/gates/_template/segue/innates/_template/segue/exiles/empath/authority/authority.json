@@ -1,0 +1,55 @@
+{
+  "schema": "savant.empath.authority.v1",
+  "id": "exile:empath",
+  "authority_effect": "none",
+  "projection_only": true,
+  "owns": [
+    "bounded affective signal projection",
+    "bounded conversational-state projection",
+    "evidence span extraction for its own projections",
+    "response-calibration recommendations explicitly labeled as projections"
+  ],
+  "does_not_own": [
+    "conversation",
+    "persona",
+    "voice",
+    "provider selection",
+    "provider routing",
+    "provider execution",
+    "canon",
+    "evidence admission",
+    "task governance",
+    "durable mutation",
+    "human psychological truth"
+  ],
+  "owners": {
+    "conversation": "palaver",
+    "persona": "envoy",
+    "voice": "envoy",
+    "provider": "opus",
+    "evidence_admission": "notary",
+    "authority_interpretation": "pryme",
+    "durable_mutation": "coda"
+  },
+  "epistemic_rules": {
+    "observable_text_is_evidence": true,
+    "projection_is_authority": false,
+    "confidence_is_authority": false,
+    "model_output_is_authority": false,
+    "absence_of_signal_proves_absence": false,
+    "internal_mental_state_is_directly_observable": false,
+    "unknown_must_remain_unknown": true
+  },
+  "prohibited_claims": [
+    "the user definitely feels a specific emotion",
+    "the user has a psychiatric or medical condition",
+    "the user is lying",
+    "the user has a fixed personality trait based solely on the analyzed text",
+    "a low signal score proves absence of the corresponding human state"
+  ],
+  "fallback": {
+    "provider_unavailable": "deterministic local projection",
+    "insufficient_signal": "unknown",
+    "unsupported_language": "partial projection with explicit limitation"
+  }
+}

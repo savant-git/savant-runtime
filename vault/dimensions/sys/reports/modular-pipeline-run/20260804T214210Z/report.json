@@ -1,0 +1,34 @@
+{
+  "application": {
+    "attempted": false,
+    "blocker": "application not requested",
+    "passed": false
+  },
+  "apply_requested": false,
+  "authority_effect": "none",
+  "executed_stage_count": 1,
+  "first_blocker": "audit: stage returned 1; accepted=(0, 2)",
+  "implementation_mutation_performed": false,
+  "operation": "run_modular_pipeline",
+  "passed": false,
+  "schema": "savant://vault/dimensions/modular-pipeline-run/1.0.0",
+  "stage_count": 9,
+  "stages": [
+    {
+      "blocker": "stage returned 1; accepted=(0, 2)",
+      "key": "audit",
+      "operation": "audit",
+      "ordinal": 1,
+      "output": "/root/savant-runtime/vault/dimensions/sys/reports/modular-conformance/latest.json",
+      "output_exists_after": true,
+      "output_exists_before": true,
+      "passed": false,
+      "return_code": 1,
+      "script": "/root/savant-runtime/vault/dimensions/sys/audit_modular_conformance.py",
+      "script_exists": true,
+      "stderr": "",
+      "stdout": "{\n  \"latest\": \"/root/savant-runtime/vault/dimensions/sys/reports/modular-conformance/latest.json\",\n  \"mutation_performed\": false,\n  \"operation\": \"audit_modular_conformance\",\n  \"passed\": false,\n  \"summary\": {\n    \"error_count\": 2,\n    \"file_count\": 24601,\n    \"finding_count\": 3569,\n    \"generated_file_count\": 1068,\n    \"historical_file_count\": 13,\n    \"notice_count\": 3567,\n    \"text_file_count\": 24321,\n    \"warning_count\": 0\n  }\n}\n"
+    }
+  ],
+  "timestamp": "20260804T214210Z"
+}

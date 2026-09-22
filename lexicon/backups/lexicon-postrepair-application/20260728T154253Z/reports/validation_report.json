@@ -1,0 +1,525 @@
+{
+  "completed_at": "2026-07-28T15:22:50.748566+00:00",
+  "issues": [
+    {
+      "code": "structure.authority_field_missing",
+      "field": "authority.timestamp",
+      "message": "Authority field is missing: timestamp",
+      "severity": "error",
+      "validator": "structure"
+    },
+    {
+      "code": "schema.lineage_missing",
+      "field": "lineage",
+      "lexeme_id": "lex:core:authority",
+      "message": "Lexeme does not expose lineage.",
+      "severity": "warning",
+      "validator": "schema"
+    },
+    {
+      "code": "schema.provenance_missing",
+      "field": "provenance",
+      "lexeme_id": "lex:core:authority",
+      "message": "Lexeme does not expose provenance.",
+      "severity": "warning",
+      "validator": "schema"
+    },
+    {
+      "code": "schema.lineage_missing",
+      "field": "lineage",
+      "lexeme_id": "lex:core:instance",
+      "message": "Lexeme does not expose lineage.",
+      "severity": "warning",
+      "validator": "schema"
+    },
+    {
+      "code": "schema.provenance_missing",
+      "field": "provenance",
+      "lexeme_id": "lex:core:instance",
+      "message": "Lexeme does not expose provenance.",
+      "severity": "warning",
+      "validator": "schema"
+    },
+    {
+      "code": "schema.lineage_missing",
+      "field": "lineage",
+      "lexeme_id": "lex:core:segue",
+      "message": "Lexeme does not expose lineage.",
+      "severity": "warning",
+      "validator": "schema"
+    },
+    {
+      "code": "schema.provenance_missing",
+      "field": "provenance",
+      "lexeme_id": "lex:core:segue",
+      "message": "Lexeme does not expose provenance.",
+      "severity": "warning",
+      "validator": "schema"
+    },
+    {
+      "code": "schema.lineage_missing",
+      "field": "lineage",
+      "lexeme_id": "lex:core:projection",
+      "message": "Lexeme does not expose lineage.",
+      "severity": "warning",
+      "validator": "schema"
+    },
+    {
+      "code": "schema.provenance_missing",
+      "field": "provenance",
+      "lexeme_id": "lex:core:projection",
+      "message": "Lexeme does not expose provenance.",
+      "severity": "warning",
+      "validator": "schema"
+    },
+    {
+      "code": "schema.lineage_missing",
+      "field": "lineage",
+      "lexeme_id": "lex:core:lineage",
+      "message": "Lexeme does not expose lineage.",
+      "severity": "warning",
+      "validator": "schema"
+    },
+    {
+      "code": "schema.provenance_missing",
+      "field": "provenance",
+      "lexeme_id": "lex:core:lineage",
+      "message": "Lexeme does not expose provenance.",
+      "severity": "warning",
+      "validator": "schema"
+    },
+    {
+      "code": "schema.lineage_missing",
+      "field": "lineage",
+      "lexeme_id": "lex:core:provenance",
+      "message": "Lexeme does not expose lineage.",
+      "severity": "warning",
+      "validator": "schema"
+    },
+    {
+      "code": "schema.provenance_missing",
+      "field": "provenance",
+      "lexeme_id": "lex:core:provenance",
+      "message": "Lexeme does not expose provenance.",
+      "severity": "warning",
+      "validator": "schema"
+    },
+    {
+      "code": "schema.lineage_missing",
+      "field": "lineage",
+      "lexeme_id": "lex:core:kindred",
+      "message": "Lexeme does not expose lineage.",
+      "severity": "warning",
+      "validator": "schema"
+    },
+    {
+      "code": "schema.provenance_missing",
+      "field": "provenance",
+      "lexeme_id": "lex:core:kindred",
+      "message": "Lexeme does not expose provenance.",
+      "severity": "warning",
+      "validator": "schema"
+    },
+    {
+      "code": "schema.lineage_missing",
+      "field": "lineage",
+      "lexeme_id": "lex:core:lexeme",
+      "message": "Lexeme does not expose lineage.",
+      "severity": "warning",
+      "validator": "schema"
+    },
+    {
+      "code": "schema.provenance_missing",
+      "field": "provenance",
+      "lexeme_id": "lex:core:lexeme",
+      "message": "Lexeme does not expose provenance.",
+      "severity": "warning",
+      "validator": "schema"
+    },
+    {
+      "code": "schema.lineage_missing",
+      "field": "lineage",
+      "lexeme_id": "lex:core:ontology",
+      "message": "Lexeme does not expose lineage.",
+      "severity": "warning",
+      "validator": "schema"
+    },
+    {
+      "code": "schema.provenance_missing",
+      "field": "provenance",
+      "lexeme_id": "lex:core:ontology",
+      "message": "Lexeme does not expose provenance.",
+      "severity": "warning",
+      "validator": "schema"
+    },
+    {
+      "code": "schema.lineage_missing",
+      "field": "lineage",
+      "lexeme_id": "lex:core:validator",
+      "message": "Lexeme does not expose lineage.",
+      "severity": "warning",
+      "validator": "schema"
+    },
+    {
+      "code": "schema.provenance_missing",
+      "field": "provenance",
+      "lexeme_id": "lex:core:validator",
+      "message": "Lexeme does not expose provenance.",
+      "severity": "warning",
+      "validator": "schema"
+    },
+    {
+      "code": "terminology.forbidden_term_in_file",
+      "line": 1215,
+      "message": "Forbidden terminology detected in repository file.",
+      "path": "/root/savant-runtime/lexicon/backups/constitution-authority-install/20260727T235041Z/constitution_engine/constitution_registry.yaml",
+      "severity": "error",
+      "validator": "terminology",
+      "value": "kindred"
+    },
+    {
+      "code": "terminology.forbidden_term_in_file",
+      "line": 1216,
+      "message": "Forbidden terminology detected in repository file.",
+      "path": "/root/savant-runtime/lexicon/backups/constitution-authority-install/20260727T235041Z/constitution_engine/constitution_registry.yaml",
+      "severity": "error",
+      "validator": "terminology",
+      "value": "kindred"
+    },
+    {
+      "code": "terminology.forbidden_term_in_file",
+      "line": 1220,
+      "message": "Forbidden terminology detected in repository file.",
+      "path": "/root/savant-runtime/lexicon/backups/constitution-authority-install/20260727T235041Z/constitution_engine/constitution_registry.yaml",
+      "severity": "error",
+      "validator": "terminology",
+      "value": "kindred"
+    },
+    {
+      "code": "terminology.forbidden_term_in_file",
+      "line": 1226,
+      "message": "Forbidden terminology detected in repository file.",
+      "path": "/root/savant-runtime/lexicon/backups/constitution-authority-install/20260727T235041Z/constitution_engine/constitution_registry.yaml",
+      "severity": "error",
+      "validator": "terminology",
+      "value": "kindred"
+    },
+    {
+      "code": "terminology.forbidden_term_in_file",
+      "line": 1229,
+      "message": "Forbidden terminology detected in repository file.",
+      "path": "/root/savant-runtime/lexicon/backups/constitution-authority-install/20260727T235041Z/constitution_engine/constitution_registry.yaml",
+      "severity": "error",
+      "validator": "terminology",
+      "value": "kindred"
+    },
+    {
+      "code": "terminology.forbidden_term_in_file",
+      "line": 1215,
+      "message": "Forbidden terminology detected in repository file.",
+      "path": "/root/savant-runtime/lexicon/backups/constitution-authority-install/20260727T235108Z/constitution_engine/constitution_registry.yaml",
+      "severity": "error",
+      "validator": "terminology",
+      "value": "kindred"
+    },
+    {
+      "code": "terminology.forbidden_term_in_file",
+      "line": 1216,
+      "message": "Forbidden terminology detected in repository file.",
+      "path": "/root/savant-runtime/lexicon/backups/constitution-authority-install/20260727T235108Z/constitution_engine/constitution_registry.yaml",
+      "severity": "error",
+      "validator": "terminology",
+      "value": "kindred"
+    },
+    {
+      "code": "terminology.forbidden_term_in_file",
+      "line": 1220,
+      "message": "Forbidden terminology detected in repository file.",
+      "path": "/root/savant-runtime/lexicon/backups/constitution-authority-install/20260727T235108Z/constitution_engine/constitution_registry.yaml",
+      "severity": "error",
+      "validator": "terminology",
+      "value": "kindred"
+    },
+    {
+      "code": "terminology.forbidden_term_in_file",
+      "line": 1226,
+      "message": "Forbidden terminology detected in repository file.",
+      "path": "/root/savant-runtime/lexicon/backups/constitution-authority-install/20260727T235108Z/constitution_engine/constitution_registry.yaml",
+      "severity": "error",
+      "validator": "terminology",
+      "value": "kindred"
+    },
+    {
+      "code": "terminology.forbidden_term_in_file",
+      "line": 1229,
+      "message": "Forbidden terminology detected in repository file.",
+      "path": "/root/savant-runtime/lexicon/backups/constitution-authority-install/20260727T235108Z/constitution_engine/constitution_registry.yaml",
+      "severity": "error",
+      "validator": "terminology",
+      "value": "kindred"
+    },
+    {
+      "code": "terminology.forbidden_term_in_file",
+      "line": 1215,
+      "message": "Forbidden terminology detected in repository file.",
+      "path": "/root/savant-runtime/lexicon/backups/constitution-authority-install/20260727T235311Z/constitution_engine/constitution_registry.yaml",
+      "severity": "error",
+      "validator": "terminology",
+      "value": "kindred"
+    },
+    {
+      "code": "terminology.forbidden_term_in_file",
+      "line": 1216,
+      "message": "Forbidden terminology detected in repository file.",
+      "path": "/root/savant-runtime/lexicon/backups/constitution-authority-install/20260727T235311Z/constitution_engine/constitution_registry.yaml",
+      "severity": "error",
+      "validator": "terminology",
+      "value": "kindred"
+    },
+    {
+      "code": "terminology.forbidden_term_in_file",
+      "line": 1220,
+      "message": "Forbidden terminology detected in repository file.",
+      "path": "/root/savant-runtime/lexicon/backups/constitution-authority-install/20260727T235311Z/constitution_engine/constitution_registry.yaml",
+      "severity": "error",
+      "validator": "terminology",
+      "value": "kindred"
+    },
+    {
+      "code": "terminology.forbidden_term_in_file",
+      "line": 1226,
+      "message": "Forbidden terminology detected in repository file.",
+      "path": "/root/savant-runtime/lexicon/backups/constitution-authority-install/20260727T235311Z/constitution_engine/constitution_registry.yaml",
+      "severity": "error",
+      "validator": "terminology",
+      "value": "kindred"
+    },
+    {
+      "code": "terminology.forbidden_term_in_file",
+      "line": 1229,
+      "message": "Forbidden terminology detected in repository file.",
+      "path": "/root/savant-runtime/lexicon/backups/constitution-authority-install/20260727T235311Z/constitution_engine/constitution_registry.yaml",
+      "severity": "error",
+      "validator": "terminology",
+      "value": "kindred"
+    },
+    {
+      "code": "terminology.forbidden_term_in_file",
+      "line": 1215,
+      "message": "Forbidden terminology detected in repository file.",
+      "path": "/root/savant-runtime/lexicon/backups/constitution-authority-install/20260727T235450Z/constitution_engine/constitution_registry.yaml",
+      "severity": "error",
+      "validator": "terminology",
+      "value": "kindred"
+    },
+    {
+      "code": "terminology.forbidden_term_in_file",
+      "line": 1216,
+      "message": "Forbidden terminology detected in repository file.",
+      "path": "/root/savant-runtime/lexicon/backups/constitution-authority-install/20260727T235450Z/constitution_engine/constitution_registry.yaml",
+      "severity": "error",
+      "validator": "terminology",
+      "value": "kindred"
+    },
+    {
+      "code": "terminology.forbidden_term_in_file",
+      "line": 1220,
+      "message": "Forbidden terminology detected in repository file.",
+      "path": "/root/savant-runtime/lexicon/backups/constitution-authority-install/20260727T235450Z/constitution_engine/constitution_registry.yaml",
+      "severity": "error",
+      "validator": "terminology",
+      "value": "kindred"
+    },
+    {
+      "code": "terminology.forbidden_term_in_file",
+      "line": 1226,
+      "message": "Forbidden terminology detected in repository file.",
+      "path": "/root/savant-runtime/lexicon/backups/constitution-authority-install/20260727T235450Z/constitution_engine/constitution_registry.yaml",
+      "severity": "error",
+      "validator": "terminology",
+      "value": "kindred"
+    },
+    {
+      "code": "terminology.forbidden_term_in_file",
+      "line": 1229,
+      "message": "Forbidden terminology detected in repository file.",
+      "path": "/root/savant-runtime/lexicon/backups/constitution-authority-install/20260727T235450Z/constitution_engine/constitution_registry.yaml",
+      "severity": "error",
+      "validator": "terminology",
+      "value": "kindred"
+    },
+    {
+      "code": "terminology.forbidden_term_in_file",
+      "line": 1215,
+      "message": "Forbidden terminology detected in repository file.",
+      "path": "/root/savant-runtime/lexicon/constitution_engine/constitution_registry.yaml",
+      "severity": "error",
+      "validator": "terminology",
+      "value": "kindred"
+    },
+    {
+      "code": "terminology.forbidden_term_in_file",
+      "line": 1216,
+      "message": "Forbidden terminology detected in repository file.",
+      "path": "/root/savant-runtime/lexicon/constitution_engine/constitution_registry.yaml",
+      "severity": "error",
+      "validator": "terminology",
+      "value": "kindred"
+    },
+    {
+      "code": "terminology.forbidden_term_in_file",
+      "line": 1220,
+      "message": "Forbidden terminology detected in repository file.",
+      "path": "/root/savant-runtime/lexicon/constitution_engine/constitution_registry.yaml",
+      "severity": "error",
+      "validator": "terminology",
+      "value": "kindred"
+    },
+    {
+      "code": "terminology.forbidden_term_in_file",
+      "line": 1226,
+      "message": "Forbidden terminology detected in repository file.",
+      "path": "/root/savant-runtime/lexicon/constitution_engine/constitution_registry.yaml",
+      "severity": "error",
+      "validator": "terminology",
+      "value": "kindred"
+    },
+    {
+      "code": "terminology.forbidden_term_in_file",
+      "line": 1229,
+      "message": "Forbidden terminology detected in repository file.",
+      "path": "/root/savant-runtime/lexicon/constitution_engine/constitution_registry.yaml",
+      "severity": "error",
+      "validator": "terminology",
+      "value": "kindred"
+    }
+  ],
+  "registry_path": "/root/savant-runtime/lexicon/registry.yaml",
+  "started_at": "2026-07-28T15:22:50.680123+00:00",
+  "statistics": {
+    "alias_count": 0,
+    "canonical_count": 10,
+    "concept_count": 10,
+    "counts_by_code": {
+      "schema.lineage_missing": 10,
+      "schema.provenance_missing": 10,
+      "structure.authority_field_missing": 1,
+      "terminology.forbidden_term_in_file": 25
+    },
+    "counts_by_validator": {
+      "schema": 20,
+      "structure": 1,
+      "terminology": 25
+    },
+    "error_count": 26,
+    "identity_count": 10,
+    "issue_count": 46,
+    "lexeme_count": 10,
+    "registry_sha256": "4dacc9ecf15823ae8444dc3db05e571328343fc3182170bda2b4d91418c9efb5",
+    "reserved_count": 10,
+    "valid": false,
+    "warning_count": 20
+  },
+  "valid": false,
+  "validator_registry_path": "/root/savant-runtime/lexicon/validators/validator_registry.yaml",
+  "validator_results": {
+    "aliases": {
+      "error_count": 0,
+      "fatal": true,
+      "issue_count": 0,
+      "priority": 50,
+      "warning_count": 0
+    },
+    "canonical": {
+      "error_count": 0,
+      "fatal": true,
+      "issue_count": 0,
+      "priority": 40,
+      "warning_count": 0
+    },
+    "dependency_graph": {
+      "error_count": 0,
+      "fatal": true,
+      "issue_count": 0,
+      "priority": 70,
+      "warning_count": 0
+    },
+    "identity": {
+      "error_count": 0,
+      "fatal": true,
+      "issue_count": 0,
+      "priority": 30,
+      "warning_count": 0
+    },
+    "inheritance_graph": {
+      "error_count": 0,
+      "fatal": true,
+      "issue_count": 0,
+      "priority": 80,
+      "warning_count": 0
+    },
+    "ontology_graph": {
+      "error_count": 0,
+      "fatal": true,
+      "issue_count": 0,
+      "priority": 90,
+      "warning_count": 0
+    },
+    "projections": {
+      "error_count": 0,
+      "fatal": true,
+      "issue_count": 0,
+      "priority": 120,
+      "warning_count": 0
+    },
+    "relationship_graph": {
+      "error_count": 0,
+      "fatal": true,
+      "issue_count": 0,
+      "priority": 100,
+      "warning_count": 0
+    },
+    "reserved": {
+      "error_count": 0,
+      "fatal": true,
+      "issue_count": 0,
+      "priority": 60,
+      "warning_count": 0
+    },
+    "schema": {
+      "error_count": 0,
+      "fatal": true,
+      "issue_count": 20,
+      "priority": 20,
+      "warning_count": 20
+    },
+    "semantic_collision": {
+      "error_count": 0,
+      "fatal": true,
+      "issue_count": 0,
+      "priority": 130,
+      "warning_count": 0
+    },
+    "structure": {
+      "error_count": 1,
+      "fatal": true,
+      "issue_count": 1,
+      "priority": 10,
+      "warning_count": 0
+    },
+    "supersession": {
+      "error_count": 0,
+      "fatal": true,
+      "issue_count": 0,
+      "priority": 110,
+      "warning_count": 0
+    },
+    "terminology": {
+      "error_count": 25,
+      "fatal": true,
+      "issue_count": 25,
+      "priority": 140,
+      "warning_count": 0
+    }
+  }
+}

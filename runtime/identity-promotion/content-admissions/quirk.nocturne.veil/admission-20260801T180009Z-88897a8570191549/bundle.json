@@ -1,0 +1,241 @@
+{
+  "admission": {
+    "automatic_overwrite_allowed": false,
+    "existing_file_count": 3,
+    "ready": true,
+    "review_required_count": 3
+  },
+  "authority": {
+    "definition": {
+      "exists": true,
+      "mode": "0o644",
+      "path": "edifices/identity/exiles/opus/prodigals/nocturne/quirks/veil/definition.json",
+      "sha256": "6b20ead72b31d84152b2b3e493b77ac09aef4017c4b621a4b0c201c4e65a512b",
+      "size": 4430
+    },
+    "definition_digest": "0ef7da9752735a446c57022c2b7f8f70795522f409ad5261aefcb7cadfca43b3",
+    "primitives": {
+      "apertures": [
+        {
+          "admission": "Requires compatible contract, validated authority, explicit lineage, and complete provenance.",
+          "id": "quirk.nocturne.veil.future",
+          "purpose": "Admit future compatible attachments without replacing this identity."
+        }
+      ],
+      "authority": {
+        "class": "identity_definition",
+        "owner": "quirk.nocturne.veil",
+        "precedence": 700,
+        "source": "edifices/identity/exiles/opus/prodigals/nocturne/quirks/veil/definition.json"
+      },
+      "capabilities": [
+        {
+          "description": "Circuit rotation, traffic mixing, timing obfuscation, and identity blending across the Tor network.",
+          "id": "quirk.nocturne.veil.declared_purpose",
+          "status": "proposed"
+        }
+      ],
+      "composition": {
+        "children": [],
+        "composition_policy": "Compose authoritative children through typed relationships without duplicating their source authority.",
+        "maximum_children": 4,
+        "minimum_children": 2,
+        "shared_children": []
+      },
+      "contracts": {
+        "errors": [
+          {
+            "code": "implementation.unavailable",
+            "condition": "Required executable behavior is absent, incomplete, or unverified.",
+            "recoverable": true
+          }
+        ],
+        "inputs": [],
+        "outputs": []
+      },
+      "dependencies": {
+        "external": [],
+        "optional": [],
+        "required": [],
+        "runtime": []
+      },
+      "id": "quirk.nocturne.veil",
+      "identity": {
+        "aliases": [],
+        "domain": "Traffic Obfuscation & Identity Protection",
+        "historical_names": [],
+        "name": "Veil"
+      },
+      "kind": "quirk",
+      "lifecycle": {
+        "allowed_transitions": [
+          "proposed",
+          "canonical",
+          "active",
+          "deprecated",
+          "superseded",
+          "retired"
+        ],
+        "state": "canonical"
+      },
+      "lineage": {
+        "parents": [
+          "prodigal.nocturne"
+        ],
+        "sources": [
+          "edifices/identity/exiles/opus/prodigals/nocturne/quirks/veil/definition.json"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "observability": {
+        "audit": true,
+        "events": [
+          "identity.invoked",
+          "identity.completed",
+          "identity.failed"
+        ],
+        "health": [
+          "definition_valid",
+          "dependencies_available",
+          "runtime_available"
+        ],
+        "metrics": [
+          "execution_count",
+          "success_count",
+          "failure_count",
+          "duration_seconds"
+        ]
+      },
+      "provenance": {
+        "captured_by": "savant.identity-quality.upgrader",
+        "created_from": [
+          "edifices/identity/exiles/opus/prodigals/nocturne/quirks/veil/definition.json"
+        ],
+        "source_hashes": {
+          "edifices/identity/exiles/opus/prodigals/nocturne/quirks/veil/definition.json": "abcb9f5d6b0670b074fb2bb4326fbb578827956dd1b4457f9c95386904d7db83"
+        }
+      },
+      "purpose": "Circuit rotation, traffic mixing, timing obfuscation, and identity blending across the Tor network.",
+      "relationships": [
+        {
+          "direction": "outbound",
+          "target": "prodigal.nocturne",
+          "type": "composition"
+        }
+      ],
+      "runtime": {
+        "deterministic": true,
+        "entrypoints": [],
+        "hooks": [],
+        "implementation": "absent",
+        "side_effects": []
+      },
+      "security": {
+        "boundary": "Deny undeclared access; require explicit authority for filesystem, network, provider, secret, and subprocess operations.",
+        "data_classification": "unclassified",
+        "network_policy": "deny_by_default",
+        "permissions": [],
+        "sandbox": true
+      },
+      "status": "canonical",
+      "validation": {
+        "acceptance": [
+          "Definition validates against the identity quality schema.",
+          "Authority, lineage, provenance, dependencies, and relationships are exposed.",
+          "Existing authoritative fields remain unchanged unless explicitly migrated.",
+          "Runtime capability is never fabricated from absent implementation evidence.",
+          "Generated compatibility views remain disposable projections.",
+          "Future extensions can attach without architectural replacement."
+        ],
+        "integration_tests": [],
+        "property_tests": [
+          "canonical_serialization_is_stable",
+          "identity_is_graph_addressable",
+          "lineage_contains_no_self_cycle"
+        ],
+        "security_tests": [
+          "undeclared_access_is_denied"
+        ],
+        "unit_tests": []
+      },
+      "version": "2.1"
+    }
+  },
+  "constraints": [
+    "Existing files may only be extended after review.",
+    "No existing authoritative file may be replaced.",
+    "Generated content is provisional until admitted.",
+    "Runtime behavior is limited to deterministic projection of authoritative primitives.",
+    "No external authority is granted.",
+    "All generated files expose provenance and deterministic identity."
+  ],
+  "digest": "9bd47d2def7c0d22325baad5075e1655806792aa7da2ad652adcafe8dce3f5a1",
+  "files": [
+    {
+      "absolute_path": "/root/savant-runtime/edifices/identity/exiles/opus/prodigals/nocturne/quirks/veil/contracts/veil_contracts.py",
+      "content": "#!/usr/bin/env python3\nfrom __future__ import annotations\n\nfrom enum import StrEnum\nfrom typing import Any, Literal\n\nfrom pydantic import BaseModel, ConfigDict, Field, model_validator\n\n\nCONTRACT_VERSION = \"1.0.0\"\nSUBJECT_ID = 'quirk.nocturne.veil'\nDECLARED_CAPABILITIES = ('quirk.nocturne.veil.declared_purpose',)\n\n\nclass StrictModel(BaseModel):\n    model_config = ConfigDict(\n        extra=\"forbid\",\n        frozen=True,\n        str_strip_whitespace=True,\n        validate_default=True,\n    )\n\n\nclass AuthorityState(StrEnum):\n    PROPOSED = \"proposed\"\n    OBSERVED = \"observed\"\n    ACCEPTED = \"accepted\"\n    AUTHORITATIVE = \"authoritative\"\n    REJECTED = \"rejected\"\n    UNKNOWN = \"unknown\"\n\n\nclass ExecutionMode(StrEnum):\n    PLAN = \"plan\"\n    EXECUTE = \"execute\"\n    VALIDATE = \"validate\"\n\n\nclass SourceReference(StrictModel):\n    source_id: str\n    source_kind: str\n    source_path: str | None = None\n    source_sha256: str | None = Field(\n        default=None,\n        pattern=r\"^[0-9a-f]{64}$\",\n    )\n    authority: AuthorityState = AuthorityState.UNKNOWN\n    captured_at: str | None = None\n\n\nclass ProvenanceEnvelope(StrictModel):\n    sources: tuple[SourceReference, ...] = ()\n    transformations: tuple[str, ...] = ()\n    generated_by: str\n    generated_at: str\n    contract_version: str = CONTRACT_VERSION\n\n\nclass VeilPolicy(StrictModel):\n    execution_mode: ExecutionMode = ExecutionMode.PLAN\n    allowed_capabilities: tuple[str, ...] = ()\n    fail_closed: bool = True\n    deterministic: bool = True\n    network_access: bool = False\n    filesystem_read: bool = False\n    filesystem_write: bool = False\n    subprocess_access: bool = False\n    secret_access: bool = False\n\n    @model_validator(mode=\"after\")\n    def enforce_boundary(\n        self,\n    ) -> \"VeilPolicy\":\n        undeclared = [\n            capability\n            for capability in self.allowed_capabilities\n            if capability not in DECLARED_CAPABILITIES\n        ]\n\n        if undeclared:\n            raise ValueError(\n                \"Undeclared capabilities requested: \"\n                + \", \".join(\n                    sorted(undeclared)\n                )\n            )\n\n        if (\n            self.network_access\n            or self.filesystem_read\n            or self.filesystem_write\n            or self.subprocess_access\n            or self.secret_access\n        ):\n            raise ValueError(\n                \"The baseline runtime grants no external authority.\"\n            )\n\n        return self\n\n\nclass VeilRequest(StrictModel):\n    request_id: str\n    purpose: str\n    operation: str\n    payload: dict[str, Any] = Field(\n        default_factory=dict\n    )\n    policy: VeilPolicy\n    authority: AuthorityState = AuthorityState.OBSERVED\n    provenance: ProvenanceEnvelope\n\n\nclass FailureRecord(StrictModel):\n    failure_id: str\n    code: str\n    message: str\n    stage: str\n    recoverable: bool\n    details: dict[str, Any] = Field(\n        default_factory=dict\n    )\n    provenance: ProvenanceEnvelope\n\n\nclass VeilProjection(StrictModel):\n    projection_id: str\n    subject_id: Literal['quirk.nocturne.veil']\n    request_id: str\n    operation: str\n    purpose: str\n    payload_digest: str = Field(\n        pattern=r\"^[0-9a-f]{64}$\"\n    )\n    admitted_capabilities: tuple[str, ...]\n    authority: AuthorityState = AuthorityState.PROPOSED\n    deterministic: bool = True\n    provenance: ProvenanceEnvelope\n\n\nclass VeilResult(StrictModel):\n    operation: Literal[\"run\", \"validate\"]\n    passed: bool\n    request_id: str\n    projection: VeilProjection | None = None\n    failure: FailureRecord | None = None\n    result_digest: str = Field(\n        pattern=r\"^[0-9a-f]{64}$\"\n    )\n    metrics: dict[str, int | float | str | bool] = Field(\n        default_factory=dict\n    )\n    provenance: ProvenanceEnvelope\n",
+      "content_sha256": "b34c37c325e8464dffc8b1cee44953f835590c165ba21ce881b8c183dad03807",
+      "existing": false,
+      "existing_sha256": null,
+      "operation": "create",
+      "path": "edifices/identity/exiles/opus/prodigals/nocturne/quirks/veil/contracts/veil_contracts.py",
+      "replace_existing": false,
+      "requires_review": false,
+      "role": "contracts"
+    },
+    {
+      "absolute_path": "/root/savant-runtime/edifices/identity/exiles/opus/prodigals/nocturne/quirks/veil/runtime/veil_runtime.py",
+      "content": "#!/usr/bin/env python3\nfrom __future__ import annotations\n\nimport argparse\nimport hashlib\nimport json\nimport sys\nimport time\nfrom pathlib import Path\nfrom typing import Any\n\n\nRUNTIME_ROOT = Path(__file__).resolve().parent\nSUBJECT_ROOT = RUNTIME_ROOT.parent\nCONTRACTS_ROOT = SUBJECT_ROOT / \"contracts\"\n\nif str(CONTRACTS_ROOT) not in sys.path:\n    sys.path.insert(\n        0,\n        str(CONTRACTS_ROOT),\n    )\n\nfrom veil_contracts import (  # noqa: E402\n    AuthorityState,\n    DECLARED_CAPABILITIES,\n    FailureRecord,\n    ProvenanceEnvelope,\n    VeilProjection,\n    VeilRequest,\n    VeilResult,\n)\n\n\nRUNTIME_ID = 'quirk.nocturne.veil.runtime'\nRUNTIME_VERSION = \"1.0.0\"\nAUTHORITATIVE_PURPOSE = 'Circuit rotation, traffic mixing, timing obfuscation, and identity blending across the Tor network.'\n\nVOLATILE_FIELDS = {\n    \"duration_seconds\",\n    \"started_at\",\n    \"finished_at\",\n    \"elapsed_seconds\",\n    \"wall_clock_seconds\",\n    \"timestamp\",\n}\n\n\ndef canonical_bytes(\n    value: Any,\n) -> bytes:\n    if hasattr(value, \"model_dump\"):\n        value = value.model_dump(\n            mode=\"json\"\n        )\n\n    return json.dumps(\n        value,\n        ensure_ascii=False,\n        sort_keys=True,\n        separators=(\",\", \":\"),\n    ).encode(\"utf-8\")\n\n\ndef digest(\n    value: Any,\n) -> str:\n    return hashlib.sha256(\n        canonical_bytes(value)\n    ).hexdigest()\n\n\ndef deterministic_projection(\n    value: Any,\n) -> Any:\n    if hasattr(value, \"model_dump\"):\n        value = value.model_dump(\n            mode=\"json\"\n        )\n\n    if isinstance(value, dict):\n        return {\n            key: deterministic_projection(child)\n            for key, child in sorted(\n                value.items(),\n                key=lambda item: item[0],\n            )\n            if key not in VOLATILE_FIELDS\n        }\n\n    if isinstance(value, list):\n        return [\n            deterministic_projection(child)\n            for child in value\n        ]\n\n    if isinstance(value, tuple):\n        return tuple(\n            deterministic_projection(child)\n            for child in value\n        )\n\n    return value\n\n\ndef build_provenance(\n    request: VeilRequest,\n    transformations: tuple[str, ...],\n) -> ProvenanceEnvelope:\n    return ProvenanceEnvelope(\n        sources=request.provenance.sources,\n        transformations=transformations,\n        generated_by=f\"{RUNTIME_ID}@{RUNTIME_VERSION}\",\n        generated_at=request.provenance.generated_at,\n    )\n\n\ndef run(\n    request: VeilRequest,\n) -> VeilResult:\n    started = time.perf_counter()\n\n    provenance = build_provenance(\n        request,\n        (\n            \"validate_request\",\n            \"resolve_declared_capabilities\",\n            \"project_authoritative_primitives\",\n            \"emit_deterministic_result\",\n        ),\n    )\n\n    try:\n        admitted = tuple(\n            sorted(\n                request.policy.allowed_capabilities\n            )\n        )\n\n        projection_body = {\n            \"subject_id\": 'quirk.nocturne.veil',\n            \"request_id\": request.request_id,\n            \"operation\": request.operation,\n            \"purpose\": request.purpose,\n            \"payload_digest\": digest(\n                deterministic_projection(\n                    request.payload\n                )\n            ),\n            \"admitted_capabilities\": admitted,\n            \"authority\": AuthorityState.PROPOSED.value,\n        }\n\n        projection_digest = digest(\n            projection_body\n        )\n\n        projection = VeilProjection(\n            projection_id=(\n                f\"veil-projection-\"\n                f\"{projection_digest[:20]}\"\n            ),\n            subject_id='quirk.nocturne.veil',\n            request_id=request.request_id,\n            operation=request.operation,\n            purpose=request.purpose,\n            payload_digest=projection_body[\n                \"payload_digest\"\n            ],\n            admitted_capabilities=admitted,\n            authority=AuthorityState.PROPOSED,\n            deterministic=True,\n            provenance=provenance,\n        )\n\n        result_body = {\n            \"operation\": \"run\",\n            \"passed\": True,\n            \"request_id\": request.request_id,\n            \"projection\": deterministic_projection(\n                projection\n            ),\n        }\n\n        return VeilResult(\n            operation=\"run\",\n            passed=True,\n            request_id=request.request_id,\n            projection=projection,\n            result_digest=digest(\n                result_body\n            ),\n            metrics={\n                \"duration_seconds\": (\n                    time.perf_counter()\n                    - started\n                ),\n                \"declared_capability_count\": len(\n                    DECLARED_CAPABILITIES\n                ),\n                \"admitted_capability_count\": len(\n                    admitted\n                ),\n                \"passed\": True,\n            },\n            provenance=provenance,\n        )\n\n    except Exception as exc:\n        failure_body = {\n            \"request_id\": request.request_id,\n            \"exception_type\": type(exc).__name__,\n            \"message\": str(exc),\n        }\n\n        failure = FailureRecord(\n            failure_id=(\n                f\"veil-failure-\"\n                f\"{digest(failure_body)[:20]}\"\n            ),\n            code='quirk.nocturne.veil.runtime.failure',\n            message=str(exc),\n            stage=\"run\",\n            recoverable=True,\n            details={\n                \"exception_type\": type(exc).__name__,\n            },\n            provenance=provenance,\n        )\n\n        return VeilResult(\n            operation=\"run\",\n            passed=False,\n            request_id=request.request_id,\n            failure=failure,\n            result_digest=digest(\n                {\n                    \"operation\": \"run\",\n                    \"passed\": False,\n                    \"request_id\": request.request_id,\n                    \"failure\": deterministic_projection(\n                        failure\n                    ),\n                }\n            ),\n            metrics={\n                \"duration_seconds\": (\n                    time.perf_counter()\n                    - started\n                ),\n                \"passed\": False,\n            },\n            provenance=provenance,\n        )\n\n\ndef example_request() -> VeilRequest:\n    generated_at = (\n        \"2026-08-01T00:00:00+00:00\"\n    )\n\n    return VeilRequest(\n        request_id='veil-example-request',\n        purpose=AUTHORITATIVE_PURPOSE,\n        operation=\"project\",\n        payload={\n            \"subject\": 'quirk.nocturne.veil',\n        },\n        policy={\n            \"execution_mode\": \"plan\",\n            \"allowed_capabilities\": [],\n            \"fail_closed\": True,\n            \"deterministic\": True,\n            \"network_access\": False,\n            \"filesystem_read\": False,\n            \"filesystem_write\": False,\n            \"subprocess_access\": False,\n            \"secret_access\": False,\n        },\n        authority=AuthorityState.OBSERVED,\n        provenance={\n            \"sources\": [],\n            \"transformations\": [],\n            \"generated_by\": 'veil-example',\n            \"generated_at\": generated_at,\n            \"contract_version\": \"1.0.0\",\n        },\n    )\n\n\ndef load_request(\n    path: Path | None,\n) -> VeilRequest:\n    if path is None:\n        raw = sys.stdin.read()\n    else:\n        raw = path.read_text(\n            encoding=\"utf-8\"\n        )\n\n    return VeilRequest.model_validate_json(\n        raw\n    )\n\n\ndef write_result(\n    result: VeilResult,\n    output: Path | None,\n) -> None:\n    rendered = json.dumps(\n        result.model_dump(\n            mode=\"json\"\n        ),\n        ensure_ascii=False,\n        indent=2,\n        sort_keys=True,\n    ) + \"\\n\"\n\n    if output is None:\n        print(\n            rendered,\n            end=\"\",\n        )\n        return\n\n    output.parent.mkdir(\n        parents=True,\n        exist_ok=True,\n    )\n\n    output.write_text(\n        rendered,\n        encoding=\"utf-8\",\n    )\n\n\ndef main() -> int:\n    parser = argparse.ArgumentParser(\n        description='Circuit rotation, traffic mixing, timing obfuscation, and identity blending across the Tor network.'\n    )\n\n    subparsers = parser.add_subparsers(\n        dest=\"command\",\n        required=True,\n    )\n\n    run_parser = subparsers.add_parser(\n        \"run\"\n    )\n\n    run_parser.add_argument(\n        \"--input\",\n        type=Path,\n    )\n\n    run_parser.add_argument(\n        \"--output\",\n        type=Path,\n    )\n\n    example_parser = subparsers.add_parser(\n        \"example\"\n    )\n\n    example_parser.add_argument(\n        \"--output\",\n        type=Path,\n    )\n\n    subparsers.add_parser(\n        \"schema\"\n    )\n\n    args = parser.parse_args()\n\n    if args.command == \"run\":\n        result = run(\n            load_request(\n                args.input\n            )\n        )\n\n        write_result(\n            result,\n            args.output,\n        )\n\n        return (\n            0\n            if result.passed\n            else 1\n        )\n\n    if args.command == \"example\":\n        request = example_request()\n\n        rendered = json.dumps(\n            request.model_dump(\n                mode=\"json\"\n            ),\n            ensure_ascii=False,\n            indent=2,\n            sort_keys=True,\n        ) + \"\\n\"\n\n        if args.output is None:\n            print(\n                rendered,\n                end=\"\",\n            )\n        else:\n            args.output.parent.mkdir(\n                parents=True,\n                exist_ok=True,\n            )\n\n            args.output.write_text(\n                rendered,\n                encoding=\"utf-8\",\n            )\n\n        return 0\n\n    if args.command == \"schema\":\n        print(\n            json.dumps(\n                {\n                    \"request\": (\n                        VeilRequest\n                        .model_json_schema()\n                    ),\n                    \"result\": (\n                        VeilResult\n                        .model_json_schema()\n                    ),\n                },\n                ensure_ascii=False,\n                indent=2,\n                sort_keys=True,\n            )\n        )\n\n        return 0\n\n    return 2\n\n\nif __name__ == \"__main__\":\n    raise SystemExit(\n        main()\n    )\n",
+      "content_sha256": "561f33470fbbae22236c988287599e871452f5e01c2268eafdd2383ff4b1a5a6",
+      "existing": true,
+      "existing_sha256": "778b99a100467d7ef7771695c7431d864a1874141dded5b00acd70d49db69a32",
+      "operation": "extend",
+      "path": "edifices/identity/exiles/opus/prodigals/nocturne/quirks/veil/runtime/veil_runtime.py",
+      "replace_existing": false,
+      "requires_review": true,
+      "role": "runtime"
+    },
+    {
+      "absolute_path": "/root/savant-runtime/edifices/identity/exiles/opus/prodigals/nocturne/quirks/veil/tests/test_veil_runtime.py",
+      "content": "#!/usr/bin/env python3\nfrom __future__ import annotations\n\nimport json\nimport sys\nfrom pathlib import Path\n\nfrom hypothesis import (\n    given,\n    strategies as st,\n)\n\n\nSUBJECT_ROOT = Path(\n    __file__\n).resolve().parents[1]\n\nRUNTIME_ROOT = (\n    SUBJECT_ROOT\n    / \"runtime\"\n)\n\nCONTRACTS_ROOT = (\n    SUBJECT_ROOT\n    / \"contracts\"\n)\n\nfor path in (\n    RUNTIME_ROOT,\n    CONTRACTS_ROOT,\n):\n    if str(path) not in sys.path:\n        sys.path.insert(\n            0,\n            str(path),\n        )\n\n\nfrom veil_contracts import (  # noqa: E402\n    AuthorityState,\n    VeilRequest,\n)\nfrom veil_runtime import (  # noqa: E402\n    canonical_bytes,\n    deterministic_projection,\n    example_request,\n    run,\n)\n\n\ndef test_example_request_succeeds() -> None:\n    result = run(\n        example_request()\n    )\n\n    assert result.passed is True\n    assert result.projection is not None\n    assert (\n        result.projection.subject_id\n        == 'quirk.nocturne.veil'\n    )\n\n\ndef test_equal_requests_produce_equal_result_digests() -> None:\n    request = example_request()\n\n    first = run(request)\n    second = run(request)\n\n    assert (\n        first.result_digest\n        == second.result_digest\n    )\n\n\ndef test_result_preserves_provenance() -> None:\n    result = run(\n        example_request()\n    )\n\n    assert result.provenance.generated_by\n    assert result.provenance.generated_at\n    assert result.provenance.transformations\n\n\ndef test_projection_remains_proposed() -> None:\n    result = run(\n        example_request()\n    )\n\n    assert result.projection is not None\n    assert (\n        result.projection.authority\n        == AuthorityState.PROPOSED\n    )\n\n\ndef test_runtime_rejects_undeclared_capability() -> None:\n    value = example_request().model_dump(\n        mode=\"json\"\n    )\n\n    value[\"policy\"][\n        \"allowed_capabilities\"\n    ] = [\n        \"undeclared.capability\"\n    ]\n\n    try:\n        VeilRequest.model_validate(\n            value\n        )\n    except ValueError:\n        return\n\n    raise AssertionError(\n        \"Runtime admitted an undeclared capability.\"\n    )\n\n\ndef test_runtime_rejects_external_authority() -> None:\n    value = example_request().model_dump(\n        mode=\"json\"\n    )\n\n    value[\"policy\"][\n        \"network_access\"\n    ] = True\n\n    try:\n        VeilRequest.model_validate(\n            value\n        )\n    except ValueError:\n        return\n\n    raise AssertionError(\n        \"Runtime admitted undeclared network authority.\"\n    )\n\n\ndef test_volatile_telemetry_does_not_change_identity() -> None:\n    request = example_request()\n\n    first = run(request)\n    second = run(request)\n\n    first_value = deterministic_projection(\n        first\n    )\n    second_value = deterministic_projection(\n        second\n    )\n\n    assert (\n        canonical_bytes(first_value)\n        == canonical_bytes(second_value)\n    )\n\n\n@given(\n    value=st.text(\n        alphabet=st.characters(\n            blacklist_categories=(\n                \"Cs\",\n            )\n        ),\n        min_size=1,\n        max_size=200,\n    )\n)\ndef test_canonical_serialization_is_stable(\n    value: str,\n) -> None:\n    payload = {\n        \"value\": value,\n    }\n\n    first = canonical_bytes(\n        payload\n    )\n\n    second = canonical_bytes(\n        json.loads(first)\n    )\n\n    assert first == second\n",
+      "content_sha256": "fb486da3720c401f2fe1815f8763311efb0e019a38abd43e6f751ff60328c3b6",
+      "existing": true,
+      "existing_sha256": "d8a0bba98254577257e7a0a897bda562ba20a6e755c8d2c418162c23931162f7",
+      "operation": "extend",
+      "path": "edifices/identity/exiles/opus/prodigals/nocturne/quirks/veil/tests/test_veil_runtime.py",
+      "replace_existing": false,
+      "requires_review": true,
+      "role": "tests"
+    },
+    {
+      "absolute_path": "/root/savant-runtime/bin/veilctl",
+      "content": "#!/usr/bin/env python3\nfrom __future__ import annotations\n\nimport json\nimport subprocess\nimport sys\nfrom pathlib import Path\n\n\nROOT = Path(\"/root/savant-runtime\")\n\nPYTHON = (\n    ROOT\n    / \"bin\"\n    / \"identity-quality-python\"\n)\n\nRUNTIME = (\n    ROOT\n    / 'edifices/identity/exiles/opus/prodigals/nocturne/quirks/veil/runtime/veil_runtime.py'\n)\n\nTESTS = (\n    ROOT\n    / 'edifices/identity/exiles/opus/prodigals/nocturne/quirks/veil/tests/test_veil_runtime.py'\n)\n\nREPORT_ROOT = (\n    ROOT\n    / 'reports/identity_quality/veil'\n)\n\n\ndef execute(\n    command: list[str],\n) -> int:\n    return subprocess.run(\n        command,\n        cwd=str(ROOT),\n        check=False,\n    ).returncode\n\n\ndef usage() -> int:\n    print(\n        \"\"\"\nveilctl example [--output PATH]\nveilctl run --input PATH [--output PATH]\nveilctl schema\nveilctl test\nveilctl verify\nveilctl status\n\"\"\"\n    )\n\n    return 0\n\n\ndef status() -> int:\n    result = {\n        \"runtime\": str(RUNTIME),\n        \"runtime_exists\": RUNTIME.is_file(),\n        \"tests\": str(TESTS),\n        \"tests_exist\": TESTS.is_file(),\n        \"report_root\": str(REPORT_ROOT),\n        \"report_root_exists\": REPORT_ROOT.is_dir(),\n    }\n\n    print(\n        json.dumps(\n            result,\n            indent=2,\n            sort_keys=True,\n        )\n    )\n\n    return 0\n\n\ndef main() -> int:\n    arguments = sys.argv[1:]\n\n    if not arguments:\n        return usage()\n\n    command = arguments[0]\n    remaining = arguments[1:]\n\n    if command in {\n        \"help\",\n        \"--help\",\n        \"-h\",\n    }:\n        return usage()\n\n    if command == \"example\":\n        return execute(\n            [\n                str(PYTHON),\n                str(RUNTIME),\n                \"example\",\n                *remaining,\n            ]\n        )\n\n    if command == \"run\":\n        return execute(\n            [\n                str(PYTHON),\n                str(RUNTIME),\n                \"run\",\n                *remaining,\n            ]\n        )\n\n    if command == \"schema\":\n        return execute(\n            [\n                str(PYTHON),\n                str(RUNTIME),\n                \"schema\",\n            ]\n        )\n\n    if command == \"test\":\n        return execute(\n            [\n                str(PYTHON),\n                \"-m\",\n                \"pytest\",\n                \"-q\",\n                str(TESTS),\n            ]\n        )\n\n    if command == \"verify\":\n        REPORT_ROOT.mkdir(\n            parents=True,\n            exist_ok=True,\n        )\n\n        example = (\n            REPORT_ROOT\n            / \"example_request.json\"\n        )\n\n        result = (\n            REPORT_ROOT\n            / \"example_result.json\"\n        )\n\n        stages = [\n            [\n                str(PYTHON),\n                \"-m\",\n                \"py_compile\",\n                str(RUNTIME),\n                str(TESTS),\n            ],\n            [\n                str(PYTHON),\n                \"-m\",\n                \"pytest\",\n                \"-q\",\n                str(TESTS),\n            ],\n            [\n                str(PYTHON),\n                str(RUNTIME),\n                \"example\",\n                \"--output\",\n                str(example),\n            ],\n            [\n                str(PYTHON),\n                str(RUNTIME),\n                \"run\",\n                \"--input\",\n                str(example),\n                \"--output\",\n                str(result),\n            ],\n        ]\n\n        for stage in stages:\n            returncode = execute(\n                stage\n            )\n\n            if returncode:\n                return returncode\n\n        print(\n            str(result)\n        )\n\n        return 0\n\n    if command == \"status\":\n        return status()\n\n    print(\n        f\"ERROR: unknown command: {command}\",\n        file=sys.stderr,\n    )\n\n    return 2\n\n\nif __name__ == \"__main__\":\n    raise SystemExit(\n        main()\n    )\n",
+      "content_sha256": "a7a49fa9b6451a2e5029bbc17ad5f22812a5a04fc520410667f1b7b8647d3d9c",
+      "existing": true,
+      "existing_sha256": "7353dd5874e4567699d0fd011e8933d683406c932ce4c793e339ed4bc77dfdd6",
+      "operation": "extend",
+      "path": "bin/veilctl",
+      "replace_existing": false,
+      "requires_review": true,
+      "role": "controller"
+    }
+  ],
+  "generated_at": "2026-08-01T18:00:09+00:00",
+  "operation": "build_promotion_content_bundle",
+  "scaffold": {
+    "digest": "4d27028ebc3aeb54d2976cae14cf61e054d4f0e04f58aa12c4e879506fe5fcb5",
+    "path": "reports/identity_quality/promotion/scaffolds/quirk.nocturne.veil/latest.json",
+    "sha256": "a4ad5f0e0c78d07258758c382eeca51548325ade3492ad65c8eaa783f9040c46"
+  },
+  "schema": "savant://identity-quality/promotion-content-bundle/1.0.0",
+  "subject": {
+    "definition": "edifices/identity/exiles/opus/prodigals/nocturne/quirks/veil/definition.json",
+    "id": "quirk.nocturne.veil",
+    "kind": "quirk",
+    "name": "Veil",
+    "parent": "prodigal.nocturne",
+    "python_name": "veil",
+    "reference_subject": true
+  }
+}

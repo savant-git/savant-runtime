@@ -1,0 +1,121 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:runtime/lineage/adapters",
+  "deterministic_hash": "eecd75e1dae303a8206069d5cdaca5631c487839ac928f5773243ecbf3743b9f",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "runtime/lineage/adapters",
+  "kind": "directory",
+  "label": "adapters",
+  "namespace": "preview.kindred",
+  "path": "runtime/lineage/adapters",
+  "placement": {
+    "domain": "filesystem",
+    "node": "runtime/lineage/adapters",
+    "parent": "runtime/lineage",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.b49699f9cdf14582712a",
+    "rank": 20,
+    "slot": "40_runtime",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.106ffe927d0c0748b827",
+    "lineage.composition.4fa95653ab1d5442f51d",
+    "lineage.composition.b49699f9cdf14582712a",
+    "lineage.composition.b72e8edd1e2bc05efc27",
+    "lineage.composition.d3bc6c5d7f7881b0ec51",
+    "lineage.composition.dcccab0addae1118a4c6"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:runtime/lineage/adapters",
+    "children": [
+      "runtime/lineage/adapters/filesystem.py",
+      "runtime/lineage/adapters/canon.py",
+      "runtime/lineage/adapters/__init__.py",
+      "runtime/lineage/adapters/authority.py",
+      "runtime/lineage/adapters/common.py"
+    ],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "runtime/lineage/adapters",
+    "kind": "directory",
+    "label": "adapters",
+    "legacy_id": "runtime/lineage/adapters",
+    "lineage": [
+      "runtime/lineage"
+    ],
+    "metadata": {
+      "canonical_id": "fs:runtime/lineage/adapters",
+      "child_modes": {
+        "projecting": [
+          "fs:runtime/lineage/adapters/filesystem.py",
+          "fs:runtime/lineage/adapters/canon.py",
+          "fs:runtime/lineage/adapters/__init__.py",
+          "fs:runtime/lineage/adapters/authority.py",
+          "fs:runtime/lineage/adapters/common.py"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:runtime/lineage/adapters/filesystem.py",
+          "fs:runtime/lineage/adapters/canon.py",
+          "fs:runtime/lineage/adapters/__init__.py",
+          "fs:runtime/lineage/adapters/authority.py",
+          "fs:runtime/lineage/adapters/common.py"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:runtime/lineage"
+        ]
+      },
+      "projected_id": "runtime/lineage/adapters",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "runtime/lineage"
+    ],
+    "path": "runtime/lineage/adapters",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "runtime/lineage/adapters",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.106ffe927d0c0748b827",
+      "lineage.composition.4fa95653ab1d5442f51d",
+      "lineage.composition.b49699f9cdf14582712a",
+      "lineage.composition.b72e8edd1e2bc05efc27",
+      "lineage.composition.d3bc6c5d7f7881b0ec51",
+      "lineage.composition.dcccab0addae1118a4c6"
+    ],
+    "size": 12,
+    "sons": [
+      "runtime/lineage/adapters/filesystem.py",
+      "runtime/lineage/adapters/canon.py",
+      "runtime/lineage/adapters/__init__.py",
+      "runtime/lineage/adapters/authority.py",
+      "runtime/lineage/adapters/common.py"
+    ]
+  },
+  "state": "active",
+  "synthetic": false
+}

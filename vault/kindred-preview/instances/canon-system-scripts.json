@@ -1,0 +1,83 @@
+{
+  "authoritative": false,
+  "authority_tier": "delegated",
+  "canonical_id": "fs:canon-system/scripts",
+  "deterministic_hash": "8d121c6c600f3c929052dd50f3a13f221b28a07dbbc5e2a851f5922244d15b29",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "canon-system/scripts",
+  "kind": "directory",
+  "label": "scripts",
+  "namespace": "preview.kindred",
+  "path": "canon-system/scripts",
+  "placement": {
+    "domain": "filesystem",
+    "node": "canon-system/scripts",
+    "parent": "canon-system",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.33c6445d185d4f6bd30d",
+    "rank": 110,
+    "slot": "20_authority",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.33c6445d185d4f6bd30d"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": false,
+    "canonical_id": "fs:canon-system/scripts",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "canon-system/scripts",
+    "kind": "directory",
+    "label": "scripts",
+    "legacy_id": "canon-system/scripts",
+    "lineage": [
+      "canon-system"
+    ],
+    "metadata": {
+      "canonical_id": "fs:canon-system/scripts",
+      "child_modes": {},
+      "child_roles": {},
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:canon-system"
+        ]
+      },
+      "projected_id": "canon-system/scripts",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "canon-system"
+    ],
+    "path": "canon-system/scripts",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "canon-system/scripts",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.33c6445d185d4f6bd30d"
+    ],
+    "size": 12,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

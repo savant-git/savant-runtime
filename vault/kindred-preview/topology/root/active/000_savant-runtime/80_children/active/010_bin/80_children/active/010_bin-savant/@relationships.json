@@ -1,0 +1,76 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "c14d0d2c382fe765abb2f6be3d4b24fa3f0a2919f1de3c4cff0b591a67494ba4",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "namespace": "preview.kindred",
+  "node": "bin/savant",
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationships": [
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.8390ccbaef30bb6629e3",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "bin",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:bin",
+        "canonical_target": "fs:bin/savant",
+        "continuation": "projecting",
+        "id": "lineage.composition.8390ccbaef30bb6629e3",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/bin/savant"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "bin",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "bin/savant",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "bin/savant"
+    }
+  ],
+  "schema": "savant.kindred.preview.relationship_projection.v2"
+}

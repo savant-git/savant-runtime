@@ -1,0 +1,19 @@
+{
+  "id": "catalog_text",
+  "type": "text_inference_provider",
+  "status": "active",
+  "owner": "opus",
+  "adapter": "catalog_text",
+  "model_env": "OPUS_UNIVERSAL_MODEL",
+  "model_default": "",
+  "capabilities": [
+    "text_inference",
+    "system_instructions",
+    "context",
+    "usage_reporting"
+  ],
+  "provider_projection": "registry/providers/universal_text_catalog.json",
+  "dynamic_provider_profiles": true,
+  "credential_values_exposed": false,
+  "authority_effect": "none"
+}

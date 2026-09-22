@@ -1,0 +1,83 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:runtime/palaver/authority/authority_engine.py",
+  "deterministic_hash": "31859ecb679f08d51ad45e5bbf4b6a5a84d4c517f5b79f880834965f01cec904",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "runtime/palaver/authority/authority_engine.py",
+  "kind": "file",
+  "label": "authority_engine.py",
+  "namespace": "preview.kindred",
+  "path": "runtime/palaver/authority/authority_engine.py",
+  "placement": {
+    "domain": "filesystem",
+    "node": "runtime/palaver/authority/authority_engine.py",
+    "parent": "runtime/palaver/authority",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.8f50d036d4d493e543dd",
+    "rank": 10,
+    "slot": "40_runtime",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.8f50d036d4d493e543dd"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "record",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:runtime/palaver/authority/authority_engine.py",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "runtime/palaver/authority/authority_engine.py",
+    "kind": "file",
+    "label": "authority_engine.py",
+    "legacy_id": "runtime/palaver/authority/authority_engine.py",
+    "lineage": [
+      "runtime/palaver/authority"
+    ],
+    "metadata": {
+      "canonical_id": "fs:runtime/palaver/authority/authority_engine.py",
+      "child_modes": {},
+      "child_roles": {},
+      "is_directory": false,
+      "is_file": true,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:runtime/palaver/authority"
+        ]
+      },
+      "projected_id": "runtime/palaver/authority/authority_engine.py",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "runtime/palaver/authority"
+    ],
+    "path": "runtime/palaver/authority/authority_engine.py",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "runtime/palaver/authority/authority_engine.py",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.8f50d036d4d493e543dd"
+    ],
+    "size": 7,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

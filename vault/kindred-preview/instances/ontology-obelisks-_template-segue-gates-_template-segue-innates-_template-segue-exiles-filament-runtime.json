@@ -1,0 +1,178 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime",
+  "deterministic_hash": "1aed89c80392993e2aa0e0b28e0b173f2f492755c7c6586c3eab48dcaa9b89d9",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime",
+  "kind": "directory",
+  "label": "runtime",
+  "namespace": "preview.kindred",
+  "path": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime",
+  "placement": {
+    "domain": "filesystem",
+    "node": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime",
+    "parent": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.824bea79c77944dc9cf9",
+    "rank": 240,
+    "slot": "30_ontology",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.21e975657c4fe183e9ad",
+    "lineage.composition.255e41e7e6335801f225",
+    "lineage.composition.2f0bb1cf873b3c8aaee2",
+    "lineage.composition.4efefbb0a3fda390a783",
+    "lineage.composition.5e14496579f190468847",
+    "lineage.composition.6ed2926dc776510215ae",
+    "lineage.composition.7d9bf5fab50f35de8133",
+    "lineage.composition.806da50e59682f26a655",
+    "lineage.composition.824bea79c77944dc9cf9",
+    "lineage.composition.a3a8a5ff326b18168a35",
+    "lineage.composition.b0ce5538be3453e0b3f2",
+    "lineage.composition.b8f2104a817f6bb93ec2",
+    "lineage.composition.bdd2c41ea3dc32cda5c3",
+    "lineage.composition.e5c8a1a31d7f6a76a17f",
+    "lineage.composition.fb40613096ac61c2fc84"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime",
+    "children": [
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/workers",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/api",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/orchestration",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/projection_engine",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/services",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/bridge",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/REVISE_PROJECTION_TO_FILAMENT.sh",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/providers",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/pipeline",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/contracts",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/bootstrap",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/events",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/__init__.py",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/protocol"
+    ],
+    "daughters": [
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/workers",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/api",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/orchestration",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/projection_engine",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/services",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/bridge",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/providers",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/pipeline",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/contracts",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/bootstrap",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/events",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/protocol"
+    ],
+    "dependencies": [],
+    "fathers": [],
+    "id": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime",
+    "kind": "directory",
+    "label": "runtime",
+    "legacy_id": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime",
+    "lineage": [
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament"
+    ],
+    "metadata": {
+      "canonical_id": "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime",
+      "child_modes": {
+        "preserving": [
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/workers",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/api",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/orchestration",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/projection_engine",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/services",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/bridge",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/providers",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/pipeline",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/contracts",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/bootstrap",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/events",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/protocol"
+        ],
+        "projecting": [
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/REVISE_PROJECTION_TO_FILAMENT.sh",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/__init__.py"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/workers",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/api",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/orchestration",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/projection_engine",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/services",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/bridge",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/REVISE_PROJECTION_TO_FILAMENT.sh",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/providers",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/pipeline",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/contracts",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/bootstrap",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/events",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/__init__.py",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/protocol"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament"
+        ]
+      },
+      "projected_id": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament"
+    ],
+    "path": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.21e975657c4fe183e9ad",
+      "lineage.composition.255e41e7e6335801f225",
+      "lineage.composition.2f0bb1cf873b3c8aaee2",
+      "lineage.composition.4efefbb0a3fda390a783",
+      "lineage.composition.5e14496579f190468847",
+      "lineage.composition.6ed2926dc776510215ae",
+      "lineage.composition.7d9bf5fab50f35de8133",
+      "lineage.composition.806da50e59682f26a655",
+      "lineage.composition.824bea79c77944dc9cf9",
+      "lineage.composition.a3a8a5ff326b18168a35",
+      "lineage.composition.b0ce5538be3453e0b3f2",
+      "lineage.composition.b8f2104a817f6bb93ec2",
+      "lineage.composition.bdd2c41ea3dc32cda5c3",
+      "lineage.composition.e5c8a1a31d7f6a76a17f",
+      "lineage.composition.fb40613096ac61c2fc84"
+    ],
+    "size": 12,
+    "sons": [
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/REVISE_PROJECTION_TO_FILAMENT.sh",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/__init__.py"
+    ]
+  },
+  "state": "active",
+  "synthetic": false
+}

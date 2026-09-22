@@ -1,0 +1,99 @@
+{
+  "digest": "953ca6dfa24888e285b160abe82c1cc20ac24cbc4e3f8f6fc060299b7c2530bd",
+  "records": [
+    {
+      "authority": "current_user_directive",
+      "authority_rank": 0,
+      "dependencies": [],
+      "id": "risk.duplicate-authority",
+      "priority": 1,
+      "provenance": {
+        "asserted_by": "user",
+        "created_at": "2026-08-30T00:00:00Z",
+        "method": "living-governance-bootstrap",
+        "sources": [
+          "current user directive 2026-08-30",
+          "project sources and accepted savant authority"
+        ]
+      },
+      "relationships": [],
+      "schema": "savant.living-governance.v1",
+      "status": "active",
+      "stream": "risks",
+      "supersedes": [],
+      "text": "creating new registries or manually maintained current-state documents can produce conflicting authority.",
+      "version": 1
+    },
+    {
+      "authority": "current_user_directive",
+      "authority_rank": 0,
+      "dependencies": [],
+      "id": "risk.historical-contamination",
+      "priority": 2,
+      "provenance": {
+        "asserted_by": "user",
+        "created_at": "2026-08-30T00:00:00Z",
+        "method": "living-governance-bootstrap",
+        "sources": [
+          "current user directive 2026-08-30",
+          "project sources and accepted savant authority"
+        ]
+      },
+      "relationships": [],
+      "schema": "savant.living-governance.v1",
+      "status": "active",
+      "stream": "risks",
+      "supersedes": [],
+      "text": "historical Savant documents contain obsolete and mutually conflicting architecture and must not automatically outrank newer accepted authority.",
+      "version": 1
+    },
+    {
+      "authority": "current_user_directive",
+      "authority_rank": 0,
+      "dependencies": [],
+      "id": "risk.projection-drift",
+      "priority": 3,
+      "provenance": {
+        "asserted_by": "user",
+        "created_at": "2026-08-30T00:00:00Z",
+        "method": "living-governance-bootstrap",
+        "sources": [
+          "current user directive 2026-08-30",
+          "project sources and accepted savant authority"
+        ]
+      },
+      "relationships": [],
+      "schema": "savant.living-governance.v1",
+      "status": "active",
+      "stream": "risks",
+      "supersedes": [],
+      "text": "hand-edited structure and masterplan documents can drift from runtime authority unless generated from the same living records.",
+      "version": 1
+    },
+    {
+      "authority": "current_user_directive",
+      "authority_rank": 0,
+      "dependencies": [],
+      "id": "risk.overvalidation",
+      "priority": 4,
+      "provenance": {
+        "asserted_by": "user",
+        "created_at": "2026-08-30T00:00:00Z",
+        "method": "living-governance-bootstrap",
+        "sources": [
+          "current user directive 2026-08-30",
+          "project sources and accepted savant authority"
+        ]
+      },
+      "relationships": [],
+      "schema": "savant.living-governance.v1",
+      "status": "active",
+      "stream": "risks",
+      "supersedes": [],
+      "text": "broad validation and inspection can become a substitute for production implementation.",
+      "version": 1
+    }
+  ],
+  "schema": "savant.living-projection.v1",
+  "stream": "risks"
+}

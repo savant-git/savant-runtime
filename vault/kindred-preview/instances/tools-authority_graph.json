@@ -1,0 +1,97 @@
+{
+  "authoritative": false,
+  "authority_tier": "delegated",
+  "canonical_id": "fs:tools/authority_graph",
+  "deterministic_hash": "b473e1bb23530e58380210244f05ab9e06438d26ffc4c1c1f483a43f42828ed2",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "tools/authority_graph",
+  "kind": "directory",
+  "label": "authority_graph",
+  "namespace": "preview.kindred",
+  "path": "tools/authority_graph",
+  "placement": {
+    "domain": "filesystem",
+    "node": "tools/authority_graph",
+    "parent": "tools",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.28d50042806926c20417",
+    "rank": 10,
+    "slot": "60_tools",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.28d50042806926c20417",
+    "lineage.composition.7eac8ef0b0f0d61fe91b"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": false,
+    "canonical_id": "fs:tools/authority_graph",
+    "children": [
+      "tools/authority_graph/compile_authority_graph.py"
+    ],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "tools/authority_graph",
+    "kind": "directory",
+    "label": "authority_graph",
+    "legacy_id": "tools/authority_graph",
+    "lineage": [
+      "tools"
+    ],
+    "metadata": {
+      "canonical_id": "fs:tools/authority_graph",
+      "child_modes": {
+        "projecting": [
+          "fs:tools/authority_graph/compile_authority_graph.py"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:tools/authority_graph/compile_authority_graph.py"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:tools"
+        ]
+      },
+      "projected_id": "tools/authority_graph",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "tools"
+    ],
+    "path": "tools/authority_graph",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "tools/authority_graph",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.28d50042806926c20417",
+      "lineage.composition.7eac8ef0b0f0d61fe91b"
+    ],
+    "size": 12,
+    "sons": [
+      "tools/authority_graph/compile_authority_graph.py"
+    ]
+  },
+  "state": "active",
+  "synthetic": false
+}

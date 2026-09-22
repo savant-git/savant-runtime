@@ -1,0 +1,15 @@
+{
+  "id": "envoy_voice_provider",
+  "type": "voice_provider",
+  "status": "active",
+  "owner": "envoy",
+  "consumer": "palaver",
+  "runtime_module": "envoy.runtime.voice_engine",
+  "capabilities": [
+    "list_personas",
+    "resolve_persona",
+    "resolve_voice",
+    "synthesize",
+    "synthesize_base64"
+  ]
+}

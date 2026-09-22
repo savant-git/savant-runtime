@@ -1,0 +1,76 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "46a5b22ca06df4ae9dd6e79bb46c39671710f390c76f30cb5d024813f5d6d1a2",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "namespace": "preview.kindred",
+  "node": "runtime/lineage/cli.py",
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationships": [
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.3df44510ee42bb6a248a",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "runtime/lineage",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:runtime/lineage",
+        "canonical_target": "fs:runtime/lineage/cli.py",
+        "continuation": "projecting",
+        "id": "lineage.composition.3df44510ee42bb6a248a",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/runtime/lineage/cli.py"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "runtime/lineage",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "runtime/lineage/cli.py",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "runtime/lineage/cli.py"
+    }
+  ],
+  "schema": "savant.kindred.preview.relationship_projection.v2"
+}

@@ -1,0 +1,105 @@
+{
+  "id": "unique_orchestration_policy",
+  "owner": "opus",
+  "type": "cognitive_orchestration_policy",
+  "status": "active",
+  "schema": "savant://opus/unique-orchestration-policy/1",
+  "purpose": "Coordinate multiple independent inference passes into a provenance-preserving, uncertainty-aware, adversarially tested derived synthesis without manufacturing authority.",
+  "mode": "bounded_recursive_deliberation",
+  "authority_effect": "none",
+  "principles": [
+    "independent_first_passes",
+    "perspective_diversity",
+    "explicit_dissent",
+    "hypothesis_competition",
+    "counterexample_search",
+    "falsification_before_synthesis",
+    "uncertainty_preservation",
+    "source_authority_preservation",
+    "lineage_preservation",
+    "deterministic_orchestration",
+    "bounded_recursion",
+    "minimum_sufficient_compute",
+    "derived_output_only"
+  ],
+  "roles": [
+    {
+      "id": "analyst",
+      "purpose": "Construct the strongest evidence-grounded solution."
+    },
+    {
+      "id": "skeptic",
+      "purpose": "Attack assumptions, unsupported conclusions, hidden dependencies, and false certainty."
+    },
+    {
+      "id": "alternativist",
+      "purpose": "Generate materially different explanations, approaches, and solution paths."
+    },
+    {
+      "id": "falsifier",
+      "purpose": "Search for observations, constraints, or counterexamples that would invalidate candidate conclusions."
+    },
+    {
+      "id": "integrator",
+      "purpose": "Identify compatible insights without erasing genuine disagreement."
+    }
+  ],
+  "stages": [
+    "decompose",
+    "independent_inference",
+    "cross_examination",
+    "falsification",
+    "alternative_generation",
+    "synthesis",
+    "synthesis_critique",
+    "final_projection"
+  ],
+  "limits": {
+    "default_independent_passes": 3,
+    "maximum_independent_passes": 8,
+    "default_critique_rounds": 1,
+    "maximum_critique_rounds": 4,
+    "default_alternative_count": 3,
+    "maximum_alternative_count": 8,
+    "maximum_total_inference_calls": 24
+  },
+  "convergence": {
+    "require_unanimity": false,
+    "preserve_material_dissent": true,
+    "allow_unresolved_result": true,
+    "stop_when_new_information_gain_is_low": true,
+    "stop_when_budget_exhausted": true,
+    "stop_when_requested_depth_reached": true
+  },
+  "epistemics": {
+    "classes": [
+      "source_derived",
+      "verified",
+      "strong_inference",
+      "weak_inference",
+      "hypothesis",
+      "speculation",
+      "unknown",
+      "contradicted"
+    ],
+    "unknown_is_first_class": true,
+    "dissent_is_first_class": true,
+    "counterevidence_is_first_class": true,
+    "confidence_is_not_authority": true,
+    "consensus_is_not_authority": true
+  },
+  "invariants": {
+    "orchestration_output_is_derived": true,
+    "model_output_never_creates_authority": true,
+    "consensus_never_creates_authority": true,
+    "source_authority_preserved": true,
+    "accepted_authority_never_silently_modified": true,
+    "dissent_never_silently_deleted": true,
+    "uncertainty_never_silently_collapsed": true,
+    "provider_failures_preserved": true,
+    "lineage_preserved": true,
+    "receipts_preserved": true,
+    "replay_inputs_preserved": true,
+    "bounded_execution": true
+  }
+}

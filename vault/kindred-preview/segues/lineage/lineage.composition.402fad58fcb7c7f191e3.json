@@ -1,0 +1,66 @@
+{
+  "authoritative": false,
+  "child_profile": "son",
+  "deterministic_hash": "d2572688667ec86d310977f18696eeabed7500042eb0208fa80e46042e4fab79",
+  "domain": "filesystem",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "lineage.composition.402fad58fcb7c7f191e3",
+  "impeti": [],
+  "namespace": "preview.kindred",
+  "parent_profile": "parent",
+  "plane": "lineage",
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "role": "composition",
+  "schema": "savant.kindred.preview.lineage_segue.v2",
+  "source": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/pact/segue/lineage",
+  "source_record": {
+    "axis": "containment",
+    "canonical_source": "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/pact/segue/lineage",
+    "canonical_target": "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/pact/segue/lineage/inheritance.json",
+    "continuation": "projecting",
+    "id": "lineage.composition.402fad58fcb7c7f191e3",
+    "inheritance": {
+      "conflict_policy": "child_wins",
+      "exclude": [],
+      "fields": [],
+      "mode": "reference"
+    },
+    "inverse": "component",
+    "kind": "contains",
+    "metadata": {
+      "legacy_edge_kind": "contains",
+      "projection": "filesystem_edifice"
+    },
+    "order": 0,
+    "propagation": {
+      "channels": [
+        "validation",
+        "projection",
+        "regeneration"
+      ],
+      "enabled": true
+    },
+    "provenance": {
+      "created_by": "filesystem_adapter",
+      "source_files": [
+        "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/pact/segue/lineage/inheritance.json"
+      ]
+    },
+    "role": "composition",
+    "scope": "filesystem",
+    "source": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/pact/segue/lineage",
+    "status": "active",
+    "symbolic_child_alias": "son",
+    "symbolic_parent_alias": "parent",
+    "target": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/pact/segue/lineage/inheritance.json",
+    "weight": 2
+  },
+  "state": "active",
+  "synthetic": false,
+  "target": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/pact/segue/lineage/inheritance.json"
+}

@@ -1,0 +1,97 @@
+{
+  "authoritative": false,
+  "authority_tier": "delegated",
+  "canonical_id": "fs:canon-system/schemas",
+  "deterministic_hash": "dc7c60a43c6a10d3f9abb95bb3d2526ef1d339bb875b22bf0eba3dce7ced6148",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "canon-system/schemas",
+  "kind": "directory",
+  "label": "schemas",
+  "namespace": "preview.kindred",
+  "path": "canon-system/schemas",
+  "placement": {
+    "domain": "filesystem",
+    "node": "canon-system/schemas",
+    "parent": "canon-system",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.4b3c2cb74b12a5ebf19f",
+    "rank": 100,
+    "slot": "20_authority",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.4b3c2cb74b12a5ebf19f",
+    "lineage.composition.781f4845d5f7fd3797cc"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": false,
+    "canonical_id": "fs:canon-system/schemas",
+    "children": [
+      "canon-system/schemas/canon-record.schema.json"
+    ],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "canon-system/schemas",
+    "kind": "directory",
+    "label": "schemas",
+    "legacy_id": "canon-system/schemas",
+    "lineage": [
+      "canon-system"
+    ],
+    "metadata": {
+      "canonical_id": "fs:canon-system/schemas",
+      "child_modes": {
+        "projecting": [
+          "fs:canon-system/schemas/canon-record.schema.json"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:canon-system/schemas/canon-record.schema.json"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:canon-system"
+        ]
+      },
+      "projected_id": "canon-system/schemas",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "canon-system"
+    ],
+    "path": "canon-system/schemas",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "canon-system/schemas",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.4b3c2cb74b12a5ebf19f",
+      "lineage.composition.781f4845d5f7fd3797cc"
+    ],
+    "size": 12,
+    "sons": [
+      "canon-system/schemas/canon-record.schema.json"
+    ]
+  },
+  "state": "active",
+  "synthetic": false
+}

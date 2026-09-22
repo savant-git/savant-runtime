@@ -1,0 +1,97 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:runtime/palaver/contracts",
+  "deterministic_hash": "4b03a607388dc1eda104455dba5ffb6e93bfe72f2048254363b59b25bc81140a",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "runtime/palaver/contracts",
+  "kind": "directory",
+  "label": "contracts",
+  "namespace": "preview.kindred",
+  "path": "runtime/palaver/contracts",
+  "placement": {
+    "domain": "filesystem",
+    "node": "runtime/palaver/contracts",
+    "parent": "runtime/palaver",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.8fd6b90f94ec49b8f6a9",
+    "rank": 20,
+    "slot": "40_runtime",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.8cd584c4ec2ab136af5f",
+    "lineage.composition.8fd6b90f94ec49b8f6a9"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:runtime/palaver/contracts",
+    "children": [
+      "runtime/palaver/contracts/investigation_contract.py"
+    ],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "runtime/palaver/contracts",
+    "kind": "directory",
+    "label": "contracts",
+    "legacy_id": "runtime/palaver/contracts",
+    "lineage": [
+      "runtime/palaver"
+    ],
+    "metadata": {
+      "canonical_id": "fs:runtime/palaver/contracts",
+      "child_modes": {
+        "projecting": [
+          "fs:runtime/palaver/contracts/investigation_contract.py"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:runtime/palaver/contracts/investigation_contract.py"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:runtime/palaver"
+        ]
+      },
+      "projected_id": "runtime/palaver/contracts",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "runtime/palaver"
+    ],
+    "path": "runtime/palaver/contracts",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "runtime/palaver/contracts",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.8cd584c4ec2ab136af5f",
+      "lineage.composition.8fd6b90f94ec49b8f6a9"
+    ],
+    "size": 12,
+    "sons": [
+      "runtime/palaver/contracts/investigation_contract.py"
+    ]
+  },
+  "state": "active",
+  "synthetic": false
+}

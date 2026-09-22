@@ -1,0 +1,83 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:runtime/lineage/adapters/common.py",
+  "deterministic_hash": "04487485e978dec9acc23531818abe538004d223c16269d6677a41bc89a6cea1",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "runtime/lineage/adapters/common.py",
+  "kind": "file",
+  "label": "common.py",
+  "namespace": "preview.kindred",
+  "path": "runtime/lineage/adapters/common.py",
+  "placement": {
+    "domain": "filesystem",
+    "node": "runtime/lineage/adapters/common.py",
+    "parent": "runtime/lineage/adapters",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.dcccab0addae1118a4c6",
+    "rank": 40,
+    "slot": "40_runtime",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.dcccab0addae1118a4c6"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "record",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:runtime/lineage/adapters/common.py",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "runtime/lineage/adapters/common.py",
+    "kind": "file",
+    "label": "common.py",
+    "legacy_id": "runtime/lineage/adapters/common.py",
+    "lineage": [
+      "runtime/lineage/adapters"
+    ],
+    "metadata": {
+      "canonical_id": "fs:runtime/lineage/adapters/common.py",
+      "child_modes": {},
+      "child_roles": {},
+      "is_directory": false,
+      "is_file": true,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:runtime/lineage/adapters"
+        ]
+      },
+      "projected_id": "runtime/lineage/adapters/common.py",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "runtime/lineage/adapters"
+    ],
+    "path": "runtime/lineage/adapters/common.py",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "runtime/lineage/adapters/common.py",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.dcccab0addae1118a4c6"
+    ],
+    "size": 7,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

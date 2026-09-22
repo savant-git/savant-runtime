@@ -1,0 +1,29 @@
+{
+  "schema": "savant.segue.v1",
+  "id": "segue:empath:conversation-affective-projection",
+  "type": "typed_connection",
+  "status": "active",
+  "source": "exile:palaver",
+  "target": "exile:empath",
+  "purpose": "allow conversation text or bounded conversation context to be interpreted as non-authoritative affective and interaction-state projections",
+  "direction": "palaver_to_empath",
+  "return_path": {
+    "target": "exile:palaver",
+    "payload": "empath_projection"
+  },
+  "related_owners": {
+    "persona_projection_consumer": "exile:envoy",
+    "optional_model_execution": "exile:opus"
+  },
+  "authority_transfer": false,
+  "projection_only": true,
+  "mutation": false,
+  "evidence_admission": false,
+  "constraints": [
+    "raw conversational substance remains owned by its existing source",
+    "empath output cannot modify persona authority",
+    "empath output cannot directly select or execute a provider",
+    "empath output cannot be promoted to canon by confidence score",
+    "all inferred human-state language must remain calibrated"
+  ]
+}

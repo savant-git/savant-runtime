@@ -1,0 +1,76 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "952d630502455d62c597a0f7803d1d51e093f32b171f128a93463d4058d20289",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "namespace": "preview.kindred",
+  "node": "tools/foundation/project_foundation_status.py",
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationships": [
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.5193884ce169384c429d",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "tools/foundation",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:tools/foundation",
+        "canonical_target": "fs:tools/foundation/project_foundation_status.py",
+        "continuation": "projecting",
+        "id": "lineage.composition.5193884ce169384c429d",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/tools/foundation/project_foundation_status.py"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "tools/foundation",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "tools/foundation/project_foundation_status.py",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "tools/foundation/project_foundation_status.py"
+    }
+  ],
+  "schema": "savant.kindred.preview.relationship_projection.v2"
+}

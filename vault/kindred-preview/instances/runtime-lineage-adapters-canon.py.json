@@ -1,0 +1,83 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:runtime/lineage/adapters/canon.py",
+  "deterministic_hash": "e04aeea022cafc8ad42a556129c782c1d50ae2ca76f63192637aa94556260588",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "runtime/lineage/adapters/canon.py",
+  "kind": "file",
+  "label": "canon.py",
+  "namespace": "preview.kindred",
+  "path": "runtime/lineage/adapters/canon.py",
+  "placement": {
+    "domain": "filesystem",
+    "node": "runtime/lineage/adapters/canon.py",
+    "parent": "runtime/lineage/adapters",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.4fa95653ab1d5442f51d",
+    "rank": 30,
+    "slot": "40_runtime",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.4fa95653ab1d5442f51d"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "record",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:runtime/lineage/adapters/canon.py",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "runtime/lineage/adapters/canon.py",
+    "kind": "file",
+    "label": "canon.py",
+    "legacy_id": "runtime/lineage/adapters/canon.py",
+    "lineage": [
+      "runtime/lineage/adapters"
+    ],
+    "metadata": {
+      "canonical_id": "fs:runtime/lineage/adapters/canon.py",
+      "child_modes": {},
+      "child_roles": {},
+      "is_directory": false,
+      "is_file": true,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:runtime/lineage/adapters"
+        ]
+      },
+      "projected_id": "runtime/lineage/adapters/canon.py",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "runtime/lineage/adapters"
+    ],
+    "path": "runtime/lineage/adapters/canon.py",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "runtime/lineage/adapters/canon.py",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.4fa95653ab1d5442f51d"
+    ],
+    "size": 7,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

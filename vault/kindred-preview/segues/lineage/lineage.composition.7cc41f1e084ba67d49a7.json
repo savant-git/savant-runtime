@@ -1,0 +1,66 @@
+{
+  "authoritative": false,
+  "child_profile": "daughter",
+  "deterministic_hash": "a799f5448493f60411d8151a89b0b43be8115bd228a29af2f20d6c47e9e30760",
+  "domain": "filesystem",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "lineage.composition.7cc41f1e084ba67d49a7",
+  "impeti": [],
+  "namespace": "preview.kindred",
+  "parent_profile": "parent",
+  "plane": "lineage",
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "role": "composition",
+  "schema": "savant.kindred.preview.lineage_segue.v2",
+  "source": "ontology/obelisks/segue/authority_graph/instances",
+  "source_record": {
+    "axis": "containment",
+    "canonical_source": "fs:ontology/obelisks/segue/authority_graph/instances",
+    "canonical_target": "fs:ontology/obelisks/segue/authority_graph/instances/application",
+    "continuation": "preserving",
+    "id": "lineage.composition.7cc41f1e084ba67d49a7",
+    "inheritance": {
+      "conflict_policy": "child_wins",
+      "exclude": [],
+      "fields": [],
+      "mode": "reference"
+    },
+    "inverse": "component",
+    "kind": "contains",
+    "metadata": {
+      "legacy_edge_kind": "contains",
+      "projection": "filesystem_edifice"
+    },
+    "order": 0,
+    "propagation": {
+      "channels": [
+        "validation",
+        "projection",
+        "regeneration"
+      ],
+      "enabled": true
+    },
+    "provenance": {
+      "created_by": "filesystem_adapter",
+      "source_files": [
+        "/root/savant-runtime/ontology/obelisks/segue/authority_graph/instances/application"
+      ]
+    },
+    "role": "composition",
+    "scope": "filesystem",
+    "source": "ontology/obelisks/segue/authority_graph/instances",
+    "status": "active",
+    "symbolic_child_alias": "daughter",
+    "symbolic_parent_alias": "parent",
+    "target": "ontology/obelisks/segue/authority_graph/instances/application",
+    "weight": 2
+  },
+  "state": "active",
+  "synthetic": false,
+  "target": "ontology/obelisks/segue/authority_graph/instances/application"
+}

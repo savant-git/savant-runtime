@@ -1,0 +1,97 @@
+{
+  "authority_state": "projection",
+  "change": {
+    "added": [],
+    "authority_state": "projection",
+    "current_active_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "digest": "7be0bd314cfa0a8276e6f95832c313ec095b022a76a8cca5c36f23e97f16e6f4",
+    "previous_active_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "removed": [],
+    "schema": "savant://projection/living-canon/diff/1.0.0",
+    "unchanged": []
+  },
+  "health": {
+    "checks": {
+      "authority": true,
+      "canon_integrity": true,
+      "constitutional_substrate": true,
+      "definition": true,
+      "dependencies": true,
+      "notary_integration": true,
+      "projection_freshness": true,
+      "scyon_integration": true,
+      "temporal_replay": true
+    },
+    "dimension_count": 9,
+    "healthy": true
+  },
+  "observation": {
+    "changed": false,
+    "event_id": null,
+    "fingerprint": "fe1d798cc51fc7be3e1d55bbc0292fca691b6b207208361f9f3fbe53e5fccf70",
+    "previous_event_digest": "552c3137ff0755117c656e45d1cf2495ad038fda09355a91093aa0cb0878e06b"
+  },
+  "projection_digest": "cf97d8d61076cae3e5a7ea5d41d7728ffa6821ad1cc4d6e5e834c4025e8486a2",
+  "projection_registry": [
+    "current_truth",
+    "historical_truth",
+    "explanation",
+    "canon_diff",
+    "canon_feed",
+    "context_packet",
+    "graph",
+    "timeline",
+    "health"
+  ],
+  "rebuildable": true,
+  "schema": "savant://projection/living-canon/1.0.0",
+  "source_scyon": "scyon:exile:lore",
+  "source_service": "service:fluid-canon",
+  "state": {
+    "active_count": 0,
+    "active_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "active_ids": [],
+    "assertion_count": 0,
+    "assertion_ids": [],
+    "authority_state": "projection",
+    "duplicate_canon_store": false,
+    "engine_id": "living-canon-engine",
+    "owner_id": "exile:lore",
+    "pipeline": [
+      "admission",
+      "identity_resolution",
+      "authority_resolution",
+      "policy_resolution",
+      "schema_validation",
+      "provenance_resolution",
+      "dependency_resolution",
+      "temporal_resolution",
+      "evidence_resolution",
+      "conflict_analysis",
+      "supersession_analysis",
+      "execution_planning",
+      "constitutional_contribution",
+      "canon_state_derivation",
+      "change_detection",
+      "projection",
+      "observability",
+      "attestation"
+    ],
+    "projection_families": [
+      "current_truth",
+      "historical_truth",
+      "explanation",
+      "canon_diff",
+      "canon_feed",
+      "context_packet",
+      "graph",
+      "timeline",
+      "health"
+    ],
+    "rebuildable": true,
+    "schema": "savant://runtime/living-canon/state/1.0.0",
+    "scyon_id": "scyon:exile:lore",
+    "snapshot_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "source_service": "service:fluid-canon"
+  }
+}

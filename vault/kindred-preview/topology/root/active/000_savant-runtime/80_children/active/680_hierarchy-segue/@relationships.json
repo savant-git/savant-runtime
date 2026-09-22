@@ -1,0 +1,145 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "68afc2fe53068813fee577aade23ba8fcbd514d4f5f959c45f40b969b3f27cd2",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "namespace": "preview.kindred",
+  "node": "edifice:segue",
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationships": [
+    {
+      "child_profile": "child",
+      "domain": "global",
+      "id": "lineage.dependency.f3da8cfdd5db6fc449a7",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "dependency",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "dependency",
+      "source": "foundation:dynamic-canon",
+      "source_record": {
+        "axis": "prerequisite",
+        "canonical_source": "foundation:dynamic-canon",
+        "canonical_target": "edifice:segue",
+        "continuation": "neutral",
+        "id": "lineage.dependency.f3da8cfdd5db6fc449a7",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "dependent",
+        "kind": "dependency",
+        "metadata": {
+          "adapter": "authority",
+          "source_field": "dependencies",
+          "source_path": "/root/savant-runtime/canon-system/authority/edifices/segue.yaml"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "authority_adapter",
+          "created_from": [
+            "/root/savant-runtime/canon-system/authority/edifices/segue.yaml"
+          ],
+          "source_files": [
+            "/root/savant-runtime/canon-system/authority/edifices/segue.yaml"
+          ]
+        },
+        "role": "dependency",
+        "scope": "global",
+        "source": "foundation:dynamic-canon",
+        "status": "active",
+        "symbolic_child_alias": "child",
+        "symbolic_parent_alias": "parent",
+        "target": "edifice:segue",
+        "weight": 1
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "edifice:segue"
+    },
+    {
+      "child_profile": "child",
+      "domain": "global",
+      "id": "lineage.generic.1a95a3466cd361ccbdb4",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "functional",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "generic",
+      "source": "foundation:dynamic-canon",
+      "source_record": {
+        "axis": "unspecified",
+        "canonical_source": "foundation:dynamic-canon",
+        "canonical_target": "edifice:segue",
+        "continuation": "neutral",
+        "id": "lineage.generic.1a95a3466cd361ccbdb4",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "generic_child",
+        "kind": "generic",
+        "metadata": {
+          "adapter": "authority",
+          "source_field": "lineage.parents",
+          "source_path": "/root/savant-runtime/canon-system/authority/edifices/segue.yaml"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "authority_adapter",
+          "created_from": [
+            "/root/savant-runtime/canon-system/authority/edifices/segue.yaml"
+          ],
+          "source_files": [
+            "/root/savant-runtime/canon-system/authority/edifices/segue.yaml"
+          ]
+        },
+        "role": "generic",
+        "scope": "global",
+        "source": "foundation:dynamic-canon",
+        "status": "active",
+        "symbolic_child_alias": "child",
+        "symbolic_parent_alias": "parent",
+        "target": "edifice:segue",
+        "weight": 1
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "edifice:segue"
+    }
+  ],
+  "schema": "savant.kindred.preview.relationship_projection.v2"
+}

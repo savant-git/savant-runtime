@@ -1,0 +1,591 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "2f59e96ca1dfedba2b755405eeaf20bb7f223a6c210322971a703742992a6973",
+  "generated_at": "2026-07-17T11:47:04+00:00",
+  "members": [
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/__init__.py",
+      "collapse_reason": "file_attachment",
+      "extension": ".py",
+      "id": "runtime/__init__.py",
+      "instance_hash": "62f908d857f6e443f0eabe1ffebcfcaf4154dfaf0293def5765784ad3f9393b0",
+      "instance_record": "instances/runtime-__init__.py.json",
+      "kind": "file",
+      "label": "__init__.py",
+      "normalized_path": "runtime/__init__.py",
+      "original_lineage_to_owner": [
+        "runtime/__init__.py",
+        "runtime"
+      ],
+      "original_parent": "runtime",
+      "path": "runtime/__init__.py",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.d0cd28e35bc2870aaefc"
+      ],
+      "semantic_owner": "runtime",
+      "shard_level": "record",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/lineage",
+      "collapse_reason": "generic_directory_attachment",
+      "extension": null,
+      "id": "runtime/lineage",
+      "instance_hash": "242f6b52d8817bbff342f6a7b5d6c8cca672386e6e63066ab4f30171eee3739e",
+      "instance_record": "instances/runtime-lineage.json",
+      "kind": "directory",
+      "label": "lineage",
+      "normalized_path": "runtime/lineage",
+      "original_lineage_to_owner": [
+        "runtime/lineage",
+        "runtime"
+      ],
+      "original_parent": "runtime",
+      "path": "runtime/lineage",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.29409dcd97625685617d",
+        "lineage.composition.323be15091a58437d62a",
+        "lineage.composition.3df44510ee42bb6a248a",
+        "lineage.composition.72c68336b3c8ac6be490",
+        "lineage.composition.9697d57641a52074bccc",
+        "lineage.composition.b49699f9cdf14582712a",
+        "lineage.composition.e55753283c912c3ddb1e",
+        "lineage.composition.efe5a3daff208fda3829",
+        "lineage.composition.f547960ac2c1c867965b"
+      ],
+      "semantic_owner": "runtime",
+      "shard_level": "instance",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/lineage/__init__.py",
+      "collapse_reason": "file_attachment",
+      "extension": ".py",
+      "id": "runtime/lineage/__init__.py",
+      "instance_hash": "1ed9040a85a1616c34a530395a1d64fd2c86b4682eeef76fa36a31da1b79005f",
+      "instance_record": "instances/runtime-lineage-__init__.py.json",
+      "kind": "file",
+      "label": "__init__.py",
+      "normalized_path": "runtime/lineage/__init__.py",
+      "original_lineage_to_owner": [
+        "runtime/lineage/__init__.py",
+        "runtime/lineage",
+        "runtime"
+      ],
+      "original_parent": "runtime/lineage",
+      "path": "runtime/lineage/__init__.py",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.29409dcd97625685617d"
+      ],
+      "semantic_owner": "runtime",
+      "shard_level": "record",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/lineage/adapters",
+      "collapse_reason": "generic_directory_attachment",
+      "extension": null,
+      "id": "runtime/lineage/adapters",
+      "instance_hash": "eecd75e1dae303a8206069d5cdaca5631c487839ac928f5773243ecbf3743b9f",
+      "instance_record": "instances/runtime-lineage-adapters.json",
+      "kind": "directory",
+      "label": "adapters",
+      "normalized_path": "runtime/lineage/adapters",
+      "original_lineage_to_owner": [
+        "runtime/lineage/adapters",
+        "runtime/lineage",
+        "runtime"
+      ],
+      "original_parent": "runtime/lineage",
+      "path": "runtime/lineage/adapters",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.106ffe927d0c0748b827",
+        "lineage.composition.4fa95653ab1d5442f51d",
+        "lineage.composition.b49699f9cdf14582712a",
+        "lineage.composition.b72e8edd1e2bc05efc27",
+        "lineage.composition.d3bc6c5d7f7881b0ec51",
+        "lineage.composition.dcccab0addae1118a4c6"
+      ],
+      "semantic_owner": "runtime",
+      "shard_level": "instance",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/lineage/adapters/__init__.py",
+      "collapse_reason": "file_attachment",
+      "extension": ".py",
+      "id": "runtime/lineage/adapters/__init__.py",
+      "instance_hash": "e37d80a74045f0f45c9194d74686e0d2c58e6d3e22d31a20966496f6c85898a3",
+      "instance_record": "instances/runtime-lineage-adapters-__init__.py.json",
+      "kind": "file",
+      "label": "__init__.py",
+      "normalized_path": "runtime/lineage/adapters/__init__.py",
+      "original_lineage_to_owner": [
+        "runtime/lineage/adapters/__init__.py",
+        "runtime/lineage/adapters",
+        "runtime/lineage",
+        "runtime"
+      ],
+      "original_parent": "runtime/lineage/adapters",
+      "path": "runtime/lineage/adapters/__init__.py",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.b72e8edd1e2bc05efc27"
+      ],
+      "semantic_owner": "runtime",
+      "shard_level": "record",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/lineage/adapters/authority.py",
+      "collapse_reason": "file_attachment",
+      "extension": ".py",
+      "id": "runtime/lineage/adapters/authority.py",
+      "instance_hash": "486b6f0c182ad150c8b6acb7b5ea124fe9d23492b8c11ceea9d9a4f712cbb990",
+      "instance_record": "instances/runtime-lineage-adapters-authority.py.json",
+      "kind": "file",
+      "label": "authority.py",
+      "normalized_path": "runtime/lineage/adapters/authority.py",
+      "original_lineage_to_owner": [
+        "runtime/lineage/adapters/authority.py",
+        "runtime/lineage/adapters",
+        "runtime/lineage",
+        "runtime"
+      ],
+      "original_parent": "runtime/lineage/adapters",
+      "path": "runtime/lineage/adapters/authority.py",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.d3bc6c5d7f7881b0ec51"
+      ],
+      "semantic_owner": "runtime",
+      "shard_level": "record",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/lineage/adapters/canon.py",
+      "collapse_reason": "file_attachment",
+      "extension": ".py",
+      "id": "runtime/lineage/adapters/canon.py",
+      "instance_hash": "e04aeea022cafc8ad42a556129c782c1d50ae2ca76f63192637aa94556260588",
+      "instance_record": "instances/runtime-lineage-adapters-canon.py.json",
+      "kind": "file",
+      "label": "canon.py",
+      "normalized_path": "runtime/lineage/adapters/canon.py",
+      "original_lineage_to_owner": [
+        "runtime/lineage/adapters/canon.py",
+        "runtime/lineage/adapters",
+        "runtime/lineage",
+        "runtime"
+      ],
+      "original_parent": "runtime/lineage/adapters",
+      "path": "runtime/lineage/adapters/canon.py",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.4fa95653ab1d5442f51d"
+      ],
+      "semantic_owner": "runtime",
+      "shard_level": "record",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/lineage/adapters/common.py",
+      "collapse_reason": "file_attachment",
+      "extension": ".py",
+      "id": "runtime/lineage/adapters/common.py",
+      "instance_hash": "04487485e978dec9acc23531818abe538004d223c16269d6677a41bc89a6cea1",
+      "instance_record": "instances/runtime-lineage-adapters-common.py.json",
+      "kind": "file",
+      "label": "common.py",
+      "normalized_path": "runtime/lineage/adapters/common.py",
+      "original_lineage_to_owner": [
+        "runtime/lineage/adapters/common.py",
+        "runtime/lineage/adapters",
+        "runtime/lineage",
+        "runtime"
+      ],
+      "original_parent": "runtime/lineage/adapters",
+      "path": "runtime/lineage/adapters/common.py",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.dcccab0addae1118a4c6"
+      ],
+      "semantic_owner": "runtime",
+      "shard_level": "record",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/lineage/adapters/filesystem.py",
+      "collapse_reason": "file_attachment",
+      "extension": ".py",
+      "id": "runtime/lineage/adapters/filesystem.py",
+      "instance_hash": "a2e26cf681e54bfe64ee0a823029f4a114bcec2f4d3d2dfb19761947847b2009",
+      "instance_record": "instances/runtime-lineage-adapters-filesystem.py.json",
+      "kind": "file",
+      "label": "filesystem.py",
+      "normalized_path": "runtime/lineage/adapters/filesystem.py",
+      "original_lineage_to_owner": [
+        "runtime/lineage/adapters/filesystem.py",
+        "runtime/lineage/adapters",
+        "runtime/lineage",
+        "runtime"
+      ],
+      "original_parent": "runtime/lineage/adapters",
+      "path": "runtime/lineage/adapters/filesystem.py",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.106ffe927d0c0748b827"
+      ],
+      "semantic_owner": "runtime",
+      "shard_level": "record",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/lineage/cli.py",
+      "collapse_reason": "file_attachment",
+      "extension": ".py",
+      "id": "runtime/lineage/cli.py",
+      "instance_hash": "096f07c95f26ead1ef77780144c2e0f479222fc727df4fe64bf07aae6e3c543b",
+      "instance_record": "instances/runtime-lineage-cli.py.json",
+      "kind": "file",
+      "label": "cli.py",
+      "normalized_path": "runtime/lineage/cli.py",
+      "original_lineage_to_owner": [
+        "runtime/lineage/cli.py",
+        "runtime/lineage",
+        "runtime"
+      ],
+      "original_parent": "runtime/lineage",
+      "path": "runtime/lineage/cli.py",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.3df44510ee42bb6a248a"
+      ],
+      "semantic_owner": "runtime",
+      "shard_level": "record",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/lineage/engine.py",
+      "collapse_reason": "file_attachment",
+      "extension": ".py",
+      "id": "runtime/lineage/engine.py",
+      "instance_hash": "004983882f1519b6d15a1b922def51c8f2a9bc580550ccbfdf7a5e62257e5237",
+      "instance_record": "instances/runtime-lineage-engine.py.json",
+      "kind": "file",
+      "label": "engine.py",
+      "normalized_path": "runtime/lineage/engine.py",
+      "original_lineage_to_owner": [
+        "runtime/lineage/engine.py",
+        "runtime/lineage",
+        "runtime"
+      ],
+      "original_parent": "runtime/lineage",
+      "path": "runtime/lineage/engine.py",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.323be15091a58437d62a"
+      ],
+      "semantic_owner": "runtime",
+      "shard_level": "record",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/lineage/model.py",
+      "collapse_reason": "file_attachment",
+      "extension": ".py",
+      "id": "runtime/lineage/model.py",
+      "instance_hash": "a91268abcd03edae44610348a45648e321c5f46bed3961b5c2eddba3063a7529",
+      "instance_record": "instances/runtime-lineage-model.py.json",
+      "kind": "file",
+      "label": "model.py",
+      "normalized_path": "runtime/lineage/model.py",
+      "original_lineage_to_owner": [
+        "runtime/lineage/model.py",
+        "runtime/lineage",
+        "runtime"
+      ],
+      "original_parent": "runtime/lineage",
+      "path": "runtime/lineage/model.py",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.efe5a3daff208fda3829"
+      ],
+      "semantic_owner": "runtime",
+      "shard_level": "record",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/lineage/projection.py",
+      "collapse_reason": "file_attachment",
+      "extension": ".py",
+      "id": "runtime/lineage/projection.py",
+      "instance_hash": "f722db118c6276c1f01313ac5f14fe6fec4424bc739cc670bb017e06e79ecfc3",
+      "instance_record": "instances/runtime-lineage-projection.py.json",
+      "kind": "file",
+      "label": "projection.py",
+      "normalized_path": "runtime/lineage/projection.py",
+      "original_lineage_to_owner": [
+        "runtime/lineage/projection.py",
+        "runtime/lineage",
+        "runtime"
+      ],
+      "original_parent": "runtime/lineage",
+      "path": "runtime/lineage/projection.py",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.e55753283c912c3ddb1e"
+      ],
+      "semantic_owner": "runtime",
+      "shard_level": "record",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/lineage/references.py",
+      "collapse_reason": "file_attachment",
+      "extension": ".py",
+      "id": "runtime/lineage/references.py",
+      "instance_hash": "385f5782edcd4d791e0599e4a69f4df73eecf6a27d6b6ab7f80b803b60206e59",
+      "instance_record": "instances/runtime-lineage-references.py.json",
+      "kind": "file",
+      "label": "references.py",
+      "normalized_path": "runtime/lineage/references.py",
+      "original_lineage_to_owner": [
+        "runtime/lineage/references.py",
+        "runtime/lineage",
+        "runtime"
+      ],
+      "original_parent": "runtime/lineage",
+      "path": "runtime/lineage/references.py",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.72c68336b3c8ac6be490"
+      ],
+      "semantic_owner": "runtime",
+      "shard_level": "record",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/lineage/registry.py",
+      "collapse_reason": "file_attachment",
+      "extension": ".py",
+      "id": "runtime/lineage/registry.py",
+      "instance_hash": "8fde140c2ebf91b0aa7c53b08a96c0bfa0dce3fb1a9117c83794e686aa1ecdf6",
+      "instance_record": "instances/runtime-lineage-registry.py.json",
+      "kind": "file",
+      "label": "registry.py",
+      "normalized_path": "runtime/lineage/registry.py",
+      "original_lineage_to_owner": [
+        "runtime/lineage/registry.py",
+        "runtime/lineage",
+        "runtime"
+      ],
+      "original_parent": "runtime/lineage",
+      "path": "runtime/lineage/registry.py",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.9697d57641a52074bccc"
+      ],
+      "semantic_owner": "runtime",
+      "shard_level": "record",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/maps",
+      "collapse_reason": "generic_directory_attachment",
+      "extension": null,
+      "id": "runtime/maps",
+      "instance_hash": "81d93f19f8b33e1232a29178edeab896517f72e48508c350186dcac15809e1b1",
+      "instance_record": "instances/runtime-maps.json",
+      "kind": "directory",
+      "label": "maps",
+      "normalized_path": "runtime/maps",
+      "original_lineage_to_owner": [
+        "runtime/maps",
+        "runtime"
+      ],
+      "original_parent": "runtime",
+      "path": "runtime/maps",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.8d9791ae23cdc8b3ebb2"
+      ],
+      "semantic_owner": "runtime",
+      "shard_level": "instance",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/services",
+      "collapse_reason": "generic_directory_attachment",
+      "extension": null,
+      "id": "runtime/services",
+      "instance_hash": "570fdf7246b5349a64a8297919ec361da0aea4c8bd401575537741c7d2eb2815",
+      "instance_record": "instances/runtime-services.json",
+      "kind": "directory",
+      "label": "services",
+      "normalized_path": "runtime/services",
+      "original_lineage_to_owner": [
+        "runtime/services",
+        "runtime"
+      ],
+      "original_parent": "runtime",
+      "path": "runtime/services",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.5044f945d53b2f19ad42",
+        "lineage.composition.6914dd58fff9b200760f"
+      ],
+      "semantic_owner": "runtime",
+      "shard_level": "instance",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/services/palaver-systemd.env",
+      "collapse_reason": "file_attachment",
+      "extension": ".env",
+      "id": "runtime/services/palaver-systemd.env",
+      "instance_hash": "b98938bc8fa31a9238930d31d6f249bafbca10fcd6c8ddbdcb53b8915e171aff",
+      "instance_record": "instances/runtime-services-palaver-systemd.env.json",
+      "kind": "file",
+      "label": "palaver-systemd.env",
+      "normalized_path": "runtime/services/palaver-systemd.env",
+      "original_lineage_to_owner": [
+        "runtime/services/palaver-systemd.env",
+        "runtime/services",
+        "runtime"
+      ],
+      "original_parent": "runtime/services",
+      "path": "runtime/services/palaver-systemd.env",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.5044f945d53b2f19ad42"
+      ],
+      "semantic_owner": "runtime",
+      "shard_level": "record",
+      "state": "active",
+      "synthetic": false
+    }
+  ],
+  "owner": "runtime",
+  "owner_label": "runtime",
+  "projection_only": true,
+  "provenance": {
+    "generator": "kindred.semantic_view_builder.v1",
+    "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+  },
+  "schema": "savant.kindred.semantic_projection.v1.collapsed_owner",
+  "summary": {
+    "by_extension": {
+      ".env": 1,
+      ".py": 13,
+      "none": 4
+    },
+    "by_kind": {
+      "directory": 4,
+      "file": 14
+    },
+    "by_reason": {
+      "file_attachment": 14,
+      "generic_directory_attachment": 4
+    },
+    "by_state": {
+      "active": 18
+    },
+    "direct": 4,
+    "nested": 14,
+    "total": 18
+  }
+}

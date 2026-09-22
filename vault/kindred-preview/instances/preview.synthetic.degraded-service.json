@@ -1,0 +1,38 @@
+{
+  "authoritative": false,
+  "authority_tier": "delegated",
+  "canonical_id": "preview.synthetic.degraded-service",
+  "deterministic_hash": "a8008a3814c89464c6b5e9d41857a4e5baceca63ee2c1f14e1bc6e60a50d6da8",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "preview.synthetic.degraded-service",
+  "kind": "service",
+  "label": "Degraded Service Example",
+  "namespace": "preview.kindred",
+  "path": null,
+  "placement": {
+    "domain": "preview",
+    "node": "preview.synthetic.degraded-service",
+    "parent": "preview.synthetic.kindred-demo",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "preview.synthetic.lineage.degraded",
+    "rank": 10,
+    "slot": "40_runtime",
+    "state": "degraded",
+    "synthetic": true
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "reason": "isolated synthetic state demonstration",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "preview.synthetic.lineage.degraded"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "service",
+  "source_record": {},
+  "state": "degraded",
+  "synthetic": true
+}

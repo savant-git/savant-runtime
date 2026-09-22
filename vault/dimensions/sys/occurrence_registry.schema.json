@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Savant Occurrence Registry",
+  "type": "object",
+  "required": [
+    "schema",
+    "classes"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string"
+    },
+    "classes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/class"
+      }
+    }
+  },
+  "$defs": {
+    "class": {
+      "type": "object",
+      "required": [
+        "key",
+        "ordinal",
+        "mutable",
+        "description"
+      ],
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "ordinal": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "mutable": {
+          "type": "boolean"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

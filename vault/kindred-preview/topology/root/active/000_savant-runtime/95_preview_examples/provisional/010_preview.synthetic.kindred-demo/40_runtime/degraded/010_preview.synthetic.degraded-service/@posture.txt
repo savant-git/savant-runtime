@@ -1,0 +1,10 @@
+node: preview.synthetic.degraded-service
+label: Degraded Service Example
+kind: service
+authority: delegated
+shard_level: service
+state: degraded
+slot: 40_runtime
+domain: preview
+placement_basis: direct_lineage
+synthetic: true

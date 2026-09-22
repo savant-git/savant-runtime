@@ -1,0 +1,74 @@
+{
+  "id": "carbon.imports",
+  "owner": "carbon",
+  "type": "composition_imports",
+  "status": "active",
+  "imports": [
+    {
+      "id": "source_instances",
+      "kind": "reference",
+      "purpose": "Reference authoritative entities and primitives participating in simulations.",
+      "authority_inherited": false
+    },
+    {
+      "id": "admitted_evidence",
+      "kind": "reference",
+      "purpose": "Reference admitted evidence when simulations require evidence-grounded initial conditions.",
+      "authority_inherited": false
+    },
+    {
+      "id": "accepted_decisions",
+      "kind": "reference",
+      "purpose": "Reference accepted decisions as fixed simulation constraints when explicitly applicable.",
+      "authority_inherited": false
+    },
+    {
+      "id": "external_historical_reality",
+      "kind": "reference",
+      "purpose": "Reference sourced historical reality used by Oriel as immutable simulation constraints while preserving external source authority.",
+      "authority_inherited": false
+    },
+    {
+      "id": "character_source_material",
+      "kind": "reference",
+      "purpose": "Reference arbitrary writing, evidence, author-supplied facts, or other admitted source material from which Guise may extract candidate character substance while preserving source authority.",
+      "authority_inherited": false
+    },
+    {
+      "id": "character_instances",
+      "kind": "reference",
+      "purpose": "Reference graph-addressable character instances participating in Guise character intelligence and Carbon simulation.",
+      "authority_inherited": false
+    },
+    {
+      "id": "character_extraction_providers",
+      "kind": "replaceable_attachment",
+      "purpose": "Attach replaceable character extraction providers without allowing provider output to become authority automatically.",
+      "authority_inherited": false
+    },
+    {
+      "id": "character_generation_providers",
+      "kind": "replaceable_attachment",
+      "purpose": "Attach replaceable character generation providers whose outputs remain hypotheses until accepted.",
+      "authority_inherited": false
+    },
+    {
+      "id": "execution_backends",
+      "kind": "replaceable_attachment",
+      "purpose": "Attach specialized engines without redefining Carbon or transferring authority.",
+      "authority_inherited": false
+    }
+  ],
+  "rules": {
+    "imports_are_references": true,
+    "imported_authority_remains_with_source": true,
+    "carbon_may_mutate_imported_authority": false,
+    "attachments_are_replaceable": true,
+    "historical_reality_is_not_simulation_owned": true,
+    "absence_of_imported_reality_is_not_availability": true,
+    "character_import_does_not_create_canon": true,
+    "character_provider_output_does_not_create_canon": true,
+    "character_data_does_not_define_guise": true,
+    "authority_transfer": false
+  }
+}

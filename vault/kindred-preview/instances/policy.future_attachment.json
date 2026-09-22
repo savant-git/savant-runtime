@@ -1,0 +1,69 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "policy.future_attachment",
+  "deterministic_hash": "a5469dd5d09613df23bde8963f596064b92ea3473dd23845402ab7c5ca01ced4",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "policy.future_attachment",
+  "kind": "policy",
+  "label": "policy.future_attachment",
+  "namespace": "preview.kindred",
+  "path": null,
+  "placement": {
+    "domain": "unclassified",
+    "node": "policy.future_attachment",
+    "parent": "savant-runtime",
+    "placement_basis": "orphan_attachment",
+    "primary_relationship_id": null,
+    "rank": 60,
+    "slot": "20_authority",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "policy.future_attachment",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "policy.future_attachment",
+    "kind": "policy",
+    "label": "policy.future_attachment",
+    "legacy_id": null,
+    "lineage": [],
+    "metadata": {
+      "authority_source_path": "/root/savant-runtime/ontology/obelisks/segue/authority_graph/policies/future_attachment.json",
+      "canonical_id": "policy.future_attachment",
+      "child_modes": {},
+      "child_roles": {},
+      "lineage_placeholder": false,
+      "parent_roles": {},
+      "projected_id": "policy.future_attachment"
+    },
+    "mothers": [],
+    "parents": [],
+    "path": null,
+    "provenance": {
+      "adapter": "authority_document",
+      "source_files": [
+        "/root/savant-runtime/ontology/obelisks/segue/authority_graph/policies/future_attachment.json"
+      ]
+    },
+    "recovery_routes": [],
+    "relationships": [],
+    "size": 7,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

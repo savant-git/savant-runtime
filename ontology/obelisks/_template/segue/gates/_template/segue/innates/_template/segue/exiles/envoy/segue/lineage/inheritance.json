@@ -1,0 +1,54 @@
+{
+  "id": "envoy.segue.inheritance",
+  "owner": "envoy",
+  "type": "lineage_projection",
+  "status": "active",
+  "inheritance": {
+    "conversation": {
+      "owner": "palaver",
+      "inherited_by_envoy": false,
+      "inherited_by_opus": false
+    },
+    "persona": {
+      "owner": "envoy",
+      "inherited_by_palaver": false,
+      "inherited_by_opus": false
+    },
+    "voice": {
+      "owner": "envoy",
+      "inherited_by_palaver": false,
+      "inherited_by_opus": false
+    },
+    "provider_selection": {
+      "owner": "opus",
+      "inherited_by_envoy": false,
+      "inherited_by_palaver": false
+    },
+    "provider_routing": {
+      "owner": "opus",
+      "inherited_by_envoy": false,
+      "inherited_by_palaver": false
+    },
+    "provider_credentials": {
+      "owner": "opus",
+      "inherited_by_envoy": false,
+      "inherited_by_palaver": false
+    },
+    "provider_execution": {
+      "owner": "opus",
+      "inherited_by_envoy": false,
+      "inherited_by_palaver": false
+    },
+    "provider_retry_policy": {
+      "owner": "opus",
+      "inherited_by_envoy": false,
+      "inherited_by_palaver": false
+    },
+    "provider_fallback_policy": {
+      "owner": "opus",
+      "inherited_by_envoy": false,
+      "inherited_by_palaver": false
+    }
+  },
+  "rule": "Composition and delegation preserve ownership boundaries and do not imply authority inheritance."
+}

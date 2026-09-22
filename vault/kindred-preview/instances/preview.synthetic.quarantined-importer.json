@@ -1,0 +1,38 @@
+{
+  "authoritative": false,
+  "authority_tier": "isolated",
+  "canonical_id": "preview.synthetic.quarantined-importer",
+  "deterministic_hash": "5bf12254df4f22bf85594a9c267d6e055b32c4b85bb85ef407f73f325a0548c8",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "preview.synthetic.quarantined-importer",
+  "kind": "adapter",
+  "label": "Quarantined Importer Example",
+  "namespace": "preview.kindred",
+  "path": null,
+  "placement": {
+    "domain": "preview",
+    "node": "preview.synthetic.quarantined-importer",
+    "parent": "preview.synthetic.kindred-demo",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "preview.synthetic.lineage.quarantined",
+    "rank": 10,
+    "slot": "40_runtime",
+    "state": "quarantined",
+    "synthetic": true
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "reason": "isolated synthetic state demonstration",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "preview.synthetic.lineage.quarantined"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "module",
+  "source_record": {},
+  "state": "quarantined",
+  "synthetic": true
+}

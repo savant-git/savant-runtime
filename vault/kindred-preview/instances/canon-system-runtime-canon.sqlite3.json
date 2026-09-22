@@ -1,0 +1,83 @@
+{
+  "authoritative": false,
+  "authority_tier": "delegated",
+  "canonical_id": "fs:canon-system/runtime/canon.sqlite3",
+  "deterministic_hash": "e8599bc68705a940d3a98806608f570af73e53d1240e3554d94b21f4fcef5fd8",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "canon-system/runtime/canon.sqlite3",
+  "kind": "file",
+  "label": "canon.sqlite3",
+  "namespace": "preview.kindred",
+  "path": "canon-system/runtime/canon.sqlite3",
+  "placement": {
+    "domain": "filesystem",
+    "node": "canon-system/runtime/canon.sqlite3",
+    "parent": "canon-system/runtime",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.ad118af819a5cf429b20",
+    "rank": 10,
+    "slot": "20_authority",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.ad118af819a5cf429b20"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "record",
+  "source_record": {
+    "authority": false,
+    "canonical_id": "fs:canon-system/runtime/canon.sqlite3",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "canon-system/runtime/canon.sqlite3",
+    "kind": "file",
+    "label": "canon.sqlite3",
+    "legacy_id": "canon-system/runtime/canon.sqlite3",
+    "lineage": [
+      "canon-system/runtime"
+    ],
+    "metadata": {
+      "canonical_id": "fs:canon-system/runtime/canon.sqlite3",
+      "child_modes": {},
+      "child_roles": {},
+      "is_directory": false,
+      "is_file": true,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:canon-system/runtime"
+        ]
+      },
+      "projected_id": "canon-system/runtime/canon.sqlite3",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "canon-system/runtime"
+    ],
+    "path": "canon-system/runtime/canon.sqlite3",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "canon-system/runtime/canon.sqlite3",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.ad118af819a5cf429b20"
+    ],
+    "size": 7,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

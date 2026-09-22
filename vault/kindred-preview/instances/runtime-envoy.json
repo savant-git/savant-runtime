@@ -1,0 +1,97 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:runtime/envoy",
+  "deterministic_hash": "072925ad5c8d6b5ab506415ae1bfe297590ad4a61f9ea47e2ab9ba24bdfd7e16",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "runtime/envoy",
+  "kind": "directory",
+  "label": "envoy",
+  "namespace": "preview.kindred",
+  "path": "runtime/envoy",
+  "placement": {
+    "domain": "filesystem",
+    "node": "runtime/envoy",
+    "parent": "runtime",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.0158ed01a2b22f9c4b79",
+    "rank": 20,
+    "slot": "40_runtime",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.0158ed01a2b22f9c4b79",
+    "lineage.composition.ebe13646349dbf1ae1a0"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:runtime/envoy",
+    "children": [
+      "runtime/envoy/voice_engine.py"
+    ],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "runtime/envoy",
+    "kind": "directory",
+    "label": "envoy",
+    "legacy_id": "runtime/envoy",
+    "lineage": [
+      "runtime"
+    ],
+    "metadata": {
+      "canonical_id": "fs:runtime/envoy",
+      "child_modes": {
+        "projecting": [
+          "fs:runtime/envoy/voice_engine.py"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:runtime/envoy/voice_engine.py"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:runtime"
+        ]
+      },
+      "projected_id": "runtime/envoy",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "runtime"
+    ],
+    "path": "runtime/envoy",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "runtime/envoy",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.0158ed01a2b22f9c4b79",
+      "lineage.composition.ebe13646349dbf1ae1a0"
+    ],
+    "size": 12,
+    "sons": [
+      "runtime/envoy/voice_engine.py"
+    ]
+  },
+  "state": "active",
+  "synthetic": false
+}

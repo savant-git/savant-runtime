@@ -1,0 +1,83 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:authority_graph/roles/lineage_role_registry.json",
+  "deterministic_hash": "04bfccefc0a9d6c7ee89d94b88bd71835309b34ab806da6bbc6171fd39392eb3",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "authority_graph/roles/lineage_role_registry.json",
+  "kind": "file",
+  "label": "lineage_role_registry.json",
+  "namespace": "preview.kindred",
+  "path": "authority_graph/roles/lineage_role_registry.json",
+  "placement": {
+    "domain": "filesystem",
+    "node": "authority_graph/roles/lineage_role_registry.json",
+    "parent": "authority_graph/roles",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.9f3fc0a371206c6f4dfc",
+    "rank": 10,
+    "slot": "20_authority",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.9f3fc0a371206c6f4dfc"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "record",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:authority_graph/roles/lineage_role_registry.json",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "authority_graph/roles/lineage_role_registry.json",
+    "kind": "file",
+    "label": "lineage_role_registry.json",
+    "legacy_id": "authority_graph/roles/lineage_role_registry.json",
+    "lineage": [
+      "authority_graph/roles"
+    ],
+    "metadata": {
+      "canonical_id": "fs:authority_graph/roles/lineage_role_registry.json",
+      "child_modes": {},
+      "child_roles": {},
+      "is_directory": false,
+      "is_file": true,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:authority_graph/roles"
+        ]
+      },
+      "projected_id": "authority_graph/roles/lineage_role_registry.json",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "authority_graph/roles"
+    ],
+    "path": "authority_graph/roles/lineage_role_registry.json",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "authority_graph/roles/lineage_role_registry.json",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.9f3fc0a371206c6f4dfc"
+    ],
+    "size": 7,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

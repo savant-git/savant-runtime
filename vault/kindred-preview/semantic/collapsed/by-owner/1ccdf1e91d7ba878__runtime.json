@@ -1,0 +1,120 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "65d2c67b6d4830458d53e174d15b07644f78f9fbb5e5d129623bcb097a779e8e",
+  "generated_at": "2026-07-17T11:47:04+00:00",
+  "members": [
+    {
+      "authority_tier": "delegated",
+      "canonical_id": "fs:canon-system/runtime/canon.sqlite3",
+      "collapse_reason": "file_attachment",
+      "extension": ".sqlite3",
+      "id": "canon-system/runtime/canon.sqlite3",
+      "instance_hash": "e8599bc68705a940d3a98806608f570af73e53d1240e3554d94b21f4fcef5fd8",
+      "instance_record": "instances/canon-system-runtime-canon.sqlite3.json",
+      "kind": "file",
+      "label": "canon.sqlite3",
+      "normalized_path": "canon-system/runtime/canon.sqlite3",
+      "original_lineage_to_owner": [
+        "canon-system/runtime/canon.sqlite3",
+        "canon-system/runtime"
+      ],
+      "original_parent": "canon-system/runtime",
+      "path": "canon-system/runtime/canon.sqlite3",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.ad118af819a5cf429b20"
+      ],
+      "semantic_owner": "canon-system/runtime",
+      "shard_level": "record",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "delegated",
+      "canonical_id": "fs:canon-system/runtime/canon_proposals.py",
+      "collapse_reason": "file_attachment",
+      "extension": ".py",
+      "id": "canon-system/runtime/canon_proposals.py",
+      "instance_hash": "882635e63fb02b6043a5232ac4bcc8b5f5d1795cf8c52c928955079f77f83884",
+      "instance_record": "instances/canon-system-runtime-canon_proposals.py.json",
+      "kind": "file",
+      "label": "canon_proposals.py",
+      "normalized_path": "canon-system/runtime/canon_proposals.py",
+      "original_lineage_to_owner": [
+        "canon-system/runtime/canon_proposals.py",
+        "canon-system/runtime"
+      ],
+      "original_parent": "canon-system/runtime",
+      "path": "canon-system/runtime/canon_proposals.py",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.86cd904f50130324ca76"
+      ],
+      "semantic_owner": "canon-system/runtime",
+      "shard_level": "record",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "delegated",
+      "canonical_id": "fs:canon-system/runtime/canonctl.py",
+      "collapse_reason": "file_attachment",
+      "extension": ".py",
+      "id": "canon-system/runtime/canonctl.py",
+      "instance_hash": "a3fa5a3d63c7e15829db95d7d39b4e24b649ae0d09cb54e32dd2009a8a67d682",
+      "instance_record": "instances/canon-system-runtime-canonctl.py.json",
+      "kind": "file",
+      "label": "canonctl.py",
+      "normalized_path": "canon-system/runtime/canonctl.py",
+      "original_lineage_to_owner": [
+        "canon-system/runtime/canonctl.py",
+        "canon-system/runtime"
+      ],
+      "original_parent": "canon-system/runtime",
+      "path": "canon-system/runtime/canonctl.py",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.5a4ca7e3173d45da9be8"
+      ],
+      "semantic_owner": "canon-system/runtime",
+      "shard_level": "record",
+      "state": "active",
+      "synthetic": false
+    }
+  ],
+  "owner": "canon-system/runtime",
+  "owner_label": "runtime",
+  "projection_only": true,
+  "provenance": {
+    "generator": "kindred.semantic_view_builder.v1",
+    "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+  },
+  "schema": "savant.kindred.semantic_projection.v1.collapsed_owner",
+  "summary": {
+    "by_extension": {
+      ".py": 2,
+      ".sqlite3": 1
+    },
+    "by_kind": {
+      "file": 3
+    },
+    "by_reason": {
+      "file_attachment": 3
+    },
+    "by_state": {
+      "active": 3
+    },
+    "direct": 3,
+    "nested": 0,
+    "total": 3
+  }
+}

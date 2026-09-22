@@ -1,0 +1,370 @@
+{
+  "id": "registry.functional_kindred",
+  "kind": "kindred_registry",
+  "status": "active",
+  "authority": "FOUNDATION-008",
+  "version": "1.0.0",
+  "description": "Registry of direct functional-kindred profiles, alliance profiles, derived relationship classes, legacy defaults, and operational semantics.",
+  "relationship_planes": {
+    "lineage": {
+      "directed": true,
+      "meaning": "Origin, generation, inheritance, continuation, succession, or descent."
+    },
+    "alliance": {
+      "directed": false,
+      "meaning": "Durable reciprocal coordination between independently identified nodes."
+    },
+    "governance": {
+      "directed": true,
+      "meaning": "Authority, guardianship, constraint, custody, approval, or protection."
+    },
+    "functional": {
+      "directed": true,
+      "meaning": "Operational source, pattern, dependency, composition, projection, implementation, or service."
+    }
+  },
+  "parent_profiles": {
+    "parent": {
+      "meaning": "Generic direct parent when no narrower profile is authoritative.",
+      "default_roles": [
+        "generic"
+      ],
+      "inheritance_domains": [],
+      "propagation_channels": []
+    },
+    "mother": {
+      "meaning": "Supplies substance, content, state, evidence, factual values, resources, or material origin.",
+      "default_roles": [
+        "source",
+        "provenance"
+      ],
+      "inheritance_domains": [
+        "substance",
+        "content",
+        "state",
+        "evidence",
+        "values",
+        "resources"
+      ],
+      "propagation_channels": [
+        "source_update",
+        "state_invalidation",
+        "provenance_revision",
+        "regeneration"
+      ]
+    },
+    "father": {
+      "meaning": "Supplies pattern, form, schema, method, interface, structure, or organizing law.",
+      "default_roles": [
+        "pattern",
+        "classification"
+      ],
+      "inheritance_domains": [
+        "form",
+        "schema",
+        "interface",
+        "method",
+        "validation",
+        "structure"
+      ],
+      "propagation_channels": [
+        "schema_migration",
+        "structural_regeneration",
+        "compatibility_validation"
+      ]
+    },
+    "progenitor": {
+      "meaning": "Performs or authorizes the concrete generation event that creates a child.",
+      "default_roles": [
+        "implementation",
+        "projection"
+      ],
+      "inheritance_domains": [
+        "generation_process",
+        "toolchain",
+        "build_parameters"
+      ],
+      "propagation_channels": [
+        "regeneration",
+        "rebuild",
+        "replay"
+      ]
+    },
+    "surrogate": {
+      "meaning": "Temporarily realizes a child on behalf of other source or pattern parents without acquiring enduring authority.",
+      "default_roles": [
+        "implementation"
+      ],
+      "inheritance_domains": [
+        "temporary_generation"
+      ],
+      "propagation_channels": [
+        "rebuild"
+      ]
+    },
+    "donor": {
+      "meaning": "Contributes a bounded trait, capability, field, or behavior without becoming a broad governing parent.",
+      "default_roles": [
+        "attachment",
+        "implementation"
+      ],
+      "inheritance_domains": [
+        "declared_traits"
+      ],
+      "propagation_channels": [
+        "trait_update"
+      ]
+    },
+    "guardian": {
+      "meaning": "Constrains, protects, validates, supervises, or approves a node without claiming origin.",
+      "default_roles": [
+        "authority",
+        "constraint"
+      ],
+      "inheritance_domains": [
+        "policy",
+        "permissions",
+        "safety",
+        "validation"
+      ],
+      "propagation_channels": [
+        "revalidation",
+        "authorization",
+        "constraint_update"
+      ]
+    },
+    "custodian": {
+      "meaning": "Maintains, preserves, repairs, archives, backs up, or restores a node.",
+      "default_roles": [
+        "ownership",
+        "composition"
+      ],
+      "inheritance_domains": [
+        "maintenance",
+        "recovery",
+        "retention"
+      ],
+      "propagation_channels": [
+        "maintenance",
+        "backup",
+        "recovery"
+      ]
+    },
+    "foster_parent": {
+      "meaning": "Temporarily assumes hosting, care, execution, or governance without replacing original lineage.",
+      "default_roles": [
+        "context",
+        "ownership"
+      ],
+      "inheritance_domains": [
+        "temporary_context",
+        "temporary_governance"
+      ],
+      "propagation_channels": [
+        "failover",
+        "temporary_recovery"
+      ]
+    },
+    "adoptive_parent": {
+      "meaning": "Formally assumes an active parental role after the child already exists while preserving original lineage.",
+      "default_roles": [
+        "pattern",
+        "source",
+        "authority"
+      ],
+      "inheritance_domains": [
+        "declared_adoptive_domain"
+      ],
+      "propagation_channels": [
+        "migration",
+        "regeneration",
+        "succession"
+      ]
+    },
+    "step_parent": {
+      "meaning": "Acquires an affinity relationship to existing children through alliance with one of their parents.",
+      "default_roles": [
+        "context"
+      ],
+      "inheritance_domains": [],
+      "propagation_channels": [
+        "coordination"
+      ]
+    },
+    "mentor": {
+      "meaning": "Supplies instruction, exemplars, training, or reference behavior without direct inheritance.",
+      "default_roles": [
+        "context",
+        "pattern"
+      ],
+      "inheritance_domains": [
+        "reference_only"
+      ],
+      "propagation_channels": [
+        "recommendation"
+      ]
+    },
+    "sponsor": {
+      "meaning": "Supplies permission, resources, capacity, institutional support, or activation.",
+      "default_roles": [
+        "authority",
+        "context"
+      ],
+      "inheritance_domains": [
+        "authorization",
+        "resources"
+      ],
+      "propagation_channels": [
+        "activation",
+        "authorization"
+      ]
+    }
+  },
+  "child_profiles": {
+    "child": {
+      "meaning": "Generic direct child when no narrower profile is authoritative."
+    },
+    "daughter": {
+      "meaning": "Preserves, contains, stabilizes, continues, maintains, or faithfully transmits inherited structure or substance."
+    },
+    "son": {
+      "meaning": "Projects, specializes, transforms, exports, executes, renders, publishes, or expands inherited structure or substance."
+    },
+    "transforming_descendant": {
+      "meaning": "Transforms inherited authority into a materially changed descendant while retaining provable lineage."
+    },
+    "heir": {
+      "meaning": "Designated successor authorized to assume a parent's active role."
+    },
+    "ward": {
+      "meaning": "Dependent child whose independent authority is intentionally limited by guardianship."
+    },
+    "twin": {
+      "meaning": "Co-generated child sharing a generation event and substantial parent signature with another child."
+    },
+    "emancipated_child": {
+      "meaning": "Former dependent that has obtained independent authority, source, validation, and recovery."
+    },
+    "disinherited_child": {
+      "meaning": "Historical descent remains true while inheritance, propagation, succession, or support is disabled."
+    }
+  },
+  "alliance_profiles": {
+    "partner": {
+      "meaning": "Generic durable reciprocal coordination contract."
+    },
+    "spouse": {
+      "meaning": "Durable reciprocal operational alliance with explicit compatibility, responsibility, authority-boundary, and dissolution rules."
+    },
+    "co_parent": {
+      "meaning": "Joint responsibility for one or more descendants without requiring a broader alliance."
+    },
+    "betrothed": {
+      "meaning": "Proposed or negotiated alliance that is not yet active."
+    },
+    "separated_partner": {
+      "meaning": "Alliance responsibilities are suspended without complete historical dissolution."
+    },
+    "former_partner": {
+      "meaning": "Alliance has ended while shared history, descendants, provenance, and residual obligations remain."
+    },
+    "widowed_partner": {
+      "meaning": "An active partner has become unavailable, retired, deleted, or irrecoverable."
+    },
+    "coalition_member": {
+      "meaning": "Member of a temporary multi-party alliance."
+    },
+    "consortium_member": {
+      "meaning": "Member of a durable multi-party operating alliance."
+    },
+    "household_member": {
+      "meaning": "Shares an operational environment without implying lineage, inheritance, ownership, or durable alliance."
+    }
+  },
+  "derived_profiles": {
+    "ancestor": {
+      "meaning": "Transitive parent reached through one or more direct lineage edges."
+    },
+    "descendant": {
+      "meaning": "Transitive child reached through one or more direct lineage edges."
+    },
+    "grandparent": {
+      "meaning": "Ancestor exactly two lineage generations above."
+    },
+    "grandchild": {
+      "meaning": "Descendant exactly two lineage generations below."
+    },
+    "full_sibling": {
+      "meaning": "Shares the complete relevant parent signature in the selected domain."
+    },
+    "half_sibling": {
+      "meaning": "Shares a non-empty but incomplete relevant parent signature."
+    },
+    "maternal_sibling": {
+      "meaning": "Shares one or more mother-profile parents."
+    },
+    "paternal_sibling": {
+      "meaning": "Shares one or more father-profile parents."
+    },
+    "twin": {
+      "meaning": "Shares a generation event and substantial parent signature."
+    },
+    "aunt_or_uncle": {
+      "meaning": "Sibling or half-sibling of a direct parent."
+    },
+    "niece_or_nephew": {
+      "meaning": "Child of a sibling or half-sibling."
+    },
+    "cousin": {
+      "meaning": "Shares ancestry without sharing a direct parent."
+    },
+    "in_law": {
+      "meaning": "Relationship reached through an alliance crossing followed by lineage traversal."
+    },
+    "step_relative": {
+      "meaning": "Affinity relationship created through a parent's alliance."
+    },
+    "common_ancestor": {
+      "meaning": "Node appearing in the ancestry of two or more subjects."
+    },
+    "common_descendant": {
+      "meaning": "Node appearing in the descendant sets of two or more subjects."
+    }
+  },
+  "legacy_defaults": {
+    "parent_profile_by_role": {
+      "source": "mother",
+      "provenance": "mother",
+      "pattern": "father",
+      "classification": "father",
+      "authority": "guardian",
+      "constraint": "guardian",
+      "ownership": "custodian",
+      "implementation": "progenitor",
+      "projection": "progenitor",
+      "generic": "parent"
+    },
+    "child_profile_by_continuation": {
+      "preserving": "daughter",
+      "projecting": "son",
+      "transforming": "transforming_descendant",
+      "neutral": "child"
+    }
+  },
+  "relationship_states": [
+    "proposed",
+    "provisional",
+    "active",
+    "suspended",
+    "estranged",
+    "separated",
+    "superseded",
+    "deprecated",
+    "dissolved",
+    "invalidated",
+    "historical",
+    "archived"
+  ],
+  "extensions": {},
+  "future_extensions": {}
+}

@@ -1,0 +1,95 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "manifest.filament.projection_engine",
+  "deterministic_hash": "94e35acdef860b1eefc8ba1a8ed22fdfece9bb01c5629e2b629269ae12c374b0",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "manifest.filament.projection_engine",
+  "kind": "manifest",
+  "label": "manifest.filament.projection_engine",
+  "namespace": "preview.kindred",
+  "path": null,
+  "placement": {
+    "domain": "unclassified",
+    "node": "manifest.filament.projection_engine",
+    "parent": "savant-runtime",
+    "placement_basis": "orphan_attachment",
+    "primary_relationship_id": null,
+    "rank": 770,
+    "slot": "80_children",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.dependency.26d30e3b4a6daa416275",
+    "lineage.dependency.cfa95df864228f5dd60e",
+    "lineage.dependency.d40950ef0ab7bececb97"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "manifest.filament.projection_engine",
+    "children": [],
+    "daughters": [],
+    "dependencies": [
+      "ontology/obelisks/segue/authority_db/savant_authority.sqlite",
+      "ontology/obelisks/segue/authority_graph/canon",
+      "ontology/obelisks/segue/authority_graph/templates"
+    ],
+    "fathers": [],
+    "id": "manifest.filament.projection_engine",
+    "kind": "manifest",
+    "label": "manifest.filament.projection_engine",
+    "legacy_id": null,
+    "lineage": [
+      "ontology/obelisks/segue/authority_db/savant_authority.sqlite",
+      "ontology/obelisks/segue/authority_graph/canon",
+      "ontology/obelisks/segue/authority_graph/templates"
+    ],
+    "metadata": {
+      "authority_source_path": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/registry/manifests/projection_engine.json",
+      "canonical_id": "manifest.filament.projection_engine",
+      "child_modes": {},
+      "child_roles": {},
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "dependency": [
+          "fs:ontology/obelisks/segue/authority_db/savant_authority.sqlite",
+          "fs:ontology/obelisks/segue/authority_graph/canon",
+          "fs:ontology/obelisks/segue/authority_graph/templates"
+        ]
+      },
+      "projected_id": "manifest.filament.projection_engine"
+    },
+    "mothers": [],
+    "parents": [
+      "ontology/obelisks/segue/authority_db/savant_authority.sqlite",
+      "ontology/obelisks/segue/authority_graph/canon",
+      "ontology/obelisks/segue/authority_graph/templates"
+    ],
+    "path": null,
+    "provenance": {
+      "adapter": "authority_document",
+      "source_files": [
+        "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/registry/manifests/projection_engine.json"
+      ]
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.dependency.26d30e3b4a6daa416275",
+      "lineage.dependency.cfa95df864228f5dd60e",
+      "lineage.dependency.d40950ef0ab7bececb97"
+    ],
+    "size": 7,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

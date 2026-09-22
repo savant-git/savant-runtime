@@ -1,0 +1,83 @@
+{
+  "authoritative": false,
+  "authority_tier": "delegated",
+  "canonical_id": "fs:canon-system/runtime/canonctl.py",
+  "deterministic_hash": "a3fa5a3d63c7e15829db95d7d39b4e24b649ae0d09cb54e32dd2009a8a67d682",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "canon-system/runtime/canonctl.py",
+  "kind": "file",
+  "label": "canonctl.py",
+  "namespace": "preview.kindred",
+  "path": "canon-system/runtime/canonctl.py",
+  "placement": {
+    "domain": "filesystem",
+    "node": "canon-system/runtime/canonctl.py",
+    "parent": "canon-system/runtime",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.5a4ca7e3173d45da9be8",
+    "rank": 30,
+    "slot": "20_authority",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.5a4ca7e3173d45da9be8"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "record",
+  "source_record": {
+    "authority": false,
+    "canonical_id": "fs:canon-system/runtime/canonctl.py",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "canon-system/runtime/canonctl.py",
+    "kind": "file",
+    "label": "canonctl.py",
+    "legacy_id": "canon-system/runtime/canonctl.py",
+    "lineage": [
+      "canon-system/runtime"
+    ],
+    "metadata": {
+      "canonical_id": "fs:canon-system/runtime/canonctl.py",
+      "child_modes": {},
+      "child_roles": {},
+      "is_directory": false,
+      "is_file": true,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:canon-system/runtime"
+        ]
+      },
+      "projected_id": "canon-system/runtime/canonctl.py",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "canon-system/runtime"
+    ],
+    "path": "canon-system/runtime/canonctl.py",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "canon-system/runtime/canonctl.py",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.5a4ca7e3173d45da9be8"
+    ],
+    "size": 7,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

@@ -1,0 +1,29 @@
+{
+  "baseline": {
+    "live_runtime_hash_validated": false,
+    "source_dump": "/root/s3_downloads/sdump_savant-runtime_080526.txt"
+  },
+  "dry_run": {
+    "exit_code": 3,
+    "meaning": "Deterministic blockers were found. The migration proposal must not be applied.",
+    "verdict": "unsafe"
+  },
+  "mutation": {
+    "authorized": false,
+    "performed": false,
+    "proposal_applied": false
+  },
+  "operation": "audit-and-dry-run",
+  "outputs": {
+    "audit": "/root/savant-runtime/audit/structural-intelligence/20260805T131540Z",
+    "dry_run": "/root/savant-runtime/audit/dry-run/20260805T131540Z"
+  },
+  "schema": "savant://migration/dry-run-receipt/1.1.0",
+  "timestamp": "20260805T131540Z",
+  "validation": {
+    "audit_passes": 50,
+    "focused_tests": "passed",
+    "json_validation": "passed",
+    "python_compile": "passed"
+  }
+}

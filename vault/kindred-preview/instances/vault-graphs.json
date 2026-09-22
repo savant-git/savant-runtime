@@ -1,0 +1,83 @@
+{
+  "authoritative": false,
+  "authority_tier": "delegated",
+  "canonical_id": "fs:vault/graphs",
+  "deterministic_hash": "a4c30d1daaaf07d200af78ddbe16a0f71dbe4a52199d0bd6a3db992559fbc164",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "vault/graphs",
+  "kind": "directory",
+  "label": "graphs",
+  "namespace": "preview.kindred",
+  "path": "vault/graphs",
+  "placement": {
+    "domain": "filesystem",
+    "node": "vault/graphs",
+    "parent": "vault",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.ed1b6ebdccd2d080e6c4",
+    "rank": 30,
+    "slot": "50_projections",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.ed1b6ebdccd2d080e6c4"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": false,
+    "canonical_id": "fs:vault/graphs",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "vault/graphs",
+    "kind": "directory",
+    "label": "graphs",
+    "legacy_id": "vault/graphs",
+    "lineage": [
+      "vault"
+    ],
+    "metadata": {
+      "canonical_id": "fs:vault/graphs",
+      "child_modes": {},
+      "child_roles": {},
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:vault"
+        ]
+      },
+      "projected_id": "vault/graphs",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "vault"
+    ],
+    "path": "vault/graphs",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "vault/graphs",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.ed1b6ebdccd2d080e6c4"
+    ],
+    "size": 12,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

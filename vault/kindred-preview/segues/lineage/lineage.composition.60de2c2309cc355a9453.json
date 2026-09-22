@@ -1,0 +1,66 @@
+{
+  "authoritative": false,
+  "child_profile": "daughter",
+  "deterministic_hash": "a9e5332fdf9491479401dbebfba1948c43cdde25ca8d05aba6f7ec179b34a247",
+  "domain": "filesystem",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "lineage.composition.60de2c2309cc355a9453",
+  "impeti": [],
+  "namespace": "preview.kindred",
+  "parent_profile": "parent",
+  "plane": "lineage",
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "role": "composition",
+  "schema": "savant.kindred.preview.lineage_segue.v2",
+  "source": "canon",
+  "source_record": {
+    "axis": "containment",
+    "canonical_source": "fs:canon",
+    "canonical_target": "fs:canon/foundation",
+    "continuation": "preserving",
+    "id": "lineage.composition.60de2c2309cc355a9453",
+    "inheritance": {
+      "conflict_policy": "child_wins",
+      "exclude": [],
+      "fields": [],
+      "mode": "reference"
+    },
+    "inverse": "component",
+    "kind": "contains",
+    "metadata": {
+      "legacy_edge_kind": "contains",
+      "projection": "filesystem_edifice"
+    },
+    "order": 0,
+    "propagation": {
+      "channels": [
+        "validation",
+        "projection",
+        "regeneration"
+      ],
+      "enabled": true
+    },
+    "provenance": {
+      "created_by": "filesystem_adapter",
+      "source_files": [
+        "/root/savant-runtime/canon/foundation"
+      ]
+    },
+    "role": "composition",
+    "scope": "filesystem",
+    "source": "canon",
+    "status": "active",
+    "symbolic_child_alias": "daughter",
+    "symbolic_parent_alias": "parent",
+    "target": "canon/foundation",
+    "weight": 2
+  },
+  "state": "active",
+  "synthetic": false,
+  "target": "canon/foundation"
+}

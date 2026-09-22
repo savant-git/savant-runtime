@@ -1,0 +1,66 @@
+{
+  "authoritative": false,
+  "child_profile": "son",
+  "deterministic_hash": "46ae03f4a1885952b5543838a21a95a6b74ef9240f87d0c9fa4a6f7370186913",
+  "domain": "filesystem",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "lineage.composition.309264d5a8c079ed9a75",
+  "impeti": [],
+  "namespace": "preview.kindred",
+  "parent_profile": "parent",
+  "plane": "lineage",
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "role": "composition",
+  "schema": "savant.kindred.preview.lineage_segue.v2",
+  "source": "runtime/palaver/graph",
+  "source_record": {
+    "axis": "containment",
+    "canonical_source": "fs:runtime/palaver/graph",
+    "canonical_target": "fs:runtime/palaver/graph/runtime_graph_index.py",
+    "continuation": "projecting",
+    "id": "lineage.composition.309264d5a8c079ed9a75",
+    "inheritance": {
+      "conflict_policy": "child_wins",
+      "exclude": [],
+      "fields": [],
+      "mode": "reference"
+    },
+    "inverse": "component",
+    "kind": "contains",
+    "metadata": {
+      "legacy_edge_kind": "contains",
+      "projection": "filesystem_edifice"
+    },
+    "order": 0,
+    "propagation": {
+      "channels": [
+        "validation",
+        "projection",
+        "regeneration"
+      ],
+      "enabled": true
+    },
+    "provenance": {
+      "created_by": "filesystem_adapter",
+      "source_files": [
+        "/root/savant-runtime/runtime/palaver/graph/runtime_graph_index.py"
+      ]
+    },
+    "role": "composition",
+    "scope": "filesystem",
+    "source": "runtime/palaver/graph",
+    "status": "active",
+    "symbolic_child_alias": "son",
+    "symbolic_parent_alias": "parent",
+    "target": "runtime/palaver/graph/runtime_graph_index.py",
+    "weight": 2
+  },
+  "state": "active",
+  "synthetic": false,
+  "target": "runtime/palaver/graph/runtime_graph_index.py"
+}

@@ -1,0 +1,83 @@
+{
+  "authoritative": false,
+  "authority_tier": "delegated",
+  "canonical_id": "fs:canon-system/history/proposals",
+  "deterministic_hash": "9f5cdf07c9b0bee5f548f33d3f60ef0dc335b02d9e3f01f572e19f0d2b84ed3d",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "canon-system/history/proposals",
+  "kind": "directory",
+  "label": "proposals",
+  "namespace": "preview.kindred",
+  "path": "canon-system/history/proposals",
+  "placement": {
+    "domain": "filesystem",
+    "node": "canon-system/history/proposals",
+    "parent": "canon-system/history",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.e2ace94fa4f515e1b2c7",
+    "rank": 20,
+    "slot": "20_authority",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.e2ace94fa4f515e1b2c7"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": false,
+    "canonical_id": "fs:canon-system/history/proposals",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "canon-system/history/proposals",
+    "kind": "directory",
+    "label": "proposals",
+    "legacy_id": "canon-system/history/proposals",
+    "lineage": [
+      "canon-system/history"
+    ],
+    "metadata": {
+      "canonical_id": "fs:canon-system/history/proposals",
+      "child_modes": {},
+      "child_roles": {},
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:canon-system/history"
+        ]
+      },
+      "projected_id": "canon-system/history/proposals",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "canon-system/history"
+    ],
+    "path": "canon-system/history/proposals",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "canon-system/history/proposals",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.e2ace94fa4f515e1b2c7"
+    ],
+    "size": 12,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

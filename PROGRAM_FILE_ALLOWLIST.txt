@@ -1,0 +1,123 @@
+###############################################################################
+# SAVANT PROGRAM FILE ALLOWLIST
+#
+# Everything not listed here is excluded by default.
+###############################################################################
+
+# Python
+*.py
+*.pyi
+
+# JavaScript
+*.js
+*.mjs
+*.cjs
+
+# TypeScript
+*.ts
+*.tsx
+
+# React
+*.jsx
+
+# Rust
+*.rs
+
+# Go
+*.go
+
+# C/C++
+*.c
+*.cc
+*.cpp
+*.cxx
+*.h
+*.hpp
+*.hh
+
+# Java/Kotlin
+*.java
+*.kt
+*.kts
+
+# Swift
+*.swift
+
+# Ruby
+*.rb
+
+# PHP
+*.php
+
+# Lua
+*.lua
+
+# Shell
+*.sh
+*.bash
+*.zsh
+
+# PowerShell
+*.ps1
+
+# SQL
+*.sql
+
+# Configuration
+*.json
+*.jsonc
+*.yaml
+*.yml
+*.toml
+*.ini
+*.cfg
+*.conf
+*.properties
+
+# Documentation
+*.md
+*.rst
+
+# Dependency manifests
+package.json
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+bun.lockb
+
+pyproject.toml
+poetry.lock
+requirements.txt
+requirements-*.txt
+Pipfile
+Pipfile.lock
+
+Cargo.toml
+Cargo.lock
+
+go.mod
+go.sum
+
+composer.json
+composer.lock
+
+Gemfile
+Gemfile.lock
+
+Dockerfile
+docker-compose.yml
+docker-compose.yaml
+docker-compose.*.yml
+docker-compose.*.yaml
+
+Makefile
+CMakeLists.txt
+meson.build
+build.gradle
+build.gradle.kts
+settings.gradle
+settings.gradle.kts
+
+.editorconfig
+.gitattributes
+.gitignore

@@ -1,0 +1,30 @@
+{
+  "after_sha256": "09d5b269c7b9bd399df6e7963098b5484f176915693f3ae6a4015d53c2f2f320",
+  "authority_effect": "none",
+  "baseline": "/root/savant-runtime/vault/dimensions/sys/reports/modular-pipeline-contract-migration/20260804T215640Z/run_modular_pipeline.py.before",
+  "before_sha256": "d6da756fd412fb275eb65a2942a9c8ebc48fc478800b414e038831027a8b02e3",
+  "changed_fields": [
+    "STAGES[0].acceptable_return_codes"
+  ],
+  "current_value": [
+    0,
+    1,
+    2
+  ],
+  "finding_suppression": false,
+  "implementation_mutation_performed": true,
+  "operation": "fix_modular_pipeline_audit_return",
+  "passed": true,
+  "previous_value": [
+    0,
+    2
+  ],
+  "reason": "Audit return code 1 represents a completed audit with blocking findings. The migration planner must receive those findings.",
+  "rollback": {
+    "expected_restored_sha256": "d6da756fd412fb275eb65a2942a9c8ebc48fc478800b414e038831027a8b02e3",
+    "source": "/root/savant-runtime/vault/dimensions/sys/reports/modular-pipeline-contract-migration/20260804T215640Z/run_modular_pipeline.py.before"
+  },
+  "schema": "savant://vault/dimensions/modular-pipeline-contract-migration/1.0.0",
+  "target": "/root/savant-runtime/vault/dimensions/sys/run_modular_pipeline.py",
+  "timestamp": "20260804T215640Z"
+}

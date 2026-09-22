@@ -1,0 +1,564 @@
+{
+  "contract_id": "savant.scyon-focal.contract",
+  "version": "1.0.0",
+  "status": "authority-candidate",
+  "authority_basis": [
+    "AD-20260806-003-recursive-identity-tier-criteria",
+    "AD-20260806-004-scyon-focal-architecture",
+    "AD-20260806-005-scyon-focal-mutation-boundary"
+  ],
+  "mutation_authorized": false,
+  "physical_migration_authorized": false,
+  "canonical_terms": {
+    "database_organism": "Scyon",
+    "specialization_layer": "Focal",
+    "shared_foundation": "Scyon kernel",
+    "tuning_surface": "Scyon equalizer",
+    "capability_unit": "Scyon ability"
+  },
+  "identity_tiers": {
+    "atomic_exclusions": [
+      "iota",
+      "mote"
+    ],
+    "scyon_bearing": [
+      "trait",
+      "quirk",
+      "prodigal",
+      "exile",
+      "innate",
+      "portal",
+      "obelisk"
+    ],
+    "complexity_rank": {
+      "trait": 1,
+      "quirk": 2,
+      "prodigal": 3,
+      "exile": 4,
+      "innate": 5,
+      "portal": 6,
+      "obelisk": 7
+    }
+  },
+  "kernel_law": {
+    "single_shared_kernel": true,
+    "canonical_substance_exists_once": true,
+    "higher_tiers_reference_lower_tiers": true,
+    "higher_tiers_must_not_absorb_lower_tier_authority": true,
+    "independent_reimplementation_for_specialization": false,
+    "focal_replaces_kernel": false
+  },
+  "dimensions": {
+    "identity": {
+      "purpose": "Establish what an element is.",
+      "coordinates": [
+        "stable_identity",
+        "identity_tier",
+        "archetype",
+        "constituents",
+        "owner",
+        "lineage",
+        "succession",
+        "compatibility"
+      ]
+    },
+    "state": {
+      "purpose": "Establish what an element currently contains, asserts, permits, or performs.",
+      "coordinates": [
+        "values",
+        "contracts",
+        "metadata",
+        "policies",
+        "abilities",
+        "equalizer",
+        "authority_state",
+        "validation_state",
+        "activation_state"
+      ]
+    },
+    "situated_depth": {
+      "purpose": "Establish where the element exists within meaning, time, authority, composition, causality, dependency, possibility, and runtime.",
+      "native_operational_dimension": true,
+      "coordinates": [
+        "edifice_position",
+        "composition_position",
+        "kindred_position",
+        "segue_position",
+        "authority_position",
+        "dependency_position",
+        "dependent_position",
+        "causal_position",
+        "temporal_position",
+        "version_position",
+        "projection_position",
+        "runtime_position",
+        "confidence_position",
+        "compatibility_position",
+        "possibility_position"
+      ]
+    }
+  },
+  "focal_contract": {
+    "maximum_primary_focals_per_scyon": 1,
+    "may_define": [
+      "specialized_abilities",
+      "ability_presets",
+      "metadata_vocabularies",
+      "metadata_interpretation",
+      "validation_rules",
+      "policies",
+      "projections",
+      "routing_behavior",
+      "automation_rules",
+      "access_rules",
+      "simulation_rules",
+      "equalizer_defaults",
+      "equalizer_extensions",
+      "resource_profiles",
+      "event_interpretation",
+      "receipt_requirements"
+    ],
+    "must_not": [
+      "replace_kernel",
+      "duplicate_kernel_substance",
+      "create_independent_authority",
+      "bypass_tier_limits",
+      "bypass_authority",
+      "erase_history",
+      "erase_provenance",
+      "mutate_other_scyons_directly",
+      "absorb_constituent_scyons"
+    ]
+  },
+  "metadata_contract": {
+    "arbitrary_structured_metadata": true,
+    "metadata_is_authority_by_default": false,
+    "required_fields": [
+      "namespace",
+      "key",
+      "value",
+      "value_type",
+      "authority_state",
+      "recorded_at",
+      "provenance"
+    ],
+    "supported_fields": [
+      "valid_from",
+      "valid_to",
+      "confidence",
+      "lineage",
+      "supersedes",
+      "scope",
+      "conditions",
+      "digest"
+    ],
+    "behavioral_influence": true,
+    "may_trigger": [
+      "validation",
+      "projection",
+      "routing",
+      "simulation",
+      "indexing",
+      "capability_activation",
+      "capability_suppression",
+      "automation_policy",
+      "warning",
+      "proposal"
+    ],
+    "must_not_trigger_without_authority": [
+      "canonical_identity_replacement",
+      "constitutional_change",
+      "destructive_history_change",
+      "unbounded_cross_scyon_mutation"
+    ]
+  },
+  "equalizer_contract": {
+    "range": {
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    "standard_channels": [
+      "adaptivity",
+      "automation",
+      "authority_strictness",
+      "causal_depth",
+      "composition_depth",
+      "confidence_threshold",
+      "exploration",
+      "metadata_influence",
+      "projection_detail",
+      "simulation_breadth",
+      "temporal_depth",
+      "validation_rigor"
+    ],
+    "effective_power_formula": [
+      "equalizer_value",
+      "tier_capacity",
+      "focal_policy",
+      "authority_permission",
+      "resource_availability"
+    ],
+    "tier_ceiling_enforced": true,
+    "focal_may_extend_channels": true,
+    "extended_channel_requirements": [
+      "stable_identity",
+      "meaning",
+      "minimum",
+      "maximum",
+      "default",
+      "tier_applicability",
+      "effects",
+      "conflicts",
+      "validation"
+    ]
+  },
+  "ability_contract": {
+    "modular": true,
+    "independently_registered": true,
+    "tier_qualified": true,
+    "focal_qualified": true,
+    "authority_qualified": true,
+    "metadata_conditionable": true,
+    "resource_qualified": true,
+    "dependency_qualified": true,
+    "catalog": [
+      "metadata_ingestion",
+      "metadata_classification",
+      "metadata_driven_behavior",
+      "semantic_search",
+      "full_text_search",
+      "identity_resolution",
+      "authority_resolution",
+      "conflict_detection",
+      "conflict_preservation",
+      "lineage_traversal",
+      "provenance_traversal",
+      "dependency_analysis",
+      "dependent_analysis",
+      "composition_analysis",
+      "causal_tracing",
+      "timeline_reconstruction",
+      "bitemporal_querying",
+      "simulation_branching",
+      "counterfactual_analysis",
+      "probability_estimation",
+      "consequence_propagation",
+      "branch_comparison",
+      "schema_induction",
+      "adaptive_indexing",
+      "anomaly_detection",
+      "projection_generation",
+      "prompt_routing",
+      "rule_activation",
+      "capability_composition",
+      "state_replay",
+      "recovery",
+      "validation",
+      "receipt_generation",
+      "runtime_shard_preparation"
+    ]
+  },
+  "temporal_contract": {
+    "required_axes": [
+      "valid_time",
+      "transaction_time"
+    ],
+    "optional_axes": [
+      "authority_time",
+      "activation_time",
+      "supersession_time",
+      "projection_time",
+      "simulation_time",
+      "runtime_time"
+    ],
+    "historical_state_reconstructable": true,
+    "later_knowledge_rewrites_prior_knowledge": false
+  },
+  "event_contract": {
+    "append_only_by_default": true,
+    "immutable_authoritative_history": true,
+    "required_fields": [
+      "event_id",
+      "scyon_id",
+      "event_type",
+      "payload",
+      "authority_state",
+      "recorded_at",
+      "digest"
+    ],
+    "supported_fields": [
+      "valid_at",
+      "idempotency_key",
+      "previous_digest",
+      "provenance"
+    ],
+    "hash_chain_supported": true,
+    "replay_supported": true
+  },
+  "relationship_contract": {
+    "typed": true,
+    "identity_bearing": true,
+    "types_include": [
+      "composition",
+      "dependency",
+      "kindred",
+      "authority",
+      "provenance",
+      "compatibility",
+      "succession",
+      "causality",
+      "ownership",
+      "exposure",
+      "attachment",
+      "segue",
+      "simulation_divergence"
+    ],
+    "metadata_supported": true,
+    "history_supported": true,
+    "authority_supported": true
+  },
+  "living_state_contract": {
+    "derived_from": [
+      "immutable_events",
+      "accepted_authority",
+      "active_metadata",
+      "active_relationships",
+      "constituent_state",
+      "focal",
+      "equalizer",
+      "policies",
+      "dependency_readiness",
+      "resource_availability"
+    ],
+    "automatically_recomputable": true,
+    "derived_state_is_authority": false,
+    "rebuildable_from_authoritative_primitives": true
+  },
+  "automation_classes": {
+    "deterministic": {
+      "automatic": true,
+      "examples": [
+        "recompute",
+        "reindex",
+        "validate",
+        "regenerate_projection",
+        "recalculate_dependencies"
+      ]
+    },
+    "observational": {
+      "automatic": true,
+      "authority_promotion": false,
+      "examples": [
+        "record_prompt",
+        "record_measurement",
+        "record_runtime_event",
+        "record_external_evidence"
+      ]
+    },
+    "governed_operational": {
+      "automatic_only_under_accepted_policy": true,
+      "examples": [
+        "route",
+        "activate_compatible_adapter",
+        "expire_projection",
+        "prepare_runtime_material"
+      ]
+    },
+    "authority_changing": {
+      "silent_automation": false,
+      "requires_accepted_authority": true
+    }
+  },
+  "simulation_contract": {
+    "branch_safe": true,
+    "branches_are_authority": false,
+    "baseline_preserved": true,
+    "branch_fields": [
+      "branch_id",
+      "scyon_id",
+      "parent_branch_id",
+      "baseline_position",
+      "assumptions",
+      "patches",
+      "provenance",
+      "digest",
+      "status"
+    ],
+    "supported_patch_classes": [
+      "metadata",
+      "events",
+      "relationships",
+      "equalizer",
+      "activation",
+      "policies"
+    ],
+    "promotion_requires_authority": true
+  },
+  "projection_contract": {
+    "derived": true,
+    "authoritative": false,
+    "deterministic_where_inputs_are_deterministic": true,
+    "traceable_to_sources": true,
+    "examples": [
+      "ui",
+      "api",
+      "report",
+      "summary",
+      "graph",
+      "timeline",
+      "causal_map",
+      "simulation_manifold",
+      "validation_view",
+      "runtime_configuration",
+      "prompt_context",
+      "runtime_shard_candidate"
+    ]
+  },
+  "prompt_contract": {
+    "prompt_is_typed_event": true,
+    "raw_prompt_preserved": true,
+    "interpretation_separate_from_raw_prompt": true,
+    "supported_fields": [
+      "prompt_id",
+      "session_identity",
+      "authority_context",
+      "recorded_at",
+      "raw_prompt",
+      "intent",
+      "referenced_identities",
+      "requested_transformation",
+      "assumptions",
+      "dependencies",
+      "operations",
+      "projections",
+      "response_digest",
+      "receipts"
+    ]
+  },
+  "tier_profiles": {
+    "trait": {
+      "jurisdiction": "one stable observable property",
+      "default_scope": "local",
+      "causal_reach": "immediate",
+      "simulation_scope": "minimal_context_variation",
+      "coordination_scope": "motes",
+      "may_govern_external_boundary": false
+    },
+    "quirk": {
+      "jurisdiction": "one bounded conditional behavior",
+      "default_scope": "behavior_local",
+      "causal_reach": "short",
+      "simulation_scope": "trigger_nontrigger",
+      "coordination_scope": "traits",
+      "may_govern_external_boundary": false
+    },
+    "prodigal": {
+      "jurisdiction": "one autonomous reusable capability",
+      "default_scope": "capability",
+      "causal_reach": "capability_local",
+      "simulation_scope": "operation_alternatives",
+      "coordination_scope": "quirks",
+      "may_govern_external_boundary": false
+    },
+    "exile": {
+      "jurisdiction": "one enduring operational domain",
+      "default_scope": "domain",
+      "causal_reach": "domain_wide",
+      "simulation_scope": "domain_branches",
+      "coordination_scope": "prodigals",
+      "may_govern_external_boundary": false
+    },
+    "innate": {
+      "jurisdiction": "one constitutional faculty",
+      "default_scope": "faculty",
+      "causal_reach": "cross_domain",
+      "simulation_scope": "cross_domain",
+      "coordination_scope": "exiles",
+      "may_govern_external_boundary": false
+    },
+    "portal": {
+      "jurisdiction": "one living interaction boundary",
+      "default_scope": "interaction_volume",
+      "causal_reach": "portal_wide",
+      "simulation_scope": "interaction_consequences",
+      "coordination_scope": "innates",
+      "may_govern_external_boundary": true,
+      "markdown_operational_dependency": false
+    },
+    "obelisk": {
+      "jurisdiction": "one sovereign foundational system",
+      "default_scope": "system",
+      "causal_reach": "system_wide",
+      "simulation_scope": "strategic_multi_portal",
+      "coordination_scope": "portals",
+      "may_govern_external_boundary": true
+    }
+  },
+  "simulation_exile_profile": {
+    "scyon_intensive": true,
+    "preferred_abilities": [
+      "scenario_generation",
+      "causal_propagation",
+      "probability_estimation",
+      "branch_comparison",
+      "counterfactual_difference",
+      "consequence_evaluation",
+      "divergence_analysis",
+      "recombination_planning",
+      "assumption_management",
+      "uncertainty_propagation",
+      "temporal_simulation",
+      "resource_simulation"
+    ],
+    "authority_safe_by_default": true,
+    "canonical_state_mutation_from_branch": false
+  },
+  "runtime_shard_contract": {
+    "preparation_supported": true,
+    "canonical_instances_remain_authority": true,
+    "shards_are_projections": true,
+    "semantics_status": "deferred",
+    "must_retain": [
+      "source_identity",
+      "source_digest",
+      "lineage",
+      "provenance",
+      "authority",
+      "replay_information"
+    ]
+  },
+  "compatibility_contract": {
+    "legacy_terms_are_historical_evidence": true,
+    "legacy_terms_may_remain_as_compatibility_surfaces": true,
+    "blind_global_rename": false,
+    "extension_before_replacement": true,
+    "migration_requires_inventory": true
+  },
+  "minimum_receipt_fields": [
+    "receipt_id",
+    "scyon_id",
+    "operation",
+    "input_digest",
+    "output_digest",
+    "authority",
+    "validation",
+    "recorded_at"
+  ],
+  "invariants": [
+    "scyon_kernel_is_shared",
+    "focal_is_specialization_not_replacement",
+    "iota_and_mote_do_not_own_scyons",
+    "tier_capacity_is_enforced",
+    "metadata_is_not_automatically_authority",
+    "equalizer_cannot_bypass_tier_capacity",
+    "equalizer_cannot_bypass_authority",
+    "simulation_branches_are_non_authoritative",
+    "projections_are_non_authoritative",
+    "history_is_preserved",
+    "lineage_is_preserved",
+    "provenance_is_preserved",
+    "dependencies_are_traceable",
+    "dependents_are_traceable",
+    "physical_migration_is_not_authorized"
+  ]
+}

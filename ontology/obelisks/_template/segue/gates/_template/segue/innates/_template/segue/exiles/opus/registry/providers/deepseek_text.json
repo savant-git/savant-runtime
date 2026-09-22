@@ -1,0 +1,17 @@
+{
+  "id": "deepseek_text",
+  "type": "text_inference_provider",
+  "status": "active",
+  "owner": "opus",
+  "env_key": "DEEPSEEK_API_KEY",
+  "api_base": "https://api.deepseek.com",
+  "model_env": "SAVANT_DEEPSEEK_MODEL",
+  "model_default": "deepseek-v4-pro",
+  "capabilities": [
+    "text_inference",
+    "system_instructions",
+    "context",
+    "function_calling",
+    "usage_reporting"
+  ]
+}

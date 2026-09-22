@@ -1,0 +1,127 @@
+{
+  "id": "carbon.contracts",
+  "owner": "carbon",
+  "type": "contract_registry",
+  "status": "active",
+  "contracts": [
+    {
+      "id": "simulation_definition",
+      "owner": "carbon",
+      "input": {
+        "sources": "references",
+        "parameters": "mapping",
+        "constraints": "collection",
+        "relationships": "collection",
+        "events": "collection",
+        "dependencies": "references",
+        "execution_rules": "mapping"
+      },
+      "output": "simulation_definition",
+      "authority_effect": "none"
+    },
+    {
+      "id": "simulation_execution",
+      "owner": "carbon",
+      "input": {
+        "simulation": "reference",
+        "branch": "optional_reference",
+        "checkpoint": "optional_reference",
+        "parameters": "optional_mapping",
+        "events": "optional_collection"
+      },
+      "output": "simulation_execution_projection",
+      "receipt": true,
+      "authority_effect": "none"
+    },
+    {
+      "id": "simulation_branch",
+      "owner": "carbon",
+      "input": {
+        "simulation": "reference",
+        "parent_branch": "reference",
+        "branch_point": "reference",
+        "changes": "mapping"
+      },
+      "output": "simulation_branch",
+      "immutable_ancestry": true,
+      "authority_effect": "none"
+    },
+    {
+      "id": "simulation_checkpoint",
+      "owner": "carbon",
+      "input": {
+        "simulation": "reference",
+        "branch": "reference",
+        "state": "simulation_state"
+      },
+      "output": "immutable_checkpoint",
+      "authority_effect": "none"
+    },
+    {
+      "id": "simulation_replay",
+      "owner": "carbon",
+      "input": {
+        "simulation": "reference",
+        "execution": "reference"
+      },
+      "output": "replay_projection",
+      "divergence_must_be_exposed": true,
+      "authority_effect": "none"
+    },
+    {
+      "id": "simulation_compare",
+      "owner": "carbon",
+      "input": {
+        "left": "reference",
+        "right": "reference"
+      },
+      "output": "comparison_projection",
+      "mutates_inputs": false,
+      "authority_effect": "none"
+    },
+    {
+      "id": "simulation_interrogate",
+      "owner": "carbon",
+      "input": {
+        "simulation": "reference",
+        "query": "mapping"
+      },
+      "output": "simulation_query_projection",
+      "authority_effect": "none"
+    },
+    {
+      "id": "oriel_discover",
+      "owner": "carbon",
+      "input": {
+        "query": "optional_mapping"
+      },
+      "output": "oriel_specialization_profile",
+      "mutates_inputs": false,
+      "authoritative": false,
+      "authority_effect": "none"
+    },
+    {
+      "id": "oriel_interrogate",
+      "owner": "carbon",
+      "input": {
+        "operation": "oriel_operation_identifier",
+        "simulation": "reference_or_mapping",
+        "facts": "optional_collection",
+        "arguments": "optional_mapping"
+      },
+      "output": "oriel_derived_projection",
+      "mutates_inputs": false,
+      "simulation_owner": "carbon",
+      "authority_effect": "none"
+    }
+  ],
+  "global_invariants": {
+    "simulation_is_not_observation": true,
+    "simulation_is_not_accepted_authority": true,
+    "source_authority_preserved": true,
+    "uncertainty_preserved": true,
+    "branch_lineage_preserved": true,
+    "provenance_preserved": true,
+    "authority_transfer": false
+  }
+}

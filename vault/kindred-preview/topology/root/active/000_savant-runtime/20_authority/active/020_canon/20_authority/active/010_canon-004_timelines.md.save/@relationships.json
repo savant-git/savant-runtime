@@ -1,0 +1,76 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "15a9f0252ca0a28cd45659e95c5dc1be6c46b4e1e54609a9f3aaa8053600fc62",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "namespace": "preview.kindred",
+  "node": "canon/004_timelines.md.save",
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationships": [
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.c8cc9e5d213b1e90fa7b",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "canon",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:canon",
+        "canonical_target": "fs:canon/004_timelines.md.save",
+        "continuation": "projecting",
+        "id": "lineage.composition.c8cc9e5d213b1e90fa7b",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/canon/004_timelines.md.save"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "canon",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "canon/004_timelines.md.save",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "canon/004_timelines.md.save"
+    }
+  ],
+  "schema": "savant.kindred.preview.relationship_projection.v2"
+}

@@ -1,0 +1,65 @@
+{
+  "authority_mutation_performed": false,
+  "evidence": [
+    {
+      "authority_class": "verified-implementation",
+      "candidate_id": null,
+      "candidate_role": "non-owner-reference",
+      "candidate_tier": null,
+      "evidence_kind": "target-reference-only",
+      "path": "/root/savant-runtime/runtime/memory/model.py",
+      "relation": null,
+      "sha256": "10b10d0b311bd7a39adc6a9d024916558e0bdadd5ffca3252753b53f5ea64557",
+      "target": "service:fluid-canon"
+    },
+    {
+      "authority_class": "verified-implementation",
+      "candidate_id": null,
+      "candidate_role": "non-owner-reference",
+      "candidate_tier": null,
+      "evidence_kind": "target-reference-only",
+      "path": "/root/savant-runtime/runtime/fluid_canon/engine.py",
+      "relation": null,
+      "sha256": "825efc7a8cd5c6613408d8da4b407c9291896eb918491158c40447a85d2b71fa",
+      "target": "service:fluid-canon"
+    },
+    {
+      "authority_class": "verified-implementation",
+      "candidate_id": null,
+      "candidate_role": "non-owner-reference",
+      "candidate_tier": null,
+      "evidence_kind": "target-reference-only",
+      "path": "/root/savant-runtime/runtime/fluid_canon/model.py",
+      "relation": null,
+      "sha256": "07589097b805f9f7b641ae61c27e2b542ffec8654aa5c70623e9c1c05b56f382",
+      "target": "service:fluid-canon"
+    },
+    {
+      "authority_class": "verified-implementation",
+      "candidate_id": null,
+      "candidate_role": "non-owner-reference",
+      "candidate_tier": null,
+      "evidence_kind": "target-reference-only",
+      "path": "/root/savant-runtime/runtime/reports/scyon-owner-resolution/service-fluid-canon.json",
+      "relation": null,
+      "sha256": "dc50df1247786ab274ad9c0c36a94e652ec68fd48c8d76d73e4daa6f5d6d0985",
+      "target": "service:fluid-canon"
+    }
+  ],
+  "explicit_governance_evidence_count": 0,
+  "explicit_implementation_evidence_count": 0,
+  "files_scanned": 2651,
+  "governance_owner_candidates": [],
+  "governance_owner_is_distinct": true,
+  "implementation_owner_candidates": [],
+  "inference_used": false,
+  "owner_basis": null,
+  "physical_mutation_performed": false,
+  "reference_count": 4,
+  "resolution": "unresolved",
+  "schema": "savant://assurance/scyon-owner-resolution/1.1.0",
+  "scyon_owner_id": null,
+  "scyon_owner_tier": null,
+  "semantic_similarity_used": false,
+  "target": "service:fluid-canon"
+}

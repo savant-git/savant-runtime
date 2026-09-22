@@ -1,0 +1,49 @@
+{
+  "id": "carbon.lineage",
+  "owner": "carbon",
+  "type": "lineage_projection",
+  "status": "active",
+  "identity": {
+    "id": "carbon",
+    "graph_id": "exile:carbon",
+    "composition_level": "exile"
+  },
+  "artifacts": [
+    {
+      "id": "avatar_forge",
+      "record": "avatar_forge.json",
+      "status": "canonicalized"
+    },
+    {
+      "id": "oriel_ancestor",
+      "record": "oriel.json",
+      "status": "active",
+      "role": "conceptual_ancestor"
+    },
+    {
+      "id": "oriel_specialization",
+      "record": "oriel_specialization.json",
+      "status": "active",
+      "role": "carbon_owned_specialization"
+    }
+  ],
+  "preservation": {
+    "historical_paths": true,
+    "source_references": true,
+    "source_identity": true,
+    "provenance": true,
+    "consent_state": true,
+    "dependency_identity": true,
+    "historical_oriel_identity": true,
+    "current_oriel_specialization_identity": true
+  },
+  "projection_rules": {
+    "derived_structure_rebuildable": true,
+    "composition_by_reference": true,
+    "canonicalization_erases_history": false,
+    "projection_replaces_source_authority": false,
+    "historical_and_current_oriel_may_be_conflated": false,
+    "carbon_remains_general_simulation_owner": true,
+    "authority_transfer": false
+  }
+}

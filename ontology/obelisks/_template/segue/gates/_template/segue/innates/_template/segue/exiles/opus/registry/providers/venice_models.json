@@ -1,0 +1,48 @@
+{
+  "schema": "savant.opus.venice-model-projection.v1",
+  "owner": "opus",
+  "provider": "venice",
+  "status": "active",
+  "models": {
+    "venice_uncensored_1_2": {
+      "model_id": "venice-uncensored-1-2",
+      "provider_profile": "venice_uncensored",
+      "inference_latitude": "maximum_provider_permitted",
+      "context_window": 131072,
+      "capabilities": [
+        "text_inference",
+        "vision",
+        "function_calling",
+        "web_search"
+      ]
+    },
+    "qwen3_6_35b_a3b_uncensored_private": {
+      "model_id": "e2ee-qwen3-6-35b-a3b-uncensored-p",
+      "provider_profile": "venice_uncensored",
+      "inference_latitude": "maximum_provider_permitted",
+      "privacy_mode": "provider_e2ee",
+      "context_window": 131072,
+      "capabilities": [
+        "text_inference",
+        "vision",
+        "reasoning",
+        "web_search",
+        "structured_output"
+      ]
+    },
+    "gemma_4_uncensored": {
+      "model_id": "gemma-4-uncensored",
+      "provider_profile": "venice_uncensored",
+      "inference_latitude": "maximum_provider_permitted",
+      "capabilities": [
+        "text_inference",
+        "vision",
+        "reasoning",
+        "web_search",
+        "structured_output"
+      ]
+    }
+  },
+  "model_override_supported": true,
+  "authority_effect": "none"
+}

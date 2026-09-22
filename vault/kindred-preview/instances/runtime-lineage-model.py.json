@@ -1,0 +1,83 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:runtime/lineage/model.py",
+  "deterministic_hash": "a91268abcd03edae44610348a45648e321c5f46bed3961b5c2eddba3063a7529",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "runtime/lineage/model.py",
+  "kind": "file",
+  "label": "model.py",
+  "namespace": "preview.kindred",
+  "path": "runtime/lineage/model.py",
+  "placement": {
+    "domain": "filesystem",
+    "node": "runtime/lineage/model.py",
+    "parent": "runtime/lineage",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.efe5a3daff208fda3829",
+    "rank": 50,
+    "slot": "40_runtime",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.efe5a3daff208fda3829"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "record",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:runtime/lineage/model.py",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "runtime/lineage/model.py",
+    "kind": "file",
+    "label": "model.py",
+    "legacy_id": "runtime/lineage/model.py",
+    "lineage": [
+      "runtime/lineage"
+    ],
+    "metadata": {
+      "canonical_id": "fs:runtime/lineage/model.py",
+      "child_modes": {},
+      "child_roles": {},
+      "is_directory": false,
+      "is_file": true,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:runtime/lineage"
+        ]
+      },
+      "projected_id": "runtime/lineage/model.py",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "runtime/lineage"
+    ],
+    "path": "runtime/lineage/model.py",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "runtime/lineage/model.py",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.efe5a3daff208fda3829"
+    ],
+    "size": 7,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

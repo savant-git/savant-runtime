@@ -1,0 +1,273 @@
+{
+  "id": "quirk.nocturne.echo",
+  "kind": "quirk",
+  "level": 2,
+  "version": "2.1",
+  "status": "canonical",
+  "parent_prodigal": "nocturne",
+  "identity": {
+    "name": "Echo",
+    "domain": "Pattern Analysis & Threat Intelligence",
+    "aliases": [],
+    "historical_names": []
+  },
+  "purpose": "Cross-source correlation, pattern detection, and threat intelligence synthesis from dark web data.",
+  "composition": {
+    "minimum_children": 2,
+    "maximum_children": 4,
+    "children": [],
+    "shared_children": [],
+    "composition_policy": "Compose authoritative children through typed relationships without duplicating their source authority."
+  },
+  "dna": {
+    "core_traits": [
+      "pattern_recognition",
+      "correlation",
+      "threat_modeling",
+      "anomaly_detection"
+    ]
+  },
+  "lineage": {
+    "parent_prodigal": "nocturne",
+    "parents": [
+      "prodigal.nocturne"
+    ],
+    "sources": [
+      "edifices/identity/exiles/opus/prodigals/nocturne/quirks/echo/definition.json"
+    ],
+    "supersedes": [],
+    "superseded_by": []
+  },
+  "authority": {
+    "owner": "quirk.nocturne.echo",
+    "class": "identity_definition",
+    "precedence": 700,
+    "source": "edifices/identity/exiles/opus/prodigals/nocturne/quirks/echo/definition.json"
+  },
+  "contracts": {
+    "inputs": [
+      {
+        "name": "correlation_request",
+        "schema": "echo_contracts.CorrelationRequest",
+        "required": true
+      },
+      {
+        "name": "correlation_policy",
+        "schema": "echo_contracts.CorrelationPolicy",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "correlation_pair",
+        "schema": "echo_contracts.CorrelationPair",
+        "required": false
+      },
+      {
+        "name": "correlation_cluster",
+        "schema": "echo_contracts.CorrelationCluster",
+        "required": false
+      },
+      {
+        "name": "threat_hypothesis",
+        "schema": "echo_contracts.ThreatHypothesis",
+        "required": false
+      },
+      {
+        "name": "correlation_index",
+        "schema": "echo_contracts.CorrelationIndex",
+        "required": true
+      },
+      {
+        "name": "echo_result",
+        "schema": "echo_contracts.EchoResult",
+        "required": true
+      }
+    ],
+    "errors": [
+      {
+        "code": "implementation.unavailable",
+        "condition": "Required executable behavior is absent, incomplete, or unverified.",
+        "recoverable": true
+      },
+      {
+        "code": "echo.runtime.failure",
+        "condition": "Correlation input, policy, or runtime execution cannot be completed.",
+        "recoverable": true
+      }
+    ]
+  },
+  "capabilities": [
+    {
+      "id": "quirk.nocturne.echo.declared_purpose",
+      "description": "Cross-source correlation, pattern detection, and threat intelligence synthesis from dark web data.",
+      "status": "proposed"
+    },
+    {
+      "id": "quirk.nocturne.echo.cross_source_correlation",
+      "description": "Correlate supplied observations across distinct sources using bounded declared evidence.",
+      "status": "active"
+    },
+    {
+      "id": "quirk.nocturne.echo.pattern_detection",
+      "description": "Detect exact, token, label, source, and temporal relationships under explicit policy.",
+      "status": "active"
+    },
+    {
+      "id": "quirk.nocturne.echo.cluster_projection",
+      "description": "Project deterministic connected correlation clusters without duplicating observation authority.",
+      "status": "active"
+    },
+    {
+      "id": "quirk.nocturne.echo.hypothesis_generation",
+      "description": "Emit bounded proposed hypotheses that preserve limitations and never claim causation.",
+      "status": "active"
+    },
+    {
+      "id": "quirk.nocturne.echo.external_analysis_adapter",
+      "description": "Attach optional separately governed analytical providers through explicit contracts.",
+      "status": "proposed"
+    }
+  ],
+  "dependencies": {
+    "required": [
+      {
+        "id": "python.pydantic",
+        "kind": "library",
+        "required": true
+      }
+    ],
+    "optional": [
+      {
+        "id": "echo.analysis_adapter",
+        "kind": "aperture",
+        "required": false
+      }
+    ],
+    "runtime": [
+      {
+        "id": "nocturne.echo.contracts",
+        "kind": "contract_module",
+        "required": true
+      }
+    ],
+    "external": []
+  },
+  "relationships": [
+    {
+      "type": "composition",
+      "target": "prodigal.nocturne",
+      "direction": "outbound"
+    }
+  ],
+  "provenance": {
+    "created_from": [
+      "edifices/identity/exiles/opus/prodigals/nocturne/quirks/echo/definition.json",
+      "edifices/identity/exiles/opus/prodigals/nocturne/quirks/echo/runtime/echo_runtime.py",
+      "edifices/identity/exiles/opus/prodigals/nocturne/quirks/echo/tests/test_echo_runtime.py",
+      "edifices/identity/exiles/opus/prodigals/nocturne/contracts/echo_contracts.py"
+    ],
+    "captured_by": "savant.identity-quality.upgrader",
+    "source_hashes": {
+      "edifices/identity/exiles/opus/prodigals/nocturne/quirks/echo/definition.json": "727a55182e8ba0299aa38776464aa7adb275193eb835a0d4e790153cdf4616d1",
+      "edifices/identity/exiles/opus/prodigals/nocturne/quirks/echo/runtime/echo_runtime.py": "e36da311349a5740781ff331ecd76d489eeb883e8273701fe6e533a583c0f7dc",
+      "edifices/identity/exiles/opus/prodigals/nocturne/quirks/echo/tests/test_echo_runtime.py": "0b6208884c22f15761a116a2f340c39ea78ddcc7fcef61cc89f42419c58641ff",
+      "edifices/identity/exiles/opus/prodigals/nocturne/contracts/echo_contracts.py": "554a0c598aea5b17c55ce63dc2e393d9e9d0d04153825966cd5355cf40ccb507"
+    }
+  },
+  "runtime": {
+    "implementation": "partial",
+    "entrypoints": [
+      "edifices/identity/exiles/opus/prodigals/nocturne/quirks/echo/runtime/echo_runtime.py"
+    ],
+    "hooks": [],
+    "deterministic": true,
+    "side_effects": [],
+    "commands": [
+      "bin/echoctl"
+    ]
+  },
+  "security": {
+    "boundary": "Analyze supplied observations only. Perform no network, filesystem-write, subprocess, secret, or external-provider access.",
+    "permissions": [],
+    "data_classification": "sensitive",
+    "network_policy": "offline_only",
+    "sandbox": true
+  },
+  "observability": {
+    "metrics": [
+      "execution_count",
+      "success_count",
+      "failure_count",
+      "duration_seconds",
+      "observation_count",
+      "pair_count",
+      "cluster_count",
+      "hypothesis_count",
+      "unmatched_count"
+    ],
+    "events": [
+      "echo.request.accepted",
+      "echo.pair.proposed",
+      "echo.cluster.generated",
+      "echo.hypothesis.proposed",
+      "echo.execution.failed"
+    ],
+    "health": [
+      "definition_valid",
+      "contracts_available",
+      "runtime_importable",
+      "tests_passing",
+      "authority_isolation_preserved"
+    ],
+    "audit": true
+  },
+  "validation": {
+    "unit_tests": [
+      "edifices/identity/exiles/opus/prodigals/nocturne/quirks/echo/tests/test_echo_runtime.py"
+    ],
+    "integration_tests": [],
+    "property_tests": [
+      "equal_requests_produce_equal_indexes",
+      "canonical_serialization_is_stable",
+      "shared_tokens_produce_bounded_scores",
+      "unmatched_observations_are_preserved"
+    ],
+    "security_tests": [
+      "hypotheses_remain_proposed",
+      "correlation_does_not_claim_causation",
+      "runtime_performs_no_external_access"
+    ],
+    "acceptance": [
+      "Equal observations and policies produce equal correlation digests.",
+      "Every correlation remains supported by explicit evidence.",
+      "No hypothesis is promoted beyond proposed authority.",
+      "Correlation never claims causation.",
+      "Unmatched observations remain visible and attributable.",
+      "Every output preserves source provenance."
+    ]
+  },
+  "lifecycle": {
+    "state": "canonical",
+    "allowed_transitions": [
+      "proposed",
+      "canonical",
+      "active",
+      "deprecated",
+      "superseded",
+      "retired"
+    ]
+  },
+  "apertures": [
+    {
+      "id": "quirk.nocturne.echo.future",
+      "purpose": "Admit future compatible attachments without replacing this identity.",
+      "admission": "Requires compatible contract, validated authority, explicit lineage, and complete provenance."
+    },
+    {
+      "id": "quirk.nocturne.echo.analysis",
+      "purpose": "Admit compatible bounded analytical providers without replacing Echo.",
+      "admission": "Requires explicit contracts, authority isolation, deterministic fallback, provenance, security review, and complete validation."
+    }
+  ]
+}

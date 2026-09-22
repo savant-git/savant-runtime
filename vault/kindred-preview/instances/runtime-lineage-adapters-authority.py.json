@@ -1,0 +1,83 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:runtime/lineage/adapters/authority.py",
+  "deterministic_hash": "486b6f0c182ad150c8b6acb7b5ea124fe9d23492b8c11ceea9d9a4f712cbb990",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "runtime/lineage/adapters/authority.py",
+  "kind": "file",
+  "label": "authority.py",
+  "namespace": "preview.kindred",
+  "path": "runtime/lineage/adapters/authority.py",
+  "placement": {
+    "domain": "filesystem",
+    "node": "runtime/lineage/adapters/authority.py",
+    "parent": "runtime/lineage/adapters",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.d3bc6c5d7f7881b0ec51",
+    "rank": 20,
+    "slot": "40_runtime",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.d3bc6c5d7f7881b0ec51"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "record",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:runtime/lineage/adapters/authority.py",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "runtime/lineage/adapters/authority.py",
+    "kind": "file",
+    "label": "authority.py",
+    "legacy_id": "runtime/lineage/adapters/authority.py",
+    "lineage": [
+      "runtime/lineage/adapters"
+    ],
+    "metadata": {
+      "canonical_id": "fs:runtime/lineage/adapters/authority.py",
+      "child_modes": {},
+      "child_roles": {},
+      "is_directory": false,
+      "is_file": true,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:runtime/lineage/adapters"
+        ]
+      },
+      "projected_id": "runtime/lineage/adapters/authority.py",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "runtime/lineage/adapters"
+    ],
+    "path": "runtime/lineage/adapters/authority.py",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "runtime/lineage/adapters/authority.py",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.d3bc6c5d7f7881b0ec51"
+    ],
+    "size": 7,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

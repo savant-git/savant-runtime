@@ -1,0 +1,97 @@
+{
+  "authoritative": false,
+  "authority_tier": "delegated",
+  "canonical_id": "fs:vault/authority",
+  "deterministic_hash": "db916fcc46972e467518f50357a75a608a30eb97fe56faa6ad54a40fc85034db",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "vault/authority",
+  "kind": "directory",
+  "label": "authority",
+  "namespace": "preview.kindred",
+  "path": "vault/authority",
+  "placement": {
+    "domain": "filesystem",
+    "node": "vault/authority",
+    "parent": "vault",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.7b05bfd6508080250c12",
+    "rank": 10,
+    "slot": "50_projections",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.25fdee21ed64448a8cba",
+    "lineage.composition.7b05bfd6508080250c12"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": false,
+    "canonical_id": "fs:vault/authority",
+    "children": [
+      "vault/authority/authority_index.json"
+    ],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "vault/authority",
+    "kind": "directory",
+    "label": "authority",
+    "legacy_id": "vault/authority",
+    "lineage": [
+      "vault"
+    ],
+    "metadata": {
+      "canonical_id": "fs:vault/authority",
+      "child_modes": {
+        "projecting": [
+          "fs:vault/authority/authority_index.json"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:vault/authority/authority_index.json"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:vault"
+        ]
+      },
+      "projected_id": "vault/authority",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "vault"
+    ],
+    "path": "vault/authority",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "vault/authority",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.25fdee21ed64448a8cba",
+      "lineage.composition.7b05bfd6508080250c12"
+    ],
+    "size": 12,
+    "sons": [
+      "vault/authority/authority_index.json"
+    ]
+  },
+  "state": "active",
+  "synthetic": false
+}

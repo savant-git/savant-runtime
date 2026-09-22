@@ -1,0 +1,83 @@
+{
+  "authoritative": false,
+  "authority_tier": "delegated",
+  "canonical_id": "fs:canon-system/authority/exiles/niche.yaml",
+  "deterministic_hash": "c983fb943e753edcfb572d9cad702dd8654cab762f6d518ea3205384abfd101e",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "canon-system/authority/exiles/niche.yaml",
+  "kind": "file",
+  "label": "niche.yaml",
+  "namespace": "preview.kindred",
+  "path": "canon-system/authority/exiles/niche.yaml",
+  "placement": {
+    "domain": "filesystem",
+    "node": "canon-system/authority/exiles/niche.yaml",
+    "parent": "canon-system/authority/exiles",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.a063dcfa1d1eba7e7460",
+    "rank": 100,
+    "slot": "20_authority",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.a063dcfa1d1eba7e7460"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "record",
+  "source_record": {
+    "authority": false,
+    "canonical_id": "fs:canon-system/authority/exiles/niche.yaml",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "canon-system/authority/exiles/niche.yaml",
+    "kind": "file",
+    "label": "niche.yaml",
+    "legacy_id": "canon-system/authority/exiles/niche.yaml",
+    "lineage": [
+      "canon-system/authority/exiles"
+    ],
+    "metadata": {
+      "canonical_id": "fs:canon-system/authority/exiles/niche.yaml",
+      "child_modes": {},
+      "child_roles": {},
+      "is_directory": false,
+      "is_file": true,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:canon-system/authority/exiles"
+        ]
+      },
+      "projected_id": "canon-system/authority/exiles/niche.yaml",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "canon-system/authority/exiles"
+    ],
+    "path": "canon-system/authority/exiles/niche.yaml",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "canon-system/authority/exiles/niche.yaml",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.a063dcfa1d1eba7e7460"
+    ],
+    "size": 7,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

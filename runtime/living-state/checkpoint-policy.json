@@ -1,0 +1,70 @@
+{
+  "schema": "savant.living-state.checkpoint-policy.v1",
+  "enabled": true,
+  "runtime_root": "/root/savant-runtime",
+  "sdump_command": "/usr/local/bin/sdump",
+  "workers": 16,
+  "keep_local": false,
+
+  "quiet_seconds": 90,
+  "priority_quiet_seconds": 30,
+  "maximum_quiet_seconds": 900,
+
+  "minimum_checkpoint_interval_seconds": 3600,
+  "maximum_checkpoint_interval_seconds": 21600,
+
+  "score_threshold": 8,
+  "priority_score_threshold": 20,
+
+  "maximum_pending_paths": 2048,
+
+  "minimum_free_disk_bytes": 2147483648,
+  "maximum_load_per_cpu": 2.0,
+
+  "checkpoint_timeout_seconds": 1800,
+
+  "failure_backoff_initial_seconds": 60,
+  "failure_backoff_maximum_seconds": 3600,
+
+  "poll_fallback_seconds": 5,
+
+  "generated_path_prefixes": [
+    "source/",
+    "exports/",
+    "audit/",
+    "_reports/",
+    "repair_backups/",
+    "relics/",
+    "runtime/living-state/",
+    "vault/sdump-receipts/",
+    "vault/sdump/"
+  ],
+
+  "generated_path_suffixes": [
+    "-shm",
+    "-wal",
+    "-journal",
+    ".sqlite-shm",
+    ".sqlite-wal",
+    ".sqlite-journal",
+    ".sqlite3-shm",
+    ".sqlite3-wal",
+    ".sqlite3-journal",
+    ".db-shm",
+    ".db-wal",
+    ".db-journal",
+    ".tmp",
+    ".swp",
+    ".swx",
+    "~"
+  ],
+
+  "priority_path_prefixes": [
+    "authority/",
+    "canon/",
+    "canon-system/",
+    "ontology/",
+    "tools/sdump-enterprise/",
+    "runtime/"
+  ]
+}

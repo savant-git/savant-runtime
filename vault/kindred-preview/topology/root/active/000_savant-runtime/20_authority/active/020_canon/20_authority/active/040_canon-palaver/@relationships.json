@@ -1,0 +1,137 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "549b1f1f4dd8051c16521ae73ea9687b1d83a7c5ef37c7dc913d1f7114394198",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "namespace": "preview.kindred",
+  "node": "canon/palaver",
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationships": [
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.4eae36633b13a77f0d29",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "canon/palaver",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:canon/palaver",
+        "canonical_target": "fs:canon/palaver/envoy_voice_registry.md",
+        "continuation": "projecting",
+        "id": "lineage.composition.4eae36633b13a77f0d29",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/canon/palaver/envoy_voice_registry.md"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "canon/palaver",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "canon/palaver/envoy_voice_registry.md",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "canon/palaver/envoy_voice_registry.md"
+    },
+    {
+      "child_profile": "daughter",
+      "domain": "filesystem",
+      "id": "lineage.composition.b2e4d932f0d0e9bcc804",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "canon",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:canon",
+        "canonical_target": "fs:canon/palaver",
+        "continuation": "preserving",
+        "id": "lineage.composition.b2e4d932f0d0e9bcc804",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/canon/palaver"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "canon",
+        "status": "active",
+        "symbolic_child_alias": "daughter",
+        "symbolic_parent_alias": "parent",
+        "target": "canon/palaver",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "canon/palaver"
+    }
+  ],
+  "schema": "savant.kindred.preview.relationship_projection.v2"
+}

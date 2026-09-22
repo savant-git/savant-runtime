@@ -1,0 +1,144 @@
+{
+  "affected_files": [],
+  "failed_move_count": 0,
+  "failed_moves": [],
+  "id": "full_reference_rewrite_simulation",
+  "live_files_changed": false,
+  "move_count": 9,
+  "move_results": [
+    {
+      "reason": "",
+      "source": "BUILD_REFACTOR_ENGINE_SIMULATOR.sh",
+      "status": "moved",
+      "target": "ops/runtime/scripts/BUILD_REFACTOR_ENGINE_SIMULATOR.sh"
+    },
+    {
+      "reason": "",
+      "source": "FIX_BROKEN_PALAVER_SYMLINK_AND_REFRESH.sh",
+      "status": "moved",
+      "target": "ops/runtime/scripts/FIX_BROKEN_PALAVER_SYMLINK_AND_REFRESH.sh"
+    },
+    {
+      "reason": "",
+      "source": "FIX_REMAINING_ACTIONABLE_BLOCKERS.sh",
+      "status": "moved",
+      "target": "ops/runtime/scripts/FIX_REMAINING_ACTIONABLE_BLOCKERS.sh"
+    },
+    {
+      "reason": "",
+      "source": "REFRESH_FAST_AUDIT_AND_BLOCKERS.sh",
+      "status": "moved",
+      "target": "ops/runtime/scripts/REFRESH_FAST_AUDIT_AND_BLOCKERS.sh"
+    },
+    {
+      "reason": "",
+      "source": "REPORT_FAST_BLOCKERS.sh",
+      "status": "moved",
+      "target": "ops/runtime/scripts/REPORT_FAST_BLOCKERS.sh"
+    },
+    {
+      "reason": "",
+      "source": "RUN_REFACTOR_FULL_SAFETY_SIMULATION.sh",
+      "status": "moved",
+      "target": "ops/runtime/scripts/RUN_REFACTOR_FULL_SAFETY_SIMULATION.sh"
+    },
+    {
+      "reason": "",
+      "source": "RUN_SAVANT_BLOCKER_REDUCTION_AND_RECURSIVE_FOUNDATION_PHASE_02.sh",
+      "status": "moved",
+      "target": "ops/runtime/scripts/RUN_SAVANT_BLOCKER_REDUCTION_AND_RECURSIVE_FOUNDATION_PHASE_02.sh"
+    },
+    {
+      "reason": "",
+      "source": "RUN_SAVANT_PHASE_03_STRICT_REPAIR_GATE.sh",
+      "status": "moved",
+      "target": "ops/runtime/scripts/RUN_SAVANT_PHASE_03_STRICT_REPAIR_GATE.sh"
+    },
+    {
+      "reason": "",
+      "source": "RUN_SAVANT_PHASE_04_REFERENCE_REWRITE_SIMULATOR.sh",
+      "status": "moved",
+      "target": "ops/runtime/scripts/RUN_SAVANT_PHASE_04_REFERENCE_REWRITE_SIMULATOR.sh"
+    }
+  ],
+  "move_safe": false,
+  "move_safe_reason": "Even when this passes, live execution requires explicit separate executor and current report review.",
+  "moves": [
+    {
+      "decision": "CANDIDATE",
+      "reason": "scope_target_no_known_references_no_conflict",
+      "reference_count": 0,
+      "source": "/root/savant-runtime/BUILD_REFACTOR_ENGINE_SIMULATOR.sh",
+      "source_rel": "BUILD_REFACTOR_ENGINE_SIMULATOR.sh",
+      "target": "/root/savant-runtime/ops/runtime/scripts/BUILD_REFACTOR_ENGINE_SIMULATOR.sh"
+    },
+    {
+      "decision": "CANDIDATE",
+      "reason": "scope_target_no_known_references_no_conflict",
+      "reference_count": 0,
+      "source": "/root/savant-runtime/FIX_BROKEN_PALAVER_SYMLINK_AND_REFRESH.sh",
+      "source_rel": "FIX_BROKEN_PALAVER_SYMLINK_AND_REFRESH.sh",
+      "target": "/root/savant-runtime/ops/runtime/scripts/FIX_BROKEN_PALAVER_SYMLINK_AND_REFRESH.sh"
+    },
+    {
+      "decision": "CANDIDATE",
+      "reason": "scope_target_no_known_references_no_conflict",
+      "reference_count": 0,
+      "source": "/root/savant-runtime/FIX_REMAINING_ACTIONABLE_BLOCKERS.sh",
+      "source_rel": "FIX_REMAINING_ACTIONABLE_BLOCKERS.sh",
+      "target": "/root/savant-runtime/ops/runtime/scripts/FIX_REMAINING_ACTIONABLE_BLOCKERS.sh"
+    },
+    {
+      "decision": "CANDIDATE",
+      "reason": "scope_target_no_known_references_no_conflict",
+      "reference_count": 0,
+      "source": "/root/savant-runtime/REFRESH_FAST_AUDIT_AND_BLOCKERS.sh",
+      "source_rel": "REFRESH_FAST_AUDIT_AND_BLOCKERS.sh",
+      "target": "/root/savant-runtime/ops/runtime/scripts/REFRESH_FAST_AUDIT_AND_BLOCKERS.sh"
+    },
+    {
+      "decision": "CANDIDATE",
+      "reason": "scope_target_no_known_references_no_conflict",
+      "reference_count": 0,
+      "source": "/root/savant-runtime/REPORT_FAST_BLOCKERS.sh",
+      "source_rel": "REPORT_FAST_BLOCKERS.sh",
+      "target": "/root/savant-runtime/ops/runtime/scripts/REPORT_FAST_BLOCKERS.sh"
+    },
+    {
+      "decision": "CANDIDATE",
+      "reason": "scope_target_no_known_references_no_conflict",
+      "reference_count": 0,
+      "source": "/root/savant-runtime/RUN_REFACTOR_FULL_SAFETY_SIMULATION.sh",
+      "source_rel": "RUN_REFACTOR_FULL_SAFETY_SIMULATION.sh",
+      "target": "/root/savant-runtime/ops/runtime/scripts/RUN_REFACTOR_FULL_SAFETY_SIMULATION.sh"
+    },
+    {
+      "decision": "CANDIDATE",
+      "reason": "scope_target_no_known_references_no_conflict",
+      "reference_count": 0,
+      "source": "/root/savant-runtime/RUN_SAVANT_BLOCKER_REDUCTION_AND_RECURSIVE_FOUNDATION_PHASE_02.sh",
+      "source_rel": "RUN_SAVANT_BLOCKER_REDUCTION_AND_RECURSIVE_FOUNDATION_PHASE_02.sh",
+      "target": "/root/savant-runtime/ops/runtime/scripts/RUN_SAVANT_BLOCKER_REDUCTION_AND_RECURSIVE_FOUNDATION_PHASE_02.sh"
+    },
+    {
+      "decision": "CANDIDATE",
+      "reason": "scope_target_no_known_references_no_conflict",
+      "reference_count": 0,
+      "source": "/root/savant-runtime/RUN_SAVANT_PHASE_03_STRICT_REPAIR_GATE.sh",
+      "source_rel": "RUN_SAVANT_PHASE_03_STRICT_REPAIR_GATE.sh",
+      "target": "/root/savant-runtime/ops/runtime/scripts/RUN_SAVANT_PHASE_03_STRICT_REPAIR_GATE.sh"
+    },
+    {
+      "decision": "CANDIDATE",
+      "reason": "scope_target_no_known_references_no_conflict",
+      "reference_count": 0,
+      "source": "/root/savant-runtime/RUN_SAVANT_PHASE_04_REFERENCE_REWRITE_SIMULATOR.sh",
+      "source_rel": "RUN_SAVANT_PHASE_04_REFERENCE_REWRITE_SIMULATOR.sh",
+      "target": "/root/savant-runtime/ops/runtime/scripts/RUN_SAVANT_PHASE_04_REFERENCE_REWRITE_SIMULATOR.sh"
+    }
+  ],
+  "rewrite_count": 0,
+  "status": "PASS",
+  "validation_failure_count": 0,
+  "validation_failures": []
+}
