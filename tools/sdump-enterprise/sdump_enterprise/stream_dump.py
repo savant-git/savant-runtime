@@ -4,6 +4,7 @@ import gzip
 import hashlib
 import json
 import os
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 import shutil
@@ -11,89 +12,346 @@ import stat
 import subprocess
 import sys
 import tempfile
+import time
 from types import SimpleNamespace
 from typing import Any, Iterable
 
-from .profiles import load_profile
-from .scan import (
-    discover,
-    language,
-    normalized_targets,
-)
-
-from straub.source_datrix import (
-    current_from_datrix,
-    datrix,
-)
 
 
-schema = "savant.sdump.stream.v3"
+schema = "savant.sdump.stream.v7"
+command_schema = "savant.sdump.command.v7"
+publish_schema = "savant.sdump.publish.v2"
 
-default_profile = "code"
-
-chunk_size = 1024 * 1024
-
-gzip_level = 9
+chunk_size = 4 * 1024 * 1024
+gzip_level = 6
 
 s3_bucket = "savant-ai-cluster"
-
 github_owner = "savant-git"
-
 github_repository = "savant-runtime"
+github_remote = f"https://github.com/{github_owner}/{github_repository}.git"
 
-github_remote = (
-    "https://github.com/"
-    f"{github_owner}/"
-    f"{github_repository}.git"
+default_env_paths = (
+    Path("/root/.env"),
+    Path.home() / ".env",
 )
 
-default_env_path = Path(
-    "/root/.env"
+# Broad, source-positive admission. Directory names never imply that Savant
+# architecture is disposable. Only concrete non-source classes are excluded.
+source_extensions = frozenset({
+    ".py", ".pyi", ".pyx", ".pxd",
+    ".js", ".jsx", ".mjs", ".cjs",
+    ".ts", ".tsx", ".mts", ".cts",
+    ".go", ".rs", ".java", ".kt", ".kts", ".scala",
+    ".c", ".cc", ".cpp", ".cxx", ".h", ".hh", ".hpp", ".hxx",
+    ".cs", ".fs", ".fsx", ".vb",
+    ".rb", ".php", ".lua", ".pl", ".pm", ".r",
+    ".sh", ".bash", ".zsh", ".fish", ".ps1", ".bat", ".cmd",
+    ".sql", ".graphql", ".gql",
+    ".yaml", ".yml", ".toml", ".ini", ".cfg", ".conf",
+    ".html", ".htm", ".css", ".scss", ".sass", ".less",
+    ".vue", ".svelte",
+    ".xml", ".xsd", ".xsl", ".xslt",
+    ".tf", ".tfvars", ".hcl",
+    ".gradle", ".properties",
+    ".proto", ".thrift",
+    ".md", ".mdx", ".rst", ".adoc",
+})
+
+source_filenames = frozenset({
+    "dockerfile", "containerfile", "makefile", "procfile", "rakefile",
+    "gemfile", "gemfile.lock", "pipfile", "pipfile.lock", "justfile",
+    "compose.yaml", "compose.yml", "docker-compose.yaml", "docker-compose.yml",
+    "pyproject.toml", "setup.py", "setup.cfg", "tox.ini", "noxfile.py",
+    "requirements.txt", "requirements-dev.txt", "requirements-test.txt",
+    "constraints.txt",
+    "package.json", "package-lock.json", "yarn.lock", "pnpm-lock.yaml",
+    "bun.lock", "cargo.toml", "cargo.lock", "go.mod", "go.sum",
+    "pom.xml", "build.gradle", "settings.gradle",
+    "composer.json", "composer.lock",
+    "deno.json", "deno.jsonc", "bunfig.toml",
+    "tsconfig.json", "jsconfig.json",
+    "manifest.json", "manifest.webmanifest",
+    "eslint.config.js", "eslint.config.mjs", "eslint.config.cjs",
+    "eslint.config.json", ".eslintrc", ".eslintrc.json",
+    ".prettierrc", ".prettierrc.json", ".babelrc", ".babelrc.json",
+    "babel.config.js", "babel.config.json",
+    "jest.config.js", "jest.config.ts", "jest.config.json",
+    "vite.config.js", "vite.config.ts",
+    "webpack.config.js", "webpack.config.ts",
+    "rollup.config.js", "rollup.config.ts",
+    "nodemon.json", "launch.json", "tasks.json", "settings.json",
+    "extensions.json",
+})
+
+excluded_dir_names = frozenset({
+    ".git", ".hg", ".svn",
+    "node_modules",
+    "__pycache__", ".pytest_cache", ".mypy_cache", ".ruff_cache",
+    ".tox", ".nox", ".coverage", "coverage", ".nyc_output",
+    ".next", ".nuxt", ".svelte-kit", ".parcel-cache", ".turbo",
+    "dist", "build",
+    ".gradle", ".idea", ".vscode",
+    "venv", ".venv", "env", ".envdir",
+    "site-packages",
+    "savant-sdump-output",
+    "source-datrix-state",
+})
+
+excluded_suffixes = frozenset({
+    ".pyc", ".pyo", ".class", ".o", ".obj", ".so", ".dll", ".dylib",
+    ".a", ".lib", ".exe", ".bin",
+    ".zip", ".gz", ".bz2", ".xz", ".zst", ".7z", ".rar", ".tar",
+    ".png", ".jpg", ".jpeg", ".gif", ".webp", ".bmp", ".ico",
+    ".mp3", ".wav", ".flac", ".ogg", ".mp4", ".mov", ".avi", ".mkv",
+    ".pdf", ".woff", ".woff2", ".ttf", ".otf",
+    ".db", ".sqlite", ".sqlite3",
+    ".log", ".tmp", ".temp", ".swp", ".swo",
+})
+
+secret_names = frozenset({
+    ".env", ".env.local", ".env.production", ".env.development",
+    "id_rsa", "id_ed25519", "credentials", "credentials.json",
+    "secrets.json", "secret.json",
+})
+
+# These are known generated/recovery families, not architectural source.
+excluded_relative_prefixes = (
+    "assurance/",
+    "audit/",
+    "backups/",
+    "repair_backups/",
+    "relics/",
+    "exports/",
+    "imports/",
+    "evolution/structure-migration/",
+    "state/",
+    "runtime/recovery/",
+    "recovery/",
+    "runtime/straub/source-datrix-state/",
+    "savant-sdump-output/",
+)
+
+excluded_name_prefixes = (
+    "sdump_",
+    "sdump-",
+    "current_runtime_source_dump_",
 )
 
 
-class StreamDumpError(
-    RuntimeError
-):
+excluded_exact_relative_paths = frozenset({
+    "context/CANONICAL_OWNERSHIP_GRAPH.json",
+    "context/SEMANTIC_REFERENCE_GRAPH.json",
+})
+
+structured_source_names = frozenset({
+    "package.json", "package-lock.json", "tsconfig.json", "jsconfig.json",
+    "composer.json", "composer.lock", "deno.json", "deno.jsonc",
+    "manifest.json", "manifest.webmanifest", "import_map.json",
+    "settings.json", "launch.json", "tasks.json", "extensions.json",
+    ".eslintrc.json", ".prettierrc.json", ".babelrc.json",
+    "babel.config.json", "jest.config.json", "nodemon.json",
+})
+
+structured_source_dirs = frozenset({
+    "config", "configs", "configuration",
+    "schema", "schemas",
+    "contract", "contracts",
+    "fixture", "fixtures",
+    "testdata", "test-data",
+    ".github",
+})
+
+text_source_names = frozenset({
+    "requirements.txt", "requirements-dev.txt", "requirements-test.txt",
+    "constraints.txt",
+})
+
+
+class TerminalUI:
+    """TTY-aware, dependency-free sdump terminal projection."""
+
+    reset = "\033[0m"
+    bold = "\033[1m"
+    dim = "\033[2m"
+    cyan = "\033[36m"
+    green = "\033[32m"
+    yellow = "\033[33m"
+    red = "\033[31m"
+    blue = "\033[34m"
+
+    def __init__(self) -> None:
+        self.tty = bool(getattr(sys.stderr, "isatty", lambda: False)())
+        self.color = (
+            self.tty
+            and os.environ.get("TERM", "").casefold() != "dumb"
+            and "NO_COLOR" not in os.environ
+        )
+        self.unicode = os.environ.get("SDUMP_ASCII", "").casefold() not in {"1", "true", "yes"}
+        self.started = time.monotonic()
+        self.last_render = 0.0
+        self.last_line_width = 0
+        self.phase_started = self.started
+
+    def c(self, value: str, *styles: str) -> str:
+        if not self.color:
+            return value
+        return "".join(styles) + value + self.reset
+
+    def width(self) -> int:
+        return max(54, min(shutil.get_terminal_size((80, 24)).columns, 120))
+
+    def human_bytes(self, value: float) -> str:
+        units = ("B", "KiB", "MiB", "GiB", "TiB")
+        amount = float(max(0.0, value))
+        for unit in units:
+            if amount < 1024.0 or unit == units[-1]:
+                return f"{amount:.0f} {unit}" if unit == "B" else f"{amount:.1f} {unit}"
+            amount /= 1024.0
+        return f"{amount:.1f} TiB"
+
+    def duration(self, seconds: float) -> str:
+        seconds = max(0, int(seconds))
+        if seconds < 60:
+            return f"{seconds}s"
+        minutes, seconds = divmod(seconds, 60)
+        if minutes < 60:
+            return f"{minutes}m {seconds:02d}s"
+        hours, minutes = divmod(minutes, 60)
+        return f"{hours}h {minutes:02d}m"
+
+    def bar(self, fraction: float, width: int = 22) -> str:
+        fraction = min(1.0, max(0.0, fraction))
+        filled = int(round(width * fraction))
+        if self.unicode:
+            return "█" * filled + "░" * (width - filled)
+        return "#" * filled + "-" * (width - filled)
+
+    def clear_progress(self) -> None:
+        if not self.tty or not self.last_line_width:
+            return
+        sys.stderr.write("\r" + (" " * self.last_line_width) + "\r")
+        sys.stderr.flush()
+        self.last_line_width = 0
+
+    def line(self, value: str = "") -> None:
+        self.clear_progress()
+        print(value, file=sys.stderr, flush=True)
+
+    def banner(self, target: Path) -> None:
+        rule_char = "─" if self.unicode else "-"
+        rule = rule_char * min(self.width(), 78)
+        mark = "◆" if self.unicode else "*"
+        self.line(self.c(rule, self.dim))
+        self.line(
+            f"{self.c(mark, self.cyan)} "
+            f"{self.c('savant sdump', self.bold)}  "
+            f"{self.c('portable source projection', self.dim)}"
+        )
+        self.line(f"  target  {target}")
+        self.line(f"  output  gzip → s3://{s3_bucket}/ + github")
+        self.line(self.c(rule, self.dim))
+
+    def phase(self, name: str, detail: str = "") -> None:
+        self.phase_started = time.monotonic()
+        marker = "◇" if self.unicode else ">"
+        suffix = f"  {self.c(detail, self.dim)}" if detail else ""
+        self.line(f"{self.c(marker, self.blue)} {self.c(name, self.bold)}{suffix}")
+
+    def note(self, label: str, value: str, tone: str = "normal") -> None:
+        style = {
+            "good": self.green,
+            "warn": self.yellow,
+            "bad": self.red,
+        }.get(tone)
+        rendered = self.c(value, style) if style else value
+        self.line(f"  {self.c(label, self.dim):<18} {rendered}")
+
+    def progress(
+        self,
+        *,
+        label: str,
+        current: int,
+        total: int,
+        bytes_done: int = 0,
+        bytes_total: int = 0,
+        force: bool = False,
+    ) -> None:
+        now = time.monotonic()
+        if not force and now - self.last_render < 0.12:
+            return
+        self.last_render = now
+
+        fraction = (current / total) if total else 1.0
+        elapsed = max(now - self.phase_started, 0.001)
+        rate = bytes_done / elapsed if bytes_done else 0.0
+        remaining = max(bytes_total - bytes_done, 0)
+        eta = remaining / rate if rate > 0 else 0.0
+        percent = fraction * 100.0
+
+        bar_width = 18 if self.width() < 76 else 24
+        pieces = [
+            f"{label}",
+            f"[{self.bar(fraction, bar_width)}]",
+            f"{percent:5.1f}%",
+            f"{current:,}/{total:,}",
+        ]
+        if bytes_total:
+            pieces.append(
+                f"{self.human_bytes(bytes_done)}/{self.human_bytes(bytes_total)}"
+            )
+        if rate:
+            pieces.append(f"{self.human_bytes(rate)}/s")
+        if eta > 0.5 and current < total:
+            pieces.append(f"eta {self.duration(eta)}")
+
+        text = "  " + "  ".join(pieces)
+        if self.tty:
+            plain_width = len(re.sub(r"\x1b\[[0-9;]*m", "", text))
+            padding = max(0, self.last_line_width - plain_width)
+            sys.stderr.write("\r" + text + (" " * padding))
+            sys.stderr.flush()
+            self.last_line_width = plain_width
+        elif force or current == total:
+            self.line(text)
+
+    def success(self, artifact_size: int, source_files: int, elapsed: float) -> None:
+        marker = "✓" if self.unicode else "OK"
+        self.line(
+            f"{self.c(marker, self.green, self.bold)} "
+            f"{self.c('sdump complete', self.green, self.bold)}"
+        )
+        self.note("source files", f"{source_files:,}")
+        self.note("gzip", self.human_bytes(artifact_size))
+        self.note("elapsed", self.duration(elapsed))
+        self.note("local artifact", "deleted after verified publication", "good")
+
+    def failure(self, message: str) -> None:
+        marker = "✗" if self.unicode else "ERROR"
+        self.line(
+            f"{self.c(marker, self.red, self.bold)} "
+            f"{self.c('sdump failed', self.red, self.bold)}"
+        )
+        self.line(f"  {message}")
+
+
+ui = TerminalUI()
+
+
+class StreamDumpError(RuntimeError):
     pass
 
 
-def canonical_json(
-    value: Any,
-) -> str:
+def canonical_json(value: Any) -> str:
     return json.dumps(
         value,
         ensure_ascii=False,
         sort_keys=True,
-        separators=(
-            ",",
-            ":",
-        ),
+        separators=(",", ":"),
     )
 
 
-def sha256_file(
-    path: Path,
-    read_size: int = chunk_size,
-) -> str:
-    digest = hashlib.sha256()
-
-    with path.open(
-        "rb"
-    ) as handle:
-        while True:
-            chunk = handle.read(
-                read_size
-            )
-
-            if not chunk:
-                break
-
-            digest.update(
-                chunk
-            )
-
-    return digest.hexdigest()
+def now_iso() -> str:
+    return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
 
 
 def run(
@@ -101,1332 +359,703 @@ def run(
     *,
     cwd: Path | None = None,
     env: dict[str, str] | None = None,
-    capture: bool = True,
 ) -> subprocess.CompletedProcess[str]:
     result = subprocess.run(
         command,
-        cwd=(
-            str(cwd)
-            if cwd is not None
-            else None
-        ),
+        cwd=str(cwd) if cwd else None,
         env=env,
         text=True,
-        stdout=(
-            subprocess.PIPE
-            if capture
-            else None
-        ),
-        stderr=(
-            subprocess.PIPE
-            if capture
-            else None
-        ),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
         check=False,
     )
-
     if result.returncode != 0:
-        stdout = (
-            result.stdout.strip()
-            if result.stdout
-            else ""
-        )
-
-        stderr = (
-            result.stderr.strip()
-            if result.stderr
-            else ""
-        )
-
-        detail = (
-            stderr
-            or stdout
-            or (
-                "process exited "
-                f"{result.returncode}"
-            )
-        )
-
+        detail = (result.stderr or result.stdout or "").strip()
         raise StreamDumpError(
-            f"command failed: "
-            f"{command[0]}: "
-            f"{detail}"
+            f"command failed: {command[0]}: "
+            f"{detail or f'exit {result.returncode}'}"
         )
-
     return result
 
 
-def require_executable(
-    name: str,
-) -> str:
-    executable = shutil.which(
-        name
-    )
-
+def require_executable(name: str) -> str:
+    executable = shutil.which(name)
     if executable is None:
-        raise StreamDumpError(
-            "required executable "
-            f"not found: {name}"
-        )
-
+        raise StreamDumpError(f"required executable not found: {name}")
     return executable
 
 
-def load_env_file(
-    path: Path = default_env_path,
-) -> dict[str, str]:
-    if not path.is_file():
-        raise StreamDumpError(
-            f"environment file "
-            f"not found: {path}"
-        )
+def load_env_file() -> dict[str, str]:
+    environment = dict(os.environ)
+    path = next((item for item in default_env_paths if item.is_file()), None)
+    if path is None:
+        raise StreamDumpError("environment file not found: /root/.env or ~/.env")
 
-    values: dict[
-        str,
-        str,
-    ] = {}
-
-    with path.open(
-        "r",
-        encoding="utf-8",
-        errors="strict",
-    ) as handle:
-        for raw_line in handle:
-            line = raw_line.strip()
-
-            if (
-                not line
-                or line.startswith(
-                    "#"
-                )
-            ):
-                continue
-
-            if line.startswith(
-                "export "
-            ):
-                line = line[
-                    len(
-                        "export "
-                    ):
-                ].lstrip()
-
-            key, separator, value = (
-                line.partition(
-                    "="
-                )
-            )
-
-            if not separator:
-                continue
-
-            key = key.strip()
-
-            if not key:
-                continue
-
-            value = value.strip()
-
-            if (
-                len(value) >= 2
-                and value[0]
-                == value[-1]
-                and value[0]
-                in {
-                    "'",
-                    '"',
-                }
-            ):
-                value = value[
-                    1:-1
-                ]
-
-            values[
-                key
-            ] = value
-
-    return values
-
-def now_iso() -> str:
-    return (
-        datetime.now(
-            timezone.utc
-        )
-        .isoformat(
-            timespec="microseconds"
-        )
-        .replace(
-            "+00:00",
-            "Z",
-        )
-    )
-
-def publication_environment(
-    env_path: Path = default_env_path,
-) -> dict[str, str]:
-    environment = dict(
-        os.environ
-    )
-
-    environment.update(
-        load_env_file(
-            env_path
-        )
-    )
-
-    required = (
-        "AWS_ACCESS_KEY_ID",
-        "AWS_SECRET_ACCESS_KEY",
-    )
-
-    missing = [
-        key
-        for key in required
-        if not environment.get(
-            key
-        )
-    ]
-
-    if missing:
-        raise StreamDumpError(
-            "missing S3 credential "
-            "environment variables in "
-            f"{env_path}: "
-            + ", ".join(
-                missing
-            )
-        )
-
+    for raw in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        key = key.strip()
+        value = value.strip()
+        if value and value[0:1] == value[-1:] and value[0] in {"'", '"'}:
+            value = value[1:-1]
+        if key and key not in environment:
+            environment[key] = value
     return environment
 
 
-def output_path(
-    target: Path,
-) -> Path:
-    stamp = datetime.now(
-        timezone.utc
-    ).strftime(
-        "%Y%m%dT%H%M%S%fZ"
-    ).lower()
+def publication_environment() -> dict[str, str]:
+    environment = load_env_file()
+    if not (
+        environment.get("AWS_ACCESS_KEY_ID")
+        and environment.get("AWS_SECRET_ACCESS_KEY")
+    ):
+        raise StreamDumpError("missing AWS credentials in .env")
+    return environment
 
-    output_root = (
-        target
-        / "source"
-        / f"sdump-{stamp}"
-    )
 
-    output_root.mkdir(
-        parents=True,
-        exist_ok=False,
-    )
+def safe_relative(path: Path, root: Path) -> str:
+    try:
+        return path.relative_to(root).as_posix()
+    except ValueError as error:
+        raise StreamDumpError(f"path escaped target: {path}") from error
 
-    return (
-        output_root
-        / (
-            f"sdump_{target.name}_"
-            f"{stamp}.txt.gz"
+
+def is_hidden_relative(relative: str) -> bool:
+    parts = Path(relative).parts
+    for part in parts:
+        if part.startswith(".") and part not in {
+            ".github", ".config", ".well-known",
+        }:
+            return True
+    return False
+
+
+def is_secret_name(name: str) -> bool:
+    lowered = name.casefold()
+    if lowered in secret_names:
+        return True
+    if lowered.startswith(".env."):
+        return True
+    return any(
+        token in lowered
+        for token in (
+            "private_key", "private-key", "apikey", "api_key",
+            "access_token", "refresh_token",
         )
     )
 
 
-def write_text(
-    handle: Any,
-    value: str,
-    digest: Any | None = None,
-) -> int:
-    handle.write(
-        value
-    )
-
-    encoded = value.encode(
-        "utf-8"
-    )
-
-    if digest is not None:
-        digest.update(
-            encoded
+def has_program_shebang(path: Path) -> bool:
+    try:
+        with path.open("rb") as handle:
+            first = handle.readline(512)
+    except OSError:
+        return False
+    if not first.startswith(b"#!"):
+        return False
+    lowered = first.lower()
+    return any(
+        token in lowered
+        for token in (
+            b"python", b"node", b"deno", b"bun", b"bash", b"/sh",
+            b"zsh", b"fish", b"ruby", b"perl", b"php", b"lua",
         )
-
-    return len(
-        encoded
     )
 
 
-def write_json_line(
-    handle: Any,
-    value: dict[str, Any],
-    digest: Any | None = None,
-) -> int:
-    return write_text(
-        handle,
-        canonical_json(
-            value
-        )
-        + "\n",
-        digest,
-    )
+def is_structured_source(path: Path, relative: str) -> bool:
+    name = path.name.casefold()
+    suffix = path.suffix.casefold()
+    parent_parts = tuple(part.casefold() for part in Path(relative).parts[:-1])
+
+    if name in structured_source_names or name in text_source_names:
+        return True
+
+    if suffix in {".json", ".jsonc", ".json5"}:
+        return any(part in structured_source_dirs for part in parent_parts)
+
+    if suffix == ".txt":
+        return any(part in {"docs", "documentation"} for part in parent_parts)
+
+    return False
 
 
-def datrix_relative_index(
-    current: dict[
-        str,
-        dict[str, Any],
-    ],
-    target: Path,
-) -> dict[
-    str,
-    dict[str, Any],
-]:
-    result: dict[
-        str,
-        dict[str, Any],
-    ] = {}
+def admitted(path: Path, root: Path, file_stat: os.stat_result) -> bool:
+    relative = safe_relative(path, root)
+    lowered_relative = relative.casefold()
+    lowered_name = path.name.casefold()
 
-    for (
-        source_path,
-        record,
-    ) in current.items():
-        source = Path(
-            source_path
-        )
+    if relative in excluded_exact_relative_paths:
+        return False
 
-        if source.is_absolute():
+    parts = tuple(part.casefold() for part in Path(relative).parts[:-1])
+    if any(part in excluded_dir_names for part in parts):
+        return False
+
+    if is_hidden_relative(relative):
+        return False
+
+    if is_secret_name(path.name):
+        return False
+
+    if any(lowered_relative.startswith(prefix) for prefix in excluded_relative_prefixes):
+        return False
+
+    if lowered_name.startswith(excluded_name_prefixes):
+        return False
+
+    suffix = path.suffix.casefold()
+    if suffix in excluded_suffixes:
+        return False
+
+    if lowered_name in source_filenames:
+        return True
+
+    if is_structured_source(path, relative):
+        return True
+
+    if suffix in source_extensions:
+        return True
+
+    if file_stat.st_mode & stat.S_IXUSR:
+        return True
+
+    return has_program_shebang(path)
+
+
+def discover_source(root: Path) -> tuple[list[Any], dict[str, Any]]:
+    candidates: list[Any] = []
+    files_seen = 0
+    skipped = 0
+    total_bytes = 0
+
+    def onerror(error: OSError) -> None:
+        raise StreamDumpError(f"source discovery failed: {error}")
+
+    for directory, dirs, files in os.walk(root, topdown=True, followlinks=False, onerror=onerror):
+        directory_path = Path(directory)
+        relative_directory = safe_relative(directory_path, root) if directory_path != root else ""
+
+        retained_dirs: list[str] = []
+        for name in dirs:
+            child = directory_path / name
+            relative = f"{relative_directory}/{name}".strip("/")
+            lowered = name.casefold()
+            if child.is_symlink():
+                skipped += 1
+                continue
+            if lowered in excluded_dir_names:
+                skipped += 1
+                continue
+            if is_hidden_relative(relative):
+                skipped += 1
+                continue
+            if any(relative.casefold().startswith(prefix) for prefix in excluded_relative_prefixes):
+                skipped += 1
+                continue
+            retained_dirs.append(name)
+        dirs[:] = retained_dirs
+
+        for name in files:
+            files_seen += 1
+            path = directory_path / name
             try:
-                relative = (
-                    source
-                    .resolve(
-                        strict=False
-                    )
-                    .relative_to(
-                        target
-                    )
-                    .as_posix()
-                )
+                if path.is_symlink():
+                    skipped += 1
+                    continue
+                file_stat = path.stat()
+            except OSError as error:
+                raise StreamDumpError(f"unable to stat source candidate {path}: {error}") from error
 
-            except ValueError:
+            if not stat.S_ISREG(file_stat.st_mode):
+                skipped += 1
                 continue
 
-        else:
-            if (
-                ".."
-                in source.parts
-            ):
+            if not admitted(path, root, file_stat):
+                skipped += 1
                 continue
 
-            relative = (
-                source.as_posix()
-            )
-
-        payload = record.get(
-            "payload"
-        )
-
-        if not isinstance(
-            payload,
-            dict,
-        ):
-            continue
-
-        if payload.get(
-            "deleted",
-            False,
-        ):
-            continue
-
-        existing = result.get(
-            relative
-        )
-
-        if existing is not None:
-            existing_id = str(
-                existing.get(
-                    "id"
+            relative = safe_relative(path, root)
+            candidates.append(
+                SimpleNamespace(
+                    relative_path=relative,
+                    absolute_path=path,
+                    size=file_stat.st_size,
                 )
-                or ""
             )
+            total_bytes += file_stat.st_size
 
-            record_id = str(
-                record.get(
-                    "id"
-                )
-                or ""
-            )
-
-            if existing_id != record_id:
-                raise StreamDumpError(
-                    "multiple current Datrix "
-                    "records resolve to "
-                    f"{relative}"
-                )
-
-        result[
-            relative
-        ] = record
-
-    return result
-
-
-def discover_authoritative_source(
-    target: Path,
-    profile: Any,
-) -> tuple[
-    list[Any],
-    dict[str, Any],
-]:
-    (
-        candidates,
-        skipped,
-        failures,
-        symlinks,
-        stats,
-    ) = discover(
-        targets=normalized_targets(
-            [
-                str(
-                    target
-                )
-            ]
-        ),
-        profile=profile,
-        absolute_excluded_roots=(),
-        include_hidden=False,
-        include_secrets=False,
-        extra_patterns=(),
-        respect_gitignore=None,
-    )
-
-    if failures:
-        sample = [
-            {
-                "path":
-                    item.path,
-                "reason":
-                    item.reason,
-            }
-            for item
-            in failures[
-                :20
-            ]
-        ]
-
-        raise StreamDumpError(
-            "authoritative profile "
-            "discovery failed: "
-            + canonical_json(
-                sample
-            )
-        )
-
-    candidates = sorted(
-        candidates,
-        key=lambda candidate: (
-            candidate
-            .relative_path
-            .casefold(),
-            candidate.relative_path,
-        ),
-    )
-
-    metadata = {
-        "candidate_count":
-            len(
-                candidates
-            ),
-        "candidate_bytes":
-            sum(
-                candidate.size
-                for candidate
-                in candidates
-            ),
-        "skipped_count":
-            len(
-                skipped
-            ),
-        "symlink_count":
-            len(
-                symlinks
-            ),
-        "files_seen":
-            stats.files_seen,
+    candidates.sort(key=lambda item: (item.relative_path.casefold(), item.relative_path))
+    return candidates, {
+        "candidate_count": len(candidates),
+        "candidate_bytes": total_bytes,
+        "files_seen": files_seen,
+        "skipped_count": skipped,
     }
 
-    return (
-        candidates,
-        metadata,
-    )
+
+def output_path(target: Path) -> Path:
+    parent = Path(tempfile.mkdtemp(prefix="savant-sdump-"))
+    timestamp = datetime.now(timezone.utc).strftime("%Y%m%dt%H%M%S%f") + "z"
+    return parent / f"sdump_{target.name}_{timestamp}.txt.gz"
 
 
-def freeze_candidate(
-    *,
+def write_text(handle: Any, text: str, digest: Any) -> int:
+    encoded = text.encode("utf-8")
+    handle.write(text)
+    digest.update(encoded)
+    return len(encoded)
+
+
+def write_json_line(handle: Any, value: Any, digest: Any) -> int:
+    return write_text(handle, canonical_json(value) + "\n", digest)
+
+
+def language(path: Path) -> str:
+    suffix = path.suffix.casefold()
+    mapping = {
+        ".py": "python", ".pyi": "python",
+        ".js": "javascript", ".jsx": "javascript",
+        ".ts": "typescript", ".tsx": "typescript",
+        ".sh": "shell", ".bash": "shell", ".zsh": "shell",
+        ".json": "json", ".jsonc": "json",
+        ".yaml": "yaml", ".yml": "yaml", ".toml": "toml",
+        ".md": "markdown", ".mdx": "markdown", ".rst": "rst",
+        ".html": "html", ".css": "css", ".scss": "scss",
+        ".sql": "sql", ".xml": "xml",
+        ".go": "go", ".rs": "rust", ".java": "java",
+    }
+    return mapping.get(suffix, suffix.lstrip(".") or "text")
+
+
+def write_file_record(
+    handle: Any,
     candidate: Any,
-    snapshot_root: Path,
-    datrix_index: dict[str, dict[str, Any]],
-) -> tuple[Any, dict[str, Any], os.stat_result, str, bool]:
-    relative = candidate.relative_path
-    source = candidate.absolute_path
-    destination = snapshot_root / relative
-    destination.parent.mkdir(parents=True, exist_ok=True)
+    artifact_digest: Any,
+) -> tuple[int, int, str]:
+    try:
+        before = candidate.absolute_path.stat()
+    except OSError as error:
+        raise StreamDumpError(f"unable to stat source {candidate.relative_path}: {error}") from error
+
+    rendered = 0
+    source_bytes = 0
+    source_digest = hashlib.sha256()
+
+    rendered += write_text(handle, "=== file ===\n", artifact_digest)
+    rendered += write_json_line(handle, {
+        "path": candidate.relative_path,
+        "size": before.st_size,
+        "mode": oct(stat.S_IMODE(before.st_mode)),
+        "language": language(candidate.absolute_path),
+    }, artifact_digest)
+    rendered += write_text(handle, "=== content ===\n", artifact_digest)
 
     try:
-        before = source.stat()
-        if not stat.S_ISREG(before.st_mode):
-            raise StreamDumpError(
-                f"profile-admitted source is no longer regular: {relative}"
-            )
-
-        digest = hashlib.sha256()
-        size = 0
-
-        with source.open("rb") as reader, destination.open("wb") as writer:
+        with candidate.absolute_path.open("rb") as source:
+            decoder = __import__("codecs").getincrementaldecoder("utf-8")(errors="replace")
             while True:
-                block = reader.read(chunk_size)
+                block = source.read(chunk_size)
                 if not block:
                     break
-                writer.write(block)
-                digest.update(block)
-                size += len(block)
-
-            writer.flush()
-            os.fsync(writer.fileno())
-
-        after = source.stat()
-
+                source_digest.update(block)
+                source_bytes += len(block)
+                text = decoder.decode(block, final=False)
+                if text:
+                    rendered += write_text(handle, text, artifact_digest)
+            tail = decoder.decode(b"", final=True)
+            if tail:
+                rendered += write_text(handle, tail, artifact_digest)
+        after = candidate.absolute_path.stat()
     except OSError as error:
-        raise StreamDumpError(
-            f"unable to freeze profile-admitted source {relative}: {error}"
-        ) from error
+        raise StreamDumpError(f"unable to read source {candidate.relative_path}: {error}") from error
 
     if (
         before.st_dev != after.st_dev
         or before.st_ino != after.st_ino
         or before.st_size != after.st_size
         or before.st_mtime_ns != after.st_mtime_ns
-        or size != before.st_size
+        or source_bytes != before.st_size
     ):
-        raise StreamDumpError(
-            f"profile-admitted source changed while snapshotting: {relative}"
-        )
+        raise StreamDumpError(f"source changed while dumping: {candidate.relative_path}")
 
-    os.chmod(destination, stat.S_IMODE(before.st_mode))
-    actual_sha = digest.hexdigest()
+    rendered += write_text(handle, "\n=== source sha256 ===\n", artifact_digest)
+    rendered += write_text(handle, source_digest.hexdigest() + "\n", artifact_digest)
+    rendered += write_text(handle, "=== /file ===\n\n", artifact_digest)
+    return rendered, source_bytes, source_digest.hexdigest()
 
-    record = datrix_index.get(relative)
-    datrix_matches = False
-
-    if isinstance(record, dict):
-        payload = record.get("payload")
-        if isinstance(payload, dict):
-            datrix_matches = (
-                str(payload.get("sha256") or "") == actual_sha
-            )
-        else:
-            record = {}
-    else:
-        record = {}
-
-    frozen = SimpleNamespace(
-        relative_path=relative,
-        absolute_path=destination,
-        size=size,
-    )
-
-    return frozen, record, before, actual_sha, datrix_matches
-
-def write_file_record(
-    *,
-    handle: Any,
-    candidate: Any,
-    record: dict[str, Any],
-    file_stat: os.stat_result,
-    actual_sha: str,
-    artifact_digest: Any,
-) -> int:
-    payload = record.get("payload")
-    if not isinstance(payload, dict):
-        payload = {}
-
-    relative = (
-        candidate.relative_path
-    )
-
-    metadata = {
-        "path":
-            relative,
-        "source_revision_id":
-            record.get(
-                "id"
-            ),
-        "sha256":
-            actual_sha,
-        "size":
-            file_stat.st_size,
-        "mode":
-            oct(
-                stat.S_IMODE(
-                    file_stat.st_mode
-                )
-            ),
-        "language":
-            language(
-                candidate.absolute_path
-            ),
-        "observed_at":
-            record.get(
-                "observed_at"
-            ),
-        "datrix_payload_sha256":
-            payload.get(
-                "sha256"
-            ),
-    }
-
-    rendered = 0
-
-    rendered += write_text(
-        handle,
-        "=== file ===\n",
-        artifact_digest,
-    )
-
-    rendered += write_json_line(
-        handle,
-        metadata,
-        artifact_digest,
-    )
-
-    rendered += write_text(
-        handle,
-        "=== content ===\n",
-        artifact_digest,
-    )
-
-    with candidate.absolute_path.open(
-        "r",
-        encoding="utf-8",
-        errors="replace",
-        newline=None,
-    ) as source:
-        while True:
-            chunk = source.read(
-                chunk_size
-            )
-
-            if not chunk:
-                break
-
-            rendered += write_text(
-                handle,
-                chunk,
-                artifact_digest,
-            )
-
-    rendered += write_text(
-        handle,
-        (
-            "\n=== /content ===\n"
-            "=== /file ===\n\n"
-        ),
-        artifact_digest,
-    )
-
-    return rendered
-
-
-def stream_dump(
-    target_raw: str,
-    profile_name: str = default_profile,
-) -> tuple[Path, list[Any], dict[str, Any]]:
+def stream_dump(target_raw: str) -> tuple[Path, list[Any], dict[str, Any]]:
     target = Path(target_raw).expanduser().resolve(strict=True)
-
     if not target.is_dir():
         raise StreamDumpError("sdump target must be a directory")
 
-    profile = load_profile(profile_name)
-    candidates, discovery = discover_authoritative_source(target, profile)
+    ui.banner(target)
+    ui.phase("discover", "pruning dependencies, generated state, recovery, and historical bulk")
+    candidates, discovery = discover_source(target)
+    if not candidates:
+        raise StreamDumpError("no relevant Savant source admitted")
 
-    source_datrix = datrix()
-    health = source_datrix.health()
-    if health.get("status") != "ok":
-        raise StreamDumpError("straub source Datrix health is not ok")
-
-    current = current_from_datrix(source_datrix)
-    datrix_index = datrix_relative_index(current, target)
-
-    candidate_paths = {candidate.relative_path for candidate in candidates}
+    ui.note("admitted", f"{len(candidates):,} files")
+    ui.note("source", ui.human_bytes(discovery["candidate_bytes"]))
+    ui.note("skipped", f"{discovery['skipped_count']:,} non-source entries")
+    if discovery["candidate_bytes"] > 512 * 1024 * 1024:
+        ui.note(
+            "admission warning",
+            "source corpus exceeds 512 MiB; generated material may still be admitted",
+            "warn",
+        )
+    ui.phase("compress", "single-pass gzip stream")
 
     output = output_path(target)
-    snapshot_root = output.parent / "snapshot"
-    snapshot_root.mkdir(parents=True, exist_ok=False)
-
-    frozen: list[
-        tuple[Any, dict[str, Any], os.stat_result, str, bool]
-    ] = []
-
-    try:
-        for candidate in candidates:
-            frozen.append(
-                freeze_candidate(
-                    candidate=candidate,
-                    snapshot_root=snapshot_root,
-                    datrix_index=datrix_index,
-                )
-            )
-    except Exception:
-        raise
-
-    frozen_candidates = [item[0] for item in frozen]
-    frozen_paths = {candidate.relative_path for candidate in frozen_candidates}
-
-    if frozen_paths != candidate_paths:
-        raise StreamDumpError(
-            "profile admission and frozen source sets differ"
-        )
-
-    frozen_bytes = sum(item[2].st_size for item in frozen)
-    if (
-        len(frozen) != len(candidates)
-        or frozen_bytes != discovery["candidate_bytes"]
-    ):
-        raise StreamDumpError(
-            "frozen source snapshot does not equal profile admission"
-        )
-
-    datrix_matched = sum(1 for item in frozen if item[4])
-    datrix_unmatched = len(frozen) - datrix_matched
-
     artifact_digest = hashlib.sha256()
-    included_files = 0
-    included_source_bytes = 0
     rendered_bytes = 0
+    serialized_bytes = 0
+    serialized_files = 0
+    source_hashes: dict[str, str] = {}
 
-    with gzip.open(
-        output,
-        mode="wt",
-        encoding="utf-8",
-        newline="\n",
-        compresslevel=gzip_level,
-    ) as handle:
-        write_text(handle, "=== sdump manifest ===\n", artifact_digest)
-        write_json_line(
-            handle,
-            {
-                "schema": schema,
-                "generated_at": now_iso(),
-                "target": str(target),
-                "profile": profile.id,
-                "semantic_source": "straub-source-datrix",
-                "semantic_source_is_sqlite": False,
-                "sqlite_consulted": False,
-                "source_admission": "authoritative-profile-discover",
-                "source_admission_module": "sdump_enterprise.scan.discover",
-                "source_snapshot": "immutable-transaction-local",
-                "source_datrix_role": "provenance-context",
-                "source_datrix_health": "ok",
-                "source_datrix_current_revisions": len(current),
-                "source_datrix_matching_files": datrix_matched,
-                "source_datrix_nonmatching_or_missing_files": datrix_unmatched,
-                "profile_admitted_files": len(candidates),
-                "profile_admitted_bytes": discovery["candidate_bytes"],
-                "strict": True,
-                "bounded_file_streaming": True,
-                "gzip": True,
-                "gzip_level": gzip_level,
-                "filesystem_presence_establishes_authority": False,
-                "authority_effect": "none",
-            },
-            artifact_digest,
-        )
-        write_text(
-            handle,
-            "=== /sdump manifest ===\n\n",
-            artifact_digest,
-        )
+    with gzip.open(output, "wt", encoding="utf-8", newline="\n", compresslevel=gzip_level) as handle:
+        rendered_bytes += write_text(handle, "=== sdump manifest ===\n", artifact_digest)
+        rendered_bytes += write_json_line(handle, {
+            "schema": schema,
+            "generated_at": now_iso(),
+            "target_name": target.name,
+            "purpose": "portable comprehensive current Savant source and architecture context",
+            "source_admission": "current-source-positive-with-generated-dependency-history-exclusions",
+            "source_files": len(candidates),
+            "source_bytes": discovery["candidate_bytes"],
+            "gzip_level": gzip_level,
+            "authority_effect": "none",
+            "filesystem_presence_establishes_authority": False,
+        }, artifact_digest)
+        rendered_bytes += write_text(handle, "=== /sdump manifest ===\n\n", artifact_digest)
 
-        for candidate, record, file_stat, actual_sha, _ in frozen:
-            rendered_bytes += write_file_record(
-                handle=handle,
-                candidate=candidate,
-                record=record,
-                file_stat=file_stat,
-                actual_sha=actual_sha,
-                artifact_digest=artifact_digest,
+        for index, candidate in enumerate(candidates, 1):
+            rendered, source_bytes, source_sha = write_file_record(
+                handle, candidate, artifact_digest
             )
-            included_files += 1
-            included_source_bytes += file_stat.st_size
+            rendered_bytes += rendered
+            serialized_bytes += source_bytes
+            serialized_files += 1
+            source_hashes[candidate.relative_path] = source_sha
+
+            ui.progress(
+                label="gzip",
+                current=index,
+                total=len(candidates),
+                bytes_done=serialized_bytes,
+                bytes_total=discovery["candidate_bytes"],
+                force=index == len(candidates),
+            )
 
         complete = (
-            included_files == len(candidates)
-            and included_source_bytes == discovery["candidate_bytes"]
-            and frozen_paths == candidate_paths
+            serialized_files == len(candidates)
+            and serialized_bytes == discovery["candidate_bytes"]
         )
+        rendered_bytes += write_text(handle, "\n=== sdump completeness ===\n", artifact_digest)
+        rendered_bytes += write_json_line(handle, {
+            "admitted_files": len(candidates),
+            "serialized_files": serialized_files,
+            "admitted_bytes": discovery["candidate_bytes"],
+            "serialized_source_bytes": serialized_bytes,
+            "complete": complete,
+        }, artifact_digest)
+        rendered_bytes += write_text(handle, "=== /sdump completeness ===\n", artifact_digest)
 
-        summary = {
-            "schema": schema,
-            "profile_admitted_files": len(candidates),
-            "profile_admitted_bytes": discovery["candidate_bytes"],
-            "frozen_files": len(frozen),
-            "frozen_source_bytes": frozen_bytes,
-            "datrix_matching_files": datrix_matched,
-            "datrix_nonmatching_or_missing_files": datrix_unmatched,
-            "included_files": included_files,
-            "included_source_bytes": included_source_bytes,
-            "rendered_bytes": rendered_bytes,
-            "required_not_written": len(candidates) - included_files,
-            "profile_equals_frozen": candidate_paths == frozen_paths,
-            "profile_equals_serialized": included_files == len(candidate_paths),
-            "source_completeness": "complete" if complete else "failed",
-            "content_stream_sha256": artifact_digest.hexdigest(),
-            "authority_effect": "none",
-        }
-
-        write_text(handle, "=== sdump summary ===\n")
-        write_json_line(handle, summary)
-        write_text(handle, "=== /sdump summary ===\n")
+    ui.clear_progress()
 
     if not complete:
-        raise StreamDumpError(
-            "strict source completeness failed; partial artifact "
-            f"retained at {output}"
-        )
+        raise StreamDumpError("strict source completeness invariant failed")
 
-    return (
-        output,
-        frozen_candidates,
-        {
-            "target": target,
-            "profile": profile,
-            "discovery": discovery,
-            "source_datrix_health": health,
-            "snapshot_root": snapshot_root,
-            "datrix_matched": datrix_matched,
-            "datrix_unmatched": datrix_unmatched,
-        },
-    )
+    return output, candidates, {
+        "target": target,
+        "discovery": discovery,
+        "source_hashes": source_hashes,
+        "rendered_bytes": rendered_bytes,
+    }
 
-def s3_object_key(
-    artifact: Path,
-    environment: dict[str, str],
-) -> str:
-    prefix = (
-        environment.get(
-            "SDUMP_S3_PREFIX",
-            "sdump",
-        )
-        .strip()
-        .strip(
-            "/"
-        )
-    )
-
-    if prefix:
-        return (
-            f"{prefix}/"
-            f"{artifact.name}"
-        )
-
-    return artifact.name
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        while True:
+            block = handle.read(chunk_size)
+            if not block:
+                break
+            digest.update(block)
+    return digest.hexdigest()
 
 
 def upload_to_s3(
     artifact: Path,
     environment: dict[str, str],
-) -> dict[str, str]:
-    aws = require_executable(
-        "aws"
-    )
-
-    key = s3_object_key(
-        artifact,
-        environment,
-    )
-
-    destination = (
-        f"s3://{s3_bucket}/"
-        f"{key}"
-    )
+    artifact_sha256: str,
+) -> dict[str, Any]:
+    aws = require_executable("aws")
+    key = artifact.name
+    destination = f"s3://{s3_bucket}/{key}"
 
     run(
         [
-            aws,
-            "s3",
-            "cp",
-            str(
-                artifact
-            ),
-            destination,
-            "--only-show-errors",
+            aws, "s3api", "put-object",
+            "--bucket", s3_bucket,
+            "--key", key,
+            "--body", str(artifact),
+            "--metadata", f"sha256={artifact_sha256}",
         ],
         env=environment,
     )
 
-    verification = run(
+    head = run(
         [
-            aws,
-            "s3api",
-            "head-object",
-            "--bucket",
-            s3_bucket,
-            "--key",
-            key,
-            "--query",
-            "ContentLength",
-            "--output",
-            "text",
+            aws, "s3api", "head-object",
+            "--bucket", s3_bucket,
+            "--key", key,
+            "--output", "json",
         ],
         env=environment,
-    )
-
-    remote_size_text = (
-        verification.stdout
-        .strip()
     )
 
     try:
-        remote_size = int(
-            remote_size_text
-        )
+        remote = json.loads(head.stdout)
+    except json.JSONDecodeError as error:
+        raise StreamDumpError("S3 verification returned invalid JSON") from error
 
-    except ValueError as error:
-        raise StreamDumpError(
-            "S3 upload verification "
-            "returned invalid size"
-        ) from error
-
-    local_size = (
-        artifact.stat().st_size
-    )
+    local_size = artifact.stat().st_size
+    remote_size = int(remote.get("ContentLength", -1))
+    metadata = remote.get("Metadata") or {}
+    remote_sha = str(metadata.get("sha256") or "")
 
     if remote_size != local_size:
-        raise StreamDumpError(
-            "S3 upload verification "
-            "size mismatch"
-        )
+        raise StreamDumpError("S3 upload verification size mismatch")
+    if remote_sha != artifact_sha256:
+        raise StreamDumpError("S3 upload verification sha256 mismatch")
 
     return {
-        "bucket":
-            s3_bucket,
-        "key":
-            key,
-        "uri":
-            destination,
+        "bucket": s3_bucket,
+        "key": key,
+        "uri": destination,
+        "bytes": remote_size,
+        "sha256": remote_sha,
+        "version_id": remote.get("VersionId"),
+        "verified": True,
     }
 
 
-def git_identity(
-    git: str,
-) -> tuple[str, str]:
-    name = run(
-        [
-            git,
-            "config",
-            "--global",
-            "--get",
-            "user.name",
-        ]
-    ).stdout.strip()
-
-    email = run(
-        [
-            git,
-            "config",
-            "--global",
-            "--get",
-            "user.email",
-        ]
-    ).stdout.strip()
-
-    if not name:
-        raise StreamDumpError(
-            "global git user.name "
-            "is not configured"
-        )
-
-    if not email:
-        raise StreamDumpError(
-            "global git user.email "
-            "is not configured"
-        )
-
-    return (
-        name,
-        email,
-    )
+def git_identity(git: str) -> None:
+    if not run([git, "config", "--global", "--get", "user.name"]).stdout.strip():
+        raise StreamDumpError("global git user.name is not configured")
+    if not run([git, "config", "--global", "--get", "user.email"]).stdout.strip():
+        raise StreamDumpError("global git user.email is not configured")
 
 
-def clean_checkout_contents(
-    checkout: Path,
-) -> None:
+def clean_checkout_contents(checkout: Path) -> None:
     for child in checkout.iterdir():
         if child.name == ".git":
             continue
-
-        if child.is_dir():
-            shutil.rmtree(
-                child
-            )
-
+        if child.is_dir() and not child.is_symlink():
+            shutil.rmtree(child)
         else:
             child.unlink()
 
 
 def copy_authoritative_source(
-    *,
     checkout: Path,
     candidates: Iterable[Any],
+    source_hashes: dict[str, str],
 ) -> None:
-    for candidate in candidates:
-        destination = (
-            checkout
-            / candidate.relative_path
+    for index, candidate in enumerate(candidates, 1):
+        destination = checkout / candidate.relative_path
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        digest = hashlib.sha256()
+        with candidate.absolute_path.open("rb") as reader, destination.open("wb") as writer:
+            while True:
+                block = reader.read(chunk_size)
+                if not block:
+                    break
+                writer.write(block)
+                digest.update(block)
+        expected = source_hashes.get(candidate.relative_path)
+        if expected is None or digest.hexdigest() != expected:
+            raise StreamDumpError(
+                f"source changed after dump: {candidate.relative_path}"
+            )
+        shutil.copystat(candidate.absolute_path, destination, follow_symlinks=False)
+        ui.progress(
+            label="github",
+            current=index,
+            total=len(candidates) if hasattr(candidates, "__len__") else index,
+            force=hasattr(candidates, "__len__") and index == len(candidates),
         )
-
-        destination.parent.mkdir(
-            parents=True,
-            exist_ok=True,
-        )
-
-        shutil.copy2(
-            candidate.absolute_path,
-            destination,
-        )
-
+    ui.clear_progress()
 
 def push_source_to_github(
-    *,
     candidates: list[Any],
+    source_hashes: dict[str, str],
     environment: dict[str, str],
 ) -> dict[str, Any]:
-    git = require_executable(
-        "git"
-    )
-
-    git_identity(
-        git
-    )
-
-    branch = (
-        environment.get(
-            "SDUMP_GITHUB_BRANCH",
-            "main",
+    oversized = [
+        candidate.relative_path
+        for candidate in candidates
+        if candidate.absolute_path.stat().st_size >= 100 * 1024 * 1024
+    ]
+    if oversized:
+        raise StreamDumpError(
+            "GitHub corpus contains file(s) at or above 100 MiB: "
+            + ", ".join(oversized[:5])
         )
-        .strip()
-        or "main"
-    )
 
-    with tempfile.TemporaryDirectory(
-        prefix="savant-sdump-git-"
-    ) as temporary:
-        checkout = Path(
-            temporary
-        ) / "repository"
+    git = require_executable("git")
+    git_identity(git)
+    branch = environment.get("SDUMP_GITHUB_BRANCH", "main").strip() or "main"
 
+    with tempfile.TemporaryDirectory(prefix="savant-sdump-git-") as temporary:
+        checkout = Path(temporary) / "repository"
         run(
             [
-                git,
-                "clone",
-                "--branch",
-                branch,
-                "--single-branch",
-                github_remote,
-                str(
-                    checkout
-                ),
+                git, "clone", "--quiet", "--depth", "1",
+                "--branch", branch, "--single-branch",
+                github_remote, str(checkout),
             ],
             env=environment,
         )
 
-        clean_checkout_contents(
-            checkout
-        )
+        copy_authoritative_source(checkout, candidates, source_hashes)
 
-        copy_authoritative_source(
-            checkout=checkout,
-            candidates=candidates,
-        )
-
-        run(
-            [
-                git,
-                "add",
-                "--all",
-            ],
-            cwd=checkout,
-            env=environment,
-        )
-
-        status = run(
-            [
-                git,
-                "status",
-                "--porcelain",
-            ],
-            cwd=checkout,
-            env=environment,
-        ).stdout
-
-        changed = bool(
-            status.strip()
-        )
+        run([git, "add", "--all"], cwd=checkout, env=environment)
+        status = run([git, "status", "--porcelain"], cwd=checkout, env=environment).stdout
+        changed = bool(status.strip())
 
         if changed:
-            commit_message = (
-                "sdump: synchronize "
-                "authoritative source"
-            )
-
             run(
-                [
-                    git,
-                    "commit",
-                    "-m",
-                    commit_message,
-                ],
+                [git, "commit", "--quiet", "-m", "sdump: synchronize authoritative source"],
                 cwd=checkout,
                 env=environment,
             )
 
-        run(
-            [
-                git,
-                "push",
-                "origin",
-                branch,
-            ],
-            cwd=checkout,
-            env=environment,
-        )
+        run([git, "push", "--quiet", "origin", branch], cwd=checkout, env=environment)
 
-        local_head = run(
-            [
-                git,
-                "rev-parse",
-                "HEAD",
-            ],
+        local_head = run([git, "rev-parse", "HEAD"], cwd=checkout, env=environment).stdout.strip()
+        remote = run(
+            [git, "ls-remote", "--heads", "origin", f"refs/heads/{branch}"],
             cwd=checkout,
             env=environment,
         ).stdout.strip()
 
-        remote_head = run(
-            [
-                git,
-                "ls-remote",
-                "--heads",
-                "origin",
-                (
-                    "refs/heads/"
-                    + branch
-                ),
-            ],
-            cwd=checkout,
-            env=environment,
-        ).stdout.strip()
-
-        if not remote_head:
-            raise StreamDumpError(
-                "GitHub branch verification "
-                "returned no remote head"
-            )
-
-        remote_commit = (
-            remote_head.split()[0]
-        )
-
-        if remote_commit != local_head:
-            raise StreamDumpError(
-                "GitHub push verification "
-                "head mismatch"
-            )
+        if not remote:
+            raise StreamDumpError("GitHub verification returned no remote head")
+        remote_head = remote.split()[0]
+        if remote_head != local_head:
+            raise StreamDumpError("GitHub push verification head mismatch")
 
         return {
-            "repository":
-                (
-                    f"{github_owner}/"
-                    f"{github_repository}"
-                ),
-            "branch":
-                branch,
-            "commit":
-                local_head,
-            "changed":
-                changed,
-            "verified":
-                True,
+            "repository": f"{github_owner}/{github_repository}",
+            "branch": branch,
+            "commit": local_head,
+            "changed": changed,
+            "verified": True,
         }
 
 
-def delete_local_artifact(
-    artifact: Path,
-) -> None:
+def delete_local_artifact(artifact: Path) -> None:
     artifact.unlink()
-
-    parent = artifact.parent
-
     try:
-        parent.rmdir()
-
+        artifact.parent.rmdir()
     except OSError:
         pass
-
     if artifact.exists():
-        raise StreamDumpError(
-            "local sdump artifact "
-            "could not be deleted"
-        )
+        raise StreamDumpError("local sdump artifact could not be deleted")
 
 
 def publish(
-    *,
     artifact: Path,
     candidates: list[Any],
+    source_hashes: dict[str, str],
     environment: dict[str, str],
-    snapshot_root: Path,
+    artifact_sha256: str,
 ) -> dict[str, Any]:
-    s3_result = upload_to_s3(
-        artifact,
-        environment,
+    ui.phase("publish s3", f"s3://{s3_bucket}/{artifact.name}")
+    s3_started = time.monotonic()
+    s3_result = upload_to_s3(artifact, environment, artifact_sha256)
+    ui.note(
+        "s3 verified",
+        f"{ui.human_bytes(s3_result['bytes'])}  sha256 {artifact_sha256[:12]}…  "
+        f"{ui.duration(time.monotonic() - s3_started)}",
+        "good",
     )
 
-    github_result = (
-        push_source_to_github(
-            candidates=candidates,
-            environment=environment,
-        )
+    ui.phase("publish github", f"{github_owner}/{github_repository}")
+    github_started = time.monotonic()
+    github_result = push_source_to_github(candidates, source_hashes, environment)
+    ui.note(
+        "github verified",
+        f"{github_result['branch']} @ {github_result['commit'][:12]}  "
+        f"{ui.duration(time.monotonic() - github_started)}",
+        "good",
     )
-
-    shutil.rmtree(snapshot_root)
-
-    delete_local_artifact(
-        artifact
-    )
-
+    delete_local_artifact(artifact)
     return {
-        "schema":
-            "savant.sdump.publish.v1",
-        "s3":
-            s3_result,
-        "github":
-            github_result,
-        "local_artifact_deleted":
-            True,
-        "authority_effect":
-            "none",
+        "schema": publish_schema,
+        "s3": s3_result,
+        "github": github_result,
+        "local_artifact_deleted": True,
+        "authority_effect": "none",
     }
 
+def main(argv: list[str] | None = None) -> int:
+    arguments = list(sys.argv[1:] if argv is None else argv)
+    if len(arguments) != 1:
+        raise StreamDumpError("usage: sdump TARGET")
 
-def main(
-    argv: list[str] | None = None,
-) -> int:
-    arguments = list(
-        sys.argv[1:]
-        if argv is None
-        else argv
-    )
+    environment = publication_environment()
+    artifact, candidates, metadata = stream_dump(arguments[0])
 
-    if len(
-        arguments
-    ) != 1:
-        raise StreamDumpError(
-            "usage: sdump TARGET"
-        )
-
-    target_raw = (
-        arguments[0]
-    )
-
-    environment = (
-        publication_environment()
-    )
-
-    (
-        artifact,
-        candidates,
-        metadata,
-    ) = stream_dump(
-        target_raw
-    )
-
-    artifact_sha256 = (
-        sha256_file(
-            artifact
-        )
-    )
-
-    artifact_size = (
-        artifact.stat().st_size
-    )
+    ui.phase("verify", "hashing completed gzip")
+    artifact_sha256 = sha256_file(artifact)
+    artifact_size = artifact.stat().st_size
+    ui.note("gzip", ui.human_bytes(artifact_size))
+    ui.note("sha256", artifact_sha256[:20] + "…")
 
     try:
         publication = publish(
-            artifact=artifact,
-            candidates=candidates,
-            environment=environment,
-            snapshot_root=metadata["snapshot_root"],
+            artifact,
+            candidates,
+            metadata["source_hashes"],
+            environment,
+            artifact_sha256,
         )
-
     except Exception as error:
         raise StreamDumpError(
-            "publication failed; "
-            "local sdump retained at "
-            f"{artifact}: {error}"
+            f"publication failed; local sdump retained at {artifact}: {error}"
         ) from error
 
     result = {
-        "schema":
-            "savant.sdump.command.v3",
-        "status":
-            "ok",
-        "target":
-            str(
-                metadata[
-                    "target"
-                ]
-            ),
-        "profile":
-            metadata[
-                "profile"
-            ].id,
-        "source_files":
-            len(
-                candidates
-            ),
-        "source_bytes":
-            metadata[
-                "discovery"
-            ][
-                "candidate_bytes"
-            ],
-        "artifact_sha256":
-            artifact_sha256,
-        "artifact_compressed_bytes":
-            artifact_size,
-        "s3":
-            publication[
-                "s3"
-            ],
-        "github":
-            publication[
-                "github"
-            ],
-        "local_artifact_deleted":
-            publication[
-                "local_artifact_deleted"
-            ],
-        "authority_effect":
-            "none",
+        "schema": command_schema,
+        "status": "ok",
+        "target": str(metadata["target"]),
+        "source_files": len(candidates),
+        "source_bytes": metadata["discovery"]["candidate_bytes"],
+        "artifact_sha256": artifact_sha256,
+        "artifact_compressed_bytes": artifact_size,
+        "s3": publication["s3"],
+        "github": publication["github"],
+        "local_artifact_deleted": publication["local_artifact_deleted"],
+        "authority_effect": "none",
     }
 
-    print(
-        json.dumps(
-            result,
-            indent=2,
-            sort_keys=True,
-        )
+    ui.success(
+        artifact_size=artifact_size,
+        source_files=len(candidates),
+        elapsed=time.monotonic() - ui.started,
     )
-
+    if os.environ.get("SDUMP_JSON", "").casefold() in {"1", "true", "yes"}:
+        print(json.dumps(result, indent=2, sort_keys=True))
     return 0
 
 
 if __name__ == "__main__":
-    raise SystemExit(
-        main()
-    )
+    try:
+        raise SystemExit(main())
+    except StreamDumpError as error:
+        ui.failure(str(error))
+        raise SystemExit(1)

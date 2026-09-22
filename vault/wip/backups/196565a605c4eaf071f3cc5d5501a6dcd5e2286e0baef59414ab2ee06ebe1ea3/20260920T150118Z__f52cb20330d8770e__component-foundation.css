@@ -1,0 +1,1146 @@
+/* mission explorer */
+
+.mission-explorer {
+  --mission-line: rgba(255, 255, 255, 0.12);
+  --mission-line-strong: rgba(255, 255, 255, 0.24);
+  --mission-panel: rgba(5, 9, 13, 0.66);
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.mission-switcher {
+  display: grid;
+  grid-template-columns:
+    repeat(
+      5,
+      minmax(0, 1fr)
+    );
+  border-top: 1px solid var(--mission-line);
+  border-left: 1px solid var(--mission-line);
+}
+
+.mission-switcher button {
+  position: relative;
+  min-width: 0;
+  min-height: 92px;
+  padding: 15px 14px;
+  display: grid;
+  grid-template-columns:
+    auto
+    minmax(0, 1fr)
+    auto;
+  gap: 12px;
+  align-items: center;
+  border: 0;
+  border-right: 1px solid var(--mission-line);
+  border-bottom: 1px solid var(--mission-line);
+  background: rgba(4, 8, 12, 0.46);
+  color: var(--soft);
+  cursor: pointer;
+  text-align: left;
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease;
+}
+
+.mission-switcher button::after {
+  content: "";
+  position: absolute;
+  left: 13px;
+  right: 13px;
+  bottom: -1px;
+  height: 1px;
+  background: var(--ice);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 220ms ease;
+}
+
+.mission-switcher button:hover,
+.mission-switcher button.active {
+  color: var(--white);
+  background: rgba(169, 221, 248, 0.055);
+}
+
+.mission-switcher button.active::after {
+  transform: scaleX(1);
+}
+
+.mission-switcher button > span,
+.mission-switcher small,
+.mission-switcher b {
+  font-family: var(--display);
+  font-size: 6px;
+  letter-spacing: 0.14em;
+}
+
+.mission-switcher button > span,
+.mission-switcher small {
+  color: var(--muted);
+}
+
+.mission-switcher button > div {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.mission-switcher strong {
+  overflow: hidden;
+  font-family: var(--display);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mission-switcher b {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.mission-explorer-stage {
+  display: grid;
+  grid-template-columns:
+    minmax(280px, 0.72fr)
+    minmax(420px, 1.28fr);
+  min-height: 720px;
+  border-right: 1px solid var(--mission-line);
+  border-bottom: 1px solid var(--mission-line);
+  border-left: 1px solid var(--mission-line);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(8, 14, 19, 0.84),
+      rgba(3, 6, 9, 0.9)
+    );
+}
+
+.mission-explorer-copy {
+  position: relative;
+  z-index: 2;
+  padding:
+    clamp(36px, 5vw, 74px)
+    clamp(24px, 4vw, 60px);
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid var(--mission-line);
+}
+
+.mission-code {
+  display: grid;
+  grid-template-columns:
+    auto
+    minmax(20px, 1fr)
+    auto;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-family: var(--display);
+  font-size: 6px;
+  letter-spacing: 0.15em;
+}
+
+.mission-code i {
+  height: 1px;
+  background: var(--mission-line);
+}
+
+.mission-code strong {
+  color: var(--ice);
+  font-weight: 500;
+}
+
+.mission-explorer-copy h3 {
+  margin:
+    clamp(34px, 6vw, 72px)
+    0
+    26px;
+  font-family: var(--display);
+  font-size: clamp(70px, 9vw, 142px);
+  font-weight: 400;
+  line-height: 0.72;
+  letter-spacing: -0.075em;
+}
+
+.mission-explorer-copy h3 em {
+  color: transparent;
+  font-style: normal;
+  -webkit-text-stroke:
+    1px
+    rgba(255, 255, 255, 0.65);
+}
+
+.mission-objective {
+  max-width: 520px;
+  margin: 0;
+  color: var(--soft);
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.mission-metrics {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0, 1fr)
+    );
+  border-top: 1px solid var(--mission-line);
+  border-left: 1px solid var(--mission-line);
+}
+
+.mission-metrics > div {
+  min-width: 0;
+  min-height: 72px;
+  padding: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-right: 1px solid var(--mission-line);
+  border-bottom: 1px solid var(--mission-line);
+}
+
+.mission-metrics small,
+.mission-metrics strong {
+  font-family: var(--display);
+  letter-spacing: 0.12em;
+}
+
+.mission-metrics small {
+  color: var(--muted);
+  font-size: 6px;
+}
+
+.mission-metrics strong {
+  overflow-wrap: anywhere;
+  font-size: 8px;
+  font-weight: 500;
+}
+
+.mission-phase-readout {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns:
+    1fr
+    auto;
+  gap: 8px 18px;
+  align-items: end;
+}
+
+.mission-phase-readout span {
+  grid-column:
+    1 /
+    -1;
+  color: var(--muted);
+  font-family: var(--display);
+  font-size: 6px;
+  letter-spacing: 0.15em;
+}
+
+.mission-phase-readout strong {
+  font-family: var(--display);
+  font-size: clamp(18px, 2vw, 27px);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+}
+
+.mission-phase-readout small {
+  color: var(--muted);
+  font-family: var(--display);
+  font-size: 7px;
+  letter-spacing: 0.12em;
+}
+
+.mission-phase-controls {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(78px, 1fr)
+    );
+  border-top: 1px solid var(--mission-line);
+  border-left: 1px solid var(--mission-line);
+}
+
+.mission-phase-controls button {
+  min-width: 0;
+  min-height: 58px;
+  padding: 9px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+  border: 0;
+  border-right: 1px solid var(--mission-line);
+  border-bottom: 1px solid var(--mission-line);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  text-align: left;
+}
+
+.mission-phase-controls button.active {
+  color: var(--white);
+  background: rgba(169, 221, 248, 0.06);
+}
+
+.mission-phase-controls span,
+.mission-phase-controls strong {
+  font-family: var(--display);
+  font-size: 6px;
+  letter-spacing: 0.1em;
+}
+
+.mission-phase-controls strong {
+  font-weight: 500;
+}
+
+.mission-visual {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  perspective: 1200px;
+  background:
+    radial-gradient(
+      circle at 50% 47%,
+      rgba(94, 157, 194, 0.11),
+      transparent 24%
+    ),
+    linear-gradient(
+      145deg,
+      #05090d,
+      #020406
+    );
+}
+
+.mission-visual-space {
+  position: absolute;
+  inset: 0 0 42px;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.mission-visual-grid {
+  position: absolute;
+  inset: -15%;
+  opacity: 0.13;
+  transform:
+    rotateX(66deg)
+    translateY(28%);
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.12) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.12) 1px,
+      transparent 1px
+    );
+  background-size: 42px 42px;
+  mask-image:
+    radial-gradient(
+      ellipse,
+      black,
+      transparent 68%
+    );
+}
+
+.mission-visual-orbit {
+  position: absolute;
+  left: 50%;
+  top: 47%;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 50%;
+  transform:
+    translate(-50%, -50%)
+    rotateX(66deg)
+    rotateZ(-14deg);
+}
+
+.mission-visual-orbit.orbit-outer {
+  width: 72%;
+  aspect-ratio: 1;
+}
+
+.mission-visual-orbit.orbit-middle {
+  width: 52%;
+  aspect-ratio: 1;
+  border-style: dashed;
+}
+
+.mission-visual-orbit.orbit-inner {
+  width: 31%;
+  aspect-ratio: 1;
+  opacity: 0.7;
+}
+
+.mission-visual-axis {
+  position: absolute;
+  left: 50%;
+  top: 47%;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.mission-visual-axis.axis-horizontal {
+  width: 76%;
+  height: 1px;
+  transform: translate(-50%, -50%);
+}
+
+.mission-visual-axis.axis-vertical {
+  width: 1px;
+  height: 76%;
+  transform: translate(-50%, -50%);
+}
+
+.mission-visual-core {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  top: 47%;
+  width: clamp(96px, 13vw, 180px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+}
+
+.mission-core-body,
+.mission-core-shadow,
+.mission-core-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+}
+
+.mission-core-body {
+  background:
+    radial-gradient(
+      circle at 36% 29%,
+      #bbb8ad,
+      #6e6c66 43%,
+      #292a28 72%,
+      #0c0d0d
+    );
+  box-shadow:
+    inset -28px -18px 34px rgba(0, 0, 0, 0.55);
+}
+
+.mission-core-shadow {
+  background:
+    radial-gradient(
+      circle at 68% 67%,
+      rgba(0, 0, 0, 0.64),
+      transparent 54%
+    );
+}
+
+.mission-core-glow {
+  inset: -22%;
+  background:
+    radial-gradient(
+      circle,
+      rgba(220, 235, 245, 0.11),
+      transparent 68%
+    );
+  filter: blur(18px);
+}
+
+.mission-visual-core > span {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 14px);
+  transform: translateX(-50%);
+  color: var(--muted);
+  font-family: var(--display);
+  font-size: 6px;
+  letter-spacing: 0.17em;
+}
+
+.mission-spacecraft {
+  --mission-progress: 0;
+  position: absolute;
+  z-index: 7;
+  left:
+    calc(
+      14% +
+      var(--mission-progress) *
+      64%
+    );
+  top:
+    calc(
+      72% -
+      var(--mission-progress) *
+      45%
+    );
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  transition:
+    left 650ms cubic-bezier(.2,.8,.2,1),
+    top 650ms cubic-bezier(.2,.8,.2,1);
+}
+
+.spacecraft-module {
+  position: relative;
+  width: 26px;
+  height: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: #12171b;
+  box-shadow: 0 0 20px rgba(164, 216, 246, 0.12);
+}
+
+.spacecraft-module::before {
+  content: "";
+  position: absolute;
+  right: 100%;
+  top: 3px;
+  width: 8px;
+  height: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.spacecraft-module i {
+  position: absolute;
+  top: 2px;
+  width: 1px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.spacecraft-module i:nth-child(1) {
+  left: 6px;
+}
+
+.spacecraft-module i:nth-child(2) {
+  left: 12px;
+}
+
+.spacecraft-module i:nth-child(3) {
+  left: 18px;
+}
+
+.mission-spacecraft > span {
+  color: var(--white);
+  font-family: var(--display);
+  font-size: 6px;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+}
+
+.mission-vector {
+  position: absolute;
+  inset: 12%;
+  width: 76%;
+  height: 76%;
+  overflow: visible;
+}
+
+.mission-vector path {
+  fill: none;
+  stroke: rgba(169, 221, 248, 0.34);
+  stroke-width: 0.35;
+  stroke-dasharray: 1.5 1.4;
+  vector-effect: non-scaling-stroke;
+}
+
+.mission-visual-label,
+.mission-visual-coordinate {
+  position: absolute;
+  color: var(--muted);
+  font-family: var(--display);
+  font-size: 5px;
+  letter-spacing: 0.13em;
+}
+
+.mission-visual-label span {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--white);
+}
+
+.mission-visual-label.label-a {
+  left: 7%;
+  bottom: 16%;
+}
+
+.mission-visual-label.label-b {
+  left: 53%;
+  top: 9%;
+}
+
+.mission-visual-label.label-c {
+  right: 7%;
+  top: 29%;
+}
+
+.mission-visual-coordinate {
+  right: 14px;
+  bottom: 56px;
+}
+
+.mission-visual-footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  min-height: 42px;
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--mission-line);
+  color: var(--muted);
+  font-family: var(--display);
+  font-size: 5px;
+  letter-spacing: 0.13em;
+}
+
+.mission-visual-footer strong {
+  color: var(--white);
+  font-size: inherit;
+  font-weight: 500;
+}
+
+.mission-system-strip {
+  border:
+    1px solid
+    var(--mission-line);
+  border-top: 0;
+}
+
+.mission-system-strip > header {
+  min-height: 46px;
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--mission-line);
+  color: var(--muted);
+  font-family: var(--display);
+  font-size: 6px;
+  letter-spacing: 0.14em;
+}
+
+.mission-system-strip > header strong {
+  color: var(--white);
+  font-size: inherit;
+  font-weight: 500;
+}
+
+.mission-system-strip > div {
+  display: grid;
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(140px, 1fr)
+    );
+}
+
+.mission-system-strip article {
+  min-width: 0;
+  min-height: 78px;
+  padding: 13px;
+  display: grid;
+  grid-template-columns:
+    auto
+    minmax(0, 1fr)
+    auto;
+  gap: 11px;
+  align-items: center;
+  border-right: 1px solid var(--mission-line);
+  border-bottom: 1px solid var(--mission-line);
+}
+
+.mission-system-strip article > span,
+.mission-system-strip article i,
+.mission-system-strip article small {
+  color: var(--muted);
+  font-family: var(--display);
+  font-size: 6px;
+  font-style: normal;
+  letter-spacing: 0.11em;
+}
+
+.mission-system-strip article > div {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mission-system-strip article strong {
+  overflow: hidden;
+  font-family: var(--display);
+  font-size: 8px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mission-source-panel {
+  margin-top: 16px;
+  border: 1px solid var(--mission-line);
+  background: rgba(3, 7, 10, 0.7);
+}
+
+.mission-source-panel summary {
+  min-height: 48px;
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  color: var(--muted);
+  font-family: var(--display);
+  font-size: 6px;
+  letter-spacing: 0.14em;
+}
+
+.mission-source-panel summary strong {
+  color: var(--white);
+  font-weight: 500;
+}
+
+.mission-source-panel > div {
+  border-top: 1px solid var(--mission-line);
+}
+
+.mission-source-panel a {
+  min-height: 64px;
+  padding: 12px 14px;
+  display: grid;
+  grid-template-columns:
+    100px
+    minmax(0, 1fr)
+    auto;
+  gap: 16px;
+  align-items: center;
+  border-bottom: 1px solid var(--mission-line);
+  color: inherit;
+  text-decoration: none;
+}
+
+.mission-source-panel a:last-child {
+  border-bottom: 0;
+}
+
+.mission-source-panel a span,
+.mission-source-panel a small {
+  color: var(--muted);
+  font-family: var(--display);
+  font-size: 6px;
+  letter-spacing: 0.11em;
+}
+
+.mission-source-panel a strong {
+  font-family: var(--display);
+  font-size: 8px;
+  font-weight: 500;
+}
+
+/* shared component hardening */
+
+.mission-explorer button,
+.system-grid-evolved button,
+.trajectory-engine button {
+  touch-action: manipulation;
+}
+
+.mission-explorer button:focus-visible,
+.system-grid-evolved button:focus-visible,
+.trajectory-engine button:focus-visible {
+  position: relative;
+  z-index: 20;
+}
+
+.system-grid-evolved,
+.trajectory-engine {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.architecture-stage,
+.trajectory-orbital-stage {
+  isolation: isolate;
+}
+
+.architecture-stage {
+  contain: layout paint;
+}
+
+.architecture-node {
+  touch-action: manipulation;
+}
+
+.architecture-node strong,
+.architecture-node small {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.trajectory-engine {
+  --trajectory-line: rgba(255, 255, 255, 0.12);
+  position: relative;
+  border: 1px solid var(--trajectory-line);
+  background: rgba(3, 7, 10, 0.82);
+}
+
+.trajectory-engine:focus {
+  outline: none;
+}
+
+.trajectory-engine:focus-visible {
+  outline: 1px solid var(--ice);
+  outline-offset: 4px;
+}
+
+.trajectory-engine-header {
+  min-height: 130px;
+  padding: clamp(20px, 3vw, 34px);
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(160px, 260px)
+    auto;
+  gap: 30px;
+  align-items: end;
+  border-bottom: 1px solid var(--trajectory-line);
+}
+
+.trajectory-engine-header h3 {
+  margin: 12px 0 0;
+  font-family: var(--display);
+  font-size: clamp(34px, 4vw, 62px);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: -0.05em;
+}
+
+.trajectory-engine-header h3 em {
+  color: transparent;
+  font-style: normal;
+  -webkit-text-stroke:
+    1px
+    rgba(255, 255, 255, 0.55);
+}
+
+.trajectory-engine-status {
+  min-width: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  border-left: 1px solid var(--trajectory-line);
+}
+
+.trajectory-engine-status span,
+.trajectory-engine-status small {
+  color: var(--muted);
+  font-family: var(--display);
+  font-size: 6px;
+  letter-spacing: 0.12em;
+}
+
+.trajectory-engine-status strong {
+  overflow: hidden;
+  font-family: var(--display);
+  font-size: 9px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.trajectory-expand {
+  min-height: 44px;
+  padding: 0 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  border: 1px solid var(--trajectory-line);
+  background: rgba(255, 255, 255, 0.025);
+  color: var(--white);
+  cursor: pointer;
+  font-family: var(--display);
+  font-size: 6px;
+  letter-spacing: 0.12em;
+}
+
+.trajectory-expand i {
+  color: var(--muted);
+  font-style: normal;
+}
+
+.trajectory-mission-selector {
+  display: flex;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  border-bottom: 1px solid var(--trajectory-line);
+}
+
+.trajectory-mission-selector button {
+  min-width: 150px;
+  min-height: 54px;
+  padding: 0 14px;
+  border: 0;
+  border-right: 1px solid var(--trajectory-line);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-family: var(--display);
+  font-size: 6px;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+.trajectory-mission-selector button.active,
+.trajectory-mission-selector button:hover {
+  color: var(--white);
+  background: rgba(169, 221, 248, 0.05);
+}
+
+body.trajectory-expanded {
+  overflow: hidden;
+}
+
+.trajectory-engine.expanded {
+  position: fixed;
+  z-index: 300;
+  inset:
+    max(
+      12px,
+      env(safe-area-inset-top)
+    )
+    max(
+      12px,
+      env(safe-area-inset-right)
+    )
+    max(
+      12px,
+      env(safe-area-inset-bottom)
+    )
+    max(
+      12px,
+      env(safe-area-inset-left)
+    );
+  overflow: auto;
+  background: rgba(2, 5, 8, 0.985);
+  box-shadow:
+    0 0 0 100vmax rgba(0, 0, 0, 0.72);
+}
+
+@media (max-width: 1100px) {
+  .mission-switcher {
+    grid-template-columns:
+      repeat(
+        3,
+        minmax(0, 1fr)
+      );
+  }
+
+  .mission-explorer-stage {
+    grid-template-columns:
+      minmax(260px, 0.85fr)
+      minmax(340px, 1.15fr);
+  }
+
+  .trajectory-engine-header {
+    grid-template-columns:
+      minmax(0, 1fr)
+      auto;
+  }
+
+  .trajectory-engine-status {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .mission-switcher {
+    display: flex;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    scrollbar-width: thin;
+  }
+
+  .mission-switcher button {
+    flex:
+      0 0
+      min(
+        78vw,
+        280px
+      );
+    min-height: 72px;
+    scroll-snap-align: start;
+  }
+
+  .mission-explorer-stage {
+    min-height: 0;
+    grid-template-columns: 1fr;
+  }
+
+  .mission-explorer-copy {
+    padding:
+      clamp(30px, 8vw, 52px)
+      clamp(18px, 5vw, 30px);
+    border-right: 0;
+    border-bottom: 1px solid var(--mission-line);
+  }
+
+  .mission-explorer-copy h3 {
+    margin:
+      30px
+      0
+      22px;
+    font-size:
+      clamp(
+        64px,
+        20vw,
+        104px
+      );
+  }
+
+  .mission-visual {
+    min-height:
+      clamp(
+        420px,
+        84vw,
+        620px
+      );
+  }
+
+  .mission-visual-space {
+    transform: none !important;
+  }
+
+  .mission-visual-footer strong {
+    display: none;
+  }
+
+  .mission-system-strip > div {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+  }
+
+  .mission-source-panel a {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .trajectory-engine-header {
+    min-height: 0;
+    padding: 20px;
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .trajectory-expand {
+    justify-self: start;
+  }
+
+  .architecture-stage {
+    min-height:
+      clamp(
+        540px,
+        120vw,
+        760px
+      );
+  }
+
+  .architecture-grid-plane {
+    opacity: 0.08;
+  }
+
+  .architecture-space {
+    transform: none !important;
+  }
+
+  .architecture-orbit {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .mission-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .mission-phase-controls {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+  }
+
+  .mission-system-strip > div {
+    grid-template-columns: 1fr;
+  }
+
+  .mission-visual-label.label-b,
+  .mission-visual-label.label-c,
+  .mission-visual-coordinate {
+    display: none;
+  }
+
+  .mission-visual-core {
+    width:
+      clamp(
+        90px,
+        31vw,
+        130px
+      );
+  }
+
+  .trajectory-engine-header h3 {
+    font-size:
+      clamp(
+        30px,
+        10vw,
+        46px
+      );
+  }
+
+  .trajectory-engine.expanded {
+    inset: 0;
+    border: 0;
+  }
+}
+
+@media (hover: none) {
+  .mission-visual-space,
+  .architecture-space {
+    transform: none !important;
+  }
+
+  .mission-visual-footer strong {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mission-spacecraft,
+  .mission-switcher button,
+  .mission-phase-controls button,
+  .trajectory-engine button {
+    transition: none !important;
+  }
+
+  .architecture-orbit {
+    animation: none !important;
+  }
+}

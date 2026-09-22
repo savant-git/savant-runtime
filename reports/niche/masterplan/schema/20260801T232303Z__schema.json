@@ -1,0 +1,27 @@
+{
+  "applied": false,
+  "backup": null,
+  "generated_at": "2026-08-01T23:23:03+00:00",
+  "graph_digest_after": "3e0c4d49dedc0ca77a1b30a5b31f843a2db15ec76851134cb79ad77431038675",
+  "graph_digest_before": "d718b43b6334bba721885931b40a845f34dd527712545403523c41ca617a9e89",
+  "operation": "migrate_masterplan_schema",
+  "owner": "project-owner",
+  "passed": true,
+  "rollback": null,
+  "schema": "savant://niche/masterplan/schema-migration/1.0.0",
+  "semantic_digest": "ad7b1a241de833c3bdf1ad6d9750bdcfe59f14d90fc168413c39178a8c982415",
+  "snapshot": null,
+  "source_version": "1.0.0",
+  "steps": [
+    {
+      "from_version": "1.0.0",
+      "graph_digest_after": "3e0c4d49dedc0ca77a1b30a5b31f843a2db15ec76851134cb79ad77431038675",
+      "graph_digest_before": "d718b43b6334bba721885931b40a845f34dd527712545403523c41ca617a9e89",
+      "migration_id": "masterplan.schema.1.0.0-to-1.1.0.add-schema-metadata",
+      "module_sha256": "2e65f0252dfb610042a12ebbfc731cd2d02d21795cb2b54fcc32560d2050537e",
+      "path": "edifices/identity/exiles/niche/prodigals/masterplan/schema/migrations/v1_0_0__to__v1_1_0__add_schema_metadata.py",
+      "to_version": "1.1.0"
+    }
+  ],
+  "target_version": "1.1.0"
+}

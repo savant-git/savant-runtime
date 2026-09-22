@@ -1,0 +1,222 @@
+# Savant Structural Intelligence Audit
+
+Generated: `2026-08-05T10:59:43+00:00`
+Source snapshot: `629fb928d1569a6478a8130406d74cbbbe182146c7746b653e6f78c70d11d147`
+Passes: `50`
+Entries: `3981`
+Audit digest: `348c396020669d4d77a3f2170b4ef997968886b2b32c7a55f6f4750254c89b52`
+
+## Severity counts
+
+- critical: 6
+- high: 193
+- medium: 600
+- warning: 299
+- low: 1693
+- info: 31
+
+## Critical and high findings
+
+- **python-syntax** `ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/runtime/voice_engine.py` — unmatched ')' (voice_engine.py, line 106)
+- **python-syntax** `ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/runtime/providers/openai_tts.py` — unmatched ')' (openai_tts.py, line 16)
+- **python-syntax** `ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/runtime/voice_orchestrator.py` — unmatched ']' (voice_orchestrator.py, line 77)
+- **python-syntax** `tools/identity_quality/upgrade_identity_quality.py` — unexpected indent (upgrade_identity_quality.py, line 663)
+- **semantic-owner-conflict** `edifices/identity/exiles/niche/prodigals/masterplan/tests/test_discover_masterplan_opus_binding.py` — canonical exile path; ownership conflict: path=niche, semantics=opus
+- **semantic-owner-conflict** `ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/graph/opus_connection.json` — canonical exile path; ownership conflict: path=envoy, semantics=opus
+- **semantic-owner-conflict** `ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/graph/palaver_connection.json` — canonical exile path; ownership conflict: path=envoy, semantics=opus
+- **semantic-owner-conflict** `ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/registry/contracts/opus_voice_orchestration_contract.json` — canonical exile path; ownership conflict: path=envoy, semantics=opus
+- **semantic-owner-conflict** `ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/registry/contracts/opus_voice_request_contract.json` — canonical exile path; ownership conflict: path=envoy, semantics=opus
+- **semantic-owner-conflict** `ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/registry/voices/historical/research_mode.json` — canonical exile path; ownership conflict: path=envoy, semantics=opus
+- **semantic-owner-conflict** `ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/registry/voices/synthetic/palaver_default.json` — canonical exile path; ownership conflict: path=envoy, semantics=opus
+- **semantic-owner-conflict** `ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/runtime/CONNECT_ENVOY_TO_OPUS.sh` — canonical exile path; ownership conflict: path=envoy, semantics=opus
+- **semantic-owner-conflict** `ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/runtime/CONNECT_ENVOY_TO_PALAVER.sh` — canonical exile path; ownership conflict: path=envoy, semantics=opus
+- **semantic-owner-conflict** `ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/runtime/CREATE_ENVOY_EXILE_VOICE_LAYER.sh` — canonical exile path; ownership conflict: path=envoy, semantics=opus
+- **semantic-owner-conflict** `ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/runtime/voice_engine.py` — canonical exile path; ownership conflict: path=envoy, semantics=opus
+- **semantic-owner-conflict** `ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/apps/webui-nextgen/src/palaver/observatories/FieldObservatory.tsx` — canonical exile path; ownership conflict: path=palaver, semantics=niche
+- **semantic-owner-conflict** `ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/apps/webui_ultra/ENABLE_PALAVER_BACKEND_AND_SPELLFIX.sh` — canonical exile path; ownership conflict: path=palaver, semantics=opus
+- **semantic-owner-conflict** `runtime/envoy/voice_engine.py` — legacy owner path; ownership conflict: path=envoy, semantics=opus
+- **semantic-owner-conflict** `runtime/palaver/fields/structural_fields.py` — legacy owner path; ownership conflict: path=palaver, semantics=niche
+- **semantic-owner-conflict** `tools/niche/masterplan/build_masterplan_opus_packet.py` — legacy owner path; ownership conflict: path=niche, semantics=opus
+- **semantic-owner-conflict** `tools/niche/masterplan/compile_masterplan_opus_binding_plan.py` — legacy owner path; ownership conflict: path=niche, semantics=opus
+- **semantic-owner-conflict** `tools/niche/masterplan/compile_masterplan_opus_queue.py` — legacy owner path; ownership conflict: path=niche, semantics=opus
+- **opus-responsibility-outside-opus** `authority/task-graph/masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/masterplan.seed.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260801T190745Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260801T191313Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260801T210525Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260801T210526Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260801T210533Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260801T210711Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260801T210947Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260801T211258Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260801T215514Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260801T220934Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260801T221425Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260801T235123Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260802T131418Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260802T131847Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260802T133700Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260802T135110Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260802T140016Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260802T140319Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260802T193919Z__3fa0bfb82cf4e219__segue-reconciliation.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260802T193932Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260802T194138Z__084378dc849b8bd1__segue-reconciliation.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260802T194151Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260802T194311Z__42f34272c2d19c5e__segue-reconciliation.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260802T200320Z__041fae888743966d__segue-reconciliation.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260802T200334Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260802T200811Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260802T201026Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260802T201313Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260802T212158Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260802T221127Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260802T221233Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260802T221422Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260802T221448Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260802T223212Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260802T223226Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260802T223337Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260802T223406Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `authority/task-graph/snapshots/20260803T034002Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `backups/masterplan/graph-build/20260801T211258Z/masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `backups/masterplan/graph-build/20260801T215514Z/masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `backups/masterplan/graph-build/20260801T220934Z/masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `backups/masterplan/graph-build/20260801T221425Z/masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `backups/masterplan/graph-build/20260801T235123Z/masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `backups/masterplan/graph-build/20260802T131418Z/masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `backups/masterplan/graph-build/20260802T131847Z/masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `backups/masterplan/graph-build/20260802T133700Z/masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `backups/masterplan/graph-build/20260802T135110Z/masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `backups/masterplan/graph-build/20260802T140016Z/masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `backups/masterplan/graph-build/20260802T140319Z/masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `backups/masterplan/graph-build/20260802T193932Z/masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `backups/masterplan/graph-build/20260802T194151Z/masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `backups/masterplan/graph-build/20260802T200334Z/masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `backups/masterplan/graph-build/20260802T200811Z/masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `backups/masterplan/graph-build/20260802T201026Z/masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `backups/masterplan/graph-build/20260802T201313Z/masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `backups/masterplan/graph-build/20260802T212158Z/masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `backups/masterplan/graph-build/20260802T221127Z/masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `backups/masterplan/graph-build/20260802T221233Z/masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `backups/masterplan/graph-build/20260802T221422Z/masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `backups/masterplan/graph-build/20260802T221448Z/masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `backups/masterplan/graph-build/20260802T223212Z/masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `backups/masterplan/graph-build/20260802T223226Z/masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `backups/masterplan/graph-build/20260802T223337Z/masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `backups/masterplan/graph-build/20260802T223406Z/masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `backups/masterplan/graph-build/20260803T034002Z/masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `backups/masterplan/segue-reconciliation/20260802T193919Z__3fa0bfb82cf4e219/masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `backups/masterplan/segue-reconciliation/20260802T194138Z__084378dc849b8bd1/masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `backups/masterplan/segue-reconciliation/20260802T194311Z__42f34272c2d19c5e/masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `backups/masterplan/segue-reconciliation/20260802T200320Z__041fae888743966d/masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `docs/SAVANT_MASTER_TASKS.md` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `edifices/identity/exiles/niche/prodigals/masterplan/authority/current_work.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `edifices/identity/exiles/niche/prodigals/masterplan/definition.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `edifices/identity/exiles/niche/prodigals/masterplan/tests/test_discover_masterplan_opus_binding.py` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/graph/opus_connection.json` — Opus signal score=2, current owner=envoy
+- **opus-responsibility-outside-opus** `ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/graph/palaver_connection.json` — Opus signal score=2, current owner=envoy
+- **opus-responsibility-outside-opus** `ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/registry/contracts/opus_voice_orchestration_contract.json` — Opus signal score=2, current owner=envoy
+- **opus-responsibility-outside-opus** `ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/registry/contracts/opus_voice_request_contract.json` — Opus signal score=2, current owner=envoy
+- **opus-responsibility-outside-opus** `ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/registry/voices/historical/research_mode.json` — Opus signal score=2, current owner=envoy
+- **opus-responsibility-outside-opus** `ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/registry/voices/synthetic/palaver_default.json` — Opus signal score=2, current owner=envoy
+- **opus-responsibility-outside-opus** `ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/runtime/CONNECT_ENVOY_TO_OPUS.sh` — Opus signal score=3, current owner=envoy
+- **opus-responsibility-outside-opus** `ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/runtime/CONNECT_ENVOY_TO_PALAVER.sh` — Opus signal score=2, current owner=envoy
+- **opus-responsibility-outside-opus** `ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/runtime/CREATE_ENVOY_EXILE_VOICE_LAYER.sh` — Opus signal score=2, current owner=envoy
+- **opus-responsibility-outside-opus** `ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/runtime/voice_engine.py` — Opus signal score=3, current owner=envoy
+- **opus-responsibility-outside-opus** `ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/apps/webui_ultra/ENABLE_PALAVER_BACKEND_AND_SPELLFIX.sh` — Opus signal score=3, current owner=palaver
+- **opus-responsibility-outside-opus** `reports/identity_quality/promotion/subjects/quirk.nocturne.veil/20260801T002508Z__promotion-packet.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/identity_quality/promotion/subjects/quirk.nocturne.veil/20260801T002522Z__promotion-packet.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/identity_quality/promotion/subjects/quirk.nocturne.veil/20260801T002614Z__promotion-packet.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/identity_quality/promotion/subjects/quirk.nocturne.veil/20260801T002815Z__promotion-packet.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/identity_quality/promotion/subjects/quirk.nocturne.veil/20260801T003916Z__promotion-packet.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/identity_quality/promotion/subjects/quirk.nocturne.veil/20260801T004051Z__promotion-packet.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/identity_quality/promotion/subjects/quirk.nocturne.veil/20260801T030826Z__promotion-packet.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/identity_quality/promotion/subjects/quirk.nocturne.veil/20260801T031318Z__promotion-packet.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/identity_quality/promotion/subjects/quirk.nocturne.veil/20260801T031644Z__promotion-packet.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/identity_quality/promotion/subjects/quirk.nocturne.veil/20260801T032053Z__promotion-packet.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/identity_quality/promotion/subjects/quirk.nocturne.veil/20260801T032351Z__promotion-packet.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/identity_quality/promotion/subjects/quirk.nocturne.veil/20260801T180009Z__promotion-packet.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/identity_quality/promotion/subjects/quirk.nocturne.veil/latest.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/niche/masterplan/roadmap/20260801T210711Z__SAVANT_MASTER_TASKS.md` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/niche/masterplan/roadmap/20260801T210947Z__SAVANT_MASTER_TASKS.md` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/niche/masterplan/roadmap/20260801T211258Z__SAVANT_MASTER_TASKS.md` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/niche/masterplan/roadmap/20260801T215514Z__SAVANT_MASTER_TASKS.md` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/niche/masterplan/roadmap/20260801T220934Z__SAVANT_MASTER_TASKS.md` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/niche/masterplan/roadmap/20260801T235123Z__SAVANT_MASTER_TASKS.md` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/niche/masterplan/roadmap/20260802T131419Z__SAVANT_MASTER_TASKS.md` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/niche/masterplan/roadmap/20260802T131847Z__SAVANT_MASTER_TASKS.md` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/niche/masterplan/roadmap/20260802T133700Z__SAVANT_MASTER_TASKS.md` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/niche/masterplan/roadmap/20260802T135110Z__SAVANT_MASTER_TASKS.md` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/niche/masterplan/roadmap/20260802T140016Z__SAVANT_MASTER_TASKS.md` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/niche/masterplan/roadmap/20260802T140319Z__SAVANT_MASTER_TASKS.md` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/niche/masterplan/roadmap/20260802T193932Z__SAVANT_MASTER_TASKS.md` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/niche/masterplan/roadmap/20260802T194151Z__SAVANT_MASTER_TASKS.md` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/niche/masterplan/roadmap/20260802T200334Z__SAVANT_MASTER_TASKS.md` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/niche/masterplan/roadmap/20260802T200811Z__SAVANT_MASTER_TASKS.md` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/niche/masterplan/roadmap/20260802T201026Z__SAVANT_MASTER_TASKS.md` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/niche/masterplan/roadmap/20260802T201313Z__SAVANT_MASTER_TASKS.md` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/niche/masterplan/roadmap/20260802T212158Z__SAVANT_MASTER_TASKS.md` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/niche/masterplan/roadmap/20260802T221127Z__SAVANT_MASTER_TASKS.md` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/niche/masterplan/roadmap/20260802T221233Z__SAVANT_MASTER_TASKS.md` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/niche/masterplan/roadmap/20260802T221422Z__SAVANT_MASTER_TASKS.md` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/niche/masterplan/roadmap/20260802T221448Z__SAVANT_MASTER_TASKS.md` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/niche/masterplan/roadmap/20260802T223212Z__SAVANT_MASTER_TASKS.md` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/niche/masterplan/roadmap/20260802T223226Z__SAVANT_MASTER_TASKS.md` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/niche/masterplan/roadmap/20260802T223337Z__SAVANT_MASTER_TASKS.md` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/niche/masterplan/roadmap/20260802T223406Z__SAVANT_MASTER_TASKS.md` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/niche/masterplan/roadmap/20260803T034002Z__SAVANT_MASTER_TASKS.md` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `reports/niche/masterplan/roadmap/latest.md` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/envoy/voice_engine.py` — Opus signal score=2, current owner=envoy
+- **opus-responsibility-outside-opus** `runtime/masterplan/replay/20260802T135446Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/replay/20260802T140013Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/replay/20260802T140017Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/replay/20260802T140317Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/replay/20260802T140320Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/replay/20260802T140702Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/replay/20260802T193929Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/replay/20260802T193932Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/replay/20260802T194148Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/replay/20260802T194152Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/replay/20260802T194312Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/replay/20260802T200331Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/replay/20260802T200335Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/replay/20260802T200808Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/replay/20260802T200812Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/replay/20260802T201023Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/replay/20260802T201027Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/replay/20260802T212159Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/replay/20260802T221124Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/replay/20260802T221129Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/replay/20260802T221234Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/replay/20260802T221423Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/replay/20260802T221450Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/replay/20260802T223023Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/replay/20260802T223212Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/replay/20260802T223228Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/replay/20260802T223338Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/replay/20260802T223408Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/replay/20260803T034003Z__masterplan.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/replay/latest.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/requests/audit.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/requests/project.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/requests/select_next.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/requests/validate.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/segue-reconciliation/20260802T193919Z__3fa0bfb82cf4e219/graph-before.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/segue-reconciliation/20260802T193919Z__3fa0bfb82cf4e219/graph-proposed.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/segue-reconciliation/20260802T194138Z__084378dc849b8bd1/graph-before.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/segue-reconciliation/20260802T194138Z__084378dc849b8bd1/graph-proposed.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/segue-reconciliation/20260802T194311Z__42f34272c2d19c5e/graph-before.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/segue-reconciliation/20260802T194311Z__42f34272c2d19c5e/graph-proposed.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/segue-reconciliation/20260802T200320Z__041fae888743966d/graph-before.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `runtime/masterplan/segue-reconciliation/20260802T200320Z__041fae888743966d/graph-proposed.json` — Opus signal score=2, current owner=niche
+- **opus-responsibility-outside-opus** `tools/niche/masterplan/build_masterplan_opus_packet.py` — Opus signal score=3, current owner=niche
+- **opus-responsibility-outside-opus** `tools/niche/masterplan/compile_masterplan_opus_binding_plan.py` — Opus signal score=3, current owner=niche
+- **opus-responsibility-outside-opus** `tools/niche/masterplan/compile_masterplan_opus_queue.py` — Opus signal score=4, current owner=niche
+- **opus-responsibility-outside-opus** `tools/niche/masterplan/discover_masterplan_opus_binding.py` — Opus signal score=2, current owner=niche
+- **authority-conflict** `system` — conflicting accepted statements for mood
+- **possible-secret** `edifices/identity/exiles/opus/prodigals/nocturne/contracts/echo_contracts.py` — possible embedded credential field TOKEN
+
+## Implementation boundary
+
+This compiler performed no mutation. Every migration entry is a proposal requiring live hash preconditions, accepted authority, staging, validation, and rollback.

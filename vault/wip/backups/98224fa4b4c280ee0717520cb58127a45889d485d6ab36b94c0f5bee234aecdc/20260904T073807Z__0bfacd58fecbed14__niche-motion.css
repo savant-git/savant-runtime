@@ -1,0 +1,55 @@
+/*
+ * savant / niche
+ * semantic motion coordinator
+ * authority_effect: none
+ */
+
+.niche-semantic-change {
+    animation:
+        niche-semantic-change
+        720ms
+        cubic-bezier(
+            .2,
+            .72,
+            .2,
+            1
+        );
+}
+
+@keyframes niche-semantic-change {
+    0% {
+        transform:
+            translateY(0)
+            scale(1);
+
+        box-shadow:
+            0 0 0
+            rgba(255,255,255,0);
+    }
+
+    28% {
+        transform:
+            translateY(-2px)
+            scale(1.006);
+
+        box-shadow:
+            0 0 0 1px
+            rgba(255,255,255,.12);
+    }
+
+    100% {
+        transform:
+            translateY(0)
+            scale(1);
+
+        box-shadow:
+            0 0 0
+            rgba(255,255,255,0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .niche-semantic-change {
+        animation: none !important;
+    }
+}

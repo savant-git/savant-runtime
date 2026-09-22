@@ -1,0 +1,842 @@
+#!/usr/bin/env python3
+"""
+Run the Savant modular pipeline sequentially and stop at the first exact blocker.
+
+This orchestrator does not reconstruct or replace stage implementations. It
+executes only stage files already present, verifies their required outputs, and
+records one deterministic diagnostic report.
+
+Implementation mutation is forbidden unless --apply is explicitly supplied and
+the application plan reports passed=true with blocked_count=0.
+"""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import subprocess
+import sys
+from dataclasses import asdict, dataclass
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Final
+
+
+ROOT: Final[Path] = Path("/root/savant-runtime")
+
+SYS_ROOT: Final[Path] = (
+    ROOT
+    / "vault"
+    / "dimensions"
+    / "sys"
+)
+
+REPORT_ROOT: Final[Path] = (
+    SYS_ROOT
+    / "reports"
+)
+
+PIPELINE_REPORT_ROOT: Final[Path] = (
+    REPORT_ROOT
+    / "modular-pipeline-run"
+)
+
+
+@dataclass(frozen=True, slots=True)
+class Stage:
+    ordinal: int
+    key: str
+    script: Path
+    operation: str
+    output: Path
+    acceptable_return_codes: tuple[int, ...]
+
+
+@dataclass(frozen=True, slots=True)
+class StageResult:
+    ordinal: int
+    key: str
+    script: str
+    operation: str
+    output: str
+    script_exists: bool
+    output_exists_before: bool
+    output_exists_after: bool
+    return_code: int | None
+    passed: bool
+    stdout: str
+    stderr: str
+    blocker: str | None
+
+
+STAGES: Final[tuple[Stage, ...]] = (
+    Stage(
+        ordinal=1,
+        key="audit",
+        script=SYS_ROOT / "audit_modular_conformance.py",
+        operation="audit",
+        output=REPORT_ROOT / "modular-conformance" / "latest.json",
+        acceptable_return_codes=(0, 2),
+    ),
+    Stage(
+        ordinal=2,
+        key="plan",
+        script=SYS_ROOT / "plan_modular_migration.py",
+        operation="plan",
+        output=REPORT_ROOT / "modular-migration" / "latest.json",
+        acceptable_return_codes=(0, 2),
+    ),
+    Stage(
+        ordinal=3,
+        key="classification",
+        script=SYS_ROOT / "classify_modular_migration.py",
+        operation="classify",
+        output=REPORT_ROOT / "modular-classification" / "latest.json",
+        acceptable_return_codes=(0,),
+    ),
+    Stage(
+        ordinal=4,
+        key="proposal",
+        script=SYS_ROOT / "prepare_modular_decisions.py",
+        operation="prepare",
+        output=REPORT_ROOT / "modular-decisions" / "latest.json",
+        acceptable_return_codes=(0,),
+    ),
+    Stage(
+        ordinal=5,
+        key="acceptance",
+        script=SYS_ROOT / "accept_modular_decisions.py",
+        operation="accept",
+        output=REPORT_ROOT / "modular-accepted-decisions" / "latest.json",
+        acceptable_return_codes=(0,),
+    ),
+    Stage(
+        ordinal=6,
+        key="execution",
+        script=SYS_ROOT / "compile_modular_execution.py",
+        operation="compile",
+        output=REPORT_ROOT / "modular-execution" / "latest.json",
+        acceptable_return_codes=(0, 2),
+    ),
+    Stage(
+        ordinal=7,
+        key="binding",
+        script=SYS_ROOT / "bind_modular_execution.py",
+        operation="bind",
+        output=REPORT_ROOT / "modular-binding" / "latest.json",
+        acceptable_return_codes=(0, 2),
+    ),
+    Stage(
+        ordinal=8,
+        key="review",
+        script=SYS_ROOT / "review_modular_binding.py",
+        operation="review",
+        output=REPORT_ROOT / "modular-review" / "latest.json",
+        acceptable_return_codes=(0, 2),
+    ),
+    Stage(
+        ordinal=9,
+        key="replacement",
+        script=SYS_ROOT / "compile_modular_replacement.py",
+        operation="compile",
+        output=REPORT_ROOT / "modular-replacement" / "latest.json",
+        acceptable_return_codes=(0, 2),
+    ),
+)
+
+
+class PipelineError(RuntimeError):
+    """Raised when the orchestrator cannot proceed safely."""
+
+
+def utc_timestamp() -> str:
+    return datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+
+
+def sha256_bytes(value: bytes) -> str:
+    return hashlib.sha256(value).hexdigest()
+
+
+def canonical_json_bytes(value: object) -> bytes:
+    return (
+        json.dumps(
+            value,
+            ensure_ascii=False,
+            indent=2,
+            sort_keys=True,
+        )
+        + "\n"
+    ).encode("utf-8")
+
+
+def atomic_json_write(
+    path: Path,
+    value: object,
+) -> None:
+    path.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    temporary = path.with_name(
+        f".{path.name}.tmp"
+    )
+
+    temporary.write_bytes(
+        canonical_json_bytes(value)
+    )
+
+    temporary.chmod(0o644)
+    temporary.replace(path)
+
+
+def load_json(path: Path) -> dict[str, Any]:
+    if not path.is_file():
+        raise PipelineError(
+            f"required JSON file missing: {path}"
+        )
+
+    try:
+        value = json.loads(
+            path.read_text(encoding="utf-8")
+        )
+    except (
+        OSError,
+        UnicodeDecodeError,
+        json.JSONDecodeError,
+    ) as error:
+        raise PipelineError(
+            f"cannot load JSON {path}: {error}"
+        ) from error
+
+    if not isinstance(value, dict):
+        raise PipelineError(
+            f"JSON root must be an object: {path}"
+        )
+
+    return value
+
+
+def run_stage(stage: Stage) -> StageResult:
+    script_exists = stage.script.is_file()
+    output_exists_before = stage.output.is_file()
+
+    if not script_exists:
+        return StageResult(
+            ordinal=stage.ordinal,
+            key=stage.key,
+            script=str(stage.script),
+            operation=stage.operation,
+            output=str(stage.output),
+            script_exists=False,
+            output_exists_before=output_exists_before,
+            output_exists_after=output_exists_before,
+            return_code=None,
+            passed=False,
+            stdout="",
+            stderr="",
+            blocker=(
+                f"stage script is missing: "
+                f"{stage.script}"
+            ),
+        )
+
+    compile_process = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "py_compile",
+            str(stage.script),
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    if compile_process.returncode != 0:
+        return StageResult(
+            ordinal=stage.ordinal,
+            key=stage.key,
+            script=str(stage.script),
+            operation=stage.operation,
+            output=str(stage.output),
+            script_exists=True,
+            output_exists_before=output_exists_before,
+            output_exists_after=stage.output.is_file(),
+            return_code=compile_process.returncode,
+            passed=False,
+            stdout=compile_process.stdout,
+            stderr=compile_process.stderr,
+            blocker=(
+                f"stage syntax validation failed: "
+                f"{stage.script}"
+            ),
+        )
+
+    process = subprocess.run(
+        [
+            sys.executable,
+            str(stage.script),
+            stage.operation,
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    output_exists_after = stage.output.is_file()
+
+    blocker: str | None = None
+
+    if (
+        process.returncode
+        not in stage.acceptable_return_codes
+    ):
+        blocker = (
+            f"stage returned {process.returncode}; "
+            f"accepted="
+            f"{stage.acceptable_return_codes}"
+        )
+
+    elif not output_exists_after:
+        blocker = (
+            "stage did not create required output: "
+            f"{stage.output}"
+        )
+
+    else:
+        try:
+            load_json(stage.output)
+        except PipelineError as error:
+            blocker = str(error)
+
+    return StageResult(
+        ordinal=stage.ordinal,
+        key=stage.key,
+        script=str(stage.script),
+        operation=stage.operation,
+        output=str(stage.output),
+        script_exists=True,
+        output_exists_before=output_exists_before,
+        output_exists_after=output_exists_after,
+        return_code=process.returncode,
+        passed=blocker is None,
+        stdout=process.stdout,
+        stderr=process.stderr,
+        blocker=blocker,
+    )
+
+
+def application_plan_passed() -> tuple[
+    bool,
+    str | None,
+]:
+    application_script = (
+        SYS_ROOT
+        / "apply_modular_replacement.py"
+    )
+
+    if not application_script.is_file():
+        return (
+            False,
+            (
+                "application script is missing: "
+                f"{application_script}"
+            ),
+        )
+
+    compile_process = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "py_compile",
+            str(application_script),
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    if compile_process.returncode != 0:
+        return (
+            False,
+            compile_process.stderr.strip(),
+        )
+
+    plan_process = subprocess.run(
+        [
+            sys.executable,
+            str(application_script),
+            "plan",
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    latest_path = (
+        REPORT_ROOT
+        / "modular-application"
+        / "latest.json"
+    )
+
+    if not latest_path.is_file():
+        return (
+            False,
+            (
+                "application plan did not create "
+                f"{latest_path}; stderr="
+                f"{plan_process.stderr.strip()}"
+            ),
+        )
+
+    latest = load_json(latest_path)
+
+    if latest.get("passed") is not True:
+        return (
+            False,
+            "application plan reports passed=false",
+        )
+
+    if latest.get("blocked_count") != 0:
+        return (
+            False,
+            (
+                "application plan reports "
+                "blocked_count="
+                f"{latest.get('blocked_count')!r}"
+            ),
+        )
+
+    return True, None
+
+
+def run_application() -> dict[str, Any]:
+    passed, blocker = application_plan_passed()
+
+    if not passed:
+        return {
+            "attempted": False,
+            "passed": False,
+            "blocker": blocker,
+        }
+
+    application_script = (
+        SYS_ROOT
+        / "apply_modular_replacement.py"
+    )
+
+    process = subprocess.run(
+        [
+            sys.executable,
+            str(application_script),
+            "apply",
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    return {
+        "attempted": True,
+        "passed": process.returncode == 0,
+        "return_code": process.returncode,
+        "stdout": process.stdout,
+        "stderr": process.stderr,
+        "blocker": (
+            None
+            if process.returncode == 0
+            else "application command failed"
+        ),
+    }
+
+
+def run_pipeline(
+    apply: bool,
+) -> dict[str, Any]:
+    run_timestamp = utc_timestamp()
+
+    results: list[StageResult] = []
+
+    first_blocker: str | None = None
+
+    for stage in STAGES:
+        result = run_stage(stage)
+        results.append(result)
+
+        if not result.passed:
+            first_blocker = (
+                f"{stage.key}: "
+                f"{result.blocker}"
+            )
+            break
+
+    application: dict[str, Any] = {
+        "attempted": False,
+        "passed": False,
+        "blocker": "application not requested",
+    }
+
+    if first_blocker is None and apply:
+        application = run_application()
+
+        if not application["passed"]:
+            first_blocker = (
+                "application: "
+                f"{application['blocker']}"
+            )
+
+    pipeline_passed = (
+        first_blocker is None
+    )
+
+    report = {
+        "schema": (
+            "savant://vault/dimensions/"
+            "modular-pipeline-run/1.0.0"
+        ),
+        "operation": "run_modular_pipeline",
+        "timestamp": run_timestamp,
+        "passed": pipeline_passed,
+        "apply_requested": apply,
+        "authority_effect": "none",
+        "implementation_mutation_performed": (
+            bool(
+                application.get("attempted")
+                and application.get("passed")
+            )
+        ),
+        "stage_count": len(STAGES),
+        "executed_stage_count": len(
+            results
+        ),
+        "first_blocker": first_blocker,
+        "stages": [
+            asdict(result)
+            for result in results
+        ],
+        "application": application,
+    }
+
+    run_root = (
+        PIPELINE_REPORT_ROOT
+        / run_timestamp
+    )
+
+    report_path = (
+        run_root
+        / "report.json"
+    )
+
+    manifest_path = (
+        run_root
+        / "manifest.json"
+    )
+
+    latest_path = (
+        PIPELINE_REPORT_ROOT
+        / "latest.json"
+    )
+
+    atomic_json_write(
+        report_path,
+        report,
+    )
+
+    manifest = {
+        "entries": [
+            {
+                "path": str(report_path),
+                "sha256": sha256_bytes(
+                    report_path.read_bytes()
+                ),
+                "size": (
+                    report_path.stat().st_size
+                ),
+            }
+        ]
+    }
+
+    atomic_json_write(
+        manifest_path,
+        manifest,
+    )
+
+    atomic_json_write(
+        latest_path,
+        {
+            "timestamp": run_timestamp,
+            "report": str(report_path),
+            "manifest": str(
+                manifest_path
+            ),
+            "passed": pipeline_passed,
+            "first_blocker": first_blocker,
+            "executed_stage_count": len(
+                results
+            ),
+            "implementation_mutation_performed": (
+                report[
+                    "implementation_mutation_performed"
+                ]
+            ),
+        },
+    )
+
+    return {
+        "operation": "run_modular_pipeline",
+        "passed": pipeline_passed,
+        "first_blocker": first_blocker,
+        "executed_stage_count": len(
+            results
+        ),
+        "apply_requested": apply,
+        "implementation_mutation_performed": (
+            report[
+                "implementation_mutation_performed"
+            ]
+        ),
+        "latest": str(latest_path),
+    }
+
+
+def verify_latest() -> dict[str, Any]:
+    latest_path = (
+        PIPELINE_REPORT_ROOT
+        / "latest.json"
+    )
+
+    latest = load_json(latest_path)
+
+    raw_report_path = latest.get(
+        "report"
+    )
+
+    raw_manifest_path = latest.get(
+        "manifest"
+    )
+
+    if not isinstance(
+        raw_report_path,
+        str,
+    ):
+        raise PipelineError(
+            "latest pipeline run lacks report path"
+        )
+
+    if not isinstance(
+        raw_manifest_path,
+        str,
+    ):
+        raise PipelineError(
+            "latest pipeline run lacks manifest path"
+        )
+
+    report_path = Path(
+        raw_report_path
+    )
+
+    manifest_path = Path(
+        raw_manifest_path
+    )
+
+    report = load_json(
+        report_path
+    )
+
+    manifest = load_json(
+        manifest_path
+    )
+
+    entries = manifest.get(
+        "entries"
+    )
+
+    if not isinstance(
+        entries,
+        list,
+    ):
+        raise PipelineError(
+            "manifest entries must be an array"
+        )
+
+    for entry in entries:
+        if not isinstance(
+            entry,
+            dict,
+        ):
+            raise PipelineError(
+                "manifest entry must be an object"
+            )
+
+        raw_path = entry.get(
+            "path"
+        )
+
+        expected = entry.get(
+            "sha256"
+        )
+
+        if not isinstance(
+            raw_path,
+            str,
+        ):
+            raise PipelineError(
+                "manifest entry lacks path"
+            )
+
+        if not isinstance(
+            expected,
+            str,
+        ):
+            raise PipelineError(
+                "manifest entry lacks digest"
+            )
+
+        path = Path(raw_path)
+
+        if not path.is_file():
+            raise PipelineError(
+                f"manifest file missing: {path}"
+            )
+
+        actual = sha256_bytes(
+            path.read_bytes()
+        )
+
+        if actual != expected:
+            raise PipelineError(
+                f"manifest digest mismatch: {path}"
+            )
+
+    stages = report.get(
+        "stages"
+    )
+
+    if not isinstance(
+        stages,
+        list,
+    ):
+        raise PipelineError(
+            "pipeline report stages must be an array"
+        )
+
+    ordinals = [
+        stage.get("ordinal")
+        for stage in stages
+        if isinstance(stage, dict)
+    ]
+
+    if ordinals != list(
+        range(
+            1,
+            len(ordinals) + 1,
+        )
+    ):
+        raise PipelineError(
+            "pipeline stage ordinals are not contiguous"
+        )
+
+    return {
+        "operation": (
+            "verify_modular_pipeline_run"
+        ),
+        "passed": True,
+        "pipeline_passed": report.get(
+            "passed"
+        ),
+        "first_blocker": report.get(
+            "first_blocker"
+        ),
+        "executed_stage_count": len(
+            stages
+        ),
+        "manifest_entry_count": len(
+            entries
+        ),
+        "implementation_mutation_performed": (
+            report.get(
+                "implementation_mutation_performed"
+            )
+        ),
+    }
+
+
+def parse_arguments() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Run or verify the complete Savant "
+            "modular pipeline."
+        )
+    )
+
+    parser.add_argument(
+        "operation",
+        choices=(
+            "run",
+            "verify",
+        ),
+    )
+
+    parser.add_argument(
+        "--apply",
+        action="store_true",
+        help=(
+            "Apply replacements only after every "
+            "stage and application preflight passes."
+        ),
+    )
+
+    return parser.parse_args()
+
+
+def main() -> int:
+    arguments = parse_arguments()
+
+    try:
+        if arguments.operation == "run":
+            result = run_pipeline(
+                apply=arguments.apply
+            )
+        else:
+            result = verify_latest()
+
+        print(
+            json.dumps(
+                result,
+                indent=2,
+                sort_keys=True,
+            )
+        )
+
+        return (
+            0
+            if result["passed"]
+            else 2
+        )
+
+    except PipelineError as error:
+        print(
+            json.dumps(
+                {
+                    "operation": (
+                        arguments.operation
+                    ),
+                    "passed": False,
+                    "first_blocker": str(
+                        error
+                    ),
+                    "implementation_mutation_performed": False,
+                },
+                indent=2,
+                sort_keys=True,
+            ),
+            file=sys.stderr,
+        )
+
+        return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

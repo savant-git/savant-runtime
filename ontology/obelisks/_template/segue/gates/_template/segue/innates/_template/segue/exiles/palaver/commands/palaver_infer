@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+runtime="/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/runtime/plan_b_resilient.py"
+
+if [[ "$#" -lt 1 ]]; then
+    printf '%s\n' \
+        'usage: palaver_infer MESSAGE [PERSONA_ID]' \
+        >&2
+    exit 64
+fi
+
+message="$1"
+persona="${2:-orobouros}"
+
+exec python3 \
+    "${runtime}" \
+    --message "${message}" \
+    --persona "${persona}"

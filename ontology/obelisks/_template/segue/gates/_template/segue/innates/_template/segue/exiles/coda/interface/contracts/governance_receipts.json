@@ -1,0 +1,57 @@
+{
+  "id": "coda.contract.governance_receipts",
+  "owner": "coda",
+  "type": "interface_contract",
+  "status": "active",
+  "authority_effect": "none",
+  "contracts": [
+    {
+      "id": "build_governance_evaluation_link",
+      "input": {
+        "coda_receipt": "coda_mutation_receipt",
+        "governance_evaluation": "living_governance_evaluation",
+        "mutation_plan": "optional_coda_mutation_plan",
+        "mutation_plan_ref": "optional_reference"
+      },
+      "output": "coda_governance_link_receipt",
+      "durable": false,
+      "mutation_owner": "coda",
+      "governance_owner": "living-governance",
+      "authority_effect": "none"
+    },
+    {
+      "id": "persist_governance_evaluation_link",
+      "input": {
+        "coda_receipt": "coda_mutation_receipt",
+        "governance_evaluation": "living_governance_evaluation",
+        "mutation_plan": "optional_coda_mutation_plan",
+        "mutation_plan_ref": "optional_reference"
+      },
+      "output": "durable_coda_governance_link_receipt",
+      "durable": true,
+      "storage_owner": "coda",
+      "mutation_owner": "coda",
+      "governance_owner": "living-governance",
+      "authority_effect": "none"
+    },
+    {
+      "id": "palaver_governed_replace_file",
+      "input": {
+        "request": "palaver_coda_mutation_request"
+      },
+      "output": "live_coda_bridge_result_with_optional_governance_receipt_link",
+      "delegate": "runtime/palaver_bridge.py",
+      "wrapper": "runtime/palaver_governed_bridge.py",
+      "live_bridge_replaced": false,
+      "authority_effect": "none"
+    }
+  ],
+  "invariants": {
+    "governance_evaluation_does_not_apply_mutation": true,
+    "coda_receipt_does_not_become_governance_authority": true,
+    "governance_receipt_does_not_become_mutation_authority": true,
+    "original_coda_receipt_mutation_required": false,
+    "ownership_transfer": false,
+    "authority_transfer": false
+  }
+}

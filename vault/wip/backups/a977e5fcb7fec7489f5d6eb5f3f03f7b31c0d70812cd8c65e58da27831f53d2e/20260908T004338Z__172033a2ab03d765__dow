@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+source "$HOME/scripts/s3_common.sh"
+
+if [ "$#" -lt 1 ]; then
+  echo "Usage: dow [s3-key-or-prefix ...]"
+  exit 1
+fi
+
+mkdir -p "$PWD/s3_downloads"
+
+for target in "$@"; do
+  clean="${target#s3://$BUCKET/}"
+  clean="${clean#/}"
+
+  uri="$(s3_uri "$clean")"
+
+  if [[ "$clean" == *"*"* ]]; then
+    prefix="${clean%%\**}"
+    pattern="$(basename "$clean")"
+    prefix="${prefix%/}"
+
+    echo "[DOWNLOAD GLOB] s3://$BUCKET/$prefix include=$pattern -> $PWD/s3_downloads/"
+    aws s3 cp "s3://$BUCKET/$prefix/" "$PWD/s3_downloads/" \
+      --recursive \
+      --exclude "*" \
+      --include "$pattern"
+  elif [[ "$clean" == */ ]]; then
+    echo "[DOWNLOAD PREFIX] $uri -> $PWD/s3_downloads/"
+    aws s3 sync "$uri" "$PWD/s3_downloads/$(basename "${clean%/}")/"
+  else
+    echo "[DOWNLOAD FILE] $uri -> $PWD/s3_downloads/"
+    aws s3 cp "$uri" "$PWD/s3_downloads/"
+  fi
+done

@@ -1,0 +1,471 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+
+root = Path(
+    "/root/savant-runtime"
+)
+
+if str(root) not in sys.path:
+    sys.path.insert(
+        0,
+        str(root),
+    )
+
+
+from runtime.straub import StraubRegistry
+
+
+def build_self_test() -> dict:
+    registry = StraubRegistry()
+
+    subject = registry.substantiate(
+        {
+            "id":
+                "instance:straub:self-test:subject",
+            "kind":
+                "instance",
+            "payload": {
+                "label":
+                    "straub self-test subject",
+            },
+            "provenance": {
+                "source":
+                    "straub:self-test",
+                "confidence":
+                    "confirmed",
+            },
+        }
+    )
+
+    label_definition = (
+        registry.define_metadata(
+            instance_id=(
+                "instance:straub:"
+                "self-test:definition:label"
+            ),
+            label="test label",
+            value_type="string",
+            applies_to=[
+                "instance",
+            ],
+            description=(
+                "self-test metadata definition"
+            ),
+            provenance={
+                "source":
+                    "straub:self-test",
+                "confidence":
+                    "confirmed",
+            },
+        )
+    )
+
+    confidence_definition = (
+        registry.define_metadata(
+            instance_id=(
+                "instance:straub:"
+                "self-test:definition:confidence"
+            ),
+            label="confidence",
+            value_type="number",
+            applies_to=[
+                "umbra.value",
+            ],
+            description=(
+                "metadata describing confidence "
+                "in another metadata value"
+            ),
+            provenance={
+                "source":
+                    "straub:self-test",
+                "confidence":
+                    "confirmed",
+            },
+        )
+    )
+
+    group = registry.define_group(
+        instance_id=(
+            "instance:straub:"
+            "self-test:group:core"
+        ),
+        label="core metadata",
+        definition_ids=[
+            label_definition[
+                "id"
+            ],
+            confidence_definition[
+                "id"
+            ],
+        ],
+        applies_to=[
+            "instance",
+            "umbra.value",
+        ],
+        provenance={
+            "source":
+                "straub:self-test",
+            "confidence":
+                "confirmed",
+        },
+    )
+
+    composition = (
+        registry.define_composition(
+            instance_id=(
+                "instance:straub:"
+                "self-test:composition"
+            ),
+            label="self-test composition",
+            group_ids=[
+                group[
+                    "id"
+                ],
+            ],
+            provenance={
+                "source":
+                    "straub:self-test",
+                "confidence":
+                    "confirmed",
+            },
+        )
+    )
+
+    effective = (
+        registry.effective_definitions(
+            composition[
+                "id"
+            ]
+        )
+    )
+
+    label_value = (
+        registry.instantiate_metadata(
+            instance_id=(
+                "instance:straub:"
+                "self-test:value:label"
+            ),
+            definition_id=(
+                label_definition[
+                    "id"
+                ]
+            ),
+            value="test value",
+            provenance={
+                "source":
+                    "straub:self-test",
+                "confidence":
+                    "confirmed",
+            },
+        )
+    )
+
+    label_edge = (
+        registry.attach_metadata(
+            membrane_id=(
+                "membrane:straub:"
+                "self-test:subject-label"
+            ),
+            subject_id=(
+                subject[
+                    "id"
+                ]
+            ),
+            umbra_id=(
+                label_value[
+                    "id"
+                ]
+            ),
+            relation="described_by",
+            provenance={
+                "source":
+                    "straub:self-test",
+                "confidence":
+                    "confirmed",
+            },
+        )
+    )
+
+    confidence_value = (
+        registry.instantiate_metadata(
+            instance_id=(
+                "instance:straub:"
+                "self-test:value:confidence"
+            ),
+            definition_id=(
+                confidence_definition[
+                    "id"
+                ]
+            ),
+            value=0.95,
+            provenance={
+                "source":
+                    "straub:self-test",
+                "confidence":
+                    "confirmed",
+            },
+        )
+    )
+
+    recursive_edge = (
+        registry.attach_metadata(
+            membrane_id=(
+                "membrane:straub:"
+                "self-test:"
+                "label-confidence"
+            ),
+            subject_id=(
+                label_value[
+                    "id"
+                ]
+            ),
+            umbra_id=(
+                confidence_value[
+                    "id"
+                ]
+            ),
+            relation="qualified_by",
+            provenance={
+                "source":
+                    "straub:self-test",
+                "confidence":
+                    "confirmed",
+            },
+        )
+    )
+
+    pair = registry.dyad(
+        label_edge[
+            "id"
+        ]
+    )
+
+    subject_radia = (
+        registry.radia(
+            subject_id=(
+                subject[
+                    "id"
+                ]
+            )
+        )
+    )
+
+    metadata_radia = (
+        registry.radia(
+            subject_id=(
+                label_value[
+                    "id"
+                ]
+            )
+        )
+    )
+
+    capsule = (
+        registry.export_capsule()
+    )
+
+    replayed = (
+        StraubRegistry.from_capsule(
+            capsule
+        )
+    )
+
+    replay_capsule = (
+        replayed.export_capsule()
+    )
+
+    passed = bool(
+        pair[
+            "subject"
+        ]
+        == subject[
+            "id"
+        ]
+        and pair[
+            "umbra"
+        ]
+        == label_value[
+            "id"
+        ]
+        and pair[
+            "membrane"
+        ]
+        == label_edge[
+            "id"
+        ]
+        and effective[
+            "definition_count"
+        ]
+        == 2
+        and (
+            label_definition[
+                "id"
+            ]
+            in effective[
+                "definitions"
+            ]
+        )
+        and (
+            confidence_definition[
+                "id"
+            ]
+            in effective[
+                "definitions"
+            ]
+        )
+        and (
+            subject_radia[
+                "subjects"
+            ][
+                0
+            ][
+                "metadata"
+            ][
+                0
+            ][
+                "value"
+            ]
+            == "test value"
+        )
+        and (
+            metadata_radia[
+                "subjects"
+            ][
+                0
+            ][
+                "metadata"
+            ][
+                0
+            ][
+                "value"
+            ]
+            == 0.95
+        )
+        and (
+            recursive_edge[
+                "from"
+            ]
+            == label_value[
+                "id"
+            ]
+        )
+        and (
+            capsule[
+                "digest"
+            ]
+            == replay_capsule[
+                "digest"
+            ]
+        )
+        and replayed.health()[
+            "recursive_metadata"
+        ]
+        is True
+        and replayed.health()[
+            "metadata_composition"
+        ]
+        is True
+    )
+
+    return {
+        "schema":
+            "savant.straub.self-test.v2",
+        "passed":
+            passed,
+        "health":
+            registry.health(),
+        "effective_definitions":
+            effective,
+        "dyad":
+            pair,
+        "subject_radia":
+            subject_radia,
+        "metadata_radia":
+            metadata_radia,
+        "capsule_digest":
+            capsule[
+                "digest"
+            ],
+        "replay_digest":
+            replay_capsule[
+                "digest"
+            ],
+        "deterministic_replay":
+            (
+                capsule[
+                    "digest"
+                ]
+                == replay_capsule[
+                    "digest"
+                ]
+            ),
+        "storage_engine":
+            None,
+        "persistent_mutation":
+            False,
+        "authority_effect":
+            "none",
+    }
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        prog="straub"
+    )
+
+    commands = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    commands.add_parser(
+        "health"
+    )
+
+    commands.add_parser(
+        "self-test"
+    )
+
+    args = parser.parse_args()
+
+    if args.command == "health":
+        output = (
+            StraubRegistry().health()
+        )
+
+        code = 0
+
+    else:
+        output = build_self_test()
+
+        code = (
+            0
+            if output[
+                "passed"
+            ]
+            else 1
+        )
+
+    print(
+        json.dumps(
+            output,
+            indent=2,
+            sort_keys=True,
+            ensure_ascii=False,
+        )
+    )
+
+    return code
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

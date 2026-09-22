@@ -1,0 +1,8 @@
+{
+  "id": "constitutional-object",
+  "version": "1.0.0",
+  "description": "Universal schema for the sole constitutional primitive.",
+  "required": ["id","kind","canonical_name","display_name","description","authority","status","version","created_at","updated_at","lineage","provenance","relationships","dependencies","metadata"],
+  "additional_properties": false,
+  "extensible_through": ["metadata","relationships"]
+}

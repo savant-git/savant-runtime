@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+exec /usr/bin/python3 \
+/root/savant-runtime/tools/extr-enterprise/runtime/extr.py \
+"$@"

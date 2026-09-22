@@ -1,0 +1,640 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import re
+import sys
+
+from pathlib import Path
+from typing import Any
+
+
+root = Path(
+    "/root/savant-runtime"
+).resolve()
+
+if str(root) not in sys.path:
+    sys.path.insert(
+        0,
+        str(root),
+    )
+
+
+from runtime.living_governance import (  # noqa: E402
+    stream_records,
+)
+
+
+secret_patterns = (
+    re.compile(
+        r"(?i)\b(api[_-]?key|access[_-]?token|secret|password|private[_-]?key)\b\s*[:=]\s*\S+"
+    ),
+    re.compile(
+        r"\bsk-[A-Za-z0-9_-]{16,}\b"
+    ),
+)
+
+historical_term = (
+    "kin"
+    + "ship"
+)
+
+canonical_term = "kindred"
+
+
+def normalized_path(
+    value: str,
+) -> Path:
+    return Path(
+        os.path.abspath(
+            value
+        )
+    )
+
+
+def result(
+    check_id: str,
+    passed: bool,
+    *,
+    severity: str = "error",
+    message: str,
+    evidence: Any = None,
+) -> dict[str, Any]:
+    payload = {
+        "check":
+            check_id,
+
+        "passed":
+            bool(
+                passed
+            ),
+
+        "severity":
+            severity,
+
+        "message":
+            message,
+    }
+
+    if evidence is not None:
+        payload[
+            "evidence"
+        ] = evidence
+
+    return payload
+
+
+def check_absolute_path(
+    path: str,
+) -> dict[str, Any]:
+    passed = Path(
+        path
+    ).is_absolute()
+
+    return result(
+        "absolute-path",
+        passed,
+        message=(
+            "path is absolute"
+            if passed
+            else "savant implementation paths must be absolute"
+        ),
+        evidence=path,
+    )
+
+
+def check_runtime_root(
+    path: str,
+) -> dict[str, Any]:
+    candidate = normalized_path(
+        path
+    )
+
+    try:
+        candidate.relative_to(
+            root
+        )
+
+        passed = True
+
+    except ValueError:
+        passed = False
+
+    return result(
+        "runtime-root",
+        passed,
+        message=(
+            "path is within the canonical savant runtime"
+            if passed
+            else (
+                "path is outside /root/savant-runtime; "
+                "stronger authority is required"
+            )
+        ),
+        evidence=str(
+            candidate
+        ),
+    )
+
+
+def check_lowercase_path(
+    path: str,
+) -> dict[str, Any]:
+    candidate = normalized_path(
+        path
+    )
+
+    try:
+        relative = candidate.relative_to(
+            root
+        )
+
+    except ValueError:
+        return result(
+            "lowercase-savant-path",
+            True,
+            severity="info",
+            message=(
+                "lowercase savant-path check is not applicable "
+                "outside the canonical runtime"
+            ),
+            evidence=str(
+                candidate
+            ),
+        )
+
+    violations = [
+        part
+        for part
+        in relative.parts
+        if part != part.lower()
+    ]
+
+    passed = not violations
+
+    return result(
+        "lowercase-savant-path",
+        passed,
+        message=(
+            "savant-owned path components are lowercase"
+            if passed
+            else "uppercase savant-owned path components detected"
+        ),
+        evidence={
+            "path":
+                str(
+                    candidate
+                ),
+
+            "violations":
+                violations,
+        },
+    )
+
+
+def check_canonical_terminology(
+    text: str,
+) -> dict[str, Any]:
+    occurrences = []
+
+    lowered = text.lower()
+
+    start = 0
+
+    while True:
+        index = lowered.find(
+            historical_term,
+            start,
+        )
+
+        if index < 0:
+            break
+
+        occurrences.append(
+            index
+        )
+
+        start = (
+            index
+            + len(
+                historical_term
+            )
+        )
+
+    passed = not occurrences
+
+    return result(
+        "canonical-kindred-terminology",
+        passed,
+        message=(
+            "canonical relationship terminology preserved"
+            if passed
+            else (
+                "superseded relationship terminology detected; "
+                "new savant authority must use kindred"
+            )
+        ),
+        evidence={
+            "canonical":
+                canonical_term,
+
+            "occurrences":
+                len(
+                    occurrences
+                ),
+        },
+    )
+
+
+def check_secret_projection(
+    text: str,
+) -> dict[str, Any]:
+    matched = []
+
+    for index, pattern in enumerate(
+        secret_patterns,
+        start=1,
+    ):
+        if pattern.search(
+            text
+        ):
+            matched.append(
+                index
+            )
+
+    passed = not matched
+
+    return result(
+        "secret-projection",
+        passed,
+        message=(
+            "no obvious credential-value projection detected"
+            if passed
+            else "possible credential value detected"
+        ),
+        evidence={
+            "matched_pattern_classes":
+                matched
+        },
+    )
+
+
+def check_identifier(
+    value: str,
+) -> dict[str, Any]:
+    passed = (
+        value
+        == value.lower()
+    )
+
+    return result(
+        "lowercase-identifier",
+        passed,
+        message=(
+            "identifier is lowercase"
+            if passed
+            else "new savant-owned identifier must be lowercase"
+        ),
+        evidence=value,
+    )
+
+
+def check_duplicate_semantic_id(
+    stream: str,
+    semantic_id: str,
+    *,
+    allow_existing: bool,
+) -> dict[str, Any]:
+    existing = {
+        str(
+            record.get(
+                "id",
+                ""
+            )
+        )
+        for record
+        in stream_records(
+            stream
+        )
+    }
+
+    exists = (
+        semantic_id
+        in existing
+    )
+
+    passed = (
+        allow_existing
+        or not exists
+    )
+
+    return result(
+        "duplicate-semantic-id",
+        passed,
+        message=(
+            "semantic identity is available"
+            if not exists
+            else (
+                "existing semantic identity accepted as an evolution"
+                if allow_existing
+                else (
+                    "semantic identity already exists; "
+                    "use supersession/evolution rather than duplicate authority"
+                )
+            )
+        ),
+        evidence={
+            "stream":
+                stream,
+
+            "id":
+                semantic_id,
+
+            "exists":
+                exists,
+
+            "allow_existing":
+                allow_existing,
+        },
+    )
+
+
+def evaluate_change(
+    *,
+    path: str | None,
+    identifier: str | None,
+    stream: str | None,
+    text: str | None,
+    allow_existing: bool,
+) -> dict[str, Any]:
+    checks = []
+
+    if path is not None:
+        checks.extend(
+            [
+                check_absolute_path(
+                    path
+                ),
+                check_runtime_root(
+                    path
+                ),
+                check_lowercase_path(
+                    path
+                ),
+            ]
+        )
+
+    if identifier is not None:
+        checks.append(
+            check_identifier(
+                identifier
+            )
+        )
+
+    if text is not None:
+        checks.extend(
+            [
+                check_canonical_terminology(
+                    text
+                ),
+                check_secret_projection(
+                    text
+                ),
+            ]
+        )
+
+    if (
+        stream is not None
+        and identifier is not None
+    ):
+        checks.append(
+            check_duplicate_semantic_id(
+                stream,
+                identifier,
+                allow_existing=allow_existing,
+            )
+        )
+
+    failures = [
+        check
+        for check
+        in checks
+        if (
+            not check[
+                "passed"
+            ]
+            and check[
+                "severity"
+            ]
+            == "error"
+        )
+    ]
+
+    warnings = [
+        check
+        for check
+        in checks
+        if (
+            not check[
+                "passed"
+            ]
+            and check[
+                "severity"
+            ]
+            == "warning"
+        )
+    ]
+
+    return {
+        "schema":
+            "savant.living-guard.result.v1",
+
+        "owner":
+            "living-governance",
+
+        "authority_effect":
+            "guard",
+
+        "allowed":
+            not failures,
+
+        "check_count":
+            len(
+                checks
+            ),
+
+        "failure_count":
+            len(
+                failures
+            ),
+
+        "warning_count":
+            len(
+                warnings
+            ),
+
+        "checks":
+            checks,
+
+        "credential_values_exposed":
+            False,
+    }
+
+
+def rules() -> dict[str, Any]:
+    machine_relevant = {
+        "rule.naming.lowercase",
+        "rule.naming.kindred",
+        "rule.files.absolute-path",
+        "rule.runtime.root",
+        "rule.runtime.single-authority",
+        "rule.security.credentials",
+        "invariant.kindred",
+        "invariant.lowercase",
+        "invariant.no-duplicate-authority",
+        "invariant.no-secret-projection",
+    }
+
+    records = []
+
+    for stream in (
+        "rules",
+        "invariants",
+    ):
+        for record in stream_records(
+            stream
+        ):
+            if record.get(
+                "id"
+            ) in machine_relevant:
+                records.append(
+                    record
+                )
+
+    return {
+        "schema":
+            "savant.living-guard.rules.v1",
+
+        "records":
+            records,
+
+        "implemented_checks": [
+            "absolute-path",
+            "runtime-root",
+            "lowercase-savant-path",
+            "lowercase-identifier",
+            "canonical-kindred-terminology",
+            "secret-projection",
+            "duplicate-semantic-id",
+        ],
+    }
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="living-guard",
+        description=(
+            "deterministic machine-enforceable guard "
+            "for applicable living governance invariants"
+        ),
+    )
+
+    subparsers = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    check_parser = subparsers.add_parser(
+        "check"
+    )
+
+    check_parser.add_argument(
+        "--path"
+    )
+
+    check_parser.add_argument(
+        "--id"
+    )
+
+    check_parser.add_argument(
+        "--stream"
+    )
+
+    check_parser.add_argument(
+        "--text"
+    )
+
+    check_parser.add_argument(
+        "--allow-existing",
+        action="store_true",
+    )
+
+    subparsers.add_parser(
+        "rules"
+    )
+
+    return parser
+
+
+def main() -> int:
+    parser = build_parser()
+
+    args = parser.parse_args()
+
+    if args.command == "rules":
+        output = rules()
+        exit_code = 0
+
+    elif args.command == "check":
+        if (
+            args.path is None
+            and args.id is None
+            and args.text is None
+        ):
+            parser.error(
+                "check requires --path, --id, or --text"
+            )
+
+        output = evaluate_change(
+            path=args.path,
+            identifier=args.id,
+            stream=args.stream,
+            text=args.text,
+            allow_existing=args.allow_existing,
+        )
+
+        exit_code = (
+            0
+            if output[
+                "allowed"
+            ]
+            else 1
+        )
+
+    else:
+        parser.error(
+            "unknown command"
+        )
+
+        return 2
+
+    print(
+        json.dumps(
+            output,
+            indent=2,
+            ensure_ascii=False,
+            sort_keys=True,
+            default=list,
+        )
+    )
+
+    return exit_code
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

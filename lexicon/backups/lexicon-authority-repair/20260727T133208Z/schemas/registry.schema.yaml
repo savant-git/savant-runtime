@@ -1,0 +1,120 @@
+schema: SAVANT_LEXICON_REGISTRY_SCHEMA
+version: 1
+
+registry:
+
+  required:
+    - registry_id
+    - version
+    - authority
+    - lexemes
+
+  fields:
+
+    registry_id:
+      type: string
+      immutable: true
+      unique: true
+
+    version:
+      type: integer
+      minimum: 1
+
+    authority:
+      type: object
+      required:
+        - source
+        - revision
+        - timestamp
+
+      fields:
+
+        source:
+          type: string
+
+        revision:
+          type: string
+
+        timestamp:
+          type: string
+
+        predecessor:
+          type:
+            - string
+            - null
+
+    constitution:
+      type: string
+      required: true
+
+    schema:
+      type: string
+      required: true
+
+    policies:
+      type: list
+      unique: true
+
+    validators:
+      type: list
+      unique: true
+
+    projections:
+      type: list
+      unique: true
+
+    lexemes:
+      type: list
+      minimum_items: 1
+      item_schema: SAVANT_LEXEME_SCHEMA
+
+    metadata:
+      type: object
+
+constraints:
+
+  lexeme_ids_unique: true
+
+  canonical_lexemes_unique: true
+
+  normalized_canonical_lexemes_unique: true
+
+  aliases_globally_unique: true
+
+  normalized_aliases_globally_unique: true
+
+  aliases_cannot_collide_with_canonical_lexemes: true
+
+  reserved_spellings_globally_unique: true
+
+  reserved_spellings_cannot_be_reassigned: true
+
+  references_must_resolve_by_identity: true
+
+  relationships_must_resolve_by_identity: true
+
+  dependencies_must_resolve_by_identity: true
+
+  parents_must_resolve_by_identity: true
+
+  children_must_resolve_by_identity: true
+
+  projections_must_resolve: true
+
+  validators_must_resolve: true
+
+  supersession_must_be_acyclic: true
+
+  dependency_graph_must_be_acyclic_unless_explicitly_permitted: true
+
+  inheritance_graph_must_be_acyclic: true
+
+  canonical_identity_is_immutable: true
+
+  deleted_identity_reuse_forbidden: true
+
+  semantic_collision_forbidden: true
+
+  forbidden_lexemes:
+    - Kindred
+    - kindred

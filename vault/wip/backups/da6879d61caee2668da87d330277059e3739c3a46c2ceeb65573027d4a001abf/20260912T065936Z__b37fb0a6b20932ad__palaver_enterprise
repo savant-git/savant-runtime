@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+PALAVER_ROOT="/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver"
+ENTRYPOINT="$PALAVER_ROOT/runtime/server_enterprise.py"
+
+if [ ! -f "$ENTRYPOINT" ]; then
+    echo "[ERROR] Palaver enterprise entrypoint missing: $ENTRYPOINT" >&2
+    exit 1
+fi
+
+exec python3 "$ENTRYPOINT" "$@"

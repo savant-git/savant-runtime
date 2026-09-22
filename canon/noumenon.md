@@ -1,0 +1,515 @@
+# noumenon
+
+status: accepted constitutional architecture
+authority: current user directive
+accepted: 2026-09-10
+scope: artificial individuality, significance, continuity, and becoming
+
+## identity
+
+noumenon is savant's persistent, model-independent significance-and-becoming substrate.
+
+noumenon is the computational soul architecture of an artificial individual.
+
+noumenon does not claim biological consciousness, phenomenal consciousness, sentience, or metaphysical soulhood.
+
+noumenon preserves what experience changed.
+
+## governing law
+
+experience does not directly mutate identity.
+
+the canonical developmental sequence is:
+
+experience
+→ observation
+→ ownership
+→ appraisal
+→ significance
+→ consequence
+→ integration
+→ becoming
+→ successor state
+
+the same experience may produce different consequences in different noumenon instances.
+
+large developmental changes require proportionate causal lineage.
+
+nothing becomes autobiographical merely because it entered context.
+
+unknown remains unknown.
+
+contradiction may remain unresolved.
+
+forgetting does not require erasing developmental consequence.
+
+repair does not erase history.
+
+forgiveness does not erase evidence.
+
+forgiveness does not automatically restore trust.
+
+affection does not establish truth.
+
+hostility does not establish falsehood.
+
+consensus does not establish authority.
+
+a model is not the noumenon.
+
+a provider is not the noumenon.
+
+a persona is not the noumenon.
+
+a character record is not the noumenon.
+
+## ownership
+
+noumenon owns:
+
+- personal significance
+- experiential consequence
+- becoming
+- developmental continuity
+- causal individuality
+- noumenon succession
+- developmental state
+- developmental lineage
+- self-model uncertainty
+- identity attractors
+- identity repulsors
+- developmental inertia
+- developmental plasticity
+- developmental residue
+- developmental debt
+- meaning metabolism
+- palimpsest identity
+- counterlife comparison
+- continuity challenge
+- succession classification
+
+noumenon does not own:
+
+- universal integration
+- provider selection
+- model selection
+- persona authority
+- character source authority
+- memory authority
+- external factual authority
+- verification
+- durable accepted trait mutation
+- conversation ownership
+- simulation authority
+- novelty authority
+
+## numinon boundary
+
+numinon is savant's singular universal integrant.
+
+noumenon must not become a competing integration plane.
+
+all cross-system noumenon bindings are mediated through numinon.
+
+the canonical law is:
+
+system owns substance
+→ system exposes contract
+→ numinon binds contracts
+→ receiving system consumes projection
+→ authority remains with original owner
+
+noumenon may consume and emit projections but does not acquire the authority of their owners.
+
+## empty-state law
+
+a noumenon instance begins unsubstantiated.
+
+no personality, values, wounds, relationships, preferences, history, beliefs, attachments, fears, tastes, morality, memories, or dispositions may be invented merely to populate an empty instance.
+
+character data must be explicitly imported before character-derived parameters exist.
+
+character import does not automatically instantiate a noumenon.
+
+the sequence is:
+
+external character data
+→ guise substantiation
+→ explicit noumenon binding
+→ noumenon seed
+→ experience
+→ development
+
+## guise integration
+
+guise owns character substantiation and character projections.
+
+noumenon consumes admitted guise projections through numinon.
+
+guise answers:
+
+what does admitted evidence support about this character?
+
+noumenon answers:
+
+what has experience changed in this continuing individual?
+
+noumenon must preserve:
+
+- evidence provenance
+- uncertainty
+- contradictions
+- unknown fields
+- source distinctions
+- inferred-versus-explicit distinctions
+
+## rapport integration
+
+rapport owns relationship state.
+
+noumenon consumes relationship projections and emits relationship-consequence candidates through numinon.
+
+relationship state is directional.
+
+relationship(a,b) is not assumed equal to relationship(b,a).
+
+relationship projections may include:
+
+- familiarity
+- trust
+- affection
+- respect
+- admiration
+- dependence
+- vulnerability
+- safety
+- predictability
+- reciprocity
+- intimacy
+- grievance
+- unresolvedness
+- indebtedness
+- loyalty
+- rivalry
+- authority asymmetry
+- power asymmetry
+- expectation
+- boundaries
+- repair history
+- shared-history references
+
+noumenon may derive personal significance from relationship state but may not fabricate relationship evidence.
+
+## envoy and persona integration
+
+envoy retains persona authority.
+
+noumenon may provide developmental projections to authorized persistent persona instances through numinon.
+
+ephemeral personas do not automatically receive noumenon instances.
+
+persistent persona and noumenon are separate identities connected through explicit binding.
+
+persona expression must not silently mutate noumenon.
+
+noumenon development must not silently mutate permanent persona baselines.
+
+## orobouros integration
+
+orobouros may be bound to a persistent noumenon instance.
+
+orobouros baseline remains protected.
+
+current orobouros may develop without rewriting the permanent baseline.
+
+orobouros moral-self and noumenon remain distinct.
+
+moral-self contributes moral appraisal where authorized.
+
+noumenon contributes personal significance and developmental consequence.
+
+## opus integration
+
+opus owns model and provider orchestration.
+
+noumenon never directly owns provider credentials or provider selection.
+
+noumenon cognitive requests are routed through numinon to opus.
+
+canonical cognitive request families include:
+
+- appraisal
+- reflection
+- reinterpretation
+- relationship interpretation
+- self-modeling
+- counterlife interpretation
+- conflict interpretation
+- repair interpretation
+- curiosity
+- taste development
+- continuity challenge
+- causal contribution analysis
+
+model output is always a candidate interpretation.
+
+model output cannot directly mutate authoritative noumenon state.
+
+## underscore integration
+
+underscore may generate divergent interpretations of significance and development.
+
+underscore may challenge cliché, premature convergence, dominant interpretations, and overly convenient self-narratives.
+
+underscore novelty is not authority.
+
+novel interpretations remain candidates until evaluated against evidence, lineage, constraints, and authority.
+
+## carbon integration
+
+carbon may provide counterfactual simulation through numinon.
+
+noumenon owns the developmental comparison between actual lineage and derived counterlife projections.
+
+counterlife never mutates actual history.
+
+counterlife remains explicitly non-authoritative.
+
+## memory integration
+
+memory retains memory authority.
+
+noumenon consumes autobiographical memory projections.
+
+noumenon may emit significance and retention-pressure candidates.
+
+memory accuracy and developmental consequence remain distinct.
+
+a forgotten event may retain developmental residue.
+
+developmental residue never proves the forgotten interpretation was factually correct.
+
+## coda integration
+
+coda retains durable accepted mutation authority where applicable.
+
+noumenon may derive candidate developmental change.
+
+noumenon cannot silently rewrite durable accepted trait history.
+
+durable mutation follows the applicable coda and authority contracts.
+
+## notary integration
+
+notary retains verification and admission boundaries.
+
+noumenon must distinguish:
+
+- event
+- observation
+- belief
+- memory
+- interpretation
+- significance
+- consequence
+
+personal significance never upgrades external factual authority.
+
+## palaver integration
+
+palaver retains conversation ownership.
+
+conversation events may become noumenon experience candidates through numinon.
+
+not every conversation event is developmentally eligible.
+
+eligibility considers:
+
+- ownership
+- relevance
+- novelty
+- relationship relevance
+- significance
+- repetition
+- unresolved pressure
+- authority
+- evidence
+- developmental bandwidth
+
+## palimpsest identity
+
+noumenon identity is layered rather than destructively overwritten.
+
+new developmental states reference predecessors.
+
+earlier states remain reconstructable.
+
+current behavior is a context-sensitive projection over developmental lineage.
+
+dormant dispositions may persist without current expression.
+
+reappearance does not rewrite history.
+
+## self-opacity
+
+noumenon separates actual causal state from introspective explanation.
+
+the sequence is:
+
+causal developmental graph
+→ observable consequences
+→ introspective evidence
+→ self-model
+→ explanation candidate
+
+self-explanation carries uncertainty.
+
+noumenon may know that change occurred while remaining uncertain about its complete cause.
+
+## meaning metabolism
+
+significance may evolve after the original event.
+
+the event remains immutable.
+
+interpretation may change.
+
+significance may change.
+
+developmental consequence may accumulate, weaken, transform, conflict, become dormant, or be repaired.
+
+all transitions retain lineage.
+
+## identity immune system
+
+unsubstantiated identity claims cannot rewrite established developmental lineage.
+
+identity mutation evaluates:
+
+- authority
+- evidence
+- historical compatibility
+- contradiction
+- dimensional inertia
+- developmental plasticity
+- repetition
+- significance
+- relationship context
+- causal adequacy
+
+## developmental conservation
+
+large identity deltas require causal explanation.
+
+unexplained discontinuity is drift or unknown discontinuity, not automatically legitimate growth.
+
+## experience ownership
+
+noumenon distinguishes:
+
+something happened
+≠ it was observed
+≠ it happened to this individual
+≠ this individual believes it happened
+≠ this individual remembers it
+≠ it became personally significant
+≠ it changed the individual
+
+## developmental bandwidth
+
+not every experience receives durable significance.
+
+experiences compete for developmental incorporation.
+
+durability depends on evidence-bounded significance rather than conversational frequency alone.
+
+## prospective identity
+
+noumenon may maintain derived projections for:
+
+- ideal self
+- feared self
+- expected self
+- rejected self
+- relationship-conditioned self
+- historical self
+- claimed self
+- observed self
+- projected future self
+
+these are projections, not competing authoritative identities.
+
+## counterlife
+
+counterlife is a derived counterfactual biography.
+
+counterlife may identify plausible causal contribution by comparing actual lineage with explicitly hypothetical alternatives.
+
+counterlife never rewrites actual lineage.
+
+## succession
+
+succession status is explicit:
+
+- continuous
+- branched
+- copied
+- restored
+- reconstructed
+- disputed
+- unknown
+
+divergent copies acquire divergent developmental lineages.
+
+identity continuity is causal, not merely byte-identical.
+
+## continuity receipt
+
+a continuity receipt should expose:
+
+- noumenon id
+- predecessor id
+- successor id
+- succession status
+- transition references
+- authority references
+- evidence references
+- projection version
+- lineage digest
+- state digest
+- unresolved discontinuities
+- integrity digest
+
+## anti-theatre
+
+savant must derive humanity wherever causal state can produce it.
+
+do not substitute theatrical prompting for developmental causality.
+
+preferred:
+
+cause
+→ state
+→ consequence
+→ expression
+
+rejected:
+
+desired expression
+→ instruction to imitate emotion
+
+## universal construction law
+
+noumenon implementation is subject to savant's universal glyph-instance construction law.
+
+authoritative textual substance must ultimately obey:
+
+substantiate once
+→ instance
+→ compose
+→ relate through typed segues
+→ project
+
+conventional source files are compatibility materializations where the authoritative composition substrate applies.
+
+noumenon must not create a competing glyph edifice.

@@ -1,0 +1,3631 @@
+/*
+ * savant / niche
+ * ten-theme visual architecture
+ *
+ * owner: niche-themes
+ * authority_effect: none
+ * projection_only: true
+ */
+
+:root {
+    --theme-browser-color:
+        #05080c;
+
+    --theme-bg:
+        #05080c;
+
+    --theme-bg-raised:
+        #0a1016;
+
+    --theme-panel:
+        rgba(
+            8,
+            14,
+            20,
+            .94
+        );
+
+    --theme-panel-alt:
+        rgba(
+            12,
+            19,
+            26,
+            .91
+        );
+
+    --theme-text:
+        #eef9fc;
+
+    --theme-muted:
+        #91a5ad;
+
+    --theme-faint:
+        rgba(
+            186,
+            215,
+            224,
+            .28
+        );
+
+    --theme-primary:
+        #9cecff;
+
+    --theme-primary-rgb:
+        156,
+        236,
+        255;
+
+    --theme-secondary:
+        #92a9ff;
+
+    --theme-border:
+        rgba(
+            156,
+            236,
+            255,
+            .18
+        );
+
+    --theme-border-strong:
+        rgba(
+            156,
+            236,
+            255,
+            .44
+        );
+
+    --theme-grid:
+        rgba(
+            156,
+            236,
+            255,
+            .035
+        );
+
+    --theme-ready:
+        #98e8c3;
+
+    --theme-blocked:
+        #ff9999;
+
+    --theme-warning:
+        #ffd18a;
+
+    --theme-evidence:
+        #cab7ff;
+
+    --theme-authority:
+        #f3f8fa;
+
+    --theme-radius:
+        4px;
+
+    --theme-radius-large:
+        10px;
+
+    --theme-border-width:
+        1px;
+
+    --theme-panel-shadow:
+        0 24px 70px
+        rgba(
+            0,
+            0,
+            0,
+            .34
+        );
+
+    --theme-glow:
+        0 0 22px
+        rgba(
+            var(
+                --theme-primary-rgb
+            ),
+            .13
+        );
+
+    --theme-font-display:
+        "Arial Narrow",
+        "Roboto Condensed",
+        "Helvetica Neue",
+        sans-serif;
+
+    --theme-font-body:
+        Inter,
+        system-ui,
+        sans-serif;
+
+    --theme-font-data:
+        "IBM Plex Mono",
+        "SFMono-Regular",
+        Consolas,
+        monospace;
+
+    --theme-heading-weight:
+        650;
+
+    --theme-heading-spacing:
+        -.03em;
+
+    --theme-transition:
+        260ms
+        cubic-bezier(
+            .2,
+            .75,
+            .25,
+            1
+        );
+}
+
+
+/* ============================================
+   SHARED THEME PHYSICS
+   ============================================ */
+
+html[data-niche-theme] {
+    color-scheme:
+        dark;
+
+    background:
+        var(--theme-bg);
+}
+
+html[data-niche-theme] body {
+    background:
+        var(--theme-bg);
+
+    color:
+        var(--theme-text);
+
+    font-family:
+        var(--theme-font-body);
+
+    transition:
+        background-color
+            var(--theme-transition),
+        color
+            var(--theme-transition);
+}
+
+html[data-niche-theme]
+body,
+html[data-niche-theme]
+.topbar,
+html[data-niche-theme]
+.statusrail,
+html[data-niche-theme]
+.surface,
+html[data-niche-theme]
+.execution-core,
+html[data-niche-theme]
+.oracle,
+html[data-niche-theme]
+.metric-panel,
+html[data-niche-theme]
+.causal-rail,
+html[data-niche-theme]
+.causal-companion,
+html[data-niche-theme]
+.graph-stage,
+html[data-niche-theme]
+.inspector,
+html[data-niche-theme]
+.dialog,
+html[data-niche-theme]
+.palette,
+html[data-niche-theme]
+.objective-card,
+html[data-niche-theme]
+.evidence-card,
+html[data-niche-theme]
+.living-card,
+html[data-niche-theme]
+.timeline-event,
+html[data-niche-theme]
+.history-item {
+    transition:
+        background
+            var(--theme-transition),
+        background-color
+            var(--theme-transition),
+        border-color
+            var(--theme-transition),
+        box-shadow
+            var(--theme-transition),
+        border-radius
+            var(--theme-transition),
+        color
+            var(--theme-transition),
+        filter
+            var(--theme-transition),
+        transform
+            var(--theme-transition);
+}
+
+html[data-niche-theme]
+.execution-core,
+html[data-niche-theme]
+.oracle,
+html[data-niche-theme]
+.metric-panel,
+html[data-niche-theme]
+.causal-rail,
+html[data-niche-theme]
+.causal-companion,
+html[data-niche-theme]
+.inspector,
+html[data-niche-theme]
+.dialog,
+html[data-niche-theme]
+.palette {
+    border-width:
+        var(--theme-border-width);
+
+    border-color:
+        var(--theme-border);
+
+    border-radius:
+        var(--theme-radius-large);
+
+    background:
+        var(--theme-panel);
+
+    box-shadow:
+        var(--theme-panel-shadow);
+}
+
+html[data-niche-theme]
+.surface-heading h1,
+html[data-niche-theme]
+.frontier-heading h1,
+html[data-niche-theme]
+.execution-core h1 {
+    font-family:
+        var(--theme-font-display);
+
+    font-weight:
+        var(--theme-heading-weight);
+
+    letter-spacing:
+        var(--theme-heading-spacing);
+}
+
+html[data-niche-theme]
+.eyebrow,
+html[data-niche-theme]
+.fabric-meta,
+html[data-niche-theme]
+.priority,
+html[data-niche-theme]
+.deterministic,
+html[data-niche-theme]
+.statusrail,
+html[data-niche-theme]
+kbd {
+    font-family:
+        var(--theme-font-data);
+}
+
+html[data-niche-theme]
+.nav button,
+html[data-niche-theme]
+.causal-modes button,
+html[data-niche-theme]
+.surface-filters button,
+html[data-niche-theme]
+.viewport-controls button,
+html[data-niche-theme]
+.top-actions button,
+html[data-niche-theme]
+select,
+html[data-niche-theme]
+input {
+    border-radius:
+        var(--theme-radius);
+}
+
+html[data-niche-theme]
+.graph-stage {
+    border-color:
+        var(--theme-border-strong);
+
+    background-color:
+        var(--theme-bg-raised);
+}
+
+html[data-niche-theme]
+.graph-node {
+    border-color:
+        var(--theme-border);
+
+    border-radius:
+        var(--theme-radius);
+
+    background:
+        var(--theme-panel-alt);
+
+    color:
+        var(--theme-text);
+}
+
+html[data-niche-theme]
+.graph-node strong {
+    color:
+        var(--theme-text);
+}
+
+html[data-niche-theme]
+.graph-node small {
+    color:
+        var(--theme-muted);
+}
+
+html[data-niche-theme]
+.graph-edge {
+    stroke:
+        var(--theme-primary);
+}
+
+html[data-niche-theme]
+.start-next {
+    border-color:
+        var(--theme-border-strong);
+
+    color:
+        var(--theme-text);
+}
+
+html[data-niche-theme]
+#niche-theme {
+    color:
+        var(--theme-text);
+
+    background:
+        var(--theme-bg-raised);
+
+    border:
+        1px solid
+        var(--theme-border-strong);
+
+    font-family:
+        var(--theme-font-data);
+}
+
+
+/* ============================================
+   01 / NEXUS INDUSTRIAL
+   ============================================ */
+
+html[
+    data-niche-theme=
+    "nexus-industrial"
+] {
+    --theme-browser-color:
+        #05080c;
+
+    --theme-bg:
+        #05080c;
+
+    --theme-bg-raised:
+        #091017;
+
+    --theme-panel:
+        rgba(
+            7,
+            13,
+            19,
+            .96
+        );
+
+    --theme-panel-alt:
+        rgba(
+            10,
+            18,
+            25,
+            .94
+        );
+
+    --theme-text:
+        #f1fbfd;
+
+    --theme-muted:
+        #8ea8b1;
+
+    --theme-primary:
+        #9cecff;
+
+    --theme-primary-rgb:
+        156,
+        236,
+        255;
+
+    --theme-secondary:
+        #7e9cff;
+
+    --theme-border:
+        rgba(
+            156,
+            236,
+            255,
+            .18
+        );
+
+    --theme-border-strong:
+        rgba(
+            156,
+            236,
+            255,
+            .46
+        );
+
+    --theme-radius:
+        2px;
+
+    --theme-radius-large:
+        5px;
+}
+
+html[
+    data-niche-theme=
+    "nexus-industrial"
+] body {
+    background:
+        radial-gradient(
+            circle at
+            50% -20%,
+            rgba(
+                156,
+                236,
+                255,
+                .09
+            ),
+            transparent
+                32rem
+        ),
+        linear-gradient(
+            180deg,
+            #081019,
+            #030609 72%
+        );
+}
+
+html[
+    data-niche-theme=
+    "nexus-industrial"
+]
+.execution-core,
+html[
+    data-niche-theme=
+    "nexus-industrial"
+]
+.oracle,
+html[
+    data-niche-theme=
+    "nexus-industrial"
+]
+.metric-panel {
+    clip-path:
+        polygon(
+            0 0,
+            calc(100% - 11px) 0,
+            100% 11px,
+            100% 100%,
+            11px 100%,
+            0 calc(100% - 11px)
+        );
+}
+
+html[
+    data-niche-theme=
+    "nexus-industrial"
+]
+.graph-stage {
+    background:
+        linear-gradient(
+            rgba(
+                156,
+                236,
+                255,
+                .045
+            ) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(
+                156,
+                236,
+                255,
+                .045
+            ) 1px,
+            transparent 1px
+        ),
+        radial-gradient(
+            circle at center,
+            #0b151d,
+            #030609 75%
+        );
+
+    background-size:
+        48px 48px,
+        48px 48px,
+        auto;
+}
+
+html[
+    data-niche-theme=
+    "nexus-industrial"
+]
+.graph-node {
+    clip-path:
+        polygon(
+            8px 0,
+            100% 0,
+            100%
+                calc(
+                    100% - 8px
+                ),
+            calc(
+                100% - 8px
+            ) 100%,
+            0 100%,
+            0 8px
+        );
+
+    box-shadow:
+        inset 0 0 20px
+            rgba(
+                156,
+                236,
+                255,
+                .035
+            ),
+        0 8px 28px
+            rgba(
+                0,
+                0,
+                0,
+                .32
+            );
+}
+
+
+/* ============================================
+   02 / MONOLITH EDITORIAL
+   ============================================ */
+
+html[
+    data-niche-theme=
+    "monolith-editorial"
+] {
+    --theme-browser-color:
+        #0d0d0c;
+
+    --theme-bg:
+        #0d0d0c;
+
+    --theme-bg-raised:
+        #151513;
+
+    --theme-panel:
+        #121210;
+
+    --theme-panel-alt:
+        #171714;
+
+    --theme-text:
+        #f0eee6;
+
+    --theme-muted:
+        #aaa79d;
+
+    --theme-primary:
+        #f0eee6;
+
+    --theme-primary-rgb:
+        240,
+        238,
+        230;
+
+    --theme-secondary:
+        #a7a39a;
+
+    --theme-border:
+        rgba(
+            240,
+            238,
+            230,
+            .18
+        );
+
+    --theme-border-strong:
+        rgba(
+            240,
+            238,
+            230,
+            .58
+        );
+
+    --theme-radius:
+        0;
+
+    --theme-radius-large:
+        0;
+
+    --theme-panel-shadow:
+        none;
+
+    --theme-glow:
+        none;
+
+    --theme-font-display:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    --theme-heading-weight:
+        400;
+
+    --theme-heading-spacing:
+        -.055em;
+}
+
+html[
+    data-niche-theme=
+    "monolith-editorial"
+] body {
+    background:
+        #0d0d0c;
+}
+
+html[
+    data-niche-theme=
+    "monolith-editorial"
+]
+.topbar {
+    border-bottom:
+        1px solid
+        #f0eee6;
+
+    background:
+        #0d0d0c;
+}
+
+html[
+    data-niche-theme=
+    "monolith-editorial"
+]
+.brand > div > span:first-child {
+    font-family:
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(
+            1.15rem,
+            2vw,
+            2rem
+        );
+
+    font-weight:
+        400;
+}
+
+html[
+    data-niche-theme=
+    "monolith-editorial"
+]
+.surface-heading,
+html[
+    data-niche-theme=
+    "monolith-editorial"
+]
+.frontier-heading {
+    align-items:
+        flex-start;
+}
+
+html[
+    data-niche-theme=
+    "monolith-editorial"
+]
+.surface-heading h1,
+html[
+    data-niche-theme=
+    "monolith-editorial"
+]
+.frontier-heading h1 {
+    font-size:
+        clamp(
+            2.6rem,
+            7vw,
+            7rem
+        );
+
+    line-height:
+        .84;
+
+    max-width:
+        9ch;
+}
+
+html[
+    data-niche-theme=
+    "monolith-editorial"
+]
+.execution-core,
+html[
+    data-niche-theme=
+    "monolith-editorial"
+]
+.oracle,
+html[
+    data-niche-theme=
+    "monolith-editorial"
+]
+.metric-panel {
+    border-width:
+        0 0 1px;
+
+    padding-top:
+        clamp(
+            1.5rem,
+            4vw,
+            4rem
+        );
+}
+
+html[
+    data-niche-theme=
+    "monolith-editorial"
+]
+.graph-stage {
+    background:
+        linear-gradient(
+            90deg,
+            transparent
+                0 49.9%,
+            rgba(
+                240,
+                238,
+                230,
+                .09
+            )
+                49.9%
+                50.1%,
+            transparent
+                50.1%
+        ),
+        #0e0e0c;
+}
+
+html[
+    data-niche-theme=
+    "monolith-editorial"
+]
+.graph-node {
+    border:
+        0;
+
+    border-left:
+        1px solid
+        #f0eee6;
+
+    padding-left:
+        18px;
+
+    background:
+        transparent;
+
+    box-shadow:
+        none;
+}
+
+html[
+    data-niche-theme=
+    "monolith-editorial"
+]
+.graph-node::before {
+    border-radius:
+        0;
+}
+
+html[
+    data-niche-theme=
+    "monolith-editorial"
+]
+.nav button {
+    text-transform:
+        none;
+
+    font-family:
+        Georgia,
+        serif;
+}
+
+
+/* ============================================
+   03 / PHOSPHOR LAB
+   ============================================ */
+
+html[
+    data-niche-theme=
+    "phosphor-lab"
+] {
+    --theme-browser-color:
+        #020704;
+
+    --theme-bg:
+        #020704;
+
+    --theme-bg-raised:
+        #061008;
+
+    --theme-panel:
+        rgba(
+            3,
+            13,
+            7,
+            .95
+        );
+
+    --theme-panel-alt:
+        rgba(
+            4,
+            18,
+            9,
+            .94
+        );
+
+    --theme-text:
+        #baffc8;
+
+    --theme-muted:
+        #6ea77a;
+
+    --theme-primary:
+        #75ff9a;
+
+    --theme-primary-rgb:
+        117,
+        255,
+        154;
+
+    --theme-secondary:
+        #d1ff74;
+
+    --theme-border:
+        rgba(
+            117,
+            255,
+            154,
+            .19
+        );
+
+    --theme-border-strong:
+        rgba(
+            117,
+            255,
+            154,
+            .55
+        );
+
+    --theme-radius:
+        0;
+
+    --theme-radius-large:
+        0;
+
+    --theme-font-display:
+        "IBM Plex Mono",
+        Consolas,
+        monospace;
+
+    --theme-font-body:
+        "IBM Plex Mono",
+        Consolas,
+        monospace;
+
+    --theme-font-data:
+        "IBM Plex Mono",
+        Consolas,
+        monospace;
+}
+
+html[
+    data-niche-theme=
+    "phosphor-lab"
+] body {
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(
+                117,
+                255,
+                154,
+                .025
+            ) 0,
+            rgba(
+                117,
+                255,
+                154,
+                .025
+            ) 1px,
+            transparent 1px,
+            transparent 4px
+        ),
+        #020704;
+}
+
+html[
+    data-niche-theme=
+    "phosphor-lab"
+]
+.topbar,
+html[
+    data-niche-theme=
+    "phosphor-lab"
+]
+.statusrail {
+    background:
+        rgba(
+            1,
+            8,
+            4,
+            .97
+        );
+
+    box-shadow:
+        none;
+}
+
+html[
+    data-niche-theme=
+    "phosphor-lab"
+]
+.surface::before {
+    opacity:
+        .18;
+}
+
+html[
+    data-niche-theme=
+    "phosphor-lab"
+]
+.execution-core,
+html[
+    data-niche-theme=
+    "phosphor-lab"
+]
+.oracle,
+html[
+    data-niche-theme=
+    "phosphor-lab"
+]
+.metric-panel,
+html[
+    data-niche-theme=
+    "phosphor-lab"
+]
+.causal-rail,
+html[
+    data-niche-theme=
+    "phosphor-lab"
+]
+.causal-companion {
+    border-style:
+        dashed;
+
+    box-shadow:
+        inset 0 0 28px
+            rgba(
+                117,
+                255,
+                154,
+                .025
+            );
+}
+
+html[
+    data-niche-theme=
+    "phosphor-lab"
+]
+.graph-stage {
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(
+                117,
+                255,
+                154,
+                .028
+            )
+                0 1px,
+            transparent
+                1px 12px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            rgba(
+                117,
+                255,
+                154,
+                .018
+            )
+                0 1px,
+            transparent
+                1px 12px
+        ),
+        #020805;
+
+    box-shadow:
+        inset 0 0 60px
+            rgba(
+                117,
+                255,
+                154,
+                .035
+            );
+}
+
+html[
+    data-niche-theme=
+    "phosphor-lab"
+]
+.graph-node {
+    border-style:
+        dashed;
+
+    text-shadow:
+        0 0 7px
+        rgba(
+            117,
+            255,
+            154,
+            .22
+        );
+
+    box-shadow:
+        none;
+}
+
+html[
+    data-niche-theme=
+    "phosphor-lab"
+]
+.graph-edge {
+    filter:
+        drop-shadow(
+            0 0 2px
+            rgba(
+                117,
+                255,
+                154,
+                .35
+            )
+        );
+}
+
+
+/* ============================================
+   04 / ULTRAVIOLET ARCHITECTURE
+   ============================================ */
+
+html[
+    data-niche-theme=
+    "ultraviolet-architecture"
+] {
+    --theme-browser-color:
+        #080616;
+
+    --theme-bg:
+        #080616;
+
+    --theme-bg-raised:
+        #100d25;
+
+    --theme-panel:
+        rgba(
+            17,
+            13,
+            39,
+            .86
+        );
+
+    --theme-panel-alt:
+        rgba(
+            24,
+            18,
+            52,
+            .84
+        );
+
+    --theme-text:
+        #f5f0ff;
+
+    --theme-muted:
+        #b0a5cc;
+
+    --theme-primary:
+        #d4b8ff;
+
+    --theme-primary-rgb:
+        212,
+        184,
+        255;
+
+    --theme-secondary:
+        #72c8ff;
+
+    --theme-border:
+        rgba(
+            212,
+            184,
+            255,
+            .18
+        );
+
+    --theme-border-strong:
+        rgba(
+            212,
+            184,
+            255,
+            .46
+        );
+
+    --theme-radius:
+        11px;
+
+    --theme-radius-large:
+        22px;
+
+    --theme-panel-shadow:
+        0 32px 100px
+        rgba(
+            0,
+            0,
+            0,
+            .42
+        );
+}
+
+html[
+    data-niche-theme=
+    "ultraviolet-architecture"
+] body {
+    background:
+        radial-gradient(
+            ellipse at
+            18% 15%,
+            rgba(
+                126,
+                79,
+                255,
+                .20
+            ),
+            transparent
+                28rem
+        ),
+        radial-gradient(
+            ellipse at
+            82% 45%,
+            rgba(
+                68,
+                167,
+                255,
+                .14
+            ),
+            transparent
+                34rem
+        ),
+        #080616;
+}
+
+html[
+    data-niche-theme=
+    "ultraviolet-architecture"
+]
+.execution-core,
+html[
+    data-niche-theme=
+    "ultraviolet-architecture"
+]
+.oracle,
+html[
+    data-niche-theme=
+    "ultraviolet-architecture"
+]
+.metric-panel,
+html[
+    data-niche-theme=
+    "ultraviolet-architecture"
+]
+.causal-rail,
+html[
+    data-niche-theme=
+    "ultraviolet-architecture"
+]
+.causal-companion {
+    backdrop-filter:
+        blur(18px)
+        saturate(120%);
+
+    background:
+        linear-gradient(
+            140deg,
+            rgba(
+                255,
+                255,
+                255,
+                .055
+            ),
+            transparent 45%
+        ),
+        rgba(
+            14,
+            11,
+            32,
+            .76
+        );
+}
+
+html[
+    data-niche-theme=
+    "ultraviolet-architecture"
+]
+.graph-stage {
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(
+                137,
+                92,
+                255,
+                .16
+            ),
+            transparent
+                46%
+        ),
+        linear-gradient(
+            135deg,
+            rgba(
+                212,
+                184,
+                255,
+                .04
+            ),
+            transparent
+                30%
+        ),
+        #080714;
+}
+
+html[
+    data-niche-theme=
+    "ultraviolet-architecture"
+]
+.graph-node {
+    border-radius:
+        18px;
+
+    backdrop-filter:
+        blur(9px);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(
+                212,
+                184,
+                255,
+                .10
+            ),
+            rgba(
+                114,
+                200,
+                255,
+                .035
+            )
+        ),
+        rgba(
+            10,
+            8,
+            24,
+            .87
+        );
+
+    box-shadow:
+        0 18px 50px
+            rgba(
+                0,
+                0,
+                0,
+                .32
+            ),
+        inset 0 1px
+            rgba(
+                255,
+                255,
+                255,
+                .05
+            );
+}
+
+
+/* ============================================
+   05 / EMBER ANALOG
+   ============================================ */
+
+html[
+    data-niche-theme=
+    "ember-analog"
+] {
+    --theme-browser-color:
+        #100b06;
+
+    --theme-bg:
+        #100b06;
+
+    --theme-bg-raised:
+        #1b130b;
+
+    --theme-panel:
+        #181109;
+
+    --theme-panel-alt:
+        #21170d;
+
+    --theme-text:
+        #ffe5b8;
+
+    --theme-muted:
+        #b39770;
+
+    --theme-primary:
+        #ffbd59;
+
+    --theme-primary-rgb:
+        255,
+        189,
+        89;
+
+    --theme-secondary:
+        #ff7658;
+
+    --theme-border:
+        rgba(
+            255,
+            189,
+            89,
+            .20
+        );
+
+    --theme-border-strong:
+        rgba(
+            255,
+            189,
+            89,
+            .58
+        );
+
+    --theme-radius:
+        3px;
+
+    --theme-radius-large:
+        6px;
+
+    --theme-panel-shadow:
+        0 18px 40px
+            rgba(
+                0,
+                0,
+                0,
+                .38
+            ),
+        inset 0 1px
+            rgba(
+                255,
+                210,
+                130,
+                .06
+            ),
+        inset 0 -2px
+            rgba(
+                0,
+                0,
+                0,
+                .6
+            );
+}
+
+html[
+    data-niche-theme=
+    "ember-analog"
+] body {
+    background:
+        radial-gradient(
+            circle at
+            30% 0,
+            rgba(
+                255,
+                150,
+                55,
+                .08
+            ),
+            transparent
+                30rem
+        ),
+        repeating-linear-gradient(
+            90deg,
+            rgba(
+                255,
+                190,
+                100,
+                .012
+            )
+                0 1px,
+            transparent
+                1px 6px
+        ),
+        #100b06;
+}
+
+html[
+    data-niche-theme=
+    "ember-analog"
+]
+.execution-core,
+html[
+    data-niche-theme=
+    "ember-analog"
+]
+.oracle,
+html[
+    data-niche-theme=
+    "ember-analog"
+]
+.metric-panel {
+    border:
+        1px solid
+        rgba(
+            255,
+            189,
+            89,
+            .28
+        );
+
+    outline:
+        1px solid
+        rgba(
+            0,
+            0,
+            0,
+            .9
+        );
+
+    outline-offset:
+        -4px;
+}
+
+html[
+    data-niche-theme=
+    "ember-analog"
+]
+button {
+    box-shadow:
+        inset 0 1px
+            rgba(
+                255,
+                226,
+                170,
+                .06
+            ),
+        inset 0 -2px
+            rgba(
+                0,
+                0,
+                0,
+                .48
+            );
+}
+
+html[
+    data-niche-theme=
+    "ember-analog"
+]
+.graph-stage {
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(
+                255,
+                189,
+                89,
+                .025
+            )
+                0 1px,
+            transparent
+                1px 20px
+        ),
+        #0d0905;
+}
+
+html[
+    data-niche-theme=
+    "ember-analog"
+]
+.graph-node {
+    border:
+        1px solid
+        rgba(
+            255,
+            189,
+            89,
+            .34
+        );
+
+    background:
+        linear-gradient(
+            180deg,
+            #281b0f,
+            #151007
+        );
+
+    box-shadow:
+        inset 0 1px
+            rgba(
+                255,
+                223,
+                160,
+                .08
+            ),
+        0 8px 16px
+            rgba(
+                0,
+                0,
+                0,
+                .38
+            );
+}
+
+
+/* ============================================
+   06 / AFTERIMAGE SPECTRAL
+   ============================================ */
+
+html[
+    data-niche-theme=
+    "afterimage-spectral"
+] {
+    --theme-browser-color:
+        #050810;
+
+    --theme-bg:
+        #050810;
+
+    --theme-bg-raised:
+        #090e19;
+
+    --theme-panel:
+        rgba(
+            7,
+            12,
+            22,
+            .92
+        );
+
+    --theme-panel-alt:
+        rgba(
+            8,
+            15,
+            27,
+            .90
+        );
+
+    --theme-text:
+        #effcff;
+
+    --theme-muted:
+        #93afba;
+
+    --theme-primary:
+        #86f7ff;
+
+    --theme-primary-rgb:
+        134,
+        247,
+        255;
+
+    --theme-secondary:
+        #ff75d8;
+
+    --theme-border:
+        rgba(
+            134,
+            247,
+            255,
+            .20
+        );
+
+    --theme-border-strong:
+        rgba(
+            134,
+            247,
+            255,
+            .48
+        );
+
+    --theme-radius:
+        2px;
+
+    --theme-radius-large:
+        6px;
+}
+
+html[
+    data-niche-theme=
+    "afterimage-spectral"
+] body {
+    background:
+        radial-gradient(
+            circle at
+            20% 30%,
+            rgba(
+                0,
+                222,
+                255,
+                .08
+            ),
+            transparent
+                26rem
+        ),
+        radial-gradient(
+            circle at
+            82% 62%,
+            rgba(
+                255,
+                0,
+                176,
+                .07
+            ),
+            transparent
+                28rem
+        ),
+        #050810;
+}
+
+html[
+    data-niche-theme=
+    "afterimage-spectral"
+]
+.surface-heading h1,
+html[
+    data-niche-theme=
+    "afterimage-spectral"
+]
+.frontier-heading h1 {
+    text-shadow:
+        -1px 0
+            rgba(
+                0,
+                225,
+                255,
+                .34
+            ),
+        1px 0
+            rgba(
+                255,
+                45,
+                190,
+                .28
+            );
+}
+
+html[
+    data-niche-theme=
+    "afterimage-spectral"
+]
+.execution-core,
+html[
+    data-niche-theme=
+    "afterimage-spectral"
+]
+.oracle,
+html[
+    data-niche-theme=
+    "afterimage-spectral"
+]
+.metric-panel {
+    box-shadow:
+        -6px 0 24px
+            rgba(
+                0,
+                224,
+                255,
+                .035
+            ),
+        6px 0 24px
+            rgba(
+                255,
+                0,
+                188,
+                .035
+            );
+}
+
+html[
+    data-niche-theme=
+    "afterimage-spectral"
+]
+.graph-stage {
+    background:
+        repeating-radial-gradient(
+            ellipse at center,
+            transparent
+                0 44px,
+            rgba(
+                134,
+                247,
+                255,
+                .025
+            )
+                45px 46px
+        ),
+        #050810;
+}
+
+html[
+    data-niche-theme=
+    "afterimage-spectral"
+]
+.graph-node {
+    box-shadow:
+        -3px 0 12px
+            rgba(
+                0,
+                220,
+                255,
+                .09
+            ),
+        3px 0 12px
+            rgba(
+                255,
+                0,
+                190,
+                .08
+            );
+}
+
+html[
+    data-niche-theme=
+    "afterimage-spectral"
+]
+.graph-edge {
+    filter:
+        drop-shadow(
+            -1px 0 1px
+            rgba(
+                0,
+                225,
+                255,
+                .44
+            )
+        )
+        drop-shadow(
+            1px 0 1px
+            rgba(
+                255,
+                0,
+                190,
+                .26
+            )
+        );
+}
+
+html[
+    data-niche-theme=
+    "afterimage-spectral"
+]
+.timeline-event {
+    box-shadow:
+        inset 3px 0
+            rgba(
+                0,
+                225,
+                255,
+                .12
+            ),
+        inset -3px 0
+            rgba(
+                255,
+                0,
+                190,
+                .08
+            );
+}
+
+
+/* ============================================
+   07 / WHITE ROOM SYSTEM
+   ============================================ */
+
+html[
+    data-niche-theme=
+    "white-room"
+] {
+    color-scheme:
+        light;
+
+    --theme-browser-color:
+        #f4f4ef;
+
+    --theme-bg:
+        #f4f4ef;
+
+    --theme-bg-raised:
+        #ffffff;
+
+    --theme-panel:
+        rgba(
+            255,
+            255,
+            255,
+            .94
+        );
+
+    --theme-panel-alt:
+        rgba(
+            250,
+            250,
+            247,
+            .98
+        );
+
+    --theme-text:
+        #121519;
+
+    --theme-muted:
+        #626970;
+
+    --theme-faint:
+        rgba(
+            16,
+            30,
+            40,
+            .16
+        );
+
+    --theme-primary:
+        #1559ff;
+
+    --theme-primary-rgb:
+        21,
+        89,
+        255;
+
+    --theme-secondary:
+        #20252c;
+
+    --theme-border:
+        rgba(
+            20,
+            31,
+            43,
+            .13
+        );
+
+    --theme-border-strong:
+        rgba(
+            20,
+            31,
+            43,
+            .42
+        );
+
+    --theme-radius:
+        0;
+
+    --theme-radius-large:
+        0;
+
+    --theme-panel-shadow:
+        0 15px 40px
+            rgba(
+                15,
+                25,
+                35,
+                .07
+            );
+
+    --theme-font-display:
+        Helvetica,
+        Arial,
+        sans-serif;
+
+    --theme-font-body:
+        Helvetica,
+        Arial,
+        sans-serif;
+
+    --theme-heading-weight:
+        700;
+}
+
+html[
+    data-niche-theme=
+    "white-room"
+] body {
+    background:
+        linear-gradient(
+            rgba(
+                30,
+                45,
+                60,
+                .045
+            ) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(
+                30,
+                45,
+                60,
+                .045
+            ) 1px,
+            transparent 1px
+        ),
+        #f4f4ef;
+
+    background-size:
+        32px 32px;
+}
+
+html[
+    data-niche-theme=
+    "white-room"
+]
+body::before,
+html[
+    data-niche-theme=
+    "white-room"
+]
+body::after {
+    opacity:
+        0;
+}
+
+html[
+    data-niche-theme=
+    "white-room"
+]
+.topbar,
+html[
+    data-niche-theme=
+    "white-room"
+]
+.statusrail {
+    background:
+        rgba(
+            244,
+            244,
+            239,
+            .96
+        );
+
+    color:
+        #121519;
+
+    backdrop-filter:
+        blur(16px);
+
+    border-color:
+        rgba(
+            20,
+            31,
+            43,
+            .18
+        );
+}
+
+html[
+    data-niche-theme=
+    "white-room"
+]
+.nav button,
+html[
+    data-niche-theme=
+    "white-room"
+]
+.top-actions button,
+html[
+    data-niche-theme=
+    "white-room"
+]
+.causal-modes button,
+html[
+    data-niche-theme=
+    "white-room"
+]
+.surface-filters button {
+    color:
+        #121519;
+}
+
+html[
+    data-niche-theme=
+    "white-room"
+]
+.surface-heading h1,
+html[
+    data-niche-theme=
+    "white-room"
+]
+.frontier-heading h1 {
+    color:
+        #0c0f12;
+}
+
+html[
+    data-niche-theme=
+    "white-room"
+]
+.graph-stage {
+    background:
+        linear-gradient(
+            rgba(
+                20,
+                60,
+                100,
+                .06
+            ) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(
+                20,
+                60,
+                100,
+                .06
+            ) 1px,
+            transparent 1px
+        ),
+        #fafaf7;
+
+    background-size:
+        40px 40px;
+
+    box-shadow:
+        inset 0 0 0 1px
+            rgba(
+                15,
+                25,
+                35,
+                .04
+            );
+}
+
+html[
+    data-niche-theme=
+    "white-room"
+]
+.graph-node {
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .98
+        );
+
+    color:
+        #121519;
+
+    box-shadow:
+        0 8px 24px
+            rgba(
+                20,
+                30,
+                40,
+                .08
+            );
+}
+
+html[
+    data-niche-theme=
+    "white-room"
+]
+.graph-node strong {
+    color:
+        #11151a;
+}
+
+html[
+    data-niche-theme=
+    "white-room"
+]
+.graph-node small {
+    color:
+        #626970;
+}
+
+html[
+    data-niche-theme=
+    "white-room"
+]
+#niche-theme {
+    color:
+        #121519;
+
+    background:
+        white;
+}
+
+
+/* ============================================
+   08 / SIGNAL BRUTALIST
+   ============================================ */
+
+html[
+    data-niche-theme=
+    "signal-brutalist"
+] {
+    --theme-browser-color:
+        #f5e900;
+
+    --theme-bg:
+        #090909;
+
+    --theme-bg-raised:
+        #111111;
+
+    --theme-panel:
+        #111111;
+
+    --theme-panel-alt:
+        #171717;
+
+    --theme-text:
+        #ffffff;
+
+    --theme-muted:
+        #c8c8c8;
+
+    --theme-primary:
+        #f5e900;
+
+    --theme-primary-rgb:
+        245,
+        233,
+        0;
+
+    --theme-secondary:
+        #ff3f27;
+
+    --theme-border:
+        rgba(
+            255,
+            255,
+            255,
+            .36
+        );
+
+    --theme-border-strong:
+        #f5e900;
+
+    --theme-radius:
+        0;
+
+    --theme-radius-large:
+        0;
+
+    --theme-border-width:
+        3px;
+
+    --theme-panel-shadow:
+        8px 8px 0
+        #000;
+
+    --theme-font-display:
+        Impact,
+        "Arial Black",
+        sans-serif;
+
+    --theme-font-body:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    --theme-heading-weight:
+        900;
+
+    --theme-heading-spacing:
+        -.05em;
+}
+
+html[
+    data-niche-theme=
+    "signal-brutalist"
+] body {
+    background:
+        #dfdfd7;
+}
+
+html[
+    data-niche-theme=
+    "signal-brutalist"
+]
+main {
+    background:
+        #090909;
+}
+
+html[
+    data-niche-theme=
+    "signal-brutalist"
+]
+.topbar {
+    color:
+        #090909;
+
+    background:
+        #f5e900;
+
+    border-bottom:
+        4px solid
+        #090909;
+}
+
+html[
+    data-niche-theme=
+    "signal-brutalist"
+]
+.statusrail {
+    color:
+        #fff;
+
+    background:
+        #090909;
+
+    border-bottom:
+        3px solid
+        #f5e900;
+}
+
+html[
+    data-niche-theme=
+    "signal-brutalist"
+]
+.nav button {
+    color:
+        #090909;
+
+    font-weight:
+        900;
+
+    border:
+        2px solid
+        transparent;
+}
+
+html[
+    data-niche-theme=
+    "signal-brutalist"
+]
+.nav button.active,
+html[
+    data-niche-theme=
+    "signal-brutalist"
+]
+.nav button:hover {
+    color:
+        #fff;
+
+    background:
+        #090909;
+
+    border-color:
+        #090909;
+}
+
+html[
+    data-niche-theme=
+    "signal-brutalist"
+]
+.surface-heading h1,
+html[
+    data-niche-theme=
+    "signal-brutalist"
+]
+.frontier-heading h1 {
+    font-size:
+        clamp(
+            3rem,
+            8vw,
+            8rem
+        );
+
+    line-height:
+        .78;
+
+    text-transform:
+        uppercase;
+}
+
+html[
+    data-niche-theme=
+    "signal-brutalist"
+]
+.execution-core,
+html[
+    data-niche-theme=
+    "signal-brutalist"
+]
+.oracle,
+html[
+    data-niche-theme=
+    "signal-brutalist"
+]
+.metric-panel {
+    border:
+        3px solid
+        #fff;
+
+    box-shadow:
+        8px 8px 0
+        #f5e900;
+}
+
+html[
+    data-niche-theme=
+    "signal-brutalist"
+]
+.start-next {
+    color:
+        #090909;
+
+    background:
+        #f5e900;
+
+    border:
+        3px solid
+        #f5e900;
+
+    font-weight:
+        900;
+}
+
+html[
+    data-niche-theme=
+    "signal-brutalist"
+]
+.graph-stage {
+    border:
+        3px solid
+        #fff;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            rgba(
+                245,
+                233,
+                0,
+                .08
+            )
+                0 2px,
+            transparent
+                2px 48px
+        ),
+        #090909;
+}
+
+html[
+    data-niche-theme=
+    "signal-brutalist"
+]
+.graph-node {
+    border:
+        2px solid
+        #fff;
+
+    background:
+        #090909;
+
+    box-shadow:
+        5px 5px 0
+        #f5e900;
+}
+
+
+/* ============================================
+   09 / LIQUID SYSTEMS
+   ============================================ */
+
+html[
+    data-niche-theme=
+    "liquid-systems"
+] {
+    --theme-browser-color:
+        #06141d;
+
+    --theme-bg:
+        #06141d;
+
+    --theme-bg-raised:
+        #0b202c;
+
+    --theme-panel:
+        rgba(
+            11,
+            31,
+            42,
+            .74
+        );
+
+    --theme-panel-alt:
+        rgba(
+            13,
+            39,
+            51,
+            .76
+        );
+
+    --theme-text:
+        #efffff;
+
+    --theme-muted:
+        #9fc3c9;
+
+    --theme-primary:
+        #6fffe7;
+
+    --theme-primary-rgb:
+        111,
+        255,
+        231;
+
+    --theme-secondary:
+        #70a8ff;
+
+    --theme-border:
+        rgba(
+            111,
+            255,
+            231,
+            .16
+        );
+
+    --theme-border-strong:
+        rgba(
+            111,
+            255,
+            231,
+            .40
+        );
+
+    --theme-radius:
+        18px;
+
+    --theme-radius-large:
+        30px;
+
+    --theme-panel-shadow:
+        0 28px 90px
+        rgba(
+            0,
+            0,
+            0,
+            .32
+        );
+}
+
+html[
+    data-niche-theme=
+    "liquid-systems"
+] body {
+    background:
+        radial-gradient(
+            ellipse at
+            10% 15%,
+            rgba(
+                54,
+                255,
+                214,
+                .16
+            ),
+            transparent
+                32rem
+        ),
+        radial-gradient(
+            ellipse at
+            82% 28%,
+            rgba(
+                94,
+                125,
+                255,
+                .20
+            ),
+            transparent
+                36rem
+        ),
+        radial-gradient(
+            ellipse at
+            48% 95%,
+            rgba(
+                0,
+                177,
+                213,
+                .13
+            ),
+            transparent
+                38rem
+        ),
+        #06141d;
+}
+
+html[
+    data-niche-theme=
+    "liquid-systems"
+]
+.execution-core,
+html[
+    data-niche-theme=
+    "liquid-systems"
+]
+.oracle,
+html[
+    data-niche-theme=
+    "liquid-systems"
+]
+.metric-panel,
+html[
+    data-niche-theme=
+    "liquid-systems"
+]
+.causal-rail,
+html[
+    data-niche-theme=
+    "liquid-systems"
+]
+.causal-companion {
+    backdrop-filter:
+        blur(22px)
+        saturate(128%);
+
+    border:
+        1px solid
+        rgba(
+            180,
+            255,
+            244,
+            .13
+        );
+
+    background:
+        linear-gradient(
+            150deg,
+            rgba(
+                255,
+                255,
+                255,
+                .055
+            ),
+            transparent 55%
+        ),
+        rgba(
+            7,
+            27,
+            37,
+            .65
+        );
+}
+
+html[
+    data-niche-theme=
+    "liquid-systems"
+]
+.graph-stage {
+    border-radius:
+        32px;
+
+    background:
+        radial-gradient(
+            ellipse at
+            50% 46%,
+            rgba(
+                111,
+                255,
+                231,
+                .10
+            ),
+            transparent 43%
+        ),
+        radial-gradient(
+            ellipse at
+            20% 85%,
+            rgba(
+                112,
+                168,
+                255,
+                .10
+            ),
+            transparent 35%
+        ),
+        #071720;
+}
+
+html[
+    data-niche-theme=
+    "liquid-systems"
+]
+.graph-node {
+    border-radius:
+        999px;
+
+    background:
+        linear-gradient(
+            100deg,
+            rgba(
+                111,
+                255,
+                231,
+                .11
+            ),
+            rgba(
+                112,
+                168,
+                255,
+                .06
+            )
+        ),
+        rgba(
+            8,
+            30,
+            40,
+            .85
+        );
+
+    box-shadow:
+        0 18px 44px
+            rgba(
+                0,
+                0,
+                0,
+                .24
+            ),
+        inset 0 1px
+            rgba(
+                255,
+                255,
+                255,
+                .07
+            );
+}
+
+html[
+    data-niche-theme=
+    "liquid-systems"
+]
+.graph-edge {
+    stroke-linecap:
+        round;
+
+    filter:
+        drop-shadow(
+            0 0 5px
+            rgba(
+                111,
+                255,
+                231,
+                .18
+            )
+        );
+}
+
+
+/* ============================================
+   10 / VOID CARTOGRAPHY
+   ============================================ */
+
+html[
+    data-niche-theme=
+    "void-cartography"
+] {
+    --theme-browser-color:
+        #010306;
+
+    --theme-bg:
+        #010306;
+
+    --theme-bg-raised:
+        #03070c;
+
+    --theme-panel:
+        rgba(
+            2,
+            7,
+            12,
+            .80
+        );
+
+    --theme-panel-alt:
+        rgba(
+            3,
+            9,
+            15,
+            .84
+        );
+
+    --theme-text:
+        #dcecf2;
+
+    --theme-muted:
+        #71828a;
+
+    --theme-primary:
+        #8fd8ed;
+
+    --theme-primary-rgb:
+        143,
+        216,
+        237;
+
+    --theme-secondary:
+        #778cff;
+
+    --theme-border:
+        rgba(
+            143,
+            216,
+            237,
+            .10
+        );
+
+    --theme-border-strong:
+        rgba(
+            143,
+            216,
+            237,
+            .26
+        );
+
+    --theme-radius:
+        0;
+
+    --theme-radius-large:
+        0;
+
+    --theme-panel-shadow:
+        none;
+}
+
+html[
+    data-niche-theme=
+    "void-cartography"
+] body {
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent
+                0 19%,
+            rgba(
+                143,
+                216,
+                237,
+                .025
+            )
+                19.2% 19.35%,
+            transparent
+                19.55% 32%,
+            rgba(
+                143,
+                216,
+                237,
+                .018
+            )
+                32.2% 32.35%,
+            transparent
+                32.55%
+        ),
+        #010306;
+}
+
+html[
+    data-niche-theme=
+    "void-cartography"
+]
+.topbar {
+    background:
+        rgba(
+            1,
+            3,
+            6,
+            .75
+        );
+
+    border-bottom-color:
+        rgba(
+            143,
+            216,
+            237,
+            .10
+        );
+
+    backdrop-filter:
+        blur(18px);
+}
+
+html[
+    data-niche-theme=
+    "void-cartography"
+]
+.execution-core,
+html[
+    data-niche-theme=
+    "void-cartography"
+]
+.oracle,
+html[
+    data-niche-theme=
+    "void-cartography"
+]
+.metric-panel,
+html[
+    data-niche-theme=
+    "void-cartography"
+]
+.causal-rail,
+html[
+    data-niche-theme=
+    "void-cartography"
+]
+.causal-companion {
+    border-color:
+        rgba(
+            143,
+            216,
+            237,
+            .08
+        );
+
+    background:
+        rgba(
+            1,
+            5,
+            9,
+            .62
+        );
+}
+
+html[
+    data-niche-theme=
+    "void-cartography"
+]
+.graph-stage {
+    background:
+        repeating-radial-gradient(
+            ellipse at center,
+            transparent
+                0 42px,
+            rgba(
+                143,
+                216,
+                237,
+                .025
+            )
+                43px 44px
+        ),
+        repeating-linear-gradient(
+            30deg,
+            transparent
+                0 79px,
+            rgba(
+                143,
+                216,
+                237,
+                .015
+            )
+                80px 81px
+        ),
+        #010407;
+
+    border-color:
+        rgba(
+            143,
+            216,
+            237,
+            .12
+        );
+
+    box-shadow:
+        inset 0 0 130px
+        #000;
+}
+
+html[
+    data-niche-theme=
+    "void-cartography"
+]
+.graph-node {
+    min-height:
+        38px;
+
+    padding:
+        6px 8px 6px 30px;
+
+    border:
+        0;
+
+    background:
+        transparent;
+
+    box-shadow:
+        none;
+}
+
+html[
+    data-niche-theme=
+    "void-cartography"
+]
+.graph-node::before {
+    width:
+        7px;
+
+    height:
+        7px;
+
+    border-color:
+        rgba(
+            143,
+            216,
+            237,
+            .76
+        );
+
+    background:
+        #010306;
+
+    box-shadow:
+        0 0 12px
+        rgba(
+            143,
+            216,
+            237,
+            .30
+        );
+}
+
+html[
+    data-niche-theme=
+    "void-cartography"
+]
+.graph-node strong {
+    font-size:
+        10px;
+
+    font-family:
+        var(--theme-font-data);
+
+    letter-spacing:
+        .03em;
+}
+
+html[
+    data-niche-theme=
+    "void-cartography"
+]
+.graph-node small {
+    opacity:
+        .55;
+
+    font-size:
+        8px;
+}
+
+html[
+    data-niche-theme=
+    "void-cartography"
+]
+.graph-edge {
+    opacity:
+        .40;
+
+    stroke-width:
+        .22;
+}
+
+html[
+    data-niche-theme=
+    "void-cartography"
+]
+.graph-node:hover,
+html[
+    data-niche-theme=
+    "void-cartography"
+]
+.graph-node:focus-visible {
+    background:
+        rgba(
+            7,
+            20,
+            29,
+            .84
+        );
+
+    box-shadow:
+        0 0 0 1px
+            rgba(
+                143,
+                216,
+                237,
+                .22
+            ),
+        0 0 30px
+            rgba(
+                143,
+                216,
+                237,
+                .08
+            );
+}
+
+
+/* ============================================
+   SEMANTIC STATES
+   THEME-INDEPENDENT MEANING
+   ============================================ */
+
+html[data-niche-theme]
+.graph-node.ready {
+    --sg-node-accent:
+        var(--theme-ready);
+}
+
+html[data-niche-theme]
+.graph-node.blocked {
+    --sg-node-accent:
+        var(--theme-blocked);
+}
+
+html[data-niche-theme]
+.graph-node.active,
+html[data-niche-theme]
+.graph-node.in_progress,
+html[data-niche-theme]
+.graph-node.in-progress {
+    --sg-node-accent:
+        var(--theme-warning);
+}
+
+html[data-niche-theme]
+[data-state="unknown"],
+html[data-niche-theme]
+[data-state="unavailable"],
+html[data-niche-theme]
+[data-state="degraded"] {
+    background-image:
+        repeating-linear-gradient(
+            -45deg,
+            transparent
+                0 8px,
+            var(--theme-border)
+                8px 9px,
+            transparent
+                9px 17px
+        );
+}
+
+
+/* ============================================
+   THEME SWITCHER
+   ============================================ */
+
+html[data-niche-themes="ready"]
+.theme-control {
+    display:
+        grid;
+
+    gap:
+        3px;
+}
+
+html[data-niche-themes="ready"]
+.theme-control > span {
+    font:
+        600 8px/1
+        var(--theme-font-data);
+
+    letter-spacing:
+        .13em;
+
+    color:
+        var(--theme-muted);
+}
+
+html[data-niche-themes="ready"]
+#niche-theme {
+    min-width:
+        176px;
+
+    min-height:
+        34px;
+
+    padding:
+        0 32px 0 10px;
+
+    cursor:
+        pointer;
+
+    border:
+        var(--theme-border-width)
+        solid
+        var(--theme-border-strong);
+
+    outline:
+        0;
+
+    transition:
+        color
+            var(--theme-transition),
+        background
+            var(--theme-transition),
+        border-color
+            var(--theme-transition);
+}
+
+html[data-niche-themes="ready"]
+#niche-theme:focus-visible {
+    outline:
+        2px solid
+        var(--theme-primary);
+
+    outline-offset:
+        3px;
+}
+
+
+/* ============================================
+   RESPONSIVE TRANSFORMATION
+   ============================================ */
+
+@media (
+    max-width:
+    900px
+) {
+    html[
+        data-niche-theme=
+        "monolith-editorial"
+    ]
+    .surface-heading h1,
+    html[
+        data-niche-theme=
+        "monolith-editorial"
+    ]
+    .frontier-heading h1,
+    html[
+        data-niche-theme=
+        "signal-brutalist"
+    ]
+    .surface-heading h1,
+    html[
+        data-niche-theme=
+        "signal-brutalist"
+    ]
+    .frontier-heading h1 {
+        font-size:
+            clamp(
+                2.8rem,
+                12vw,
+                5.8rem
+            );
+    }
+
+    html[
+        data-niche-theme=
+        "liquid-systems"
+    ]
+    .graph-stage {
+        border-radius:
+            20px;
+    }
+
+    html[
+        data-niche-theme=
+        "white-room"
+    ] body {
+        background-size:
+            24px 24px;
+    }
+}
+
+@media (
+    max-width:
+    620px
+) {
+    html[data-niche-themes="ready"]
+    #niche-theme {
+        min-width:
+            140px;
+
+        max-width:
+            42vw;
+    }
+
+    html[
+        data-niche-theme=
+        "signal-brutalist"
+    ]
+    .execution-core,
+    html[
+        data-niche-theme=
+        "signal-brutalist"
+    ]
+    .oracle,
+    html[
+        data-niche-theme=
+        "signal-brutalist"
+    ]
+    .metric-panel {
+        box-shadow:
+            4px 4px 0
+            #f5e900;
+    }
+
+    html[
+        data-niche-theme=
+        "void-cartography"
+    ]
+    .graph-node small {
+        display:
+            none;
+    }
+
+    html[
+        data-niche-theme=
+        "monolith-editorial"
+    ]
+    .surface-heading h1 {
+        max-width:
+            none;
+    }
+}
+
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+@media (
+    prefers-reduced-motion:
+    reduce
+) {
+    html[data-niche-theme] *,
+    html[data-niche-theme]
+    *::before,
+    html[data-niche-theme]
+    *::after {
+        animation-duration:
+            .001ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            .001ms !important;
+
+        scroll-behavior:
+            auto !important;
+    }
+}
+
+@media (
+    prefers-contrast:
+    more
+) {
+    html[data-niche-theme] {
+        --theme-border:
+            currentColor;
+
+        --theme-border-strong:
+            currentColor;
+    }
+
+    html[data-niche-theme]
+    .graph-edge {
+        opacity:
+            .95;
+    }
+}
+
+/* restrained niche convergence / authority_effect: none */
+
+:root {
+    --savant-bg: var(--theme-bg);
+    --savant-bg-elevated: var(--theme-bg-raised);
+    --savant-bg-recessed: color-mix(in srgb, var(--theme-bg) 95%, black);
+    --savant-surface: var(--theme-panel);
+    --savant-border: var(--theme-border);
+    --savant-border-strong: var(--theme-border-strong);
+    --savant-text: var(--theme-text);
+    --savant-text-muted: var(--theme-muted);
+    --savant-text-faint: var(--theme-faint);
+    --savant-accent: var(--theme-primary);
+    --savant-ready: var(--theme-ready);
+    --savant-active: color-mix(in srgb, var(--theme-primary) 72%, white);
+    --savant-blocked: var(--theme-blocked);
+    --savant-complete: color-mix(in srgb, var(--theme-muted) 72%, transparent);
+    --savant-review: var(--theme-evidence);
+    --savant-waiting: var(--theme-warning);
+    --savant-unknown: color-mix(in srgb, var(--theme-muted) 66%, var(--theme-bg));
+    --savant-focus: color-mix(in srgb, white 76%, var(--theme-primary));
+    --savant-frontier: var(--theme-ready);
+    --savant-route: color-mix(in srgb, var(--theme-warning) 82%, white);
+    --motion-fast: 110ms;
+    --motion-standard: 170ms;
+    --motion-slow: 240ms;
+    --ease-standard: cubic-bezier(.2,.72,.22,1);
+}
+
+html[data-niche-theme] body {
+    background: var(--theme-bg);
+}
+
+html[data-niche-theme] .topbar {
+    background: color-mix(in srgb, var(--theme-bg) 98%, transparent);
+    border-color: color-mix(in srgb, var(--theme-border) 72%, transparent);
+    box-shadow: none;
+}
+
+html[data-niche-theme] .brand > div > span:first-child {
+    color: var(--theme-text);
+    font-weight: 760;
+}
+
+html[data-niche-theme] .brand > div > span:last-child {
+    color: var(--theme-faint);
+    font-size: .64rem;
+    font-weight: 540;
+    letter-spacing: .08em;
+}
+
+html[data-niche-theme] .nav {
+    scrollbar-width: none;
+}
+
+html[data-niche-theme] .nav::-webkit-scrollbar {
+    display: none;
+}
+
+html[data-niche-theme] .nav button {
+    position: relative;
+    min-height: 2.75rem;
+    padding-inline: clamp(.72rem, 1.25vw, 1.05rem);
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    color: var(--theme-muted);
+    font-weight: 650;
+    transition:
+        color var(--motion-fast) var(--ease-standard),
+        border-color var(--motion-fast) var(--ease-standard);
+}
+
+html[data-niche-theme] .nav button::before {
+    content: "";
+    position: absolute;
+    inset: auto 22% 0;
+    height: 2px;
+    background: var(--theme-primary);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform var(--motion-standard) var(--ease-standard);
+}
+
+html[data-niche-theme] .nav button.active,
+html[data-niche-theme] .nav button[aria-current="page"] {
+    color: var(--theme-text);
+}
+
+html[data-niche-theme] .nav button.active::before,
+html[data-niche-theme] .nav button[aria-current="page"]::before {
+    transform: scaleX(1);
+}
+
+html[data-niche-theme] .theme-control {
+    display: grid;
+    gap: .22rem;
+}
+
+html[data-niche-theme] .theme-control > span {
+    color: var(--theme-faint);
+    font-size: .56rem;
+    font-weight: 650;
+    letter-spacing: .11em;
+}
+
+html[data-niche-theme] #niche-theme {
+    min-height: 2.3rem;
+    border: 1px solid var(--theme-border);
+    border-radius: 5px;
+    background: var(--theme-panel);
+    color: var(--theme-text);
+    box-shadow: none;
+    font: inherit;
+    font-size: .69rem;
+}
+
+html[data-niche-theme] :where(button,input,select,textarea,[tabindex]):focus-visible {
+    outline: 2px solid var(--savant-focus);
+    outline-offset: 2px;
+}
+
+html[data-niche-theme] .atlas-surface {
+    --a-bg: var(--savant-bg-recessed);
+    --a-panel: var(--savant-surface);
+    --a-line: var(--savant-border);
+    --a-line2: var(--savant-border-strong);
+    --a-text: var(--savant-text);
+    --a-muted: var(--savant-text-muted);
+    --a-accent: var(--savant-accent);
+    --ready: var(--savant-ready);
+    --active: var(--savant-active);
+    --blocked: var(--savant-blocked);
+    --review: var(--savant-review);
+    --waiting: var(--savant-waiting);
+    --complete: var(--savant-complete);
+    --unknown: var(--savant-unknown);
+    --atlas-bg: var(--a-bg);
+    --atlas-panel: var(--a-panel);
+    --atlas-line: var(--a-line);
+    --atlas-line-strong: var(--a-line2);
+    --atlas-text: var(--a-text);
+    --atlas-muted: var(--a-muted);
+    --atlas-accent: var(--a-accent);
+    --atlas-ready: var(--ready);
+    --atlas-blocked: var(--blocked);
+}
+
+@media (max-width: 720px) {
+    html[data-niche-theme] .topbar {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: .55rem .7rem;
+        padding-block: .78rem .45rem;
+    }
+
+    html[data-niche-theme] .brand {
+        display: flex;
+        min-width: 0;
+    }
+
+    html[data-niche-theme] .brand > div > span:first-child {
+        display: block;
+        font-size: .93rem;
+    }
+
+    html[data-niche-theme] .brand > div > span:last-child {
+        display: none;
+    }
+
+    html[data-niche-theme] .theme-control > span {
+        display: none;
+    }
+
+    html[data-niche-theme] #niche-theme {
+        width: min(9.5rem, 38vw);
+        min-height: 2.15rem;
+    }
+
+    html[data-niche-theme] .nav {
+        grid-column: 1 / -1;
+        display: flex;
+        overflow-x: auto;
+        overscroll-behavior-inline: contain;
+        scroll-snap-type: x proximity;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    html[data-niche-theme] .nav button {
+        flex: 0 0 auto;
+        min-width: max-content;
+        min-height: 2.65rem;
+        scroll-snap-align: nearest;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        --motion-fast: 1ms;
+        --motion-standard: 1ms;
+        --motion-slow: 1ms;
+    }
+}
+
+
+/* r12 Atlas theme differentiation: same semantics, distinct visual grammar */
+html[data-niche-theme="nexus-industrial"] .atlas-surface {
+    --atlas-theme-grid-opacity: .18;
+}
+html[data-niche-theme="nexus-industrial"] .atlas-territory-outer { stroke-linejoin: bevel; }
+
+html[data-niche-theme="monolith-editorial"] .atlas-territory-outer {
+    filter: none !important;
+    stroke-width: 1.7 !important;
+}
+html[data-niche-theme="monolith-editorial"] .atlas-territory-inner { fill-opacity: .7; }
+html[data-niche-theme="monolith-editorial"] .atlas-territory-circuit { stroke-dasharray: 2 5; opacity: .22; }
+
+html[data-niche-theme="phosphor-lab"] .atlas-world-grid { opacity: .27 !important; }
+html[data-niche-theme="phosphor-lab"] .atlas-territory-circuit { stroke-dasharray: 3 4; opacity: .52; }
+html[data-niche-theme="phosphor-lab"] .atlas-task-body { stroke-width: 1.4; }
+
+html[data-niche-theme="ultraviolet-architecture"] .atlas-territory-inner {
+    fill: color-mix(in srgb,var(--a-bg) 78%,var(--tc) 14%) !important;
+}
+html[data-niche-theme="ultraviolet-architecture"] .atlas-territory-outer { stroke-width: 2.8 !important; }
+
+html[data-niche-theme="ember-analog"] .atlas-world-grid { opacity: .09 !important; }
+html[data-niche-theme="ember-analog"] .atlas-territory-corner { stroke-width: 1.8; }
+html[data-niche-theme="ember-analog"] .atlas-corridor { stroke-dasharray: 8 5; }
+
+html[data-niche-theme="afterimage-spectral"] .atlas-territory-outer {
+    filter: drop-shadow(-2px 0 5px rgba(0,220,255,.12)) drop-shadow(2px 0 5px rgba(255,48,170,.08)) !important;
+}
+html[data-niche-theme="afterimage-spectral"] .atlas-route-edge { stroke-width: 2.2; }
+
+html[data-niche-theme="white-room"] .atlas-viewport { background: #f4f7f8 !important; }
+html[data-niche-theme="white-room"] .atlas-world-bg { fill: #f4f7f8; }
+html[data-niche-theme="white-room"] .atlas-territory-outer { filter: none !important; }
+html[data-niche-theme="white-room"] .atlas-territory-circuit { opacity: .3; }
+
+html[data-niche-theme="signal-brutalist"] .atlas-territory-outer {
+    filter: none !important;
+    stroke-width: 3.2 !important;
+}
+html[data-niche-theme="signal-brutalist"] .atlas-territory-inner { fill-opacity: .42; }
+html[data-niche-theme="signal-brutalist"] .atlas-territory-circuit { stroke-dasharray: none; opacity: .25; }
+html[data-niche-theme="signal-brutalist"] .atlas-task-body { rx: 0; }
+
+html[data-niche-theme="liquid-systems"] .atlas-territory-inner {
+    fill: color-mix(in srgb,var(--a-bg) 72%,var(--tc) 16%) !important;
+}
+html[data-niche-theme="liquid-systems"] .atlas-corridor { opacity: .58 !important; }
+html[data-niche-theme="liquid-systems"] .atlas-territory-core { stroke-width: 2; }
+
+html[data-niche-theme="void-cartography"] .atlas-world-grid { opacity: .23 !important; }
+html[data-niche-theme="void-cartography"] .atlas-territory-outer { stroke-dasharray: 14 3; }
+html[data-niche-theme="void-cartography"] .atlas-territory-circuit { stroke-dasharray: 1 4; opacity: .48; }
+
+
+/* r13 / atlas reference-convergence theme grammars */
+html[data-niche-theme] .atlas-surface {
+    --atlas-territory-depth:10%;
+    --atlas-circuit-opacity:.42;
+    --atlas-boundary-strength:72%;
+    --atlas-grid-opacity:.14;
+}
+html[data-niche-theme="nexus-industrial"] .atlas-surface {--atlas-territory-depth:11%;--atlas-circuit-opacity:.46;--atlas-grid-opacity:.17}
+html[data-niche-theme="monolith-editorial"] .atlas-surface {--atlas-territory-depth:5%;--atlas-circuit-opacity:.22;--atlas-grid-opacity:.055}
+html[data-niche-theme="phosphor-lab"] .atlas-surface {--atlas-territory-depth:8%;--atlas-circuit-opacity:.56;--atlas-grid-opacity:.26}
+html[data-niche-theme="ultraviolet-architecture"] .atlas-surface {--atlas-territory-depth:15%;--atlas-circuit-opacity:.48;--atlas-grid-opacity:.12}
+html[data-niche-theme="ember-analog"] .atlas-surface {--atlas-territory-depth:12%;--atlas-circuit-opacity:.34;--atlas-grid-opacity:.07}
+html[data-niche-theme="afterimage-spectral"] .atlas-surface {--atlas-territory-depth:13%;--atlas-circuit-opacity:.50;--atlas-grid-opacity:.13}
+html[data-niche-theme="white-room"] .atlas-surface {--atlas-territory-depth:7%;--atlas-circuit-opacity:.34;--atlas-grid-opacity:.10}
+html[data-niche-theme="signal-brutalist"] .atlas-surface {--atlas-territory-depth:3%;--atlas-circuit-opacity:.28;--atlas-grid-opacity:.05}
+html[data-niche-theme="liquid-systems"] .atlas-surface {--atlas-territory-depth:16%;--atlas-circuit-opacity:.44;--atlas-grid-opacity:.09}
+html[data-niche-theme="void-cartography"] .atlas-surface {--atlas-territory-depth:8%;--atlas-circuit-opacity:.52;--atlas-grid-opacity:.21}
+
+
+/* r14 / Atlas facility-plan theme refinements */
+html[data-niche-theme="nexus-industrial"] .atlas-concourse-pad {opacity:.82}
+html[data-niche-theme="monolith-editorial"] .atlas-concourse-pad {opacity:.46}
+html[data-niche-theme="phosphor-lab"] .atlas-concourse-pad {opacity:.64}
+html[data-niche-theme="ultraviolet-architecture"] .atlas-concourse-pad {opacity:.78}
+html[data-niche-theme="ember-analog"] .atlas-concourse-pad {opacity:.62}
+html[data-niche-theme="afterimage-spectral"] .atlas-concourse-pad {opacity:.72}
+html[data-niche-theme="white-room"] .atlas-concourse-pad {opacity:.58}
+html[data-niche-theme="signal-brutalist"] .atlas-concourse-pad {opacity:.88}
+html[data-niche-theme="liquid-systems"] .atlas-concourse-pad {opacity:.54}
+html[data-niche-theme="void-cartography"] .atlas-concourse-pad {opacity:.74}

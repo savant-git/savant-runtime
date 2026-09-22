@@ -1,0 +1,2306 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import argparse
+import fcntl
+import hashlib
+import json
+import os
+import shutil
+import subprocess
+import sys
+import tempfile
+import uuid
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any
+
+
+RUNTIME_ROOT = Path(
+    __file__
+).resolve().parent
+
+LEXICON_ROOT = RUNTIME_ROOT.parent
+
+BIN_ROOT = LEXICON_ROOT / "bin"
+
+COMPILED_ROOT = RUNTIME_ROOT / "compiled"
+
+TRANSACTION_ROOT = (
+    RUNTIME_ROOT
+    / "transactions"
+)
+
+ACTIVE_ROOT = (
+    TRANSACTION_ROOT
+    / "active"
+)
+
+COMMITTED_ROOT = (
+    TRANSACTION_ROOT
+    / "committed"
+)
+
+ROLLED_BACK_ROOT = (
+    TRANSACTION_ROOT
+    / "rolled_back"
+)
+
+FAILED_ROOT = (
+    TRANSACTION_ROOT
+    / "failed"
+)
+
+LOCK_PATH = (
+    TRANSACTION_ROOT
+    / ".runtime_transaction.lock"
+)
+
+HEAD_PATH = (
+    TRANSACTION_ROOT
+    / "transaction_head.json"
+)
+
+INDEX_PATH = (
+    TRANSACTION_ROOT
+    / "transaction_index.json"
+)
+
+EVENT_LOG_PATH = (
+    TRANSACTION_ROOT
+    / "transaction_events.jsonl"
+)
+
+EXECUTION_ORDER = (
+    "lexicon",
+    "ontology",
+    "kindred",
+    "instance",
+    "segue",
+    "projection",
+    "constitution",
+)
+
+SUPPORTED_ACTIONS = (
+    "validate",
+    "compile",
+    "integrity",
+)
+
+
+class RuntimeTransactionError(
+    RuntimeError
+):
+    pass
+
+
+def utc_now() -> str:
+    return (
+        datetime.now(
+            timezone.utc
+        )
+        .replace(
+            microsecond=0
+        )
+        .isoformat()
+        .replace(
+            "+00:00",
+            "Z",
+        )
+    )
+
+
+def canonical_json(
+    value: Any,
+) -> str:
+    return json.dumps(
+        value,
+        sort_keys=True,
+        separators=(
+            ",",
+            ":",
+        ),
+        ensure_ascii=False,
+        default=str,
+    )
+
+
+def digest(
+    value: Any,
+) -> str:
+    return hashlib.sha256(
+        canonical_json(
+            value
+        ).encode(
+            "utf-8"
+        )
+    ).hexdigest()
+
+
+def file_digest(
+    path: Path,
+) -> str | None:
+    if not path.is_file():
+        return None
+
+    hasher = hashlib.sha256()
+
+    with path.open(
+        "rb"
+    ) as handle:
+        while True:
+            chunk = handle.read(
+                1024 * 1024
+            )
+
+            if not chunk:
+                break
+
+            hasher.update(
+                chunk
+            )
+
+    return hasher.hexdigest()
+
+
+def load_json(
+    path: Path,
+    default: Any = None,
+) -> Any:
+    if not path.is_file():
+        return default
+
+    with path.open(
+        "r",
+        encoding="utf-8",
+    ) as handle:
+        return json.load(
+            handle
+        )
+
+
+def write_json_atomic(
+    path: Path,
+    payload: Any,
+) -> None:
+    path.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    descriptor, temporary_name = tempfile.mkstemp(
+        prefix=f".{path.name}.",
+        suffix=".tmp",
+        dir=str(
+            path.parent
+        ),
+    )
+
+    temporary_path = Path(
+        temporary_name
+    )
+
+    try:
+        with os.fdopen(
+            descriptor,
+            "w",
+            encoding="utf-8",
+        ) as handle:
+            json.dump(
+                payload,
+                handle,
+                indent=2,
+                sort_keys=True,
+                ensure_ascii=False,
+                default=str,
+            )
+
+            handle.write(
+                "\n"
+            )
+
+            handle.flush()
+
+            os.fsync(
+                handle.fileno()
+            )
+
+        os.replace(
+            temporary_path,
+            path,
+        )
+
+    finally:
+        if temporary_path.exists():
+            temporary_path.unlink()
+
+
+def append_jsonl(
+    path: Path,
+    payload: dict[str, Any],
+) -> None:
+    path.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    with path.open(
+        "a",
+        encoding="utf-8",
+    ) as handle:
+        handle.write(
+            canonical_json(
+                payload
+            )
+        )
+
+        handle.write(
+            "\n"
+        )
+
+        handle.flush()
+
+        os.fsync(
+            handle.fileno()
+        )
+
+
+def read_jsonl(
+    path: Path,
+) -> list[dict[str, Any]]:
+    if not path.is_file():
+        return []
+
+    records = []
+
+    with path.open(
+        "r",
+        encoding="utf-8",
+    ) as handle:
+        for line_number, raw_line in enumerate(
+            handle,
+            start=1,
+        ):
+            line = raw_line.strip()
+
+            if not line:
+                continue
+
+            try:
+                payload = json.loads(
+                    line
+                )
+
+            except json.JSONDecodeError as error:
+                raise RuntimeTransactionError(
+                    f"Invalid transaction event "
+                    f"at {path}:{line_number}: "
+                    f"{error}"
+                ) from error
+
+            if not isinstance(
+                payload,
+                dict,
+            ):
+                raise RuntimeTransactionError(
+                    f"Transaction event must be "
+                    f"an object at "
+                    f"{path}:{line_number}"
+                )
+
+            records.append(
+                payload
+            )
+
+    return records
+
+
+def copy_path(
+    source: Path,
+    destination: Path,
+) -> None:
+    if source.is_dir():
+        shutil.copytree(
+            source,
+            destination,
+            dirs_exist_ok=True,
+            symlinks=True,
+        )
+
+    elif source.is_file():
+        destination.parent.mkdir(
+            parents=True,
+            exist_ok=True,
+        )
+
+        shutil.copy2(
+            source,
+            destination,
+            follow_symlinks=False,
+        )
+
+
+def remove_path(
+    path: Path,
+) -> None:
+    if path.is_dir():
+        shutil.rmtree(
+            path
+        )
+
+    elif path.exists():
+        path.unlink()
+
+
+class RuntimeLock:
+
+    def __init__(
+        self,
+    ) -> None:
+        self.handle = None
+
+    def __enter__(
+        self,
+    ) -> "RuntimeLock":
+        TRANSACTION_ROOT.mkdir(
+            parents=True,
+            exist_ok=True,
+        )
+
+        self.handle = LOCK_PATH.open(
+            "a+",
+            encoding="utf-8",
+        )
+
+        fcntl.flock(
+            self.handle.fileno(),
+            fcntl.LOCK_EX,
+        )
+
+        return self
+
+    def __exit__(
+        self,
+        exc_type: Any,
+        exc_value: Any,
+        traceback: Any,
+    ) -> None:
+        if self.handle is None:
+            return
+
+        fcntl.flock(
+            self.handle.fileno(),
+            fcntl.LOCK_UN,
+        )
+
+        self.handle.close()
+
+
+class RuntimeTransaction:
+
+    def __init__(
+        self,
+    ) -> None:
+        for path in (
+            TRANSACTION_ROOT,
+            ACTIVE_ROOT,
+            COMMITTED_ROOT,
+            ROLLED_BACK_ROOT,
+            FAILED_ROOT,
+        ):
+            path.mkdir(
+                parents=True,
+                exist_ok=True,
+            )
+
+    def transaction_path(
+        self,
+        transaction_id: str,
+    ) -> Path:
+        for root in (
+            ACTIVE_ROOT,
+            COMMITTED_ROOT,
+            ROLLED_BACK_ROOT,
+            FAILED_ROOT,
+        ):
+            candidate = (
+                root
+                / transaction_id
+            )
+
+            if candidate.is_dir():
+                return candidate
+
+        raise FileNotFoundError(
+            transaction_id
+        )
+
+    def metadata_path(
+        self,
+        transaction_path: Path,
+    ) -> Path:
+        return (
+            transaction_path
+            / "transaction.json"
+        )
+
+    def load_transaction(
+        self,
+        transaction_id: str,
+    ) -> tuple[
+        Path,
+        dict[str, Any],
+    ]:
+        transaction_path = self.transaction_path(
+            transaction_id
+        )
+
+        metadata = load_json(
+            self.metadata_path(
+                transaction_path
+            ),
+            default={},
+        )
+
+        if not isinstance(
+            metadata,
+            dict,
+        ):
+            raise RuntimeTransactionError(
+                f"Invalid transaction metadata: "
+                f"{transaction_id}"
+            )
+
+        return (
+            transaction_path,
+            metadata,
+        )
+
+    def next_sequence(
+        self,
+    ) -> int:
+        index = load_json(
+            INDEX_PATH,
+            default={},
+        )
+
+        if not isinstance(
+            index,
+            dict,
+        ):
+            return 1
+
+        return int(
+            index.get(
+                "sequence",
+                0,
+            )
+        ) + 1
+
+    def update_index(
+        self,
+        metadata: dict[str, Any],
+    ) -> None:
+        existing = load_json(
+            INDEX_PATH,
+            default={},
+        )
+
+        if not isinstance(
+            existing,
+            dict,
+        ):
+            existing = {}
+
+        records = existing.get(
+            "records",
+            {}
+        )
+
+        if not isinstance(
+            records,
+            dict,
+        ):
+            records = {}
+
+        transaction_id = str(
+            metadata[
+                "transaction_id"
+            ]
+        )
+
+        records[
+            transaction_id
+        ] = {
+            "transaction_id": transaction_id,
+            "sequence": metadata.get(
+                "sequence"
+            ),
+            "state": metadata.get(
+                "state"
+            ),
+            "created_at": metadata.get(
+                "created_at"
+            ),
+            "updated_at": metadata.get(
+                "updated_at"
+            ),
+            "action": metadata.get(
+                "action"
+            ),
+            "subsystems": metadata.get(
+                "subsystems",
+                [],
+            ),
+            "digest": metadata.get(
+                "digest"
+            ),
+        }
+
+        ordered_records = {
+            key: records[
+                key
+            ]
+            for key in sorted(
+                records,
+                key=lambda record_id: (
+                    int(
+                        records[
+                            record_id
+                        ].get(
+                            "sequence",
+                            0,
+                        )
+                    ),
+                    record_id,
+                ),
+            )
+        }
+
+        payload = {
+            "index_id": (
+                "runtime:transaction:index"
+            ),
+            "sequence": max(
+                (
+                    int(
+                        record.get(
+                            "sequence",
+                            0,
+                        )
+                    )
+                    for record
+                    in ordered_records.values()
+                ),
+                default=0,
+            ),
+            "transaction_count": len(
+                ordered_records
+            ),
+            "records": ordered_records,
+            "updated_at": utc_now(),
+        }
+
+        payload[
+            "digest"
+        ] = digest(
+            payload
+        )
+
+        write_json_atomic(
+            INDEX_PATH,
+            payload,
+        )
+
+    def write_metadata(
+        self,
+        transaction_path: Path,
+        metadata: dict[str, Any],
+    ) -> None:
+        metadata[
+            "updated_at"
+        ] = utc_now()
+
+        metadata[
+            "digest"
+        ] = digest(
+            {
+                key: value
+                for key, value
+                in metadata.items()
+                if key != "digest"
+            }
+        )
+
+        write_json_atomic(
+            self.metadata_path(
+                transaction_path
+            ),
+            metadata,
+        )
+
+        self.update_index(
+            metadata
+        )
+
+    def append_event(
+        self,
+        transaction_id: str,
+        event_type: str,
+        payload: dict[str, Any],
+    ) -> dict[str, Any]:
+        events = read_jsonl(
+            EVENT_LOG_PATH
+        )
+
+        previous_digest = (
+            events[
+                -1
+            ].get(
+                "digest"
+            )
+            if events
+            else None
+        )
+
+        event = {
+            "event_id": (
+                "runtime:transaction:event:"
+                f"{len(events) + 1:012d}"
+            ),
+            "sequence": len(
+                events
+            ) + 1,
+            "transaction_id": transaction_id,
+            "event_type": event_type,
+            "timestamp": utc_now(),
+            "previous_digest": (
+                previous_digest
+            ),
+            "payload": payload,
+        }
+
+        event[
+            "digest"
+        ] = digest(
+            event
+        )
+
+        append_jsonl(
+            EVENT_LOG_PATH,
+            event,
+        )
+
+        return event
+
+    def snapshot_targets(
+        self,
+    ) -> list[Path]:
+        targets = []
+
+        for path in (
+            LEXICON_ROOT / "compiled",
+            RUNTIME_ROOT / "compiled",
+        ):
+            if path.exists():
+                targets.append(
+                    path
+                )
+
+        for subsystem in EXECUTION_ORDER:
+            subsystem_root = (
+                LEXICON_ROOT
+                / subsystem
+            )
+
+            if not subsystem_root.is_dir():
+                continue
+
+            for candidate_name in (
+                "compiled",
+                "output",
+                "outputs",
+                "generated",
+            ):
+                candidate = (
+                    subsystem_root
+                    / candidate_name
+                )
+
+                if candidate.exists():
+                    targets.append(
+                        candidate
+                    )
+
+        unique = {}
+
+        for target in targets:
+            unique[
+                str(
+                    target.resolve()
+                )
+            ] = target
+
+        return [
+            unique[
+                key
+            ]
+            for key in sorted(
+                unique
+            )
+        ]
+
+    def snapshot(
+        self,
+        transaction_path: Path,
+    ) -> dict[str, Any]:
+        snapshot_root = (
+            transaction_path
+            / "snapshot"
+        )
+
+        manifest_records = []
+
+        for source in self.snapshot_targets():
+            relative = source.relative_to(
+                LEXICON_ROOT
+            )
+
+            destination = (
+                snapshot_root
+                / relative
+            )
+
+            copy_path(
+                source,
+                destination,
+            )
+
+            if source.is_file():
+                manifest_records.append(
+                    {
+                        "source": str(
+                            source
+                        ),
+                        "relative_path": str(
+                            relative
+                        ),
+                        "type": "file",
+                        "sha256": file_digest(
+                            source
+                        ),
+                    }
+                )
+
+                continue
+
+            for path in sorted(
+                source.rglob(
+                    "*"
+                )
+            ):
+                if not path.is_file():
+                    continue
+
+                manifest_records.append(
+                    {
+                        "source": str(
+                            path
+                        ),
+                        "relative_path": str(
+                            path.relative_to(
+                                LEXICON_ROOT
+                            )
+                        ),
+                        "type": "file",
+                        "size": path.stat().st_size,
+                        "sha256": file_digest(
+                            path
+                        ),
+                    }
+                )
+
+        manifest = {
+            "snapshot_id": (
+                "runtime:transaction:snapshot:"
+                f"{transaction_path.name}"
+            ),
+            "transaction_id": (
+                transaction_path.name
+            ),
+            "created_at": utc_now(),
+            "root": str(
+                snapshot_root
+            ),
+            "record_count": len(
+                manifest_records
+            ),
+            "records": manifest_records,
+        }
+
+        manifest[
+            "digest"
+        ] = digest(
+            manifest
+        )
+
+        write_json_atomic(
+            transaction_path
+            / "snapshot_manifest.json",
+            manifest,
+        )
+
+        return manifest
+
+    def begin(
+        self,
+        *,
+        action: str,
+        subsystems: list[str],
+    ) -> dict[str, Any]:
+        if action not in SUPPORTED_ACTIONS:
+            raise RuntimeTransactionError(
+                f"Unsupported action: {action}"
+            )
+
+        normalized_subsystems = []
+
+        for subsystem in subsystems:
+            if subsystem not in EXECUTION_ORDER:
+                raise RuntimeTransactionError(
+                    f"Unknown subsystem: "
+                    f"{subsystem}"
+                )
+
+            if subsystem not in normalized_subsystems:
+                normalized_subsystems.append(
+                    subsystem
+                )
+
+        if not normalized_subsystems:
+            normalized_subsystems = list(
+                EXECUTION_ORDER
+            )
+
+        sequence = self.next_sequence()
+
+        transaction_id = (
+            "runtime-transaction-"
+            f"{sequence:012d}-"
+            f"{uuid.uuid4().hex[:12]}"
+        )
+
+        transaction_path = (
+            ACTIVE_ROOT
+            / transaction_id
+        )
+
+        transaction_path.mkdir(
+            parents=True,
+            exist_ok=False,
+        )
+
+        metadata = {
+            "transaction_id": transaction_id,
+            "sequence": sequence,
+            "state": "active",
+            "action": action,
+            "subsystems": (
+                normalized_subsystems
+            ),
+            "created_at": utc_now(),
+            "updated_at": utc_now(),
+            "results": [],
+            "failure": None,
+            "commit": None,
+            "rollback": None,
+            "provenance": {
+                "generator": str(
+                    Path(
+                        __file__
+                    ).resolve()
+                ),
+                "runtime_root": str(
+                    RUNTIME_ROOT
+                ),
+            },
+            "lineage": {
+                "derived_from": [
+                    "runtime:savant:lexicon"
+                ]
+            },
+        }
+
+        self.write_metadata(
+            transaction_path,
+            metadata,
+        )
+
+        snapshot = self.snapshot(
+            transaction_path
+        )
+
+        metadata[
+            "snapshot"
+        ] = {
+            "manifest": str(
+                transaction_path
+                / "snapshot_manifest.json"
+            ),
+            "digest": snapshot[
+                "digest"
+            ],
+            "record_count": snapshot[
+                "record_count"
+            ],
+        }
+
+        self.write_metadata(
+            transaction_path,
+            metadata,
+        )
+
+        event = self.append_event(
+            transaction_id,
+            "begin",
+            {
+                "action": action,
+                "subsystems": (
+                    normalized_subsystems
+                ),
+                "snapshot_digest": (
+                    snapshot[
+                        "digest"
+                    ]
+                ),
+            },
+        )
+
+        return {
+            "operation": "begin",
+            "passed": True,
+            "transaction_id": (
+                transaction_id
+            ),
+            "state": "active",
+            "path": str(
+                transaction_path
+            ),
+            "snapshot": snapshot,
+            "event": event,
+        }
+
+    def run_controller(
+        self,
+        subsystem: str,
+        action: str,
+    ) -> dict[str, Any]:
+        controller = (
+            BIN_ROOT
+            / f"{subsystem}ctl"
+        )
+
+        started_at = utc_now()
+
+        if not controller.is_file():
+            return {
+                "subsystem": subsystem,
+                "action": action,
+                "passed": False,
+                "returncode": 127,
+                "started_at": started_at,
+                "finished_at": utc_now(),
+                "controller": str(
+                    controller
+                ),
+                "stdout": "",
+                "stderr": (
+                    "Controller not found"
+                ),
+            }
+
+        completed = subprocess.run(
+            [
+                str(
+                    controller
+                ),
+                action,
+            ],
+            cwd=str(
+                LEXICON_ROOT
+            ),
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+
+        payload = {
+            "subsystem": subsystem,
+            "action": action,
+            "passed": (
+                completed.returncode == 0
+            ),
+            "returncode": (
+                completed.returncode
+            ),
+            "started_at": started_at,
+            "finished_at": utc_now(),
+            "controller": str(
+                controller
+            ),
+            "controller_sha256": (
+                file_digest(
+                    controller
+                )
+            ),
+            "stdout": completed.stdout,
+            "stderr": completed.stderr,
+            "stdout_digest": digest(
+                completed.stdout
+            ),
+            "stderr_digest": digest(
+                completed.stderr
+            ),
+        }
+
+        try:
+            payload[
+                "parsed_stdout"
+            ] = json.loads(
+                completed.stdout
+            )
+
+        except json.JSONDecodeError:
+            payload[
+                "parsed_stdout"
+            ] = None
+
+        payload[
+            "digest"
+        ] = digest(
+            payload
+        )
+
+        return payload
+
+    def execute(
+        self,
+        transaction_id: str,
+        *,
+        stop_on_failure: bool = True,
+    ) -> dict[str, Any]:
+        transaction_path, metadata = (
+            self.load_transaction(
+                transaction_id
+            )
+        )
+
+        if metadata.get(
+            "state"
+        ) != "active":
+            raise RuntimeTransactionError(
+                f"Transaction is not active: "
+                f"{transaction_id}"
+            )
+
+        action = str(
+            metadata[
+                "action"
+            ]
+        )
+
+        subsystems = [
+            str(
+                subsystem
+            )
+            for subsystem in metadata.get(
+                "subsystems",
+                [],
+            )
+        ]
+
+        results = list(
+            metadata.get(
+                "results",
+                [],
+            )
+        )
+
+        completed_subsystems = {
+            str(
+                result.get(
+                    "subsystem"
+                )
+            )
+            for result in results
+            if isinstance(
+                result,
+                dict,
+            )
+        }
+
+        halted = False
+
+        for subsystem in subsystems:
+            if subsystem in completed_subsystems:
+                continue
+
+            result = self.run_controller(
+                subsystem,
+                action,
+            )
+
+            results.append(
+                result
+            )
+
+            metadata[
+                "results"
+            ] = results
+
+            self.write_metadata(
+                transaction_path,
+                metadata,
+            )
+
+            self.append_event(
+                transaction_id,
+                "subsystem_result",
+                {
+                    "subsystem": subsystem,
+                    "action": action,
+                    "passed": result[
+                        "passed"
+                    ],
+                    "result_digest": result[
+                        "digest"
+                    ],
+                },
+            )
+
+            if (
+                stop_on_failure
+                and not result[
+                    "passed"
+                ]
+            ):
+                halted = True
+                break
+
+        failures = [
+            result
+            for result in results
+            if not result.get(
+                "passed",
+                False,
+            )
+        ]
+
+        execution = {
+            "operation": "execute",
+            "passed": not failures,
+            "transaction_id": (
+                transaction_id
+            ),
+            "action": action,
+            "subsystems": subsystems,
+            "result_count": len(
+                results
+            ),
+            "passed_count": (
+                len(
+                    results
+                )
+                - len(
+                    failures
+                )
+            ),
+            "failed_count": len(
+                failures
+            ),
+            "halted": halted,
+            "results": results,
+        }
+
+        execution[
+            "digest"
+        ] = digest(
+            execution
+        )
+
+        metadata[
+            "execution"
+        ] = execution
+
+        if failures:
+            metadata[
+                "failure"
+            ] = {
+                "failed_count": len(
+                    failures
+                ),
+                "subsystems": [
+                    result.get(
+                        "subsystem"
+                    )
+                    for result in failures
+                ],
+                "digest": digest(
+                    failures
+                ),
+            }
+
+        self.write_metadata(
+            transaction_path,
+            metadata,
+        )
+
+        return execution
+
+    def commit(
+        self,
+        transaction_id: str,
+    ) -> dict[str, Any]:
+        transaction_path, metadata = (
+            self.load_transaction(
+                transaction_id
+            )
+        )
+
+        if metadata.get(
+            "state"
+        ) != "active":
+            raise RuntimeTransactionError(
+                f"Transaction is not active: "
+                f"{transaction_id}"
+            )
+
+        execution = metadata.get(
+            "execution"
+        )
+
+        if not isinstance(
+            execution,
+            dict,
+        ):
+            raise RuntimeTransactionError(
+                "Transaction has not executed"
+            )
+
+        if not execution.get(
+            "passed",
+            False,
+        ):
+            raise RuntimeTransactionError(
+                "Failed transaction cannot commit"
+            )
+
+        commit_record = {
+            "committed_at": utc_now(),
+            "execution_digest": execution.get(
+                "digest"
+            ),
+            "snapshot_digest": metadata.get(
+                "snapshot",
+                {},
+            ).get(
+                "digest"
+            ),
+        }
+
+        commit_record[
+            "digest"
+        ] = digest(
+            commit_record
+        )
+
+        metadata[
+            "state"
+        ] = "committed"
+
+        metadata[
+            "commit"
+        ] = commit_record
+
+        self.write_metadata(
+            transaction_path,
+            metadata,
+        )
+
+        destination = (
+            COMMITTED_ROOT
+            / transaction_id
+        )
+
+        os.replace(
+            transaction_path,
+            destination,
+        )
+
+        metadata = load_json(
+            self.metadata_path(
+                destination
+            ),
+            default={},
+        )
+
+        self.update_index(
+            metadata
+        )
+
+        head = {
+            "head_id": (
+                "runtime:transaction:head"
+            ),
+            "transaction_id": (
+                transaction_id
+            ),
+            "sequence": metadata.get(
+                "sequence"
+            ),
+            "state": "committed",
+            "commit_digest": (
+                commit_record[
+                    "digest"
+                ]
+            ),
+            "updated_at": utc_now(),
+        }
+
+        head[
+            "digest"
+        ] = digest(
+            head
+        )
+
+        write_json_atomic(
+            HEAD_PATH,
+            head,
+        )
+
+        event = self.append_event(
+            transaction_id,
+            "commit",
+            commit_record,
+        )
+
+        return {
+            "operation": "commit",
+            "passed": True,
+            "transaction_id": (
+                transaction_id
+            ),
+            "state": "committed",
+            "path": str(
+                destination
+            ),
+            "commit": commit_record,
+            "event": event,
+        }
+
+    def restore_snapshot(
+        self,
+        transaction_path: Path,
+    ) -> dict[str, Any]:
+        snapshot_root = (
+            transaction_path
+            / "snapshot"
+        )
+
+        manifest = load_json(
+            transaction_path
+            / "snapshot_manifest.json",
+            default={},
+        )
+
+        if not snapshot_root.is_dir():
+            raise RuntimeTransactionError(
+                "Snapshot directory missing"
+            )
+
+        restored = []
+
+        current_targets = self.snapshot_targets()
+
+        snapshot_top_level = {
+            path.parts[
+                0
+            ]
+            for path in (
+                relative
+                for relative
+                in (
+                    child.relative_to(
+                        snapshot_root
+                    )
+                    for child
+                    in snapshot_root.iterdir()
+                )
+            )
+            if path.parts
+        }
+
+        for target in current_targets:
+            relative = target.relative_to(
+                LEXICON_ROOT
+            )
+
+            if (
+                relative.parts
+                and relative.parts[
+                    0
+                ] in snapshot_top_level
+            ):
+                remove_path(
+                    target
+                )
+
+        for source in sorted(
+            snapshot_root.rglob(
+                "*"
+            )
+        ):
+            if not source.is_file():
+                continue
+
+            relative = source.relative_to(
+                snapshot_root
+            )
+
+            destination = (
+                LEXICON_ROOT
+                / relative
+            )
+
+            destination.parent.mkdir(
+                parents=True,
+                exist_ok=True,
+            )
+
+            shutil.copy2(
+                source,
+                destination,
+                follow_symlinks=False,
+            )
+
+            restored.append(
+                {
+                    "source": str(
+                        source
+                    ),
+                    "destination": str(
+                        destination
+                    ),
+                    "sha256": file_digest(
+                        destination
+                    ),
+                }
+            )
+
+        payload = {
+            "restored_at": utc_now(),
+            "snapshot_digest": (
+                manifest.get(
+                    "digest"
+                )
+                if isinstance(
+                    manifest,
+                    dict,
+                )
+                else None
+            ),
+            "restored_count": len(
+                restored
+            ),
+            "records": restored,
+        }
+
+        payload[
+            "digest"
+        ] = digest(
+            payload
+        )
+
+        return payload
+
+    def rollback(
+        self,
+        transaction_id: str,
+        *,
+        reason: str,
+    ) -> dict[str, Any]:
+        transaction_path, metadata = (
+            self.load_transaction(
+                transaction_id
+            )
+        )
+
+        if metadata.get(
+            "state"
+        ) not in {
+            "active",
+            "failed",
+        }:
+            raise RuntimeTransactionError(
+                f"Transaction cannot roll back "
+                f"from state "
+                f"{metadata.get('state')}"
+            )
+
+        restoration = self.restore_snapshot(
+            transaction_path
+        )
+
+        rollback_record = {
+            "rolled_back_at": utc_now(),
+            "reason": reason,
+            "restoration": restoration,
+        }
+
+        rollback_record[
+            "digest"
+        ] = digest(
+            rollback_record
+        )
+
+        metadata[
+            "state"
+        ] = "rolled_back"
+
+        metadata[
+            "rollback"
+        ] = rollback_record
+
+        self.write_metadata(
+            transaction_path,
+            metadata,
+        )
+
+        destination = (
+            ROLLED_BACK_ROOT
+            / transaction_id
+        )
+
+        os.replace(
+            transaction_path,
+            destination,
+        )
+
+        metadata = load_json(
+            self.metadata_path(
+                destination
+            ),
+            default={},
+        )
+
+        self.update_index(
+            metadata
+        )
+
+        event = self.append_event(
+            transaction_id,
+            "rollback",
+            rollback_record,
+        )
+
+        return {
+            "operation": "rollback",
+            "passed": True,
+            "transaction_id": (
+                transaction_id
+            ),
+            "state": "rolled_back",
+            "path": str(
+                destination
+            ),
+            "rollback": rollback_record,
+            "event": event,
+        }
+
+    def fail(
+        self,
+        transaction_id: str,
+        *,
+        reason: str,
+    ) -> dict[str, Any]:
+        transaction_path, metadata = (
+            self.load_transaction(
+                transaction_id
+            )
+        )
+
+        if metadata.get(
+            "state"
+        ) != "active":
+            raise RuntimeTransactionError(
+                f"Transaction is not active: "
+                f"{transaction_id}"
+            )
+
+        failure_record = {
+            "failed_at": utc_now(),
+            "reason": reason,
+        }
+
+        failure_record[
+            "digest"
+        ] = digest(
+            failure_record
+        )
+
+        metadata[
+            "state"
+        ] = "failed"
+
+        metadata[
+            "failure"
+        ] = failure_record
+
+        self.write_metadata(
+            transaction_path,
+            metadata,
+        )
+
+        destination = (
+            FAILED_ROOT
+            / transaction_id
+        )
+
+        os.replace(
+            transaction_path,
+            destination,
+        )
+
+        metadata = load_json(
+            self.metadata_path(
+                destination
+            ),
+            default={},
+        )
+
+        self.update_index(
+            metadata
+        )
+
+        event = self.append_event(
+            transaction_id,
+            "fail",
+            failure_record,
+        )
+
+        return {
+            "operation": "fail",
+            "passed": False,
+            "transaction_id": (
+                transaction_id
+            ),
+            "state": "failed",
+            "path": str(
+                destination
+            ),
+            "failure": failure_record,
+            "event": event,
+        }
+
+    def run(
+        self,
+        *,
+        action: str,
+        subsystems: list[str],
+        rollback_on_failure: bool,
+    ) -> dict[str, Any]:
+        with RuntimeLock():
+            begin_result = self.begin(
+                action=action,
+                subsystems=subsystems,
+            )
+
+            transaction_id = str(
+                begin_result[
+                    "transaction_id"
+                ]
+            )
+
+            execution = self.execute(
+                transaction_id,
+                stop_on_failure=True,
+            )
+
+            if execution[
+                "passed"
+            ]:
+                final = self.commit(
+                    transaction_id
+                )
+
+                return {
+                    "operation": "run",
+                    "passed": True,
+                    "transaction_id": (
+                        transaction_id
+                    ),
+                    "begin": begin_result,
+                    "execution": execution,
+                    "final": final,
+                }
+
+            if rollback_on_failure:
+                final = self.rollback(
+                    transaction_id,
+                    reason=(
+                        "automatic rollback "
+                        "after execution failure"
+                    ),
+                )
+
+            else:
+                final = self.fail(
+                    transaction_id,
+                    reason=(
+                        "execution failure"
+                    ),
+                )
+
+            return {
+                "operation": "run",
+                "passed": False,
+                "transaction_id": (
+                    transaction_id
+                ),
+                "begin": begin_result,
+                "execution": execution,
+                "final": final,
+            }
+
+    def status(
+        self,
+        transaction_id: str | None,
+    ) -> dict[str, Any]:
+        if transaction_id:
+            path, metadata = (
+                self.load_transaction(
+                    transaction_id
+                )
+            )
+
+            return {
+                "operation": "status",
+                "passed": True,
+                "transaction_id": (
+                    transaction_id
+                ),
+                "path": str(
+                    path
+                ),
+                "transaction": metadata,
+            }
+
+        index = load_json(
+            INDEX_PATH,
+            default={},
+        )
+
+        head = load_json(
+            HEAD_PATH,
+            default={},
+        )
+
+        if not isinstance(
+            index,
+            dict,
+        ):
+            index = {}
+
+        if not isinstance(
+            head,
+            dict,
+        ):
+            head = {}
+
+        return {
+            "operation": "status",
+            "passed": True,
+            "active_count": len(
+                list(
+                    ACTIVE_ROOT.iterdir()
+                )
+            ),
+            "committed_count": len(
+                list(
+                    COMMITTED_ROOT.iterdir()
+                )
+            ),
+            "rolled_back_count": len(
+                list(
+                    ROLLED_BACK_ROOT.iterdir()
+                )
+            ),
+            "failed_count": len(
+                list(
+                    FAILED_ROOT.iterdir()
+                )
+            ),
+            "head": head,
+            "index": index,
+        }
+
+    def verify(
+        self,
+    ) -> dict[str, Any]:
+        issues = []
+
+        events = read_jsonl(
+            EVENT_LOG_PATH
+        )
+
+        previous_digest = None
+
+        for expected_sequence, event in enumerate(
+            events,
+            start=1,
+        ):
+            if event.get(
+                "sequence"
+            ) != expected_sequence:
+                issues.append(
+                    {
+                        "code": (
+                            "event_sequence_mismatch"
+                        ),
+                        "expected": (
+                            expected_sequence
+                        ),
+                        "actual": event.get(
+                            "sequence"
+                        ),
+                    }
+                )
+
+            if event.get(
+                "previous_digest"
+            ) != previous_digest:
+                issues.append(
+                    {
+                        "code": (
+                            "event_previous_digest_mismatch"
+                        ),
+                        "sequence": (
+                            expected_sequence
+                        ),
+                        "expected": (
+                            previous_digest
+                        ),
+                        "actual": event.get(
+                            "previous_digest"
+                        ),
+                    }
+                )
+
+            expected_digest = digest(
+                {
+                    key: value
+                    for key, value
+                    in event.items()
+                    if key != "digest"
+                }
+            )
+
+            if event.get(
+                "digest"
+            ) != expected_digest:
+                issues.append(
+                    {
+                        "code": (
+                            "event_digest_mismatch"
+                        ),
+                        "sequence": (
+                            expected_sequence
+                        ),
+                    }
+                )
+
+            previous_digest = event.get(
+                "digest"
+            )
+
+        index = load_json(
+            INDEX_PATH,
+            default={},
+        )
+
+        if isinstance(
+            index,
+            dict,
+        ):
+            expected_index_digest = digest(
+                {
+                    key: value
+                    for key, value
+                    in index.items()
+                    if key != "digest"
+                }
+            )
+
+            if (
+                index
+                and index.get(
+                    "digest"
+                ) != expected_index_digest
+            ):
+                issues.append(
+                    {
+                        "code": (
+                            "index_digest_mismatch"
+                        )
+                    }
+                )
+
+        for root, expected_state in (
+            (
+                ACTIVE_ROOT,
+                "active",
+            ),
+            (
+                COMMITTED_ROOT,
+                "committed",
+            ),
+            (
+                ROLLED_BACK_ROOT,
+                "rolled_back",
+            ),
+            (
+                FAILED_ROOT,
+                "failed",
+            ),
+        ):
+            for transaction_path in sorted(
+                root.iterdir()
+            ):
+                if not transaction_path.is_dir():
+                    continue
+
+                metadata = load_json(
+                    self.metadata_path(
+                        transaction_path
+                    ),
+                    default={},
+                )
+
+                if not isinstance(
+                    metadata,
+                    dict,
+                ):
+                    issues.append(
+                        {
+                            "code": (
+                                "invalid_transaction_metadata"
+                            ),
+                            "path": str(
+                                transaction_path
+                            ),
+                        }
+                    )
+
+                    continue
+
+                if metadata.get(
+                    "state"
+                ) != expected_state:
+                    issues.append(
+                        {
+                            "code": (
+                                "transaction_state_path_mismatch"
+                            ),
+                            "transaction_id": (
+                                transaction_path.name
+                            ),
+                            "expected": (
+                                expected_state
+                            ),
+                            "actual": metadata.get(
+                                "state"
+                            ),
+                        }
+                    )
+
+                expected_metadata_digest = digest(
+                    {
+                        key: value
+                        for key, value
+                        in metadata.items()
+                        if key != "digest"
+                    }
+                )
+
+                if metadata.get(
+                    "digest"
+                ) != expected_metadata_digest:
+                    issues.append(
+                        {
+                            "code": (
+                                "transaction_digest_mismatch"
+                            ),
+                            "transaction_id": (
+                                transaction_path.name
+                            ),
+                        }
+                    )
+
+        result = {
+            "operation": "verify",
+            "passed": not issues,
+            "event_count": len(
+                events
+            ),
+            "issue_count": len(
+                issues
+            ),
+            "issues": issues,
+            "head_event_digest": (
+                previous_digest
+            ),
+        }
+
+        result[
+            "digest"
+        ] = digest(
+            result
+        )
+
+        return result
+
+
+def parse_subsystems(
+    values: list[str] | None,
+) -> list[str]:
+    if not values:
+        return list(
+            EXECUTION_ORDER
+        )
+
+    result = []
+
+    for value in values:
+        for subsystem in value.split(
+            ","
+        ):
+            subsystem = subsystem.strip()
+
+            if not subsystem:
+                continue
+
+            if subsystem not in EXECUTION_ORDER:
+                raise RuntimeTransactionError(
+                    f"Unknown subsystem: "
+                    f"{subsystem}"
+                )
+
+            if subsystem not in result:
+                result.append(
+                    subsystem
+                )
+
+    return result
+
+
+def print_result(
+    payload: Any,
+) -> None:
+    print(
+        json.dumps(
+            payload,
+            indent=2,
+            sort_keys=True,
+            ensure_ascii=False,
+            default=str,
+        )
+    )
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+
+    subparsers = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    begin_parser = subparsers.add_parser(
+        "begin"
+    )
+
+    begin_parser.add_argument(
+        "action",
+        choices=SUPPORTED_ACTIONS,
+    )
+
+    begin_parser.add_argument(
+        "--subsystem",
+        action="append",
+        dest="subsystems",
+    )
+
+    execute_parser = subparsers.add_parser(
+        "execute"
+    )
+
+    execute_parser.add_argument(
+        "transaction_id"
+    )
+
+    execute_parser.add_argument(
+        "--continue-on-failure",
+        action="store_true",
+    )
+
+    commit_parser = subparsers.add_parser(
+        "commit"
+    )
+
+    commit_parser.add_argument(
+        "transaction_id"
+    )
+
+    rollback_parser = subparsers.add_parser(
+        "rollback"
+    )
+
+    rollback_parser.add_argument(
+        "transaction_id"
+    )
+
+    rollback_parser.add_argument(
+        "--reason",
+        default="manual rollback",
+    )
+
+    run_parser = subparsers.add_parser(
+        "run"
+    )
+
+    run_parser.add_argument(
+        "action",
+        choices=SUPPORTED_ACTIONS,
+    )
+
+    run_parser.add_argument(
+        "--subsystem",
+        action="append",
+        dest="subsystems",
+    )
+
+    run_parser.add_argument(
+        "--no-rollback",
+        action="store_true",
+    )
+
+    status_parser = subparsers.add_parser(
+        "status"
+    )
+
+    status_parser.add_argument(
+        "transaction_id",
+        nargs="?",
+    )
+
+    subparsers.add_parser(
+        "verify"
+    )
+
+    args = parser.parse_args()
+
+    transaction = RuntimeTransaction()
+
+    with RuntimeLock():
+        if args.command == "begin":
+            result = transaction.begin(
+                action=args.action,
+                subsystems=parse_subsystems(
+                    args.subsystems
+                ),
+            )
+
+        elif args.command == "execute":
+            result = transaction.execute(
+                args.transaction_id,
+                stop_on_failure=(
+                    not args.continue_on_failure
+                ),
+            )
+
+        elif args.command == "commit":
+            result = transaction.commit(
+                args.transaction_id
+            )
+
+        elif args.command == "rollback":
+            result = transaction.rollback(
+                args.transaction_id,
+                reason=args.reason,
+            )
+
+        elif args.command == "run":
+            result = transaction.run(
+                action=args.action,
+                subsystems=parse_subsystems(
+                    args.subsystems
+                ),
+                rollback_on_failure=(
+                    not args.no_rollback
+                ),
+            )
+
+        elif args.command == "status":
+            result = transaction.status(
+                args.transaction_id
+            )
+
+        elif args.command == "verify":
+            result = transaction.verify()
+
+        else:
+            raise RuntimeTransactionError(
+                args.command
+            )
+
+    print_result(
+        result
+    )
+
+    return (
+        0
+        if result.get(
+            "passed",
+            True,
+        )
+        else 1
+    )
+
+
+if __name__ == "__main__":
+    try:
+        raise SystemExit(
+            main()
+        )
+
+    except (
+        RuntimeTransactionError,
+        FileNotFoundError,
+    ) as error:
+        print_result(
+            {
+                "operation": "error",
+                "passed": False,
+                "error": type(
+                    error
+                ).__name__,
+                "message": str(
+                    error
+                ),
+            }
+        )
+
+        raise SystemExit(
+            1
+        )

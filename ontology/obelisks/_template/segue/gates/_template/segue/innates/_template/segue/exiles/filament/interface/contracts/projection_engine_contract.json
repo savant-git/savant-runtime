@@ -1,0 +1,22 @@
+{
+  "id": "contract.filament.projection_engine",
+  "kind": "contract",
+  "status": "active",
+  "authority": "USER_DIRECTIVE",
+  "owner": "filament",
+  "function": "projection",
+  "rule": "Filament owns runtime projection from authoritative primitives into generated files.",
+  "inputs": [
+    "authority_db",
+    "instances",
+    "templates",
+    "segues",
+    "policies"
+  ],
+  "outputs": [
+    "json_projections",
+    "markdown_projections",
+    "script_projections",
+    "audit_projections"
+  ]
+}

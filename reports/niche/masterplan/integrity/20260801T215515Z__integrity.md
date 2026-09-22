@@ -1,0 +1,25 @@
+# Masterplan Integrity Audit
+
+- Generated: `2026-08-01T21:55:15+00:00`
+- Passed: **False**
+- Graph digest: `63db8daf950920f24f1cb0cf7151a86c9cce8144f6343345448677d8ce50f8e2`
+- Tasks: **32**
+- Segues: **84**
+
+## Checks
+
+- Dependency cycles: **0**
+- Task integrity: **True**
+- Reference integrity: **True**
+- Roadmap integrity: **True**
+- Gate integrity: **False**
+
+## Collections
+
+- `attestations`: **True** (0 graph / 0 external)
+- `decisions`: **True** (0 graph / 0 external)
+- `events`: **True** (0 graph / 0 external)
+- `evidence`: **True** (0 graph / 0 external)
+- `receipts`: **True** (0 graph / 0 external)
+
+- Audit digest: `64912f1eee911a34f3ac53a886d8d9bc03cac6ded9c2d0521ba6526fe392bbd9`

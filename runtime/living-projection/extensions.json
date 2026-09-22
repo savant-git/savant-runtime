@@ -1,0 +1,401 @@
+{
+  "authority_effect": "none",
+  "capabilities": {
+    "atomic_publication": true,
+    "duplicate_authority": false,
+    "freshness_tracking": true,
+    "historical_backup_projection": false,
+    "incremental_surface_diff": true,
+    "living_persona_projection": true,
+    "living_sdump_mutation": false,
+    "living_sdump_observation": true,
+    "living_trait_registry_projection": true,
+    "owner_preservation": true,
+    "persona_runtime_discovery": true,
+    "projection_history": true,
+    "secret_values_serialized": false,
+    "source_hashing": true,
+    "trait_adjudication_visibility": true,
+    "trait_candidate_visibility": true,
+    "trait_capability_discovery": true,
+    "trait_evaluation_visibility": true,
+    "trait_evidence_visibility": true,
+    "trait_experiment_visibility": true,
+    "trait_history_visibility": true,
+    "trait_persistence_visibility": true
+  },
+  "change_count": 3,
+  "changed_surfaces": [
+    "persona",
+    "persona_traits",
+    "sdump"
+  ],
+  "filesystem_presence_establishes_authority": false,
+  "generated_at_unix_ns": 1788485323661804002,
+  "previous_projection_hash": null,
+  "projection_hash": "33fa9baa44fce24294de3841b4c6151a0d7f636aa6a04a9723f90fb68afd4d78",
+  "projection_only": true,
+  "schema": "savant.living-projection.extensions.v1",
+  "sequence": 1,
+  "source_authority_preserved": true,
+  "surface_count": 3,
+  "surface_digests": {
+    "persona": "e7507109efcfad1611aca69f942ece673c836a5d862b415003083544427268d8",
+    "persona_traits": "eb23c11088713092f6a55513c41c3fa12bb1ea861c759b30374d48901b71bcc7",
+    "sdump": "c5a5b6fc6136f091d891a469c849682c929e6ec079715802cd368d5a55395435"
+  },
+  "surfaces": {
+    "persona": {
+      "authority_effect": "none",
+      "digest": "9aa9166a388cf30af03682c7868319097195b6c81a827240203dcf265dda282c",
+      "duplicate_persona_state_created": false,
+      "filesystem_presence_establishes_authority": false,
+      "id": "living:persona",
+      "layer_digests": {
+        "runtime": "f9f4f6df914858bac278791c4eeb75cb70137f765ba83bb6d7390b3b253813ea",
+        "trait_registry": "3a087c85b1be84a9dfdcfde29913a5d60fb09eb3034dcf35de41be8b35ac8d90"
+      },
+      "layers": {
+        "persona_engine": {
+          "owner": "envoy",
+          "projection_only": true,
+          "source": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/runtime/persona_engine.py"
+        },
+        "trait_adjudication": {
+          "owner": "envoy",
+          "projection_only": true,
+          "source": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/runtime/trait_adjudication.py"
+        },
+        "trait_candidates": {
+          "owner": "envoy",
+          "projection_only": true,
+          "source": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/runtime/trait_candidate_persistence.py"
+        },
+        "trait_evaluation": {
+          "owner": "envoy",
+          "projection_only": true,
+          "source": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/runtime/trait_evaluation.py"
+        },
+        "trait_evidence": {
+          "owner": "envoy",
+          "projection_only": true,
+          "source": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/runtime/trait_evidence.py"
+        },
+        "trait_experiment": {
+          "owner": "envoy",
+          "projection_only": true,
+          "source": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/runtime/trait_experiment.py"
+        },
+        "trait_history": {
+          "owner": "envoy",
+          "projection_only": true,
+          "source": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/runtime/trait_history.py"
+        },
+        "trait_persistence": {
+          "owner": "envoy",
+          "projection_only": true,
+          "source": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/runtime/trait_persistence.py"
+        },
+        "trait_registry": {
+          "owner": "envoy",
+          "projection_only": true,
+          "source": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/registry/traits"
+        },
+        "trait_state": {
+          "owner": "envoy",
+          "projection_only": true,
+          "source": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/runtime/trait_state.py"
+        }
+      },
+      "owner": "envoy",
+      "projection_only": true,
+      "runtime": {
+        "absent_components": [],
+        "authority_effect": "none",
+        "capabilities": {
+          "adjudication": true,
+          "candidate_persistence": true,
+          "evaluation": true,
+          "evidence": true,
+          "experiment": true,
+          "persona_engine": true,
+          "trait_history": true,
+          "trait_persistence": true,
+          "trait_state": true
+        },
+        "components": {
+          "persona_engine": {
+            "authority_effect": "none",
+            "freshness": {
+              "age_seconds": 1292867.648708494,
+              "state": "stale"
+            },
+            "mtime_ns": 1787192455912498940,
+            "path": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/runtime/persona_engine.py",
+            "present": true,
+            "sha256": "dba9d64154e96a80555a05405de5eca51a4e15fb47a23745c21d72d128fa8c53",
+            "size": 34527
+          },
+          "trait_adjudication": {
+            "authority_effect": "none",
+            "freshness": {
+              "age_seconds": 1757306.831799756,
+              "state": "stale"
+            },
+            "mtime_ns": 1786728016731560241,
+            "path": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/runtime/trait_adjudication.py",
+            "present": true,
+            "sha256": "b8c4bed5241138343b22d77d3d5d5799f285701c931c57d03900507066d181f5",
+            "size": 17204
+          },
+          "trait_candidate_persistence": {
+            "authority_effect": "none",
+            "freshness": {
+              "age_seconds": 1751297.055440095,
+              "state": "stale"
+            },
+            "mtime_ns": 1786734026506980689,
+            "path": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/runtime/trait_candidate_persistence.py",
+            "present": true,
+            "sha256": "50bf711110a787372406d8150f29067be8d084c189f724de8caa7cd37fb798bf",
+            "size": 17029
+          },
+          "trait_evaluation": {
+            "authority_effect": "none",
+            "freshness": {
+              "age_seconds": 1757736.593546135,
+              "state": "stale"
+            },
+            "mtime_ns": 1786727586969536098,
+            "path": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/runtime/trait_evaluation.py",
+            "present": true,
+            "sha256": "f0625968c0297b108cae4ef536f964f320de836270c0c1ba70ee2c3aeabca833",
+            "size": 15721
+          },
+          "trait_evidence": {
+            "authority_effect": "none",
+            "freshness": {
+              "age_seconds": 1752716.373953882,
+              "state": "stale"
+            },
+            "mtime_ns": 1786732607188810431,
+            "path": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/runtime/trait_evidence.py",
+            "present": true,
+            "sha256": "6d393073b5c304b180721636a441c8bb88d82b7d2add6e9dfa788f733f7bc777",
+            "size": 20642
+          },
+          "trait_experiment": {
+            "authority_effect": "none",
+            "freshness": {
+              "age_seconds": 1757838.634564822,
+              "state": "stale"
+            },
+            "mtime_ns": 1786727484929098407,
+            "path": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/runtime/trait_experiment.py",
+            "present": true,
+            "sha256": "11d9921b4aa47167c9834ba4eec3556db6dfdbba29c38a63eaae5f34f1b7f466",
+            "size": 20199
+          },
+          "trait_history": {
+            "authority_effect": "none",
+            "freshness": {
+              "age_seconds": 1753991.470558615,
+              "state": "stale"
+            },
+            "mtime_ns": 1786731332091250665,
+            "path": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/runtime/trait_history.py",
+            "present": true,
+            "sha256": "1ec68934776ca43a7880641ec129caf743cb287aba380f531ad04789cd801d49",
+            "size": 17479
+          },
+          "trait_persistence": {
+            "authority_effect": "none",
+            "freshness": {
+              "age_seconds": 1752074.805505438,
+              "state": "stale"
+            },
+            "mtime_ns": 1786733248756610731,
+            "path": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/runtime/trait_persistence.py",
+            "present": true,
+            "sha256": "15b3037f87d0fa8fce0358d8f50c7e1d74209caf463e2f46321b17183fb8bebd",
+            "size": 13236
+          },
+          "trait_state": {
+            "authority_effect": "none",
+            "freshness": {
+              "age_seconds": 1751190.075310459,
+              "state": "stale"
+            },
+            "mtime_ns": 1786734133486185710,
+            "path": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/runtime/trait_state.py",
+            "present": true,
+            "sha256": "6ff75574774f8431705bea7ea60801e3af085955408b674e20804ed0e77d650c",
+            "size": 8646
+          }
+        },
+        "digest": "f9f4f6df914858bac278791c4eeb75cb70137f765ba83bb6d7390b3b253813ea",
+        "owner": "envoy",
+        "present_components": [
+          "persona_engine",
+          "trait_adjudication",
+          "trait_candidate_persistence",
+          "trait_evaluation",
+          "trait_evidence",
+          "trait_experiment",
+          "trait_history",
+          "trait_persistence",
+          "trait_state"
+        ],
+        "projection_only": true,
+        "runtime_root": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/runtime",
+        "schema": "savant.living-persona-runtime.v1"
+      },
+      "schema": "savant.living-persona.v1",
+      "source_authority_preserved": true,
+      "trait_registry": {
+        "authority_effect": "none",
+        "digest": "3a087c85b1be84a9dfdcfde29913a5d60fb09eb3034dcf35de41be8b35ac8d90",
+        "documents": [
+          {
+            "digest": "7619138c4632ced29aa20c3df8d32f35d8cc7a0f306c7c1098f6a11be4d37db2",
+            "path": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/registry/traits/orobouros_traits.json",
+            "shape": {
+              "count": 5,
+              "keys": [
+                "owner",
+                "persona_scope",
+                "schema",
+                "status",
+                "traits"
+              ],
+              "type": "object"
+            }
+          }
+        ],
+        "file_count": 1,
+        "files": [
+          {
+            "authority_effect": "none",
+            "freshness": {
+              "age_seconds": 1925901.934335609,
+              "state": "stale"
+            },
+            "mtime_ns": 1786559421630528306,
+            "path": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/registry/traits/orobouros_traits.json",
+            "present": true,
+            "sha256": "1a724086ce36e2767b793e83e9e9433901ffb4305df2e6c4eb3eddf65d353709",
+            "size": 3835
+          }
+        ],
+        "owner": "envoy",
+        "projection_only": true,
+        "registry_root": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/registry/traits",
+        "schema": "savant.living-persona-trait-registry.v1"
+      }
+    },
+    "persona_traits": {
+      "authority_effect": "none",
+      "digest": "3a087c85b1be84a9dfdcfde29913a5d60fb09eb3034dcf35de41be8b35ac8d90",
+      "documents": [
+        {
+          "digest": "7619138c4632ced29aa20c3df8d32f35d8cc7a0f306c7c1098f6a11be4d37db2",
+          "path": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/registry/traits/orobouros_traits.json",
+          "shape": {
+            "count": 5,
+            "keys": [
+              "owner",
+              "persona_scope",
+              "schema",
+              "status",
+              "traits"
+            ],
+            "type": "object"
+          }
+        }
+      ],
+      "file_count": 1,
+      "files": [
+        {
+          "authority_effect": "none",
+          "freshness": {
+            "age_seconds": 1925901.934335609,
+            "state": "stale"
+          },
+          "mtime_ns": 1786559421630528306,
+          "path": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/registry/traits/orobouros_traits.json",
+          "present": true,
+          "sha256": "1a724086ce36e2767b793e83e9e9433901ffb4305df2e6c4eb3eddf65d353709",
+          "size": 3835
+        }
+      ],
+      "owner": "envoy",
+      "projection_only": true,
+      "registry_root": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy/registry/traits",
+      "schema": "savant.living-persona-trait-registry.v1"
+    },
+    "sdump": {
+      "authority_effect": "none",
+      "digest": "73a88daf84b4e9774df62033bb456fbda7476c88ebf1516eda5922f97919ceaf",
+      "duplicate_sdump_authority_created": false,
+      "existing_implementation_preserved": true,
+      "filesystem_presence_establishes_authority": false,
+      "freshness": {
+        "age_seconds": 507260.65857996,
+        "state": "stale"
+      },
+      "id": "living:sdump",
+      "latest": {
+        "mtime_ns": 1787978063002277415,
+        "path": "/root/savant-runtime/source/sdump-20260829t043318900049z/sdump_savant-runtime_20260829t043318900049z.txt",
+        "sha256": "ccaf384d732cbf9a72b6247168c0fc897141f9fa6a0f232704b5d918925c275c",
+        "size": 103056228
+      },
+      "mutation_enabled": false,
+      "owner": "existing-living-sdump",
+      "projection_only": true,
+      "runtime_surfaces": [
+        {
+          "authority_effect": "none",
+          "bytes": 0,
+          "directory_count": 0,
+          "file_count": 0,
+          "freshness": {
+            "age_seconds": null,
+            "state": "absent"
+          },
+          "newest_mtime_ns": null,
+          "path": "/root/savant-runtime/runtime/sdump",
+          "present": false
+        },
+        {
+          "authority_effect": "none",
+          "bytes": 0,
+          "directory_count": 0,
+          "file_count": 0,
+          "freshness": {
+            "age_seconds": null,
+            "state": "absent"
+          },
+          "newest_mtime_ns": null,
+          "path": "/root/savant-runtime/runtime/living-sdump",
+          "present": false
+        },
+        {
+          "authority_effect": "none",
+          "bytes": 52457258,
+          "directory_count": 1010,
+          "file_count": 2454,
+          "freshness": {
+            "age_seconds": 507403.071435911,
+            "state": "stale"
+          },
+          "newest_mtime_ns": 1787977920589414862,
+          "path": "/root/savant-runtime/tools/sdump-enterprise",
+          "present": true
+        }
+      ],
+      "schema": "savant.living-sdump-projection.v1"
+    }
+  },
+  "unchanged_surfaces": []
+}

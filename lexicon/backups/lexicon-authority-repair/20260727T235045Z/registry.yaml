@@ -1,0 +1,96 @@
+registry_id: savant.lexicon
+
+version: 1
+
+authority:
+
+  source: constitution
+
+  revision: initial
+
+  timestamp: null
+
+constitution: docs/LEXICON_CONSTITUTION.md
+
+schema: schemas/registry.schema.yaml
+
+policies:
+
+  - policies/identity.yaml
+  - policies/normalization.yaml
+  - policies/supersession.yaml
+
+validators:
+
+  - validators/validator_registry.yaml
+
+projections:
+
+  - projections/projection_registry.yaml
+
+lexemes:
+
+  - id: lex:core:authority
+    canonical: Authority
+    concept: Constitutional authority
+    layer: shard00
+    status: active
+
+  - id: lex:core:instance
+    canonical: Instance
+    concept: Concrete realization
+    layer: shard00
+    status: active
+
+  - id: lex:core:segue
+    canonical: Segue
+    concept: Directed transition
+    layer: shard00
+    status: active
+
+  - id: lex:core:projection
+    canonical: Projection
+    concept: Deterministic derived artifact
+    layer: shard00
+    status: active
+
+  - id: lex:core:lineage
+    canonical: Lineage
+    concept: Evolution history
+    layer: shard00
+    status: active
+
+  - id: lex:core:provenance
+    canonical: Provenance
+    concept: Origin authority
+    layer: shard00
+    status: active
+
+  - id: lex:core:kindred
+    canonical: Kindred
+    concept: Constitutional relationship
+    layer: shard00
+    status: active
+
+  - id: lex:core:lexeme
+    canonical: Lexeme
+    concept: Canonical vocabulary unit
+    layer: shard00
+    status: active
+
+  - id: lex:core:ontology
+    canonical: Ontology
+    concept: Constitutional knowledge graph
+    layer: shard00
+    status: active
+
+  - id: lex:core:validator
+    canonical: Validator
+    concept: Integrity verification
+    layer: shard00
+    status: active
+
+reserved:
+
+  - Kindred
+  - kindred

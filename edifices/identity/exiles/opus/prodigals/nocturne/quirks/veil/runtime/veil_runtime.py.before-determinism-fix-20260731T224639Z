@@ -1,0 +1,643 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import datetime as dt
+import hashlib
+import json
+import random
+import sys
+import time
+from pathlib import Path
+from typing import Any, Iterable
+
+NOCTURNE_ROOT = Path(__file__).resolve().parents[3]
+CONTRACTS_ROOT = NOCTURNE_ROOT / "contracts"
+
+if str(CONTRACTS_ROOT) not in sys.path:
+    sys.path.insert(
+        0,
+        str(CONTRACTS_ROOT),
+    )
+
+from nocturne_contracts import (  # noqa: E402
+    AuthorityState,
+    ConfidenceBand,
+    ExecutionMode,
+    FailureRecord,
+    ProvenanceEnvelope,
+    RiskLevel,
+    RouteHop,
+    RouteObservation,
+    RoutePlan,
+    RouteRequest,
+    SourceReference,
+    VeilResult,
+)
+
+
+RUNTIME_ID = "quirk.nocturne.veil.runtime"
+RUNTIME_VERSION = "1.0.0"
+
+DEFAULT_REPORT_ROOT = Path(
+    "/root/savant-runtime/reports/identity_quality/nocturne/veil"
+)
+
+DEFAULT_ROUTE_POOL = (
+    RouteHop(
+        hop_id="veil-hop-a",
+        jurisdiction="unassigned",
+        provider="internal-planner",
+        transport="relay",
+        trust=ConfidenceBand.UNKNOWN,
+    ),
+    RouteHop(
+        hop_id="veil-hop-b",
+        jurisdiction="unassigned",
+        provider="internal-planner",
+        transport="relay",
+        trust=ConfidenceBand.UNKNOWN,
+    ),
+    RouteHop(
+        hop_id="veil-hop-c",
+        jurisdiction="unassigned",
+        provider="internal-planner",
+        transport="relay",
+        trust=ConfidenceBand.UNKNOWN,
+    ),
+    RouteHop(
+        hop_id="veil-hop-d",
+        jurisdiction="unassigned",
+        provider="internal-planner",
+        transport="bridge",
+        trust=ConfidenceBand.UNKNOWN,
+    ),
+    RouteHop(
+        hop_id="veil-hop-e",
+        jurisdiction="unassigned",
+        provider="internal-planner",
+        transport="relay",
+        trust=ConfidenceBand.UNKNOWN,
+    ),
+    RouteHop(
+        hop_id="veil-hop-f",
+        jurisdiction="unassigned",
+        provider="internal-planner",
+        transport="bridge",
+        trust=ConfidenceBand.UNKNOWN,
+    ),
+)
+
+
+def utc_now() -> str:
+    return (
+        dt.datetime.now(dt.timezone.utc)
+        .replace(microsecond=0)
+        .isoformat()
+    )
+
+
+def canonical_bytes(
+    value: Any,
+) -> bytes:
+    if hasattr(value, "model_dump"):
+        value = value.model_dump(
+            mode="json",
+        )
+
+    return json.dumps(
+        value,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+
+
+def digest(
+    value: Any,
+) -> str:
+    return hashlib.sha256(
+        canonical_bytes(value)
+    ).hexdigest()
+
+
+def stable_seed(
+    request: RouteRequest,
+) -> int:
+    return int(
+        digest(request)[:16],
+        16,
+    )
+
+
+def provenance(
+    *,
+    sources: Iterable[SourceReference] = (),
+    transformations: Iterable[str] = (),
+) -> ProvenanceEnvelope:
+    return ProvenanceEnvelope(
+        sources=tuple(sources),
+        transformations=tuple(transformations),
+        generated_by=f"{RUNTIME_ID}@{RUNTIME_VERSION}",
+        generated_at=utc_now(),
+    )
+
+
+def select_hops(
+    request: RouteRequest,
+    pool: tuple[RouteHop, ...],
+) -> tuple[RouteHop, ...]:
+    eligible: list[RouteHop] = []
+
+    preferred = {
+        item.lower()
+        for item in request.preferred_transports
+    }
+
+    avoided = {
+        item.lower()
+        for item in request.avoid_jurisdictions
+    }
+
+    for hop in pool:
+        jurisdiction = (
+            hop.jurisdiction or ""
+        ).lower()
+
+        if jurisdiction in avoided:
+            continue
+
+        if preferred and hop.transport.lower() not in preferred:
+            continue
+
+        eligible.append(hop)
+
+    if len(eligible) < request.required_hops:
+        raise ValueError(
+            "Insufficient route candidates satisfy the declared policy."
+        )
+
+    randomizer = random.Random(
+        stable_seed(request)
+    )
+
+    selected = randomizer.sample(
+        eligible,
+        request.required_hops,
+    )
+
+    return tuple(selected)
+
+
+def build_plan(
+    request: RouteRequest,
+    *,
+    pool: tuple[RouteHop, ...] = DEFAULT_ROUTE_POOL,
+) -> RoutePlan:
+    started = time.perf_counter()
+
+    warnings: list[str] = []
+
+    if request.execution_mode != request.policy.execution_mode:
+        raise ValueError(
+            "Request execution mode and security-policy mode differ."
+        )
+
+    if request.execution_mode == ExecutionMode.EXECUTE:
+        if not request.policy.network_access:
+            raise PermissionError(
+                "Network execution is denied by policy."
+            )
+
+        if not request.policy.allowed_hosts:
+            raise PermissionError(
+                "Execute mode requires an explicit allowed_hosts boundary."
+            )
+
+    if request.destination not in request.policy.allowed_hosts:
+        if request.execution_mode == ExecutionMode.EXECUTE:
+            raise PermissionError(
+                "Destination is outside the authorized host boundary."
+            )
+
+        warnings.append(
+            "Destination is not in allowed_hosts; plan remains non-executable."
+        )
+
+    hops = select_hops(
+        request,
+        pool,
+    )
+
+    policy_digest = digest(
+        request.policy
+    )
+
+    plan_body = {
+        "request_id": request.request_id,
+        "execution_mode": request.execution_mode.value,
+        "destination": request.destination,
+        "hops": [
+            hop.model_dump(
+                mode="json",
+            )
+            for hop in hops
+        ],
+        "timing_jitter_ms": request.timing_jitter_ms,
+        "rotation_interval_seconds": request.rotation_interval_seconds,
+        "policy_digest": policy_digest,
+    }
+
+    plan_digest = digest(
+        plan_body
+    )
+
+    executable = (
+        request.execution_mode == ExecutionMode.EXECUTE
+        and request.policy.network_access
+        and request.destination in request.policy.allowed_hosts
+    )
+
+    elapsed = time.perf_counter() - started
+
+    return RoutePlan(
+        plan_id=f"veil-plan-{plan_digest[:20]}",
+        request_id=request.request_id,
+        execution_mode=request.execution_mode,
+        destination=request.destination,
+        hops=hops,
+        timing_jitter_ms=request.timing_jitter_ms,
+        rotation_interval_seconds=request.rotation_interval_seconds,
+        deterministic=True,
+        executable=executable,
+        policy_digest=policy_digest,
+        plan_digest=plan_digest,
+        warnings=tuple(warnings),
+        provenance=provenance(
+            sources=request.provenance.sources,
+            transformations=(
+                "validate_route_request",
+                "apply_security_policy",
+                "filter_route_candidates",
+                "deterministically_select_route",
+                f"plan_duration_seconds={elapsed:.9f}",
+            ),
+        ),
+    )
+
+
+def simulate_plan(
+    request: RouteRequest,
+    plan: RoutePlan,
+) -> RouteObservation:
+    seed = int(
+        plan.plan_digest[:16],
+        16,
+    )
+    randomizer = random.Random(seed)
+
+    latency = round(
+        randomizer.uniform(
+            40.0,
+            350.0,
+        ),
+        3,
+    )
+
+    failures: list[str] = []
+
+    if (
+        request.maximum_latency_ms is not None
+        and latency > request.maximum_latency_ms
+    ):
+        failures.append(
+            "simulated_latency_exceeds_declared_maximum"
+        )
+
+    confidence = (
+        ConfidenceBand.MODERATE
+        if not failures
+        else ConfidenceBand.LOW
+    )
+
+    return RouteObservation(
+        observation_id=(
+            f"veil-observation-{digest([request.request_id, plan.plan_id])[:20]}"
+        ),
+        request_id=request.request_id,
+        plan_id=plan.plan_id,
+        authority=AuthorityState.OBSERVED,
+        confidence=confidence,
+        reachable=not failures,
+        latency_ms=latency,
+        failures=tuple(failures),
+        evidence=(),
+        provenance=provenance(
+            sources=request.provenance.sources,
+            transformations=(
+                "deterministic_route_simulation",
+                "simulated_values_are_not_external_observations",
+            ),
+        ),
+    )
+
+
+def failure_result(
+    request_id: str,
+    operation: str,
+    exc: Exception,
+    started: float,
+) -> VeilResult:
+    elapsed = time.perf_counter() - started
+
+    if isinstance(exc, PermissionError):
+        code = "veil.policy.denied"
+        risk = RiskLevel.HIGH
+        recoverable = True
+    elif isinstance(exc, ValueError):
+        code = "veil.input.invalid"
+        risk = RiskLevel.MODERATE
+        recoverable = True
+    else:
+        code = "veil.runtime.failure"
+        risk = RiskLevel.UNKNOWN
+        recoverable = False
+
+    envelope = provenance(
+        transformations=(
+            "capture_failure",
+        ),
+    )
+
+    failure = FailureRecord(
+        failure_id=f"veil-failure-{digest([request_id, operation, repr(exc)])[:20]}",
+        code=code,
+        message=str(exc),
+        recoverable=recoverable,
+        retryable=False,
+        risk=risk,
+        stage=operation,
+        details={
+            "exception_type": type(exc).__name__,
+        },
+        provenance=envelope,
+    )
+
+    return VeilResult(
+        operation=operation,  # type: ignore[arg-type]
+        passed=False,
+        request_id=request_id,
+        failure=failure,
+        metrics={
+            "duration_seconds": elapsed,
+            "passed": False,
+        },
+        provenance=envelope,
+    )
+
+
+def run(
+    request: RouteRequest,
+) -> VeilResult:
+    started = time.perf_counter()
+
+    operation = {
+        ExecutionMode.PLAN: "plan_route",
+        ExecutionMode.SIMULATE: "simulate_route",
+        ExecutionMode.EXECUTE: "execute_route",
+    }[request.execution_mode]
+
+    try:
+        plan = build_plan(
+            request
+        )
+
+        observation = None
+
+        if request.execution_mode == ExecutionMode.SIMULATE:
+            observation = simulate_plan(
+                request,
+                plan,
+            )
+
+        if request.execution_mode == ExecutionMode.EXECUTE:
+            raise PermissionError(
+                "Live network execution adapter is not installed. "
+                "Veil currently supports deterministic planning and simulation only."
+            )
+
+        elapsed = time.perf_counter() - started
+
+        envelope = provenance(
+            sources=request.provenance.sources,
+            transformations=(
+                operation,
+                "emit_contract_valid_result",
+            ),
+        )
+
+        return VeilResult(
+            operation=operation,  # type: ignore[arg-type]
+            passed=True,
+            request_id=request.request_id,
+            plan=plan,
+            observation=observation,
+            metrics={
+                "duration_seconds": elapsed,
+                "hop_count": len(plan.hops),
+                "warning_count": len(plan.warnings),
+                "passed": True,
+            },
+            provenance=envelope,
+        )
+
+    except Exception as exc:
+        return failure_result(
+            request.request_id,
+            operation,
+            exc,
+            started,
+        )
+
+
+def load_request(
+    path: Path | None,
+) -> RouteRequest:
+    if path is None:
+        raw = sys.stdin.read()
+    else:
+        raw = path.read_text(
+            encoding="utf-8"
+        )
+
+    value = json.loads(raw)
+
+    return RouteRequest.model_validate(
+        value
+    )
+
+
+def write_result(
+    result: VeilResult,
+    output: Path | None,
+) -> None:
+    rendered = json.dumps(
+        result.model_dump(
+            mode="json",
+        ),
+        ensure_ascii=False,
+        indent=2,
+        sort_keys=True,
+    ) + "\n"
+
+    if output is None:
+        print(
+            rendered,
+            end="",
+        )
+        return
+
+    output.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+    output.write_text(
+        rendered,
+        encoding="utf-8",
+    )
+
+
+def example_request() -> RouteRequest:
+    return RouteRequest(
+        request_id="veil-example-request",
+        destination="example.invalid",
+        purpose="Demonstrate deterministic planning without network execution.",
+        execution_mode=ExecutionMode.PLAN,
+        required_hops=3,
+        preferred_transports=(),
+        timing_jitter_ms=(100, 900),
+        rotation_interval_seconds=600,
+        policy={
+            "execution_mode": "plan",
+            "network_access": False,
+            "filesystem_read": False,
+            "filesystem_write": False,
+            "subprocess_access": False,
+            "secret_access": False,
+            "allowed_hosts": [],
+            "allowed_paths": [],
+            "allowed_commands": [],
+            "audit_required": True,
+        },
+        provenance={
+            "sources": [],
+            "transformations": [],
+            "generated_by": "veil-example",
+            "generated_at": utc_now(),
+        },
+    )
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Veil deterministic route-policy planner and simulator."
+        )
+    )
+
+    subparsers = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    run_parser = subparsers.add_parser(
+        "run"
+    )
+    run_parser.add_argument(
+        "--input",
+        type=Path,
+    )
+    run_parser.add_argument(
+        "--output",
+        type=Path,
+    )
+
+    example_parser = subparsers.add_parser(
+        "example"
+    )
+    example_parser.add_argument(
+        "--output",
+        type=Path,
+    )
+
+    subparsers.add_parser(
+        "schema"
+    )
+
+    args = parser.parse_args()
+
+    if args.command == "run":
+        request = load_request(
+            args.input
+        )
+        result = run(
+            request
+        )
+        write_result(
+            result,
+            args.output,
+        )
+        return 0 if result.passed else 1
+
+    if args.command == "example":
+        request = example_request()
+        rendered = json.dumps(
+            request.model_dump(
+                mode="json",
+            ),
+            ensure_ascii=False,
+            indent=2,
+            sort_keys=True,
+        ) + "\n"
+
+        if args.output is None:
+            print(
+                rendered,
+                end="",
+            )
+        else:
+            args.output.parent.mkdir(
+                parents=True,
+                exist_ok=True,
+            )
+            args.output.write_text(
+                rendered,
+                encoding="utf-8",
+            )
+
+        return 0
+
+    if args.command == "schema":
+        value = {
+            "route_request": RouteRequest.model_json_schema(),
+            "route_plan": RoutePlan.model_json_schema(),
+            "route_observation": RouteObservation.model_json_schema(),
+            "veil_result": VeilResult.model_json_schema(),
+        }
+        print(
+            json.dumps(
+                value,
+                ensure_ascii=False,
+                indent=2,
+                sort_keys=True,
+            )
+        )
+        return 0
+
+    return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

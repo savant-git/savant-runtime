@@ -1,0 +1,1732 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import fnmatch
+import hashlib
+import json
+import os
+import re
+import tempfile
+
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Iterable, Mapping
+
+
+from runtime.living_governance import (
+    append_event,
+    authority_order,
+    canonical_json,
+    projection_root,
+    read_events,
+    resolved_records,
+)
+
+
+schema = "savant.living-policy.v1"
+
+policy_stream = "policies"
+
+receipt_root = (
+    projection_root
+    / "receipts"
+)
+
+snapshot_root = (
+    projection_root
+    / "snapshots"
+)
+
+manifest_path = (
+    projection_root
+    / "policy-manifest.json"
+)
+
+
+effects = {
+    "allow",
+    "deny",
+    "conditional",
+    "advisory",
+    "require_authority",
+}
+
+enforcement_modes = {
+    "advisory",
+    "warn",
+    "block",
+    "require-authority",
+}
+
+epistemic_states = {
+    "fact",
+    "assertion",
+    "inference",
+    "estimate",
+    "speculation",
+    "unknown",
+    "projection",
+}
+
+terminal_statuses = {
+    "superseded",
+    "withdrawn",
+    "inactive",
+    "revoked",
+}
+
+secret_patterns = (
+    re.compile(
+        r"\bsk-[A-Za-z0-9_-]{20,}\b"
+    ),
+    re.compile(
+        r"\bgh[pousr]_[A-Za-z0-9]{20,}\b"
+    ),
+    re.compile(
+        r"\bAIza[A-Za-z0-9_-]{25,}\b"
+    ),
+    re.compile(
+        r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"
+    ),
+)
+
+historical_relationship_term = (
+    "kin"
+    + "ship"
+)
+
+savant_root = Path(
+    "/root/savant-runtime"
+).resolve()
+
+
+class living_policy_error(
+    RuntimeError
+):
+    pass
+
+
+def utc_now() -> str:
+    return (
+        datetime.now(
+            timezone.utc
+        )
+        .replace(
+            microsecond=0
+        )
+        .isoformat()
+        .replace(
+            "+00:00",
+            "Z",
+        )
+    )
+
+
+def digest(
+    value: Any,
+) -> str:
+    return hashlib.sha256(
+        canonical_json(
+            value
+        ).encode(
+            "utf-8"
+        )
+    ).hexdigest()
+
+
+def atomic_write(
+    path: Path,
+    value: Any,
+) -> None:
+    path.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    descriptor, temporary = (
+        tempfile.mkstemp(
+            prefix=(
+                "."
+                + path.name
+                + "."
+            ),
+            dir=str(
+                path.parent
+            ),
+            text=True,
+        )
+    )
+
+    temporary_path = Path(
+        temporary
+    )
+
+    try:
+        with os.fdopen(
+            descriptor,
+            "w",
+            encoding="utf-8",
+        ) as handle:
+            handle.write(
+                json.dumps(
+                    value,
+                    indent=2,
+                    ensure_ascii=False,
+                    sort_keys=True,
+                )
+            )
+
+            handle.write(
+                "\n"
+            )
+
+            handle.flush()
+
+            os.fsync(
+                handle.fileno()
+            )
+
+        os.replace(
+            temporary_path,
+            path,
+        )
+
+    finally:
+        temporary_path.unlink(
+            missing_ok=True
+        )
+
+
+def parse_time(
+    value: str | None,
+) -> datetime | None:
+    if not value:
+        return None
+
+    normalized = value.strip()
+
+    if normalized.endswith(
+        "Z"
+    ):
+        normalized = (
+            normalized[
+                :-1
+            ]
+            + "+00:00"
+        )
+
+    try:
+        result = datetime.fromisoformat(
+            normalized
+        )
+
+    except ValueError as exc:
+        raise living_policy_error(
+            (
+                "invalid timestamp: "
+                + value
+            )
+        ) from exc
+
+    if result.tzinfo is None:
+        result = result.replace(
+            tzinfo=timezone.utc
+        )
+
+    return result.astimezone(
+        timezone.utc
+    )
+
+
+def normalize_string_list(
+    value: Any,
+) -> list[str]:
+    if value is None:
+        return []
+
+    if isinstance(
+        value,
+        str,
+    ):
+        value = [
+            value
+        ]
+
+    if not isinstance(
+        value,
+        list,
+    ):
+        raise living_policy_error(
+            "expected string or list"
+        )
+
+    return sorted(
+        {
+            str(
+                item
+            ).strip()
+            for item in value
+            if str(
+                item
+            ).strip()
+        }
+    )
+
+
+def normalize_mapping(
+    value: Any,
+    *,
+    name: str,
+) -> dict[str, Any]:
+    if value is None:
+        return {}
+
+    if not isinstance(
+        value,
+        Mapping,
+    ):
+        raise living_policy_error(
+            (
+                name
+                + " must be an object"
+            )
+        )
+
+    return {
+        str(
+            key
+        ):
+            item
+        for key, item
+        in value.items()
+    }
+
+
+def validate_predicate(
+    value: Mapping[str, Any],
+) -> dict[str, Any]:
+    operation = str(
+        value.get(
+            "op",
+            "",
+        )
+    ).strip()
+
+    field = str(
+        value.get(
+            "field",
+            "",
+        )
+    ).strip()
+
+    allowed = {
+        "equals",
+        "not_equals",
+        "in",
+        "not_in",
+        "exists",
+        "prefix",
+        "suffix",
+        "contains",
+        "glob",
+        "lowercase",
+        "absolute_path",
+        "under_runtime_root",
+        "no_secret",
+        "canonical_kindred",
+    }
+
+    if operation not in allowed:
+        raise living_policy_error(
+            (
+                "unsupported predicate: "
+                + operation
+            )
+        )
+
+    if not field:
+        raise living_policy_error(
+            "predicate field is required"
+        )
+
+    result = {
+        "op":
+            operation,
+
+        "field":
+            field,
+    }
+
+    if "value" in value:
+        result[
+            "value"
+        ] = value[
+            "value"
+        ]
+
+    return result
+
+
+def normalize_predicates(
+    value: Any,
+) -> list[dict[str, Any]]:
+    if value is None:
+        return []
+
+    if not isinstance(
+        value,
+        list,
+    ):
+        raise living_policy_error(
+            "predicates must be a list"
+        )
+
+    return [
+        validate_predicate(
+            item
+        )
+        for item in value
+        if isinstance(
+            item,
+            Mapping,
+        )
+    ]
+
+
+def normalize_exceptions(
+    value: Any,
+) -> list[dict[str, Any]]:
+    if value is None:
+        return []
+
+    if not isinstance(
+        value,
+        list,
+    ):
+        raise living_policy_error(
+            "exceptions must be a list"
+        )
+
+    output = []
+
+    for item in value:
+        if not isinstance(
+            item,
+            Mapping,
+        ):
+            raise living_policy_error(
+                "exception must be an object"
+            )
+
+        exception_id = str(
+            item.get(
+                "id",
+                "",
+            )
+        ).strip()
+
+        if not exception_id:
+            raise living_policy_error(
+                "exception id is required"
+            )
+
+        output.append(
+            {
+                "id":
+                    exception_id,
+
+                "selectors":
+                    normalize_mapping(
+                        item.get(
+                            "selectors"
+                        ),
+                        name=
+                            "exception selectors",
+                    ),
+
+                "effective_from":
+                    item.get(
+                        "effective_from"
+                    ),
+
+                "effective_until":
+                    item.get(
+                        "effective_until"
+                    ),
+
+                "reason":
+                    str(
+                        item.get(
+                            "reason",
+                            "",
+                        )
+                    ).strip(),
+            }
+        )
+
+    return output
+
+
+def make_policy_record(
+    *,
+    semantic_id: str,
+    text: str,
+    authority: str,
+    priority: int = 1000,
+    specificity: int = 0,
+    status: str = "active",
+    policy_type: str = "policy",
+    scope: str = "global",
+    subject: str | None = None,
+    target: str | None = None,
+    action: str | None = None,
+    effect: str = "conditional",
+    enforcement: str = "advisory",
+    selectors: Mapping[str, Any] | None = None,
+    predicates: list[Mapping[str, Any]] | None = None,
+    exceptions: list[Mapping[str, Any]] | None = None,
+    evidence_requirements: list[str] | None = None,
+    epistemic_state: str = "assertion",
+    confidence: float | None = None,
+    effective_from: str | None = None,
+    effective_until: str | None = None,
+    reason_code: str | None = None,
+    remediation: str | None = None,
+    dependencies: list[str] | None = None,
+    relationships: list[Mapping[str, str]] | None = None,
+    supersedes: list[str] | None = None,
+    extends: list[str] | None = None,
+    provenance: Mapping[str, Any] | None = None,
+    version: int = 1,
+) -> dict[str, Any]:
+    semantic_id = semantic_id.strip()
+
+    if not semantic_id:
+        raise living_policy_error(
+            "policy id is required"
+        )
+
+    if semantic_id != semantic_id.lower():
+        raise living_policy_error(
+            (
+                "savant policy ids "
+                "must be lowercase"
+            )
+        )
+
+    if authority not in authority_order:
+        raise living_policy_error(
+            (
+                "unknown authority class: "
+                + authority
+            )
+        )
+
+    if effect not in effects:
+        raise living_policy_error(
+            (
+                "unsupported policy effect: "
+                + effect
+            )
+        )
+
+    if enforcement not in enforcement_modes:
+        raise living_policy_error(
+            (
+                "unsupported enforcement mode: "
+                + enforcement
+            )
+        )
+
+    if epistemic_state not in epistemic_states:
+        raise living_policy_error(
+            (
+                "unsupported epistemic state: "
+                + epistemic_state
+            )
+        )
+
+    if confidence is not None:
+        confidence = float(
+            confidence
+        )
+
+        if not (
+            0.0
+            <= confidence
+            <= 1.0
+        ):
+            raise living_policy_error(
+                (
+                    "confidence must be "
+                    "between 0 and 1"
+                )
+            )
+
+    parse_time(
+        effective_from
+    )
+
+    parse_time(
+        effective_until
+    )
+
+    normalized_relationships = []
+
+    for relationship in (
+        relationships
+        or []
+    ):
+        kind = str(
+            relationship.get(
+                "kind",
+                "",
+            )
+        ).strip()
+
+        relation_target = str(
+            relationship.get(
+                "target",
+                "",
+            )
+        ).strip()
+
+        if (
+            not kind
+            or not relation_target
+        ):
+            raise living_policy_error(
+                (
+                    "relationship requires "
+                    "kind and target"
+                )
+            )
+
+        normalized_relationships.append(
+            {
+                "kind":
+                    kind,
+
+                "target":
+                    relation_target,
+            }
+        )
+
+    created_at = utc_now()
+
+    policy = {
+        "schema":
+            schema,
+
+        "id":
+            semantic_id,
+
+        "stream":
+            policy_stream,
+
+        "version":
+            int(
+                version
+            ),
+
+        "status":
+            status,
+
+        "authority":
+            authority,
+
+        "authority_rank":
+            authority_order[
+                authority
+            ],
+
+        "priority":
+            int(
+                priority
+            ),
+
+        "specificity":
+            int(
+                specificity
+            ),
+
+        "text":
+            text.strip(),
+
+        "policy_type":
+            policy_type,
+
+        "scope":
+            scope,
+
+        "subject":
+            subject,
+
+        "target":
+            target,
+
+        "action":
+            action,
+
+        "effect":
+            effect,
+
+        "enforcement":
+            enforcement,
+
+        "selectors":
+            normalize_mapping(
+                selectors,
+                name="selectors",
+            ),
+
+        "predicates":
+            normalize_predicates(
+                predicates
+            ),
+
+        "exceptions":
+            normalize_exceptions(
+                exceptions
+            ),
+
+        "evidence_requirements":
+            normalize_string_list(
+                evidence_requirements
+            ),
+
+        "epistemic_state":
+            epistemic_state,
+
+        "confidence":
+            confidence,
+
+        "effective_from":
+            effective_from,
+
+        "effective_until":
+            effective_until,
+
+        "reason_code":
+            (
+                reason_code
+                or semantic_id
+            ),
+
+        "remediation":
+            remediation,
+
+        "supersedes":
+            normalize_string_list(
+                supersedes
+            ),
+
+        "dependencies":
+            normalize_string_list(
+                dependencies
+            ),
+
+        "extends":
+            normalize_string_list(
+                extends
+            ),
+
+        "relationships":
+            sorted(
+                normalized_relationships,
+                key=lambda item: (
+                    item[
+                        "kind"
+                    ],
+                    item[
+                        "target"
+                    ],
+                ),
+            ),
+
+        "provenance":
+            {
+                "asserted_by":
+                    "user",
+
+                "method":
+                    "living-policy",
+
+                "created_at":
+                    created_at,
+
+                **dict(
+                    provenance
+                    or {}
+                ),
+            },
+    }
+
+    policy[
+        "semantic_digest"
+    ] = digest(
+        policy
+    )
+
+    return policy
+
+
+def policy_records(
+    events: Iterable[
+        Mapping[str, Any]
+    ] | None = None,
+) -> list[dict[str, Any]]:
+    source = (
+        list(
+            events
+        )
+        if events is not None
+        else read_events()
+    )
+
+    return [
+        dict(
+            record
+        )
+        for record
+        in resolved_records(
+            source
+        )
+        if record.get(
+            "stream"
+        )
+        == policy_stream
+    ]
+
+
+def policy_index(
+    events: Iterable[
+        Mapping[str, Any]
+    ] | None = None,
+) -> dict[str, dict[str, Any]]:
+    return {
+        str(
+            record[
+                "id"
+            ]
+        ):
+            record
+        for record
+        in policy_records(
+            events
+        )
+    }
+
+
+def next_version(
+    semantic_id: str,
+) -> int:
+    versions = []
+
+    for event in read_events():
+        record = event.get(
+            "record"
+        )
+
+        if not isinstance(
+            record,
+            Mapping,
+        ):
+            continue
+
+        if (
+            record.get(
+                "stream"
+            )
+            == policy_stream
+            and record.get(
+                "id"
+            )
+            == semantic_id
+        ):
+            versions.append(
+                int(
+                    record.get(
+                        "version",
+                        0,
+                    )
+                )
+            )
+
+    return (
+        max(
+            versions,
+            default=0,
+        )
+        + 1
+    )
+
+
+def assert_policy(
+    **values: Any,
+) -> dict[str, Any]:
+    semantic_id = str(
+        values[
+            "semantic_id"
+        )
+
+    values[
+        "version"
+    ] = next_version(
+        semantic_id
+    )
+
+    record = make_policy_record(
+        **values
+    )
+
+    event = append_event(
+        record
+    )
+
+    write_manifest()
+
+    return event
+
+
+def field_value(
+    context: Mapping[str, Any],
+    field: str,
+) -> tuple[
+    bool,
+    Any,
+]:
+    current: Any = context
+
+    for part in field.split(
+        "."
+    ):
+        if not isinstance(
+            current,
+            Mapping,
+        ):
+            return (
+                False,
+                None,
+            )
+
+        if part not in current:
+            return (
+                False,
+                None,
+            )
+
+        current = current[
+            part
+        ]
+
+    return (
+        True,
+        current,
+    )
+
+
+def selector_match(
+    expected: Any,
+    actual: Any,
+) -> bool:
+    if expected == "*":
+        return True
+
+    values = (
+        expected
+        if isinstance(
+            expected,
+            list,
+        )
+        else [
+            expected
+        ]
+    )
+
+    actual_text = str(
+        actual
+    )
+
+    for value in values:
+        candidate = str(
+            value
+        )
+
+        if fnmatch.fnmatchcase(
+            actual_text,
+            candidate,
+        ):
+            return True
+
+    return False
+
+
+def applicability(
+    policy: Mapping[str, Any],
+    context: Mapping[str, Any],
+) -> dict[str, Any]:
+    selectors = policy.get(
+        "selectors",
+        {},
+    )
+
+    unknown = []
+
+    failed = []
+
+    matched = []
+
+    for field, expected in sorted(
+        selectors.items()
+    ):
+        exists, actual = field_value(
+            context,
+            field,
+        )
+
+        if not exists:
+            unknown.append(
+                field
+            )
+
+            continue
+
+        if selector_match(
+            expected,
+            actual,
+        ):
+            matched.append(
+                field
+            )
+
+        else:
+            failed.append(
+                field
+            )
+
+    if failed:
+        state = "not_applicable"
+
+    elif unknown:
+        state = "unknown"
+
+    else:
+        state = "applicable"
+
+    return {
+        "state":
+            state,
+
+        "matched":
+            matched,
+
+        "failed":
+            failed,
+
+        "unknown":
+            unknown,
+    }
+
+
+def temporal_state(
+    policy: Mapping[str, Any],
+    *,
+    at: datetime,
+) -> str:
+    start = parse_time(
+        policy.get(
+            "effective_from"
+        )
+    )
+
+    end = parse_time(
+        policy.get(
+            "effective_until"
+        )
+    )
+
+    if (
+        start is not None
+        and at < start
+    ):
+        return "future"
+
+    if (
+        end is not None
+        and at >= end
+    ):
+        return "expired"
+
+    return "active"
+
+
+def exception_state(
+    policy: Mapping[str, Any],
+    context: Mapping[str, Any],
+    *,
+    at: datetime,
+) -> dict[str, Any] | None:
+    for exception in policy.get(
+        "exceptions",
+        [],
+    ):
+        start = parse_time(
+            exception.get(
+                "effective_from"
+            )
+        )
+
+        end = parse_time(
+            exception.get(
+                "effective_until"
+            )
+        )
+
+        if (
+            start is not None
+            and at < start
+        ):
+            continue
+
+        if (
+            end is not None
+            and at >= end
+        ):
+            continue
+
+        state = applicability(
+            {
+                "selectors":
+                    exception.get(
+                        "selectors",
+                        {},
+                    )
+            },
+            context,
+        )
+
+        if state[
+            "state"
+        ] == "applicable":
+            return dict(
+                exception
+            )
+
+    return None
+
+
+def predicate_result(
+    predicate: Mapping[str, Any],
+    context: Mapping[str, Any],
+) -> dict[str, Any]:
+    operation = str(
+        predicate[
+            "op"
+        )
+
+    field = str(
+        predicate[
+            "field"
+        )
+
+    exists, actual = field_value(
+        context,
+        field,
+    )
+
+    if (
+        operation
+        != "exists"
+        and not exists
+    ):
+        return {
+            "state":
+                "unknown",
+
+            "reason_code":
+                "predicate.field-missing",
+
+            "field":
+                field,
+        }
+
+    expected = predicate.get(
+        "value"
+    )
+
+    passed = False
+
+    if operation == "exists":
+        passed = exists
+
+    elif operation == "equals":
+        passed = (
+            actual
+            == expected
+        )
+
+    elif operation == "not_equals":
+        passed = (
+            actual
+            != expected
+        )
+
+    elif operation == "in":
+        passed = (
+            actual
+            in (
+                expected
+                if isinstance(
+                    expected,
+                    list,
+                )
+                else [
+                    expected
+                ]
+            )
+        )
+
+    elif operation == "not_in":
+        passed = (
+            actual
+            not in (
+                expected
+                if isinstance(
+                    expected,
+                    list,
+                )
+                else [
+                    expected
+                ]
+            )
+        )
+
+    elif operation == "prefix":
+        passed = str(
+            actual
+        ).startswith(
+            str(
+                expected
+            )
+        )
+
+    elif operation == "suffix":
+        passed = str(
+            actual
+        ).endswith(
+            str(
+                expected
+            )
+        )
+
+    elif operation == "contains":
+        passed = (
+            str(
+                expected
+            )
+            in str(
+                actual
+            )
+        )
+
+    elif operation == "glob":
+        passed = fnmatch.fnmatchcase(
+            str(
+                actual
+            ),
+            str(
+                expected
+            ),
+        )
+
+    elif operation == "lowercase":
+        passed = (
+            str(
+                actual
+            )
+            == str(
+                actual
+            ).lower()
+        )
+
+    elif operation == "absolute_path":
+        passed = Path(
+            str(
+                actual
+            )
+        ).is_absolute()
+
+    elif operation == "under_runtime_root":
+        candidate = Path(
+            str(
+                actual
+            )
+        ).resolve()
+
+        try:
+            candidate.relative_to(
+                savant_root
+            )
+
+            passed = (
+                candidate
+                != savant_root
+            )
+
+        except ValueError:
+            passed = False
+
+    elif operation == "no_secret":
+        text = str(
+            actual
+        )
+
+        passed = not any(
+            pattern.search(
+                text
+            )
+            for pattern
+            in secret_patterns
+        )
+
+    elif operation == "canonical_kindred":
+        passed = (
+            historical_relationship_term
+            not in str(
+                actual
+            ).lower()
+        )
+
+    return {
+        "state":
+            (
+                "pass"
+                if passed
+                else "fail"
+            ),
+
+        "reason_code":
+            (
+                "predicate."
+                + operation
+            ),
+
+        "field":
+            field,
+    }
+
+
+def inherited_policy(
+    policy: Mapping[str, Any],
+    index: Mapping[
+        str,
+        Mapping[str, Any],
+    ],
+    *,
+    seen: set[str] | None = None,
+) -> dict[str, Any]:
+    semantic_id = str(
+        policy[
+            "id"
+        )
+
+    visited = set(
+        seen
+        or set()
+    )
+
+    if semantic_id in visited:
+        raise living_policy_error(
+            (
+                "policy inheritance cycle: "
+                + semantic_id
+            )
+        )
+
+    visited.add(
+        semantic_id
+    )
+
+    inherited: dict[str, Any] = {}
+
+    for parent_id in policy.get(
+        "extends",
+        [],
+    ):
+        parent = index.get(
+            str(
+                parent_id
+            )
+        )
+
+        if parent is None:
+            continue
+
+        inherited.update(
+            inherited_policy(
+                parent,
+                index,
+                seen=visited,
+            )
+        )
+
+    for key, value in policy.items():
+        if (
+            value is not None
+            and value != []
+            and value != {}
+        ):
+            inherited[
+                key
+            ] = value
+
+    return inherited
+
+
+def evaluate_policy(
+    policy: Mapping[str, Any],
+    context: Mapping[str, Any],
+    *,
+    index: Mapping[
+        str,
+        Mapping[str, Any],
+    ],
+    at: datetime,
+) -> dict[str, Any]:
+    effective = inherited_policy(
+        policy,
+        index,
+    )
+
+    temporal = temporal_state(
+        effective,
+        at=at,
+    )
+
+    if temporal != "active":
+        return {
+            "id":
+                policy[
+                    "id"
+                ],
+
+            "state":
+                "not_applicable",
+
+            "reason_code":
+                (
+                    "policy."
+                    + temporal
+                ),
+
+            "temporal":
+                temporal,
+        }
+
+    applicable = applicability(
+        effective,
+        context,
+    )
+
+    if applicable[
+        "state"
+    ] != "applicable":
+        return {
+            "id":
+                policy[
+                    "id"
+                ],
+
+            "state":
+                applicable[
+                    "state"
+                ],
+
+            "reason_code":
+                (
+                    "policy.selector."
+                    + applicable[
+                        "state"
+                    ]
+                ),
+
+            "applicability":
+                applicable,
+        }
+
+    exception = exception_state(
+        effective,
+        context,
+        at=at,
+    )
+
+    if exception is not None:
+        return {
+            "id":
+                policy[
+                    "id"
+                ],
+
+            "state":
+                "excepted",
+
+            "reason_code":
+                "policy.exception",
+
+            "exception":
+                exception[
+                    "id"
+                ],
+        }
+
+    predicate_trace = [
+        predicate_result(
+            predicate,
+            context,
+        )
+        for predicate
+        in effective.get(
+            "predicates",
+            [],
+        )
+    ]
+
+    if any(
+        item[
+            "state"
+        ] == "unknown"
+        for item
+        in predicate_trace
+    ):
+        state = "unknown"
+
+    elif any(
+        item[
+            "state"
+        ] == "fail"
+        for item
+        in predicate_trace
+    ):
+        state = "not_triggered"
+
+    else:
+        state = "triggered"
+
+    return {
+        "id":
+            policy[
+                "id"
+            ],
+
+        "state":
+            state,
+
+        "effect":
+            effective.get(
+                "effect"
+            ),
+
+        "enforcement":
+            effective.get(
+                "enforcement"
+            ),
+
+        "reason_code":
+            effective.get(
+                "reason_code"
+            ),
+
+        "remediation":
+            effective.get(
+                "remediation"
+            ),
+
+        "evidence_requirements":
+            effective.get(
+                "evidence_requirements",
+                [],
+            ),
+
+        "authority":
+            effective.get(
+                "authority"
+            ),
+
+        "authority_rank":
+            effective.get(
+                "authority_rank"
+            ),
+
+        "priority":
+            effective.get(
+                "priority"
+            ),
+
+        "specificity":
+            effective.get(
+                "specificity"
+            ),
+
+        "predicates":
+            predicate_trace,
+    }
+
+
+def evaluate(
+    context: Mapping[str, Any],
+    *,
+    at: str | None = None,
+    policies: Iterable[
+        Mapping[str, Any]
+    ] | None = None,
+) -> dict[str, Any]:
+    timestamp = (
+        parse_time(
+            at
+        )
+        if at
+        else datetime.now(
+            timezone.utc
+        )
+    )
+
+    if timestamp is None:
+        timestamp = datetime.now(
+            timezone.utc
+        )
+
+    values = [
+        dict(
+            item
+        )
+        for item
+        in (
+            policies
+            if policies is not None
+            else policy_records()
+        )
+    ]
+
+    index = {
+        str(
+            item[
+                "id"
+            ]
+        ):
+            item
+        for item
+        in values
+    }
+
+    ordered = sorted(
+        values,
+        key=lambda item: (
+            int(
+                item.get(
+                    "authority_rank",
+                    1000,
+                )
+            ),
+            int(
+                item.get(
+                    "priority",
+                    1000,
+                )
+            ),
+            -int(
+                item.get(
+                    "specificity",
+                    0,
+                )
+            ),
+            str(
+                item.get(
+                    "id",
+                    "",
+                )
+            ),
+        ),
+    )
+
+    trace = [
+        evaluate_policy(
+            item,
+            context,
+            index=index,
+            at=timestamp,
+        )
+        for item
+        in ordered
+    ]
+
+    triggered = [
+        item
+        for item
+        in trace
+        if item.get(
+            "state"
+        )
+        == "triggered"
+    ]
+
+    unknown = [
+        item
+        for item
+        in trace
+        if item.get(
+            "state"
+        )
+        == "unknown"
+    ]
+
+    blocking_denies = [
+        item
+        for item
+        in triggered
+        if (
+            item.get(
+                "effect"
+            )
+            == "deny"
+            and item.get(
+                "enforcement"
+            )
+            == "block"
+        )
+    ]
+
+    authority_required = [
+        item
+        for item
+        in triggered
+        if (
+            item.get(
+                "effect"
+            )
+            == "require_authority"
+            or item.get(
+                "enforcement"
+            )
+            == "require-authority"
+        )
+    ]
+
+    allows = [
+        item
+        for item
+        in triggered
+        if item.get(
+            "effect"
+        )
+        == "allow"
+    ]
+
+    advisories = [
+        item
+        for item
+        in triggered
+        if (
+            item.get(
+                "

@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "savant://schemas/lineage_segue.schema.json",
+  "title": "Savant Functional Lineage Segue",
+  "type": "object",
+  "required": [
+    "id",
+    "kind",
+    "type",
+    "parent",
+    "child",
+    "role"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "kind": {
+      "const": "segue"
+    },
+    "type": {
+      "const": "lineage"
+    },
+    "status": {
+      "type": "string",
+      "default": "active"
+    },
+    "authority": {
+      "type": [
+        "string",
+        "object"
+      ]
+    },
+    "version": {
+      "type": "string"
+    },
+    "parent": {
+      "type": "string",
+      "minLength": 1
+    },
+    "child": {
+      "type": "string",
+      "minLength": 1
+    },
+    "role": {
+      "type": "string",
+      "minLength": 1
+    },
+    "axis": {
+      "type": "string"
+    },
+    "continuation": {
+      "enum": [
+        "neutral",
+        "preserving",
+        "projecting",
+        "transforming"
+      ]
+    },
+    "scope": {
+      "type": "string"
+    },
+    "order": {
+      "type": "integer"
+    },
+    "inheritance": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "enum": [
+            "default",
+            "none",
+            "reference",
+            "merge",
+            "replace"
+          ]
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "exclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "conflict_policy": {
+          "enum": [
+            "default",
+            "child_wins",
+            "parent_wins",
+            "collect",
+            "error"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "propagation": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "channels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "validity": {
+      "type": "object",
+      "properties": {
+        "valid_from": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "valid_until": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      },
+      "additionalProperties": true
+    },
+    "provenance": {
+      "type": "object"
+    },
+    "metadata": {
+      "type": "object"
+    },
+    "extensions": {
+      "type": "object"
+    },
+    "future_extensions": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": true
+}

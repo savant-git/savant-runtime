@@ -1,0 +1,1193 @@
+registry_id: savant.lexicon
+version: 2
+
+authority:
+  source: user
+  revision: lexical-migration-20260809
+  timestamp: "2026-08-09"
+
+constitution: ../docs/LEXICON_CONSTITUTION.md
+
+schema: schemas/registry.schema.yaml
+
+policies:
+  - policies/identity.yaml
+  - policies/normalization.yaml
+  - policies/supersession.yaml
+
+validators:
+  - validators/validator_registry.yaml
+
+projections:
+  - projections/projection_registry.yaml
+
+lexemes:
+
+  - id: lex:core:authority
+    canonical: Authority
+    concept: Constitutional authority
+    layer: shard00
+    status: active
+    lineage:
+      supersedes: []
+      superseded_by: null
+    provenance:
+      - user-retained-20260809
+
+  - id: lex:core:shade
+    canonical: Shade
+    concept: Concrete realization
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Instance
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:core:segue
+    canonical: Segue
+    concept: Directed transition
+    layer: shard00
+    status: active
+    lineage:
+      supersedes: []
+      superseded_by: null
+    provenance:
+      - established-savant-lexicon
+
+  - id: lex:core:wavre
+    canonical: Wavre
+    concept: Deterministic derived artifact
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Projection
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:core:lineage
+    canonical: Lineage
+    concept: Immutable evolution and succession history
+    layer: shard00
+    status: active
+    lineage:
+      supersedes: []
+      superseded_by: null
+    provenance:
+      - user-retained-20260809
+
+  - id: lex:core:provenance
+    canonical: Provenance
+    concept: Origin and source authority
+    layer: shard00
+    status: active
+    lineage:
+      supersedes: []
+      superseded_by: null
+    provenance:
+      - user-retained-20260809
+
+  - id: lex:core:kindred
+    canonical: Kindred
+    concept: Constitutional typed relationship
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Kindred
+      superseded_by: null
+    provenance:
+      - user-established-kindred
+
+  - id: lex:core:lexeme
+    canonical: Lexeme
+    concept: Canonical vocabulary unit
+    layer: shard00
+    status: active
+    lineage:
+      supersedes: []
+      superseded_by: null
+    provenance:
+      - lexicon-constitution
+
+  - id: lex:core:ontology
+    canonical: Ontology
+    concept: Constitutional knowledge organization
+    layer: shard00
+    status: active
+    lineage:
+      supersedes: []
+      superseded_by: null
+    provenance:
+      - user-retained-20260809
+
+  - id: lex:core:cert
+    canonical: Cert
+    concept: Integrity validation mechanism
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Validator
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:primitive:shard
+    canonical: Shard
+    concept: Foundational universal compositional and existential unit
+    layer: shard00
+    status: active
+    lineage:
+      supersedes: []
+      superseded_by: null
+    provenance:
+      - constitutional-shard-authority
+      - user-preservation-20260809
+
+  - id: lex:primitive:lexicon
+    canonical: Lexicon
+    concept: Governed canonical vocabulary system
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Nomenclature
+      superseded_by: null
+    provenance:
+      - user-terminology-authority
+
+  - id: lex:primitive:canon
+    canonical: Canon
+    concept: Authoritative accepted knowledge
+    layer: shard00
+    status: active
+    lineage:
+      supersedes: []
+      superseded_by: null
+    provenance:
+      - established-savant-lexicon
+
+  - id: lex:primitive:admission
+    canonical: Admission
+    concept: Governed acceptance into authority
+    layer: shard00
+    status: active
+    lineage:
+      supersedes: []
+      superseded_by: null
+    provenance:
+      - user-retained-20260809
+
+  - id: lex:primitive:attestation
+    canonical: Attestation
+    concept: Formal assertion or witness of verification
+    layer: shard00
+    status: active
+    lineage:
+      supersedes: []
+      superseded_by: null
+    provenance:
+      - user-retained-20260809
+
+  - id: lex:primitive:evidence
+    canonical: Evidence
+    concept: Admissible basis supporting or contradicting a claim
+    layer: shard00
+    status: active
+    lineage:
+      supersedes: []
+      superseded_by: null
+    provenance:
+      - user-retained-20260809
+
+  - id: lex:primitive:mutation
+    canonical: Mutation
+    concept: Governed change of mutable state or representation
+    layer: shard00
+    status: active
+    lineage:
+      supersedes: []
+      superseded_by: null
+    provenance:
+      - user-retained-20260809
+
+  - id: lex:primitive:rebirth
+    canonical: Rebirth
+    concept: Recovery and restoration
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Recovery
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:identity:iota
+    canonical: Iota
+    concept: Identity edifice tier 1
+    layer: shard00
+    status: active
+    lineage:
+      supersedes: []
+      superseded_by: null
+    provenance:
+      - recursive-identity-authority
+
+  - id: lex:identity:mote
+    canonical: Mote
+    concept: Identity edifice tier 2
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Shard-as-identity-tier-2
+      superseded_by: null
+    provenance:
+      - identity-tier-specific-user-authority
+
+  - id: lex:identity:ink
+    canonical: Ink
+    concept: Identity edifice tier 3
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Trait
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:identity:quirk
+    canonical: Quirk
+    concept: Identity edifice tier 4
+    layer: shard00
+    status: active
+    lineage:
+      supersedes: []
+      superseded_by: null
+    provenance:
+      - recursive-identity-authority
+
+  - id: lex:identity:prodigal
+    canonical: Prodigal
+    concept: Identity edifice tier 5
+    layer: shard00
+    status: active
+    lineage:
+      supersedes: []
+      superseded_by: null
+    provenance:
+      - recursive-identity-authority
+
+  - id: lex:identity:exile
+    canonical: Exile
+    concept: Identity edifice tier 6
+    layer: shard00
+    status: active
+    lineage:
+      supersedes: []
+      superseded_by: null
+    provenance:
+      - recursive-identity-authority
+
+  - id: lex:identity:innate
+    canonical: Innate
+    concept: Identity edifice tier 7
+    layer: shard00
+    status: active
+    lineage:
+      supersedes: []
+      superseded_by: null
+    provenance:
+      - recursive-identity-authority
+
+  - id: lex:identity:wyrmhole
+    canonical: Wyrmhole
+    concept: Identity edifice tier 8
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Gate
+        - Portal
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:identity:obelisk
+    canonical: Obelisk
+    concept: Identity edifice tier 9
+    layer: shard00
+    status: active
+    lineage:
+      supersedes: []
+      superseded_by: null
+    provenance:
+      - recursive-identity-authority
+
+  - id: lex:tidal:tidal
+    canonical: Tidal
+    concept: Member of the nine-element fluid modular family
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Living-Substrate
+        - Fluid-Template
+      superseded_by: null
+    provenance:
+      - user-family-name-20260808
+
+  - id: lex:tidal:scyon
+    canonical: Scyon
+    concept: Substantiation Tidal
+    layer: shard00
+    status: active
+    lineage:
+      supersedes: []
+      superseded_by: null
+    provenance:
+      - living-tidal-family
+
+  - id: lex:tidal:splyce
+    canonical: Splyce
+    concept: Presentation Tidal
+    layer: shard00
+    status: active
+    lineage:
+      supersedes: []
+      superseded_by: null
+    provenance:
+      - living-tidal-family
+
+  - id: lex:tidal:scrybe
+    canonical: Scrybe
+    concept: Memory Tidal
+    layer: shard00
+    status: active
+    lineage:
+      supersedes: []
+      superseded_by: null
+    provenance:
+      - living-tidal-family
+
+  - id: lex:tidal:pryme
+    canonical: Pryme
+    concept: Authority interpretation Tidal
+    layer: shard00
+    status: active
+    lineage:
+      supersedes: []
+      superseded_by: null
+    provenance:
+      - living-tidal-family
+
+  - id: lex:tidal:cyphor
+    canonical: Cyphor
+    concept: Translation normalization and lexical-governance Tidal
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Cypher
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:tidal:thryce
+    canonical: Thryce
+    concept: Assurance Tidal
+    layer: shard00
+    status: active
+    lineage:
+      supersedes: []
+      superseded_by: null
+    provenance:
+      - living-tidal-family
+
+  - id: lex:tidal:spyral
+    canonical: Spyral
+    concept: Evolution Tidal
+    layer: shard00
+    status: active
+    lineage:
+      supersedes: []
+      superseded_by: null
+    provenance:
+      - living-tidal-family
+
+  - id: lex:tidal:lythe
+    canonical: Lythe
+    concept: Deterministic derivation Tidal
+    layer: shard00
+    status: active
+    lineage:
+      supersedes: []
+      superseded_by: null
+    provenance:
+      - living-tidal-family
+
+  - id: lex:tidal:dryve
+    canonical: Dryve
+    concept: Authorized action Tidal
+    layer: shard00
+    status: active
+    lineage:
+      supersedes: []
+      superseded_by: null
+    provenance:
+      - living-tidal-family
+
+  - id: lex:composition:rut
+    canonical: Rut
+    concept: Extensible attachment position
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Slot
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:composition:sidecar
+    canonical: Sidecar
+    concept: Attached extension
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Attachment
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:composition:centra
+    canonical: Centra
+    concept: Specialization center for a reusable Tidal shade
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Focal
+        - Central
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:composition:visage
+    canonical: Visage
+    concept: Compositional mask
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Mask
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:composition:veneer
+    canonical: Veneer
+    concept: Non-destructive specialization overlay
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Overlay
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:composition:credenda
+    canonical: Credenda
+    concept: Governing policy
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Policy
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:composition:substra
+    canonical: Substra
+    concept: Binding and attachment fabric
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Fabric
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:implementation:sear
+    canonical: Sear
+    concept: Registry
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Registry
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:implementation:igneo
+    canonical: Igneo
+    concept: Runtime
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Runtime
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:implementation:inface
+    canonical: Inface
+    concept: Interface
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Interface
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:implementation:gridd
+    canonical: Gridd
+    concept: Graph
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Graph
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:implementation:vitae
+    canonical: Vitae
+    concept: State
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - State
+        - Moot
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:implementation:coinage
+    canonical: Coinage
+    concept: Token
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Token
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:implementation:oblast
+    canonical: Oblast
+    concept: Function
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Function
+        - Frisk
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:implementation:variant
+    canonical: Variant
+    concept: Variable
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Variable
+        - Wanderer
+        - Unset
+        - Variate
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:implementation:insend
+    canonical: Insend
+    concept: Import
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Import
+        - Florate
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:implementation:outsend
+    canonical: Outsend
+    concept: Export
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Export
+        - Fascate
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:implementation:linka
+    canonical: Linka
+    concept: Adapter
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Adapter
+        - Glove
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:implementation:arkade
+    canonical: Arkade
+    concept: Sandbox
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Sandbox
+        - Nullix
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:implementation:secton
+    canonical: Secton
+    concept: Component
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Component
+        - Exacto
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:implementation:slab
+    canonical: Slab
+    concept: Module
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Module
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:implementation:forma
+    canonical: Forma
+    concept: Object
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Object
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:implementation:almanac
+    canonical: Almanac
+    concept: Record
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Record
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:implementation:tox
+    canonical: Tox
+    concept: Node
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Node
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:implementation:tracery
+    canonical: Tracery
+    concept: Schema
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Schema
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:implementation:riot
+    canonical: Riot
+    concept: Architectural aggregate
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Entity
+        - Form
+        - Swarm
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:implementation:chaote
+    canonical: Chaote
+    concept: Chat
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Babel
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:implementation:quarx
+    canonical: Quarx
+    concept: Query
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Query
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:implementation:chatter
+    canonical: Chatter
+    concept: Channel
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Channel
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:implementation:doppelgangre
+    canonical: Doppelgangre
+    concept: Clone
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Clone
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:structure:tomb
+    canonical: Tomb
+    concept: Vault
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Vault
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:structure:convex
+    canonical: Convex
+    concept: Historical secondary-level concept formerly called Arc
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Arc
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:structure:caevas
+    canonical: Caevas
+    concept: Architectural concept historically named Caelus Chamberlain and Occam
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Caelus
+        - Chamberlain
+        - Occam
+      superseded_by: null
+    provenance:
+      - user-rename-20260809
+
+  - id: lex:semantic:anamnesis
+    canonical: Anamnesis
+    concept: Memory
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Memory
+      superseded_by: null
+    provenance:
+      - historical-user-lexicon
+
+  - id: lex:semantic:echo
+    canonical: Echo
+    concept: Simulation
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Simulation
+      superseded_by: null
+    provenance:
+      - historical-user-lexicon
+
+  - id: lex:semantic:coalescence
+    canonical: Coalescence
+    concept: Orchestration
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Orchestration
+      superseded_by: null
+    provenance:
+      - historical-user-lexicon
+
+  - id: lex:semantic:onus
+    canonical: Onus
+    concept: Task
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Task
+      superseded_by: null
+    provenance:
+      - historical-user-lexicon
+
+  - id: lex:semantic:chrysalis
+    canonical: Chrysalis
+    concept: Evolution
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Evolution
+      superseded_by: null
+    provenance:
+      - historical-user-lexicon
+
+  - id: lex:semantic:nostalgia
+    canonical: Nostalgia
+    concept: Narrative
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Narrative
+      superseded_by: null
+    provenance:
+      - historical-user-lexicon
+
+  - id: lex:semantic:etiquette
+    canonical: Etiquette
+    concept: Behavior
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Behavior
+      superseded_by: null
+    provenance:
+      - historical-user-lexicon
+
+  - id: lex:semantic:cerebral
+    canonical: Cerebral
+    concept: Cognitive
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Cognitive
+      superseded_by: null
+    provenance:
+      - historical-user-lexicon
+
+  - id: lex:semantic:apotheosis
+    canonical: Apotheosis
+    concept: Embodiment
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Embodiment
+      superseded_by: null
+    provenance:
+      - historical-user-lexicon
+
+  - id: lex:semantic:locution
+    canonical: Locution
+    concept: Expression
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Expression
+      superseded_by: null
+    provenance:
+      - historical-user-lexicon
+
+  - id: lex:semantic:ego
+    canonical: Ego
+    concept: Identity
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Identity
+      superseded_by: null
+    provenance:
+      - historical-user-lexicon
+
+  - id: lex:semantic:inflection
+    canonical: Inflection
+    concept: Tone
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Tone
+      superseded_by: null
+    provenance:
+      - historical-user-lexicon
+
+  - id: lex:semantic:anatomy
+    canonical: Anatomy
+    concept: Frame
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Frame
+      superseded_by: null
+    provenance:
+      - historical-user-lexicon
+
+  - id: lex:semantic:fjord
+    canonical: Fjord
+    concept: Chronicle snapshot delta lineage concept
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Chronicle
+        - Snapshot
+        - Delta
+      superseded_by: null
+    provenance:
+      - historical-user-lexicon
+
+  - id: lex:vocabulary:envolio
+    canonical: Envolio
+    concept: Folder
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Folder
+      superseded_by: null
+    provenance:
+      - historical-user-lexicon
+
+  - id: lex:vocabulary:envolia
+    canonical: Envolia
+    concept: Folders
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Folders
+      superseded_by: null
+    provenance:
+      - historical-user-lexicon
+
+  - id: lex:vocabulary:chassia
+    canonical: Chassia
+    concept: Structure
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Structure
+      superseded_by: null
+    provenance:
+      - historical-user-lexicon
+
+  - id: lex:vocabulary:atlos
+    canonical: Atlos
+    concept: Map
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Map
+      superseded_by: null
+    provenance:
+      - historical-user-lexicon
+
+  - id: lex:vocabulary:datapluck
+    canonical: Datapluck
+    concept: Extraction
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Extraction
+      superseded_by: null
+    provenance:
+      - historical-user-lexicon
+
+  - id: lex:vocabulary:cyphus
+    canonical: Cyphus
+    concept: Script
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Script
+      superseded_by: null
+    provenance:
+      - historical-user-lexicon
+
+  - id: lex:vocabulary:xanto
+    canonical: Xanto
+    concept: Snippet
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Snippet
+      superseded_by: null
+    provenance:
+      - historical-user-lexicon
+
+  - id: lex:vocabulary:temport
+    canonical: Temport
+    concept: Time
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - Time
+      superseded_by: null
+    provenance:
+      - historical-user-lexicon
+
+  - id: lex:vocabulary:behold
+    canonical: Behold
+    concept: Full system UI
+    layer: shard00
+    status: active
+    lineage:
+      supersedes:
+        - UI
+      superseded_by: null
+    provenance:
+      - historical-user-lexicon
+
+reserved:
+  - Instance
+  - Projection
+  - Validator
+  - Trait
+  - Gate
+  - Portal
+  - Cypher
+  - Entity
+  - Form
+  - Swarm
+  - Babel
+  - Query
+  - Channel
+  - Clone
+  - Registry
+  - Runtime
+  - Interface
+  - Graph
+  - State
+  - Token
+  - Function
+  - Variable
+  - Wanderer
+  - Unset
+  - Variate
+  - Import
+  - Florate
+  - Export
+  - Fascate
+  - Adapter
+  - Glove
+  - Sandbox
+  - Nullix
+  - Component
+  - Exacto
+  - Module
+  - Object
+  - Record
+  - Node
+  - Schema
+  - Policy
+  - Overlay
+  - Fabric
+  - Slot
+  - Mask
+  - Attachment
+  - Focal
+  - Central
+  - Recovery
+  - Arc
+  - Vault
+  - Caelus
+  - Chamberlain
+  - Occam
+  - Nomenclature
+  - Omnistructure
+  - Kindred

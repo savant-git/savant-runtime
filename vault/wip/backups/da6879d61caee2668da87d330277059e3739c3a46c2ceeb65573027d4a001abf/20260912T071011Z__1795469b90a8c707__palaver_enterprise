@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+PALAVER_ROOT="/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver"
+RUNTIME="$PALAVER_ROOT/runtime"
+COMPAT="$RUNTIME/opus_router_package_compat.py"
+ENTRYPOINT="$RUNTIME/server_enterprise.py"
+
+if [ ! -f "$COMPAT" ]; then
+    echo "[ERROR] Palaver Opus compatibility runtime missing: $COMPAT" >&2
+    exit 1
+fi
+
+if [ ! -f "$ENTRYPOINT" ]; then
+    echo "[ERROR] Palaver enterprise entrypoint missing: $ENTRYPOINT" >&2
+    exit 1
+fi
+
+exec python3 -c '
+import importlib.util
+import runpy
+import sys
+
+compat_path = sys.argv[1]
+entrypoint = sys.argv[2]
+
+spec = importlib.util.spec_from_file_location(
+    "savant_palaver_opus_router_package_compat",
+    compat_path,
+)
+
+if spec is None or spec.loader is None:
+    raise RuntimeError(
+        "unable to construct Palaver Opus compatibility import"
+    )
+
+module = importlib.util.module_from_spec(spec)
+
+sys.modules[
+    "savant_palaver_opus_router_package_compat"
+] = module
+
+spec.loader.exec_module(module)
+
+result = module.install()
+
+if not result.get("installed"):
+    raise RuntimeError(
+        "Palaver Opus router compatibility installation failed"
+    )
+
+sys.argv = [entrypoint, *sys.argv[3:]]
+
+runpy.run_path(
+    entrypoint,
+    run_name="__main__",
+)
+' "$COMPAT" "$ENTRYPOINT" "$@"

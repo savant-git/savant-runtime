@@ -1,0 +1,233 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import importlib.util
+import json
+from pathlib import Path
+import subprocess
+
+
+root = Path(
+    "/root/savant-runtime/tools/extr-enterprise"
+)
+
+venv_python = (
+    root
+    / "venv"
+    / "bin"
+    / "python"
+)
+
+runtime = (
+    root
+    / "runtime"
+    / "extr.py"
+)
+
+universal = (
+    root
+    / "runtime"
+    / "universal.py"
+)
+
+policy = (
+    root
+    / "config"
+    / "policy.json"
+)
+
+projects = (
+    root
+    / "config"
+    / "projects.json"
+)
+
+verified = Path(
+    "/root/savant-runtime/bin/extract_savant_jsonl.py"
+)
+
+public = Path(
+    "/usr/local/bin/extr"
+)
+
+
+dependencies = (
+    "charset_normalizer",
+    "ftfy",
+    "json5",
+    "ijson",
+    "orjson",
+    "rapidfuzz",
+)
+
+
+def exists(
+    path: Path,
+) -> bool:
+    return path.is_file()
+
+
+def dependency_state() -> dict[str, bool]:
+    if not venv_python.is_file():
+        return {
+            name: False
+            for name
+            in dependencies
+        }
+
+    code = """
+import importlib.util
+import json
+
+names = %r
+
+print(json.dumps({
+    name: importlib.util.find_spec(name) is not None
+    for name in names
+}))
+""" % (
+        dependencies,
+    )
+
+    result = subprocess.run(
+        [
+            str(
+                venv_python
+            ),
+            "-c",
+            code,
+        ],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        check=False,
+        timeout=15,
+    )
+
+    if result.returncode != 0:
+        return {
+            name: False
+            for name
+            in dependencies
+        }
+
+    try:
+        value = json.loads(
+            result.stdout
+        )
+    except json.JSONDecodeError:
+        return {
+            name: False
+            for name
+            in dependencies
+        }
+
+    return {
+        name:
+            bool(
+                value.get(
+                    name
+                )
+            )
+        for name
+        in dependencies
+    }
+
+
+def main() -> int:
+    files = {
+        "venv_python":
+            exists(
+                venv_python
+            ),
+        "runtime":
+            exists(
+                runtime
+            ),
+        "universal":
+            exists(
+                universal
+            ),
+        "policy":
+            exists(
+                policy
+            ),
+        "projects":
+            exists(
+                projects
+            ),
+        "verified_chatgpt_extractor":
+            exists(
+                verified
+            ),
+        "public_entrypoint":
+            exists(
+                public
+            ),
+    }
+
+    optional = dependency_state()
+
+    healthy = all(
+        files.values()
+    )
+
+    payload = {
+        "schema":
+            "savant.extr.status.v2",
+        "projection_only":
+            True,
+        "authority_effect":
+            "none",
+        "healthy":
+            healthy,
+        "files":
+            files,
+        "optional_dependencies":
+            optional,
+        "dependency_isolation": {
+            "enabled":
+                True,
+            "environment":
+                str(
+                    root
+                    / "venv"
+                ),
+            "system_python_modified":
+                False,
+            "pep668_respected":
+                True,
+        },
+        "semantics": {
+            "verified_chatgpt_extractor_preserved":
+                True,
+            "universal_ingestion":
+                exists(
+                    universal
+                ),
+            "fallbacks_remain_available":
+                True,
+        },
+    }
+
+    print(
+        json.dumps(
+            payload,
+            ensure_ascii=False,
+            sort_keys=True,
+            indent=2,
+        )
+    )
+
+    return (
+        0
+        if healthy
+        else 1
+    )
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

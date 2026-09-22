@@ -1,0 +1,856 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import json
+import os
+import ssl
+import subprocess
+import sys
+import traceback
+import urllib.request
+from datetime import datetime, UTC
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
+from urllib.parse import urlparse
+
+ROOT = Path(__file__).resolve().parents[1]
+RUNTIME = ROOT / "runtime"
+
+sys.path.insert(0, str(RUNTIME))
+
+try:
+    from dotenv import load_dotenv
+    load_dotenv(ROOT / ".env")
+except Exception:
+    pass
+
+try:
+    from core import (
+        diagnostics,
+        latest_session,
+        new_session_path,
+        load_session,
+        save_session,
+        rebuild_all,
+        memory_block_for_prompt,
+        write_message_object,
+    )
+except Exception:
+    diagnostics = None
+    latest_session = None
+    new_session_path = None
+    load_session = None
+    save_session = None
+    rebuild_all = None
+    memory_block_for_prompt = None
+    write_message_object = None
+
+
+PORT = int(os.getenv("PALAVER_WEB_PORT", "8787"))
+
+SYSTEM_PROMPT = """
+You are Palaver Ultra, the browser-based Savant runtime chat system.
+
+You operate inside ~/savant-runtime on the Ubuntu server.
+
+You are intended to function like a stronger project-specific ChatGPT:
+- persistent memory through Savant message objects
+- file inspection through guarded file tools
+- patch creation and approval
+- source retrieval
+- graph retrieval
+- runtime rebuild commands
+- no false claims about changed files
+
+Rules:
+- Be direct.
+- If a file has not been read, say so.
+- If a command has not confirmed a change, do not claim it happened.
+- Prefer patch proposals before destructive edits.
+- Use retrieved memory and file context as evidence, not unquestioned truth.
+"""
+
+
+def utc_now() -> str:
+    return datetime.now(UTC).isoformat()
+
+
+def load_env_file() -> None:
+    env = ROOT / ".env"
+    if not env.exists():
+        return
+
+    for line in env.read_text(encoding="utf-8", errors="ignore").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        k, v = line.split("=", 1)
+        k = k.strip()
+        v = v.strip().strip('"').strip("'")
+        os.environ.setdefault(k, v)
+
+
+load_env_file()
+
+
+def read_body(handler: BaseHTTPRequestHandler) -> dict:
+    size = int(handler.headers.get("Content-Length", "0"))
+    raw = handler.rfile.read(size).decode("utf-8") if size else "{}"
+    try:
+        return json.loads(raw)
+    except Exception:
+        return {}
+
+
+def json_response(handler: BaseHTTPRequestHandler, payload: dict, code: int = 200) -> None:
+    data = json.dumps(payload, ensure_ascii=False).encode("utf-8")
+    handler.send_response(code)
+    handler.send_header("Content-Type", "application/json; charset=utf-8")
+    handler.send_header("Cache-Control", "no-store")
+    handler.send_header("Content-Length", str(len(data)))
+    handler.end_headers()
+    handler.wfile.write(data)
+
+
+def html_response(handler: BaseHTTPRequestHandler, html: str, code: int = 200) -> None:
+    data = html.encode("utf-8")
+    handler.send_response(code)
+    handler.send_header("Content-Type", "text/html; charset=utf-8")
+    handler.send_header("Cache-Control", "no-store")
+    handler.send_header("Content-Length", str(len(data)))
+    handler.end_headers()
+    handler.wfile.write(data)
+
+
+def run_cmd(args: list[str], input_text: str | None = None) -> dict:
+    try:
+        p = subprocess.run(
+            args,
+            cwd=str(ROOT),
+            input=input_text,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        return {
+            "ok": p.returncode == 0,
+            "stdout": p.stdout,
+            "stderr": p.stderr,
+            "code": p.returncode,
+            "args": args,
+        }
+    except Exception as e:
+        return {
+            "ok": False,
+            "stdout": "",
+            "stderr": str(e),
+            "code": -1,
+            "args": args,
+        }
+
+
+def health() -> dict:
+    return {
+        "root": str(ROOT),
+        "api_key_present": bool(os.getenv("OPENAI_API_KEY")),
+        "model": os.getenv("SAVANT_MODEL", "gpt-5"),
+        "core_available": bool(diagnostics),
+        "file_tool": (ROOT / "file").exists(),
+        "search_tool": (ROOT / "search").exists(),
+        "retrieve_tool": (ROOT / "retrieve").exists(),
+        "patch_tool": (ROOT / "patch").exists(),
+        "graph_info": (ROOT / "graph_info").exists(),
+    }
+
+
+def cmd_answer(args: list[str], trace: str) -> dict:
+    r = run_cmd(args)
+    return {
+        "answer": (r["stdout"] or "") + (("\n[stderr]\n" + r["stderr"]) if r["stderr"] else ""),
+        "trace": trace + "\n" + " ".join(args),
+    }
+
+
+def command_result(text: str) -> dict | None:
+    low = text.lower().strip()
+
+    if low in {"health", "status"}:
+        return {"answer": json.dumps(health(), indent=2, ensure_ascii=False), "trace": "health"}
+
+    if low == "diag":
+        if diagnostics:
+            try:
+                return {
+                    "answer": json.dumps(diagnostics(), indent=2, ensure_ascii=False),
+                    "trace": "diagnostics via core",
+                }
+            except Exception as e:
+                return {"answer": str(e), "trace": "diagnostics error"}
+        return cmd_answer(["./palaver_diag"], "diagnostics command")
+
+    if low == "files":
+        return cmd_answer(["./file", "list", ".", "--limit", "1000"], "file list")
+
+    if low.startswith("file list "):
+        path = text[len("file list "):].strip()
+        return cmd_answer(["./file", "list", path, "--limit", "1000"], "file list")
+
+    if low.startswith("file read "):
+        path = text[len("file read "):].strip()
+        return cmd_answer(["./file", "read", path, "--start", "1", "--end", "900"], "file read")
+
+    if low.startswith("search "):
+        q = text[len("search "):].strip()
+        return cmd_answer(["./search", "term", q, "--limit", "80"], "message search")
+
+    if low.startswith("retrieve "):
+        q = text[len("retrieve "):].strip()
+        return cmd_answer(["./retrieve", "term", q, "--limit", "30"], "memory retrieval")
+
+    if low == "graph":
+        return cmd_answer(["./graph_info"], "graph info")
+
+    if low == "patches":
+        return cmd_answer(["./patch", "list"], "patch queue")
+
+    if low.startswith("patch show "):
+        pid = text[len("patch show "):].strip()
+        return cmd_answer(["./patch", "show", pid], "patch show")
+
+    if low.startswith("patch apply "):
+        pid = text[len("patch apply "):].strip()
+        return cmd_answer(["./patch", "apply", pid], "patch apply")
+
+    if low == "rebuild":
+        if (ROOT / "maintenance.sh").exists():
+            return cmd_answer(["./maintenance.sh"], "maintenance")
+        if rebuild_all:
+            try:
+                return {
+                    "answer": json.dumps(rebuild_all(), indent=2, ensure_ascii=False),
+                    "trace": "rebuild via core",
+                }
+            except Exception as e:
+                return {"answer": str(e), "trace": "rebuild error"}
+        return cmd_answer(["./rebuild_search_index.sh"], "rebuild search")
+
+    return None
+
+
+def auto_file_context(text: str) -> tuple[str, list[str]]:
+    low = text.lower()
+    trace: list[str] = []
+    chunks: list[str] = []
+
+    triggers = ["file", "code", "runtime", "source", "build", "savant", "palaver", "web", "ui", "patch"]
+    if any(t in low for t in triggers) and (ROOT / "file").exists():
+        r = run_cmd(["./file", "list", "runtime", "--limit", "220"])
+        if r["stdout"]:
+            chunks.append("## runtime file list\n" + r["stdout"][:12000])
+            trace.append("attached runtime file list")
+
+    targeted = {
+        "core": "runtime/core.py",
+        "gateway": "runtime/gateway.py",
+        "web": "webui_ultra/server.py",
+        "ui": "webui_ultra/server.py",
+        "file": "runtime/file_access.py",
+        "patch": "runtime/patch_system.py",
+        "graph": "runtime/graph_inspect.py",
+        "retrieval": "runtime/memory_retrieval.py",
+    }
+
+    for key, path in targeted.items():
+        if key in low and (ROOT / path).exists() and (ROOT / "file").exists():
+            r = run_cmd(["./file", "read", path, "--start", "1", "--end", "420"])
+            chunks.append(f"## {path}\n" + r["stdout"][:18000])
+            trace.append(f"attached {path}")
+
+    return "\n\n".join(chunks), trace
+
+
+def call_openai_raw(messages: list[dict]) -> str:
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        raise RuntimeError("OPENAI_API_KEY missing. Add it to ~/savant-runtime/.env")
+
+    payload = {
+        "model": os.getenv("SAVANT_MODEL", "gpt-5"),
+        "input": messages,
+    }
+
+    data = json.dumps(payload).encode("utf-8")
+
+    req = urllib.request.Request(
+        "https://api.openai.com/v1/responses",
+        data=data,
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {api_key}",
+        },
+        method="POST",
+    )
+
+    context = ssl.create_default_context()
+
+    with urllib.request.urlopen(req, timeout=120, context=context) as resp:
+        raw = resp.read().decode("utf-8")
+
+    obj = json.loads(raw)
+
+    if "output_text" in obj:
+        return obj["output_text"]
+
+    texts = []
+    for item in obj.get("output", []):
+        for content in item.get("content", []):
+            if content.get("type") in {"output_text", "text"}:
+                texts.append(content.get("text", ""))
+
+    if texts:
+        return "\n".join(texts).strip()
+
+    return json.dumps(obj, indent=2, ensure_ascii=False)
+
+
+def chat_response(message: str) -> dict:
+    direct = command_result(message)
+    if direct:
+        persist_exchange(message, direct["answer"], direct["trace"])
+        return direct
+
+    traces: list[str] = []
+
+    memory = ""
+    if memory_block_for_prompt:
+        try:
+            memory = memory_block_for_prompt(message, limit=10)
+            traces.append("memory attached" if memory else "memory empty")
+        except Exception as e:
+            traces.append(f"memory error: {e}")
+
+    file_context, file_trace = auto_file_context(message)
+    traces.extend(file_trace)
+
+    context = "\n\n".join(x for x in [memory, file_context] if x)
+
+    user_content = message
+    if context:
+        user_content = (
+            "Authoritative retrieved context follows.\n\n"
+            + context
+            + "\n\nCurrent user message:\n"
+            + message
+        )
+
+    try:
+        answer = call_openai_raw(
+            [
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": user_content},
+            ]
+        )
+        traces.append("model response ok via raw HTTPS")
+    except Exception as e:
+        answer = (
+            "AI response failed.\n\n"
+            + str(e)
+            + "\n\nRun `health` in Palaver to verify OPENAI_API_KEY and backend status.\n"
+            + "Commands still work: files, file read runtime/core.py, search <query>, retrieve <query>, graph, patches, rebuild."
+        )
+        traces.append("model error")
+
+    persist_exchange(message, answer, "\n".join(traces))
+    return {"answer": answer, "trace": "\n".join(traces)}
+
+
+def persist_exchange(user_text: str, assistant_text: str, trace: str) -> None:
+    chat_dir = ROOT / "vault" / "web_chats"
+    trace_dir = ROOT / "vault" / "web_traces"
+    chat_dir.mkdir(parents=True, exist_ok=True)
+    trace_dir.mkdir(parents=True, exist_ok=True)
+
+    stamp = datetime.now(UTC).strftime("%Y%m%d_%H%M%S_%f")
+    record = {
+        "timestamp": utc_now(),
+        "user": user_text,
+        "assistant": assistant_text,
+        "trace": trace,
+    }
+
+    (chat_dir / f"{stamp}.json").write_text(
+        json.dumps(record, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    if latest_session and new_session_path and load_session and save_session and write_message_object:
+        try:
+            session_file = latest_session() or new_session_path()
+            conversation = load_session(session_file)
+
+            conversation.append({"role": "user", "content": user_text, "timestamp": utc_now()})
+            write_message_object(
+                session_file.stem,
+                "user",
+                user_text,
+                source_path="webui_ultra",
+                source_type="web_chat",
+                ordinal=len(conversation) - 1,
+            )
+
+            conversation.append({"role": "assistant", "content": assistant_text, "timestamp": utc_now()})
+            write_message_object(
+                session_file.stem,
+                "assistant",
+                assistant_text,
+                source_path="webui_ultra",
+                source_type="web_chat",
+                ordinal=len(conversation) - 1,
+            )
+
+            save_session(session_file, conversation)
+
+            if rebuild_all:
+                rebuild_all()
+
+        except Exception:
+            (trace_dir / f"{stamp}.error.txt").write_text(traceback.format_exc(), encoding="utf-8")
+
+
+HTML = r'''<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Palaver Ultra</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{
+--bg:#08090c;
+--panel:#11141a;
+--panel2:#191e27;
+--gun:#5c626b;
+--gun2:#30343a;
+--gold:#ffd700;
+--gold2:#a87922;
+--pink:#ff1493;
+--pink2:#c80f75;
+--white:#ffffff;
+--bone:#e6e6e6;
+--muted:#a7adb8;
+--shadow:rgba(255,20,147,.22);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+margin:0;
+background:
+radial-gradient(circle at 15% 0%,rgba(255,215,0,.12),transparent 32%),
+radial-gradient(circle at 88% 10%,rgba(255,20,147,.16),transparent 35%),
+linear-gradient(180deg,#151922 0%,#08090c 100%);
+color:var(--bone);
+font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+.app{
+height:100vh;
+display:grid;
+grid-template-rows:auto 1fr auto;
+gap:12px;
+padding:14px;
+}
+.topbar{
+border:1px solid rgba(255,215,0,.45);
+border-radius:22px;
+background:rgba(17,20,26,.76);
+backdrop-filter:blur(18px);
+box-shadow:0 18px 70px rgba(0,0,0,.35),0 0 60px var(--shadow);
+padding:14px 16px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+}
+.brand{
+display:flex;
+align-items:center;
+gap:14px;
+min-width:0;
+}
+.mark{
+width:48px;height:48px;border-radius:16px;
+display:grid;place-items:center;
+background:linear-gradient(135deg,var(--gold),var(--gold2));
+color:#0b0d10;
+font-weight:900;
+box-shadow:0 0 30px rgba(255,215,0,.24);
+}
+.title{min-width:0}
+.title h1{
+font-size:20px;
+letter-spacing:.18em;
+margin:0;
+color:var(--gold);
+text-transform:uppercase;
+}
+.title div{
+font-size:12px;
+color:var(--muted);
+margin-top:3px;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+}
+.sigil{color:var(--pink);font-weight:900}
+.status{
+font-size:12px;
+color:var(--white);
+border:1px solid rgba(255,20,147,.44);
+background:rgba(255,20,147,.12);
+border-radius:999px;
+padding:8px 11px;
+white-space:nowrap;
+}
+.grid{
+min-height:0;
+display:grid;
+grid-template-columns:270px minmax(0,1fr) 340px;
+gap:12px;
+}
+.panel{
+min-height:0;
+border:1px solid rgba(92,98,107,.72);
+background:rgba(17,20,26,.74);
+backdrop-filter:blur(18px);
+border-radius:22px;
+box-shadow:0 18px 70px rgba(0,0,0,.28);
+overflow:hidden;
+display:flex;
+flex-direction:column;
+}
+.panelHeader{
+color:var(--pink);
+font-weight:900;
+letter-spacing:.16em;
+font-size:12px;
+text-transform:uppercase;
+padding:14px 16px;
+border-bottom:1px solid rgba(92,98,107,.4);
+background:rgba(25,30,39,.68);
+}
+.panelBody{
+padding:14px;
+overflow:auto;
+min-height:0;
+}
+button{
+width:100%;
+border:1px solid rgba(255,215,0,.42);
+border-radius:14px;
+background:linear-gradient(180deg,rgba(48,52,58,.96),rgba(25,30,39,.96));
+color:var(--gold);
+font:inherit;
+font-weight:700;
+padding:12px;
+margin:5px 0;
+box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+}
+button:active{transform:translateY(1px)}
+.chatPanel{display:flex;flex-direction:column}
+#chat{
+flex:1;
+overflow:auto;
+padding:18px;
+display:flex;
+flex-direction:column;
+gap:18px;
+}
+.msg{
+max-width:92%;
+border-radius:24px;
+overflow:hidden;
+box-shadow:0 18px 45px rgba(0,0,0,.28);
+white-space:pre-wrap;
+line-height:1.55;
+}
+.user{
+align-self:flex-end;
+background:linear-gradient(135deg,var(--gold),var(--gold2));
+color:var(--white);
+border:1px solid rgba(255,215,0,.6);
+}
+.assistant{
+align-self:flex-start;
+background:linear-gradient(135deg,var(--pink),var(--pink2));
+color:var(--white);
+border:1px solid rgba(255,20,147,.65);
+}
+.msgHeader{
+font-size:12px;
+letter-spacing:.14em;
+text-transform:uppercase;
+font-weight:1000;
+padding:11px 14px 0;
+}
+.user .msgHeader{color:var(--pink)}
+.assistant .msgHeader{color:var(--gold)}
+.msgBody{
+padding:10px 14px 14px;
+font-size:15px;
+color:var(--white);
+}
+.composer{
+padding:12px;
+border-top:1px solid rgba(92,98,107,.45);
+background:rgba(8,9,12,.56);
+display:flex;
+gap:10px;
+}
+#input{
+flex:1;
+resize:none;
+min-height:48px;
+max-height:150px;
+}
+input,textarea{
+background:rgba(8,9,12,.86);
+border:1px solid rgba(255,20,147,.56);
+border-radius:16px;
+color:var(--white);
+font:inherit;
+padding:13px;
+outline:none;
+}
+textarea{width:100%;min-height:170px;resize:vertical}
+.send{
+width:105px;
+background:linear-gradient(135deg,var(--pink),var(--pink2));
+color:var(--gold);
+border-color:rgba(255,20,147,.7);
+}
+#trace,#patchOut{
+white-space:pre-wrap;
+font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+font-size:12px;
+line-height:1.45;
+color:var(--muted);
+}
+.small{font-size:12px;color:var(--muted);line-height:1.45}
+@media(max-width:1050px){
+.app{height:auto;min-height:100vh}
+.grid{grid-template-columns:1fr}
+.panel{min-height:260px}
+#chat{min-height:55vh}
+.msg{max-width:100%}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+  <div class="brand">
+    <div class="mark">§</div>
+    <div class="title">
+      <h1>PALAVER</h1>
+      <div>savant-runtime // persistent browser chat // build console</div>
+    </div>
+  </div>
+  <div class="status" id="status">online §</div>
+</header>
+
+<section class="grid">
+<aside class="panel">
+  <div class="panelHeader">Runtime</div>
+  <div class="panelBody">
+    <button onclick="send('health')">Health</button>
+    <button onclick="send('diag')">Diagnostics</button>
+    <button onclick="send('files')">Files</button>
+    <button onclick="send('graph')">Graph</button>
+    <button onclick="send('patches')">Patches</button>
+    <button onclick="send('rebuild')">Rebuild</button>
+    <button onclick="fill('file read runtime/core.py')">Read core.py</button>
+    <button onclick="fill('search authority')">Search authority</button>
+    <button onclick="fill('retrieve message registry')">Retrieve memory</button>
+    <div class="small">
+      Commands work even if AI fails. Natural chat requires OPENAI_API_KEY.
+    </div>
+  </div>
+</aside>
+
+<main class="panel chatPanel">
+  <div class="panelHeader">Chat</div>
+  <div id="chat">
+    <div class="msg assistant">
+      <div class="msgHeader">PALAVER §</div>
+      <div class="msgBody">Ready. Ask naturally. If I fail to answer, run health.</div>
+    </div>
+  </div>
+  <div class="composer">
+    <textarea id="input" placeholder="Ask Palaver anything, or type: files / graph / file read runtime/core.py" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();submitMsg()}"></textarea>
+    <button class="send" onclick="submitMsg()">Send</button>
+  </div>
+</main>
+
+<aside class="panel">
+  <div class="panelHeader">Patch Writer</div>
+  <div class="panelBody">
+    <input id="patchPath" placeholder="target path">
+    <br><br>
+    <textarea id="patchContent" placeholder="content to write/append"></textarea>
+    <button onclick="patchWrite()">Propose write patch</button>
+    <button onclick="patchAppend()">Propose append patch</button>
+    <div id="patchOut"></div>
+    <br>
+    <div class="panelHeader" style="margin:0 -14px 12px">Trace</div>
+    <div id="trace">ready §</div>
+  </div>
+</aside>
+</section>
+</div>
+
+<script>
+const chat=document.getElementById("chat");
+const input=document.getElementById("input");
+const trace=document.getElementById("trace");
+const patchOut=document.getElementById("patchOut");
+const statusEl=document.getElementById("status");
+
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+
+function add(role,text){
+  const el=document.createElement("div");
+  el.className="msg "+role;
+  el.innerHTML=`<div class="msgHeader">${role==="user"?"YOU":"PALAVER"} §</div><div class="msgBody">${esc(text)}</div>`;
+  chat.appendChild(el);
+  el.scrollIntoView({behavior:"smooth",block:"end"});
+}
+
+function fill(x){input.value=x;input.focus()}
+
+async function submitMsg(){
+  const m=input.value.trim();
+  if(!m)return;
+  input.value="";
+  await send(m);
+}
+
+async function send(message){
+  add("user",message);
+  statusEl.textContent="thinking §";
+  trace.textContent="running §";
+  try{
+    const res=await fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message})});
+    const data=await res.json();
+    add("assistant",data.answer||"(empty response)");
+    trace.textContent=data.trace||"";
+  }catch(e){
+    add("assistant","Browser/API error:\n"+e);
+    trace.textContent=String(e);
+  }
+  statusEl.textContent="online §";
+}
+
+async function patchWrite(){
+  const path=document.getElementById("patchPath").value.trim();
+  const content=document.getElementById("patchContent").value;
+  const res=await fetch("/api/patch/write",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({path,content,intent:"browser write proposal"})});
+  const data=await res.json();
+  patchOut.textContent=data.output||JSON.stringify(data,null,2);
+}
+
+async function patchAppend(){
+  const path=document.getElementById("patchPath").value.trim();
+  const content=document.getElementById("patchContent").value;
+  const res=await fetch("/api/patch/append",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({path,content,intent:"browser append proposal"})});
+  const data=await res.json();
+  patchOut.textContent=data.output||JSON.stringify(data,null,2);
+}
+</script>
+</body>
+</html>
+'''
+
+
+class Handler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        path = urlparse(self.path).path
+
+        if path == "/":
+            html_response(self, HTML)
+            return
+
+        if path == "/api/health":
+            json_response(self, {
+                "ok": True,
+                "health": health(),
+            })
+            return
+
+        json_response(self, {"ok": False, "error": "not found"}, 404)
+
+    def do_POST(self):
+        try:
+            path = urlparse(self.path).path
+            data = read_body(self)
+
+            if path == "/api/health":
+                json_response(self, {
+                    "ok": True,
+                    "health": health(),
+                })
+                return
+
+            if path == "/api/chat":
+            message = data.get("message", "").strip()
+            if not message:
+                json_response(self, {"ok": False, "answer": "", "trace": "empty"})
+                return
+            result = chat_response(message)
+            json_response(self, {"ok": True, **result})
+            return
+
+        if path == "/api/patch/write":
+            target = data.get("path", "").strip()
+            content = data.get("content", "")
+            intent = data.get("intent", "browser write proposal")
+            if not target:
+                json_response(self, {"ok": False, "output": "missing path"})
+                return
+            r = run_cmd(["./patch", "write", target, "--stdin", "--intent", intent], input_text=content)
+            json_response(self, {"ok": r["ok"], "output": r["stdout"] + r["stderr"]})
+            return
+
+        if path == "/api/patch/append":
+            target = data.get("path", "").strip()
+            content = data.get("content", "")
+            intent = data.get("intent", "browser append proposal")
+            if not target:
+                json_response(self, {"ok": False, "output": "missing path"})
+                return
+            r = run_cmd(["./patch", "append", target, "--stdin", "--intent", intent], input_text=content)
+            json_response(self, {"ok": r["ok"], "output": r["stdout"] + r["stderr"]})
+            return
+
+            json_response(self, {"ok": False, "error": "not found"}, 404)
+
+        except Exception as e:
+            crash_dir = ROOT / "vault" / "diagnostics" / "crashes"
+            crash_dir.mkdir(parents=True, exist_ok=True)
+            stamp = datetime.now(UTC).strftime("%Y%m%d_%H%M%S_%f")
+            (crash_dir / f"webui_ultra_{stamp}.txt").write_text(
+                traceback.format_exc(),
+                encoding="utf-8",
+            )
+            json_response(self, {
+                "ok": False,
+                "answer": "Server route crashed. See vault/diagnostics/crashes.",
+                "trace": str(e),
+            }, 500)
+
+
+def main():
+    server = ThreadingHTTPServer(("0.0.0.0", PORT), Handler)
+    print(f"Palaver Ultra running: http://127.0.0.1:{PORT}")
+    server.serve_forever()
+
+
+if __name__ == "__main__":
+    main()

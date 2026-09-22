@@ -1,0 +1,808 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1">
+
+  <meta
+    name="color-scheme"
+    content="dark">
+
+  <meta
+    name="theme-color"
+    content="#070a10">
+
+  <title>Niche Command</title>
+
+  <link
+    rel="icon"
+    href="/favicon.svg"
+    type="image/svg+xml">
+
+  <link
+    rel="stylesheet"
+    href="/styles.css">
+
+  <link
+    rel="stylesheet"
+    href="/assets/command.css">
+
+  <link
+    rel="stylesheet"
+    href="/assets/command-augment.css">
+
+  <link
+    rel="stylesheet"
+    href="/assets/command-intelligence.css">
+</head>
+
+<body>
+
+  <div class="command-shell">
+
+    <header class="command-topbar">
+
+      <a
+        class="command-brand"
+        href="/"
+        aria-label="Niche taskboard">
+
+        <div class="command-mark">
+          N
+        </div>
+
+        <div>
+          <strong>Niche</strong>
+          <span>command intelligence</span>
+        </div>
+
+      </a>
+
+      <div class="command-search">
+
+        <span>⌕</span>
+
+        <input
+          id="search"
+          autocomplete="off"
+          spellcheck="false"
+          placeholder="Search work, systems, dependencies, evidence…">
+
+        <kbd>/</kbd>
+
+      </div>
+
+      <div class="command-actions">
+
+        <div
+          id="syncState"
+          class="sync-state">
+          connecting
+        </div>
+
+        <button
+          id="commandButton"
+          class="command-button secondary"
+          type="button">
+          ⌘
+          <span>Command</span>
+        </button>
+
+        <button
+          id="refresh"
+          class="command-button primary"
+          type="button">
+          Refresh
+        </button>
+
+      </div>
+
+    </header>
+
+    <aside class="command-sidebar">
+
+      <nav
+        class="command-nav"
+        aria-label="Command views">
+
+        <button
+          class="command-nav-item active"
+          data-view="cockpit"
+          type="button">
+          <span>◫</span>
+          <strong>Cockpit</strong>
+        </button>
+
+        <button
+          class="command-nav-item"
+          data-view="focus"
+          type="button">
+          <span>◎</span>
+          <strong>Focus</strong>
+        </button>
+
+        <button
+          class="command-nav-item"
+          data-view="matrix"
+          type="button">
+          <span>▦</span>
+          <strong>Matrix</strong>
+        </button>
+
+        <button
+          class="command-nav-item"
+          data-view="topology"
+          type="button">
+          <span>⌘</span>
+          <strong>Topology</strong>
+        </button>
+
+        <button
+          class="command-nav-item"
+          data-view="signals"
+          type="button">
+          <span>◌</span>
+          <strong>Signals</strong>
+        </button>
+
+        <button
+          class="command-nav-item"
+          data-view="history"
+          type="button">
+          <span>↺</span>
+          <strong>History</strong>
+        </button>
+
+      </nav>
+
+      <section class="sidebar-block">
+
+        <div class="sidebar-heading">
+          Projection
+        </div>
+
+        <div
+          id="depthControl"
+          class="depth-selector"
+          aria-label="Projection depth">
+
+          <button
+            data-depth="1"
+            type="button">
+            <strong>1</strong>
+            <span>objective</span>
+          </button>
+
+          <button
+            data-depth="2"
+            type="button">
+            <strong>2</strong>
+            <span>tranche</span>
+          </button>
+
+          <button
+            data-depth="3"
+            class="active"
+            type="button">
+            <strong>3</strong>
+            <span>task</span>
+          </button>
+
+          <button
+            data-depth="4"
+            type="button">
+            <strong>4</strong>
+            <span>action</span>
+          </button>
+
+        </div>
+
+      </section>
+
+      <section class="sidebar-block">
+
+        <div class="sidebar-heading">
+          Scope
+        </div>
+
+        <label>
+          <span class="visually-hidden">
+            status
+          </span>
+
+          <select id="statusFilter">
+            <option value="">all states</option>
+            <option value="proposed">proposed</option>
+            <option value="accepted">accepted</option>
+            <option value="ready">ready</option>
+            <option value="leased">leased</option>
+            <option value="active">active</option>
+            <option value="blocked">blocked</option>
+            <option value="deferred">deferred</option>
+            <option value="completed">completed</option>
+            <option value="rejected">rejected</option>
+            <option value="superseded">superseded</option>
+          </select>
+        </label>
+
+        <label>
+          <span class="visually-hidden">
+            priority
+          </span>
+
+          <select id="priorityFilter">
+            <option value="">all priorities</option>
+            <option value="critical">critical</option>
+            <option value="high">high</option>
+            <option value="normal">normal</option>
+            <option value="low">low</option>
+            <option value="deferred">deferred</option>
+          </select>
+        </label>
+
+        <label>
+          <span class="visually-hidden">
+            system
+          </span>
+
+          <select id="systemFilter">
+            <option value="">all systems</option>
+          </select>
+        </label>
+
+        <label>
+          <span class="visually-hidden">
+            workstream
+          </span>
+
+          <select id="workstreamFilter">
+            <option value="">all workstreams</option>
+          </select>
+        </label>
+
+      </section>
+
+      <section
+        id="engineHealth"
+        class="engine-health"
+        aria-live="polite">
+        loading engine
+      </section>
+
+      <div class="sidebar-links">
+
+        <a href="/">
+          classic taskboard
+        </a>
+
+        <a href="/assets/completion.html">
+          completion intelligence
+        </a>
+
+      </div>
+
+    </aside>
+
+    <main class="command-main">
+
+      <section
+        id="cockpitView"
+        class="command-view active">
+
+        <header class="view-heading">
+
+          <div>
+
+            <span class="eyebrow">
+              operational synthesis
+            </span>
+
+            <h1>
+              Command cockpit
+            </h1>
+
+            <p>
+              The smallest useful picture of what Savant
+              should do next.
+            </p>
+
+          </div>
+
+          <div class="view-heading-meta">
+
+            <span id="updatedAt">
+            </span>
+
+            <code id="graphDigest">
+            </code>
+
+          </div>
+
+        </header>
+
+        <section
+          id="metricGrid"
+          class="command-metrics"
+          aria-label="Task metrics">
+        </section>
+
+        <section class="cockpit-grid">
+
+          <article class="command-panel primary-panel">
+
+            <div class="panel-heading">
+
+              <div>
+
+                <span class="eyebrow">
+                  deterministic queue
+                </span>
+
+                <h2>
+                  Next best work
+                </h2>
+
+              </div>
+
+              <button
+                id="focusFirst"
+                class="micro-button"
+                type="button">
+                open first
+              </button>
+
+            </div>
+
+            <div
+              id="nextWork"
+              class="work-stack">
+            </div>
+
+          </article>
+
+          <article class="command-panel">
+
+            <div class="panel-heading">
+
+              <div>
+
+                <span class="eyebrow">
+                  intervention
+                </span>
+
+                <h2>
+                  Blocker radar
+                </h2>
+
+              </div>
+
+              <span
+                id="blockerCount"
+                class="counter">
+              </span>
+
+            </div>
+
+            <div
+              id="blockerRadar"
+              class="work-stack compact">
+            </div>
+
+          </article>
+
+          <article class="command-panel">
+
+            <div class="panel-heading">
+
+              <div>
+
+                <span class="eyebrow">
+                  leverage
+                </span>
+
+                <h2>
+                  Bottleneck map
+                </h2>
+
+              </div>
+
+            </div>
+
+            <div
+              id="bottleneckMap"
+              class="work-stack compact">
+            </div>
+
+          </article>
+
+          <article class="command-panel">
+
+            <div class="panel-heading">
+
+              <div>
+
+                <span class="eyebrow">
+                  longest chain
+                </span>
+
+                <h2>
+                  Critical path
+                </h2>
+
+              </div>
+
+            </div>
+
+            <div id="criticalPath">
+            </div>
+
+          </article>
+
+        </section>
+
+        <section class="cockpit-grid lower">
+
+          <article class="command-panel span-two">
+
+            <div class="panel-heading">
+
+              <div>
+
+                <span class="eyebrow">
+                  completion surface
+                </span>
+
+                <h2>
+                  System pulse
+                </h2>
+
+              </div>
+
+            </div>
+
+            <div
+              id="systemPulse"
+              class="pulse-grid">
+            </div>
+
+          </article>
+
+          <article class="command-panel">
+
+            <div class="panel-heading">
+
+              <div>
+
+                <span class="eyebrow">
+                  recent mutation
+                </span>
+
+                <h2>
+                  Activity
+                </h2>
+
+              </div>
+
+            </div>
+
+            <div
+              id="activityFeed"
+              class="activity-feed">
+            </div>
+
+          </article>
+
+        </section>
+
+      </section>
+
+      <section
+        id="focusView"
+        class="command-view">
+
+        <header class="view-heading">
+
+          <div>
+
+            <span class="eyebrow">
+              protected attention
+            </span>
+
+            <h1>
+              Focus queue
+            </h1>
+
+            <p>
+              Executable work only, ranked by the living
+              Niche engine.
+            </p>
+
+          </div>
+
+          <div
+            id="focusSummary"
+            class="view-heading-meta">
+          </div>
+
+        </header>
+
+        <div
+          id="focusQueue"
+          class="focus-queue">
+        </div>
+
+      </section>
+
+      <section
+        id="matrixView"
+        class="command-view">
+
+        <header class="view-heading">
+
+          <div>
+
+            <span class="eyebrow">
+              portfolio surface
+            </span>
+
+            <h1>
+              Work matrix
+            </h1>
+
+            <p>
+              Every visible task projected without creating
+              another task authority.
+            </p>
+
+          </div>
+
+          <div
+            id="visibleCount"
+            class="view-heading-meta">
+          </div>
+
+        </header>
+
+        <div
+          id="matrix"
+          class="matrix">
+        </div>
+
+      </section>
+
+      <section
+        id="topologyView"
+        class="command-view">
+
+        <header class="view-heading">
+
+          <div>
+
+            <span class="eyebrow">
+              dependency geometry
+            </span>
+
+            <h1>
+              Topology
+            </h1>
+
+            <p>
+              Direct dependency structure with executable,
+              blocked, and completed states.
+            </p>
+
+          </div>
+
+          <div class="topology-controls">
+
+            <button
+              id="zoomOut"
+              class="micro-button"
+              type="button"
+              aria-label="Zoom topology out">
+              −
+            </button>
+
+            <button
+              id="zoomReset"
+              class="micro-button"
+              type="button">
+              reset
+            </button>
+
+            <button
+              id="zoomIn"
+              class="micro-button"
+              type="button"
+              aria-label="Zoom topology in">
+              +
+            </button>
+
+          </div>
+
+        </header>
+
+        <section class="command-panel topology-panel">
+
+          <div
+            id="topologyCanvas"
+            class="topology-canvas">
+
+            <svg
+              id="topologySvg"
+              viewBox="0 0 1600 900"
+              role="img"
+              aria-label="Niche dependency topology">
+            </svg>
+
+          </div>
+
+        </section>
+
+      </section>
+
+      <section
+        id="signalsView"
+        class="command-view">
+
+        <header class="view-heading">
+
+          <div>
+
+            <span class="eyebrow">
+              derived intelligence
+            </span>
+
+            <h1>
+              Signals
+            </h1>
+
+            <p>
+              Deterministic warnings and opportunities
+              derived from authoritative task primitives.
+            </p>
+
+          </div>
+
+        </header>
+
+        <div
+          id="signalGrid"
+          class="signal-grid">
+        </div>
+
+      </section>
+
+      <section
+        id="historyView"
+        class="command-view">
+
+        <header class="view-heading">
+
+          <div>
+
+            <span class="eyebrow">
+              immutable event chain
+            </span>
+
+            <h1>
+              History
+            </h1>
+
+            <p>
+              Task mutation history remains evidence,
+              not decoration.
+            </p>
+
+          </div>
+
+        </header>
+
+        <section class="command-panel">
+
+          <div
+            id="historyTimeline"
+            class="history-timeline">
+          </div>
+
+        </section>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <div
+    id="scrim"
+    class="command-scrim hidden">
+  </div>
+
+  <aside
+    id="inspector"
+    class="inspector hidden"
+    aria-label="Task inspector">
+
+    <header class="inspector-header">
+
+      <button
+        id="closeInspector"
+        class="icon-button"
+        type="button"
+        aria-label="Close task inspector">
+        ×
+      </button>
+
+      <div>
+
+        <span
+          id="inspectorId"
+          class="eyebrow">
+        </span>
+
+        <h2 id="inspectorTitle">
+        </h2>
+
+      </div>
+
+    </header>
+
+    <div
+      id="inspectorBody"
+      class="inspector-body">
+    </div>
+
+  </aside>
+
+  <dialog
+    id="commandPalette"
+    class="command-palette">
+
+    <div class="palette-search">
+
+      <span>⌘</span>
+
+      <input
+        id="paletteInput"
+        autocomplete="off"
+        spellcheck="false"
+        placeholder="Jump to task or command…">
+
+      <kbd>esc</kbd>
+
+    </div>
+
+    <div
+      id="paletteResults"
+      class="palette-results">
+    </div>
+
+  </dialog>
+
+  <div
+    id="toast"
+    class="command-toast"
+    role="status"
+    aria-live="polite">
+  </div>
+
+  <script
+    src="/assets/command.js"
+    defer>
+  </script>
+
+  <script
+    src="/assets/command-augment.js"
+    defer>
+  </script>
+
+  <script
+    src="/assets/command-intelligence.js"
+    defer>
+  </script>
+
+</body>
+</html>

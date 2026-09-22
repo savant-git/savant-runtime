@@ -1,0 +1,35 @@
+{
+  "id": "opus_text_inference_contract",
+  "type": "runtime_contract",
+  "status": "active",
+  "consumer": "envoy",
+  "provider": "opus",
+  "schema": "savant.envoy.opus-text-bridge.v1",
+  "route": "text_inference_route",
+  "request": {
+    "type": "object",
+    "owner": "envoy"
+  },
+  "response": {
+    "type": "object",
+    "lineage_required": true,
+    "lineage_owner": "opus",
+    "lineage_route": "text_inference_route"
+  },
+  "authority": {
+    "request_owner": "envoy",
+    "provider_selection_owner": "opus",
+    "provider_routing_owner": "opus",
+    "provider_credentials_owner": "opus",
+    "provider_execution_owner": "opus",
+    "provider_retry_policy_owner": "opus",
+    "provider_fallback_policy_owner": "opus"
+  },
+  "envoy_permissions": {
+    "select_provider": false,
+    "access_provider_credentials": false,
+    "execute_provider_calls": false,
+    "define_provider_retry_policy": false,
+    "define_provider_fallback_policy": false
+  }
+}

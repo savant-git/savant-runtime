@@ -1,0 +1,157 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+
+title: Savant Kindred Schema
+
+type: object
+
+required:
+  - registry_id
+  - version
+  - kindreds
+
+properties:
+
+  registry_id:
+    type: string
+
+  version:
+    type: integer
+    minimum: 1
+
+  authority:
+    type: object
+
+  kindreds:
+    type: array
+
+    items:
+      type: object
+
+      required:
+        - id
+        - canonical
+        - members
+        - provenance
+        - lineage
+
+      properties:
+
+        id:
+          type: string
+          pattern: "^kindred:[a-z][a-z0-9_-]*$"
+
+        canonical:
+          type: string
+          minLength: 1
+
+        description:
+          type: string
+
+        status:
+          type: string
+          enum:
+            - active
+            - deprecated
+            - superseded
+            - reserved
+
+        ontology:
+          type: array
+          items:
+            type: string
+
+        members:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+
+        parents:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+
+        children:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+
+        dependencies:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+
+        relationships:
+          type: array
+
+          items:
+            oneOf:
+
+              - type: string
+
+              - type: object
+                required:
+                  - type
+                  - target
+
+                properties:
+                  type:
+                    type: string
+
+                  target:
+                    type: string
+
+                  metadata:
+                    type: object
+
+        provenance:
+          type: object
+
+          required:
+            - source
+            - confidence
+
+          properties:
+            source:
+              type: string
+
+            confidence:
+              type: string
+              enum:
+                - confirmed
+                - inferred
+                - projected
+
+            evidence:
+              type: array
+              items:
+                type: string
+
+        lineage:
+          type: object
+
+          properties:
+            derived_from:
+              type: array
+              items:
+                type: string
+
+            supersedes:
+              type: array
+              items:
+                type: string
+
+            superseded_by:
+              type:
+                - string
+                - "null"
+
+            history:
+              type: array
+              items:
+                type: object
+
+additionalProperties: true
