@@ -5,13 +5,13 @@ from collections import deque
 from dataclasses import replace
 from typing import Iterable
 
-from .graph import KinshipGraph
+from .graph import KindredGraph
 from .model import (
     DirectLineageEdge,
-    KinshipDetermination,
+    KindredDetermination,
     PathStep,
 )
-from .registry import KinshipRegistry
+from .registry import KindredRegistry
 
 
 def _step_up(
@@ -52,11 +52,11 @@ def _step_down(
     )
 
 
-class KinshipAlgebra:
+class KindredAlgebra:
     def __init__(
         self,
-        graph: KinshipGraph,
-        registry: KinshipRegistry,
+        graph: KindredGraph,
+        registry: KindredRegistry,
     ) -> None:
         self.graph = graph
         self.registry = registry
@@ -280,7 +280,7 @@ class KinshipAlgebra:
         active_only: bool = True,
         domain: str | None = None,
     ) -> list[
-        KinshipDetermination
+        KindredDetermination
     ]:
         subject = self.graph.resolve_node_id(
             identifier
@@ -295,7 +295,7 @@ class KinshipAlgebra:
         )
 
         results: list[
-            KinshipDetermination
+            KindredDetermination
         ] = []
 
         for relative in (
@@ -387,7 +387,7 @@ class KinshipAlgebra:
                 )
 
             results.append(
-                KinshipDetermination(
+                KindredDetermination(
                     subject=subject,
                     relative=relative,
                     relationship=(
@@ -440,7 +440,7 @@ class KinshipAlgebra:
 
             if "mother" in profiles:
                 results.append(
-                    KinshipDetermination(
+                    KindredDetermination(
                         subject=subject,
                         relative=relative,
                         relationship=(
@@ -468,7 +468,7 @@ class KinshipAlgebra:
 
             if "father" in profiles:
                 results.append(
-                    KinshipDetermination(
+                    KindredDetermination(
                         subject=subject,
                         relative=relative,
                         relationship=(
@@ -505,7 +505,7 @@ class KinshipAlgebra:
         active_only: bool = True,
         domain: str | None = None,
     ) -> list[
-        KinshipDetermination
+        KindredDetermination
     ]:
         subject = self.graph.resolve_node_id(
             subject_identifier
@@ -517,7 +517,7 @@ class KinshipAlgebra:
 
         if subject == relative:
             return [
-                KinshipDetermination(
+                KindredDetermination(
                     subject=subject,
                     relative=relative,
                     relationship="self",
@@ -534,7 +534,7 @@ class KinshipAlgebra:
             ]
 
         results: list[
-            KinshipDetermination
+            KindredDetermination
         ] = []
 
         incoming = (
@@ -550,7 +550,7 @@ class KinshipAlgebra:
                 continue
 
             results.append(
-                KinshipDetermination(
+                KindredDetermination(
                     subject=subject,
                     relative=relative,
                     relationship=(
@@ -595,7 +595,7 @@ class KinshipAlgebra:
                 continue
 
             results.append(
-                KinshipDetermination(
+                KindredDetermination(
                     subject=subject,
                     relative=relative,
                     relationship=(
@@ -637,7 +637,7 @@ class KinshipAlgebra:
                 continue
 
             results.append(
-                KinshipDetermination(
+                KindredDetermination(
                     subject=subject,
                     relative=relative,
                     relationship=(
@@ -721,7 +721,7 @@ class KinshipAlgebra:
                 )
 
             results.append(
-                KinshipDetermination(
+                KindredDetermination(
                     subject=subject,
                     relative=relative,
                     relationship=(
@@ -810,7 +810,7 @@ class KinshipAlgebra:
                 )
 
             results.append(
-                KinshipDetermination(
+                KindredDetermination(
                     subject=subject,
                     relative=relative,
                     relationship=(
@@ -889,7 +889,7 @@ class KinshipAlgebra:
 
             if relative in parent_siblings:
                 results.append(
-                    KinshipDetermination(
+                    KindredDetermination(
                         subject=subject,
                         relative=relative,
                         relationship=(
@@ -947,7 +947,7 @@ class KinshipAlgebra:
 
         if through_siblings:
             results.append(
-                KinshipDetermination(
+                KindredDetermination(
                     subject=subject,
                     relative=relative,
                     relationship=(
@@ -1056,7 +1056,7 @@ class KinshipAlgebra:
             )
 
             results.append(
-                KinshipDetermination(
+                KindredDetermination(
                     subject=subject,
                     relative=relative,
                     relationship="cousin",
@@ -1113,7 +1113,7 @@ class KinshipAlgebra:
             ):
                 if partner == relative:
                     results.append(
-                        KinshipDetermination(
+                        KindredDetermination(
                             subject=subject,
                             relative=relative,
                             relationship=(
@@ -1174,7 +1174,7 @@ class KinshipAlgebra:
                 )
 
                 results.append(
-                    KinshipDetermination(
+                    KindredDetermination(
                         subject=subject,
                         relative=relative,
                         relationship="in_law",
@@ -1221,7 +1221,7 @@ class KinshipAlgebra:
                 tuple[str, ...],
                 tuple[str, ...],
             ],
-            KinshipDetermination,
+            KindredDetermination,
         ] = {}
 
         for result in results:
@@ -1266,7 +1266,7 @@ class KinshipAlgebra:
         domain: str | None = None,
         include_extended: bool = True,
     ) -> list[
-        KinshipDetermination
+        KindredDetermination
     ]:
         subject = self.graph.resolve_node_id(
             identifier
@@ -1378,7 +1378,7 @@ class KinshipAlgebra:
                     )
 
         results: list[
-            KinshipDetermination
+            KindredDetermination
         ] = []
 
         for relative in sorted(
@@ -1406,5 +1406,5 @@ class KinshipAlgebra:
 
 
 __all__ = [
-    "KinshipAlgebra",
+    "KindredAlgebra",
 ]

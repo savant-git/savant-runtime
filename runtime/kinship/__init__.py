@@ -1,23 +1,23 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
-from .algebra import KinshipAlgebra
-from .graph import KinshipGraph
+from .algebra import KindredAlgebra
+from .graph import KindredGraph
 from .model import (
     AllianceContract,
     DirectLineageEdge,
     FamilyTreeProjection,
-    KinshipDetermination,
-    KinshipError,
-    KinshipLookupError,
-    KinshipNode,
-    KinshipValidationError,
+    KindredDetermination,
+    KindredError,
+    KindredLookupError,
+    KindredNode,
+    KindredValidationError,
     PathStep,
 )
 from .projection import FamilyTreeProjector
 from .registry import (
-    DEFAULT_KINSHIP_REGISTRY,
-    KinshipRegistry,
+    DEFAULT_KINDRED_REGISTRY,
+    KindredRegistry,
 )
 from .renderers import (
     SUPPORTED_FORMATS,
@@ -27,18 +27,18 @@ from .renderers import (
 
 __all__ = [
     "AllianceContract",
-    "DEFAULT_KINSHIP_REGISTRY",
+    "DEFAULT_KINDRED_REGISTRY",
     "DirectLineageEdge",
     "FamilyTreeProjection",
     "FamilyTreeProjector",
-    "KinshipAlgebra",
-    "KinshipDetermination",
-    "KinshipError",
-    "KinshipGraph",
-    "KinshipLookupError",
-    "KinshipNode",
-    "KinshipRegistry",
-    "KinshipValidationError",
+    "KindredAlgebra",
+    "KindredDetermination",
+    "KindredError",
+    "KindredGraph",
+    "KindredLookupError",
+    "KindredNode",
+    "KindredRegistry",
+    "KindredValidationError",
     "PathStep",
     "SUPPORTED_FORMATS",
     "render_family_tree",

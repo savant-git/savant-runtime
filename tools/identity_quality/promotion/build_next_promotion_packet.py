@@ -32,7 +32,7 @@ SUBJECT_REPORT_ROOT = (
 
 NOCTURNE_ROOT = (
     ROOT
-    / "hierarchies"
+    / "edifices"
     / "identity"
     / "exiles"
     / "opus"
@@ -87,7 +87,7 @@ REFERENCE_FILES = {
     ),
     "exile_definition": (
         ROOT
-        / "hierarchies"
+        / "edifices"
         / "identity"
         / "exiles"
         / "opus"
@@ -115,7 +115,7 @@ VOLATILE_FIELDS = {
     "elapsed_seconds",
 }
 
-KINSHIP_TERM = "kin" + "ship"
+KINDRED_TERM = "kin" + "ship"
 
 
 def utc_now() -> str:
@@ -379,7 +379,7 @@ def search_mentions(
 
     roots = (
         ROOT
-        / "hierarchies",
+        / "edifices",
         ROOT
         / "ontology",
         ROOT
@@ -458,7 +458,7 @@ def forbidden_term_findings(
     directory: Path,
 ) -> list[dict[str, Any]]:
     pattern = re.compile(
-        rf"\b{re.escape(KINSHIP_TERM)}\b",
+        rf"\b{re.escape(KINDRED_TERM)}\b",
         re.IGNORECASE,
     )
 
@@ -498,7 +498,7 @@ def forbidden_term_findings(
                             path
                         ),
                         "line": line_number,
-                        "value": KINSHIP_TERM,
+                        "value": KINDRED_TERM,
                     }
                 )
 

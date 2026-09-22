@@ -63,7 +63,7 @@ VALID_CONFIDENCE_VALUES = {
 }
 
 FORBIDDEN_TERMS = {
-    "kinship",
+    "kindred",
 }
 
 REFERENCE_FIELDS = {
@@ -2525,7 +2525,7 @@ class LexiconValidator:
         )
 
         active_kindred = []
-        active_kinship = []
+        active_kindred = []
 
         for lexeme in context.lexemes:
             canonical = optional_string(
@@ -2560,9 +2560,9 @@ class LexiconValidator:
             if (
                 status == "active"
                 and normalized
-                == "kinship"
+                == "kindred"
             ):
-                active_kinship.append(
+                active_kindred.append(
                     lexeme
                 )
 
@@ -2586,29 +2586,29 @@ class LexiconValidator:
                 },
             )
 
-        if len(active_kinship) != 1:
+        if len(active_kindred) != 1:
             self.report.add(
                 code=(
                     "terminology."
-                    "kinship_cardinality"
+                    "kindred_cardinality"
                 ),
                 severity="error",
                 validator="terminology",
                 message=(
                     "Exactly one active "
-                    "Kinship service lexeme "
+                    "Kindred service lexeme "
                     "is required."
                 ),
                 metadata={
                     "count": len(
-                        active_kinship
+                        active_kindred
                     )
                 },
             )
 
         if (
             len(active_kindred) == 1
-            and len(active_kinship) == 1
+            and len(active_kindred) == 1
         ):
             kindred_id = (
                 context.lexeme_identity(
@@ -2616,18 +2616,18 @@ class LexiconValidator:
                 )
             )
 
-            kinship = (
-                active_kinship[0]
+            kindred = (
+                active_kindred[0]
             )
 
-            kinship_id = (
+            kindred_id = (
                 context.lexeme_identity(
-                    kinship
+                    kindred
                 )
             )
 
             dependencies = (
-                kinship.get(
+                kindred.get(
                     "dependencies"
                 )
             )
@@ -2645,7 +2645,7 @@ class LexiconValidator:
                 self.report.add(
                     code=(
                         "terminology."
-                        "kinship_kindred_"
+                        "kindred_kindred_"
                         "dependency_missing"
                     ),
                     severity="error",
@@ -2653,10 +2653,10 @@ class LexiconValidator:
                         "terminology"
                     ),
                     message=(
-                        "Kinship must depend "
+                        "Kindred must depend "
                         "on Kindred."
                     ),
-                    lexeme_id=kinship_id,
+                    lexeme_id=kindred_id,
                     field="dependencies",
                     value=kindred_id,
                 )
@@ -2726,10 +2726,10 @@ class LexiconValidator:
 
             if (
                 lexeme_id
-                == "lex:service:kinship"
+                == "lex:service:kindred"
                 and contains_term(
                     value,
-                    "kinship",
+                    "kindred",
                 )
             ):
                 return
@@ -2739,7 +2739,7 @@ class LexiconValidator:
             ):
                 if (
                     forbidden
-                    == "kinship"
+                    == "kindred"
                 ):
                     continue
 
@@ -2880,7 +2880,7 @@ class LexiconValidator:
                 ):
                     if (
                         forbidden
-                        == "kinship"
+                        == "kindred"
                     ):
                         continue
 

@@ -15,7 +15,7 @@ from jsonschema import Draft202012Validator
 
 
 DEFAULT_ROOT = Path("/root/savant-runtime")
-DEFAULT_IDENTITY_ROOT = DEFAULT_ROOT / "hierarchies/identity"
+DEFAULT_IDENTITY_ROOT = DEFAULT_ROOT / "edifices/identity"
 DEFAULT_SCHEMA = (
     DEFAULT_ROOT
     / "tools"
@@ -36,7 +36,7 @@ DEFAULT_REPORT_ROOT = (
 TOOL_ID = "savant.identity-quality.upgrader"
 TOOL_VERSION = "1.1.0"
 
-KINSHIP_TERM = "kin" + "ship"
+KINDRED_TERM = "kin" + "ship"
 
 LEVELS = {
     "exile": 6,
@@ -984,7 +984,7 @@ def replace_forbidden_term(
         return {
             (
                 key.replace(
-                    KINSHIP_TERM,
+                    KINDRED_TERM,
                     "kindred",
                 )
                 if isinstance(key, str)
@@ -1001,10 +1001,10 @@ def replace_forbidden_term(
 
     if isinstance(value, str):
         return value.replace(
-            KINSHIP_TERM,
+            KINDRED_TERM,
             "kindred",
         ).replace(
-            KINSHIP_TERM.capitalize(),
+            KINDRED_TERM.capitalize(),
             "Kindred",
         )
 

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import os
 from pathlib import Path
 from typing import Iterable, Mapping
@@ -8,6 +9,17 @@ from typing import Iterable, Mapping
 DEFAULT_ENV_PATHS = (
     Path("/root/.env"),
     Path("/root/savant-runtime/.env"),
+)
+
+OPUS_ROOT = Path(
+    __file__
+).resolve().parents[1]
+
+UNIVERSAL_CATALOG = (
+    OPUS_ROOT
+    / "registry"
+    / "providers"
+    / "universal_text_catalog.json"
 )
 
 _LOADED = False
@@ -87,15 +99,10 @@ def load_environment(
     if _LOADED and not force:
         return _LOADED_PATHS
 
-    candidates = tuple(
+    existing = tuple(
         Path(path)
         for path in paths
-    )
-
-    existing = tuple(
-        path
-        for path in candidates
-        if path.is_file()
+        if Path(path).is_file()
     )
 
     try:
@@ -183,38 +190,374 @@ def availability(
     }
 
 
-def status() -> dict[str, object]:
+def _env(
+    name: object,
+) -> str:
+    key = str(
+        name
+        or ""
+    ).strip()
+
+    if not key:
+        return ""
+
+    return str(
+        os.getenv(
+            key,
+            "",
+        )
+        or ""
+    ).strip()
+
+
+def _catalog_profiles() -> dict[
+    str,
+    dict[str, object],
+]:
+    if not UNIVERSAL_CATALOG.is_file():
+        return {}
+
+    try:
+        value = json.loads(
+            UNIVERSAL_CATALOG.read_text(
+                encoding="utf-8"
+            )
+        )
+    except Exception:
+        return {}
+
+    profiles = value.get(
+        "profiles"
+    )
+
+    if not isinstance(
+        profiles,
+        dict,
+    ):
+        return {}
+
+    result: dict[
+        str,
+        dict[str, object],
+    ] = {}
+
+    for (
+        profile_id,
+        profile,
+    ) in profiles.items():
+        if isinstance(
+            profile,
+            dict,
+        ):
+            result[
+                str(profile_id)
+            ] = dict(
+                profile
+            )
+
+    return result
+
+
+def _base_configured(
+    profile: Mapping[
+        str,
+        object,
+    ],
+) -> bool:
+    direct = str(
+        profile.get(
+            "api_base"
+        )
+        or ""
+    ).strip()
+
+    if direct:
+        return True
+
+    return bool(
+        _env(
+            profile.get(
+                "api_base_env"
+            )
+        )
+    )
+
+
+def _credential_configured(
+    profile: Mapping[
+        str,
+        object,
+    ],
+) -> bool:
+    header_env = profile.get(
+        "header_env"
+    )
+
+    if isinstance(
+        header_env,
+        dict,
+    ):
+        if any(
+            _env(value)
+            for value
+            in header_env.values()
+        ):
+            return True
+
+    if _env(
+        profile.get(
+            "api_key_env"
+        )
+    ):
+        return True
+
+    if _env(
+        profile.get(
+            "api_key_env_fallback"
+        )
+    ):
+        return True
+
+    return bool(
+        profile.get(
+            "api_key_optional",
+            False,
+        )
+    )
+
+
+def _default_model_configured(
+    profile: Mapping[
+        str,
+        object,
+    ],
+) -> bool:
+    if str(
+        profile.get(
+            "model_default"
+        )
+        or ""
+    ).strip():
+        return True
+
+    return bool(
+        _env(
+            profile.get(
+                "model_env"
+            )
+        )
+    )
+
+
+def _bedrock_configured(
+    profile: Mapping[
+        str,
+        object,
+    ],
+) -> bool:
+    region = (
+        _env(
+            profile.get(
+                "region_env"
+            )
+        )
+        or os.getenv(
+            "AWS_REGION",
+            "",
+        )
+        or os.getenv(
+            "AWS_DEFAULT_REGION",
+            "",
+        )
+    )
+
+    if not str(
+        region
+    ).strip():
+        return False
+
+    try:
+        import boto3
+    except ImportError:
+        return False
+
+    try:
+        return (
+            boto3.Session()
+            .get_credentials()
+            is not None
+        )
+    except Exception:
+        return False
+
+
+def _profile_configured(
+    profile: Mapping[
+        str,
+        object,
+    ],
+) -> bool:
+    protocol = str(
+        profile.get(
+            "protocol"
+        )
+        or ""
+    ).strip().lower()
+
+    if protocol == "bedrock_converse":
+        return _bedrock_configured(
+            profile
+        )
+
+    if protocol == "ollama_chat":
+        return _base_configured(
+            profile
+        )
+
+    if protocol in {
+        "cohere_chat",
+        "replicate_prediction",
+        "openai_responses",
+        "openai_chat",
+        "anthropic_messages",
+        "gemini_generate_content",
+        "generic_json",
+    }:
+        return (
+            _base_configured(
+                profile
+            )
+            and _credential_configured(
+                profile
+            )
+        )
+
+    return False
+
+
+def provider_availability() -> dict[
+    str,
+    bool,
+]:
     load_environment()
 
+    result = {
+        "elevenlabs": bool(
+            os.getenv(
+                "ELEVENLABS_SERVER_KEY"
+            )
+            or os.getenv(
+                "ELEVENLABS_API_KEY"
+            )
+        ),
+    }
+
+    for (
+        profile_id,
+        profile,
+    ) in _catalog_profiles().items():
+        result[
+            profile_id
+        ] = _profile_configured(
+            profile
+        )
+
+    return dict(
+        sorted(
+            result.items()
+        )
+    )
+
+
+def default_model_availability() -> dict[
+    str,
+    bool,
+]:
+    load_environment()
+
+    return dict(
+        sorted(
+            (
+                profile_id,
+                _default_model_configured(
+                    profile
+                ),
+            )
+            for (
+                profile_id,
+                profile,
+            ) in _catalog_profiles().items()
+        )
+    )
+
+
+def status() -> dict[
+    str,
+    object,
+]:
+    load_environment()
+
+    providers = (
+        provider_availability()
+    )
+
+    models = (
+        default_model_availability()
+    )
+
+    configured_ids = [
+        provider_id
+        for (
+            provider_id,
+            state,
+        ) in providers.items()
+        if state
+    ]
+
+    unconfigured_ids = [
+        provider_id
+        for (
+            provider_id,
+            state,
+        ) in providers.items()
+        if not state
+    ]
+
     return {
-        "owner": "opus",
-        "loaded_paths": list(
-            _LOADED_PATHS
-        ),
-        "providers": availability(
-            {
-                "openai": (
-                    "OPENAI_API_KEY",
-                ),
-                "anthropic": (
-                    "ANTHROPIC_API_KEY",
-                ),
-                "google": (
-                    "GOOGLE_API_KEY",
-                    "GEMINI_API_KEY",
-                ),
-                "elevenlabs": (
-                    "ELEVENLABS_SERVER_KEY",
-                    "ELEVENLABS_API_KEY",
-                ),
-                "groq": (
-                    "GROQ_API_KEY",
-                ),
-                "deepseek": (
-                    "DEEPSEEK_API_KEY",
-                ),
-            }
-        ),
-        "credential_values_exposed": False,
-        "authority_effect": "none",
+        "owner":
+            "opus",
+        "loaded_paths":
+            list(
+                _LOADED_PATHS
+            ),
+        "providers":
+            providers,
+        "provider_count":
+            len(
+                providers
+            ),
+        "available_provider_count":
+            len(
+                configured_ids
+            ),
+        "available_providers":
+            configured_ids,
+        "unavailable_providers":
+            unconfigured_ids,
+        "default_models":
+            models,
+        "request_model_override_supported":
+            True,
+        "provider_discovery":
+            "registry_projection",
+        "universal_catalog":
+            str(
+                UNIVERSAL_CATALOG
+            ),
+        "universal_catalog_present":
+            UNIVERSAL_CATALOG.is_file(),
+        "credential_values_exposed":
+            False,
+        "authority_effect":
+            "none",
     }

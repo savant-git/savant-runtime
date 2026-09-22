@@ -1,4 +1,4 @@
-"""Project existing Savant hierarchies into functional lineage."""
+"""Project existing Savant edifices into functional lineage."""
 
 from .authority import (
     ingest_authority_document,

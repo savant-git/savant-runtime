@@ -23,13 +23,13 @@ if str(ROOT) not in sys.path:
     )
 
 
-from runtime.kinship.graph import KinshipGraph  # noqa: E402
-from runtime.kinship.projection import FamilyTreeProjector  # noqa: E402
-from runtime.kinship.registry import (  # noqa: E402
-    DEFAULT_KINSHIP_REGISTRY,
-    KinshipRegistry,
+from runtime.kindred.graph import KindredGraph  # noqa: E402
+from runtime.kindred.projection import FamilyTreeProjector  # noqa: E402
+from runtime.kindred.registry import (  # noqa: E402
+    DEFAULT_KINDRED_REGISTRY,
+    KindredRegistry,
 )
-from runtime.kinship.renderers import (  # noqa: E402
+from runtime.kindred.renderers import (  # noqa: E402
     SUPPORTED_FORMATS,
     render_family_tree,
 )
@@ -98,7 +98,7 @@ def build_parser(
         "--registry",
         type=Path,
         default=(
-            DEFAULT_KINSHIP_REGISTRY
+            DEFAULT_KINDRED_REGISTRY
         ),
     )
 
@@ -160,12 +160,12 @@ def main(
             args.graph
         )
 
-        registry = KinshipRegistry.load(
+        registry = KindredRegistry.load(
             args.registry
         )
 
         graph = (
-            KinshipGraph
+            KindredGraph
             .from_runtime_graph(
                 runtime_payload,
                 registry=registry,

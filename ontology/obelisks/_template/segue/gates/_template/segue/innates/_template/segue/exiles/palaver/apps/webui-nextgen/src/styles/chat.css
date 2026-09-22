@@ -1,0 +1,146 @@
+.chat-observatory {
+  position: relative;
+}
+
+.chat-file-input {
+  display: none;
+}
+
+.composer-core {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.composer-core textarea {
+  flex: 1;
+  min-width: 0;
+  max-height: 220px;
+  resize: none;
+  overflow-y: auto;
+}
+
+.composer-attach,
+.composer-send {
+  flex: 0 0 auto;
+}
+
+.composer-attachments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 0 10px;
+}
+
+.composer-attachments article {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 280px;
+  padding: 8px 9px;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, .035);
+}
+
+.composer-attachment-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+}
+
+.composer-attachment-copy {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.composer-attachment-copy strong {
+  overflow: hidden;
+  font-size: 11px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.composer-attachment-copy small {
+  color: var(--text-muted, #7f8793);
+  font-size: 9px;
+}
+
+.composer-attachments article > button {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+}
+
+.chat-message-attachments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 6px 0 10px;
+}
+
+.chat-message-attachments span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 7px;
+  border: 1px solid rgba(255, 255, 255, .09);
+  border-radius: 7px;
+  color: var(--text-muted, #8d96a3);
+  font-size: 9px;
+}
+
+.chat-thinking {
+  gap: 10px;
+}
+
+.chat-stop-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 5px;
+}
+
+.chat-drop-overlay {
+  position: absolute;
+  inset: 8px;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 10px;
+  border: 1px dashed rgba(240, 200, 121, .55);
+  border-radius: 12px;
+  background: rgba(5, 6, 8, .92);
+  backdrop-filter: blur(18px);
+  pointer-events: none;
+}
+
+.chat-drop-overlay strong {
+  font-size: 15px;
+}
+
+.chat-drop-overlay span {
+  color: var(--text-muted, #8d96a3);
+  font-size: 11px;
+}
+
+.composer-stop {
+  color: #f0c879;
+}
+
+@media (max-width: 700px) {
+  .composer-attachments article {
+    max-width: 100%;
+  }
+
+  .composer-attachments {
+    display: grid;
+  }
+}

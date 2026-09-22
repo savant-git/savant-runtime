@@ -4,7 +4,7 @@ set -euo pipefail
 
 ROOT="/root/savant-runtime"
 MASTERPLAN_ROOT="${ROOT}/tools/niche/masterplan"
-TEST_ROOT="${ROOT}/hierarchies/identity/exiles/niche/prodigals/masterplan/tests"
+TEST_ROOT="${ROOT}/edifices/identity/exiles/niche/prodigals/masterplan/tests"
 
 RESUMER="${MASTERPLAN_ROOT}/resume_masterplan_opus_binding_chain.sh"
 STATUS_TEST="${TEST_ROOT}/test_inspect_masterplan_opus_binding_state.py"

@@ -1,0 +1,210 @@
+/*
+savant niche objective structural visualization
+authority_effect: none
+projection_only: true
+*/
+
+.niche-objective-map {
+    position: relative;
+    min-height: 360px;
+    margin-bottom: 0.8rem;
+    overflow: hidden;
+    border: 1px solid rgba(120, 216, 233, 0.14);
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(120, 216, 233, 0.055),
+            transparent 46%
+        ),
+        linear-gradient(
+            rgba(255, 255, 255, 0.012) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.012) 1px,
+            transparent 1px
+        ),
+        #080b0c;
+    background-size:
+        auto,
+        22px 22px,
+        22px 22px,
+        auto;
+}
+
+.niche-objective-map::before {
+    content: "STRUCTURAL PROJECTION";
+    position: absolute;
+    top: 0.65rem;
+    left: 0.75rem;
+    z-index: 2;
+    color: rgba(120, 216, 233, 0.68);
+    font:
+        600 0.47rem/1
+        ui-monospace,
+        "SFMono-Regular",
+        Consolas,
+        monospace;
+    letter-spacing: 0.11em;
+}
+
+.niche-objective-svg {
+    display: block;
+    width: 100%;
+    height: 360px;
+    overflow: visible;
+}
+
+.niche-objective-axis {
+    stroke: rgba(120, 216, 233, 0.09);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+}
+
+.niche-objective-contour {
+    fill: none;
+    stroke: rgba(120, 216, 233, 0.14);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+}
+
+.niche-objective-link {
+    fill: none;
+    stroke: rgba(120, 216, 233, 0.27);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+}
+
+.niche-objective-link[data-kind="blocked"] {
+    stroke: rgba(215, 116, 103, 0.58);
+    stroke-dasharray: 4 4;
+}
+
+.niche-objective-link[data-kind="ready"] {
+    stroke: rgba(120, 216, 233, 0.64);
+}
+
+.niche-objective-node {
+    vector-effect: non-scaling-stroke;
+}
+
+.niche-objective-node[data-level="objective"] {
+    fill: #78d8e9;
+    stroke: #78d8e9;
+    stroke-width: 1;
+}
+
+.niche-objective-node[data-level="tranche"] {
+    fill: #080b0c;
+    stroke: #d9b566;
+    stroke-width: 1.4;
+}
+
+.niche-objective-node[data-level="task"] {
+    fill: #080b0c;
+    stroke: #78d8e9;
+    stroke-width: 1.2;
+}
+
+.niche-objective-node[data-level="action"] {
+    fill: #080b0c;
+    stroke: #738087;
+    stroke-width: 1;
+}
+
+.niche-objective-node[data-state="ready"] {
+    fill: rgba(120, 216, 233, 0.38);
+    stroke: #78d8e9;
+}
+
+.niche-objective-node[data-state="blocked"] {
+    fill: rgba(215, 116, 103, 0.16);
+    stroke: #d77467;
+}
+
+.niche-objective-node[data-state="established"] {
+    fill: rgba(126, 185, 154, 0.16);
+    stroke: #7eb99a;
+}
+
+.niche-objective-label {
+    fill: #aebbc0;
+    font:
+        7px/1
+        ui-monospace,
+        "SFMono-Regular",
+        Consolas,
+        monospace;
+    letter-spacing: 0.025em;
+    pointer-events: none;
+}
+
+.niche-objective-label[data-level="objective"] {
+    fill: #edf3f4;
+    font-size: 8px;
+    font-weight: 700;
+}
+
+.niche-objective-depth-label {
+    fill: #738087;
+    font:
+        6px/1
+        ui-monospace,
+        "SFMono-Regular",
+        Consolas,
+        monospace;
+    letter-spacing: 0.1em;
+}
+
+.niche-objective-current {
+    fill: none;
+    stroke: #78d8e9;
+    stroke-width: 1;
+    stroke-dasharray: 2 3;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: niche-objective-current 4s linear infinite;
+}
+
+@keyframes niche-objective-current {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.niche-objective-unknown {
+    display: grid;
+    place-items: center;
+    min-height: 360px;
+    padding: 2rem;
+    color: #738087;
+    font:
+        0.55rem/1.6
+        ui-monospace,
+        "SFMono-Regular",
+        Consolas,
+        monospace;
+    letter-spacing: 0.07em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+@media (max-width: 620px) {
+    .niche-objective-map,
+    .niche-objective-svg,
+    .niche-objective-unknown {
+        min-height: 290px;
+        height: 290px;
+    }
+
+    .niche-objective-label {
+        font-size: 6px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .niche-objective-current {
+        animation: none;
+    }
+}

@@ -25,7 +25,7 @@ GRAPH_PATH = (
 
 TEST_PATH = (
     ROOT
-    / "hierarchies"
+    / "edifices"
     / "identity"
     / "exiles"
     / "niche"

@@ -1,0 +1,77 @@
+/*
+ * savant / niche
+ * unknown-state projection
+ * authority_effect: none
+ */
+
+[data-niche-unknown="true"] {
+    position: relative;
+}
+
+[data-niche-unknown="true"]::after {
+    content: "UNKNOWN";
+
+    display: inline-flex;
+
+    margin-left: 7px;
+    padding: 2px 4px;
+
+    border:
+        1px dashed
+        rgba(255,255,255,.13);
+
+    font-size: 7px;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: .1em;
+
+    vertical-align: middle;
+
+    opacity: .42;
+
+    pointer-events: none;
+}
+
+#flow-board[data-niche-unknown="true"]::after,
+#graph-stage[data-niche-unknown="true"]::after,
+#objective-grid[data-niche-unknown="true"]::after,
+#evidence-grid[data-niche-unknown="true"]::after,
+#timeline[data-niche-unknown="true"]::after,
+#history-list[data-niche-unknown="true"]::after,
+#living-grid[data-niche-unknown="true"]::after {
+    position: absolute;
+
+    top: 10px;
+    right: 10px;
+
+    z-index: 4;
+}
+
+html[data-niche-unknowns="present"]
+    [data-niche-unknown="true"] {
+    filter: saturate(.6);
+}
+
+html[data-niche-unknowns="none"]
+    [data-niche-unknown="true"]::after {
+    display: none;
+}
+
+@media (max-width: 700px) {
+    #flow-board[data-niche-unknown="true"]::after,
+    #graph-stage[data-niche-unknown="true"]::after,
+    #objective-grid[data-niche-unknown="true"]::after,
+    #evidence-grid[data-niche-unknown="true"]::after,
+    #timeline[data-niche-unknown="true"]::after,
+    #history-list[data-niche-unknown="true"]::after,
+    #living-grid[data-niche-unknown="true"]::after {
+        top: 6px;
+        right: 6px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-niche-unknown="true"] {
+        transition: none !important;
+    }
+}

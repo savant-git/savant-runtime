@@ -1,0 +1,231 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import json
+import sys
+import tempfile
+from pathlib import Path
+
+
+root = Path(
+    "/root/savant-runtime"
+)
+
+if str(root) not in sys.path:
+    sys.path.insert(
+        0,
+        str(root),
+    )
+
+
+from runtime.straub import StraubDatrix
+
+
+def main() -> int:
+    with tempfile.TemporaryDirectory(
+        prefix="straub-datrix-test-"
+    ) as directory:
+        path = (
+            Path(directory)
+            / "straub.datrix"
+        )
+
+        datrix = StraubDatrix.open(
+            path
+        )
+
+        subject = (
+            datrix.registry.substantiate(
+                {
+                    "id":
+                        "instance:straub:"
+                        "datrix-self-test:subject",
+                    "kind":
+                        "instance",
+                    "payload": {
+                        "label":
+                            "datrix subject",
+                    },
+                    "provenance": {
+                        "source":
+                            "straub:"
+                            "datrix-self-test",
+                        "confidence":
+                            "confirmed",
+                    },
+                }
+            )
+        )
+
+        checkpoint = datrix.checkpoint()
+
+        canonical_digest = (
+            datrix.capsule()[
+                "digest"
+            ]
+        )
+
+        health_before = (
+            datrix.health()
+        )
+
+        path.write_text(
+            "{corrupted",
+            encoding="utf-8",
+        )
+
+        recovered = StraubDatrix.open(
+            path
+        )
+
+        recovered_digest = (
+            recovered.capsule()[
+                "digest"
+            ]
+        )
+
+        recovery_source = (
+            recovered.persistence
+            .health()[
+                "last_recovery_source"
+            ]
+        )
+
+        repaired = (
+            recovered.recover_primary()
+        )
+
+        repaired_digest = (
+            recovered.capsule()[
+                "digest"
+            ]
+        )
+
+        health_after = (
+            recovered.health()
+        )
+
+        subject_recovered = (
+            recovered.registry.instance(
+                subject[
+                    "id"
+                ]
+            )
+        )
+
+        isotope = (
+            recovered.rebuild_isotope()
+        )
+
+        passed = bool(
+            health_before[
+                "kind"
+            ]
+            == "datrix"
+            and health_before[
+                "storage_engine_selected"
+            ]
+            is False
+            and health_before[
+                "database_engine"
+            ]
+            is None
+            and health_before[
+                "custody"
+            ][
+                "interprocess_locking"
+            ]
+            is True
+            and health_before[
+                "custody"
+            ][
+                "redundant_capsule"
+            ]
+            is True
+            and checkpoint[
+                "capsule_digest"
+            ]
+            == canonical_digest
+            and recovered_digest
+            == canonical_digest
+            and recovery_source
+            == "backup"
+            and repaired
+            is True
+            and repaired_digest
+            == canonical_digest
+            and subject_recovered[
+                "id"
+            ]
+            == subject[
+                "id"
+            ]
+            and isotope[
+                "source_capsule_digest"
+            ]
+            == canonical_digest
+            and health_after[
+                "custody"
+            ][
+                "last_recovery_source"
+            ]
+            == "primary"
+            and health_after[
+                "authority_effect"
+            ]
+            == "none"
+        )
+
+        output = {
+            "schema":
+                "savant.straub."
+                "datrix-self-test.v1",
+            "passed":
+                passed,
+            "canonical_digest":
+                canonical_digest,
+            "recovered_digest":
+                recovered_digest,
+            "repaired_digest":
+                repaired_digest,
+            "recovery_source":
+                recovery_source,
+            "primary_repaired":
+                repaired,
+            "checkpoint":
+                checkpoint,
+            "isotope_digest":
+                isotope[
+                    "digest"
+                ],
+            "health":
+                health_after,
+            "class":
+                "datrix",
+            "storage_engine":
+                None,
+            "authority_effect":
+                "none",
+        }
+
+        print(
+            json.dumps(
+                output,
+                indent=2,
+                sort_keys=True,
+                ensure_ascii=False,
+            )
+        )
+
+        return (
+            0
+            if passed
+            else 1
+        )
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

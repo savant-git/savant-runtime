@@ -85,8 +85,8 @@ class SystemComposition:
             "child_level": (
                 SYSTEM_CHILD_LEVEL
             ),
-            "hierarchy_source": (
-                "PROGRAM_HIERARCHY_SEGUES"
+            "edifice_source": (
+                "PROGRAM_edifice_SEGUES"
             ),
             "owner": "exile:modus",
             "authoritative": False,
@@ -154,8 +154,8 @@ class ProgramSystemComposer:
                 provenance=provenance,
                 dependencies=dependencies,
                 metadata={
-                    "hierarchy_source": (
-                        "PROGRAM_HIERARCHY_SEGUES"
+                    "edifice_source": (
+                        "PROGRAM_edifice_SEGUES"
                     ),
                 },
             )
@@ -246,8 +246,8 @@ class ProgramSystemComposer:
                     "descendants"
                 ]
             ),
-            "hierarchy_source": (
-                "PROGRAM_HIERARCHY_SEGUES"
+            "edifice_source": (
+                "PROGRAM_edifice_SEGUES"
             ),
             "owner": self.owner,
             "authoritative": False,
@@ -274,10 +274,10 @@ class ProgramSystemComposer:
             "target_level": (
                 SYSTEM_LEVEL
             ),
-            "hierarchy_source": (
-                "PROGRAM_HIERARCHY_SEGUES"
+            "edifice_source": (
+                "PROGRAM_edifice_SEGUES"
             ),
-            "hierarchy_projection": True,
+            "edifice_projection": True,
             "composition_only": True,
             "parent_primitive": (
                 "ProgramParentComposer"

@@ -7,7 +7,7 @@ ROOT="/root/savant-runtime"
 PACKET_VALIDATOR="${ROOT}/tools/niche/masterplan/validate_masterplan_opus_packet.sh"
 QUEUE_TOOL="${ROOT}/tools/niche/masterplan/compile_masterplan_opus_queue.py"
 CYCLE_TOOL="${ROOT}/tools/niche/masterplan/run_masterplan_living_cycle.py"
-QUEUE_TEST="${ROOT}/hierarchies/identity/exiles/niche/prodigals/masterplan/tests/test_masterplan_opus_queue.py"
+QUEUE_TEST="${ROOT}/edifices/identity/exiles/niche/prodigals/masterplan/tests/test_masterplan_opus_queue.py"
 QUEUE_COMMAND="${ROOT}/bin/masterplan-opus-queue"
 LIVE_COMMAND="${ROOT}/bin/masterplan-live"
 

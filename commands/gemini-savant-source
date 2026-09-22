@@ -1,0 +1,259 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+base_url="https://generativelanguage.googleapis.com"
+source_dir="/root/savant-runtime/sd"
+store_state="/root/savant-runtime/runtime/gemini-savant-source-store.txt"
+env_file="/root/.env"
+model="gemini-3.8-flash"
+
+if [[ -f "$env_file" ]]; then
+    set -a
+    source "$env_file"
+    set +a
+fi
+
+if [[ -z "${GEMINI_API_KEY:-}" ]]; then
+    printf '%s\n' "GEMINI_API_KEY is not configured." >&2
+    exit 1
+fi
+
+mkdir -p /root/savant-runtime/runtime
+
+extract_json_field() {
+    field="$1"
+    payload="$2"
+
+    python3 -c '
+import json
+import sys
+
+field = sys.argv[1]
+payload = sys.argv[2]
+
+data = json.loads(payload)
+
+value = data
+for part in field.split("."):
+    if not isinstance(value, dict) or part not in value:
+        raise SystemExit(1)
+    value = value[part]
+
+if isinstance(value, bool):
+    print("true" if value else "false")
+elif value is None:
+    print("")
+else:
+    print(value)
+' "$field" "$payload"
+}
+
+create_store() {
+    response="$(
+        curl -sS \
+            -X POST \
+            "${base_url}/v1beta/fileSearchStores?key=${GEMINI_API_KEY}" \
+            -H "Content-Type: application/json" \
+            -d '{
+                "displayName": "savant-runtime",
+                "embeddingModel": "models/gemini-embedding-2"
+            }'
+    )"
+
+    if ! store_name="$(extract_json_field "name" "$response" 2>/dev/null)"; then
+        printf '%s\n' "Gemini did not create the File Search store." >&2
+        printf '%s\n' "$response" >&2
+        exit 1
+    fi
+
+    if [[ -z "$store_name" ]]; then
+        printf '%s\n' "Gemini returned an empty File Search store name." >&2
+        printf '%s\n' "$response" >&2
+        exit 1
+    fi
+
+    printf '%s\n' "$store_name" > "$store_state"
+    printf 'created store: %s\n' "$store_name"
+}
+
+upload_part() {
+    file_path="$1"
+    display_name="$(basename "$file_path")"
+    byte_count="$(wc -c < "$file_path")"
+
+    header_file="$(mktemp)"
+    response_file="$(mktemp)"
+
+    cleanup_upload() {
+        rm -f "$header_file" "$response_file"
+    }
+
+    curl -sS \
+        "${base_url}/upload/v1beta/${store_name}:uploadToFileSearchStore?key=${GEMINI_API_KEY}" \
+        -D "$header_file" \
+        -H "X-Goog-Upload-Protocol: resumable" \
+        -H "X-Goog-Upload-Command: start" \
+        -H "X-Goog-Upload-Header-Content-Length: ${byte_count}" \
+        -H "X-Goog-Upload-Header-Content-Type: text/plain" \
+        -H "Content-Type: application/json" \
+        -d "{
+            \"displayName\": \"${display_name}\",
+            \"chunkingConfig\": {
+                \"whiteSpaceConfig\": {
+                    \"maxTokensPerChunk\": 512,
+                    \"maxOverlapTokens\": 120
+                }
+            }
+        }" \
+        -o "$response_file"
+
+    upload_url="$(
+        awk '
+            BEGIN { IGNORECASE = 1 }
+            /^x-goog-upload-url:/ {
+                sub(/\r$/, "", $2)
+                print $2
+                exit
+            }
+        ' "$header_file"
+    )"
+
+    if [[ -z "$upload_url" ]]; then
+        printf 'Gemini did not return an upload URL for %s.\n' "$display_name" >&2
+        printf '%s\n' "Response headers:" >&2
+        cat "$header_file" >&2
+        printf '%s\n' "Response body:" >&2
+        cat "$response_file" >&2
+        cleanup_upload
+        exit 1
+    fi
+
+    curl -sS \
+        "$upload_url" \
+        -H "Content-Length: ${byte_count}" \
+        -H "X-Goog-Upload-Offset: 0" \
+        -H "X-Goog-Upload-Command: upload, finalize" \
+        -H "Content-Type: text/plain" \
+        --data-binary "@${file_path}" \
+        -o "$response_file"
+
+    printf 'submitted: %s\n' "$display_name"
+    cat "$response_file"
+    printf '\n'
+
+    cleanup_upload
+}
+
+query_store() {
+    if [[ "$#" -eq 0 ]]; then
+        printf '%s\n' "Usage: gemini-savant-source query <prompt>" >&2
+        exit 1
+    fi
+
+    prompt="$*"
+
+    request_file="$(mktemp)"
+    response_file="$(mktemp)"
+
+    cleanup_query() {
+        rm -f "$request_file" "$response_file"
+    }
+
+    python3 - "$model" "$store_name" "$prompt" > "$request_file" <<'PY'
+import json
+import sys
+
+model, store_name, prompt = sys.argv[1:4]
+
+print(json.dumps({
+    "model": model,
+    "input": prompt,
+    "tools": [
+        {
+            "type": "file_search",
+            "file_search_store_names": [store_name]
+        }
+    ]
+}))
+PY
+
+    curl -sS \
+        -X POST \
+        "${base_url}/v1beta/interactions" \
+        -H "x-goog-api-key: ${GEMINI_API_KEY}" \
+        -H "Content-Type: application/json" \
+        --data-binary "@${request_file}" \
+        -o "$response_file"
+
+    cat "$response_file"
+    printf '\n'
+
+    cleanup_query
+}
+
+case "${1:-}" in
+    init)
+        if [[ -f "$store_state" ]]; then
+            printf 'store already configured: %s\n' "$(cat "$store_state")"
+            exit 0
+        fi
+
+        create_store
+        ;;
+
+    upload)
+        if [[ ! -f "$store_state" ]]; then
+            printf '%s\n' "Run gemini-savant-source init first." >&2
+            exit 1
+        fi
+
+        store_name="$(cat "$store_state")"
+
+        found=0
+
+        for file_path in "$source_dir"/part*.txt; do
+            if [[ ! -f "$file_path" ]]; then
+                continue
+            fi
+
+            found=1
+            upload_part "$file_path"
+        done
+
+        if [[ "$found" -eq 0 ]]; then
+            printf 'No part*.txt files found under %s\n' "$source_dir" >&2
+            exit 1
+        fi
+        ;;
+
+    query)
+        if [[ ! -f "$store_state" ]]; then
+            printf '%s\n' "Run gemini-savant-source init first." >&2
+            exit 1
+        fi
+
+        store_name="$(cat "$store_state")"
+        shift
+        query_store "$@"
+        ;;
+
+    store)
+        if [[ ! -f "$store_state" ]]; then
+            printf '%s\n' "No store has been configured." >&2
+            exit 1
+        fi
+
+        cat "$store_state"
+        ;;
+
+    *)
+        cat <<'EOF'
+usage:
+  gemini-savant-source init
+  gemini-savant-source upload
+  gemini-savant-source query "your question"
+  gemini-savant-source store
+EOF
+        exit 1
+        ;;
+esac

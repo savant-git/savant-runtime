@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+PALAVER_ROOT="/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver"
+ENV_FILE="/root/.env"
+
+if [ -f "$ENV_FILE" ]; then
+  set -a
+  # shellcheck disable=SC1091
+  source "$ENV_FILE"
+  set +a
+fi
+
+if [ -x "$PALAVER_ROOT/runtime/server.py" ]; then
+  exec python3 "$PALAVER_ROOT/runtime/server.py" "$@"
+fi
+
+if [ -x "$PALAVER_ROOT/apps/webui_ultra/server.py" ]; then
+  exec python3 "$PALAVER_ROOT/apps/webui_ultra/server.py" "$@"
+fi
+
+echo "[ERROR] No executable Palaver server entrypoint found." >&2
+exit 1

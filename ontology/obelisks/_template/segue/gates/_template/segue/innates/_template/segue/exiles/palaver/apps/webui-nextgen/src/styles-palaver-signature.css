@@ -1,0 +1,377 @@
+.palaver {
+  --palaver-edge:
+    rgba(255,255,255,.065);
+  --palaver-edge-hot:
+    rgba(215,255,84,.18);
+}
+
+.palaver-atmosphere {
+  pointer-events: none;
+}
+
+.palaver-grid {
+  mask-image:
+    radial-gradient(
+      ellipse at center,
+      black 20%,
+      transparent 78%
+    );
+}
+
+.palaver-head,
+.composer-zone {
+  isolation: isolate;
+}
+
+.palaver-head-actions {
+  align-items: center;
+}
+
+.palaver-head-actions > * {
+  flex: 0 0 auto;
+}
+
+.palaver-mark,
+.icon-action,
+.palaver-health,
+.composer-tool,
+.composer-voice,
+.composer-send {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.arrival {
+  position: relative;
+}
+
+.arrival::before {
+  content: "";
+  position: absolute;
+  top: 18%;
+  left: -7vw;
+  width: min(38vw, 460px);
+  height: min(38vw, 460px);
+  border: 1px solid rgba(215,255,84,.03);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: rotate(-14deg);
+}
+
+.arrival::after {
+  content: "";
+  position: absolute;
+  top: 27%;
+  left: -3vw;
+  width: min(22vw, 270px);
+  height: min(22vw, 270px);
+  border: 1px solid rgba(255,255,255,.025);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.arrival > * {
+  position: relative;
+  z-index: 1;
+}
+
+.arrival h1 {
+  text-shadow:
+    0 12px 60px rgba(0,0,0,.3);
+}
+
+.arrival-prompts button {
+  backdrop-filter: blur(8px);
+}
+
+.message-column {
+  counter-reset: palaver-turn;
+}
+
+.palaver-message-anchor {
+  counter-increment: palaver-turn;
+}
+
+.palaver-message-anchor::after {
+  content:
+    counter(palaver-turn, decimal-leading-zero);
+  position: absolute;
+  top: 19px;
+  right: -34px;
+  opacity: 0;
+  color: rgba(255,255,255,.16);
+  font-size: 7px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .05em;
+  pointer-events: none;
+  transition: opacity 150ms ease;
+}
+
+.palaver-message-anchor:hover::after,
+.palaver-message-anchor.active::after {
+  opacity: 1;
+}
+
+.palaver-message[data-role="assistant"]
+.palaver-message-body {
+  position: relative;
+}
+
+.palaver-message[data-role="assistant"]
+.palaver-message-body::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: -16px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  opacity: .32;
+  background: var(--signal);
+}
+
+.palaver-message[data-role="user"]
+.palaver-message-body {
+  position: relative;
+  overflow: hidden;
+}
+
+.palaver-message[data-role="user"]
+.palaver-message-body::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 38px;
+  height: 38px;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 100% 100%,
+      rgba(215,255,84,.055),
+      transparent 68%
+    );
+}
+
+.palaver-code {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.02);
+}
+
+.palaver-code-head::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: rgba(215,255,84,.42);
+  box-shadow:
+    9px 0 0 rgba(255,255,255,.08),
+    18px 0 0 rgba(255,255,255,.045);
+  margin-right: 20px;
+}
+
+.palaver-trace[open] {
+  padding-bottom: 8px;
+}
+
+.composer {
+  overflow: visible;
+}
+
+.composer::after {
+  content: "";
+  position: absolute;
+  right: 14%;
+  bottom: -1px;
+  left: 14%;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(215,255,84,.6),
+      transparent
+    );
+  filter: blur(.2px);
+  transition:
+    opacity 220ms ease,
+    left 320ms var(--palaver-ease),
+    right 320ms var(--palaver-ease);
+}
+
+.composer:focus-within::after {
+  right: 4%;
+  left: 4%;
+  opacity: .28;
+}
+
+.composer-send {
+  position: relative;
+  overflow: hidden;
+}
+
+.composer-send::after {
+  content: "";
+  position: absolute;
+  inset: 20%;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(.2);
+}
+
+.composer-send:not(:disabled):active::after {
+  animation:
+    palaver-send-ripple
+    420ms
+    var(--palaver-ease);
+}
+
+@keyframes palaver-send-ripple {
+  0% {
+    opacity: .4;
+    transform: scale(.2);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(2.5);
+  }
+}
+
+.tool-bloom {
+  border-color:
+    var(--palaver-edge);
+}
+
+.tool-bloom button:hover,
+.tool-bloom button:focus-visible {
+  border-color:
+    var(--palaver-edge-hot);
+}
+
+.palaver-focus-list > button,
+.palaver-branches-list > button,
+.palaver-branch-list > button,
+.palette-list > button {
+  position: relative;
+}
+
+.palaver-focus-list > button::before,
+.palaver-branches-list > button::before,
+.palaver-branch-list > button::before,
+.palette-list > button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 4px;
+  width: 2px;
+  height: 12px;
+  border-radius: 99px;
+  opacity: 0;
+  background: var(--signal);
+  transform:
+    translateY(-50%)
+    scaleY(.3);
+  transition:
+    opacity 150ms ease,
+    transform 180ms var(--palaver-ease);
+}
+
+.palaver-focus-list > button:hover::before,
+.palaver-focus-list > button.active::before,
+.palaver-branches-list > button:hover::before,
+.palaver-branches-list > button.active::before,
+.palaver-branch-list > button:hover::before,
+.palaver-branch-list > button.active::before,
+.palette-list > button:hover::before {
+  opacity: .55;
+  transform:
+    translateY(-50%)
+    scaleY(1);
+}
+
+.lens-head,
+.palaver-focus-head,
+.palaver-branches-header,
+.palaver-branches-head {
+  position: relative;
+}
+
+.lens-head::after,
+.palaver-focus-head::after,
+.palaver-branches-header::after,
+.palaver-branches-head::after {
+  content: "";
+  position: absolute;
+  right: 16px;
+  bottom: -1px;
+  left: 16px;
+  height: 1px;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(215,255,84,.08),
+      transparent
+    );
+}
+
+.palaver.is-thinking
+.composer {
+  border-color:
+    rgba(215,255,84,.13);
+}
+
+.palaver.is-thinking
+.composer::after {
+  right: 2%;
+  left: 2%;
+  opacity: .2;
+}
+
+@media (min-width: 1200px) {
+  .message-column,
+  .composer,
+  .tool-bloom {
+    max-width: 1040px;
+  }
+
+  .arrival {
+    max-width: 1120px;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 1080px) {
+  .palaver-message-anchor::after {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .arrival::before {
+    top: 20%;
+    left: -26vw;
+    width: 72vw;
+    height: 72vw;
+  }
+
+  .arrival::after {
+    display: none;
+  }
+
+  .palaver-message[data-role="assistant"]
+  .palaver-message-body::before {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .composer-send::after {
+    display: none;
+  }
+}

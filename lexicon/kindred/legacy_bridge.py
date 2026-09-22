@@ -6,43 +6,60 @@ import argparse
 import json
 import sys
 from pathlib import Path
-from typing import Any, Iterable, Mapping
+from typing import Any, Mapping
 
 
 ROOT = Path("/root/savant-runtime")
 
 if str(ROOT) not in sys.path:
-    sys.path.insert(0, str(ROOT))
+    sys.path.insert(
+        0,
+        str(ROOT),
+    )
 
-from lexicon.kindred.discipline_engine import (
-    DisciplineEngine,
-    DisciplineError,
-    KindredEdge,
+
+from lexicon.kindred.compatibility_edge_projection import (
+    KindredCompatibilityEdge,
+    KindredCompatibilityEdgeProjector,
+    KindredCompatibilityProjectionError,
 )
 
 
-class LegacyKindredBridgeError(ValueError):
+class LegacyKindredBridgeError(
+    ValueError
+):
     pass
 
 
 SCALAR_FIELDS = {
-    "parent": "relation:contained_by",
-    "opposite": "relation:opposes",
+    "parent":
+        "relation:contained_by",
+    "opposite":
+        "relation:opposes",
 }
 
 LIST_FIELDS = {
-    "children": "relation:contains",
-    "related": "relation:related_to",
-    "dependencies": "relation:depends_on",
-    "dependents": "relation:required_by",
-    "supersedes": "relation:supersedes",
-    "superseded_by": "relation:superseded_by",
+    "children":
+        "relation:contains",
+    "related":
+        "relation:related_to",
+    "dependencies":
+        "relation:depends_on",
+    "dependents":
+        "relation:required_by",
+    "supersedes":
+        "relation:supersedes",
+    "superseded_by":
+        "relation:superseded_by",
 }
 
 NESTED_FIELDS = {
-    "lineage.parent": "relation:contained_by",
-    "lineage.supersedes": "relation:supersedes",
-    "lineage.superseded_by": "relation:superseded_by",
+    "lineage.parent":
+        "relation:contained_by",
+    "lineage.supersedes":
+        "relation:supersedes",
+    "lineage.superseded_by":
+        "relation:superseded_by",
 }
 
 PROVENANCE_SOURCE_FIELDS = (
@@ -52,44 +69,87 @@ PROVENANCE_SOURCE_FIELDS = (
 )
 
 
-def _strings(value: Any) -> tuple[str, ...]:
+def _strings(
+    value: Any,
+) -> tuple[str, ...]:
     if value is None:
         return ()
 
-    if isinstance(value, str):
+    if isinstance(
+        value,
+        str,
+    ):
         value = value.strip()
-        return (value,) if value else ()
 
-    if isinstance(value, (list, tuple, set)):
+        return (
+            (value,)
+            if value
+            else ()
+        )
+
+    if isinstance(
+        value,
+        (
+            list,
+            tuple,
+            set,
+        ),
+    ):
         return tuple(
             sorted(
                 {
-                    str(item).strip()
+                    str(
+                        item
+                    ).strip()
                     for item in value
-                    if str(item).strip()
+                    if str(
+                        item
+                    ).strip()
                 }
             )
         )
 
-    return (str(value).strip(),)
+    value = str(
+        value
+    ).strip()
+
+    return (
+        (value,)
+        if value
+        else ()
+    )
 
 
 def _nested(
-    record: Mapping[str, Any],
+    record: Mapping[
+        str,
+        Any,
+    ],
     path: str,
 ) -> Any:
     value: Any = record
 
-    for part in path.split("."):
-        if not isinstance(value, Mapping):
+    for part in path.split(
+        "."
+    ):
+        if not isinstance(
+            value,
+            Mapping,
+        ):
             return None
-        value = value.get(part)
+
+        value = value.get(
+            part
+        )
 
     return value
 
 
 def _subject_id(
-    record: Mapping[str, Any],
+    record: Mapping[
+        str,
+        Any,
+    ],
     fallback: str | None = None,
 ) -> str:
     for field in (
@@ -99,7 +159,10 @@ def _subject_id(
         "graph_id",
     ):
         value = str(
-            record.get(field, "")
+            record.get(
+                field,
+                "",
+            )
         ).strip()
 
         if value:
@@ -117,18 +180,24 @@ class LegacyKindredBridge:
     """
     Compatibility projection for relationship-shaped legacy fields.
 
-    This class never edits the source record. It only emits projected
-    Kindred edges representing relationship semantics already present
-    in the source.
+    Source records are never edited.
+
+    Relationship authority is delegated to the canonical Kindred
+    relationship resolver through the compatibility edge projector.
+
+    Historical discipline machinery is not imported or instantiated.
     """
 
     def __init__(
         self,
-        engine: DisciplineEngine | None = None,
+        projector: (
+            KindredCompatibilityEdgeProjector
+            | None
+        ) = None,
     ) -> None:
-        self.engine = (
-            engine
-            or DisciplineEngine()
+        self.projector = (
+            projector
+            or KindredCompatibilityEdgeProjector()
         )
 
     def _edge(
@@ -139,46 +208,55 @@ class LegacyKindredBridge:
         object_id: str,
         basis: str,
         source_field: str,
-    ) -> KindredEdge:
-        return KindredEdge(
+    ) -> KindredCompatibilityEdge:
+        return KindredCompatibilityEdge(
             subject=subject,
             relation=relation,
             object=object_id,
             basis=basis,
             authority_state="projected",
             provenance={
-                "projection": (
-                    "legacy-kindred-bridge"
-                ),
-                "source_field": (
-                    source_field
-                ),
+                "projection":
+                    "legacy-kindred-bridge",
+                "source_field":
+                    source_field,
             },
             metadata={
-                "compatibility": True,
-                "source_field": source_field,
+                "compatibility":
+                    True,
+                "source_field":
+                    source_field,
             },
         )
 
     def direct_edges(
         self,
-        record: Mapping[str, Any],
+        record: Mapping[
+            str,
+            Any,
+        ],
         *,
         fallback_id: str | None = None,
         basis: str = "legacy-record",
-    ) -> list[KindredEdge]:
+    ) -> list[
+        KindredCompatibilityEdge
+    ]:
         subject = _subject_id(
             record,
             fallback_id,
         )
 
-        edges: list[KindredEdge] = []
+        edges: list[
+            KindredCompatibilityEdge
+        ] = []
 
         for field, relation in (
             SCALAR_FIELDS.items()
         ):
             for object_id in _strings(
-                record.get(field)
+                record.get(
+                    field
+                )
             ):
                 edges.append(
                     self._edge(
@@ -194,7 +272,9 @@ class LegacyKindredBridge:
             LIST_FIELDS.items()
         ):
             for object_id in _strings(
-                record.get(field)
+                record.get(
+                    field
+                )
             ):
                 edges.append(
                     self._edge(
@@ -237,7 +317,9 @@ class LegacyKindredBridge:
                 PROVENANCE_SOURCE_FIELDS
             ):
                 for source in _strings(
-                    provenance.get(field)
+                    provenance.get(
+                        field
+                    )
                 ):
                     edges.append(
                         self._edge(
@@ -251,14 +333,20 @@ class LegacyKindredBridge:
                             ),
                             basis=basis,
                             source_field=(
-                                f"provenance.{field}"
+                                f"provenance."
+                                f"{field}"
                             ),
                         )
                     )
 
-        lineage = record.get("lineage")
+        lineage = record.get(
+            "lineage"
+        )
 
-        if isinstance(lineage, list):
+        if isinstance(
+            lineage,
+            list,
+        ):
             for origin in _strings(
                 lineage
             ):
@@ -271,7 +359,9 @@ class LegacyKindredBridge:
                         ),
                         object_id=origin,
                         basis=basis,
-                        source_field="lineage",
+                        source_field=(
+                            "lineage"
+                        ),
                     )
                 )
 
@@ -279,7 +369,10 @@ class LegacyKindredBridge:
 
     def project(
         self,
-        record: Mapping[str, Any],
+        record: Mapping[
+            str,
+            Any,
+        ],
         *,
         fallback_id: str | None = None,
         basis: str = "legacy-record",
@@ -292,7 +385,7 @@ class LegacyKindredBridge:
         )
 
         projected = (
-            self.engine.project_edges(
+            self.projector.project_edges(
                 direct,
                 include_inverses=(
                     include_inverses
@@ -301,23 +394,34 @@ class LegacyKindredBridge:
         )
 
         return {
-            "schema": (
-                "savant.kindred."
-                "legacy-projection.v1"
-            ),
-            "authority_effect": "none",
-            "mutation_effect": "none",
-            "source_id": _subject_id(
-                record,
-                fallback_id,
-            ),
-            "direct_edge_count": len(
-                direct
-            ),
-            "edge_count": len(
-                projected
-            ),
-            "edges": projected,
+            "schema":
+                (
+                    "savant.kindred."
+                    "legacy-projection.v1"
+                ),
+            "authority_effect":
+                "none",
+            "mutation_effect":
+                "none",
+            "projection_only":
+                True,
+            "relationship_authority_created":
+                False,
+            "source_id":
+                _subject_id(
+                    record,
+                    fallback_id,
+                ),
+            "direct_edge_count":
+                len(
+                    direct
+                ),
+            "edge_count":
+                len(
+                    projected
+                ),
+            "edges":
+                projected,
         }
 
 
@@ -328,7 +432,9 @@ def _load_json(
         "r",
         encoding="utf-8",
     ) as handle:
-        return json.load(handle)
+        return json.load(
+            handle
+        )
 
 
 def main() -> int:
@@ -357,7 +463,9 @@ def main() -> int:
             args.path
         ).expanduser().resolve()
 
-        record = _load_json(path)
+        record = _load_json(
+            path
+        )
 
         if not isinstance(
             record,
@@ -367,7 +475,9 @@ def main() -> int:
                 "input must be a JSON object"
             )
 
-        bridge = LegacyKindredBridge()
+        bridge = (
+            LegacyKindredBridge()
+        )
 
         print(
             json.dumps(
@@ -376,7 +486,9 @@ def main() -> int:
                     fallback_id=(
                         args.fallback_id
                     ),
-                    basis=str(path),
+                    basis=str(
+                        path
+                    ),
                     include_inverses=(
                         not args.no_inverses
                     ),
@@ -393,21 +505,28 @@ def main() -> int:
         OSError,
         ValueError,
         json.JSONDecodeError,
-        DisciplineError,
+        KindredCompatibilityProjectionError,
         LegacyKindredBridgeError,
     ) as exc:
         print(
             json.dumps(
                 {
-                    "valid": False,
-                    "error": str(exc),
+                    "valid":
+                        False,
+                    "error":
+                        str(
+                            exc
+                        ),
                 },
                 indent=2,
                 sort_keys=True,
             )
         )
+
         return 1
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(
+        main()
+    )

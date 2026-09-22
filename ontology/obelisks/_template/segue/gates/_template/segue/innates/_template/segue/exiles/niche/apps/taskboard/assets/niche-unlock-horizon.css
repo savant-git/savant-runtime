@@ -1,0 +1,313 @@
+/*
+savant niche unlock horizon
+projection-only causal topology instrument
+authority_effect: none
+*/
+
+:root {
+  --niche-horizon-edge:
+    color-mix(
+      in srgb,
+      var(--savant-primary, #7fe7ff) 30%,
+      transparent
+    );
+
+  --niche-horizon-direct:
+    var(--savant-ready, #8fffb0);
+
+  --niche-horizon-second:
+    var(--savant-primary, #7fe7ff);
+
+  --niche-horizon-transitive:
+    var(--savant-text-muted, #879397);
+
+  --niche-horizon-unknown:
+    var(--savant-unknown, #9aa6aa);
+}
+
+.niche-unlock-horizon {
+  position: fixed;
+  inset-inline-end:
+    max(
+      0.75rem,
+      env(safe-area-inset-right)
+    );
+  inset-block-end:
+    max(
+      0.75rem,
+      env(safe-area-inset-bottom)
+    );
+  z-index: 56;
+  inline-size:
+    min(
+      31rem,
+      calc(100vw - 1.5rem)
+    );
+  max-block-size:
+    min(72dvh, 44rem);
+  display: grid;
+  grid-template-rows:
+    auto
+    minmax(0, 1fr);
+  overflow: hidden;
+  border:
+    1px solid
+    var(--niche-horizon-edge);
+  background:
+    color-mix(
+      in srgb,
+      var(--savant-background, #050708) 97%,
+      transparent
+    );
+  box-shadow:
+    0 1.5rem 4rem
+    rgb(0 0 0 / 0.4);
+}
+
+.niche-unlock-horizon[hidden] {
+  display: none !important;
+}
+
+.niche-horizon-head {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.72rem;
+  border-block-end:
+    1px solid
+    var(--niche-horizon-edge);
+}
+
+.niche-horizon-kicker,
+.niche-horizon-close,
+.niche-horizon-chip,
+.niche-horizon-tier,
+.niche-horizon-task {
+  font-family:
+    ui-monospace,
+    "SFMono-Regular",
+    Consolas,
+    monospace;
+}
+
+.niche-horizon-kicker {
+  margin: 0 0 0.2rem;
+  color:
+    var(--savant-primary, #7fe7ff);
+  font-size: 0.55rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.niche-horizon-title {
+  margin: 0;
+  color:
+    var(--savant-text, #eef7f8);
+  font:
+    730 0.95rem/1.1
+    system-ui,
+    sans-serif;
+}
+
+.niche-horizon-close {
+  min-inline-size: 2.75rem;
+  min-block-size: 2.75rem;
+  border:
+    1px solid
+    var(--niche-horizon-edge);
+  color:
+    var(--savant-text, #eef7f8);
+  background: transparent;
+  cursor: pointer;
+}
+
+.niche-horizon-close:hover,
+.niche-horizon-close:focus-visible {
+  outline: none;
+  border-color:
+    var(--savant-primary, #7fe7ff);
+}
+
+.niche-horizon-body {
+  min-block-size: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 0.75rem;
+}
+
+.niche-horizon-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-block-end: 0.8rem;
+}
+
+.niche-horizon-chip {
+  padding: 0.3rem 0.42rem;
+  border:
+    1px solid
+    var(--niche-horizon-edge);
+  color:
+    var(--savant-text-muted, #879397);
+  font-size: 0.53rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.niche-horizon-track {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.niche-horizon-band {
+  position: relative;
+  padding:
+    0.7rem
+    0.7rem
+    0.7rem
+    0.9rem;
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--savant-border, #263237) 78%,
+      transparent
+    );
+  background:
+    color-mix(
+      in srgb,
+      var(--savant-surface, #0b1113) 78%,
+      transparent
+    );
+}
+
+.niche-horizon-band::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: 3px;
+  background:
+    var(--niche-horizon-unknown);
+}
+
+.niche-horizon-band[data-tier="direct"]::before {
+  background:
+    var(--niche-horizon-direct);
+}
+
+.niche-horizon-band[data-tier="second"]::before {
+  background:
+    var(--niche-horizon-second);
+}
+
+.niche-horizon-band[data-tier="transitive"]::before {
+  background:
+    var(--niche-horizon-transitive);
+}
+
+.niche-horizon-tier {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-block-end: 0.55rem;
+  color:
+    var(--savant-text-muted, #879397);
+  font-size: 0.56rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.niche-horizon-list {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.niche-horizon-task {
+  width: 100%;
+  min-block-size: 2.5rem;
+  padding: 0.5rem 0.58rem;
+  border:
+    1px solid
+    var(--niche-horizon-edge);
+  color:
+    var(--savant-text, #eef7f8);
+  background:
+    var(--savant-background, #050708);
+  text-align: start;
+  font-size: 0.64rem;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+.niche-horizon-task:hover,
+.niche-horizon-task:focus-visible {
+  outline: none;
+  border-color:
+    var(--savant-primary, #7fe7ff);
+}
+
+.niche-horizon-empty {
+  padding: 0.6rem;
+  border:
+    1px dashed
+    var(--niche-horizon-edge);
+  color:
+    var(--savant-text-muted, #879397);
+  font:
+    0.64rem/1.5
+    ui-monospace,
+    monospace;
+}
+
+.niche-horizon-boundary {
+  margin-block-start: 0.8rem;
+  padding: 0.65rem;
+  border-block-start:
+    1px solid
+    var(--niche-horizon-edge);
+  color:
+    var(--savant-text-muted, #879397);
+  font:
+    0.62rem/1.5
+    ui-monospace,
+    monospace;
+}
+
+@media (max-width: 700px) {
+  .niche-unlock-horizon {
+    inset-inline:
+      max(
+        0.45rem,
+        env(safe-area-inset-left)
+      )
+      max(
+        0.45rem,
+        env(safe-area-inset-right)
+      );
+    inset-block-end:
+      max(
+        0.45rem,
+        env(safe-area-inset-bottom)
+      );
+    inline-size: auto;
+    max-block-size: 70dvh;
+  }
+}
+
+@media (forced-colors: active) {
+  .niche-unlock-horizon,
+  .niche-horizon-close,
+  .niche-horizon-chip,
+  .niche-horizon-band,
+  .niche-horizon-task {
+    border-color: CanvasText;
+  }
+}

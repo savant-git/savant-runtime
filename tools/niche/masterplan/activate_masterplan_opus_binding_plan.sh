@@ -6,7 +6,7 @@ ROOT="/root/savant-runtime"
 
 DISCOVERY_RUNNER="${ROOT}/tools/niche/masterplan/run_masterplan_opus_discovery.sh"
 PLAN_TOOL="${ROOT}/tools/niche/masterplan/compile_masterplan_opus_binding_plan.py"
-PLAN_TEST="${ROOT}/hierarchies/identity/exiles/niche/prodigals/masterplan/tests/test_compile_masterplan_opus_binding_plan.py"
+PLAN_TEST="${ROOT}/edifices/identity/exiles/niche/prodigals/masterplan/tests/test_compile_masterplan_opus_binding_plan.py"
 PLAN_COMMAND="${ROOT}/bin/masterplan-opus-plan"
 LATEST_PLAN="${ROOT}/reports/niche/masterplan/opus-binding-plan/latest.json"
 

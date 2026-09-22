@@ -25,11 +25,11 @@ for candidate in (
         )
 
 
-from runtime.kinship.algebra import KinshipAlgebra  # noqa: E402
-from runtime.kinship.graph import KinshipGraph  # noqa: E402
-from runtime.kinship.projection import FamilyTreeProjector  # noqa: E402
-from runtime.kinship.registry import KinshipRegistry  # noqa: E402
-from runtime.kinship.renderers import render_family_tree  # noqa: E402
+from runtime.kindred.algebra import KindredAlgebra  # noqa: E402
+from runtime.kindred.graph import KindredGraph  # noqa: E402
+from runtime.kindred.projection import FamilyTreeProjector  # noqa: E402
+from runtime.kindred.registry import KindredRegistry  # noqa: E402
+from runtime.kindred.renderers import render_family_tree  # noqa: E402
 
 
 def fixture(
@@ -97,7 +97,7 @@ def fixture(
                 ),
                 "scope": "test",
                 "status": "active",
-                "kinship": {
+                "kindred": {
                     "parent_profile": (
                         "mother"
                     ),
@@ -120,7 +120,7 @@ def fixture(
                 ),
                 "scope": "test",
                 "status": "active",
-                "kinship": {
+                "kindred": {
                     "parent_profile": (
                         "father"
                     ),
@@ -143,7 +143,7 @@ def fixture(
                 ),
                 "scope": "test",
                 "status": "active",
-                "kinship": {
+                "kindred": {
                     "parent_profile": (
                         "mother"
                     ),
@@ -166,7 +166,7 @@ def fixture(
                 ),
                 "scope": "test",
                 "status": "active",
-                "kinship": {
+                "kindred": {
                     "parent_profile": (
                         "father"
                     ),
@@ -220,7 +220,7 @@ def fixture(
     }
 
 
-class FunctionalKinshipTests(
+class FunctionalKindredTests(
     unittest.TestCase
 ):
     @classmethod
@@ -228,11 +228,11 @@ class FunctionalKinshipTests(
         cls,
     ) -> None:
         cls.registry = (
-            KinshipRegistry.load()
+            KindredRegistry.load()
         )
 
         cls.graph = (
-            KinshipGraph
+            KindredGraph
             .from_runtime_graph(
                 fixture(),
                 registry=(
@@ -241,7 +241,7 @@ class FunctionalKinshipTests(
             )
         )
 
-        cls.algebra = KinshipAlgebra(
+        cls.algebra = KindredAlgebra(
             cls.graph,
             cls.registry,
         )

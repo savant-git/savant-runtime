@@ -1,0 +1,209 @@
+schema: savant://canon/runtime-structure/1.0.0
+id: canon:runtime-structure:recursive-capsules
+status: accepted
+accepted_at: "2026-08-06T09:14:40Z"
+authority:
+  source: current_user_directive
+  decision:
+    - authority/accepted-decisions/AD-20260806-002-canonical-recursive-runtime-structure.md
+
+identity_edifice:
+  ascending:
+    - iota
+    - mote
+    - trait
+    - quirk
+    - prodigal
+    - exile
+    - innate
+    - portal
+    - obelisk
+  compatibility:
+    shard:
+      superseded_meaning: identity_level_2
+      canonical: mote
+      other_uses_remain_valid: true
+    gate:
+      superseded_meaning: identity_level_8
+      canonical: portal
+      programming_uses_remain_valid: true
+
+content_edifice:
+  - character
+  - line
+  - snippet
+  - script
+  - module
+  - service
+  - application
+  - suite
+  - estate
+
+capsule:
+  optional_facilities:
+    - authority
+    - rubric
+    - cabal
+    - kindred
+    - moods
+    - slots
+    - attachments
+    - segue
+    - projections
+    - observatory
+    - history
+    - tasks
+  materialization: used_facilities_only
+  empty_facilities: forbidden
+
+rubric:
+  declaration: rubric.cue
+  facilities:
+    - source
+    - contracts
+    - schemas
+    - adapters
+    - commands
+    - tests
+    - migrations
+    - tasks
+    - receipts
+  owner_cardinality: 1
+  ambiguous_ownership: invalid
+
+cabal:
+  declaration: cabal.cue
+  scope: narrowest_common_semantic_scope
+  minimum_independent_consumers: 2
+  qualification:
+    - Chorus
+    - Commons
+    - Covenant
+    - Equinox
+    - Gauntlet
+    - Distillate
+    - Severance
+    - Cascade
+    - Bridge
+
+kindred:
+  trees:
+    - structural
+    - semantic
+    - rubric
+    - authority
+    - composition
+    - dependency
+    - provenance
+    - succession
+    - compatibility
+  families:
+    - Descent
+    - Fraternity
+    - Collateral
+    - Union
+    - Guardianship
+    - Adoption
+    - Composition
+    - Succession
+    - Affinity
+  coordinates:
+    intrinsic:
+      - generation
+      - collateral
+      - affinity
+    contextual:
+      - authority
+      - dependency
+      - composition
+      - temporal
+      - provenance
+      - compatibility
+  notation: "K(generation, collateral, affinity, authority, dependency, composition, temporal, provenance, compatibility)"
+  unknown_coordinate: null
+  direct_edges: storable_when_authoritative
+  derived_edges: deterministic_projection
+  guessing: forbidden
+
+moods:
+  canonical:
+    - anima
+    - weld
+    - kiln
+    - graft
+    - aria
+    - mantle
+    - fulcrum
+    - echelon
+    - ascent
+  combination_arity: 2
+  ordered_pairs: permitted
+  canonical_owner: modus
+  local_storage: bindings_only
+
+masterplan:
+  nature: dynamic_living_task_projection
+  authority_owner: niche
+  root_projection:
+    - MASTERPLAN.md
+    - masterplan.json
+  domains:
+    - authority
+    - canon
+    - ontology
+    - rubrics
+    - context
+    - runtime
+    - vault
+    - assurance
+    - evolution
+  duplicate_task_substance: forbidden
+
+external_dependency_record:
+  fields:
+    - owner
+    - purpose
+    - version_constraint
+    - lock_or_digest
+    - license
+    - supply_chain_source
+    - failure_mode
+    - fallback
+    - removal_strategy
+
+validation:
+  layers:
+    - syntax
+    - type
+    - schema
+    - policy
+    - property
+    - graph
+    - integration
+    - replay
+    - regression
+
+migration:
+  phases:
+    - inventory
+    - classification
+    - authority_reconciliation
+    - graph_construction
+    - destination_compilation
+    - compatibility_staging
+    - reversible_migration
+    - integrated_validation
+    - monitored_retirement
+  unresolved_owner_action: remain_unmoved
+  destructive_blind_move: forbidden
+
+laws:
+  - Rubric owns
+  - Cabal shares
+  - Kindred relates
+  - Segue transitions
+  - Mood transforms
+  - Slot attaches
+  - Authority governs
+  - Projection reveals
+  - Receipt proves

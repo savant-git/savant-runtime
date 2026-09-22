@@ -1,0 +1,205 @@
+/*
+savant niche focus compression
+projection-only causal attention layer
+authority_effect: none
+*/
+
+:root {
+  --niche-focus-edge:
+    color-mix(
+      in srgb,
+      var(--savant-primary, #7fe7ff) 36%,
+      transparent
+    );
+
+  --niche-focus-upstream:
+    var(--savant-blocked, #ff785f);
+
+  --niche-focus-origin:
+    var(--savant-primary, #7fe7ff);
+
+  --niche-focus-downstream:
+    var(--savant-ready, #8fffb0);
+}
+
+body.niche-focus-compression-active
+[data-task-id] {
+  opacity: 0.17;
+  filter:
+    saturate(0.25)
+    brightness(0.68);
+  transition:
+    opacity 180ms ease,
+    filter 180ms ease,
+    transform 180ms ease;
+}
+
+body.niche-focus-compression-active
+[data-task-id].niche-focus-origin,
+body.niche-focus-compression-active
+[data-task-id].niche-focus-upstream,
+body.niche-focus-compression-active
+[data-task-id].niche-focus-downstream {
+  opacity: 1;
+  filter: none;
+}
+
+body.niche-focus-compression-active
+[data-task-id].niche-focus-origin {
+  position: relative;
+  z-index: 2;
+  outline:
+    2px solid
+    var(--niche-focus-origin);
+  outline-offset: 3px;
+}
+
+body.niche-focus-compression-active
+[data-task-id].niche-focus-upstream {
+  outline:
+    1px solid
+    var(--niche-focus-upstream);
+  outline-offset: 2px;
+}
+
+body.niche-focus-compression-active
+[data-task-id].niche-focus-downstream {
+  outline:
+    1px solid
+    var(--niche-focus-downstream);
+  outline-offset: 2px;
+}
+
+.niche-focus-console {
+  position: fixed;
+  inset-inline-start: 50%;
+  inset-block-end:
+    max(
+      0.7rem,
+      env(safe-area-inset-bottom)
+    );
+  z-index: 61;
+  inline-size:
+    min(
+      42rem,
+      calc(100vw - 1.4rem)
+    );
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto;
+  gap: 0.6rem;
+  align-items: center;
+  padding: 0.55rem 0.65rem;
+  border:
+    1px solid
+    var(--niche-focus-edge);
+  background:
+    color-mix(
+      in srgb,
+      var(--savant-background, #050708) 96%,
+      transparent
+    );
+  box-shadow:
+    0 1rem 3rem
+    rgb(0 0 0 / 0.42);
+  transform:
+    translateX(-50%);
+}
+
+.niche-focus-console[hidden] {
+  display: none !important;
+}
+
+.niche-focus-readout {
+  min-inline-size: 0;
+}
+
+.niche-focus-kicker,
+.niche-focus-task,
+.niche-focus-counts,
+.niche-focus-exit {
+  font-family:
+    ui-monospace,
+    "SFMono-Regular",
+    Consolas,
+    monospace;
+}
+
+.niche-focus-kicker {
+  display: block;
+  margin-block-end: 0.15rem;
+  color:
+    var(--savant-text-muted, #879397);
+  font-size: 0.51rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.niche-focus-task {
+  display: block;
+  overflow: hidden;
+  color:
+    var(--savant-text, #eef7f8);
+  font-size: 0.67rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.niche-focus-counts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.38rem;
+  margin-block-start: 0.25rem;
+  color:
+    var(--savant-text-muted, #879397);
+  font-size: 0.52rem;
+  text-transform: uppercase;
+}
+
+.niche-focus-exit {
+  min-inline-size: 4.8rem;
+  min-block-size: 2.75rem;
+  border:
+    1px solid
+    var(--niche-focus-edge);
+  color:
+    var(--savant-text, #eef7f8);
+  background:
+    var(--savant-surface, #0b1113);
+  cursor: pointer;
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.niche-focus-exit:hover,
+.niche-focus-exit:focus-visible {
+  outline: none;
+  border-color:
+    var(--savant-primary, #7fe7ff);
+}
+
+@media (max-width: 430px) {
+  .niche-focus-console {
+    grid-template-columns: 1fr;
+  }
+
+  .niche-focus-exit {
+    inline-size: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.niche-focus-compression-active
+  [data-task-id] {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .niche-focus-console,
+  .niche-focus-exit {
+    border-color: CanvasText;
+  }
+}

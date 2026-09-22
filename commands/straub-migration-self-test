@@ -1,0 +1,303 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import json
+import sys
+import tempfile
+from pathlib import Path
+
+
+root = Path(
+    "/root/savant-runtime"
+)
+
+if str(root) not in sys.path:
+    sys.path.insert(
+        0,
+        str(root),
+    )
+
+
+from runtime.straub import (
+    AtomicRepresentationStore,
+    StraubRegistry,
+    from_keyed_representation,
+    migrate_and_verify,
+)
+
+
+def main() -> int:
+    registry = StraubRegistry()
+
+    subject = registry.substantiate(
+        {
+            "id":
+                "instance:straub:"
+                "migration-self-test:subject",
+            "kind":
+                "instance",
+            "payload": {
+                "label":
+                    "migration subject",
+            },
+            "provenance": {
+                "source":
+                    "straub:migration-self-test",
+                "confidence":
+                    "confirmed",
+            },
+        }
+    )
+
+    definition = (
+        registry.define_metadata(
+            instance_id=(
+                "instance:straub:"
+                "migration-self-test:"
+                "definition:label"
+            ),
+            label="label",
+            value_type="string",
+            applies_to=[
+                "instance",
+            ],
+            provenance={
+                "source":
+                    "straub:migration-self-test",
+                "confidence":
+                    "confirmed",
+            },
+        )
+    )
+
+    value = (
+        registry.instantiate_metadata(
+            instance_id=(
+                "instance:straub:"
+                "migration-self-test:"
+                "value:label"
+            ),
+            definition_id=(
+                definition[
+                    "id"
+                ]
+            ),
+            value="migration value",
+            provenance={
+                "source":
+                    "straub:migration-self-test",
+                "confidence":
+                    "confirmed",
+            },
+        )
+    )
+
+    registry.attach_metadata(
+        membrane_id=(
+            "membrane:straub:"
+            "migration-self-test:"
+            "subject-label"
+        ),
+        subject_id=(
+            subject[
+                "id"
+            ]
+        ),
+        umbra_id=(
+            value[
+                "id"
+            ]
+        ),
+        relation="described_by",
+        provenance={
+            "source":
+                "straub:migration-self-test",
+            "confidence":
+                "confirmed",
+        },
+    )
+
+    capsule = (
+        registry.export_capsule()
+    )
+
+    result = migrate_and_verify(
+        capsule
+    )
+
+    representation = result[
+        "representation"
+    ]
+
+    restored = result[
+        "restored_capsule"
+    ]
+
+    receipt = result[
+        "receipt"
+    ]
+
+    with tempfile.TemporaryDirectory(
+        prefix="straub-migration-test-"
+    ) as directory:
+        store = (
+            AtomicRepresentationStore(
+                Path(
+                    directory
+                )
+                / "keyed.json"
+            )
+        )
+
+        store.save(
+            representation
+        )
+
+        loaded = store.load()
+
+        if loaded is None:
+            raise RuntimeError(
+                "representation store "
+                "returned no projection"
+            )
+
+        rolled_back = (
+            from_keyed_representation(
+                loaded
+            )
+        )
+
+        replayed = (
+            StraubRegistry.from_capsule(
+                rolled_back
+            )
+        )
+
+        replayed_capsule = (
+            replayed.export_capsule()
+        )
+
+        health = store.health()
+
+        passed = bool(
+            representation[
+                "projection_only"
+            ]
+            is True
+            and representation[
+                "authority_effect"
+            ]
+            == "none"
+            and representation[
+                "source_capsule_digest"
+            ]
+            == capsule[
+                "digest"
+            ]
+            and receipt[
+                "reversible"
+            ]
+            is True
+            and receipt[
+                "semantic_mutation"
+            ]
+            is False
+            and restored[
+                "digest"
+            ]
+            == capsule[
+                "digest"
+            ]
+            and rolled_back[
+                "digest"
+            ]
+            == capsule[
+                "digest"
+            ]
+            and replayed_capsule[
+                "digest"
+            ]
+            == capsule[
+                "digest"
+            ]
+            and loaded[
+                "digest"
+            ]
+            == representation[
+                "digest"
+            ]
+            and health[
+                "durable"
+            ]
+            is True
+            and health[
+                "authoritative"
+            ]
+            is False
+            and health[
+                "projection_only"
+            ]
+            is True
+            and health[
+                "file_mode"
+            ]
+            == "0o600"
+        )
+
+        output = {
+            "schema":
+                "savant.straub."
+                "migration-self-test.v1",
+            "passed":
+                passed,
+            "source_capsule_digest":
+                capsule[
+                    "digest"
+                ],
+            "representation_digest":
+                representation[
+                    "digest"
+                ],
+            "restored_capsule_digest":
+                restored[
+                    "digest"
+                ],
+            "stored_rollback_digest":
+                rolled_back[
+                    "digest"
+                ],
+            "replayed_capsule_digest":
+                replayed_capsule[
+                    "digest"
+                ],
+            "receipt":
+                receipt,
+            "store":
+                health,
+            "semantic_mutation":
+                False,
+            "authority_effect":
+                "none",
+        }
+
+        print(
+            json.dumps(
+                output,
+                indent=2,
+                sort_keys=True,
+                ensure_ascii=False,
+            )
+        )
+
+        return (
+            0
+            if passed
+            else 1
+        )
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

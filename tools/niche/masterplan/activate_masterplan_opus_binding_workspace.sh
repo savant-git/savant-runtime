@@ -6,7 +6,7 @@ ROOT="/root/savant-runtime"
 
 PREREQUISITE="${ROOT}/tools/niche/masterplan/repair_masterplan_opus_queue_prerequisite.sh"
 WORKSPACE_TOOL="${ROOT}/tools/niche/masterplan/compile_masterplan_opus_binding_workspace.py"
-WORKSPACE_TEST="${ROOT}/hierarchies/identity/exiles/niche/prodigals/masterplan/tests/test_compile_masterplan_opus_binding_workspace.py"
+WORKSPACE_TEST="${ROOT}/edifices/identity/exiles/niche/prodigals/masterplan/tests/test_compile_masterplan_opus_binding_workspace.py"
 WORKSPACE_COMMAND="${ROOT}/bin/masterplan-opus-workspace"
 LATEST="${ROOT}/reports/niche/masterplan/opus-binding-workspace/latest.json"
 

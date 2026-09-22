@@ -1,0 +1,339 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+
+from pathlib import Path
+from typing import Any, Mapping
+
+
+root = Path(
+    "/root/savant-runtime"
+)
+
+if str(
+    root
+) not in sys.path:
+    sys.path.insert(
+        0,
+        str(
+            root
+        ),
+    )
+
+
+from runtime.living_policy import (  # noqa: E402
+    applicable,
+    evaluate_policies,
+    explain,
+    status,
+    why,
+    why_not,
+)
+
+
+def load_json(
+    path: str,
+) -> Any:
+    if path == "-":
+        return json.load(
+            sys.stdin
+        )
+
+    with Path(
+        path
+    ).open(
+        "r",
+        encoding="utf-8",
+    ) as handle:
+        return json.load(
+            handle
+        )
+
+
+def load_context(
+    path: str,
+) -> Mapping[str, Any]:
+    value = load_json(
+        path
+    )
+
+    if not isinstance(
+        value,
+        Mapping,
+    ):
+        raise ValueError(
+            "context must be a json object"
+        )
+
+    return value
+
+
+def load_policies(
+    path: str,
+) -> list[
+    Mapping[
+        str,
+        Any,
+    ]
+]:
+    value = load_json(
+        path
+    )
+
+    if isinstance(
+        value,
+        Mapping,
+    ):
+        if isinstance(
+            value.get(
+                "records"
+            ),
+            list,
+        ):
+            value = value[
+                "records"
+            ]
+
+        else:
+            value = [
+                value
+            ]
+
+    if not isinstance(
+        value,
+        list,
+    ):
+        raise ValueError(
+            (
+                "policies must be a "
+                "json object or list"
+            )
+        )
+
+    records = []
+
+    for item in value:
+        if not isinstance(
+            item,
+            Mapping,
+        ):
+            raise ValueError(
+                (
+                    "each policy must be "
+                    "a json object"
+                )
+            )
+
+        records.append(
+            item
+        )
+
+    return records
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="living-policy",
+        description=(
+            "typed deterministic "
+            "living-governance policy evaluation"
+        ),
+    )
+
+    subparsers = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    subparsers.add_parser(
+        "status"
+    )
+
+    applicable_parser = subparsers.add_parser(
+        "applicable"
+    )
+
+    applicable_parser.add_argument(
+        "--policy",
+        required=True,
+    )
+
+    applicable_parser.add_argument(
+        "--context",
+        required=True,
+    )
+
+    applicable_parser.add_argument(
+        "--at"
+    )
+
+    for command in (
+        "evaluate",
+        "explain",
+        "why",
+        "why-not",
+    ):
+        child = subparsers.add_parser(
+            command
+        )
+
+        child.add_argument(
+            "--policies",
+            required=True,
+        )
+
+        child.add_argument(
+            "--context",
+            required=True,
+        )
+
+        child.add_argument(
+            "--at"
+        )
+
+        if command == "why-not":
+            child.add_argument(
+                "--desired",
+                default="pass",
+            )
+
+    return parser
+
+
+def main() -> int:
+    parser = build_parser()
+
+    args = parser.parse_args()
+
+    try:
+        if args.command == "status":
+            output = status()
+
+        elif args.command == "applicable":
+            policies = load_policies(
+                args.policy
+            )
+
+            if len(
+                policies
+            ) != 1:
+                raise ValueError(
+                    (
+                        "applicable requires "
+                        "exactly one policy"
+                    )
+                )
+
+            context = load_context(
+                args.context
+            )
+
+            output = applicable(
+                policies[
+                    0
+                ],
+                context,
+                at=args.at,
+            )
+
+        else:
+            policies = load_policies(
+                args.policies
+            )
+
+            context = load_context(
+                args.context
+            )
+
+            if args.command == "evaluate":
+                output = evaluate_policies(
+                    policies,
+                    context,
+                    at=args.at,
+                )
+
+            elif args.command == "explain":
+                output = explain(
+                    policies,
+                    context,
+                    at=args.at,
+                )
+
+            elif args.command == "why":
+                output = why(
+                    policies,
+                    context,
+                    at=args.at,
+                )
+
+            elif args.command == "why-not":
+                output = why_not(
+                    policies,
+                    context,
+                    desired=args.desired,
+                    at=args.at,
+                )
+
+            else:
+                parser.error(
+                    "unknown command"
+                )
+
+                return 2
+
+    except (
+        OSError,
+        ValueError,
+        json.JSONDecodeError,
+    ) as exc:
+        print(
+            json.dumps(
+                {
+                    "ok":
+                        False,
+
+                    "error":
+                        str(
+                            exc
+                        ),
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+
+        return 1
+
+    print(
+        json.dumps(
+            output,
+            indent=2,
+            ensure_ascii=False,
+            sort_keys=True,
+        )
+    )
+
+    if isinstance(
+        output,
+        Mapping,
+    ):
+        if output.get(
+            "decision"
+        ) in {
+            "fail",
+            "unknown",
+            "authority-required",
+        }:
+            return 1
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

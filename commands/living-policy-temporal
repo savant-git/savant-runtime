@@ -1,0 +1,336 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+
+from pathlib import Path
+from typing import Any
+
+
+runtime_root = Path(
+    "/root/savant-runtime/runtime"
+)
+
+if str(runtime_root) not in sys.path:
+    sys.path.insert(
+        0,
+        str(runtime_root),
+    )
+
+
+from living_policy_temporal import (  # noqa: E402
+    applicable_records,
+    evaluate_record,
+    evaluate_records,
+    living_policy_temporal_error,
+    selftest,
+    status,
+)
+
+
+def read_json(
+    path: str,
+) -> Any:
+    if path == "-":
+        return json.load(
+            sys.stdin
+        )
+
+    return json.loads(
+        Path(
+            path
+        ).read_text(
+            encoding="utf-8"
+        )
+    )
+
+
+def read_object(
+    path: str,
+) -> dict[str, Any]:
+    value = read_json(
+        path
+    )
+
+    if not isinstance(
+        value,
+        dict,
+    ):
+        raise ValueError(
+            "input must be a JSON object"
+        )
+
+    return value
+
+
+def read_records(
+    path: str,
+) -> list[dict[str, Any]]:
+    value = read_json(
+        path
+    )
+
+    if isinstance(
+        value,
+        dict,
+    ):
+        for field in (
+            "records",
+            "policies",
+            "items",
+        ):
+            candidate = value.get(
+                field
+            )
+
+            if isinstance(
+                candidate,
+                list,
+            ):
+                value = candidate
+                break
+
+    if not isinstance(
+        value,
+        list,
+    ):
+        raise ValueError(
+            (
+                "records must be a JSON array "
+                "or object containing "
+                "records/policies/items"
+            )
+        )
+
+    result = []
+
+    for item in value:
+        if not isinstance(
+            item,
+            dict,
+        ):
+            raise ValueError(
+                (
+                    "every policy record "
+                    "must be an object"
+                )
+            )
+
+        result.append(
+            item
+        )
+
+    return result
+
+
+def add_context(
+    parser: argparse.ArgumentParser,
+) -> None:
+    parser.add_argument(
+        "--as-of"
+    )
+
+    parser.add_argument(
+        "--sequence"
+    )
+
+    parser.add_argument(
+        "--timezone"
+    )
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="living-policy-temporal",
+        description=(
+            "deterministic temporal validity "
+            "projection for Living Governance"
+        ),
+    )
+
+    commands = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    commands.add_parser(
+        "status"
+    )
+
+    commands.add_parser(
+        "selftest"
+    )
+
+    evaluate = commands.add_parser(
+        "evaluate"
+    )
+
+    evaluate.add_argument(
+        "--record",
+        required=True,
+    )
+
+    add_context(
+        evaluate
+    )
+
+    evaluate_set = commands.add_parser(
+        "evaluate-set"
+    )
+
+    evaluate_set.add_argument(
+        "--records",
+        required=True,
+    )
+
+    add_context(
+        evaluate_set
+    )
+
+    applicable = commands.add_parser(
+        "applicable"
+    )
+
+    applicable.add_argument(
+        "--records",
+        required=True,
+    )
+
+    add_context(
+        applicable
+    )
+
+    return parser
+
+
+def sequence_value(
+    value: str | None,
+) -> int | None:
+    if value is None:
+        return None
+
+    return int(
+        value
+    )
+
+
+def main() -> int:
+    args = (
+        build_parser()
+        .parse_args()
+    )
+
+    try:
+        if args.command == "status":
+            output = status()
+
+        elif args.command == "selftest":
+            output = selftest()
+
+        elif args.command == "evaluate":
+            output = evaluate_record(
+                read_object(
+                    args.record
+                ),
+                as_of=
+                    args.as_of,
+                sequence=
+                    sequence_value(
+                        args.sequence
+                    ),
+                default_timezone=
+                    args.timezone,
+            )
+
+        elif args.command == "evaluate-set":
+            output = evaluate_records(
+                read_records(
+                    args.records
+                ),
+                as_of=
+                    args.as_of,
+                sequence=
+                    sequence_value(
+                        args.sequence
+                    ),
+                default_timezone=
+                    args.timezone,
+            )
+
+        elif args.command == "applicable":
+            output = applicable_records(
+                read_records(
+                    args.records
+                ),
+                as_of=
+                    args.as_of,
+                sequence=
+                    sequence_value(
+                        args.sequence
+                    ),
+                default_timezone=
+                    args.timezone,
+            )
+
+        else:
+            raise ValueError(
+                "unknown command"
+            )
+
+    except (
+        OSError,
+        ValueError,
+        json.JSONDecodeError,
+        living_policy_temporal_error,
+    ) as exc:
+        print(
+            json.dumps(
+                {
+                    "schema":
+                        (
+                            "savant.living-governance."
+                            "policy-temporal.v1"
+                        ),
+
+                    "owner":
+                        "living-governance",
+
+                    "authority_effect":
+                        "none",
+
+                    "ok":
+                        False,
+
+                    "error":
+                        str(
+                            exc
+                        ),
+
+                    "authority_transfer":
+                        False,
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+
+        return 1
+
+    print(
+        json.dumps(
+            output,
+            indent=2,
+            ensure_ascii=False,
+            sort_keys=True,
+        )
+    )
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

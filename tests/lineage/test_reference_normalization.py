@@ -192,14 +192,14 @@ class ReferenceNormalizationTests(
 
             resolution = (
                 resolve_reference(
-                    "hierarchy:identity:4",
+                    "edifice:identity:4",
                     root=root,
                 )
             )
 
             self.assertEqual(
                 resolution.canonical,
-                "hierarchy:identity:4",
+                "edifice:identity:4",
             )
 
             self.assertFalse(
@@ -339,7 +339,7 @@ class ReferenceNormalizationTests(
             add_binding_once(
                 graph,
                 parent=(
-                    "hierarchy:identity:4"
+                    "edifice:identity:4"
                 ),
                 child="semantic:child",
                 role="source",
@@ -354,7 +354,7 @@ class ReferenceNormalizationTests(
                 (
                     "unresolved node "
                     "reference: "
-                    "hierarchy:identity:4"
+                    "edifice:identity:4"
                 ),
                 warnings,
             )

@@ -536,9 +536,9 @@ def main() -> int:
         )
 
         require(
-            data.get("hierarchy")
+            data.get("edifice")
             == EXPECTED_LEVELS,
-            "identity hierarchy mismatch",
+            "identity edifice mismatch",
         )
 
         universal = data.get(

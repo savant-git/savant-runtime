@@ -1,0 +1,321 @@
+/*
+savant niche evidence gate
+projection-only evidence requirement instrument
+authority_effect: none
+*/
+
+:root {
+  --niche-evidence-edge:
+    color-mix(
+      in srgb,
+      var(--savant-primary, #7fe7ff) 30%,
+      transparent
+    );
+  --niche-evidence-present:
+    var(--savant-ready, #8fffb0);
+  --niche-evidence-required:
+    var(--savant-blocked, #ff785f);
+  --niche-evidence-unknown:
+    var(--savant-unknown, #9aa6aa);
+}
+
+.niche-evidence-gate {
+  position: fixed;
+  inset-inline-end:
+    max(0.75rem, env(safe-area-inset-right));
+  inset-block-end:
+    max(0.75rem, env(safe-area-inset-bottom));
+  z-index: 59;
+  inline-size:
+    min(32rem, calc(100vw - 1.5rem));
+  max-block-size:
+    min(74dvh, 46rem);
+  display: grid;
+  grid-template-rows:
+    auto minmax(0, 1fr);
+  overflow: hidden;
+  border:
+    1px solid var(--niche-evidence-edge);
+  background:
+    color-mix(
+      in srgb,
+      var(--savant-background, #050708) 97%,
+      transparent
+    );
+  box-shadow:
+    0 1.5rem 4rem rgb(0 0 0 / 0.42);
+}
+
+.niche-evidence-gate[hidden] {
+  display: none !important;
+}
+
+.niche-evidence-head {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr) auto;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.72rem;
+  border-block-end:
+    1px solid var(--niche-evidence-edge);
+}
+
+.niche-evidence-kicker,
+.niche-evidence-close,
+.niche-evidence-chip,
+.niche-evidence-label,
+.niche-evidence-value,
+.niche-evidence-receipt,
+.niche-evidence-boundary {
+  font-family:
+    ui-monospace,
+    "SFMono-Regular",
+    Consolas,
+    monospace;
+}
+
+.niche-evidence-kicker {
+  margin: 0 0 0.2rem;
+  color:
+    var(--savant-primary, #7fe7ff);
+  font-size: 0.55rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.niche-evidence-title {
+  margin: 0;
+  color:
+    var(--savant-text, #eef7f8);
+  font:
+    730 0.95rem/1.1
+    system-ui,
+    sans-serif;
+}
+
+.niche-evidence-close {
+  min-inline-size: 2.75rem;
+  min-block-size: 2.75rem;
+  border:
+    1px solid var(--niche-evidence-edge);
+  color:
+    var(--savant-text, #eef7f8);
+  background: transparent;
+  cursor: pointer;
+}
+
+.niche-evidence-close:hover,
+.niche-evidence-close:focus-visible {
+  outline: none;
+  border-color:
+    var(--savant-primary, #7fe7ff);
+}
+
+.niche-evidence-body {
+  min-block-size: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 0.75rem;
+}
+
+.niche-evidence-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-block-end: 0.75rem;
+}
+
+.niche-evidence-chip {
+  padding: 0.3rem 0.42rem;
+  border:
+    1px solid var(--niche-evidence-edge);
+  color:
+    var(--savant-text-muted, #879397);
+  font-size: 0.53rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.niche-evidence-chip[data-state="required"] {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--niche-evidence-required) 70%,
+      transparent
+    );
+  color:
+    var(--niche-evidence-required);
+}
+
+.niche-evidence-chip[data-state="present"] {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--niche-evidence-present) 70%,
+      transparent
+    );
+  color:
+    var(--niche-evidence-present);
+}
+
+.niche-evidence-grid {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.niche-evidence-row {
+  position: relative;
+  display: grid;
+  grid-template-columns:
+    minmax(8rem, 0.7fr)
+    minmax(0, 1.3fr);
+  gap: 0.7rem;
+  padding: 0.62rem;
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--savant-border, #263237) 78%,
+      transparent
+    );
+  background:
+    color-mix(
+      in srgb,
+      var(--savant-surface, #0b1113) 78%,
+      transparent
+    );
+}
+
+.niche-evidence-row::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: 2px;
+  background:
+    var(--niche-evidence-unknown);
+}
+
+.niche-evidence-row[data-state="represented"]::before {
+  background:
+    var(--niche-evidence-present);
+}
+
+.niche-evidence-row[data-state="required"]::before {
+  background:
+    var(--niche-evidence-required);
+}
+
+.niche-evidence-label {
+  color:
+    var(--savant-text-muted, #879397);
+  font-size: 0.54rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.niche-evidence-value {
+  min-inline-size: 0;
+  color:
+    var(--savant-text, #eef7f8);
+  font-size: 0.63rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.niche-evidence-receipts {
+  margin-block-start: 0.75rem;
+  border:
+    1px solid var(--niche-evidence-edge);
+}
+
+.niche-evidence-receipts-head {
+  padding: 0.58rem;
+  border-block-end:
+    1px solid var(--niche-evidence-edge);
+  color:
+    var(--savant-text-muted, #879397);
+  font:
+    0.54rem/1.4
+    ui-monospace,
+    monospace;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.niche-evidence-receipt-list {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.niche-evidence-receipt {
+  padding: 0.55rem 0.6rem;
+  border-block-end:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--savant-border, #263237) 70%,
+      transparent
+    );
+  color:
+    var(--savant-text, #eef7f8);
+  font-size: 0.6rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.niche-evidence-receipt:last-child {
+  border-block-end: 0;
+}
+
+.niche-evidence-empty,
+.niche-evidence-boundary {
+  padding: 0.65rem;
+  border:
+    1px dashed var(--niche-evidence-edge);
+  color:
+    var(--savant-text-muted, #879397);
+  font:
+    0.62rem/1.55
+    ui-monospace,
+    monospace;
+}
+
+.niche-evidence-boundary {
+  margin-block-start: 0.75rem;
+}
+
+@media (max-width: 700px) {
+  .niche-evidence-gate {
+    inset-inline:
+      max(0.45rem, env(safe-area-inset-left))
+      max(0.45rem, env(safe-area-inset-right));
+    inset-block-end:
+      max(0.45rem, env(safe-area-inset-bottom));
+    inline-size: auto;
+    max-block-size: 72dvh;
+  }
+}
+
+@media (max-width: 430px) {
+  .niche-evidence-row {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+}
+
+@media (forced-colors: active) {
+  .niche-evidence-gate,
+  .niche-evidence-close,
+  .niche-evidence-chip,
+  .niche-evidence-row,
+  .niche-evidence-receipts,
+  .niche-evidence-empty,
+  .niche-evidence-boundary {
+    border-color: CanvasText;
+  }
+}

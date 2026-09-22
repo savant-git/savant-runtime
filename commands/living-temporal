@@ -1,0 +1,229 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+
+from pathlib import Path
+
+
+root = Path(
+    "/root/savant-runtime"
+)
+
+if str(
+    root
+) not in sys.path:
+    sys.path.insert(
+        0,
+        str(
+            root
+        ),
+    )
+
+
+from runtime.living_temporal import (  # noqa: E402
+    classify_cycles,
+    current_state,
+    diff_sequences,
+    diff_timestamps,
+    impact,
+    living_temporal_error,
+    state_at_sequence,
+    state_at_timestamp,
+    status,
+    supersession_trace,
+)
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="living-temporal",
+        description=(
+            "deterministic temporal and "
+            "impact projections over living governance"
+        ),
+    )
+
+    subparsers = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    subparsers.add_parser(
+        "status"
+    )
+
+    state_parser = subparsers.add_parser(
+        "state"
+    )
+
+    state_group = state_parser.add_mutually_exclusive_group()
+
+    state_group.add_argument(
+        "--sequence",
+        type=int,
+    )
+
+    state_group.add_argument(
+        "--timestamp",
+    )
+
+    diff_parser = subparsers.add_parser(
+        "diff"
+    )
+
+    diff_mode = diff_parser.add_mutually_exclusive_group(
+        required=True
+    )
+
+    diff_mode.add_argument(
+        "--sequences",
+        nargs=2,
+        type=int,
+        metavar=(
+            "FROM",
+            "TO",
+        ),
+    )
+
+    diff_mode.add_argument(
+        "--timestamps",
+        nargs=2,
+        metavar=(
+            "FROM",
+            "TO",
+        ),
+    )
+
+    trace_parser = subparsers.add_parser(
+        "trace"
+    )
+
+    trace_parser.add_argument(
+        "--stream",
+        required=True,
+    )
+
+    trace_parser.add_argument(
+        "--id",
+        required=True,
+    )
+
+    impact_parser = subparsers.add_parser(
+        "impact"
+    )
+
+    impact_parser.add_argument(
+        "id"
+    )
+
+    subparsers.add_parser(
+        "cycles"
+    )
+
+    return parser
+
+
+def main() -> int:
+    parser = build_parser()
+
+    args = parser.parse_args()
+
+    try:
+        if args.command == "status":
+            output = status()
+
+        elif args.command == "state":
+            if args.sequence is not None:
+                output = state_at_sequence(
+                    args.sequence
+                )
+
+            elif args.timestamp is not None:
+                output = state_at_timestamp(
+                    args.timestamp
+                )
+
+            else:
+                output = current_state()
+
+        elif args.command == "diff":
+            if args.sequences is not None:
+                output = diff_sequences(
+                    args.sequences[
+                        0
+                    ],
+                    args.sequences[
+                        1
+                    ],
+                )
+
+            else:
+                output = diff_timestamps(
+                    args.timestamps[
+                        0
+                    ],
+                    args.timestamps[
+                        1
+                    ],
+                )
+
+        elif args.command == "trace":
+            output = supersession_trace(
+                stream=args.stream,
+                semantic_id=args.id,
+            )
+
+        elif args.command == "impact":
+            output = impact(
+                args.id
+            )
+
+        elif args.command == "cycles":
+            output = classify_cycles()
+
+        else:
+            parser.error(
+                "unknown command"
+            )
+
+            return 2
+
+    except living_temporal_error as exc:
+        print(
+            json.dumps(
+                {
+                    "ok":
+                        False,
+
+                    "error":
+                        str(
+                            exc
+                        ),
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+
+        return 1
+
+    print(
+        json.dumps(
+            output,
+            indent=2,
+            ensure_ascii=False,
+            sort_keys=True,
+        )
+    )
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

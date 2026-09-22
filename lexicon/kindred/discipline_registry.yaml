@@ -11,7 +11,7 @@ authority:
 
 grammar:
   system: Kindred
-  hierarchy:
+  edifice:
     - Discipline
     - Relation
     - Edge
@@ -29,7 +29,7 @@ disciplines:
   - id: discipline:containment
     canonical: Containment
     steward: Kindred
-    purpose: hierarchy and containment relationships
+    purpose: edifice and containment relationships
     relations:
       - relation:contains
       - relation:contained_by

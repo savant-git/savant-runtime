@@ -13,7 +13,7 @@ ROOT = Path("/root/savant-runtime")
 
 NOCTURNE_ROOT = (
     ROOT
-    / "hierarchies"
+    / "edifices"
     / "identity"
     / "exiles"
     / "opus"
@@ -643,22 +643,22 @@ def main() -> int:
         "integration_tests"
     ] = [
         (
-            "hierarchies/identity/exiles/opus/"
+            "edifices/identity/exiles/opus/"
             "prodigals/nocturne/quirks/veil/"
             "tests/test_veil_runtime.py"
         ),
         (
-            "hierarchies/identity/exiles/opus/"
+            "edifices/identity/exiles/opus/"
             "prodigals/nocturne/quirks/lantern/"
             "tests/test_lantern_runtime.py"
         ),
         (
-            "hierarchies/identity/exiles/opus/"
+            "edifices/identity/exiles/opus/"
             "prodigals/nocturne/quirks/scribe/"
             "tests/test_scribe_runtime.py"
         ),
         (
-            "hierarchies/identity/exiles/opus/"
+            "edifices/identity/exiles/opus/"
             "prodigals/nocturne/quirks/echo/"
             "tests/test_echo_runtime.py"
         ),

@@ -215,7 +215,7 @@ def _add_path(
         },
         metadata={
             "projection": (
-                "filesystem_hierarchy"
+                "filesystem_edifice"
             ),
             "legacy_edge_kind": (
                 "contains"

@@ -5,21 +5,21 @@ from collections import defaultdict
 from copy import deepcopy
 from typing import Any
 
-from .algebra import KinshipAlgebra
-from .graph import KinshipGraph
+from .algebra import KindredAlgebra
+from .graph import KindredGraph
 from .model import FamilyTreeProjection
-from .registry import KinshipRegistry
+from .registry import KindredRegistry
 
 
 class FamilyTreeProjector:
     def __init__(
         self,
-        graph: KinshipGraph,
-        registry: KinshipRegistry,
+        graph: KindredGraph,
+        registry: KindredRegistry,
     ) -> None:
         self.graph = graph
         self.registry = registry
-        self.algebra = KinshipAlgebra(
+        self.algebra = KindredAlgebra(
             graph,
             registry,
         )
@@ -385,7 +385,7 @@ class FamilyTreeProjector:
                         .deterministic_hash
                     ),
                     "kind": (
-                        "derived_kinship"
+                        "derived_kindred"
                     ),
                     "source": focus,
                     "target": (

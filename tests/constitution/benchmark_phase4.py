@@ -15,7 +15,7 @@ def measure(fn,repeats=5):
 def main():
     authority=ConstitutionalRegistry.load(ROOT); migrated=ConstitutionalRegistry.load_migrated(ROOT); boot=bootstrap(ROOT)
     result={"bootstrap":measure(lambda:bootstrap(ROOT),3),"migration":measure(lambda:ConstitutionalRegistry.load_migrated(ROOT),3),
-            "discovery":measure(lambda:discover_runtime(ROOT,authority.values()),5),"registry_lookup":measure(lambda:migrated.get("runtime:module:runtime.kinship.graph"),1000),
+            "discovery":measure(lambda:discover_runtime(ROOT,authority.values()),5),"registry_lookup":measure(lambda:migrated.get("runtime:module:runtime.kindred.graph"),1000),
             "graph_traversal":measure(lambda:migrated.find_descendants("domain:instances"),100),"projection":measure(lambda:migrated.project("json"),3),
             "validation":measure(lambda:RuntimeMigrationValidator(boot.registry,boot.runtime_migration).validate(),3)}
     print(json.dumps(result,indent=2,sort_keys=True))

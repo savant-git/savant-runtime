@@ -26,6 +26,11 @@ from coalesce_composer import (
     CoalesceComposer,
     composer,
 )
+from identity_resolver import (
+    IdentityResolutionError,
+    IdentityResolver,
+    resolver,
+)
 from mode_engine import (
     CoalesceModeEngine,
     CoalesceModeError,
@@ -35,7 +40,7 @@ from mode_engine import (
 
 OWNER = "prodigal:modus:coalesce"
 
-SCHEMA = "savant://coalesce/runtime/2"
+SCHEMA = "savant://coalesce/runtime/2.1"
 
 
 class CoalesceRuntime:
@@ -43,6 +48,7 @@ class CoalesceRuntime:
         self,
         engine: CoalesceComposer | None = None,
         modes: CoalesceModeEngine | None = None,
+        identities: IdentityResolver | None = None,
     ) -> None:
         self.engine = (
             engine
@@ -52,6 +58,11 @@ class CoalesceRuntime:
         self.modes = (
             modes
             or mode_engine()
+        )
+
+        self.identities = (
+            identities
+            or resolver()
         )
 
     def status(
@@ -68,6 +79,9 @@ class CoalesceRuntime:
             "modes": (
                 self.modes.status()
             ),
+            "identity_resolution": (
+                self.identities.status()
+            ),
             "primary_modes": [
                 "auto",
                 "manual",
@@ -75,6 +89,7 @@ class CoalesceRuntime:
             "operations": [
                 "status",
                 "capabilities",
+                "resolve",
                 "plan",
                 "plan-recipe",
                 "compose",
@@ -85,10 +100,52 @@ class CoalesceRuntime:
             "maximum_alloys": 3,
             "maximum_slivers_per_alloy": 9,
             "legacy_runtime_preserved": True,
+            "historical_identity_compatibility": True,
+            "canonical_sliver_identity": True,
             "reference_composition": True,
             "minimum_sufficient": True,
             "authoritative": False,
             "authority_effect": "none",
+        }
+
+    def resolve(
+        self,
+        payload: dict[str, Any],
+    ) -> dict[str, Any]:
+        identity = str(
+            payload.get(
+                "identity",
+                "",
+            )
+            or ""
+        ).strip()
+
+        if not identity:
+            return {
+                "ok": False,
+                "owner": OWNER,
+                "error": "identity is required",
+            }
+
+        try:
+            result = (
+                self.identities
+                .resolve(
+                    identity
+                )
+            )
+        except IdentityResolutionError as exc:
+            return {
+                "ok": False,
+                "owner": OWNER,
+                "identity": identity,
+                "error": str(exc),
+            }
+
+        return {
+            "ok": True,
+            "owner": OWNER,
+            "result": result,
         }
 
     def dispatch(
@@ -103,6 +160,11 @@ class CoalesceRuntime:
 
         if action == "status":
             return self.status()
+
+        if action == "resolve":
+            return self.resolve(
+                payload
+            )
 
         if action in {
             "auto",
@@ -174,6 +236,7 @@ def main() -> int:
         choices=(
             "status",
             "capabilities",
+            "resolve",
             "plan",
             "plan-recipe",
             "compose",

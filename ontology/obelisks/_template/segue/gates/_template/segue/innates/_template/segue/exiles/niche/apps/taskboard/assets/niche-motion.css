@@ -1,0 +1,246 @@
+/*
+savant niche semantic motion
+projection-only interface layer
+authority_effect: none
+*/
+
+:root {
+  --niche-motion-micro: 140ms;
+  --niche-motion-state: 260ms;
+  --niche-motion-spatial: 420ms;
+  --niche-motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-niche-motion="ready"] [data-task-id] {
+  will-change: auto;
+}
+
+.niche-motion-focus-enter {
+  animation:
+    niche-motion-focus-enter
+    var(--niche-motion-state)
+    var(--niche-motion-ease)
+    both;
+}
+
+.niche-motion-ready-enter {
+  animation:
+    niche-motion-ready-enter
+    var(--niche-motion-spatial)
+    var(--niche-motion-ease)
+    both;
+}
+
+.niche-motion-complete {
+  animation:
+    niche-motion-complete
+    var(--niche-motion-state)
+    var(--niche-motion-ease)
+    both;
+}
+
+.niche-motion-blocked {
+  animation:
+    niche-motion-blocked
+    var(--niche-motion-state)
+    var(--niche-motion-ease)
+    both;
+}
+
+.niche-motion-change {
+  animation:
+    niche-motion-change
+    var(--niche-motion-state)
+    var(--niche-motion-ease)
+    both;
+}
+
+.niche-motion-propagate {
+  animation:
+    niche-motion-propagate
+    var(--niche-motion-spatial)
+    var(--niche-motion-ease)
+    both;
+}
+
+.niche-motion-filament-resolve {
+  animation:
+    niche-motion-filament-resolve
+    var(--niche-motion-spatial)
+    var(--niche-motion-ease)
+    both;
+}
+
+.niche-motion-living-pulse {
+  animation:
+    niche-motion-living-pulse
+    var(--niche-motion-spatial)
+    var(--niche-motion-ease)
+    both;
+}
+
+@keyframes niche-motion-focus-enter {
+  from {
+    opacity: 0.62;
+    transform: translateY(3px) scale(0.995);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes niche-motion-ready-enter {
+  0% {
+    opacity: 0.35;
+    transform: translateX(-8px);
+    filter: brightness(0.8);
+  }
+
+  55% {
+    opacity: 1;
+    filter: brightness(1.18);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+@keyframes niche-motion-complete {
+  0% {
+    filter: brightness(1);
+  }
+
+  40% {
+    filter: brightness(1.2);
+  }
+
+  100% {
+    filter: none;
+  }
+}
+
+@keyframes niche-motion-blocked {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  35% {
+    transform: translateX(-2px);
+  }
+
+  70% {
+    transform: translateX(2px);
+  }
+}
+
+@keyframes niche-motion-change {
+  0% {
+    outline-color: transparent;
+  }
+
+  35% {
+    outline:
+      1px solid
+      color-mix(
+        in srgb,
+        var(--savant-primary, #7fe7ff) 72%,
+        transparent
+      );
+    outline-offset: 3px;
+  }
+
+  100% {
+    outline-color: transparent;
+  }
+}
+
+@keyframes niche-motion-propagate {
+  0% {
+    filter: brightness(1);
+  }
+
+  45% {
+    filter: brightness(1.18);
+  }
+
+  100% {
+    filter: none;
+  }
+}
+
+@keyframes niche-motion-filament-resolve {
+  from {
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+
+  to {
+    opacity: 0.35;
+    stroke-dashoffset: 14;
+  }
+}
+
+@keyframes niche-motion-living-pulse {
+  0% {
+    box-shadow:
+      inset 0 0 0 0
+      color-mix(
+        in srgb,
+        var(--savant-living, #75ffd6) 0%,
+        transparent
+      );
+  }
+
+  45% {
+    box-shadow:
+      inset 0 0 0 1px
+      color-mix(
+        in srgb,
+        var(--savant-living, #75ffd6) 64%,
+        transparent
+      );
+  }
+
+  100% {
+    box-shadow:
+      inset 0 0 0 1px
+      transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --niche-motion-micro: 0ms;
+    --niche-motion-state: 0ms;
+    --niche-motion-spatial: 0ms;
+  }
+
+  .niche-motion-focus-enter,
+  .niche-motion-ready-enter,
+  .niche-motion-complete,
+  .niche-motion-blocked,
+  .niche-motion-change,
+  .niche-motion-propagate,
+  .niche-motion-filament-resolve,
+  .niche-motion-living-pulse {
+    animation: none !important;
+  }
+
+  .niche-motion-ready-enter,
+  .niche-motion-complete,
+  .niche-motion-blocked,
+  .niche-motion-change,
+  .niche-motion-propagate,
+  .niche-motion-living-pulse {
+    outline:
+      1px solid
+      var(--savant-primary, #7fe7ff);
+    outline-offset: 2px;
+  }
+}

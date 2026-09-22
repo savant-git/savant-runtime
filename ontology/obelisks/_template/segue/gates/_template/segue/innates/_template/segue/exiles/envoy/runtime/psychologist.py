@@ -19,6 +19,7 @@ from opus_bridge import (
     infer_with_opus,
     text_bridge_projection,
 )
+from .canonical_primitives import canonical as _canonical, digest as _digest
 
 
 SCHEMA = (
@@ -117,32 +118,6 @@ class ReflectionSession:
         return MappingProxyType(
             asdict(self)
         )
-
-
-def _canonical(
-    value: Any,
-) -> str:
-    return json.dumps(
-        value,
-        ensure_ascii=False,
-        sort_keys=True,
-        separators=(
-            ",",
-            ":",
-        ),
-    )
-
-
-def _digest(
-    value: Any,
-) -> str:
-    return sha256(
-        _canonical(
-            value
-        ).encode(
-            "utf-8"
-        )
-    ).hexdigest()
 
 
 def _materialize_mapping(

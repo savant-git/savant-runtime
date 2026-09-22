@@ -70,7 +70,7 @@ DISCOVERY_ROOTS: Final[
     tuple[Path, ...]
 ] = (
     ROOT
-    / "hierarchies"
+    / "edifices"
     / "identity"
     / "exiles"
     / "opus",

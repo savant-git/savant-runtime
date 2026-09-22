@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 from collections import defaultdict, deque
+from copy import deepcopy
 from pathlib import Path
 from typing import Any
 
@@ -32,11 +33,35 @@ class KindredEngine:
             self.registry_path
         )
 
-        self.kindreds: dict[str, dict[str, Any]] = {}
-        self.member_index: dict[str, set[str]] = defaultdict(set)
-        self.parent_graph: dict[str, set[str]] = defaultdict(set)
-        self.child_graph: dict[str, set[str]] = defaultdict(set)
-        self.dependency_graph: dict[str, set[str]] = defaultdict(set)
+        self.kindreds: dict[
+            str,
+            dict[str, Any],
+        ] = {}
+
+        self.lineage_segues: dict[
+            str,
+            dict[str, Any],
+        ] = {}
+
+        self.member_index: dict[
+            str,
+            set[str],
+        ] = defaultdict(set)
+
+        self.parent_graph: dict[
+            str,
+            set[str],
+        ] = defaultdict(set)
+
+        self.child_graph: dict[
+            str,
+            set[str],
+        ] = defaultdict(set)
+
+        self.dependency_graph: dict[
+            str,
+            set[str],
+        ] = defaultdict(set)
 
         self._build_indexes()
 
@@ -78,41 +103,28 @@ class KindredEngine:
                 continue
 
             kindred_id = str(
-                record.get("id", "")
+                record.get(
+                    "id",
+                    "",
+                )
             ).strip()
 
             if not kindred_id:
                 continue
 
-            self.kindreds[kindred_id] = record
+            self.kindreds[
+                kindred_id
+            ] = record
 
-        for kindred_id, record in self.kindreds.items():
+        for kindred_id, record in (
+            self.kindreds.items()
+        ):
             for member in self._string_list(
                 record.get("members")
             ):
-                self.member_index[member].add(
-                    kindred_id
-                )
-
-            for parent in self._string_list(
-                record.get("parents")
-            ):
-                self.parent_graph[kindred_id].add(
-                    parent
-                )
-
-                self.child_graph[parent].add(
-                    kindred_id
-                )
-
-            for child in self._string_list(
-                record.get("children")
-            ):
-                self.child_graph[kindred_id].add(
-                    child
-                )
-
-                self.parent_graph[child].add(
+                self.member_index[
+                    member
+                ].add(
                     kindred_id
                 )
 
@@ -121,25 +133,318 @@ class KindredEngine:
             ):
                 self.dependency_graph[
                     kindred_id
-                ].add(dependency)
+                ].add(
+                    dependency
+                )
+
+        self._build_lineage_indexes()
+
+    def _build_lineage_indexes(
+        self,
+    ) -> None:
+        raw_segues = self.data.get(
+            "lineage_segues",
+            [],
+        )
+
+        if not isinstance(raw_segues, list):
+            raise KindredError(
+                "lineage_segues must be a list."
+            )
+
+        signatures: set[
+            tuple[str, str, str, str, int]
+        ] = set()
+
+        for raw in raw_segues:
+            if not isinstance(raw, dict):
+                raise KindredError(
+                    "lineage segue must be an object."
+                )
+
+            segue = self._normalize_lineage_segue(
+                raw
+            )
+
+            segue_id = segue["id"]
+
+            if segue_id in self.lineage_segues:
+                raise KindredError(
+                    "duplicate lineage segue id: "
+                    f"{segue_id}"
+                )
+
+            signature = (
+                segue["parent"],
+                segue["child"],
+                segue["role"],
+                segue["scope"],
+                segue["order"],
+            )
+
+            if signature in signatures:
+                raise KindredError(
+                    "duplicate lineage segue: "
+                    f"{signature}"
+                )
+
+            signatures.add(signature)
+
+            self.lineage_segues[
+                segue_id
+            ] = segue
+
+            parent = segue["parent"]
+            child = segue["child"]
+
+            if parent not in self.kindreds:
+                raise KindredError(
+                    "lineage segue references unknown "
+                    f"parent: {parent}"
+                )
+
+            if child not in self.kindreds:
+                raise KindredError(
+                    "lineage segue references unknown "
+                    f"child: {child}"
+                )
+
+            if parent == child:
+                raise KindredError(
+                    "lineage segue cannot be "
+                    f"self-referential: {parent}"
+                )
+
+            self.parent_graph[
+                child
+            ].add(
+                parent
+            )
+
+            self.child_graph[
+                parent
+            ].add(
+                child
+            )
+
+        self._assert_acyclic_lineage()
+
+    def _normalize_lineage_segue(
+        self,
+        value: dict[str, Any],
+    ) -> dict[str, Any]:
+        segue_id = str(
+            value.get(
+                "id",
+                "",
+            )
+        ).strip()
+
+        parent = str(
+            value.get(
+                "parent",
+                "",
+            )
+        ).strip()
+
+        child = str(
+            value.get(
+                "child",
+                "",
+            )
+        ).strip()
+
+        role = str(
+            value.get(
+                "role",
+                "",
+            )
+        ).strip()
+
+        if not segue_id:
+            raise KindredError(
+                "lineage segue requires id."
+            )
+
+        if value.get("kind") != "segue":
+            raise KindredError(
+                f"{segue_id} must have kind segue."
+            )
+
+        if value.get("type") != "lineage":
+            raise KindredError(
+                f"{segue_id} must have type lineage."
+            )
+
+        if not parent or not child or not role:
+            raise KindredError(
+                f"{segue_id} requires parent, child, "
+                "and role."
+            )
+
+        order = value.get(
+            "order",
+            0,
+        )
+
+        if (
+            isinstance(order, bool)
+            or not isinstance(order, int)
+        ):
+            raise KindredError(
+                f"{segue_id} order must be integer."
+            )
+
+        scope = str(
+            value.get(
+                "scope",
+                "lexicon:kindred",
+            )
+        ).strip() or "lexicon:kindred"
+
+        result = deepcopy(value)
+        result["id"] = segue_id
+        result["parent"] = parent
+        result["child"] = child
+        result["role"] = role
+        result["scope"] = scope
+        result["order"] = order
+
+        return result
+
+    def _assert_acyclic_lineage(
+        self,
+    ) -> None:
+        visiting: set[str] = set()
+        visited: set[str] = set()
+
+        def visit(
+            node: str,
+        ) -> None:
+            if node in visited:
+                return
+
+            if node in visiting:
+                raise KindredError(
+                    "cycle detected in Kindred "
+                    f"lineage at {node}"
+                )
+
+            visiting.add(node)
+
+            for child in sorted(
+                self.child_graph.get(
+                    node,
+                    set(),
+                )
+            ):
+                visit(child)
+
+            visiting.remove(node)
+            visited.add(node)
+
+        for node in sorted(
+            self.kindreds
+        ):
+            visit(node)
 
     def get(
         self,
         kindred_id: str,
+        *,
+        project_lineage: bool = True,
     ) -> dict[str, Any]:
         try:
-            return self.kindreds[kindred_id]
+            record = self.kindreds[
+                kindred_id
+            ]
         except KeyError as exc:
             raise KindredError(
                 f"Unknown kindred: {kindred_id}"
             ) from exc
+
+        result = deepcopy(record)
+
+        if project_lineage:
+            result["parents"] = self.parents(
+                kindred_id
+            )
+            result["children"] = self.children(
+                kindred_id
+            )
+
+        return result
+
+    def lineage(
+        self,
+        kindred_id: str | None = None,
+    ) -> list[dict[str, Any]]:
+        if kindred_id is None:
+            return [
+                deepcopy(
+                    self.lineage_segues[
+                        segue_id
+                    ]
+                )
+                for segue_id in sorted(
+                    self.lineage_segues
+                )
+            ]
+
+        self._require_kindred(
+            kindred_id
+        )
+
+        return [
+            deepcopy(segue)
+            for _, segue in sorted(
+                self.lineage_segues.items()
+            )
+            if (
+                segue["parent"] == kindred_id
+                or segue["child"] == kindred_id
+            )
+        ]
+
+    def parents(
+        self,
+        kindred_id: str,
+    ) -> list[str]:
+        self._require_kindred(
+            kindred_id
+        )
+
+        return sorted(
+            self.parent_graph.get(
+                kindred_id,
+                set(),
+            )
+        )
+
+    def children(
+        self,
+        kindred_id: str,
+    ) -> list[str]:
+        self._require_kindred(
+            kindred_id
+        )
+
+        return sorted(
+            self.child_graph.get(
+                kindred_id,
+                set(),
+            )
+        )
 
     def members(
         self,
         kindred_id: str,
         recursive: bool = False,
     ) -> list[str]:
-        record = self.get(kindred_id)
+        record = self.get(
+            kindred_id,
+            project_lineage=False,
+        )
 
         members = set(
             self._string_list(
@@ -152,7 +457,8 @@ class KindredEngine:
                 kindred_id
             ):
                 descendant_record = self.get(
-                    descendant
+                    descendant,
+                    project_lineage=False,
                 )
 
                 members.update(
@@ -178,11 +484,15 @@ class KindredEngine:
         )
 
         if inherited:
-            inherited_memberships: set[str] = set()
+            inherited_memberships: set[
+                str
+            ] = set()
 
             for kindred_id in memberships:
                 inherited_memberships.update(
-                    self.ancestors(kindred_id)
+                    self.ancestors(
+                        kindred_id
+                    )
                 )
 
             memberships.update(
@@ -195,7 +505,9 @@ class KindredEngine:
         self,
         kindred_id: str,
     ) -> list[str]:
-        self.get(kindred_id)
+        self._require_kindred(
+            kindred_id
+        )
 
         return self._walk(
             kindred_id,
@@ -206,7 +518,9 @@ class KindredEngine:
         self,
         kindred_id: str,
     ) -> list[str]:
-        self.get(kindred_id)
+        self._require_kindred(
+            kindred_id
+        )
 
         return self._walk(
             kindred_id,
@@ -218,7 +532,9 @@ class KindredEngine:
         kindred_id: str,
         recursive: bool = False,
     ) -> list[str]:
-        self.get(kindred_id)
+        self._require_kindred(
+            kindred_id
+        )
 
         if not recursive:
             return sorted(
@@ -237,15 +553,23 @@ class KindredEngine:
         self,
         kindred_id: str,
     ) -> list[dict[str, Any]]:
-        record = self.get(kindred_id)
+        record = self.get(
+            kindred_id,
+            project_lineage=False,
+        )
 
-        edges: list[dict[str, Any]] = []
+        edges: list[
+            dict[str, Any]
+        ] = []
 
         for relationship in record.get(
             "relationships",
             [],
         ):
-            if isinstance(relationship, str):
+            if isinstance(
+                relationship,
+                str,
+            ):
                 edges.append(
                     {
                         "type": "related_to",
@@ -277,37 +601,58 @@ class KindredEngine:
 
         return edges
 
-    def graph(self) -> dict[str, Any]:
+    def graph(
+        self,
+    ) -> dict[str, Any]:
         nodes = [
             {
                 "id": kindred_id,
                 "canonical": record.get(
                     "canonical"
                 ),
-                "status": record.get("status"),
+                "status": record.get(
+                    "status"
+                ),
             }
             for kindred_id, record
-            in sorted(self.kindreds.items())
+            in sorted(
+                self.kindreds.items()
+            )
         ]
 
-        edges: list[dict[str, Any]] = []
+        edges: list[
+            dict[str, Any]
+        ] = []
 
-        for source, targets in sorted(
-            self.parent_graph.items()
+        for segue_id in sorted(
+            self.lineage_segues
         ):
-            for target in sorted(targets):
-                edges.append(
-                    {
-                        "type": "parent",
-                        "source": source,
-                        "target": target,
-                    }
-                )
+            segue = self.lineage_segues[
+                segue_id
+            ]
+
+            edges.append(
+                {
+                    "id": segue["id"],
+                    "type": "lineage",
+                    "role": segue["role"],
+                    "source": segue["parent"],
+                    "target": segue["child"],
+                    "authority": deepcopy(
+                        segue.get(
+                            "authority"
+                        )
+                    ),
+                    "scope": segue["scope"],
+                }
+            )
 
         for source, targets in sorted(
             self.dependency_graph.items()
         ):
-            for target in sorted(targets):
+            for target in sorted(
+                targets
+            ):
                 edges.append(
                     {
                         "type": "depends_on",
@@ -316,7 +661,9 @@ class KindredEngine:
                     }
                 )
 
-        for kindred_id in sorted(self.kindreds):
+        for kindred_id in sorted(
+            self.kindreds
+        ):
             edges.extend(
                 self.relationship_edges(
                     kindred_id
@@ -326,7 +673,9 @@ class KindredEngine:
         for member, kindreds in sorted(
             self.member_index.items()
         ):
-            for kindred_id in sorted(kindreds):
+            for kindred_id in sorted(
+                kindreds
+            ):
                 edges.append(
                     {
                         "type": "member_of",
@@ -342,9 +691,22 @@ class KindredEngine:
             "version": self.data.get(
                 "version"
             ),
+            "lineage_authority": {
+                "primitive": "lineage_segue",
+                "inverse_views": "projection",
+            },
             "nodes": nodes,
             "edges": edges,
         }
+
+    def _require_kindred(
+        self,
+        kindred_id: str,
+    ) -> None:
+        if kindred_id not in self.kindreds:
+            raise KindredError(
+                f"Unknown kindred: {kindred_id}"
+            )
 
     def _walk(
         self,
@@ -352,6 +714,7 @@ class KindredEngine:
         graph: dict[str, set[str]],
     ) -> list[str]:
         visited: set[str] = set()
+
         queue = deque(
             sorted(
                 graph.get(
@@ -376,7 +739,9 @@ class KindredEngine:
                 )
             ):
                 if target not in visited:
-                    queue.append(target)
+                    queue.append(
+                        target
+                    )
 
         return sorted(visited)
 
@@ -387,22 +752,40 @@ class KindredEngine:
         if value is None:
             return []
 
-        if isinstance(value, str):
+        if isinstance(
+            value,
+            str,
+        ):
             value = value.strip()
-            return [value] if value else []
+            return [
+                value
+            ] if value else []
 
-        if isinstance(value, list):
+        if isinstance(
+            value,
+            list,
+        ):
             result: list[str] = []
 
             for item in value:
-                text = str(item).strip()
+                text = str(
+                    item
+                ).strip()
 
                 if text:
-                    result.append(text)
+                    result.append(
+                        text
+                    )
 
             return result
 
-        return [str(value).strip()]
+        text = str(
+            value
+        ).strip()
+
+        return [
+            text
+        ] if text else []
 
 
 def print_json(
@@ -425,7 +808,9 @@ def build_parser() -> argparse.ArgumentParser:
 
     parser.add_argument(
         "--registry",
-        default=str(DEFAULT_REGISTRY),
+        default=str(
+            DEFAULT_REGISTRY
+        ),
     )
 
     subparsers = parser.add_subparsers(
@@ -433,47 +818,93 @@ def build_parser() -> argparse.ArgumentParser:
         required=True,
     )
 
-    get_parser = subparsers.add_parser("get")
-    get_parser.add_argument("kindred_id")
+    get_parser = subparsers.add_parser(
+        "get"
+    )
+    get_parser.add_argument(
+        "kindred_id"
+    )
 
     members_parser = subparsers.add_parser(
         "members"
     )
-    members_parser.add_argument("kindred_id")
+    members_parser.add_argument(
+        "kindred_id"
+    )
     members_parser.add_argument(
         "--recursive",
         action="store_true",
     )
 
-    memberships_parser = subparsers.add_parser(
-        "memberships"
+    memberships_parser = (
+        subparsers.add_parser(
+            "memberships"
+        )
     )
-    memberships_parser.add_argument("member_id")
+    memberships_parser.add_argument(
+        "member_id"
+    )
     memberships_parser.add_argument(
         "--direct",
         action="store_true",
     )
 
-    ancestors_parser = subparsers.add_parser(
-        "ancestors"
+    parents_parser = subparsers.add_parser(
+        "parents"
     )
-    ancestors_parser.add_argument("kindred_id")
+    parents_parser.add_argument(
+        "kindred_id"
+    )
 
-    descendants_parser = subparsers.add_parser(
-        "descendants"
+    children_parser = subparsers.add_parser(
+        "children"
     )
-    descendants_parser.add_argument("kindred_id")
+    children_parser.add_argument(
+        "kindred_id"
+    )
 
-    dependencies_parser = subparsers.add_parser(
-        "dependencies"
+    ancestors_parser = (
+        subparsers.add_parser(
+            "ancestors"
+        )
     )
-    dependencies_parser.add_argument("kindred_id")
+    ancestors_parser.add_argument(
+        "kindred_id"
+    )
+
+    descendants_parser = (
+        subparsers.add_parser(
+            "descendants"
+        )
+    )
+    descendants_parser.add_argument(
+        "kindred_id"
+    )
+
+    dependencies_parser = (
+        subparsers.add_parser(
+            "dependencies"
+        )
+    )
+    dependencies_parser.add_argument(
+        "kindred_id"
+    )
     dependencies_parser.add_argument(
         "--recursive",
         action="store_true",
     )
 
-    subparsers.add_parser("graph")
+    lineage_parser = subparsers.add_parser(
+        "lineage"
+    )
+    lineage_parser.add_argument(
+        "kindred_id",
+        nargs="?",
+    )
+
+    subparsers.add_parser(
+        "graph"
+    )
 
     return parser
 
@@ -487,7 +918,9 @@ def main() -> int:
 
     if args.command == "get":
         print_json(
-            engine.get(args.kindred_id)
+            engine.get(
+                args.kindred_id
+            )
         )
 
     elif args.command == "members":
@@ -503,6 +936,20 @@ def main() -> int:
             engine.memberships(
                 args.member_id,
                 inherited=not args.direct,
+            )
+        )
+
+    elif args.command == "parents":
+        print_json(
+            engine.parents(
+                args.kindred_id
+            )
+        )
+
+    elif args.command == "children":
+        print_json(
+            engine.children(
+                args.kindred_id
             )
         )
 
@@ -528,11 +975,22 @@ def main() -> int:
             )
         )
 
+    elif args.command == "lineage":
+        print_json(
+            engine.lineage(
+                args.kindred_id
+            )
+        )
+
     elif args.command == "graph":
-        print_json(engine.graph())
+        print_json(
+            engine.graph()
+        )
 
     return 0
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(
+        main()
+    )

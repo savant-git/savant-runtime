@@ -1,0 +1,205 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+
+from pathlib import Path
+from typing import Any
+
+
+runtime_root = Path(
+    "/root/savant-runtime/"
+    "ontology/obelisks/_template/"
+    "segue/gates/_template/segue/"
+    "innates/_template/segue/"
+    "exiles/coda/runtime"
+)
+
+if str(runtime_root) not in sys.path:
+    sys.path.insert(
+        0,
+        str(runtime_root),
+    )
+
+
+from palaver_governed_bridge import (  # noqa: E402
+    bridge_status,
+    coda_palaver_governed_bridge_error,
+    replace_file,
+    selftest,
+)
+
+
+def read_json(
+    path: str,
+) -> Any:
+    if path == "-":
+        return json.load(
+            sys.stdin
+        )
+
+    return json.loads(
+        Path(
+            path
+        ).read_text(
+            encoding="utf-8"
+        )
+    )
+
+
+def read_object(
+    path: str,
+) -> dict[str, Any]:
+    value = read_json(
+        path
+    )
+
+    if not isinstance(
+        value,
+        dict,
+    ):
+        raise ValueError(
+            (
+                "input must be "
+                "a JSON object"
+            )
+        )
+
+    return value
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="coda-palaver-governed",
+        description=(
+            "Palaver-to-Coda mutation bridge "
+            "with durable Living Governance "
+            "receipt linkage"
+        ),
+    )
+
+    commands = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    commands.add_parser(
+        "status"
+    )
+
+    commands.add_parser(
+        "selftest"
+    )
+
+    replace = commands.add_parser(
+        "replace-file"
+    )
+
+    replace.add_argument(
+        "--request",
+        required=True,
+    )
+
+    return parser
+
+
+def main() -> int:
+    args = (
+        build_parser()
+        .parse_args()
+    )
+
+    try:
+        if args.command == "status":
+            output = bridge_status()
+
+        elif args.command == "selftest":
+            output = selftest()
+
+        elif args.command == "replace-file":
+            output = replace_file(
+                read_object(
+                    args.request
+                )
+            )
+
+        else:
+            raise ValueError(
+                "unknown command"
+            )
+
+    except (
+        OSError,
+        ValueError,
+        json.JSONDecodeError,
+        coda_palaver_governed_bridge_error,
+    ) as exc:
+        print(
+            json.dumps(
+                {
+                    "schema":
+                        (
+                            "savant.coda."
+                            "palaver-governed-bridge.v1"
+                        ),
+
+                    "owner":
+                        "coda",
+
+                    "caller":
+                        "palaver",
+
+                    "governance_owner":
+                        "living-governance",
+
+                    "authority_effect":
+                        "none",
+
+                    "ok":
+                        False,
+
+                    "error":
+                        str(
+                            exc
+                        ),
+
+                    "authority_transfer":
+                        False,
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+
+        return 1
+
+    print(
+        json.dumps(
+            output,
+            indent=2,
+            ensure_ascii=False,
+            sort_keys=True,
+        )
+    )
+
+    if (
+        isinstance(
+            output,
+            dict,
+        )
+        and output.get(
+            "ok"
+        )
+        is False
+    ):
+        return 1
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

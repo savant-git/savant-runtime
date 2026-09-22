@@ -33,7 +33,7 @@ SLIVER_SCHEMA = (
 )
 
 POOL_SCHEMA = (
-    "savant://coalesce/sliver-pool/1"
+    "savant://coalesce/sliver-pool/1.1"
 )
 
 
@@ -125,6 +125,31 @@ def slab_parts(
     return (
         domain,
         capability,
+    )
+
+
+def recipe_identities(
+    row: dict[str, Any],
+) -> tuple[str, ...]:
+    values = {
+        normalize_id(
+            row.get(
+                "id"
+            )
+        ),
+        normalize_id(
+            row.get(
+                "recipe_id"
+            )
+        ),
+    }
+
+    return tuple(
+        sorted(
+            value
+            for value in values
+            if value
+        )
     )
 
 
@@ -383,32 +408,39 @@ class SliverPool:
             f"mapped: {target}"
         )
 
-    def application_slivers(
+    def resolve_recipe_row(
         self,
         application_id: str,
-    ) -> tuple[str, ...]:
+    ) -> dict[str, Any]:
         target = normalize_id(
             application_id
         )
 
-        matched = None
+        if not target:
+            raise SliverPoolError(
+                "application recipe identity is required"
+            )
 
         for row in (
             self._recipe_rows()
         ):
-            if normalize_id(
-                row.get(
-                    "id"
-                )
-            ) == target:
-                matched = row
-                break
+            if target in recipe_identities(
+                row
+            ):
+                return row
 
-        if matched is None:
-            raise SliverPoolError(
-                "unknown application recipe: "
-                f"{target}"
-            )
+        raise SliverPoolError(
+            "unknown application recipe: "
+            f"{target}"
+        )
+
+    def application_slivers(
+        self,
+        application_id: str,
+    ) -> tuple[str, ...]:
+        matched = self.resolve_recipe_row(
+            application_id
+        )
 
         slab_ids: set[str] = set()
 
@@ -492,15 +524,11 @@ class SliverPool:
                 in self._slivers
             ],
             "compatibility": {
-                "historical_slab_ids": (
-                    True
-                ),
-                "historical_recipes": (
-                    True
-                ),
-                "destructive_migration": (
-                    False
-                ),
+                "historical_slab_ids": True,
+                "historical_recipes": True,
+                "canonical_recipe_ids": True,
+                "short_recipe_ids": True,
+                "destructive_migration": False,
             },
             "authority_effect": "none",
             "authoritative": False,
@@ -520,12 +548,90 @@ def build_pool() -> SliverPool:
     return SliverPool()
 
 
-def main() -> int:
+def selftest() -> dict[str, Any]:
     pool = build_pool()
 
+    rows = pool._recipe_rows()
+
+    if not rows:
+        raise SliverPoolError(
+            "recipe registry is empty"
+        )
+
+    checked = 0
+
+    for row in rows:
+        identities = recipe_identities(
+            row
+        )
+
+        if not identities:
+            raise SliverPoolError(
+                "recipe lacks identity"
+            )
+
+        expected = (
+            pool.application_slivers(
+                identities[0]
+            )
+        )
+
+        for identity in identities:
+            actual = (
+                pool.application_slivers(
+                    identity
+                )
+            )
+
+            if actual != expected:
+                raise SliverPoolError(
+                    "recipe aliases resolve differently: "
+                    f"{identities}"
+                )
+
+            checked += 1
+
+    short = (
+        pool.application_slivers(
+            "chronology-explorer"
+        )
+    )
+
+    if not short:
+        raise SliverPoolError(
+            "chronology-explorer resolved "
+            "to no Slivers"
+        )
+
+    if len(short) > 9:
+        raise SliverPoolError(
+            "chronology-explorer exceeds "
+            "the nine-Sliver Alloy limit"
+        )
+
+    return {
+        "ok": True,
+        "schema": POOL_SCHEMA,
+        "owner": (
+            "prodigal:modus:coalesce"
+        ),
+        "historical_slab_count": len(
+            pool.historical_slabs
+        ),
+        "sliver_count": len(
+            pool.slivers
+        ),
+        "recipe_identity_checks": checked,
+        "short_recipe_identity": True,
+        "canonical_recipe_identity": True,
+        "authority_effect": "none",
+    }
+
+
+def main() -> int:
     print(
         json.dumps(
-            pool.projection(),
+            selftest(),
             indent=2,
             sort_keys=True,
         )

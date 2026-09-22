@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="/root/savant-runtime"
+PALAVER="$ROOT/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver"
+
+ULTRA="$PALAVER/commands/palaver_ultra"
+ENTERPRISE="$PALAVER/commands/palaver_enterprise"
+
+printf '%s\n' '=== palaver cutover probe ==='
+
+printf '\n%s\n' '=== canonical launchers ==='
+
+for path in "$ULTRA" "$ENTERPRISE"; do
+    if [ -f "$path" ]; then
+        printf '\n--- %s ---\n' "$path"
+        cat "$path"
+    else
+        printf '\nmissing: %s\n' "$path"
+    fi
+done
+
+printf '\n%s\n' '=== systemd units ==='
+
+for path in \
+    /etc/systemd/system/*palaver*.service \
+    /lib/systemd/system/*palaver*.service
+do
+    if [ -f "$path" ]; then
+        printf '\n--- %s ---\n' "$path"
+        cat "$path"
+    fi
+done
+
+printf '\n%s\n' '=== enabled/running services ==='
+
+systemctl list-unit-files \
+    --type=service \
+    --no-pager \
+    2>/dev/null \
+    | grep -i palaver \
+    || true
+
+systemctl list-units \
+    --type=service \
+    --all \
+    --no-pager \
+    2>/dev/null \
+    | grep -i palaver \
+    || true
+
+printf '\n%s\n' '=== nginx palaver references ==='
+
+grep -RInE \
+    'palaver|8787|webui-nextgen' \
+    /etc/nginx \
+    2>/dev/null \
+    || true
+
+printf '\n%s\n' '=== frontend build artifacts ==='
+
+for path in \
+    "$PALAVER/apps/webui-nextgen/dist/index.html" \
+    "$PALAVER/apps/webui-nextgen/package.json" \
+    "$PALAVER/apps/webui-nextgen/vite.config.ts" \
+    "$PALAVER/apps/webui-nextgen/vite.config.js"
+do
+    if [ -f "$path" ]; then
+        printf '%s\n' "$path"
+    fi
+done
+
+printf '\n%s\n' '=== result ==='
+printf '%s\n' 'palaver cutover probe complete'

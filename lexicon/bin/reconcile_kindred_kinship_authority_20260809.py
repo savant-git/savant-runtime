@@ -29,7 +29,7 @@ REGISTRY_SCHEMA_PATH = (
 )
 
 KINDRED_ID = "lex:core:kindred"
-KINSHIP_ID = "lex:service:kinship"
+KINDRED_ID = "lex:service:kindred"
 
 
 def stamp() -> str:
@@ -275,9 +275,9 @@ def reconcile_registry(
         )
     )
 
-    kinship_identifiers = {
-        "lex:history:kinship",
-        KINSHIP_ID,
+    kindred_identifiers = {
+        "lex:history:kindred",
+        KINDRED_ID,
     }
 
     kindred_lineage[
@@ -289,7 +289,7 @@ def reconcile_registry(
             "supersedes"
         ]
         if str(value)
-        not in kinship_identifiers
+        not in kindred_identifiers
     ]
 
     kindred_lineage[
@@ -312,14 +312,14 @@ def reconcile_registry(
                         "",
                     )
                 )
-                in kinship_identifiers
+                in kindred_identifiers
                 or str(
                     event.get(
                         "historical_term",
                         "",
                     )
                 ).casefold()
-                == "kinship"
+                == "kindred"
             )
         )
     ]
@@ -342,11 +342,11 @@ def reconcile_registry(
                     "",
                 )
             )
-            == "lex:history:kinship"
+            == "lex:history:kindred"
         )
     ]
 
-    kinship_candidates = [
+    kindred_candidates = [
         item
         for item in lexemes
         if isinstance(
@@ -359,32 +359,32 @@ def reconcile_registry(
                 "",
             )
         ).casefold()
-        == "kinship"
+        == "kindred"
     ]
 
     if len(
-        kinship_candidates
+        kindred_candidates
     ) > 1:
         raise RuntimeError(
-            "Multiple Kinship lexemes exist"
+            "Multiple Kindred lexemes exist"
         )
 
-    if kinship_candidates:
-        kinship = (
-            kinship_candidates[0]
+    if kindred_candidates:
+        kindred = (
+            kindred_candidates[0]
         )
 
     else:
-        kinship = {}
+        kindred = {}
 
         lexemes.append(
-            kinship
+            kindred
         )
 
-    kinship.update(
+    kindred.update(
         {
-            "id": KINSHIP_ID,
-            "canonical": "Kinship",
+            "id": KINDRED_ID,
+            "canonical": "Kindred",
             "concept": (
                 "Functional relationship-plane service"
             ),
@@ -410,13 +410,13 @@ def reconcile_registry(
             ],
             "metadata": {
                 "accepted_graph_id": (
-                    "service:kinship"
+                    "service:kindred"
                 ),
                 "system_dependency": (
                     "system:kindred"
                 ),
                 "implementation_ref": (
-                    "runtime/kinship"
+                    "runtime/kindred"
                 ),
                 "implemented_through": (
                     "exile:modus"
@@ -428,7 +428,7 @@ def reconcile_registry(
         }
     )
 
-    kinship[
+    kindred[
         "lineage"
     ] = {
         "supersedes": [],
@@ -436,13 +436,13 @@ def reconcile_registry(
         "history": [],
     }
 
-    kinship[
+    kindred[
         "provenance"
     ] = {
         "sources": [
-            "accepted-graph:service:kinship",
+            "accepted-graph:service:kindred",
             "accepted-graph:system:kindred",
-            "runtime/kinship/",
+            "runtime/kindred/",
         ],
         "authority": "accepted",
         "confidence": "confirmed",
@@ -463,7 +463,7 @@ def reconcile_registry(
             for value
             in reserved
             if str(value).casefold()
-            != "kinship"
+            != "kindred"
         ]
 
 
@@ -473,8 +473,8 @@ def remove_false_change(
     result: list[Any] = []
 
     false_ids = {
-        "lexchange:kinship-kindred",
-        "lexchange:kindred-kinship",
+        "lexchange:kindred-kindred",
+        "lexchange:kindred-kindred",
     }
 
     for change in changes:
@@ -524,7 +524,7 @@ def remove_false_change(
             )
             and any(
                 str(value).casefold()
-                == "kinship"
+                == "kindred"
                 for value
                 in lineage.get(
                     "supersedes",
@@ -595,7 +595,7 @@ def reconcile_terminology(
                 "relationships": [
                     {
                         "type": "consumed_by",
-                        "target": "service:kinship",
+                        "target": "service:kindred",
                     }
                 ],
                 "provenance": {
@@ -609,15 +609,15 @@ def reconcile_terminology(
             },
             {
                 "change_id": (
-                    "lexchange:kinship-distinct"
+                    "lexchange:kindred-distinct"
                 ),
                 "concept_id": (
-                    "concept:service:kinship"
+                    "concept:service:kindred"
                 ),
                 "status": "accepted",
                 "canonical": {
-                    "term": "kinship",
-                    "display": "Kinship",
+                    "term": "kindred",
+                    "display": "Kindred",
                 },
                 "definition": (
                     "Functional relationship-plane "
@@ -625,7 +625,7 @@ def reconcile_terminology(
                 ),
                 "lineage": {
                     "sequence": [
-                        "kinship"
+                        "kindred"
                     ],
                     "supersedes": [],
                     "superseded_by": None,
@@ -645,10 +645,10 @@ def reconcile_terminology(
                 ],
                 "implementation": {
                     "service": (
-                        "service:kinship"
+                        "service:kindred"
                     ),
                     "runtime": (
-                        "runtime/kinship"
+                        "runtime/kindred"
                     ),
                 },
                 "compatibility": {
@@ -697,7 +697,7 @@ def reconcile_terminology(
             ):
                 if str(
                     key
-                ).casefold() == "kinship":
+                ).casefold() == "kindred":
                     aliases.pop(
                         key,
                         None,
@@ -721,14 +721,14 @@ def reconcile_terminology(
             "relationship-methodology-system"
         ),
         "distinct_from": [
-            "kinship"
+            "kindred"
         ],
     }
 
     retained[
-        "kinship"
+        "kindred"
     ] = {
-        "canonical": "kinship",
+        "canonical": "kindred",
         "role": (
             "functional-relationship-plane-service"
         ),
@@ -757,12 +757,12 @@ def reconcile_terminology(
     invariants.update(
         {
             "kindred_is_active": True,
-            "kinship_is_active": True,
-            "kindred_is_not_kinship": True,
-            "kinship_is_not_kindred": True,
-            "kinship_depends_on_kindred": True,
-            "kinship_does_not_supersede_kindred": True,
-            "kindred_does_not_supersede_kinship": True,
+            "kindred_is_active": True,
+            "kindred_is_not_kindred": True,
+            "kindred_is_not_kindred": True,
+            "kindred_depends_on_kindred": True,
+            "kindred_does_not_supersede_kindred": True,
+            "kindred_does_not_supersede_kindred": True,
         }
     )
 
@@ -804,10 +804,10 @@ def reconcile_schema(
                 "relationship-methodology-system"
             ),
             "distinct_from": [
-                "Kinship"
+                "Kindred"
             ],
-            "supersedes_kinship": False,
-            "superseded_by_kinship": False,
+            "supersedes_kindred": False,
+            "superseded_by_kindred": False,
         }
     )
 
@@ -816,9 +816,9 @@ def reconcile_schema(
     ] = kindred
 
     special[
-        "kinship"
+        "kindred"
     ] = {
-        "canonical": "Kinship",
+        "canonical": "Kindred",
         "status": "active",
         "role": (
             "functional-relationship-plane-service"
@@ -858,7 +858,7 @@ def reconcile_schema(
             ):
                 if str(
                     key
-                ).casefold() == "kinship":
+                ).casefold() == "kindred":
                     aliases.pop(
                         key,
                         None,
@@ -877,11 +877,11 @@ def reconcile_schema(
     invariants.update(
         {
             "kindred_active": True,
-            "kinship_active": True,
-            "kindred_and_kinship_distinct": True,
-            "kinship_depends_on_kindred": True,
-            "no_kindred_kinship_alias": True,
-            "no_kindred_kinship_supersession": True,
+            "kindred_active": True,
+            "kindred_and_kindred_distinct": True,
+            "kindred_depends_on_kindred": True,
+            "no_kindred_kindred_alias": True,
+            "no_kindred_kindred_supersession": True,
         }
     )
 
@@ -927,7 +927,7 @@ def validate(
         == "active"
     ]
 
-    kinship = [
+    kindred = [
         item
         for item in lexemes
         if isinstance(
@@ -940,7 +940,7 @@ def validate(
                 "",
             )
         ).casefold()
-        == "kinship"
+        == "kindred"
         and item.get(
             "status"
         )
@@ -952,20 +952,20 @@ def validate(
             "Kindred cardinality invalid"
         )
 
-    if len(kinship) != 1:
+    if len(kindred) != 1:
         raise RuntimeError(
-            "Kinship cardinality invalid"
+            "Kindred cardinality invalid"
         )
 
     if (
         kindred[0]["id"]
-        == kinship[0]["id"]
+        == kindred[0]["id"]
     ):
         raise RuntimeError(
-            "Kindred and Kinship share identity"
+            "Kindred and Kindred share identity"
         )
 
-    dependencies = kinship[0].get(
+    dependencies = kindred[0].get(
         "dependencies",
         [],
     )
@@ -975,7 +975,7 @@ def validate(
         not in dependencies
     ):
         raise RuntimeError(
-            "Kinship lacks Kindred dependency"
+            "Kindred lacks Kindred dependency"
         )
 
     kindred_lineage = ensure_lineage(
@@ -985,8 +985,8 @@ def validate(
     if any(
         str(value)
         in {
-            KINSHIP_ID,
-            "lex:history:kinship",
+            KINDRED_ID,
+            "lex:history:kindred",
         }
         for value
         in kindred_lineage[
@@ -994,7 +994,7 @@ def validate(
         ]
     ):
         raise RuntimeError(
-            "False Kindred/Kinship "
+            "False Kindred/Kindred "
             "supersession remains"
         )
 
@@ -1015,11 +1015,11 @@ def validate(
     ):
         if any(
             str(key).casefold()
-            == "kinship"
+            == "kindred"
             for key in aliases
         ):
             raise RuntimeError(
-                "False Kinship alias remains "
+                "False Kindred alias remains "
                 "in terminology ledger"
             )
 
@@ -1040,11 +1040,11 @@ def validate(
     ):
         if any(
             str(key).casefold()
-            == "kinship"
+            == "kindred"
             for key in schema_aliases
         ):
             raise RuntimeError(
-                "False Kinship alias remains "
+                "False Kindred alias remains "
                 "in registry schema"
             )
 
@@ -1053,7 +1053,7 @@ def main() -> int:
     backup_root = (
         LEXICON_ROOT
         / "backups"
-        / "kindred-kinship-separation"
+        / "kindred-kindred-separation"
         / stamp()
     )
 
@@ -1113,7 +1113,7 @@ def main() -> int:
     )
 
     print(
-        "KINDRED/KINSHIP AUTHORITY "
+        "KINDRED/KINDRED AUTHORITY "
         "RECONCILIATION: complete"
     )
 
@@ -1123,12 +1123,12 @@ def main() -> int:
     )
 
     print(
-        "Kinship = active functional "
+        "Kindred = active functional "
         "relationship-plane service"
     )
 
     print(
-        "Kinship -> depends_on -> Kindred"
+        "Kindred -> depends_on -> Kindred"
     )
 
     print(

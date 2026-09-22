@@ -1,15 +1,16 @@
 from __future__ import annotations
 
 import importlib
-import json
-from pathlib import Path
 from typing import Any, Dict, Iterable
 
-from environment import load_environment
-from model_projection import (
+from .environment import load_environment
+from .model_projection import (
     model_supports_layers,
     provider_model,
 )
+from .normalization import normalized_strings as _normalized
+from .json_io import read_json
+from pathlib import Path
 
 
 OPUS_ROOT = Path(
@@ -33,16 +34,6 @@ POLICIES = (
     / "registry"
     / "policies"
 )
-
-
-def read_json(
-    path: Path,
-) -> Dict[str, Any]:
-    return json.loads(
-        path.read_text(
-            encoding="utf-8"
-        )
-    )
 
 
 def route(
@@ -78,19 +69,6 @@ def load_provider_module(
     return importlib.import_module(
         f"providers.{provider_id}"
     )
-
-
-def _normalized(
-    values: Iterable[Any] | None,
-) -> set[str]:
-    if values is None:
-        return set()
-
-    return {
-        str(value).strip().lower()
-        for value in values
-        if str(value).strip()
-    }
 
 
 def _provider_supports_capabilities(
@@ -354,83 +332,10 @@ def execute_voice_request(
 def execute_text_request(
     request: Dict[str, Any],
 ) -> Dict[str, Any]:
-    required_capabilities = (
-        request.get(
-            "required_capabilities"
-        )
+    from .resilient_text import (
+        execute_text_request_resilient,
     )
 
-    required_layers = request.get(
-        "required_layers"
+    return execute_text_request_resilient(
+        request
     )
-
-    (
-        route_data,
-        provider_data,
-        policy_data,
-    ) = orchestration_context(
-        "text_inference_route",
-        required_capabilities=(
-            required_capabilities
-        ),
-        required_layers=(
-            required_layers
-        ),
-    )
-
-    module = load_provider_module(
-        provider_data["id"]
-    )
-
-    infer = getattr(
-        module,
-        "infer",
-        None,
-    )
-
-    if not callable(
-        infer
-    ):
-        raise RuntimeError(
-            "Selected text provider has no "
-            f"infer(): {provider_data['id']}"
-        )
-
-    result = infer(
-        request,
-        provider_data,
-    )
-
-    result["lineage"] = {
-        "owner": "opus",
-        "route": "text_inference_route",
-        "provider": provider_data[
-            "id"
-        ],
-        "model": provider_data.get(
-            "selected_model"
-        ),
-        "policy": policy_data.get(
-            "id"
-        ),
-        "fallback_order": route_data.get(
-            "fallback_order",
-            [],
-        ),
-        "required_capabilities": sorted(
-            _normalized(
-                required_capabilities
-            )
-        ),
-        "required_layers": sorted(
-            _normalized(
-                required_layers
-            )
-        ),
-        "request_owner": request.get(
-            "owner",
-            "palaver",
-        ),
-    }
-
-    return result

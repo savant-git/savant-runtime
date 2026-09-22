@@ -5,15 +5,12 @@ import os
 import urllib.request
 from pathlib import Path
 from typing import Any, Dict, Optional
+from .json_io import read_json
 
 
 OPUS_ROOT = Path(__file__).resolve().parents[1]
 ROUTES = OPUS_ROOT / "registry" / "routes"
 PROVIDERS = OPUS_ROOT / "registry" / "providers"
-
-
-def read_json(path: Path) -> Dict[str, Any]:
-    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def env_present(key: Optional[str]) -> bool:

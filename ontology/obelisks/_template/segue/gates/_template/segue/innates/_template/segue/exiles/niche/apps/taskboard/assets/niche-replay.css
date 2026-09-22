@@ -1,0 +1,195 @@
+/*
+ * savant / niche
+ * temporal ghost
+ * authority_effect: none
+ */
+
+.niche-replay {
+    margin-bottom: 16px;
+
+    border:
+        1px solid
+        var(
+            --line,
+            rgba(255,255,255,.1)
+        );
+
+    background:
+        rgba(255,255,255,.015);
+}
+
+.niche-replay[hidden] {
+    display: none !important;
+}
+
+.niche-replay-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    padding: 12px 14px;
+
+    border-bottom:
+        1px solid
+        var(
+            --line,
+            rgba(255,255,255,.08)
+        );
+}
+
+.niche-replay-head h2 {
+    margin: 2px 0 0;
+}
+
+.niche-replay-event {
+    min-width: 0;
+
+    padding: 16px;
+}
+
+.niche-replay-event h3 {
+    margin: 0 0 14px;
+
+    overflow-wrap: anywhere;
+}
+
+.niche-replay-event dl {
+    display: grid;
+
+    grid-template-columns:
+        max-content
+        minmax(0,1fr);
+
+    gap: 5px 12px;
+
+    margin: 0 0 14px;
+}
+
+.niche-replay-event dt {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+
+    opacity: .44;
+}
+
+.niche-replay-event dd {
+    min-width: 0;
+    margin: 0;
+
+    overflow-wrap: anywhere;
+}
+
+.niche-replay-event pre {
+    max-height: 34dvh;
+
+    margin: 0;
+
+    padding: 12px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.06);
+
+    background:
+        rgba(0,0,0,.18);
+
+    overflow: auto;
+    overscroll-behavior: contain;
+
+    font-size: 10px;
+    line-height: 1.5;
+
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.niche-replay-controls {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0,1fr)
+        )
+        auto
+        repeat(
+            2,
+            minmax(0,1fr)
+        );
+
+    align-items: center;
+    gap: 6px;
+
+    padding: 10px 14px;
+
+    border-top:
+        1px solid
+        var(
+            --line,
+            rgba(255,255,255,.08)
+        );
+}
+
+.niche-replay-controls button {
+    min-height: 38px;
+
+    border:
+        1px solid
+        var(
+            --line,
+            rgba(255,255,255,.1)
+        );
+
+    background: transparent;
+    color: inherit;
+
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: .06em;
+
+    cursor: pointer;
+}
+
+#niche-replay-position {
+    padding: 0 8px;
+
+    font-size: 9px;
+
+    text-align: center;
+
+    opacity: .52;
+}
+
+@media (max-width: 700px) {
+    .niche-replay-controls {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0,1fr)
+            );
+    }
+
+    #niche-replay-position {
+        grid-column:
+            1 / -1;
+
+        grid-row: 1;
+
+        padding: 5px;
+    }
+
+    .niche-replay-event pre {
+        max-height: 28dvh;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .niche-replay,
+    .niche-replay * {
+        scroll-behavior: auto !important;
+        transition: none !important;
+    }
+}

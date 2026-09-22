@@ -1,0 +1,167 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+
+from pathlib import Path
+
+
+root = Path(
+    "/root/savant-runtime"
+)
+
+if str(
+    root
+) not in sys.path:
+    sys.path.insert(
+        0,
+        str(
+            root
+        ),
+    )
+
+
+from runtime.living_guard import (  # noqa: E402
+    evaluate_change,
+    status,
+)
+
+from runtime.living_governance import (  # noqa: E402
+    stream_records,
+)
+
+
+def existing_ids(
+    stream: str | None,
+) -> set[str] | None:
+    if stream is None:
+        return None
+
+    return {
+        str(
+            record.get(
+                "id",
+                "",
+            )
+        )
+        for record
+        in stream_records(
+            stream
+        )
+    }
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="living-guard",
+        description=(
+            "deterministic machine-enforceable "
+            "living governance guard"
+        ),
+    )
+
+    subparsers = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    subparsers.add_parser(
+        "status"
+    )
+
+    check_parser = subparsers.add_parser(
+        "check"
+    )
+
+    check_parser.add_argument(
+        "--path"
+    )
+
+    check_parser.add_argument(
+        "--id"
+    )
+
+    check_parser.add_argument(
+        "--stream"
+    )
+
+    check_parser.add_argument(
+        "--text"
+    )
+
+    check_parser.add_argument(
+        "--allow-existing",
+        action="store_true",
+    )
+
+    return parser
+
+
+def main() -> int:
+    parser = build_parser()
+
+    args = parser.parse_args()
+
+    if args.command == "status":
+        output = status()
+
+        code = 0
+
+    elif args.command == "check":
+        if (
+            args.path is None
+            and args.id is None
+            and args.text is None
+        ):
+            parser.error(
+                (
+                    "check requires --path, "
+                    "--id, or --text"
+                )
+            )
+
+        output = evaluate_change(
+            path=args.path,
+            identifier=args.id,
+            text=args.text,
+            stream=args.stream,
+            existing_ids=existing_ids(
+                args.stream
+            ),
+            allow_existing=args.allow_existing,
+        )
+
+        code = (
+            0
+            if output[
+                "allowed"
+            ]
+            else 1
+        )
+
+    else:
+        parser.error(
+            "unknown command"
+        )
+
+        return 2
+
+    print(
+        json.dumps(
+            output,
+            indent=2,
+            ensure_ascii=False,
+            sort_keys=True,
+        )
+    )
+
+    return code
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

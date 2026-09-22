@@ -1,0 +1,452 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import argparse
+import importlib.util
+import json
+import sys
+from pathlib import Path
+from types import ModuleType
+from typing import Any
+
+
+ROOT = Path(
+    "/root/savant-runtime"
+).resolve()
+
+RUNTIME = (
+    ROOT
+    / "ontology"
+    / "obelisks"
+    / "_template"
+    / "segue"
+    / "gates"
+    / "_template"
+    / "segue"
+    / "innates"
+    / "_template"
+    / "segue"
+    / "exiles"
+    / "palaver"
+    / "runtime"
+)
+
+ENGINE_PATH = (
+    RUNTIME
+    / "grounded_development.py"
+)
+
+
+def load_engine() -> ModuleType:
+    if not ENGINE_PATH.is_file():
+        raise RuntimeError(
+            "grounded development "
+            "engine missing: "
+            + str(
+                ENGINE_PATH
+            )
+        )
+
+    spec = (
+        importlib.util.spec_from_file_location(
+            "savant_palaver_grounded_development",
+            ENGINE_PATH,
+        )
+    )
+
+    if (
+        spec is None
+        or spec.loader is None
+    ):
+        raise RuntimeError(
+            "unable to load grounded "
+            "development engine"
+        )
+
+    module = (
+        importlib.util.module_from_spec(
+            spec
+        )
+    )
+
+    sys.modules[
+        spec.name
+    ] = module
+
+    spec.loader.exec_module(
+        module
+    )
+
+    return module
+
+
+ENGINE = load_engine()
+
+
+def print_json(
+    value: Any,
+) -> None:
+    print(
+        json.dumps(
+            value,
+            ensure_ascii=False,
+            sort_keys=True,
+            indent=2,
+            default=str,
+        )
+    )
+
+
+def load_json(
+    value: str,
+) -> dict[str, Any]:
+    candidate = Path(
+        value
+    )
+
+    if candidate.is_file():
+        payload = json.loads(
+            candidate.read_text(
+                encoding="utf-8"
+            )
+        )
+    else:
+        payload = json.loads(
+            value
+        )
+
+    if not isinstance(
+        payload,
+        dict,
+    ):
+        raise RuntimeError(
+            "JSON input must "
+            "be an object"
+        )
+
+    return payload
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Palaver grounded self-hosted "
+            "Savant development"
+        )
+    )
+
+    commands = (
+        parser.add_subparsers(
+            dest="command",
+            required=True,
+        )
+    )
+
+    commands.add_parser(
+        "status"
+    )
+
+    commands.add_parser(
+        "selftest"
+    )
+
+    context = commands.add_parser(
+        "context"
+    )
+
+    context.add_argument(
+        "instruction"
+    )
+
+    ask = commands.add_parser(
+        "ask"
+    )
+
+    ask.add_argument(
+        "instruction"
+    )
+
+    ask.add_argument(
+        "--persona",
+        default="orobouros",
+    )
+
+    ask.add_argument(
+        "--cap",
+        type=int,
+    )
+
+    plan = commands.add_parser(
+        "plan"
+    )
+
+    plan.add_argument(
+        "instruction"
+    )
+
+    plan.add_argument(
+        "--persona",
+        default="orobouros",
+    )
+
+    plan.add_argument(
+        "--cap",
+        type=int,
+    )
+
+    develop = commands.add_parser(
+        "develop"
+    )
+
+    develop.add_argument(
+        "instruction"
+    )
+
+    develop.add_argument(
+        "--persona",
+        default="orobouros",
+    )
+
+    develop.add_argument(
+        "--cap",
+        type=int,
+    )
+
+    develop.add_argument(
+        "--commit",
+        action="store_true",
+    )
+
+    replace = commands.add_parser(
+        "replace"
+    )
+
+    replace.add_argument(
+        "path"
+    )
+
+    replace.add_argument(
+        "content"
+    )
+
+    replace.add_argument(
+        "--expected-digest"
+    )
+
+    replace.add_argument(
+        "--intent",
+        default=(
+            "palaver authorized "
+            "file replacement"
+        ),
+    )
+
+    trait = commands.add_parser(
+        "trait-decision"
+    )
+
+    trait.add_argument(
+        "decision"
+    )
+
+    trait.add_argument(
+        "--expected-store-digest"
+    )
+
+    return parser
+
+
+def main() -> int:
+    args = (
+        build_parser().parse_args()
+    )
+
+    if args.command == "status":
+        print_json(
+            ENGINE.status()
+        )
+        return 0
+
+    if args.command == "selftest":
+        print_json(
+            ENGINE.selftest()
+        )
+        return 0
+
+    if args.command == "context":
+        context = (
+            ENGINE.assemble_context(
+                args.instruction
+            )
+        )
+
+        print_json(
+            {
+                "schema": (
+                    context[
+                        "schema"
+                    ]
+                ),
+                "digest": (
+                    context[
+                        "digest"
+                    ]
+                ),
+                "selected_file_count": (
+                    context[
+                        "selected_file_count"
+                    ]
+                ),
+                "selected_paths": [
+                    item[
+                        "path"
+                    ]
+                    for item in context[
+                        "selected_files"
+                    ]
+                ],
+                "read_only": True,
+                "authority_effect": "none",
+            }
+        )
+
+        return 0
+
+    if args.command == "ask":
+        result = ENGINE.infer(
+            instruction=(
+                args.instruction
+            ),
+            persona_id=(
+                args.persona
+            ),
+            cap=args.cap,
+        )
+
+        text = (
+            ENGINE.extract_result_text(
+                result
+            )
+        )
+
+        if text:
+            print(
+                text
+            )
+        else:
+            print_json(
+                result
+            )
+
+        return 0
+
+    if args.command == "plan":
+        print_json(
+            ENGINE.plan_development(
+                instruction=(
+                    args.instruction
+                ),
+                persona_id=(
+                    args.persona
+                ),
+                cap=args.cap,
+            )
+        )
+
+        return 0
+
+    if args.command == "develop":
+        print_json(
+            ENGINE.develop(
+                instruction=(
+                    args.instruction
+                ),
+                persona_id=(
+                    args.persona
+                ),
+                cap=args.cap,
+                commit=args.commit,
+            )
+        )
+
+        return 0
+
+    if args.command == "replace":
+        content_argument = (
+            args.content
+        )
+
+        candidate = Path(
+            content_argument
+        )
+
+        if candidate.is_file():
+            content = (
+                candidate.read_text(
+                    encoding="utf-8"
+                )
+            )
+        else:
+            content = (
+                content_argument
+            )
+
+        print_json(
+            ENGINE.replace_file(
+                path=args.path,
+                content=content,
+                expected_digest=(
+                    args.expected_digest
+                ),
+                intent=args.intent,
+            )
+        )
+
+        return 0
+
+    if (
+        args.command
+        == "trait-decision"
+    ):
+        print_json(
+            ENGINE.persist_trait_decision(
+                load_json(
+                    args.decision
+                ),
+                expected_store_digest=(
+                    args.expected_store_digest
+                ),
+            )
+        )
+
+        return 0
+
+    raise RuntimeError(
+        "unsupported command"
+    )
+
+
+if __name__ == "__main__":
+    try:
+        raise SystemExit(
+            main()
+        )
+    except Exception as exc:
+        print(
+            (
+                "ERROR: "
+                + type(
+                    exc
+                ).__name__
+                + ": "
+                + str(
+                    exc
+                )
+            ),
+            file=sys.stderr,
+        )
+
+        raise SystemExit(
+            1
+        )

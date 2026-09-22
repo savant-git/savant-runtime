@@ -4,6 +4,7 @@ import json
 import os
 from pathlib import Path
 from typing import Any, Dict, Iterable
+from .normalization import normalized_strings as _normalized
 
 
 OPUS_ROOT = Path(
@@ -24,19 +25,6 @@ def _registry() -> Dict[str, Any]:
             encoding="utf-8"
         )
     )
-
-
-def _normalized(
-    values: Iterable[Any] | None,
-) -> set[str]:
-    if values is None:
-        return set()
-
-    return {
-        str(value).strip().lower()
-        for value in values
-        if str(value).strip()
-    }
 
 
 def models() -> Dict[str, Any]:

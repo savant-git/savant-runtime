@@ -46,7 +46,7 @@ BACKUP_ROOT = (
 
 IDENTITY_ROOT = (
     ROOT
-    / "hierarchies"
+    / "edifices"
     / "identity"
 )
 

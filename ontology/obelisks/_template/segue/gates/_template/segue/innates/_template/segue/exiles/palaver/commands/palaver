@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+server="/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/commands/palaver_server"
+
+runtime="/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/runtime/plan_b_resilient.py"
+
+if [[ "$#" -eq 0 ]]; then
+    exec "${server}"
+fi
+
+exec python3 \
+    "${runtime}" \
+    "$@"

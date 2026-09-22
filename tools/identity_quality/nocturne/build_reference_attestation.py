@@ -16,7 +16,7 @@ ROOT = Path("/root/savant-runtime")
 
 NOCTURNE_ROOT = (
     ROOT
-    / "hierarchies"
+    / "edifices"
     / "identity"
     / "exiles"
     / "opus"

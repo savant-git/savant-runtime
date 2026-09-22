@@ -1,0 +1,487 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import json
+import multiprocessing
+import sys
+import tempfile
+from pathlib import Path
+
+
+root = Path(
+    "/root/savant-runtime"
+)
+
+if str(root) not in sys.path:
+    sys.path.insert(
+        0,
+        str(root),
+    )
+
+
+from runtime.straub import (
+    ContentionSafeIsotope,
+    StraubDatrix,
+    StraubQuery,
+)
+
+
+def _refresh_worker(
+    isotope_path: str,
+    capsule: dict,
+    queue: multiprocessing.Queue,
+) -> None:
+    try:
+        refresh = (
+            ContentionSafeIsotope(
+                isotope_path
+            ).refresh(
+                capsule
+            )
+        )
+
+        queue.put(
+            {
+                "ok":
+                    True,
+                "digest":
+                    refresh[
+                        "projection"
+                    ][
+                        "digest"
+                    ],
+                "action":
+                    refresh[
+                        "action"
+                    ],
+            }
+        )
+    except Exception as exc:
+        queue.put(
+            {
+                "ok":
+                    False,
+                "error":
+                    repr(
+                        exc
+                    ),
+            }
+        )
+
+
+def main() -> int:
+    with tempfile.TemporaryDirectory(
+        prefix="straub-enterprise-test-"
+    ) as directory:
+        capsule_path = (
+            Path(
+                directory
+            )
+            / "straub.datrix"
+        )
+
+        datrix = StraubDatrix.open(
+            capsule_path
+        )
+
+        subject = (
+            datrix.registry.substantiate(
+                {
+                    "id":
+                        "instance:straub:"
+                        "enterprise-self-test:"
+                        "subject",
+                    "kind":
+                        "instance",
+                    "payload": {
+                        "label":
+                            "enterprise subject",
+                    },
+                    "provenance": {
+                        "source":
+                            "straub:"
+                            "enterprise-self-test",
+                        "confidence":
+                            "confirmed",
+                    },
+                }
+            )
+        )
+
+        future_definition = (
+            datrix.registry.define_metadata(
+                instance_id=(
+                    "instance:straub:"
+                    "enterprise-self-test:"
+                    "definition:future-label"
+                ),
+                label="future-label",
+                value_type="string",
+                applies_to=[
+                    "instance",
+                ],
+                provenance={
+                    "source":
+                        "straub:"
+                        "enterprise-self-test",
+                    "confidence":
+                        "confirmed",
+                },
+            )
+        )
+
+        future_value = (
+            datrix.registry.instantiate_metadata(
+                instance_id=(
+                    "instance:straub:"
+                    "enterprise-self-test:"
+                    "value:future-label"
+                ),
+                definition_id=(
+                    future_definition[
+                        "id"
+                    ]
+                ),
+                value="future metadata",
+                validity={
+                    "valid_from":
+                        "2030-01-01T00:00:00+00:00",
+                    "valid_until":
+                        None,
+                },
+                provenance={
+                    "source":
+                        "straub:"
+                        "enterprise-self-test",
+                    "confidence":
+                        "confirmed",
+                },
+            )
+        )
+
+        datrix.registry.attach_metadata(
+            membrane_id=(
+                "membrane:straub:"
+                "enterprise-self-test:"
+                "future-label"
+            ),
+            subject_id=(
+                subject[
+                    "id"
+                ]
+            ),
+            umbra_id=(
+                future_value[
+                    "id"
+                ]
+            ),
+            relation="described_by",
+            validity={
+                "valid_from":
+                    "2030-01-01T00:00:00+00:00",
+                "valid_until":
+                    None,
+            },
+            provenance={
+                "source":
+                    "straub:"
+                    "enterprise-self-test",
+                "confidence":
+                    "confirmed",
+            },
+        )
+
+        checkpoint = datrix.checkpoint()
+
+        capsule = datrix.capsule()
+
+        query_a = StraubQuery(
+            capsule
+        ).search(
+            {
+                "kinds": [
+                    "instance",
+                ],
+            }
+        )
+
+        query_b = StraubQuery(
+            capsule
+        ).search(
+            {
+                "kinds": [
+                    "instance",
+                ],
+            }
+        )
+
+        metadata_unbounded_a = (
+            StraubQuery(
+                capsule
+            ).effective_metadata(
+                subject[
+                    "id"
+                ]
+            )
+        )
+
+        metadata_unbounded_b = (
+            StraubQuery(
+                capsule
+            ).effective_metadata(
+                subject[
+                    "id"
+                ]
+            )
+        )
+
+        metadata_before = (
+            StraubQuery(
+                capsule
+            ).effective_metadata(
+                subject[
+                    "id"
+                ],
+                at=(
+                    "2029-01-01"
+                    "T00:00:00+00:00"
+                ),
+            )
+        )
+
+        metadata_after = (
+            StraubQuery(
+                capsule
+            ).effective_metadata(
+                subject[
+                    "id"
+                ],
+                at=(
+                    "2031-01-01"
+                    "T00:00:00+00:00"
+                ),
+            )
+        )
+
+        isotope_path = str(
+            capsule_path.with_name(
+                capsule_path.name
+                + ".isotope"
+            )
+        )
+
+        context = (
+            multiprocessing.get_context(
+                "fork"
+            )
+        )
+
+        queue = context.Queue()
+
+        workers = [
+            context.Process(
+                target=_refresh_worker,
+                args=(
+                    isotope_path,
+                    capsule,
+                    queue,
+                ),
+            )
+            for _ in range(
+                6
+            )
+        ]
+
+        for worker in workers:
+            worker.start()
+
+        for worker in workers:
+            worker.join()
+
+        worker_results = [
+            queue.get()
+            for _ in workers
+        ]
+
+        worker_digests = sorted(
+            {
+                result.get(
+                    "digest"
+                )
+                for result in worker_results
+                if result.get(
+                    "ok"
+                )
+            }
+        )
+
+        worker_failures = [
+            result
+            for result in worker_results
+            if not result.get(
+                "ok"
+            )
+        ]
+
+        status = (
+            ContentionSafeIsotope(
+                isotope_path
+            ).status(
+                capsule_digest=(
+                    capsule[
+                        "digest"
+                    ]
+                )
+            )
+        )
+
+        health = datrix.health()
+
+        passed = bool(
+            query_a[
+                "at"
+            ]
+            is None
+            and query_b[
+                "at"
+            ]
+            is None
+            and query_a[
+                "digest"
+            ]
+            == query_b[
+                "digest"
+            ]
+            and metadata_unbounded_a[
+                "at"
+            ]
+            is None
+            and metadata_unbounded_b[
+                "at"
+            ]
+            is None
+            and metadata_unbounded_a[
+                "digest"
+            ]
+            == metadata_unbounded_b[
+                "digest"
+            ]
+            and metadata_unbounded_a[
+                "count"
+            ]
+            == 1
+            and metadata_before[
+                "count"
+            ]
+            == 0
+            and metadata_after[
+                "count"
+            ]
+            == 1
+            and len(
+                worker_failures
+            )
+            == 0
+            and len(
+                worker_digests
+            )
+            == 1
+            and worker_digests[
+                0
+            ]
+            == checkpoint[
+                "materialized_projection_digest"
+            ]
+            and status[
+                "fresh"
+            ]
+            is True
+            and status[
+                "rebuild_required"
+            ]
+            is False
+            and health[
+                "query_default_time"
+            ]
+            is None
+            and health[
+                "implicit_wall_clock"
+            ]
+            is False
+        )
+
+        output = {
+            "schema":
+                "savant.straub."
+                "enterprise-self-test.v1",
+            "passed":
+                passed,
+            "capsule_digest":
+                capsule[
+                    "digest"
+                ],
+            "deterministic_query_digest":
+                query_a[
+                    "digest"
+                ],
+            "deterministic_metadata_digest":
+                metadata_unbounded_a[
+                    "digest"
+                ],
+            "implicit_query_time":
+                query_a[
+                    "at"
+                ],
+            "implicit_metadata_time":
+                metadata_unbounded_a[
+                    "at"
+                ],
+            "unbounded_metadata_count":
+                metadata_unbounded_a[
+                    "count"
+                ],
+            "metadata_count_2029":
+                metadata_before[
+                    "count"
+                ],
+            "metadata_count_2031":
+                metadata_after[
+                    "count"
+                ],
+            "concurrent_worker_count":
+                len(
+                    workers
+                ),
+            "concurrent_failures":
+                worker_failures,
+            "concurrent_projection_digests":
+                worker_digests,
+            "isotope_status":
+                status,
+            "datrix_health":
+                health,
+            "authority_effect":
+                "none",
+        }
+
+        print(
+            json.dumps(
+                output,
+                indent=2,
+                sort_keys=True,
+                ensure_ascii=False,
+            )
+        )
+
+        return (
+            0
+            if passed
+            else 1
+        )
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

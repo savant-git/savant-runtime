@@ -15,7 +15,7 @@ ROOT = Path(
 
 NOCTURNE_ROOT = (
     ROOT
-    / "hierarchies"
+    / "edifices"
     / "identity"
     / "exiles"
     / "opus"
@@ -30,7 +30,7 @@ NOCTURNE_DEFINITION = (
 
 OPUS_DEFINITION_CANDIDATES = (
     ROOT
-    / "hierarchies"
+    / "edifices"
     / "identity"
     / "exiles"
     / "opus"

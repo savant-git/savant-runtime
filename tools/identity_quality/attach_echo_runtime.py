@@ -13,7 +13,7 @@ ROOT = Path("/root/savant-runtime")
 
 ECHO_ROOT = (
     ROOT
-    / "hierarchies"
+    / "edifices"
     / "identity"
     / "exiles"
     / "opus"
@@ -39,7 +39,7 @@ TEST = (
 
 CONTRACTS = (
     ROOT
-    / "hierarchies"
+    / "edifices"
     / "identity"
     / "exiles"
     / "opus"

@@ -4,7 +4,7 @@ import unittest
 
 from runtime.constitution import (ConstitutionalExtensions, ConstitutionalRegistry,
     RuntimeDescriptor, RuntimeMigrationPluginRegistry, RuntimeMigrationValidator, bootstrap, discover_runtime)
-from runtime.kinship import KinshipGraph
+from runtime.kindred import KindredGraph
 from runtime.lineage import LineageGraph
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -29,9 +29,9 @@ class Phase4RuntimeMigrationTests(unittest.TestCase):
                 self.assertEqual(original.to_primitives(), self.registry.get(original.id).to_primitives())
 
     def test_runtime_compatibility_exports_are_unchanged(self):
-        from runtime.kinship import KinshipGraph as after_kinship
+        from runtime.kindred import KindredGraph as after_kindred
         from runtime.lineage import LineageGraph as after_lineage
-        self.assertIs(KinshipGraph, after_kinship); self.assertIs(LineageGraph, after_lineage)
+        self.assertIs(KindredGraph, after_kindred); self.assertIs(LineageGraph, after_lineage)
 
     def test_every_source_and_public_definition_is_registered(self):
         migration = self.bootstrap.runtime_migration

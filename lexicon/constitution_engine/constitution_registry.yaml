@@ -1212,21 +1212,21 @@ rules:
   relationships: []
   attachments: []
   future_slots: []
-- id: constitution:kinship-forbidden
-  canonical: The term kinship is forbidden where kindred is intended.
+- id: constitution:kindred-forbidden
+  canonical: The term kindred is forbidden where kindred is intended.
   status: active
   scope: constitution
   subjects:
-  - constitution:kinship-forbidden
+  - constitution:kindred-forbidden
   severity: error
   conditions: []
   assertions:
   - path: id
     operator: equals
-    value: constitution:kinship-forbidden
+    value: constitution:kindred-forbidden
   - path: canonical
     operator: equals
-    value: The term kinship is forbidden where kindred is intended.
+    value: The term kindred is forbidden where kindred is intended.
   - path: status
     operator: equals
     value: active

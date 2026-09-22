@@ -1,139 +1,191 @@
 registry_id: savant_kindred_registry
-
-version: 1
+version: 2
 
 authority:
   source: constitutional_runtime
-  revision: 1
-  timestamp: "2026-07-26T00:00:00Z"
+  revision: 2
+  timestamp: "2026-09-03T00:00:00Z"
+  constitutional_basis:
+    - FOUNDATION-008
+
+lineage:
+  authority_model: directed_segue
+  authoritative_primitive: lineage_segue
+  inverse_views: projection
+  duplicate_inverse_storage: false
+
+lineage_segues:
+  - id: lineage.kindred.primitive-instance
+    kind: segue
+    type: lineage
+    status: active
+    authority: FOUNDATION-008
+    version: "1.0.0"
+    parent: kindred:primitive
+    child: kindred:instance
+    role: classification
+    axis: kindred
+    continuation: preserving
+    scope: lexicon:kindred
+    order: 0
+    inheritance:
+      mode: reference
+      fields: []
+      exclude: []
+      conflict_policy: child_wins
+    propagation:
+      enabled: true
+      channels:
+        - validation
+        - projection
+    validity:
+      valid_from: "2026-07-26T00:00:00Z"
+      valid_until: null
+    provenance:
+      source: constitutional_runtime
+      evidence:
+        - FOUNDATION-008
+        - kindred_registry.yaml
+    metadata:
+      compatibility:
+        legacy_parent_projection: true
+        legacy_child_projection: true
+    extensions: {}
+    future_extensions: {}
+
+  - id: lineage.kindred.primitive-segue
+    kind: segue
+    type: lineage
+    status: active
+    authority: FOUNDATION-008
+    version: "1.0.0"
+    parent: kindred:primitive
+    child: kindred:segue
+    role: classification
+    axis: kindred
+    continuation: preserving
+    scope: lexicon:kindred
+    order: 0
+    inheritance:
+      mode: reference
+      fields: []
+      exclude: []
+      conflict_policy: child_wins
+    propagation:
+      enabled: true
+      channels:
+        - validation
+        - projection
+    validity:
+      valid_from: "2026-07-26T00:00:00Z"
+      valid_until: null
+    provenance:
+      source: constitutional_runtime
+      evidence:
+        - FOUNDATION-008
+        - kindred_registry.yaml
+    metadata:
+      compatibility:
+        legacy_parent_projection: true
+        legacy_child_projection: true
+    extensions: {}
+    future_extensions: {}
 
 kindreds:
-
   - id: kindred:primitive
-
     canonical: Primitive Kindred
-
     description: >
       Groups authoritative primitives that may be composed,
       referenced, inherited, projected, and instantiated.
-
     status: active
-
     ontology:
       - primitive
-
     members: []
-
-    parents: []
-
-    children:
-      - kindred:instance
-      - kindred:segue
-
     dependencies: []
-
     relationships: []
-
     provenance:
       source: constitutional_runtime
       confidence: confirmed
       evidence:
         - registry.yaml
         - ontology/ontology_registry.yaml
-
+        - FOUNDATION-008
     lineage:
       derived_from:
         - ontology:primitive
-      supersedes: []
-      superseded_by: null
-      history:
-        - revision: 1
-          action: created
-          timestamp: "2026-07-26T00:00:00Z"
+    supersedes: []
+    superseded_by: null
+    history:
+      - revision: 1
+        action: created
+        timestamp: "2026-07-26T00:00:00Z"
+      - revision: 2
+        action: normalized_parent_child_to_lineage_segues
+        timestamp: "2026-09-03T00:00:00Z"
 
   - id: kindred:instance
-
     canonical: Instance Kindred
-
     description: >
       Groups addressable manifestations of authoritative primitives.
-
     status: active
-
     ontology:
       - primitive
       - structure
-
     members: []
-
-    parents:
-      - kindred:primitive
-
-    children: []
-
     dependencies:
       - kindred:primitive
-
     relationships:
       - type: manifests
         target: kindred:primitive
-
     provenance:
       source: constitutional_runtime
       confidence: confirmed
       evidence:
         - instances/instance.schema.yaml
-
+        - FOUNDATION-008
     lineage:
       derived_from:
         - kindred:primitive
-      supersedes: []
-      superseded_by: null
-      history:
-        - revision: 1
-          action: created
-          timestamp: "2026-07-26T00:00:00Z"
+    supersedes: []
+    superseded_by: null
+    history:
+      - revision: 1
+        action: created
+        timestamp: "2026-07-26T00:00:00Z"
+      - revision: 2
+        action: normalized_parent_child_to_lineage_segues
+        timestamp: "2026-09-03T00:00:00Z"
 
   - id: kindred:segue
-
     canonical: Segue Kindred
-
     description: >
       Groups transitions that connect instances without duplicating
       either endpoint.
-
     status: active
-
     ontology:
       - relationship
       - process
-
     members: []
-
-    parents:
-      - kindred:primitive
-
-    children: []
-
     dependencies:
       - kindred:instance
-
     relationships:
       - type: connects
         target: kindred:instance
-
     provenance:
       source: constitutional_runtime
       confidence: confirmed
       evidence:
         - instances/segue.schema.yaml
-
+        - FOUNDATION-008
     lineage:
       derived_from:
         - kindred:primitive
-      supersedes: []
-      superseded_by: null
-      history:
-        - revision: 1
-          action: created
-          timestamp: "2026-07-26T00:00:00Z"
+    supersedes: []
+    superseded_by: null
+    history:
+      - revision: 1
+        action: created
+        timestamp: "2026-07-26T00:00:00Z"
+      - revision: 2
+        action: normalized_parent_child_to_lineage_segues
+        timestamp: "2026-09-03T00:00:00Z"

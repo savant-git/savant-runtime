@@ -9,20 +9,20 @@ from pathlib import Path
 from typing import Any, Iterable, Mapping
 
 try:
-    from .program_hierarchy import (
+    from .program_edifice import (
         PROGRAM_CHILD_LEVEL,
         PROGRAM_LEVEL_INDEX,
         PROGRAM_LEVELS,
-        ProgramHierarchy,
-        ProgramHierarchyError,
+        Programedifice,
+        ProgramedificeError,
     )
 except ImportError:
-    from program_hierarchy import (
+    from program_edifice import (
         PROGRAM_CHILD_LEVEL,
         PROGRAM_LEVEL_INDEX,
         PROGRAM_LEVELS,
-        ProgramHierarchy,
-        ProgramHierarchyError,
+        Programedifice,
+        ProgramedificeError,
     )
 
 
@@ -236,13 +236,13 @@ class ProgramInstance:
             ),
         )
 
-        hierarchy = ProgramHierarchy()
+        edifice = Programedifice()
 
         try:
-            level = hierarchy.normalize(
+            level = edifice.normalize(
                 self.level
             )
-        except ProgramHierarchyError as exc:
+        except ProgramedificeError as exc:
             raise ProgramCompositionError(
                 str(exc)
             ) from exc
@@ -646,8 +646,8 @@ class ProgramCompositionGraph:
     def __init__(
         self,
     ) -> None:
-        self.hierarchy = (
-            ProgramHierarchy()
+        self.edifice = (
+            Programedifice()
         )
 
         self._instances: dict[
@@ -781,14 +781,14 @@ class ProgramCompositionGraph:
             return
 
         expected = (
-            self.hierarchy.child_of(
+            self.edifice.child_of(
                 instance.level
             )
         )
 
         if expected is None:
             raise ProgramCompositionError(
-                "program hierarchy defines "
+                "program edifice defines "
                 "no child level for "
                 + instance.level
             )
@@ -879,8 +879,8 @@ class ProgramCompositionGraph:
     def validate(
         self,
     ) -> dict[str, Any]:
-        hierarchy_validation = (
-            self.hierarchy.validate()
+        edifice_validation = (
+            self.edifice.validate()
         )
 
         for instance in (
@@ -905,10 +905,10 @@ class ProgramCompositionGraph:
 
         checks = {
             "program_levels": (
-                hierarchy_validation[
+                edifice_validation[
                     "valid"
                 ]
-                and hierarchy_validation[
+                and edifice_validation[
                     "level_count"
                 ]
                 == 9
@@ -923,9 +923,9 @@ class ProgramCompositionGraph:
                 PROGRAM_LEVELS[-1]
                 == "application"
             ),
-            "hierarchy_derived": True,
-            "hierarchy_transition_count": (
-                hierarchy_validation[
+            "edifice_derived": True,
+            "edifice_transition_count": (
+                edifice_validation[
                     "transition_count"
                 ]
                 == 8
@@ -976,8 +976,8 @@ class ProgramCompositionGraph:
             "program_levels": list(
                 PROGRAM_LEVELS
             ),
-            "hierarchy_schema": (
-                self.hierarchy.schema
+            "edifice_schema": (
+                self.edifice.schema
             ),
             "instance_count": len(
                 self._instances
@@ -1258,11 +1258,11 @@ class ProgramCompositionGraph:
     ) -> str:
         try:
             normalized_level = (
-                self.hierarchy.normalize(
+                self.edifice.normalize(
                     level
                 )
             )
-        except ProgramHierarchyError as exc:
+        except ProgramedificeError as exc:
             raise ProgramCompositionError(
                 str(exc)
             ) from exc
@@ -1605,8 +1605,8 @@ class ProgramCompositionGraph:
     def profile(
         self,
     ) -> dict[str, Any]:
-        hierarchy_validation = (
-            self.hierarchy.validate()
+        edifice_validation = (
+            self.edifice.validate()
         )
 
         payload = {
@@ -1620,21 +1620,21 @@ class ProgramCompositionGraph:
             "program_levels": list(
                 PROGRAM_LEVELS
             ),
-            "hierarchy_schema": (
-                self.hierarchy.schema
+            "edifice_schema": (
+                self.edifice.schema
             ),
-            "hierarchy_valid": (
-                hierarchy_validation[
+            "edifice_valid": (
+                edifice_validation[
                     "valid"
                 ]
             ),
-            "hierarchy_level_count": (
-                hierarchy_validation[
+            "edifice_level_count": (
+                edifice_validation[
                     "level_count"
                 ]
             ),
-            "hierarchy_transition_count": (
-                hierarchy_validation[
+            "edifice_transition_count": (
+                edifice_validation[
                     "transition_count"
                 ]
             ),

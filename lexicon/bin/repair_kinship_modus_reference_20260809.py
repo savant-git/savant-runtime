@@ -13,7 +13,7 @@ import yaml
 LEXICON_ROOT = Path("/root/savant-runtime/lexicon")
 REGISTRY_PATH = LEXICON_ROOT / "registry.yaml"
 
-KINSHIP_ID = "lex:service:kinship"
+KINDRED_ID = "lex:service:kindred"
 KINDRED_ID = "lex:core:kindred"
 MODUS_LEXEME_ID = "lex:exile:modus"
 
@@ -158,27 +158,27 @@ def ensure_modus_lexeme(
     return modus
 
 
-def repair_kinship(
+def repair_kindred(
     registry: dict[str, Any],
 ) -> None:
     lexemes = registry["lexemes"]
 
-    kinship_matches = [
+    kindred_matches = [
         lexeme
         for lexeme in lexemes
         if isinstance(lexeme, dict)
         and lexeme.get("id")
-        == KINSHIP_ID
+        == KINDRED_ID
     ]
 
-    if len(kinship_matches) != 1:
+    if len(kindred_matches) != 1:
         raise RuntimeError(
-            "Expected exactly one Kinship lexeme"
+            "Expected exactly one Kindred lexeme"
         )
 
-    kinship = kinship_matches[0]
+    kindred = kindred_matches[0]
 
-    relationships = kinship.get(
+    relationships = kindred.get(
         "relationships"
     )
 
@@ -267,11 +267,11 @@ def repair_kinship(
 
             seen.add(key)
 
-    kinship[
+    kindred[
         "relationships"
     ] = repaired
 
-    dependencies = kinship.get(
+    dependencies = kindred.get(
         "dependencies"
     )
 
@@ -308,11 +308,11 @@ def repair_kinship(
                 required_dependency
             )
 
-    kinship[
+    kindred[
         "dependencies"
     ] = normalized_dependencies
 
-    metadata = kinship.get(
+    metadata = kindred.get(
         "metadata"
     )
 
@@ -321,16 +321,16 @@ def repair_kinship(
 
     metadata.update(
         {
-            "external_service_identity": "service:kinship",
+            "external_service_identity": "service:kindred",
             "external_kindred_identity": "system:kindred",
             "external_modus_identity": EXTERNAL_MODUS_ID,
             "lexicon_kindred_identity": KINDRED_ID,
             "lexicon_modus_identity": MODUS_LEXEME_ID,
-            "implementation_ref": "runtime/kinship",
+            "implementation_ref": "runtime/kindred",
         }
     )
 
-    kinship["metadata"] = metadata
+    kindred["metadata"] = metadata
 
 
 def validate(
@@ -359,16 +359,16 @@ def validate(
             "Modus lexeme missing"
         )
 
-    kinship = by_id.get(
-        KINSHIP_ID
+    kindred = by_id.get(
+        KINDRED_ID
     )
 
-    if kinship is None:
+    if kindred is None:
         raise RuntimeError(
-            "Kinship lexeme missing"
+            "Kindred lexeme missing"
         )
 
-    relationships = kinship.get(
+    relationships = kindred.get(
         "relationships",
         [],
     )
@@ -378,7 +378,7 @@ def validate(
         list,
     ):
         raise RuntimeError(
-            "Kinship relationships invalid"
+            "Kindred relationships invalid"
         )
 
     targets = {
@@ -409,7 +409,7 @@ def validate(
         MODUS_LEXEME_ID,
     ) not in targets:
         raise RuntimeError(
-            "Kinship -> Modus relationship missing"
+            "Kindred -> Modus relationship missing"
         )
 
     if (
@@ -417,7 +417,7 @@ def validate(
         KINDRED_ID,
     ) not in targets:
         raise RuntimeError(
-            "Kinship -> Kindred relationship missing"
+            "Kindred -> Kindred relationship missing"
         )
 
     for _, target in targets:
@@ -451,7 +451,7 @@ def main() -> int:
     backup_root = (
         LEXICON_ROOT
         / "backups"
-        / "kinship-modus-reference"
+        / "kindred-modus-reference"
         / timestamp()
     )
 
@@ -470,7 +470,7 @@ def main() -> int:
         registry
     )
 
-    repair_kinship(
+    repair_kindred(
         registry
     )
 
@@ -501,7 +501,7 @@ def main() -> int:
     )
 
     print(
-        "KINSHIP/MODUS LEXICON REFERENCE: complete"
+        "KINDRED/MODUS LEXICON REFERENCE: complete"
     )
 
     print(

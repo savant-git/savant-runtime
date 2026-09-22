@@ -167,7 +167,7 @@ REFERENCE_PATH_PREFIXES = (
     "authority_graph/",
     "canon-system/authority/",
     "ontology/",
-    "hierarchies/",
+    "edifices/",
     "runtime/",
 )
 

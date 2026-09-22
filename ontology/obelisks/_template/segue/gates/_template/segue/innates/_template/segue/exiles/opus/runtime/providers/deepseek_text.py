@@ -8,6 +8,7 @@ import urllib.request
 from typing import Any, Dict
 
 from providers.base import ProviderError
+from .tool_normalization import make_tool_normalizer
 
 
 DEFAULT_API_BASE = "https://api.deepseek.com"
@@ -17,65 +18,7 @@ def available() -> bool:
     return bool(os.getenv("DEEPSEEK_API_KEY"))
 
 
-def _normalize_tools(
-    value: Any,
-) -> list[Dict[str, Any]]:
-    if value is None:
-        return []
-
-    if not isinstance(value, list):
-        raise ProviderError(
-            "text inference tools must be a list"
-        )
-
-    result: list[Dict[str, Any]] = []
-
-    for row in value:
-        if not isinstance(row, dict):
-            raise ProviderError(
-                "text inference tool definition "
-                "must be object"
-            )
-
-        name = str(
-            row.get("name") or ""
-        ).strip()
-
-        if not name:
-            raise ProviderError(
-                "text inference tool requires name"
-            )
-
-        parameters = row.get("parameters")
-
-        if parameters is None:
-            parameters = {
-                "type": "object",
-                "properties": {},
-                "additionalProperties": False,
-            }
-
-        if not isinstance(parameters, dict):
-            raise ProviderError(
-                "text inference tool parameters "
-                "must be object"
-            )
-
-        result.append(
-            {
-                "type": "function",
-                "function": {
-                    "name": name,
-                    "description": str(
-                        row.get("description") or ""
-                    ).strip(),
-                    "parameters": parameters,
-                },
-            }
-        )
-
-    return result
-
+_normalize_tools = make_tool_normalizer(ProviderError)
 
 def _messages(
     *,

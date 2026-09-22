@@ -1,0 +1,22 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: .9rem 1rem;
+  border-bottom: 1px solid var(--color-border-0);
+  text-align: left;
+}
+
+.table th {
+  color: var(--color-text-2);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: .14em;
+}
+
+.table tr:hover td {
+  background: rgba(255, 255, 255, 0.025);
+}

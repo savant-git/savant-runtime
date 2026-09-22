@@ -7,6 +7,7 @@ import urllib.request
 from typing import Any, Dict
 
 from providers.base import ProviderError
+from .response_text import response_text
 
 
 OPENAI_RESPONSES_URL = "https://api.openai.com/v1/responses"
@@ -18,64 +19,6 @@ def available() -> bool:
             "OPENAI_API_KEY"
         )
     )
-
-
-def response_text(
-    data: Dict[str, Any],
-) -> str:
-    direct = data.get(
-        "output_text"
-    )
-
-    if (
-        isinstance(
-            direct,
-            str,
-        )
-        and direct.strip()
-    ):
-        return direct.strip()
-
-    texts: list[str] = []
-
-    for item in data.get(
-        "output",
-        [],
-    ):
-        if not isinstance(
-            item,
-            dict,
-        ):
-            continue
-
-        for content in item.get(
-            "content",
-            [],
-        ):
-            if not isinstance(
-                content,
-                dict,
-            ):
-                continue
-
-            text = content.get(
-                "text"
-            )
-
-            if (
-                isinstance(
-                    text,
-                    str,
-                )
-                and text
-            ):
-                texts.append(
-                    text
-                )
-
-    return "\n".join(
-        texts
-    ).strip()
 
 
 def response_tool_calls(

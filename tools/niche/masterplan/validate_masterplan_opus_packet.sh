@@ -5,7 +5,7 @@ set -euo pipefail
 ROOT="/root/savant-runtime"
 
 PACKET_TOOL="${ROOT}/tools/niche/masterplan/build_masterplan_opus_packet.py"
-PACKET_TEST="${ROOT}/hierarchies/identity/exiles/niche/prodigals/masterplan/tests/test_masterplan_opus_packet.py"
+PACKET_TEST="${ROOT}/edifices/identity/exiles/niche/prodigals/masterplan/tests/test_masterplan_opus_packet.py"
 PACKET_COMMAND="${ROOT}/bin/masterplan-opus-packet"
 MASTERPLAN_COMMAND="${ROOT}/bin/masterplan-project"
 LATEST_PACKET="${ROOT}/reports/niche/masterplan/opus-packets/latest.json"

@@ -173,17 +173,17 @@ special_rules:
       historical_label: Shard
       canonical_label: Mote
       tier: 2
-      scope: identity-hierarchy-only
+      scope: identity-edifice-only
     global_supersession_forbidden: true
   kindred:
     canonical: Kindred
     status: active
     role: relationship-methodology-system
     distinct_from:
-    - Kinship
-    supersedes_kinship: false
-    superseded_by_kinship: false
-  identity_hierarchy:
+    - Kindred
+    supersedes_kindred: false
+    superseded_by_kindred: false
+  identity_edifice:
     cardinality: 9
     canonical:
     - Iota
@@ -260,8 +260,8 @@ special_rules:
     - Evidence
     - Attestation
     Entra: Admission
-  kinship:
-    canonical: Kinship
+  kindred:
+    canonical: Kindred
     status: active
     role: functional-relationship-plane-service
     distinct_from:
@@ -347,8 +347,8 @@ invariants:
   tomb_is_vault_successor: true
   mutation_is_mutation: true
   kindred_active: true
-  kinship_active: true
-  kindred_and_kinship_distinct: true
-  kinship_depends_on_kindred: true
-  no_kindred_kinship_alias: true
-  no_kindred_kinship_supersession: true
+  kindred_active: true
+  kindred_and_kindred_distinct: true
+  kindred_depends_on_kindred: true
+  no_kindred_kindred_alias: true
+  no_kindred_kindred_supersession: true

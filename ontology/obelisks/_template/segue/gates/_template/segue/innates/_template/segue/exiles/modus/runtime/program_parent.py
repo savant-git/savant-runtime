@@ -15,7 +15,7 @@ try:
         content_id,
         digest,
     )
-    from .program_hierarchy import (
+    from .program_edifice import (
         PROGRAM_CHILD_LEVEL,
         PROGRAM_LEVEL_INDEX,
         PROGRAM_LEVELS,
@@ -29,7 +29,7 @@ except ImportError:
         content_id,
         digest,
     )
-    from program_hierarchy import (
+    from program_edifice import (
         PROGRAM_CHILD_LEVEL,
         PROGRAM_LEVEL_INDEX,
         PROGRAM_LEVELS,
@@ -86,8 +86,8 @@ class ParentComposition:
             "segue_ids": list(
                 self.segue_ids
             ),
-            "hierarchy_source": (
-                "PROGRAM_HIERARCHY_SEGUES"
+            "edifice_source": (
+                "PROGRAM_edifice_SEGUES"
             ),
             "owner": "exile:modus",
             "authoritative": False,
@@ -228,8 +228,8 @@ class ProgramParentComposer:
                 f"{child_level}-to-"
                 f"{parent_level}"
             ),
-            "hierarchy_source": (
-                "PROGRAM_HIERARCHY_SEGUES"
+            "edifice_source": (
+                "PROGRAM_edifice_SEGUES"
             ),
         }
 
@@ -251,7 +251,7 @@ class ProgramParentComposer:
                 )
                 + (
                     "deterministic-parent-composition",
-                    "program-hierarchy-segue-projection",
+                    "program-edifice-segue-projection",
                 )
             ),
             dependencies=tuple(
@@ -309,7 +309,7 @@ class ProgramParentComposer:
                 ),
                 provenance=(
                     "deterministic-parent-composition",
-                    "program-hierarchy-segue-projection",
+                    "program-edifice-segue-projection",
                 ),
                 metadata={
                     "parent_instance_id": (
@@ -324,8 +324,8 @@ class ProgramParentComposer:
                     "ordinal": (
                         ordinal + 1
                     ),
-                    "hierarchy_source": (
-                        "PROGRAM_HIERARCHY_SEGUES"
+                    "edifice_source": (
+                        "PROGRAM_edifice_SEGUES"
                     ),
                 },
             )
@@ -396,7 +396,7 @@ class ProgramParentComposer:
         ):
             raise ProgramParentError(
                 "composition child level "
-                "does not match hierarchy "
+                "does not match edifice "
                 "projection"
             )
 
@@ -439,8 +439,8 @@ class ProgramParentComposer:
             "descendants": list(
                 descendants
             ),
-            "hierarchy_source": (
-                "PROGRAM_HIERARCHY_SEGUES"
+            "edifice_source": (
+                "PROGRAM_edifice_SEGUES"
             ),
             "owner": self.owner,
             "authoritative": False,
@@ -464,10 +464,10 @@ class ProgramParentComposer:
             "levels": dict(
                 PARENT_LEVELS
             ),
-            "hierarchy_source": (
-                "PROGRAM_HIERARCHY_SEGUES"
+            "edifice_source": (
+                "PROGRAM_edifice_SEGUES"
             ),
-            "hierarchy_projection": True,
+            "edifice_projection": True,
             "composition_only": True,
             "authoritative": False,
             "authority_effect": "none",

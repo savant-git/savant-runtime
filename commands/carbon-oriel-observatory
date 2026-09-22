@@ -1,0 +1,170 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+
+from pathlib import Path
+
+
+runtime_root = Path(
+    "/root/savant-runtime/"
+    "ontology/obelisks/_template/"
+    "segue/gates/_template/segue/"
+    "innates/_template/segue/"
+    "exiles/carbon/runtime"
+)
+
+if str(runtime_root) not in sys.path:
+    sys.path.insert(
+        0,
+        str(runtime_root),
+    )
+
+
+from oriel_capabilities import (  # noqa: E402
+    oriel_capabilities_error,
+)
+
+from oriel_composition import (  # noqa: E402
+    oriel_composition_error,
+)
+
+from oriel_graph import (  # noqa: E402
+    oriel_graph_error,
+)
+
+from oriel_interface import (  # noqa: E402
+    oriel_interface_error,
+)
+
+from oriel_introspection import (  # noqa: E402
+    oriel_introspection_error,
+)
+
+from oriel_lineage import (  # noqa: E402
+    oriel_lineage_error,
+)
+
+from oriel_observatory import (  # noqa: E402
+    oriel_observatory_error,
+    selftest,
+    snapshot,
+    status,
+)
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="carbon-oriel-observatory",
+        description=(
+            "read-only Carbon Observatory "
+            "projection for the contained "
+            "Oriel specialization"
+        ),
+    )
+
+    subparsers = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    subparsers.add_parser(
+        "status"
+    )
+
+    subparsers.add_parser(
+        "selftest"
+    )
+
+    snapshot_parser = (
+        subparsers.add_parser(
+            "snapshot"
+        )
+    )
+
+    snapshot_parser.add_argument(
+        "--full",
+        action="store_true",
+    )
+
+    return parser
+
+
+def main() -> int:
+    args = build_parser().parse_args()
+
+    try:
+        if args.command == "status":
+            output = status()
+
+        elif args.command == "selftest":
+            output = selftest()
+
+        elif args.command == "snapshot":
+            output = snapshot(
+                full=args.full
+            )
+
+        else:
+            raise ValueError(
+                "unknown command"
+            )
+
+    except (
+        OSError,
+        ValueError,
+        json.JSONDecodeError,
+        oriel_capabilities_error,
+        oriel_composition_error,
+        oriel_graph_error,
+        oriel_interface_error,
+        oriel_introspection_error,
+        oriel_lineage_error,
+        oriel_observatory_error,
+    ) as exc:
+        print(
+            json.dumps(
+                {
+                    "ok":
+                        False,
+
+                    "error":
+                        str(exc),
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+
+        return 1
+
+    print(
+        json.dumps(
+            output,
+            indent=2,
+            ensure_ascii=False,
+            sort_keys=True,
+        )
+    )
+
+    if (
+        isinstance(
+            output,
+            dict,
+        )
+        and output.get(
+            "ok"
+        )
+        is False
+    ):
+        return 1
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

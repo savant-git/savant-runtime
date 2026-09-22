@@ -25,7 +25,7 @@ GRAPH_PATH = (
 
 SCHEMA_PATH = (
     ROOT
-    / "hierarchies"
+    / "edifices"
     / "identity"
     / "exiles"
     / "niche"

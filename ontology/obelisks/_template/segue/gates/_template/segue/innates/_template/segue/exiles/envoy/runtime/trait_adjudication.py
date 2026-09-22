@@ -6,6 +6,7 @@ import hashlib
 import json
 from dataclasses import dataclass
 from typing import Any, Iterable, Mapping, Sequence
+from .trait_primitives import canonical_json, digest, normalize_term
 
 
 SCHEMA = (
@@ -21,45 +22,6 @@ class TraitAdjudicationError(
     ValueError
 ):
     pass
-
-
-def canonical_json(
-    value: Any,
-) -> str:
-    return json.dumps(
-        value,
-        ensure_ascii=False,
-        sort_keys=True,
-        separators=(",", ":"),
-        default=str,
-    )
-
-
-def digest(
-    value: Any,
-) -> str:
-    return hashlib.sha256(
-        canonical_json(
-            value
-        ).encode(
-            "utf-8"
-        )
-    ).hexdigest()
-
-
-def normalize_term(
-    value: Any,
-) -> str:
-    return (
-        str(
-            value
-            or ""
-        )
-        .strip()
-        .lower()
-        .replace("-", "_")
-        .replace(" ", "_")
-    )
 
 
 def normalize_score(

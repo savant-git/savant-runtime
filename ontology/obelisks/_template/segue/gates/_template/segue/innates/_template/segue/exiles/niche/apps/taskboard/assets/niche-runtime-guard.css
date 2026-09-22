@@ -1,0 +1,71 @@
+/*
+ * savant / niche
+ * runtime interaction guard
+ * authority_effect: none
+ */
+
+html[data-niche-task-authority="unavailable"]
+    #start-next,
+html[data-niche-task-authority="unavailable"]
+    #transition-confirm,
+html[data-niche-task-authority="unavailable"]
+    [data-transition],
+html[data-niche-task-authority="unavailable"]
+    [data-task-transition] {
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: .34;
+}
+
+html[data-niche-task-authority="unavailable"]
+    .execution-core {
+    position: relative;
+}
+
+html[data-niche-task-authority="unavailable"]
+    .execution-core::before {
+    content: "TASK AUTHORITY UNAVAILABLE";
+
+    display: inline-flex;
+
+    margin-bottom: 9px;
+    padding: 4px 7px;
+
+    border:
+        1px dashed
+        rgba(255,255,255,.15);
+
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: .1em;
+
+    opacity: .52;
+}
+
+html[data-niche-task-authority="unavailable"]
+    #execute-priority {
+    opacity: .4;
+}
+
+html[data-niche-task-authority="unavailable"]
+    #priority-oracle {
+    filter: saturate(.25);
+}
+
+html[data-niche-task-authority="available"]
+    #start-next,
+html[data-niche-task-authority="available"]
+    #transition-confirm {
+    pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html[data-niche-task-authority]
+        #start-next,
+    html[data-niche-task-authority]
+        #transition-confirm,
+    html[data-niche-task-authority]
+        #priority-oracle {
+        transition: none !important;
+    }
+}

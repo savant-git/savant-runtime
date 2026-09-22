@@ -9,11 +9,11 @@ import unittest
 from pathlib import Path
 
 
-EXPECTED_KINSHIP_ERRORS = {
-    "test_functional_kinship.FunctionalKinshipTests.test_all_renderers",
-    "test_functional_kinship.FunctionalKinshipTests.test_direct_parent_profiles",
-    "test_functional_kinship.FunctionalKinshipTests.test_full_sibling_and_twin",
-    "test_functional_kinship.FunctionalKinshipTests.test_projection_is_deterministic",
+EXPECTED_KINDRED_ERRORS = {
+    "test_functional_kindred.FunctionalKindredTests.test_all_renderers",
+    "test_functional_kindred.FunctionalKindredTests.test_direct_parent_profiles",
+    "test_functional_kindred.FunctionalKindredTests.test_full_sibling_and_twin",
+    "test_functional_kindred.FunctionalKindredTests.test_projection_is_deterministic",
 }
 
 
@@ -23,7 +23,7 @@ def test_ids(items: list[tuple[unittest.case.TestCase, str]]) -> set[str]:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("suite", choices=("kinship", "lineage"))
+    parser.add_argument("suite", choices=("kindred", "lineage"))
     args = parser.parse_args()
 
     root = Path(__file__).resolve().parents[2]
@@ -38,14 +38,14 @@ def main() -> int:
     if args.suite == "lineage":
         return 0 if result.wasSuccessful() else 1
 
-    if failures or unexpected_successes or errors != EXPECTED_KINSHIP_ERRORS:
-        print("kinship regression baseline changed", file=sys.stderr)
-        print(f"expected errors: {sorted(EXPECTED_KINSHIP_ERRORS)}", file=sys.stderr)
+    if failures or unexpected_successes or errors != EXPECTED_KINDRED_ERRORS:
+        print("kindred regression baseline changed", file=sys.stderr)
+        print(f"expected errors: {sorted(EXPECTED_KINDRED_ERRORS)}", file=sys.stderr)
         print(f"actual errors:   {sorted(errors)}", file=sys.stderr)
         print(f"failures:        {sorted(failures)}", file=sys.stderr)
         return 1
 
-    print("kinship baseline preserved: 2 passing, 4 known recursion errors")
+    print("kindred baseline preserved: 2 passing, 4 known recursion errors")
     return 0
 
 

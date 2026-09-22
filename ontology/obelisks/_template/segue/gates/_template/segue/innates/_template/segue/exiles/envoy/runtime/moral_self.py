@@ -10,6 +10,7 @@ import time
 from pathlib import Path
 from types import MappingProxyType, ModuleType
 from typing import Any, Mapping
+from .canonical_primitives import canonical as _canonical, digest as _digest
 
 
 schema = "savant://envoy/moral-self/2.0.0"
@@ -34,25 +35,6 @@ def _clamp(
         minimum,
         min(maximum, float(value)),
     )
-
-
-def _canonical(
-    value: Any,
-) -> str:
-    return json.dumps(
-        value,
-        ensure_ascii=False,
-        sort_keys=True,
-        separators=(",", ":"),
-    )
-
-
-def _digest(
-    value: Any,
-) -> str:
-    return sha256(
-        _canonical(value).encode("utf-8")
-    ).hexdigest()
 
 
 def _load_module(

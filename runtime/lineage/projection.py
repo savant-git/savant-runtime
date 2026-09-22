@@ -145,7 +145,7 @@ def family_projection(
     }
 
 
-def legacy_hierarchy_projection(
+def legacy_edifice_projection(
     graph: LineageGraph,
     node_id: str,
 ) -> dict[str, Any]:

@@ -1,0 +1,231 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+
+from pathlib import Path
+from typing import Any
+
+
+runtime_root = Path(
+    "/root/savant-runtime/runtime"
+)
+
+if str(
+    runtime_root
+) not in sys.path:
+    sys.path.insert(
+        0,
+        str(
+            runtime_root
+        ),
+    )
+
+
+from living_governance_receipts import (  # noqa: E402
+    build_evaluation_receipt,
+    link_to_coda_receipt,
+    living_governance_receipt_error,
+    selftest,
+)
+
+
+def read_json(
+    path: str,
+) -> Any:
+    if path == "-":
+        return json.load(
+            sys.stdin
+        )
+
+    return json.loads(
+        Path(
+            path
+        ).read_text(
+            encoding="utf-8"
+        )
+    )
+
+
+def read_object(
+    path: str,
+) -> dict[str, Any]:
+    value = read_json(
+        path
+    )
+
+    if not isinstance(
+        value,
+        dict,
+    ):
+        raise ValueError(
+            (
+                "input must be "
+                "a JSON object"
+            )
+        )
+
+    return value
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="living-governance-receipt",
+        description=(
+            "deterministic "
+            "living-governance "
+            "evaluation receipts "
+            "and Coda receipt linkage"
+        ),
+    )
+
+    commands = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    build = commands.add_parser(
+        "build"
+    )
+
+    build.add_argument(
+        "--evaluation",
+        required=True,
+    )
+
+    build.add_argument(
+        "--mutation-plan"
+    )
+
+    build.add_argument(
+        "--mutation-plan-ref"
+    )
+
+    link = commands.add_parser(
+        "link"
+    )
+
+    link.add_argument(
+        "--governance-receipt",
+        required=True,
+    )
+
+    link.add_argument(
+        "--coda-receipt",
+        required=True,
+    )
+
+    link.add_argument(
+        "--coda-receipt-ref"
+    )
+
+    commands.add_parser(
+        "selftest"
+    )
+
+    return parser
+
+
+def main() -> int:
+    args = (
+        build_parser()
+        .parse_args()
+    )
+
+    try:
+        if args.command == "build":
+            evaluation = read_object(
+                args.evaluation
+            )
+
+            plan = (
+                read_object(
+                    args.mutation_plan
+                )
+                if args.mutation_plan
+                else None
+            )
+
+            output = (
+                build_evaluation_receipt(
+                    evaluation,
+                    mutation_plan=
+                        plan,
+                    mutation_plan_ref=
+                        args.mutation_plan_ref,
+                )
+            )
+
+        elif args.command == "link":
+            output = (
+                link_to_coda_receipt(
+                    read_object(
+                        args.governance_receipt
+                    ),
+                    read_object(
+                        args.coda_receipt
+                    ),
+                    coda_receipt_ref=
+                        args.coda_receipt_ref,
+                )
+            )
+
+        elif args.command == "selftest":
+            output = selftest()
+
+        else:
+            raise ValueError(
+                "unknown command"
+            )
+
+    except (
+        OSError,
+        ValueError,
+        json.JSONDecodeError,
+        living_governance_receipt_error,
+    ) as exc:
+        print(
+            json.dumps(
+                {
+                    "ok":
+                        False,
+
+                    "owner":
+                        "living-governance",
+
+                    "authority_effect":
+                        "none",
+
+                    "error":
+                        str(
+                            exc
+                        ),
+
+                    "authority_transfer":
+                        False,
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+
+        return 1
+
+    print(
+        json.dumps(
+            output,
+            indent=2,
+            ensure_ascii=False,
+            sort_keys=True,
+        )
+    )
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

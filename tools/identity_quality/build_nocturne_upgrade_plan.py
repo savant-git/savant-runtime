@@ -13,7 +13,7 @@ ROOT = Path("/root/savant-runtime")
 
 IDENTITY_ROOT = (
     ROOT
-    / "hierarchies"
+    / "edifices"
     / "identity"
 )
 

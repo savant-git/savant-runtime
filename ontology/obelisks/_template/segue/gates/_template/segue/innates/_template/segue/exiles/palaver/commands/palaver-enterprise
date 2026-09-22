@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SAVANT_ROOT="/root/savant-runtime"
+PALAVER_ROOT="${SAVANT_ROOT}/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver"
+PALAVER_RUNTIME="${PALAVER_ROOT}/runtime"
+
+SAVANT_ENV="${SAVANT_ROOT}/.env"
+ROOT_ENV="/root/.env"
+
+if [ -f "$ROOT_ENV" ]; then
+  set -a
+  source "$ROOT_ENV"
+  set +a
+fi
+
+if [ -f "$SAVANT_ENV" ]; then
+  set -a
+  source "$SAVANT_ENV"
+  set +a
+fi
+
+ORIGINAL_PYTHONPATH="${PYTHONPATH:-}"
+
+if [ -n "$ORIGINAL_PYTHONPATH" ]; then
+  export PYTHONPATH="${SAVANT_ROOT}:${PALAVER_RUNTIME}:${ORIGINAL_PYTHONPATH}"
+else
+  export PYTHONPATH="${SAVANT_ROOT}:${PALAVER_RUNTIME}"
+fi
+
+COMMAND="${1:-serve}"
+
+case "$COMMAND" in
+  inspect)
+    exec python3 \
+      "${PALAVER_RUNTIME}/deployment.py" \
+      inspect
+    ;;
+
+  check)
+    exec python3 \
+      "${PALAVER_RUNTIME}/deployment.py" \
+      check
+    ;;
+
+  integration-inspect)
+    exec python3 \
+      "${PALAVER_RUNTIME}/enterprise_runtime.py" \
+      --inspect
+    ;;
+
+  serve)
+    exec python3 \
+      "${PALAVER_RUNTIME}/enterprise_runtime.py"
+    ;;
+
+  *)
+    printf '%s\n' \
+      "usage: palaver-enterprise {inspect|check|integration-inspect|serve}" \
+      >&2
+    exit 2
+    ;;
+esac

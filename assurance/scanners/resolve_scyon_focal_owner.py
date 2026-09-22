@@ -35,7 +35,7 @@ AUTHORITY_ROOTS = (
     ROOT / "authority",
     ROOT / "canon",
     ROOT / "canon-system",
-    ROOT / "hierarchies",
+    ROOT / "edifices",
     ROOT / "ontology",
     ROOT / "runtime",
 )

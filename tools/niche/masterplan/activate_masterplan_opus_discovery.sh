@@ -5,7 +5,7 @@ set -euo pipefail
 ROOT="/root/savant-runtime"
 
 DISCOVERY_TOOL="${ROOT}/tools/niche/masterplan/discover_masterplan_opus_binding.py"
-DISCOVERY_TEST="${ROOT}/hierarchies/identity/exiles/niche/prodigals/masterplan/tests/test_discover_masterplan_opus_binding.py"
+DISCOVERY_TEST="${ROOT}/edifices/identity/exiles/niche/prodigals/masterplan/tests/test_discover_masterplan_opus_binding.py"
 DISCOVERY_COMMAND="${ROOT}/bin/masterplan-opus-discover"
 LATEST="${ROOT}/reports/niche/masterplan/opus-binding-discovery/latest.json"
 

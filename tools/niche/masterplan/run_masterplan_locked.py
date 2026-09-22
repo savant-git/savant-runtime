@@ -18,7 +18,7 @@ ROOT = Path("/root/savant-runtime")
 
 SUBJECT_ROOT = (
     ROOT
-    / "hierarchies"
+    / "edifices"
     / "identity"
     / "exiles"
     / "niche"

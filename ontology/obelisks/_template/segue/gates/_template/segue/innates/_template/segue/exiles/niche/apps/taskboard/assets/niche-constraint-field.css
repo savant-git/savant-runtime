@@ -1,0 +1,301 @@
+/*
+savant niche constraint field
+represented execution-constraint projection
+authority_effect: none
+*/
+
+:root {
+  --niche-constraint-edge:
+    color-mix(
+      in srgb,
+      var(--savant-primary, #7fe7ff) 28%,
+      transparent
+    );
+  --niche-constraint-hard:
+    var(--savant-blocked, #ff785f);
+  --niche-constraint-unsatisfied:
+    #ffd36f;
+  --niche-constraint-context:
+    var(--savant-primary, #7fe7ff);
+  --niche-constraint-unknown:
+    var(--savant-unknown, #9aa6aa);
+}
+
+.niche-constraint-field {
+  position: fixed;
+  inset-inline-end:
+    max(0.75rem, env(safe-area-inset-right));
+  inset-block-start:
+    max(5rem, env(safe-area-inset-top));
+  z-index: 60;
+  inline-size:
+    min(35rem, calc(100vw - 1.5rem));
+  max-block-size:
+    min(78dvh, 50rem);
+  display: grid;
+  grid-template-rows:
+    auto minmax(0, 1fr);
+  overflow: hidden;
+  border:
+    1px solid var(--niche-constraint-edge);
+  background:
+    color-mix(
+      in srgb,
+      var(--savant-background, #050708) 97%,
+      transparent
+    );
+  box-shadow:
+    0 1.6rem 4.8rem rgb(0 0 0 / 0.45);
+}
+
+.niche-constraint-field[hidden] {
+  display: none !important;
+}
+
+.niche-constraint-field-head {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr) auto;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.72rem;
+  border-block-end:
+    1px solid var(--niche-constraint-edge);
+}
+
+.niche-constraint-field-kicker,
+.niche-constraint-field-close,
+.niche-constraint-field-chip,
+.niche-constraint-field-section-head,
+.niche-constraint-field-node,
+.niche-constraint-field-fact,
+.niche-constraint-field-empty,
+.niche-constraint-field-note {
+  font-family:
+    ui-monospace,
+    "SFMono-Regular",
+    Consolas,
+    monospace;
+}
+
+.niche-constraint-field-kicker {
+  margin: 0 0 0.2rem;
+  color:
+    var(--savant-primary, #7fe7ff);
+  font-size: 0.54rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.niche-constraint-field-title {
+  margin: 0;
+  color:
+    var(--savant-text, #eef7f8);
+  font:
+    730 0.95rem/1.1
+    system-ui,
+    sans-serif;
+}
+
+.niche-constraint-field-close {
+  min-inline-size: 2.75rem;
+  min-block-size: 2.75rem;
+  border:
+    1px solid var(--niche-constraint-edge);
+  color:
+    var(--savant-text, #eef7f8);
+  background: transparent;
+  cursor: pointer;
+}
+
+.niche-constraint-field-close:hover,
+.niche-constraint-field-close:focus-visible {
+  outline: none;
+  border-color:
+    var(--savant-primary, #7fe7ff);
+}
+
+.niche-constraint-field-body {
+  min-block-size: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 0.75rem;
+}
+
+.niche-constraint-field-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-block-end: 0.7rem;
+}
+
+.niche-constraint-field-chip {
+  padding: 0.3rem 0.42rem;
+  border:
+    1px solid var(--niche-constraint-edge);
+  color:
+    var(--savant-text-muted, #879397);
+  font-size: 0.51rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.niche-constraint-field-sections {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.niche-constraint-field-section {
+  border:
+    1px solid var(--niche-constraint-edge);
+  background:
+    color-mix(
+      in srgb,
+      var(--savant-surface, #0b1113) 78%,
+      transparent
+    );
+}
+
+.niche-constraint-field-section[data-kind="blocker"] {
+  box-shadow:
+    inset 2px 0
+    var(--niche-constraint-hard);
+}
+
+.niche-constraint-field-section[data-kind="unsatisfied"] {
+  box-shadow:
+    inset 2px 0
+    var(--niche-constraint-unsatisfied);
+}
+
+.niche-constraint-field-section[data-kind="explicit"] {
+  box-shadow:
+    inset 2px 0
+    var(--niche-constraint-context);
+}
+
+.niche-constraint-field-section[data-kind="boundary"] {
+  box-shadow:
+    inset 2px 0
+    var(--niche-constraint-unknown);
+}
+
+.niche-constraint-field-section-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.5rem 0.55rem;
+  border-block-end:
+    1px solid var(--niche-constraint-edge);
+  color:
+    var(--savant-text-muted, #879397);
+  font-size: 0.5rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.niche-constraint-field-list {
+  display: grid;
+  gap: 0.36rem;
+  padding: 0.48rem;
+}
+
+.niche-constraint-field-node {
+  display: grid;
+  gap: 0.15rem;
+  inline-size: 100%;
+  min-block-size: 3rem;
+  padding: 0.48rem 0.52rem;
+  border:
+    1px solid var(--niche-constraint-edge);
+  color:
+    var(--savant-text, #eef7f8);
+  background:
+    var(--savant-background, #050708);
+  text-align: start;
+  cursor: pointer;
+}
+
+.niche-constraint-field-node:hover,
+.niche-constraint-field-node:focus-visible {
+  outline: none;
+  border-color:
+    var(--savant-primary, #7fe7ff);
+}
+
+.niche-constraint-field-node-id {
+  color:
+    var(--savant-primary, #7fe7ff);
+  font-size: 0.54rem;
+  overflow-wrap: anywhere;
+}
+
+.niche-constraint-field-node-title {
+  color:
+    var(--savant-text-muted, #879397);
+  font-size: 0.58rem;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.niche-constraint-field-fact {
+  padding: 0.55rem;
+  border:
+    1px solid var(--niche-constraint-edge);
+  color:
+    var(--savant-text, #eef7f8);
+  background:
+    var(--savant-background, #050708);
+  font-size: 0.58rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.niche-constraint-field-empty,
+.niche-constraint-field-note {
+  padding: 0.62rem;
+  border:
+    1px dashed var(--niche-constraint-edge);
+  color:
+    var(--savant-text-muted, #879397);
+  font-size: 0.59rem;
+  line-height: 1.5;
+}
+
+.niche-constraint-field-note {
+  margin-block-start: 0.7rem;
+}
+
+@media (max-width: 700px) {
+  .niche-constraint-field {
+    inset-inline:
+      max(0.45rem, env(safe-area-inset-left))
+      max(0.45rem, env(safe-area-inset-right));
+    inset-block-start: auto;
+    inset-block-end:
+      max(0.45rem, env(safe-area-inset-bottom));
+    inline-size: auto;
+    max-block-size: 74dvh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .niche-constraint-field * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .niche-constraint-field,
+  .niche-constraint-field-close,
+  .niche-constraint-field-chip,
+  .niche-constraint-field-section,
+  .niche-constraint-field-node,
+  .niche-constraint-field-fact,
+  .niche-constraint-field-empty,
+  .niche-constraint-field-note {
+    border-color: CanvasText;
+  }
+}

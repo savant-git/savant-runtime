@@ -13,7 +13,7 @@ from .model import (
 
 from .projection import (
     family_projection,
-    legacy_hierarchy_projection,
+    legacy_edifice_projection,
 )
 
 from .references import (
@@ -39,7 +39,7 @@ __all__ = [
     "compile_lineage",
     "family_projection",
     "filesystem_reference_id",
-    "legacy_hierarchy_projection",
+    "legacy_edifice_projection",
     "normalize_reference",
     "resolve_reference",
 ]

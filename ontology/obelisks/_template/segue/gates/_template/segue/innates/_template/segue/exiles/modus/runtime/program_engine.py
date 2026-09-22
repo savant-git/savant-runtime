@@ -85,8 +85,8 @@ class EngineComposition:
             "child_level": (
                 ENGINE_CHILD_LEVEL
             ),
-            "hierarchy_source": (
-                "PROGRAM_HIERARCHY_SEGUES"
+            "edifice_source": (
+                "PROGRAM_edifice_SEGUES"
             ),
             "owner": "exile:modus",
             "authoritative": False,
@@ -215,8 +215,8 @@ class ProgramEngineComposer:
                         "source_paths": (
                             source_paths
                         ),
-                        "hierarchy_source": (
-                            "PROGRAM_HIERARCHY_SEGUES"
+                        "edifice_source": (
+                            "PROGRAM_edifice_SEGUES"
                         ),
                     },
                 )
@@ -312,8 +312,8 @@ class ProgramEngineComposer:
                     "segues"
                 ]
             ),
-            "hierarchy_source": (
-                "PROGRAM_HIERARCHY_SEGUES"
+            "edifice_source": (
+                "PROGRAM_edifice_SEGUES"
             ),
             "owner": self.owner,
             "authoritative": False,
@@ -340,10 +340,10 @@ class ProgramEngineComposer:
             "target_level": (
                 ENGINE_LEVEL
             ),
-            "hierarchy_source": (
-                "PROGRAM_HIERARCHY_SEGUES"
+            "edifice_source": (
+                "PROGRAM_edifice_SEGUES"
             ),
-            "hierarchy_projection": True,
+            "edifice_projection": True,
             "composition_only": True,
             "parent_primitive": (
                 "ProgramParentComposer"

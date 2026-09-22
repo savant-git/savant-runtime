@@ -5,7 +5,7 @@ set -euo pipefail
 ROOT="/root/savant-runtime"
 
 PLAN_TOOL="${ROOT}/tools/niche/masterplan/compile_masterplan_opus_binding_plan.py"
-PLAN_TEST="${ROOT}/hierarchies/identity/exiles/niche/prodigals/masterplan/tests/test_compile_masterplan_opus_binding_plan.py"
+PLAN_TEST="${ROOT}/edifices/identity/exiles/niche/prodigals/masterplan/tests/test_compile_masterplan_opus_binding_plan.py"
 PLAN_COMMAND="${ROOT}/bin/masterplan-opus-plan"
 ACTIVATOR="${ROOT}/tools/niche/masterplan/activate_masterplan_opus_binding_plan.sh"
 

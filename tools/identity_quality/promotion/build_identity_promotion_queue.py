@@ -16,7 +16,7 @@ ROOT = Path("/root/savant-runtime")
 
 IDENTITY_ROOT = (
     ROOT
-    / "hierarchies"
+    / "edifices"
     / "identity"
 )
 
@@ -49,7 +49,7 @@ REFERENCE_SUBJECTS = {
     "quirk.nocturne.echo",
 }
 
-KINSHIP_TERM = "kin" + "ship"
+KINDRED_TERM = "kin" + "ship"
 
 REQUIRED_FIELDS = (
     "id",
@@ -585,7 +585,7 @@ def scan_forbidden_terms(
         return findings
 
     pattern = re.compile(
-        rf"\b{re.escape(KINSHIP_TERM)}\b",
+        rf"\b{re.escape(KINDRED_TERM)}\b",
         re.IGNORECASE,
     )
 
@@ -623,7 +623,7 @@ def scan_forbidden_terms(
                             ).as_posix()
                         ),
                         "line": line_number,
-                        "value": KINSHIP_TERM,
+                        "value": KINDRED_TERM,
                     }
                 )
 

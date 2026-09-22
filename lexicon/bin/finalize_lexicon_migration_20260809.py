@@ -27,9 +27,9 @@ CONSTITUTION_PATH = (
 )
 
 KINDRED_ID = "lex:core:kindred"
-KINSHIP_ID = "lex:service:kinship"
+KINDRED_ID = "lex:service:kindred"
 
-CURRENT_KINSHIP_CONCEPT = (
+CURRENT_KINDRED_CONCEPT = (
     "Functional relationship-plane service"
 )
 
@@ -239,7 +239,7 @@ def active_by_canonical(
     ]
 
 
-def restore_kindred_and_kinship(
+def restore_kindred_and_kindred(
     registry: dict[str, Any],
 ) -> None:
     lexemes = registry["lexemes"]
@@ -293,9 +293,9 @@ def restore_kindred_and_kinship(
         kindred
     )
 
-    historical_kinship_ids = {
-        "lex:history:kinship",
-        KINSHIP_ID,
+    historical_kindred_ids = {
+        "lex:history:kindred",
+        KINDRED_ID,
     }
 
     kindred_lineage["supersedes"] = [
@@ -305,7 +305,7 @@ def restore_kindred_and_kinship(
             "supersedes"
         ]
         if str(predecessor)
-        not in historical_kinship_ids
+        not in historical_kindred_ids
     ]
 
     kindred_lineage["history"] = [
@@ -326,14 +326,14 @@ def restore_kindred_and_kinship(
                         "",
                     )
                 )
-                in historical_kinship_ids
+                in historical_kindred_ids
                 or str(
                     event.get(
                         "historical_term",
                         "",
                     )
                 ).casefold()
-                == "kinship"
+                == "kindred"
             )
         )
     ]
@@ -342,25 +342,25 @@ def restore_kindred_and_kinship(
         "superseded_by"
     ] = None
 
-    historical_kinship = by_id.get(
-        "lex:history:kinship"
+    historical_kindred = by_id.get(
+        "lex:history:kindred"
     )
 
-    if historical_kinship is not None:
+    if historical_kindred is not None:
         lexemes.remove(
-            historical_kinship
+            historical_kindred
         )
 
     existing_service = by_id.get(
-        KINSHIP_ID
+        KINDRED_ID
     )
 
     if existing_service is None:
-        kinship = {
-            "id": KINSHIP_ID,
-            "canonical": "Kinship",
+        kindred = {
+            "id": KINDRED_ID,
+            "canonical": "Kindred",
             "concept": (
-                CURRENT_KINSHIP_CONCEPT
+                CURRENT_KINDRED_CONCEPT
             ),
             "description": (
                 "Active Savant service that "
@@ -386,8 +386,8 @@ def restore_kindred_and_kinship(
             },
             "provenance": {
                 "sources": [
-                    "service:kinship",
-                    "runtime/kinship/",
+                    "service:kindred",
+                    "runtime/kindred/",
                     "constitutional-bootstrap",
                 ],
                 "authority": "accepted",
@@ -398,10 +398,10 @@ def restore_kindred_and_kinship(
                     "system:kindred"
                 ),
                 "service_identity": (
-                    "service:kinship"
+                    "service:kindred"
                 ),
                 "implementation": (
-                    "runtime/kinship"
+                    "runtime/kindred"
                 ),
                 "implemented_through": (
                     "exile:modus"
@@ -410,17 +410,17 @@ def restore_kindred_and_kinship(
         }
 
         lexemes.append(
-            kinship
+            kindred
         )
 
     else:
         existing_service[
             "canonical"
-        ] = "Kinship"
+        ] = "Kindred"
 
         existing_service[
             "concept"
-        ] = CURRENT_KINSHIP_CONCEPT
+        ] = CURRENT_KINDRED_CONCEPT
 
         existing_service[
             "status"
@@ -479,10 +479,10 @@ def restore_kindred_and_kinship(
                     "system:kindred"
                 ),
                 "service_identity": (
-                    "service:kinship"
+                    "service:kindred"
                 ),
                 "implementation": (
-                    "runtime/kinship"
+                    "runtime/kindred"
                 ),
                 "implemented_through": (
                     "exile:modus"
@@ -506,7 +506,7 @@ def restore_kindred_and_kinship(
             value
             for value in reserved
             if str(value).casefold()
-            != "kinship"
+            != "kindred"
         ]
 
 
@@ -688,7 +688,7 @@ VALIDATE_TERMINOLOGY = r'''
         )
 
         active_kindred = []
-        active_kinship = []
+        active_kindred = []
 
         for lexeme in context.lexemes:
             canonical = optional_string(
@@ -723,9 +723,9 @@ VALIDATE_TERMINOLOGY = r'''
             if (
                 status == "active"
                 and normalized
-                == "kinship"
+                == "kindred"
             ):
-                active_kinship.append(
+                active_kindred.append(
                     lexeme
                 )
 
@@ -749,29 +749,29 @@ VALIDATE_TERMINOLOGY = r'''
                 },
             )
 
-        if len(active_kinship) != 1:
+        if len(active_kindred) != 1:
             self.report.add(
                 code=(
                     "terminology."
-                    "kinship_cardinality"
+                    "kindred_cardinality"
                 ),
                 severity="error",
                 validator="terminology",
                 message=(
                     "Exactly one active "
-                    "Kinship service lexeme "
+                    "Kindred service lexeme "
                     "is required."
                 ),
                 metadata={
                     "count": len(
-                        active_kinship
+                        active_kindred
                     )
                 },
             )
 
         if (
             len(active_kindred) == 1
-            and len(active_kinship) == 1
+            and len(active_kindred) == 1
         ):
             kindred_id = (
                 context.lexeme_identity(
@@ -779,18 +779,18 @@ VALIDATE_TERMINOLOGY = r'''
                 )
             )
 
-            kinship = (
-                active_kinship[0]
+            kindred = (
+                active_kindred[0]
             )
 
-            kinship_id = (
+            kindred_id = (
                 context.lexeme_identity(
-                    kinship
+                    kindred
                 )
             )
 
             dependencies = (
-                kinship.get(
+                kindred.get(
                     "dependencies"
                 )
             )
@@ -808,7 +808,7 @@ VALIDATE_TERMINOLOGY = r'''
                 self.report.add(
                     code=(
                         "terminology."
-                        "kinship_kindred_"
+                        "kindred_kindred_"
                         "dependency_missing"
                     ),
                     severity="error",
@@ -816,10 +816,10 @@ VALIDATE_TERMINOLOGY = r'''
                         "terminology"
                     ),
                     message=(
-                        "Kinship must depend "
+                        "Kindred must depend "
                         "on Kindred."
                     ),
-                    lexeme_id=kinship_id,
+                    lexeme_id=kindred_id,
                     field="dependencies",
                     value=kindred_id,
                 )
@@ -891,10 +891,10 @@ SCAN_VALUE = r'''
 
             if (
                 lexeme_id
-                == "lex:service:kinship"
+                == "lex:service:kindred"
                 and contains_term(
                     value,
-                    "kinship",
+                    "kindred",
                 )
             ):
                 return
@@ -904,7 +904,7 @@ SCAN_VALUE = r'''
             ):
                 if (
                     forbidden
-                    == "kinship"
+                    == "kindred"
                 ):
                     continue
 
@@ -1047,7 +1047,7 @@ SCAN_REPOSITORY = r'''
                 ):
                     if (
                         forbidden
-                        == "kinship"
+                        == "kindred"
                     ):
                         continue
 
@@ -1122,10 +1122,10 @@ def validate_local(
         )
     )
 
-    active_kinship = (
+    active_kindred = (
         active_by_canonical(
             lexemes,
-            "Kinship",
+            "Kindred",
         )
     )
 
@@ -1138,31 +1138,31 @@ def validate_local(
         )
 
     if len(
-        active_kinship
+        active_kindred
     ) != 1:
         raise RuntimeError(
             "Expected exactly one "
-            "active Kinship"
+            "active Kindred"
         )
 
     if (
         active_kindred[0]["id"]
-        == active_kinship[0]["id"]
+        == active_kindred[0]["id"]
     ):
         raise RuntimeError(
-            "Kindred and Kinship "
+            "Kindred and Kindred "
             "must have distinct identities"
         )
 
     if (
         active_kindred[0]["id"]
-        not in active_kinship[0].get(
+        not in active_kindred[0].get(
             "dependencies",
             [],
         )
     ):
         raise RuntimeError(
-            "Kinship must depend "
+            "Kindred must depend "
             "on Kindred"
         )
 
@@ -1174,14 +1174,14 @@ def validate_local(
 
     if any(
         str(value).casefold()
-        == "lex:history:kinship"
+        == "lex:history:kindred"
         for value in kindred_lineage[
             "supersedes"
         ]
     ):
         raise RuntimeError(
             "Kindred must not "
-            "supersede Kinship"
+            "supersede Kindred"
         )
 
     if (
@@ -1271,7 +1271,7 @@ def main() -> int:
         registry
     )
 
-    restore_kindred_and_kinship(
+    restore_kindred_and_kindred(
         registry
     )
 
@@ -1334,7 +1334,7 @@ def main() -> int:
     )
 
     print(
-        "KINSHIP: active dependent service"
+        "KINDRED: active dependent service"
     )
 
     print(

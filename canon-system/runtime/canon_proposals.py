@@ -203,7 +203,7 @@ def authority_directory_for(
     ).strip().lower()
 
     plural = {
-        "hierarchy": "hierarchies",
+        "edifice": "edifices",
         "exile": "exiles",
         "foundation": "foundation",
         "policy": "policies",

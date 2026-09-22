@@ -8,15 +8,15 @@ from typing import Any, Mapping
 from runtime.lineage.model import stable_hash
 
 
-class KinshipError(Exception):
-    """Base functional-kinship error."""
+class KindredError(Exception):
+    """Base functional-kindred error."""
 
 
-class KinshipValidationError(KinshipError):
-    """Raised when authoritative kinship data is invalid."""
+class KindredValidationError(KindredError):
+    """Raised when authoritative kindred data is invalid."""
 
 
-class KinshipLookupError(KinshipError):
+class KindredLookupError(KindredError):
     """Raised when a node or relationship cannot be resolved."""
 
 
@@ -87,7 +87,7 @@ def _strings(
 
 
 @dataclass(frozen=True, slots=True)
-class KinshipNode:
+class KindredNode:
     id: str
     label: str
     kind: str = "instance"
@@ -167,7 +167,7 @@ class DirectLineageEdge:
             "role": self.role,
             "axis": self.axis,
             "domain": self.domain,
-            "kinship": {
+            "kindred": {
                 "parent_profile": (
                     self.parent_profile
                 ),
@@ -225,7 +225,7 @@ class AllianceContract:
         if len(
             self.partners
         ) < 2:
-            raise KinshipValidationError(
+            raise KindredValidationError(
                 "alliance requires at least "
                 "two partners"
             )
@@ -237,7 +237,7 @@ class AllianceContract:
         ) != len(
             self.partners
         ):
-            raise KinshipValidationError(
+            raise KindredValidationError(
                 "alliance partners must "
                 "be unique"
             )
@@ -292,7 +292,7 @@ class PathStep:
 
 
 @dataclass(frozen=True, slots=True)
-class KinshipDetermination:
+class KindredDetermination:
     subject: str
     relative: str
     relationship: str
@@ -478,11 +478,11 @@ __all__ = [
     "AllianceContract",
     "DirectLineageEdge",
     "FamilyTreeProjection",
-    "KinshipDetermination",
-    "KinshipError",
-    "KinshipLookupError",
-    "KinshipNode",
-    "KinshipValidationError",
+    "KindredDetermination",
+    "KindredError",
+    "KindredLookupError",
+    "KindredNode",
+    "KindredValidationError",
     "PathStep",
     "VALID_RELATIONSHIP_PLANES",
     "stable_alliance_id",

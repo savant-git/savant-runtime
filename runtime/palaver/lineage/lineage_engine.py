@@ -513,7 +513,7 @@ def build_parser(
     parser = argparse.ArgumentParser(
         description=(
             "Compile every Savant "
-            "hierarchy into one "
+            "edifice into one "
             "role-bearing functional "
             "lineage graph."
         )

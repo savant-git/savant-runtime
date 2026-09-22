@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from .model import (
-    KinshipValidationError,
+    KindredValidationError,
 )
 
 
@@ -19,11 +19,11 @@ ROOT = Path(
     )
 ).expanduser().resolve()
 
-DEFAULT_KINSHIP_REGISTRY = (
+DEFAULT_KINDRED_REGISTRY = (
     ROOT
     / "authority_graph"
-    / "kinship"
-    / "kinship_registry.json"
+    / "kindred"
+    / "kindred_registry.json"
 )
 
 
@@ -78,14 +78,14 @@ def _load_payload(
             )
         )
 
-        raise KinshipValidationError(
-            "kinship registry import "
+        raise KindredValidationError(
+            "kindred registry import "
             f"cycle: {chain}"
         )
 
     if not source.is_file():
-        raise KinshipValidationError(
-            "kinship registry missing: "
+        raise KindredValidationError(
+            "kindred registry missing: "
             f"{source}"
         )
 
@@ -100,8 +100,8 @@ def _load_payload(
         UnicodeError,
         json.JSONDecodeError,
     ) as exc:
-        raise KinshipValidationError(
-            "cannot read kinship registry "
+        raise KindredValidationError(
+            "cannot read kindred registry "
             f"{source}: {exc}"
         ) from exc
 
@@ -109,8 +109,8 @@ def _load_payload(
         payload,
         Mapping,
     ):
-        raise KinshipValidationError(
-            "kinship registry must be "
+        raise KindredValidationError(
+            "kindred registry must be "
             f"an object: {source}"
         )
 
@@ -129,8 +129,8 @@ def _load_payload(
         imports,
         list,
     ):
-        raise KinshipValidationError(
-            "kinship registry imports "
+        raise KindredValidationError(
+            "kindred registry imports "
             "must be an array"
         )
 
@@ -142,8 +142,8 @@ def _load_payload(
             )
             or not raw_import.strip()
         ):
-            raise KinshipValidationError(
-                "invalid kinship registry "
+            raise KindredValidationError(
+                "invalid kindred registry "
                 "import"
             )
 
@@ -203,7 +203,7 @@ def _load_payload(
     )
 
 
-class KinshipRegistry:
+class KindredRegistry:
     def __init__(
         self,
         payload: Mapping[str, Any],
@@ -274,7 +274,7 @@ class KinshipRegistry:
             legacy,
             Mapping,
         ):
-            raise KinshipValidationError(
+            raise KindredValidationError(
                 "legacy_defaults must "
                 "be an object"
             )
@@ -310,7 +310,7 @@ class KinshipRegistry:
             states,
             list,
         ):
-            raise KinshipValidationError(
+            raise KindredValidationError(
                 "relationship_states "
                 "must be an array"
             )
@@ -326,9 +326,9 @@ class KinshipRegistry:
     def load(
         cls,
         path: Path | str = (
-            DEFAULT_KINSHIP_REGISTRY
+            DEFAULT_KINDRED_REGISTRY
         ),
-    ) -> "KinshipRegistry":
+    ) -> "KindredRegistry":
         source = Path(
             path
         ).expanduser().resolve()
@@ -361,7 +361,7 @@ class KinshipRegistry:
             section,
             Mapping,
         ):
-            raise KinshipValidationError(
+            raise KindredValidationError(
                 f"{name} must be an object"
             )
 
@@ -382,7 +382,7 @@ class KinshipRegistry:
                     Mapping,
                 )
             ):
-                raise KinshipValidationError(
+                raise KindredValidationError(
                     f"invalid {name} entry"
                 )
 
@@ -404,7 +404,7 @@ class KinshipRegistry:
                 profile
                 not in self._parent_profiles
             ):
-                raise KinshipValidationError(
+                raise KindredValidationError(
                     "legacy role default "
                     f"{role} references "
                     f"unknown parent profile "
@@ -418,7 +418,7 @@ class KinshipRegistry:
                 profile
                 not in self._child_profiles
             ):
-                raise KinshipValidationError(
+                raise KindredValidationError(
                     "legacy continuation "
                     f"default {continuation} "
                     "references unknown child "
@@ -436,7 +436,7 @@ class KinshipRegistry:
                 ]
             )
         except KeyError as exc:
-            raise KinshipValidationError(
+            raise KindredValidationError(
                 "unknown parent profile: "
                 f"{name}"
             ) from exc
@@ -452,7 +452,7 @@ class KinshipRegistry:
                 ]
             )
         except KeyError as exc:
-            raise KinshipValidationError(
+            raise KindredValidationError(
                 "unknown child profile: "
                 f"{name}"
             ) from exc
@@ -468,7 +468,7 @@ class KinshipRegistry:
                 ]
             )
         except KeyError as exc:
-            raise KinshipValidationError(
+            raise KindredValidationError(
                 "unknown alliance profile: "
                 f"{name}"
             ) from exc
@@ -483,7 +483,7 @@ class KinshipRegistry:
                 {
                     "meaning": (
                         "Derived functional "
-                        "kinship relationship."
+                        "kindred relationship."
                     )
                 },
             )
@@ -544,6 +544,6 @@ class KinshipRegistry:
 
 
 __all__ = [
-    "DEFAULT_KINSHIP_REGISTRY",
-    "KinshipRegistry",
+    "DEFAULT_KINDRED_REGISTRY",
+    "KindredRegistry",
 ]

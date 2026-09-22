@@ -9,12 +9,12 @@ from typing import Any, Iterable, Mapping
 from .model import (
     AllianceContract,
     DirectLineageEdge,
-    KinshipLookupError,
-    KinshipNode,
-    KinshipValidationError,
+    KindredLookupError,
+    KindredNode,
+    KindredValidationError,
     stable_alliance_id,
 )
-from .registry import KinshipRegistry
+from .registry import KindredRegistry
 
 
 ACTIVE_STATES = {
@@ -77,13 +77,13 @@ def _strings(
     )
 
 
-class KinshipGraph:
+class KindredGraph:
     def __init__(
         self,
         *,
         nodes: Mapping[
             str,
-            KinshipNode,
+            KindredNode,
         ],
         lineage_edges: Mapping[
             str,
@@ -174,13 +174,13 @@ class KinshipGraph:
             self.lineage_edges.items()
         ):
             if edge.parent not in self.nodes:
-                raise KinshipValidationError(
+                raise KindredValidationError(
                     "lineage parent missing "
                     f"from graph: {edge.parent}"
                 )
 
             if edge.child not in self.nodes:
-                raise KinshipValidationError(
+                raise KindredValidationError(
                     "lineage child missing "
                     f"from graph: {edge.child}"
                 )
@@ -202,7 +202,7 @@ class KinshipGraph:
         ):
             for partner in alliance.partners:
                 if partner not in self.nodes:
-                    raise KinshipValidationError(
+                    raise KindredValidationError(
                         "alliance partner missing "
                         f"from graph: {partner}"
                     )
@@ -234,8 +234,8 @@ class KinshipGraph:
             Any,
         ],
         *,
-        registry: KinshipRegistry,
-    ) -> "KinshipGraph":
+        registry: KindredRegistry,
+    ) -> "KindredGraph":
         raw_nodes = payload.get(
             "nodes",
             [],
@@ -250,7 +250,7 @@ class KinshipGraph:
             raw_nodes,
             list,
         ):
-            raise KinshipValidationError(
+            raise KindredValidationError(
                 "runtime graph nodes "
                 "must be an array"
             )
@@ -259,14 +259,14 @@ class KinshipGraph:
             raw_edges,
             list,
         ):
-            raise KinshipValidationError(
+            raise KindredValidationError(
                 "runtime graph edges "
                 "must be an array"
             )
 
         nodes: dict[
             str,
-            KinshipNode,
+            KindredNode,
         ] = {}
 
         for raw_node in raw_nodes:
@@ -274,7 +274,7 @@ class KinshipGraph:
                 raw_node,
                 Mapping,
             ):
-                raise KinshipValidationError(
+                raise KindredValidationError(
                     "runtime graph node "
                     "must be an object"
                 )
@@ -287,20 +287,20 @@ class KinshipGraph:
             ).strip()
 
             if not node_id:
-                raise KinshipValidationError(
+                raise KindredValidationError(
                     "runtime graph node "
                     "lacks id"
                 )
 
             if node_id in nodes:
-                raise KinshipValidationError(
+                raise KindredValidationError(
                     "duplicate runtime node "
                     f"id: {node_id}"
                 )
 
             nodes[
                 node_id
-            ] = KinshipNode(
+            ] = KindredNode(
                 id=node_id,
                 canonical_id=str(
                     raw_node.get(
@@ -370,7 +370,7 @@ class KinshipGraph:
                 raw_edge,
                 Mapping,
             ):
-                raise KinshipValidationError(
+                raise KindredValidationError(
                     "runtime graph edge "
                     "must be an object"
                 )
@@ -501,7 +501,7 @@ class KinshipGraph:
             ).strip()
 
             if not parent or not child:
-                raise KinshipValidationError(
+                raise KindredValidationError(
                     "lineage edge requires "
                     "parent/source and "
                     "child/target"
@@ -524,9 +524,9 @@ class KinshipGraph:
                 )
             ).strip() or "neutral"
 
-            kinship = _mapping(
+            kindred = _mapping(
                 edge.get(
-                    "kinship"
+                    "kindred"
                 )
             )
 
@@ -536,19 +536,19 @@ class KinshipGraph:
                 )
             )
 
-            metadata_kinship = (
+            metadata_kindred = (
                 _mapping(
                     metadata.get(
-                        "kinship"
+                        "kindred"
                     )
                 )
             )
 
             parent_profile = str(
-                kinship.get(
+                kindred.get(
                     "parent_profile"
                 )
-                or metadata_kinship.get(
+                or metadata_kindred.get(
                     "parent_profile"
                 )
                 or edge.get(
@@ -561,10 +561,10 @@ class KinshipGraph:
             )
 
             child_profile = str(
-                kinship.get(
+                kindred.get(
                     "child_profile"
                 )
-                or metadata_kinship.get(
+                or metadata_kindred.get(
                     "child_profile"
                 )
                 or edge.get(
@@ -667,11 +667,11 @@ class KinshipGraph:
                 ),
                 generation_event=(
                     str(
-                        kinship.get(
+                        kindred.get(
                             "generation_event"
                         )
                     )
-                    if kinship.get(
+                    if kindred.get(
                         "generation_event"
                     )
                     else None
@@ -696,7 +696,7 @@ class KinshipGraph:
             raw_alliances,
             list,
         ):
-            raise KinshipValidationError(
+            raise KindredValidationError(
                 "runtime graph alliances "
                 "must be an array"
             )
@@ -706,7 +706,7 @@ class KinshipGraph:
                 raw_alliance,
                 Mapping,
             ):
-                raise KinshipValidationError(
+                raise KindredValidationError(
                     "alliance must be "
                     "an object"
                 )
@@ -820,16 +820,16 @@ class KinshipGraph:
         )
 
         if not candidates:
-            raise KinshipLookupError(
-                "kinship node not found: "
+            raise KindredLookupError(
+                "kindred node not found: "
                 f"{identifier}"
             )
 
         if len(
             candidates
         ) > 1:
-            raise KinshipLookupError(
-                "kinship node identifier "
+            raise KindredLookupError(
+                "kindred node identifier "
                 f"is ambiguous: {identifier} "
                 "-> "
                 + ", ".join(
@@ -842,7 +842,7 @@ class KinshipGraph:
     def node(
         self,
         identifier: str,
-    ) -> KinshipNode:
+    ) -> KindredNode:
         return self.nodes[
             self.resolve_node_id(
                 identifier
@@ -1108,5 +1108,5 @@ class KinshipGraph:
 
 __all__ = [
     "ACTIVE_STATES",
-    "KinshipGraph",
+    "KindredGraph",
 ]

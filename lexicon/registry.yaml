@@ -305,7 +305,7 @@ lexemes:
     canonical_status: accepted
 - id: lex:identity:exile
   canonical: Exile
-  concept: Identity hierarchy tier 6
+  concept: Identity edifice tier 6
   layer: shard00
   status: active
   lineage:
@@ -318,7 +318,7 @@ lexemes:
     confidence: confirmed
 - id: lex:identity:ink
   canonical: Ink
-  concept: Identity hierarchy tier 3
+  concept: Identity edifice tier 3
   layer: shard00
   status: active
   lineage:
@@ -335,7 +335,7 @@ lexemes:
     confidence: confirmed
 - id: lex:identity:innate
   canonical: Innate
-  concept: Identity hierarchy tier 7
+  concept: Identity edifice tier 7
   layer: shard00
   status: active
   lineage:
@@ -348,7 +348,7 @@ lexemes:
     confidence: confirmed
 - id: lex:identity:iota
   canonical: Iota
-  concept: Identity hierarchy tier 1
+  concept: Identity edifice tier 1
   layer: shard00
   status: active
   lineage:
@@ -361,7 +361,7 @@ lexemes:
     confidence: confirmed
 - id: lex:identity:mote
   canonical: Mote
-  concept: Identity hierarchy tier 2
+  concept: Identity edifice tier 2
   layer: shard00
   status: active
   lineage:
@@ -378,7 +378,7 @@ lexemes:
     confidence: confirmed
 - id: lex:identity:obelisk
   canonical: Obelisk
-  concept: Identity hierarchy tier 9
+  concept: Identity edifice tier 9
   layer: shard00
   status: active
   lineage:
@@ -391,7 +391,7 @@ lexemes:
     confidence: confirmed
 - id: lex:identity:prodigal
   canonical: Prodigal
-  concept: Identity hierarchy tier 5
+  concept: Identity edifice tier 5
   layer: shard00
   status: active
   lineage:
@@ -404,7 +404,7 @@ lexemes:
     confidence: confirmed
 - id: lex:identity:quirk
   canonical: Quirk
-  concept: Identity hierarchy tier 4
+  concept: Identity edifice tier 4
   layer: shard00
   status: active
   lineage:
@@ -417,7 +417,7 @@ lexemes:
     confidence: confirmed
 - id: lex:identity:wyrmhole
   canonical: Wyrmhole
-  concept: Identity hierarchy tier 8
+  concept: Identity edifice tier 8
   layer: shard00
   status: active
   lineage:
@@ -1234,8 +1234,8 @@ lexemes:
     sources:
     - historical-user-lexicon
     confidence: confirmed
-- id: lex:service:kinship
-  canonical: Kinship
+- id: lex:service:kindred
+  canonical: Kindred
   concept: Functional relationship-plane service
   description: Active Savant service that compiles functional relationship planes from Kindred relationship
     authority.
@@ -1255,18 +1255,18 @@ lexemes:
     history: []
   provenance:
     sources:
-    - accepted-graph:service:kinship
+    - accepted-graph:service:kindred
     - accepted-graph:system:kindred
-    - runtime/kinship/
+    - runtime/kindred/
     authority: accepted
     confidence: confirmed
   metadata:
-    accepted_graph_id: service:kinship
+    accepted_graph_id: service:kindred
     system_dependency: system:kindred
-    implementation_ref: runtime/kinship
+    implementation_ref: runtime/kindred
     implemented_through: exile:modus
     role: compile-functional-relationship-planes
-    external_service_identity: service:kinship
+    external_service_identity: service:kindred
     external_kindred_identity: system:kindred
     external_modus_identity: exile:modus
     lexicon_kindred_identity: lex:core:kindred

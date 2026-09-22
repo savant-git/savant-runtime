@@ -1,16 +1,15 @@
 $schema: "https://json-schema.org/draft/2020-12/schema"
-
 title: Savant Kindred Schema
-
 type: object
 
 required:
   - registry_id
   - version
+  - lineage
+  - lineage_segues
   - kindreds
 
 properties:
-
   registry_id:
     type: string
 
@@ -21,21 +20,100 @@ properties:
   authority:
     type: object
 
-  kindreds:
-    type: array
+  lineage:
+    type: object
+    required:
+      - authority_model
+      - authoritative_primitive
+      - inverse_views
+      - duplicate_inverse_storage
+    properties:
+      authority_model:
+        const: directed_segue
+      authoritative_primitive:
+        const: lineage_segue
+      inverse_views:
+        const: projection
+      duplicate_inverse_storage:
+        const: false
+    additionalProperties: true
 
+  lineage_segues:
+    type: array
+    uniqueItems: true
     items:
       type: object
+      required:
+        - id
+        - kind
+        - type
+        - parent
+        - child
+        - role
+      properties:
+        id:
+          type: string
+          minLength: 1
+        kind:
+          const: segue
+        type:
+          const: lineage
+        status:
+          type: string
+        authority:
+          type:
+            - string
+            - object
+        version:
+          type: string
+        parent:
+          type: string
+          minLength: 1
+        child:
+          type: string
+          minLength: 1
+        role:
+          type: string
+          minLength: 1
+        axis:
+          type: string
+        continuation:
+          enum:
+            - neutral
+            - preserving
+            - projecting
+            - transforming
+        scope:
+          type: string
+        order:
+          type: integer
+        inheritance:
+          type: object
+        propagation:
+          type: object
+        validity:
+          type: object
+        provenance:
+          type: object
+        metadata:
+          type: object
+        extensions:
+          type: object
+        future_extensions:
+          type: object
+      additionalProperties: true
 
+  kindreds:
+    type: array
+    items:
+      type: object
       required:
         - id
         - canonical
         - members
         - provenance
         - lineage
-
       properties:
-
         id:
           type: string
           pattern: "^kindred:[a-z][a-z0-9_-]*$"
@@ -66,18 +144,6 @@ properties:
           items:
             type: string
 
-        parents:
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-
-        children:
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-
         dependencies:
           type: array
           uniqueItems: true
@@ -86,45 +152,35 @@ properties:
 
         relationships:
           type: array
-
           items:
             oneOf:
-
               - type: string
-
               - type: object
                 required:
                   - type
                   - target
-
                 properties:
                   type:
                     type: string
-
                   target:
                     type: string
-
                   metadata:
                     type: object
 
         provenance:
           type: object
-
           required:
             - source
             - confidence
-
           properties:
             source:
               type: string
-
             confidence:
               type: string
               enum:
                 - confirmed
                 - inferred
                 - projected
-
             evidence:
               type: array
               items:
@@ -132,26 +188,47 @@ properties:
 
         lineage:
           type: object
-
           properties:
             derived_from:
               type: array
               items:
                 type: string
 
-            supersedes:
-              type: array
-              items:
-                type: string
+        supersedes:
+          type: array
+          items:
+            type: string
 
-            superseded_by:
-              type:
-                - string
-                - "null"
+        superseded_by:
+          type:
+            - string
+            - "null"
 
-            history:
-              type: array
-              items:
-                type: object
+        history:
+          type: array
+          items:
+            type: object
+
+        parents:
+          type: array
+          readOnly: true
+          description: >
+            Compatibility projection only. Authoritative parent
+            relationships are stored as lineage_segues.
+          uniqueItems: true
+          items:
+            type: string
+
+        children:
+          type: array
+          readOnly: true
+          description: >
+            Compatibility projection only. Authoritative child
+            relationships are stored as lineage_segues.
+          uniqueItems: true
+          items:
+            type: string
+
+      additionalProperties: true
 
 additionalProperties: true

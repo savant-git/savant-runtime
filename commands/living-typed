@@ -1,0 +1,514 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+
+from pathlib import Path
+from typing import Any
+
+
+root = Path(
+    "/root/savant-runtime"
+)
+
+if str(
+    root
+) not in sys.path:
+    sys.path.insert(
+        0,
+        str(
+            root
+        ),
+    )
+
+
+from runtime.living_governance import (  # noqa: E402
+    authority_order,
+    stream_records,
+)
+
+from runtime.living_typed_governance import (  # noqa: E402
+    assert_typed_record,
+    evolve_typed_record,
+    living_typed_governance_error,
+    status,
+    validate_typed_record,
+)
+
+
+def json_object(
+    value: str | None,
+    *,
+    field: str,
+) -> dict[str, Any] | None:
+    if value is None:
+        return None
+
+    parsed = json.loads(
+        value
+    )
+
+    if not isinstance(
+        parsed,
+        dict,
+    ):
+        raise ValueError(
+            (
+                field
+                + " must decode to an object"
+            )
+        )
+
+    return parsed
+
+
+def json_list(
+    value: str | None,
+    *,
+    field: str,
+) -> list[Any] | None:
+    if value is None:
+        return None
+
+    parsed = json.loads(
+        value
+    )
+
+    if not isinstance(
+        parsed,
+        list,
+    ):
+        raise ValueError(
+            (
+                field
+                + " must decode to a list"
+            )
+        )
+
+    return parsed
+
+
+def typed_arguments(
+    args: argparse.Namespace,
+) -> dict[str, Any]:
+    output: dict[
+        str,
+        Any,
+    ] = {}
+
+    simple = (
+        "type",
+        "epistemic_class",
+        "effect",
+        "enforcement_mode",
+        "reason_code",
+        "valid_from",
+        "valid_until",
+        "remediation",
+    )
+
+    for field in simple:
+        value = getattr(
+            args,
+            field,
+            None,
+        )
+
+        if value is not None:
+            output[
+                field
+            ] = value
+
+    for field in (
+        "scope",
+        "subject",
+        "target",
+        "action",
+        "predicate",
+        "override",
+    ):
+        value = getattr(
+            args,
+            field,
+            None,
+        )
+
+        if value is not None:
+            output[
+                field
+            ] = json_object(
+                value,
+                field=field,
+            )
+
+    for field in (
+        "exceptions",
+        "evidence",
+        "completion_criteria",
+    ):
+        value = getattr(
+            args,
+            field,
+            None,
+        )
+
+        if value is not None:
+            output[
+                field
+            ] = json_list(
+                value,
+                field=field,
+            )
+
+    return output
+
+
+def add_typed_options(
+    parser: argparse.ArgumentParser,
+) -> None:
+    parser.add_argument(
+        "--type"
+    )
+
+    parser.add_argument(
+        "--epistemic-class",
+        dest="epistemic_class",
+    )
+
+    parser.add_argument(
+        "--scope"
+    )
+
+    parser.add_argument(
+        "--subject"
+    )
+
+    parser.add_argument(
+        "--target"
+    )
+
+    parser.add_argument(
+        "--action"
+    )
+
+    parser.add_argument(
+        "--predicate"
+    )
+
+    parser.add_argument(
+        "--effect"
+    )
+
+    parser.add_argument(
+        "--enforcement-mode",
+        dest="enforcement_mode",
+    )
+
+    parser.add_argument(
+        "--reason-code",
+        dest="reason_code",
+    )
+
+    parser.add_argument(
+        "--valid-from",
+        dest="valid_from",
+    )
+
+    parser.add_argument(
+        "--valid-until",
+        dest="valid_until",
+    )
+
+    parser.add_argument(
+        "--exceptions"
+    )
+
+    parser.add_argument(
+        "--override"
+    )
+
+    parser.add_argument(
+        "--evidence"
+    )
+
+    parser.add_argument(
+        "--remediation"
+    )
+
+    parser.add_argument(
+        "--completion-criteria",
+        dest="completion_criteria",
+    )
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="living-typed",
+        description=(
+            "authoritative sparse typed "
+            "living-governance records"
+        ),
+    )
+
+    subparsers = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    subparsers.add_parser(
+        "status"
+    )
+
+    validate_parser = subparsers.add_parser(
+        "validate"
+    )
+
+    validate_parser.add_argument(
+        "--stream",
+        required=True,
+    )
+
+    validate_parser.add_argument(
+        "--id",
+        required=True,
+    )
+
+    assert_parser = subparsers.add_parser(
+        "assert"
+    )
+
+    assert_parser.add_argument(
+        "--stream",
+        required=True,
+    )
+
+    assert_parser.add_argument(
+        "--id",
+        required=True,
+    )
+
+    assert_parser.add_argument(
+        "--text",
+        required=True,
+    )
+
+    assert_parser.add_argument(
+        "--authority",
+        choices=tuple(
+            authority_order
+        ),
+        default="current_user_directive",
+    )
+
+    assert_parser.add_argument(
+        "--priority",
+        type=int,
+        default=1000,
+    )
+
+    assert_parser.add_argument(
+        "--status",
+        default="active",
+    )
+
+    assert_parser.add_argument(
+        "--dependency",
+        action="append",
+        default=[],
+    )
+
+    assert_parser.add_argument(
+        "--source",
+        action="append",
+        default=[
+            "living-typed-cli"
+        ],
+    )
+
+    add_typed_options(
+        assert_parser
+    )
+
+    evolve_parser = subparsers.add_parser(
+        "evolve"
+    )
+
+    evolve_parser.add_argument(
+        "--stream",
+        required=True,
+    )
+
+    evolve_parser.add_argument(
+        "--id",
+        required=True,
+    )
+
+    evolve_parser.add_argument(
+        "--text"
+    )
+
+    evolve_parser.add_argument(
+        "--authority",
+        choices=tuple(
+            authority_order
+        ),
+    )
+
+    evolve_parser.add_argument(
+        "--priority",
+        type=int,
+    )
+
+    evolve_parser.add_argument(
+        "--status"
+    )
+
+    evolve_parser.add_argument(
+        "--source",
+        action="append",
+        default=[
+            "living-typed-cli"
+        ],
+    )
+
+    add_typed_options(
+        evolve_parser
+    )
+
+    return parser
+
+
+def find_record(
+    stream: str,
+    semantic_id: str,
+) -> dict[str, Any]:
+    for record in stream_records(
+        stream
+    ):
+        if str(
+            record.get(
+                "id",
+                "",
+            )
+        ) == semantic_id:
+            return dict(
+                record
+            )
+
+    raise ValueError(
+        (
+            "record not found: "
+            + stream
+            + ":"
+            + semantic_id
+        )
+    )
+
+
+def main() -> int:
+    parser = build_parser()
+
+    args = parser.parse_args()
+
+    try:
+        if args.command == "status":
+            output = status()
+
+        elif args.command == "validate":
+            output = validate_typed_record(
+                find_record(
+                    args.stream,
+                    args.id,
+                )
+            )
+
+        elif args.command == "assert":
+            output = assert_typed_record(
+                stream=args.stream,
+                semantic_id=args.id,
+                text=args.text,
+                authority=args.authority,
+                priority=args.priority,
+                status=args.status,
+                dependencies=args.dependency,
+                relationships=[],
+                asserted_by="user",
+                source=args.source,
+                typed=typed_arguments(
+                    args
+                ),
+            )
+
+        elif args.command == "evolve":
+            output = evolve_typed_record(
+                stream=args.stream,
+                semantic_id=args.id,
+                text=args.text,
+                authority=args.authority,
+                priority=args.priority,
+                status=args.status,
+                asserted_by="user",
+                source=args.source,
+                typed=typed_arguments(
+                    args
+                ),
+            )
+
+        else:
+            parser.error(
+                "unknown command"
+            )
+
+            return 2
+
+    except (
+        ValueError,
+        json.JSONDecodeError,
+        living_typed_governance_error,
+    ) as exc:
+        print(
+            json.dumps(
+                {
+                    "ok":
+                        False,
+
+                    "error":
+                        str(
+                            exc
+                        ),
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+
+        return 1
+
+    print(
+        json.dumps(
+            output,
+            indent=2,
+            ensure_ascii=False,
+            sort_keys=True,
+            default=list,
+        )
+    )
+
+    if (
+        args.command == "validate"
+        and not output[
+            "valid"
+        ]
+    ):
+        return 1
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

@@ -16,7 +16,7 @@ from jsonschema.exceptions import SchemaError
 
 
 DEFAULT_ROOT = Path("/root/savant-runtime")
-DEFAULT_IDENTITY_ROOT = DEFAULT_ROOT / "hierarchies/identity"
+DEFAULT_IDENTITY_ROOT = DEFAULT_ROOT / "edifices/identity"
 DEFAULT_SCHEMA = (
     DEFAULT_ROOT
     / "tools/identity_quality/identity_quality.schema.json"
@@ -33,7 +33,7 @@ KINDS = {
 }
 
 FORBIDDEN_ACTIVE_TERMS = {
-    "kinship": "kindred",
+    "kindred": "kindred",
 }
 
 DISCOURAGED_UNIVERSAL_TERMS = {

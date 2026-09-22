@@ -1,0 +1,262 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import json
+import sys
+import tempfile
+from pathlib import Path
+
+
+root = Path(
+    "/root/savant-runtime"
+)
+
+if str(root) not in sys.path:
+    sys.path.insert(
+        0,
+        str(root),
+    )
+
+
+from runtime.straub import (
+    Straub,
+    StraubConflictError,
+)
+
+
+def add_record(
+    datrix,
+    record_id: str,
+    label: str,
+) -> None:
+    datrix.registry.substantiate(
+        {
+            "id":
+                record_id,
+            "kind":
+                "instance",
+            "payload": {
+                "label":
+                    label,
+            },
+            "provenance": {
+                "source":
+                    "straub:"
+                    "stale-writer-self-test",
+                "confidence":
+                    "confirmed",
+            },
+        }
+    )
+
+
+def main() -> int:
+    with tempfile.TemporaryDirectory(
+        prefix="straub-stale-writer-"
+    ) as directory:
+        path = (
+            Path(
+                directory
+            )
+            / "shared.datrix"
+        )
+
+        seed = Straub.create_datrix(
+            path
+        )
+
+        add_record(
+            seed,
+            "instance:test:seed",
+            "seed",
+        )
+
+        seed_checkpoint = (
+            seed.checkpoint()
+        )
+
+        writer_a = (
+            Straub.open_datrix(
+                path
+            )
+        )
+
+        writer_b = (
+            Straub.open_datrix(
+                path
+            )
+        )
+
+        shared_digest = (
+            writer_a.health()[
+                "loaded_capsule_digest"
+            ]
+        )
+
+        same_start = bool(
+            shared_digest
+            == writer_b.health()[
+                "loaded_capsule_digest"
+            ]
+        )
+
+        add_record(
+            writer_a,
+            "instance:test:writer-a",
+            "writer a",
+        )
+
+        checkpoint_a = (
+            writer_a.checkpoint()
+        )
+
+        add_record(
+            writer_b,
+            "instance:test:writer-b",
+            "writer b",
+        )
+
+        stale_rejected = False
+        stale_error = None
+
+        try:
+            writer_b.checkpoint()
+
+        except StraubConflictError as exc:
+            stale_rejected = True
+            stale_error = str(
+                exc
+            )
+
+        reopened = (
+            Straub.open_datrix(
+                path
+            )
+        )
+
+        ids = {
+            row[
+                "id"
+            ]
+            for row
+            in reopened.capsule()[
+                "instances"
+            ]
+        }
+
+        preserved_a = bool(
+            "instance:test:writer-a"
+            in ids
+        )
+
+        rejected_b = bool(
+            "instance:test:writer-b"
+            not in ids
+        )
+
+        reopened_digest = (
+            reopened.capsule()[
+                "digest"
+            ]
+        )
+
+        custody = (
+            reopened.health()[
+                "custody"
+            ]
+        )
+
+        passed = bool(
+            same_start
+            and stale_rejected
+            and preserved_a
+            and rejected_b
+            and (
+                reopened_digest
+                == checkpoint_a[
+                    "capsule_digest"
+                ]
+            )
+            and (
+                seed_checkpoint[
+                    "capsule_digest"
+                ]
+                == shared_digest
+            )
+            and (
+                custody[
+                    "stale_writer_protection"
+                ]
+                is True
+            )
+            and (
+                custody[
+                    "compare_and_swap"
+                ]
+                is True
+            )
+            and (
+                reopened.health()[
+                    "automatic_merge"
+                ]
+                is False
+            )
+        )
+
+        output = {
+            "schema":
+                "savant.carbon.straub."
+                "stale-writer-self-test.v1",
+            "passed":
+                passed,
+            "same_start":
+                same_start,
+            "stale_checkpoint_rejected":
+                stale_rejected,
+            "writer_a_preserved":
+                preserved_a,
+            "writer_b_not_merged":
+                rejected_b,
+            "shared_start_digest":
+                shared_digest,
+            "writer_a_digest":
+                checkpoint_a[
+                    "capsule_digest"
+                ],
+            "reopened_digest":
+                reopened_digest,
+            "compare_and_swap":
+                True,
+            "automatic_merge":
+                False,
+            "local_interprocess_coordination":
+                True,
+            "distributed_consensus":
+                False,
+            "stale_error":
+                stale_error,
+            "authority_effect":
+                "none",
+        }
+
+        print(
+            json.dumps(
+                output,
+                indent=2,
+                sort_keys=True,
+                ensure_ascii=False,
+            )
+        )
+
+        return (
+            0
+            if passed
+            else 1
+        )
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )
