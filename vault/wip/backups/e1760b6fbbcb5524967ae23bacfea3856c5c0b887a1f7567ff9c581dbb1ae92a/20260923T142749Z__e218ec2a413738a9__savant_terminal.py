@@ -108,6 +108,24 @@ class terminal_projection:
     dim = "\033[2m"
     italic = "\033[3m"
 
+    _wordmark = (
+        "███████╗ █████╗ ██╗   ██╗ █████╗ ███╗   ██╗████████╗",
+        "██╔════╝██╔══██╗██║   ██║██╔══██╗████╗  ██║╚══██╔══╝",
+        "███████╗███████║██║   ██║███████║██╔██╗ ██║   ██║   ",
+        "╚════██║██╔══██║╚██╗ ██╔╝██╔══██║██║╚██╗██║   ██║   ",
+        "███████║██║  ██║ ╚████╔╝ ██║  ██║██║ ╚████║   ██║   ",
+        "╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝   ",
+    )
+
+    _compact_mark = (
+        "   ╱██████╲   ",
+        " ╱██╱    ╲██╲ ",
+        " ██╲  ╱██╱    ",
+        "   ╲██╲  ╲██  ",
+        " ╲██╱    ╲██╱ ",
+        "   ╲██████╱   ",
+    )
+
     def __init__(
         self,
         *,
@@ -160,6 +178,8 @@ class terminal_projection:
             }
         )
 
+        # Contemporary Termux supports 24-bit ANSI even when
+        # COLORTERM is absent. Explicit opt-out remains available.
         self.truecolor = (
             self.color
             and os.environ.get(
@@ -514,6 +534,9 @@ class terminal_projection:
     def clear_progress(
         self,
     ) -> None:
+        # Snapshot rendering deliberately avoids carriage-return
+        # repainting. Some terminal transports preserve every
+        # carriage-return frame and corrupt the visible transcript.
         self.last_line_width = 0
 
     def line(
@@ -731,44 +754,105 @@ class terminal_projection:
             )
         )
 
-    def _identity(
+    def _sigil(
         self,
     ) -> None:
-        width = min(
-            self.width(),
-            104,
-        )
+        width = self.width()
 
-        label = (
-            self.c(
-                "savant",
-                self.bold,
-                color=palette.gold,
-            )
-            + self.c(
-                " // ",
-                color=palette.gunmetal,
-            )
-            + self.c(
-                self.application.casefold(),
-                self.bold,
-                color=palette.hot_pink,
-            )
-        )
+        if (
+            width >= 72
+            and self.unicode
+        ):
+            for index, row in enumerate(
+                self._wordmark
+            ):
+                if index in {
+                    0,
+                    5,
+                }:
+                    rendered = self.gradient(
+                        row,
+                        start=palette.gold_deep,
+                        end=palette.gold,
+                        bold=True,
+                    )
 
-        self.line(
-            label
-        )
+                elif index == 2:
+                    rendered = self.gradient(
+                        row,
+                        start=palette.gold,
+                        end=palette.hot_pink,
+                        bold=True,
+                    )
 
-        self.line(
-            self.gradient(
-                self._rail(
-                    width
-                ),
-                start=palette.gunmetal,
-                end=palette.gold_deep,
+                else:
+                    rendered = self.c(
+                        row,
+                        self.bold,
+                        color=palette.gold,
+                    )
+
+                self.line(
+                    "  "
+                    + rendered
+                )
+
+            return
+
+        if self.unicode:
+            for index, row in enumerate(
+                self._compact_mark
+            ):
+                color = (
+                    palette.hot_pink
+                    if index in {
+                        2,
+                        3,
+                    }
+                    else palette.gold
+                )
+
+                self.line(
+                    " "
+                    + self.c(
+                        row,
+                        self.bold,
+                        color=color,
+                    )
+                )
+
+            self.line(
+                " "
+                + self.c(
+                    "S A V A N T",
+                    self.bold,
+                    color=palette.gold,
+                )
+                + self.c(
+                    "  //  ",
+                    color=palette.gunmetal,
+                )
+                + self.c(
+                    self.application.upper(),
+                    self.bold,
+                    color=palette.hot_pink,
+                )
             )
-        )
+
+        else:
+            self.line(
+                self.c(
+                    "[ S A V A N T ]",
+                    self.bold,
+                    color=palette.gold,
+                )
+                + " "
+                + self.c(
+                    self.application.upper(),
+                    self.bold,
+                    color=palette.hot_pink,
+                )
+            )
 
     def banner(
         self,
@@ -779,7 +863,16 @@ class terminal_projection:
     ) -> None:
         self.line()
 
-        self._identity()
+        self._sigil()
+
+        self.line(
+            "  "
+            + self.gradient(
+                self._rail(),
+                start=palette.gunmetal,
+                end=palette.gold_deep,
+            )
+        )
 
         subtitle = (
             detail
@@ -827,7 +920,7 @@ class terminal_projection:
 
         topology = (
             self.c(
-                "source",
+                "SOURCE",
                 self.bold,
                 color=palette.gold,
             )
@@ -836,7 +929,7 @@ class terminal_projection:
                 color=palette.gunmetal,
             )
             + self.c(
-                "hash",
+                "HASH",
                 self.bold,
                 color=palette.gold_deep,
             )
@@ -845,7 +938,7 @@ class terminal_projection:
                 color=palette.gunmetal,
             )
             + self.c(
-                "package",
+                "PACKAGE",
                 self.bold,
                 color=palette.gold,
             )
@@ -854,7 +947,7 @@ class terminal_projection:
                 color=palette.gunmetal,
             )
             + self.c(
-                "verify",
+                "VERIFY",
                 self.bold,
                 color=palette.hot_pink,
             )
@@ -1165,6 +1258,8 @@ class terminal_projection:
             ),
         )
 
+        # Twenty deterministic milestones plus the forced terminal
+        # frame bounds transcript output without relying on \r.
         bucket = (
             20
             if safe_current
@@ -1562,50 +1657,57 @@ class terminal_projection:
             else elapsed
         )
 
-        lines = [
+        seal = (
             self.c(
-                "verified publication",
+                "     ╭──────────╮",
+                self.bold,
+                color=palette.gold,
+            )
+            + "\n"
+            + self.c(
+                "     │",
+                color=palette.gold_deep,
+            )
+            + self.c(
+                "    ◆     ",
+                self.bold,
+                color=palette.hot_pink,
+            )
+            + self.c(
+                "│",
+                color=palette.gold_deep,
+            )
+            + "\n"
+            + self.c(
+                "     │",
+                color=palette.gold_deep,
+            )
+            + self.c(
+                " VERIFIED ",
                 self.bold,
                 color=palette.paper,
-            ),
-            (
-                self.c(
-                    "source",
-                    color=palette.gold,
-                )
-                + self.c(
-                    " ━◆━ ",
-                    color=palette.gunmetal,
-                )
-                + self.c(
-                    "hash",
-                    color=palette.gold_deep,
-                )
-                + self.c(
-                    " ━◆━ ",
-                    color=palette.gunmetal,
-                )
-                + self.c(
-                    "package",
-                    color=palette.gold,
-                )
-                + self.c(
-                    " ━◆━ ",
-                    color=palette.gunmetal,
-                )
-                + self.c(
-                    "publish",
-                    color=palette.gold,
-                )
-                + self.c(
-                    " ━◆━ ",
-                    color=palette.gunmetal,
-                )
-                + self.c(
-                    "verify",
-                    self.bold,
-                    color=palette.hot_pink,
-                )
+            )
+            + self.c(
+                "│",
+                color=palette.gold_deep,
+            )
+            + "\n"
+            + self.c(
+                "     ╰──────────╯",
+                self.bold,
+                color=palette.gold,
+            )
+        )
+
+        lines = [
+            seal,
+            self.c(
+                (
+                    "source ━◆━ hash ━◆━ "
+                    "package ━◆━ publish ━◆━ verify"
+                ),
+                self.bold,
+                color=palette.gold,
             ),
         ]
 
@@ -1682,7 +1784,8 @@ class terminal_projection:
         )
 
         self.line(
-            self.gradient(
+            "  "
+            + self.gradient(
                 self._rail(),
                 start=palette.gold_deep,
                 end=palette.hot_pink,
