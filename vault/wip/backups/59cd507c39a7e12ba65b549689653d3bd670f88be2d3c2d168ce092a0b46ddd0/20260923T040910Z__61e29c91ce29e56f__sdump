@@ -25,36 +25,25 @@ for path in (
         )
 
 
-import sdump_enterprise.stream_dump as stream_dump
-
-from savant_terminal import (
-    terminal,
-)
-
-
-stream_dump.ui = terminal(
-    "sdump",
-    subtitle=(
-        "deterministic source projection "
-        "· verified publication"
-    ),
+from sdump_enterprise.stream_dump import (
+    StreamDumpError,
+    main,
 )
 
 
 try:
     raise SystemExit(
-        stream_dump.main()
+        main()
     )
 
 except (
-    stream_dump.StreamDumpError,
+    StreamDumpError,
     RuntimeError,
     OSError,
 ) as error:
-    stream_dump.ui.failure(
-        str(
-            error
-        )
+    print(
+        f"sdump error: {error}",
+        file=sys.stderr,
     )
 
     raise SystemExit(
