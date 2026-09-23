@@ -19,17 +19,21 @@ ansi_pattern = re.compile(
     slots=True,
 )
 class terminal_palette:
-    gunmetal_deep: str = "#11151c"
-    gunmetal: str = "#171d27"
+    gunmetal_dark: str = "#121212"
+    gunmetal_light: str = "#1a1a1a"
+    gunmetal_legacy: str = "#3d444d"
 
-    gold_deep: str = "#9d7831"
-    gold: str = "#d6b45f"
+    gold: str = "#e6c03b"
+    gold_deep: str = "#d8a200"
 
-    hot_pink: str = "#ff2f9d"
+    pink: str = "#ff4068"
 
-    paper: str = "#f1e5c7"
-    text: str = "#d8dce3"
-    muted: str = "#858e9d"
+    text: str = "#f4f4ef"
+    text_soft: str = "#a3a39f"
+
+    good: str = "#e6c03b"
+    warn: str = "#ff4068"
+    bad: str = "#ff4068"
 
 
 palette = terminal_palette()
@@ -71,8 +75,13 @@ def _interpolate(
         ),
     )
 
-    a = _hex_rgb(start)
-    b = _hex_rgb(end)
+    a = _hex_rgb(
+        start
+    )
+
+    b = _hex_rgb(
+        end
+    )
 
     return tuple(
         round(
@@ -93,7 +102,7 @@ def _interpolate(
 
 class terminal_projection:
     """
-    shared savant terminal projection.
+    shared savant terminal presentation.
 
     presentation only.
 
@@ -117,15 +126,6 @@ class terminal_projection:
         "╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝   ",
     )
 
-    _compact_mark = (
-        "   ╱██████╲   ",
-        " ╱██╱    ╲██╲ ",
-        " ██╲  ╱██╱    ",
-        "   ╲██╲  ╲██  ",
-        " ╲██╱    ╲██╱ ",
-        "   ╲██████╱   ",
-    )
-
     def __init__(
         self,
         *,
@@ -134,7 +134,9 @@ class terminal_projection:
         stream: Any = None,
     ) -> None:
         self.application = (
-            str(application).strip()
+            str(
+                application
+            ).strip()
             or "savant"
         )
 
@@ -178,20 +180,29 @@ class terminal_projection:
             }
         )
 
-        # Contemporary Termux supports 24-bit ANSI even when
-        # COLORTERM is absent. Explicit opt-out remains available.
+        color_term = os.environ.get(
+            "COLORTERM",
+            "",
+        ).casefold()
+
         self.truecolor = (
             self.color
-            and os.environ.get(
-                "SAVANT_TRUECOLOR",
-                "1",
-            ).casefold()
-            not in {
-                "0",
-                "false",
-                "no",
-                "off",
-            }
+            and (
+                "truecolor"
+                in color_term
+                or "24bit"
+                in color_term
+                or os.environ.get(
+                    "SAVANT_TRUECOLOR",
+                    "",
+                ).casefold()
+                in {
+                    "1",
+                    "true",
+                    "yes",
+                    "on",
+                }
+            )
         )
 
         self.unicode = (
@@ -252,16 +263,13 @@ class terminal_projection:
     def _rgb(
         self,
         color: str,
-        background: bool = False,
     ) -> str:
         red, green, blue = _hex_rgb(
             color
         )
 
         return (
-            f"\033["
-            f"{48 if background else 38};"
-            f"2;"
+            f"\033[38;2;"
             f"{red};"
             f"{green};"
             f"{blue}m"
@@ -271,28 +279,22 @@ class terminal_projection:
         self,
         color: str,
     ) -> str:
-        if color == palette.hot_pink:
-            return "\033[38;5;198m"
+        if color == palette.pink:
+            return "\033[95m"
 
-        if color == palette.gold:
-            return "\033[38;5;179m"
-
-        if color == palette.gold_deep:
-            return "\033[38;5;136m"
-
-        if color == palette.paper:
-            return "\033[38;5;230m"
+        if color in {
+            palette.gold,
+            palette.gold_deep,
+        }:
+            return "\033[93m"
 
         if color == palette.text:
-            return "\033[38;5;252m"
+            return "\033[97m"
 
-        if color == palette.muted:
-            return "\033[38;5;102m"
+        if color == palette.text_soft:
+            return "\033[37m"
 
-        if color == palette.gunmetal:
-            return "\033[38;5;239m"
-
-        return "\033[38;5;236m"
+        return "\033[90m"
 
     def color_code(
         self,
@@ -315,7 +317,6 @@ class terminal_projection:
         value: Any,
         *styles: str,
         color: str | None = None,
-        background: str | None = None,
     ) -> str:
         text = str(
             value
@@ -325,19 +326,8 @@ class terminal_projection:
             return text
 
         prefix = "".join(
-            style
-            for style in styles
-            if style
+            styles
         )
-
-        if (
-            background
-            and self.truecolor
-        ):
-            prefix += self._rgb(
-                background,
-                background=True,
-            )
 
         if color:
             prefix += self.color_code(
@@ -370,19 +360,31 @@ class terminal_projection:
         if (
             not self.color
             or not self.truecolor
-            or len(value) < 2
+            or len(
+                value
+            )
+            < 2
         ):
+            styles = (
+                (
+                    self.bold,
+                )
+                if bold
+                else ()
+            )
+
             return self.c(
                 value,
-                self.bold
-                if bold
-                else "",
+                *styles,
                 color=start,
             )
 
         denominator = max(
             1,
-            len(value) - 1,
+            len(
+                value
+            )
+            - 1,
         )
 
         pieces: list[str] = []
@@ -393,20 +395,23 @@ class terminal_projection:
             red, green, blue = _interpolate(
                 start,
                 end,
-                index / denominator,
+                index
+                / denominator,
+            )
+
+            prefix = (
+                self.bold
+                if bold
+                else ""
             )
 
             pieces.append(
-                (
-                    self.bold
-                    if bold
-                    else ""
-                )
-                + f"\033[38;2;"
-                + f"{red};"
-                + f"{green};"
-                + f"{blue}m"
-                + character
+                f"{prefix}"
+                f"\033[38;2;"
+                f"{red};"
+                f"{green};"
+                f"{blue}m"
+                f"{character}"
             )
 
         pieces.append(
@@ -462,7 +467,9 @@ class terminal_projection:
     ) -> str:
         seconds_int = max(
             0,
-            int(seconds),
+            int(
+                seconds
+            ),
         )
 
         if seconds_int < 60:
@@ -505,16 +512,14 @@ class terminal_projection:
         character: str | None = None,
         width: int | None = None,
     ) -> str:
-        character = (
-            character
-            or (
+        if character is None:
+            character = (
                 "━"
                 if self.unicode
                 else "="
             )
-        )
 
-        target = (
+        target_width = (
             width
             if width is not None
             else min(
@@ -527,16 +532,23 @@ class terminal_projection:
             character
             * max(
                 1,
-                target,
+                target_width,
             )
         )
 
     def clear_progress(
         self,
     ) -> None:
-        # Snapshot rendering deliberately avoids carriage-return
-        # repainting. Some terminal transports preserve every
-        # carriage-return frame and corrupt the visible transcript.
+        """
+        progress is snapshot based.
+
+        carriage-return erasure is
+        deliberately not used because
+        some terminal transports preserve
+        every intermediate carriage-return
+        frame as visible output.
+        """
+
         self.last_line_width = 0
 
     def line(
@@ -561,80 +573,29 @@ class terminal_projection:
     def _phase_mark(
         self,
     ) -> str:
+        if not self.unicode:
+            return ">"
+
         marks = (
-            (
-                "◈",
-                "◆",
-                "◇",
-                "◊",
-            )
-            if self.unicode
-            else (
-                ">",
-                "*",
-                "+",
-                ">",
-            )
+            "◈",
+            "◆",
+            "◇",
+            "◊",
         )
 
         return marks[
             self._phase_index
-            % len(marks)
+            % len(
+                marks
+            )
         ]
 
-    def _rail(
-        self,
-        width: int | None = None,
-    ) -> str:
-        length = max(
-            12,
-            (
-                width
-                or min(
-                    self.width(),
-                    104,
-                )
-            )
-            - 8,
-        )
-
-        if not self.unicode:
-            return (
-                "["
-                + "="
-                * max(
-                    1,
-                    length - 2,
-                )
-                + "]"
-            )
-
-        left = max(
-            2,
-            length // 3,
-        )
-
-        right = max(
-            2,
-            length
-            - left
-            - 5,
-        )
-
-        return (
-            "╾"
-            + "━" * left
-            + "◆━━◆"
-            + "━" * right
-            + "╼"
-        )
-
-    def _panel(
+    def _box(
         self,
         lines: Sequence[str],
         *,
+        accent: str = palette.gold,
         title: str = "",
-        accent: str = palette.gold_deep,
     ) -> None:
         width = min(
             self.width(),
@@ -643,31 +604,41 @@ class terminal_projection:
 
         inner = max(
             8,
-            width - 2,
+            width
+            - 2,
         )
 
-        label = (
+        top_label = (
             f" {title} "
             if title
             else ""
         )
 
+        remainder = max(
+            0,
+            inner
+            - len(
+                top_label
+            ),
+        )
+
         if self.unicode:
             top = (
                 "╭"
-                + label
-                + "─"
-                * max(
-                    0,
-                    inner
-                    - len(label),
+                + top_label
+                + (
+                    "─"
+                    * remainder
                 )
                 + "╮"
             )
 
             bottom = (
                 "╰"
-                + "─" * inner
+                + (
+                    "─"
+                    * inner
+                )
                 + "╯"
             )
 
@@ -677,19 +648,20 @@ class terminal_projection:
         else:
             top = (
                 "+"
-                + label
-                + "-"
-                * max(
-                    0,
-                    inner
-                    - len(label),
+                + top_label
+                + (
+                    "-"
+                    * remainder
                 )
                 + "+"
             )
 
             bottom = (
                 "+"
-                + "-" * inner
+                + (
+                    "-"
+                    * inner
+                )
                 + "+"
             )
 
@@ -709,40 +681,50 @@ class terminal_projection:
                 raw
             )
 
-            if len(visible) > inner - 2:
-                raw = (
-                    visible[
-                        :inner - 3
-                    ]
-                    + "…"
-                )
-
-                visible = self.plain(
-                    raw
-                )
-
-            padding = (
-                " "
-                * max(
+            clipped = visible[
+                :max(
                     0,
                     inner
-                    - 2
-                    - len(visible),
+                    - 2,
                 )
+            ]
+
+            rendered = (
+                raw
+                if len(
+                    visible
+                )
+                <= inner
+                - 2
+                else clipped
+            )
+
+            padding = max(
+                0,
+                inner
+                - 2
+                - len(
+                    self.plain(
+                        rendered
+                    )
+                ),
             )
 
             self.line(
                 self.c(
                     left,
-                    color=palette.gunmetal,
+                    color=palette.gunmetal_legacy,
                 )
                 + " "
-                + raw
-                + padding
+                + rendered
+                + (
+                    " "
+                    * padding
+                )
                 + " "
                 + self.c(
                     right,
-                    color=palette.gunmetal,
+                    color=palette.gunmetal_legacy,
                 )
             )
 
@@ -754,10 +736,16 @@ class terminal_projection:
             )
         )
 
-    def _sigil(
+    def banner(
         self,
+        target: Any = None,
+        *,
+        detail: str = "",
+        destination: str = "",
     ) -> None:
         width = self.width()
+
+        self.line()
 
         if (
             width >= 72
@@ -766,54 +754,18 @@ class terminal_projection:
             for index, row in enumerate(
                 self._wordmark
             ):
-                if index in {
-                    0,
-                    5,
-                }:
-                    rendered = self.gradient(
-                        row,
-                        start=palette.gold_deep,
-                        end=palette.gold,
-                        bold=True,
-                    )
-
-                elif index == 2:
-                    rendered = self.gradient(
-                        row,
-                        start=palette.gold,
-                        end=palette.hot_pink,
-                        bold=True,
-                    )
-
-                else:
-                    rendered = self.c(
-                        row,
-                        self.bold,
-                        color=palette.gold,
-                    )
-
-                self.line(
-                    "  "
-                    + rendered
-                )
-
-            return
-
-        if self.unicode:
-            for index, row in enumerate(
-                self._compact_mark
-            ):
                 color = (
-                    palette.hot_pink
-                    if index in {
-                        2,
-                        3,
+                    palette.gold_deep
+                    if index
+                    in {
+                        0,
+                        5,
                     }
                     else palette.gold
                 )
 
                 self.line(
-                    " "
+                    "  "
                     + self.c(
                         row,
                         self.bold,
@@ -822,57 +774,40 @@ class terminal_projection:
                 )
 
             self.line(
-                " "
+                "  "
                 + self.c(
-                    "S A V A N T",
+                    "◆",
                     self.bold,
-                    color=palette.gold,
+                    color=palette.pink,
                 )
+                + " "
                 + self.c(
-                    "  //  ",
-                    color=palette.gunmetal,
-                )
-                + self.c(
-                    self.application.upper(),
+                    (
+                        f"{self.application.upper()} "
+                        f"// TERMINAL PROJECTION"
+                    ),
                     self.bold,
-                    color=palette.hot_pink,
+                    color=palette.text,
                 )
             )
 
         else:
             self.line(
                 self.c(
-                    "[ S A V A N T ]",
+                    "◆ SAVANT",
                     self.bold,
                     color=palette.gold,
                 )
                 + " "
                 + self.c(
-                    self.application.upper(),
+                    (
+                        f"// "
+                        f"{self.application}"
+                    ),
                     self.bold,
-                    color=palette.hot_pink,
+                    color=palette.pink,
                 )
             )
-
-    def banner(
-        self,
-        target: Any = None,
-        *,
-        detail: str = "",
-        destination: str = "",
-    ) -> None:
-        self.line()
-
-        self._sigil()
-
-        self.line(
-            "  "
-            + self.gradient(
-                self._rail(),
-                start=palette.gunmetal,
-                end=palette.gold_deep,
-            )
-        )
 
         subtitle = (
             detail
@@ -884,12 +819,8 @@ class terminal_projection:
         if subtitle:
             lines.append(
                 self.c(
-                    "projection  ",
-                    color=palette.muted,
-                )
-                + self.c(
                     subtitle,
-                    color=palette.text,
+                    color=palette.text_soft,
                 )
             )
 
@@ -897,20 +828,23 @@ class terminal_projection:
             lines.append(
                 self.c(
                     "target      ",
-                    color=palette.muted,
+                    self.dim,
+                    color=palette.text_soft,
                 )
                 + self.c(
-                    str(target),
-                    self.bold,
-                    color=palette.paper,
+                    str(
+                        target
+                    ),
+                    color=palette.text,
                 )
             )
 
         if destination:
             lines.append(
                 self.c(
-                    "destination ",
-                    color=palette.muted,
+                    "projection  ",
+                    self.dim,
+                    color=palette.text_soft,
                 )
                 + self.c(
                     destination,
@@ -918,53 +852,45 @@ class terminal_projection:
                 )
             )
 
-        topology = (
-            self.c(
-                "SOURCE",
-                self.bold,
-                color=palette.gold,
-            )
-            + self.c(
-                " ━━◆━━ ",
-                color=palette.gunmetal,
-            )
-            + self.c(
-                "HASH",
-                self.bold,
-                color=palette.gold_deep,
-            )
-            + self.c(
-                " ━━◆━━ ",
-                color=palette.gunmetal,
-            )
-            + self.c(
-                "PACKAGE",
-                self.bold,
-                color=palette.gold,
-            )
-            + self.c(
-                " ━━◆━━ ",
-                color=palette.gunmetal,
-            )
-            + self.c(
-                "VERIFY",
-                self.bold,
-                color=palette.hot_pink,
-            )
-        )
-
-        lines.append(
-            topology
-        )
-
-        self._panel(
-            lines,
-            title=(
-                "savant // "
-                "deterministic projection"
-            ),
+        self._box(
+            lines
+            or [
+                "",
+            ],
             accent=palette.gold_deep,
+            title="savant // active",
         )
+
+        if (
+            self.unicode
+            and width >= 72
+        ):
+            rail = (
+                "━━"
+                + "◆"
+                + (
+                    "━"
+                    * max(
+                        8,
+                        min(
+                            width
+                            - 12,
+                            76,
+                        ),
+                    )
+                )
+                + "◆"
+                + "━━"
+            )
+
+            self.line(
+                "  "
+                + self.gradient(
+                    rail,
+                    start=palette.gunmetal_legacy,
+                    end=palette.pink,
+                )
+            )
 
     def phase(
         self,
@@ -972,85 +898,80 @@ class terminal_projection:
         detail: str = "",
     ) -> None:
         self.phase_started = time.monotonic()
+
         self._phase_index += 1
         self.last_snapshot = -1
 
         marker = self._phase_mark()
-        stage = f"{self._phase_index:02d}"
+
+        stage = (
+            f"{self._phase_index:02d}"
+        )
+
+        title = self.c(
+            (
+                f"{stage} / "
+                f"{name.casefold()}"
+            ),
+            self.bold,
+            color=palette.gold,
+        )
+
+        suffix = ""
+
+        if detail:
+            suffix = (
+                "  "
+                + self.c(
+                    detail,
+                    color=palette.text_soft,
+                )
+            )
 
         self.line()
 
         self.line(
             self.c(
-                "╺━━",
-                color=palette.gunmetal,
-            )
-            + self.c(
-                f" {marker} ",
+                marker,
                 self.bold,
-                color=palette.hot_pink,
+                color=palette.pink,
             )
-            + self.c(
-                (
-                    f"{stage} // "
-                    f"{name.casefold()}"
-                ),
-                self.bold,
-                color=palette.gold,
-            )
-            + (
-                self.c(
-                    "  ::  ",
-                    color=palette.gunmetal,
-                )
-                + self.c(
-                    detail,
-                    color=palette.muted,
-                )
-                if detail
-                else ""
-            )
+            + " "
+            + title
+            + suffix
+        )
+
+        length = max(
+            8,
+            min(
+                self.width()
+                - 6,
+                86,
+            ),
         )
 
         if self.unicode:
-            length = max(
-                12,
-                min(
-                    self.width() - 8,
-                    88,
-                ),
-            )
-
-            pulse = min(
-                length - 2,
-                max(
-                    1,
+            self.line(
+                "  "
+                + self.c(
                     (
-                        self._phase_index
-                        * 13
-                    )
-                    % length,
-                ),
-            )
-
-            rail = (
-                "━" * pulse
-                + "◆"
-                + "━"
-                * max(
-                    0,
-                    length
-                    - pulse
-                    - 1,
+                        "╺"
+                        + (
+                            "━"
+                            * length
+                        )
+                        + "╸"
+                    ),
+                    color=palette.gunmetal_legacy,
                 )
             )
 
+        else:
             self.line(
-                "   "
-                + self.gradient(
-                    rail,
-                    start=palette.gunmetal,
-                    end=palette.gold_deep,
+                "  "
+                + (
+                    "-"
+                    * length
                 )
             )
 
@@ -1067,37 +988,44 @@ class terminal_projection:
             "good":
                 palette.gold,
             "warn":
-                palette.hot_pink,
+                palette.pink,
             "bad":
-                palette.hot_pink,
+                palette.pink,
             "violet":
-                palette.hot_pink,
+                palette.pink,
             "normal":
                 palette.text,
         }
 
+        bullet = self.c(
+            (
+                "◆"
+                if self.unicode
+                else ">"
+            ),
+            color=palette.gunmetal_legacy,
+        )
+
+        rendered_label = self.c(
+            str(
+                label
+            ).casefold(),
+            self.dim,
+            color=palette.text_soft,
+        )
+
+        rendered_value = self.c(
+            value,
+            color=colors.get(
+                tone,
+                palette.text,
+            ),
+        )
+
         self.line(
-            "   "
-            + self.c(
-                "◆",
-                color=palette.gold_deep,
-            )
-            + " "
-            + self.c(
-                f"{str(label).casefold():<11}",
-                color=palette.muted,
-            )
-            + self.c(
-                "│ ",
-                color=palette.gunmetal,
-            )
-            + self.c(
-                value,
-                color=colors.get(
-                    tone,
-                    palette.text,
-                ),
-            )
+            f"  {bullet} "
+            f"{rendered_label:<18} "
+            f"{rendered_value}"
         )
 
     def note(
@@ -1120,9 +1048,19 @@ class terminal_projection:
         unit: str = "",
         tone: str = "accent",
     ) -> None:
+        rendered = str(
+            value
+        )
+
+        if unit:
+            rendered = (
+                f"{rendered} "
+                f"{unit}"
+            )
+
         self.field(
             label,
-            f"{value} {unit}".rstrip(),
+            rendered,
             tone=tone,
         )
 
@@ -1215,11 +1153,12 @@ class terminal_projection:
             self.gradient(
                 filled,
                 start=palette.gold_deep,
-                end=palette.hot_pink,
+                end=palette.gold,
             )
             + self.c(
                 empty,
-                color=palette.gunmetal,
+                self.dim,
+                color=palette.gunmetal_legacy,
             )
         )
 
@@ -1237,31 +1176,35 @@ class terminal_projection:
 
         safe_total = max(
             0,
-            int(total),
+            int(
+                total
+            ),
         )
 
         safe_current = max(
             0,
-            int(current),
+            int(
+                current
+            ),
+        )
+
+        fraction = (
+            safe_current
+            / safe_total
+            if safe_total
+            else 1.0
         )
 
         fraction = min(
             1.0,
             max(
                 0.0,
-                (
-                    safe_current
-                    / safe_total
-                    if safe_total
-                    else 1.0
-                ),
+                fraction,
             ),
         )
 
-        # Twenty deterministic milestones plus the forced terminal
-        # frame bounds transcript output without relying on \r.
         bucket = (
-            20
+            100
             if safe_current
             >= safe_total
             else int(
@@ -1274,6 +1217,9 @@ class terminal_projection:
             not force
             and bucket
             == self.last_snapshot
+            and now
+            - self.last_render
+            < 1.0
         ):
             return
 
@@ -1281,7 +1227,7 @@ class terminal_projection:
             not force
             and now
             - self.last_render
-            < 0.35
+            < 0.25
         ):
             return
 
@@ -1319,88 +1265,84 @@ class terminal_projection:
         bar_width = (
             18
             if terminal_width < 64
-            else 30
+            else 28
             if terminal_width < 96
-            else 42
+            else 40
         )
 
-        percentage = (
-            f"{fraction * 100:5.1f}%"
-        )
-
-        self.line(
-            "   "
-            + self.c(
-                "◈",
-                self.bold,
-                color=palette.hot_pink,
-            )
-            + " "
-            + self.c(
-                f"{str(label).casefold():<9}",
+        pieces = [
+            self.c(
+                str(
+                    label
+                ).casefold(),
                 self.bold,
                 color=palette.gold,
-            )
-            + " "
-            + self.bar(
+            ),
+            self.bar(
                 fraction,
                 bar_width,
-            )
-            + " "
-            + self.c(
-                percentage,
+            ),
+            self.c(
+                f"{fraction * 100:5.1f}%",
                 self.bold,
-                color=palette.paper,
-            )
-        )
-
-        telemetry = [
-            (
-                f"{safe_current:,}/"
-                f"{safe_total:,}"
+                color=palette.pink,
+            ),
+            self.c(
+                (
+                    f"{safe_current:,}/"
+                    f"{safe_total:,}"
+                ),
+                color=palette.text_soft,
             ),
         ]
 
-        if bytes_total:
-            telemetry.append(
-                (
-                    f"{self.human_bytes(bytes_done)}"
-                    f" / "
-                    f"{self.human_bytes(bytes_total)}"
+        if (
+            bytes_total
+            and terminal_width >= 72
+        ):
+            pieces.append(
+                self.c(
+                    (
+                        f"{self.human_bytes(bytes_done)}"
+                        f"/"
+                        f"{self.human_bytes(bytes_total)}"
+                    ),
+                    color=palette.text,
                 )
             )
 
         if (
             byte_rate
-            and terminal_width >= 70
+            and terminal_width >= 86
         ):
-            telemetry.append(
-                self.rate(
-                    byte_rate
+            pieces.append(
+                self.c(
+                    self.rate(
+                        byte_rate
+                    ),
+                    color=palette.gold,
                 )
             )
 
         if (
             eta > 0.5
             and safe_current < safe_total
-            and terminal_width >= 86
+            and terminal_width >= 100
         ):
-            telemetry.append(
-                (
-                    "eta "
-                    + self.duration(
-                        eta
-                    )
+            pieces.append(
+                self.c(
+                    (
+                        f"eta "
+                        f"{self.duration(eta)}"
+                    ),
+                    color=palette.text_soft,
                 )
             )
 
         self.line(
-            "     "
-            + self.c(
-                " ┊ ".join(
-                    telemetry
-                ),
-                color=palette.muted,
+            "  "
+            + "  ".join(
+                pieces
             )
         )
 
@@ -1429,15 +1371,28 @@ class terminal_projection:
 
         marker = frames[
             frame
-            % len(frames)
+            % len(
+                frames
+            )
         ]
 
+        suffix = ""
+
+        if detail:
+            suffix = (
+                "  "
+                + self.c(
+                    detail,
+                    color=palette.text_soft,
+                )
+            )
+
         self.line(
-            "   "
+            "  "
             + self.c(
                 marker,
                 self.bold,
-                color=palette.hot_pink,
+                color=palette.pink,
             )
             + " "
             + self.c(
@@ -1445,15 +1400,7 @@ class terminal_projection:
                 self.bold,
                 color=palette.gold,
             )
-            + (
-                "  "
-                + self.c(
-                    detail,
-                    color=palette.muted,
-                )
-                if detail
-                else ""
-            )
+            + suffix
         )
 
     def sparkline(
@@ -1463,17 +1410,21 @@ class terminal_projection:
         width: int = 24,
     ) -> str:
         sequence = [
-            float(value)
+            float(
+                value
+            )
             for value in values
-        ][
+        ]
+
+        if not sequence:
+            return ""
+
+        sequence = sequence[
             -max(
                 1,
                 width,
             ):
         ]
-
-        if not sequence:
-            return ""
 
         low = min(
             sequence
@@ -1494,12 +1445,17 @@ class terminal_projection:
             - low
         )
 
-        rendered = "".join(
-            characters[
+        rendered = ""
+
+        for value in sequence:
+            index = (
                 0
                 if span <= 0
                 else min(
-                    len(characters) - 1,
+                    len(
+                        characters
+                    )
+                    - 1,
                     int(
                         (
                             (
@@ -1509,19 +1465,23 @@ class terminal_projection:
                             / span
                         )
                         * (
-                            len(characters)
+                            len(
+                                characters
+                            )
                             - 1
                         )
                     ),
                 )
+            )
+
+            rendered += characters[
+                index
             ]
-            for value in sequence
-        )
 
         return self.gradient(
             rendered,
             start=palette.gold_deep,
-            end=palette.hot_pink,
+            end=palette.pink,
         )
 
     def table(
@@ -1532,7 +1492,9 @@ class terminal_projection:
     ) -> None:
         data = [
             [
-                str(cell)
+                str(
+                    cell
+                )
                 for cell in row
             ]
             for row in rows
@@ -1542,7 +1504,9 @@ class terminal_projection:
             data.insert(
                 0,
                 [
-                    str(cell)
+                    str(
+                        cell
+                    )
                     for cell in headers
                 ],
             )
@@ -1551,7 +1515,9 @@ class terminal_projection:
             return
 
         columns = max(
-            len(row)
+            len(
+                row
+            )
             for row in data
         )
 
@@ -1565,7 +1531,9 @@ class terminal_projection:
             ):
                 cell = (
                     row[index]
-                    if index < len(row)
+                    if index < len(
+                        row
+                    )
                     else ""
                 )
 
@@ -1573,7 +1541,9 @@ class terminal_projection:
                     30,
                     max(
                         widths[index],
-                        len(cell),
+                        len(
+                            cell
+                        ),
                     ),
                 )
 
@@ -1587,16 +1557,22 @@ class terminal_projection:
             ):
                 cell = (
                     row[index]
-                    if index < len(row)
+                    if index < len(
+                        row
+                    )
                     else ""
-                )[
+                )
+
+                cell = cell[
                     :widths[index]
                 ].ljust(
                     widths[index]
                 )
 
-                header = (
-                    bool(headers)
+                is_header = (
+                    bool(
+                        headers
+                    )
                     and row_index == 0
                 )
 
@@ -1605,22 +1581,22 @@ class terminal_projection:
                         cell,
                         (
                             self.bold
-                            if header
+                            if is_header
                             else ""
                         ),
                         color=(
                             palette.gold
-                            if header
+                            if is_header
                             else palette.text
                         ),
                     )
                 )
 
             self.line(
-                "   "
+                "  "
                 + self.c(
                     "│",
-                    color=palette.gunmetal,
+                    color=palette.gunmetal_legacy,
                 ).join(
                     cells
                 )
@@ -1631,14 +1607,14 @@ class terminal_projection:
                 and row_index == 0
             ):
                 self.line(
-                    "   "
+                    "  "
                     + self.c(
                         "┼".join(
-                            "─" * width
-                            for width
-                            in widths
+                            "─"
+                            * width
+                            for width in widths
                         ),
-                        color=palette.gunmetal,
+                        color=palette.gunmetal_legacy,
                     )
                 )
 
@@ -1657,57 +1633,22 @@ class terminal_projection:
             else elapsed
         )
 
-        seal = (
-            self.c(
-                "     ╭──────────╮",
-                self.bold,
-                color=palette.gold,
-            )
-            + "\n"
-            + self.c(
-                "     │",
-                color=palette.gold_deep,
-            )
-            + self.c(
-                "    ◆     ",
-                self.bold,
-                color=palette.hot_pink,
-            )
-            + self.c(
-                "│",
-                color=palette.gold_deep,
-            )
-            + "\n"
-            + self.c(
-                "     │",
-                color=palette.gold_deep,
-            )
-            + self.c(
-                " VERIFIED ",
-                self.bold,
-                color=palette.paper,
-            )
-            + self.c(
-                "│",
-                color=palette.gold_deep,
-            )
-            + "\n"
-            + self.c(
-                "     ╰──────────╯",
-                self.bold,
-                color=palette.gold,
-            )
-        )
-
         lines = [
-            seal,
+            self.c(
+                "VERIFIED PROJECTION",
+                self.bold,
+                color=palette.gold,
+            ),
             self.c(
                 (
-                    "source ━◆━ hash ━◆━ "
-                    "package ━◆━ publish ━◆━ verify"
+                    "◆ source  "
+                    "◆ hash  "
+                    "◆ package  "
+                    "◆ publish  "
+                    "◆ verify"
                 ),
                 self.bold,
-                color=palette.gold,
+                color=palette.pink,
             ),
         ]
 
@@ -1715,11 +1656,11 @@ class terminal_projection:
             lines.append(
                 self.c(
                     "source files  ",
-                    color=palette.muted,
+                    color=palette.text_soft,
                 )
                 + self.c(
                     f"{source_files:,}",
-                    color=palette.paper,
+                    color=palette.text,
                 )
             )
 
@@ -1727,7 +1668,7 @@ class terminal_projection:
             lines.append(
                 self.c(
                     "artifact      ",
-                    color=palette.muted,
+                    color=palette.text_soft,
                 )
                 + self.c(
                     self.human_bytes(
@@ -1740,7 +1681,7 @@ class terminal_projection:
         lines.append(
             self.c(
                 "elapsed       ",
-                color=palette.muted,
+                color=palette.text_soft,
             )
             + self.c(
                 self.duration(
@@ -1764,7 +1705,7 @@ class terminal_projection:
             lines.append(
                 self.c(
                     f"{label:<13}",
-                    color=palette.muted,
+                    color=palette.text_soft,
                 )
                 + self.c(
                     value,
@@ -1774,21 +1715,34 @@ class terminal_projection:
 
         self.line()
 
-        self._panel(
+        self._box(
             lines,
-            title=(
-                "savant // "
-                "verified publication"
-            ),
             accent=palette.gold,
+            title="◆ savant // complete",
         )
 
         self.line(
             "  "
-            + self.gradient(
-                self._rail(),
-                start=palette.gold_deep,
-                end=palette.hot_pink,
+            + self.c(
+                "◆",
+                self.bold,
+                color=palette.pink,
+            )
+            + " "
+            + self.c(
+                (
+                    f"{self.application} "
+                    f"complete"
+                ),
+                self.bold,
+                color=palette.gold,
+            )
+        )
+
+        self.line(
+            self.c(
+                self.rule(),
+                color=palette.gunmetal_legacy,
             )
         )
 
@@ -1800,9 +1754,11 @@ class terminal_projection:
     ) -> None:
         lines = [
             self.c(
-                str(message),
+                str(
+                    message
+                ),
                 self.bold,
-                color=palette.hot_pink,
+                color=palette.pink,
             ),
         ]
 
@@ -1810,16 +1766,16 @@ class terminal_projection:
             lines.append(
                 self.c(
                     detail,
-                    color=palette.muted,
+                    color=palette.text_soft,
                 )
             )
 
         self.line()
 
-        self._panel(
+        self._box(
             lines,
-            title="savant // fault",
-            accent=palette.hot_pink,
+            accent=palette.pink,
+            title="◆ savant // fault",
         )
 
     def command(
@@ -1828,12 +1784,23 @@ class terminal_projection:
         *,
         detail: str = "",
     ) -> None:
+        suffix = ""
+
+        if detail:
+            suffix = (
+                "  "
+                + self.c(
+                    detail,
+                    color=palette.text_soft,
+                )
+            )
+
         self.line(
-            "   "
+            "  "
             + self.c(
-                "❯",
+                "$",
                 self.bold,
-                color=palette.hot_pink,
+                color=palette.pink,
             )
             + " "
             + self.c(
@@ -1841,15 +1808,7 @@ class terminal_projection:
                 self.bold,
                 color=palette.gold,
             )
-            + (
-                "  "
-                + self.c(
-                    detail,
-                    color=palette.muted,
-                )
-                if detail
-                else ""
-            )
+            + suffix
         )
 
 
