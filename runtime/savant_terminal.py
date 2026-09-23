@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-import math
 import os
 import re
 import shutil
@@ -14,28 +13,27 @@ ansi_pattern = re.compile(
     r"\x1b\[[0-9;]*m"
 )
 
-truecolor_pattern = re.compile(
-    r"\x1b\[38;2;\d+;\d+;\d+m"
-)
-
 
 @dataclass(
     frozen=True,
     slots=True,
 )
 class terminal_palette:
-    night: str = "#030405"
-    night_soft: str = "#090b0c"
-    ink: str = "#0b0d0e"
-    paper: str = "#ece9e0"
-    paper_muted: str = "#c7c4bb"
-    ice: str = "#9cecff"
-    acid: str = "#b8f2dc"
-    amber: str = "#ffd397"
-    blue: str = "#72ddff"
-    green: str = "#98e8c3"
-    red: str = "#ff9999"
-    violet: str = "#cab7ff"
+    gunmetal_dark: str = "#121212"
+    gunmetal_light: str = "#1a1a1a"
+    gunmetal_legacy: str = "#3d444d"
+
+    gold: str = "#e6c03b"
+    gold_deep: str = "#d8a200"
+
+    pink: str = "#ff4068"
+
+    text: str = "#f4f4ef"
+    text_soft: str = "#a3a39f"
+
+    good: str = "#e6c03b"
+    warn: str = "#ff4068"
+    bad: str = "#ff4068"
 
 
 palette = terminal_palette()
@@ -51,19 +49,16 @@ def _hex_rgb(
             f"invalid rgb color: {value}"
         )
 
-    return (
+    return tuple(
         int(
-            clean[0:2],
+            clean[index:index + 2],
             16,
-        ),
-        int(
-            clean[2:4],
-            16,
-        ),
-        int(
-            clean[4:6],
-            16,
-        ),
+        )
+        for index in (
+            0,
+            2,
+            4,
+        )
     )
 
 
@@ -83,6 +78,7 @@ def _interpolate(
     a = _hex_rgb(
         start
     )
+
     b = _hex_rgb(
         end
     )
@@ -106,19 +102,29 @@ def _interpolate(
 
 class terminal_projection:
     """
-    shared savant terminal projection.
+    shared savant terminal presentation.
 
-    this object owns presentation only.
+    presentation only.
 
-    it does not own command behavior,
-    authority, source state, execution
-    semantics, or command results.
+    command semantics, authority,
+    source state, execution behavior,
+    and command results remain owned
+    by their originating systems.
     """
 
     reset = "\033[0m"
     bold = "\033[1m"
     dim = "\033[2m"
     italic = "\033[3m"
+
+    _wordmark = (
+        "███████╗ █████╗ ██╗   ██╗ █████╗ ███╗   ██╗████████╗",
+        "██╔════╝██╔══██╗██║   ██║██╔══██╗████╗  ██║╚══██╔══╝",
+        "███████╗███████║██║   ██║███████║██╔██╗ ██║   ██║   ",
+        "╚════██║██╔══██║╚██╗ ██╔╝██╔══██║██║╚██╗██║   ██║   ",
+        "███████║██║  ██║ ╚████╔╝ ██║  ██║██║ ╚████║   ██║   ",
+        "╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝   ",
+    )
 
     def __init__(
         self,
@@ -174,19 +180,18 @@ class terminal_projection:
             }
         )
 
+        color_term = os.environ.get(
+            "COLORTERM",
+            "",
+        ).casefold()
+
         self.truecolor = (
             self.color
             and (
                 "truecolor"
-                in os.environ.get(
-                    "COLORTERM",
-                    "",
-                ).casefold()
+                in color_term
                 or "24bit"
-                in os.environ.get(
-                    "COLORTERM",
-                    "",
-                ).casefold()
+                in color_term
                 or os.environ.get(
                     "SAVANT_TRUECOLOR",
                     "",
@@ -232,15 +237,18 @@ class terminal_projection:
 
         self.started = time.monotonic()
         self.phase_started = self.started
+
         self.last_render = 0.0
+        self.last_snapshot = -1
         self.last_line_width = 0
+
         self._phase_index = 0
 
     def width(
         self,
     ) -> int:
         return max(
-            54,
+            44,
             min(
                 shutil.get_terminal_size(
                     (
@@ -271,31 +279,22 @@ class terminal_projection:
         self,
         color: str,
     ) -> str:
-        mapping = {
-            palette.ice:
-                "\033[96m",
-            palette.acid:
-                "\033[92m",
-            palette.amber:
-                "\033[93m",
-            palette.blue:
-                "\033[94m",
-            palette.green:
-                "\033[92m",
-            palette.red:
-                "\033[91m",
-            palette.violet:
-                "\033[95m",
-            palette.paper:
-                "\033[97m",
-            palette.paper_muted:
-                "\033[37m",
-        }
+        if color == palette.pink:
+            return "\033[95m"
 
-        return mapping.get(
-            color,
-            "\033[37m",
-        )
+        if color in {
+            palette.gold,
+            palette.gold_deep,
+        }:
+            return "\033[93m"
+
+        if color == palette.text:
+            return "\033[97m"
+
+        if color == palette.text_soft:
+            return "\033[37m"
+
+        return "\033[90m"
 
     def color_code(
         self,
@@ -347,18 +346,15 @@ class terminal_projection:
     ) -> str:
         return ansi_pattern.sub(
             "",
-            truecolor_pattern.sub(
-                "",
-                value,
-            ),
+            value,
         )
 
     def gradient(
         self,
         value: str,
         *,
-        start: str = palette.ice,
-        end: str = palette.acid,
+        start: str = palette.gold_deep,
+        end: str = palette.gold,
         bold: bool = False,
     ) -> str:
         if (
@@ -366,7 +362,8 @@ class terminal_projection:
             or not self.truecolor
             or len(
                 value
-            ) < 2
+            )
+            < 2
         ):
             styles = (
                 (
@@ -429,14 +426,6 @@ class terminal_projection:
         self,
         value: float,
     ) -> str:
-        units = (
-            "B",
-            "KiB",
-            "MiB",
-            "GiB",
-            "TiB",
-        )
-
         amount = float(
             max(
                 0.0,
@@ -444,11 +433,16 @@ class terminal_projection:
             )
         )
 
-        for unit in units:
+        for unit in (
+            "B",
+            "KiB",
+            "MiB",
+            "GiB",
+            "TiB",
+        ):
             if (
                 amount < 1024.0
-                or unit
-                == units[-1]
+                or unit == "TiB"
             ):
                 if unit == "B":
                     return (
@@ -520,9 +514,9 @@ class terminal_projection:
     ) -> str:
         if character is None:
             character = (
-                "─"
+                "━"
                 if self.unicode
-                else "-"
+                else "="
             )
 
         target_width = (
@@ -530,7 +524,7 @@ class terminal_projection:
             if width is not None
             else min(
                 self.width(),
-                92,
+                104,
             )
         )
 
@@ -545,22 +539,15 @@ class terminal_projection:
     def clear_progress(
         self,
     ) -> None:
-        if (
-            not self.tty
-            or not self.last_line_width
-        ):
-            return
+        """
+        progress is snapshot based.
 
-        self.stream.write(
-            "\r"
-            + (
-                " "
-                * self.last_line_width
-            )
-            + "\r"
-        )
-
-        self.stream.flush()
+        carriage-return erasure is
+        deliberately not used because
+        some terminal transports preserve
+        every intermediate carriage-return
+        frame as visible output.
+        """
 
         self.last_line_width = 0
 
@@ -568,8 +555,6 @@ class terminal_projection:
         self,
         value: str = "",
     ) -> None:
-        self.clear_progress()
-
         print(
             value,
             file=self.stream,
@@ -588,15 +573,15 @@ class terminal_projection:
     def _phase_mark(
         self,
     ) -> str:
-        marks = (
-            "◇",
-            "◈",
-            "◊",
-            "◆",
-        )
-
         if not self.unicode:
             return ">"
+
+        marks = (
+            "◈",
+            "◆",
+            "◇",
+            "◊",
+        )
 
         return marks[
             self._phase_index
@@ -605,6 +590,152 @@ class terminal_projection:
             )
         ]
 
+    def _box(
+        self,
+        lines: Sequence[str],
+        *,
+        accent: str = palette.gold,
+        title: str = "",
+    ) -> None:
+        width = min(
+            self.width(),
+            104,
+        )
+
+        inner = max(
+            8,
+            width
+            - 2,
+        )
+
+        top_label = (
+            f" {title} "
+            if title
+            else ""
+        )
+
+        remainder = max(
+            0,
+            inner
+            - len(
+                top_label
+            ),
+        )
+
+        if self.unicode:
+            top = (
+                "╭"
+                + top_label
+                + (
+                    "─"
+                    * remainder
+                )
+                + "╮"
+            )
+
+            bottom = (
+                "╰"
+                + (
+                    "─"
+                    * inner
+                )
+                + "╯"
+            )
+
+            left = "│"
+            right = "│"
+
+        else:
+            top = (
+                "+"
+                + top_label
+                + (
+                    "-"
+                    * remainder
+                )
+                + "+"
+            )
+
+            bottom = (
+                "+"
+                + (
+                    "-"
+                    * inner
+                )
+                + "+"
+            )
+
+            left = "|"
+            right = "|"
+
+        self.line(
+            self.c(
+                top,
+                self.bold,
+                color=accent,
+            )
+        )
+
+        for raw in lines:
+            visible = self.plain(
+                raw
+            )
+
+            clipped = visible[
+                :max(
+                    0,
+                    inner
+                    - 2,
+                )
+            ]
+
+            rendered = (
+                raw
+                if len(
+                    visible
+                )
+                <= inner
+                - 2
+                else clipped
+            )
+
+            padding = max(
+                0,
+                inner
+                - 2
+                - len(
+                    self.plain(
+                        rendered
+                    )
+                ),
+            )
+
+            self.line(
+                self.c(
+                    left,
+                    color=palette.gunmetal_legacy,
+                )
+                + " "
+                + rendered
+                + (
+                    " "
+                    * padding
+                )
+                + " "
+                + self.c(
+                    right,
+                    color=palette.gunmetal_legacy,
+                )
+            )
+
+        self.line(
+            self.c(
+                bottom,
+                self.bold,
+                color=accent,
+            )
+        )
+
     def banner(
         self,
         target: Any = None,
@@ -612,63 +743,154 @@ class terminal_projection:
         detail: str = "",
         destination: str = "",
     ) -> None:
-        rule = self.rule()
+        width = self.width()
 
-        self.line(
-            self.c(
-                rule,
-                self.dim,
-                color=palette.blue,
+        self.line()
+
+        if (
+            width >= 72
+            and self.unicode
+        ):
+            for index, row in enumerate(
+                self._wordmark
+            ):
+                color = (
+                    palette.gold_deep
+                    if index
+                    in {
+                        0,
+                        5,
+                    }
+                    else palette.gold
+                )
+
+                self.line(
+                    "  "
+                    + self.c(
+                        row,
+                        self.bold,
+                        color=color,
+                    )
+                )
+
+            self.line(
+                "  "
+                + self.c(
+                    "◆",
+                    self.bold,
+                    color=palette.pink,
+                )
+                + " "
+                + self.c(
+                    (
+                        f"{self.application.upper()} "
+                        f"// TERMINAL PROJECTION"
+                    ),
+                    self.bold,
+                    color=palette.text,
+                )
             )
-        )
 
-        title = (
-            f"savant / "
-            f"{self.application}"
-        )
-
-        self.line(
-            f"{self.c(self._mark(), self.bold, color=palette.ice)} "
-            f"{self.gradient(title, bold=True)}"
-        )
+        else:
+            self.line(
+                self.c(
+                    "◆ SAVANT",
+                    self.bold,
+                    color=palette.gold,
+                )
+                + " "
+                + self.c(
+                    (
+                        f"// "
+                        f"{self.application}"
+                    ),
+                    self.bold,
+                    color=palette.pink,
+                )
+            )
 
         subtitle = (
             detail
             or self.subtitle
         )
 
+        lines: list[str] = []
+
         if subtitle:
-            self.line(
-                "  "
-                + self.c(
+            lines.append(
+                self.c(
                     subtitle,
-                    self.dim,
-                    color=palette.paper_muted,
+                    color=palette.text_soft,
                 )
             )
 
         if target is not None:
-            self.field(
-                "target",
-                str(
-                    target
-                ),
+            lines.append(
+                self.c(
+                    "target      ",
+                    self.dim,
+                    color=palette.text_soft,
+                )
+                + self.c(
+                    str(
+                        target
+                    ),
+                    color=palette.text,
+                )
             )
 
         if destination:
-            self.field(
-                "projection",
-                destination,
-                tone="accent",
+            lines.append(
+                self.c(
+                    "projection  ",
+                    self.dim,
+                    color=palette.text_soft,
+                )
+                + self.c(
+                    destination,
+                    color=palette.gold,
+                )
             )
 
-        self.line(
-            self.c(
-                rule,
-                self.dim,
-                color=palette.blue,
-            )
+        self._box(
+            lines
+            or [
+                "",
+            ],
+            accent=palette.gold_deep,
+            title="savant // active",
         )
+
+        if (
+            self.unicode
+            and width >= 72
+        ):
+            rail = (
+                "━━"
+                + "◆"
+                + (
+                    "━"
+                    * max(
+                        8,
+                        min(
+                            width
+                            - 12,
+                            76,
+                        ),
+                    )
+                )
+                + "◆"
+                + "━━"
+            )
+
+            self.line(
+                "  "
+                + self.gradient(
+                    rail,
+                    start=palette.gunmetal_legacy,
+                    end=palette.pink,
+                )
+            )
 
     def phase(
         self,
@@ -676,14 +898,23 @@ class terminal_projection:
         detail: str = "",
     ) -> None:
         self.phase_started = time.monotonic()
+
         self._phase_index += 1
+        self.last_snapshot = -1
 
         marker = self._phase_mark()
 
-        rendered_name = self.c(
-            name.casefold(),
+        stage = (
+            f"{self._phase_index:02d}"
+        )
+
+        title = self.c(
+            (
+                f"{stage} / "
+                f"{name.casefold()}"
+            ),
             self.bold,
-            color=palette.ice,
+            color=palette.gold,
         )
 
         suffix = ""
@@ -693,16 +924,56 @@ class terminal_projection:
                 "  "
                 + self.c(
                     detail,
-                    self.dim,
-                    color=palette.paper_muted,
+                    color=palette.text_soft,
                 )
             )
 
+        self.line()
+
         self.line(
-            f"{self.c(marker, self.bold, color=palette.blue)} "
-            f"{rendered_name}"
-            f"{suffix}"
+            self.c(
+                marker,
+                self.bold,
+                color=palette.pink,
+            )
+            + " "
+            + title
+            + suffix
         )
+
+        length = max(
+            8,
+            min(
+                self.width()
+                - 6,
+                86,
+            ),
+        )
+
+        if self.unicode:
+            self.line(
+                "  "
+                + self.c(
+                    (
+                        "╺"
+                        + (
+                            "━"
+                            * length
+                        )
+                        + "╸"
+                    ),
+                    color=palette.gunmetal_legacy,
+                )
+            )
+
+        else:
+            self.line(
+                "  "
+                + (
+                    "-"
+                    * length
+                )
+            )
 
     def field(
         self,
@@ -713,22 +984,26 @@ class terminal_projection:
     ) -> None:
         colors = {
             "accent":
-                palette.ice,
+                palette.gold,
             "good":
-                palette.green,
+                palette.gold,
             "warn":
-                palette.amber,
+                palette.pink,
             "bad":
-                palette.red,
+                palette.pink,
             "violet":
-                palette.violet,
+                palette.pink,
             "normal":
-                palette.paper,
+                palette.text,
         }
 
-        color = colors.get(
-            tone,
-            palette.paper,
+        bullet = self.c(
+            (
+                "◆"
+                if self.unicode
+                else ">"
+            ),
+            color=palette.gunmetal_legacy,
         )
 
         rendered_label = self.c(
@@ -736,16 +1011,20 @@ class terminal_projection:
                 label
             ).casefold(),
             self.dim,
-            color=palette.paper_muted,
+            color=palette.text_soft,
         )
 
         rendered_value = self.c(
             value,
-            color=color,
+            color=colors.get(
+                tone,
+                palette.text,
+            ),
         )
 
         self.line(
-            f"  {rendered_label:<18} "
+            f"  {bullet} "
+            f"{rendered_label:<18} "
             f"{rendered_value}"
         )
 
@@ -812,12 +1091,12 @@ class terminal_projection:
             exact
         )
 
-        remainder = (
-            exact
-            - full
-        )
+        partial = ""
 
-        if self.unicode:
+        if (
+            self.unicode
+            and full < width
+        ):
             partials = (
                 "",
                 "▏",
@@ -829,26 +1108,36 @@ class terminal_projection:
                 "▉",
             )
 
-            partial_index = min(
-                7,
-                int(
-                    remainder
-                    * 8
-                ),
-            )
-
-            partial = (
-                partials[
-                    partial_index
-                ]
-                if (
-                    full < width
-                    and partial_index
+            partial = partials[
+                min(
+                    7,
+                    int(
+                        (
+                            exact
+                            - full
+                        )
+                        * 8
+                    ),
                 )
-                else ""
-            )
+            ]
 
-            empty = max(
+        filled = (
+            (
+                "█"
+                if self.unicode
+                else "#"
+            )
+            * full
+            + partial
+        )
+
+        empty = (
+            (
+                "░"
+                if self.unicode
+                else "-"
+            )
+            * max(
                 0,
                 width
                 - full
@@ -858,48 +1147,18 @@ class terminal_projection:
                     else 0
                 ),
             )
-
-            filled_text = (
-                "█"
-                * full
-                + partial
-            )
-
-            empty_text = (
-                "░"
-                * empty
-            )
-
-        else:
-            filled_text = (
-                "#"
-                * full
-            )
-
-            empty_text = (
-                "-"
-                * (
-                    width
-                    - full
-                )
-            )
-
-        if not self.color:
-            return (
-                filled_text
-                + empty_text
-            )
+        )
 
         return (
             self.gradient(
-                filled_text,
-                start=palette.ice,
-                end=palette.acid,
+                filled,
+                start=palette.gold_deep,
+                end=palette.gold,
             )
             + self.c(
-                empty_text,
+                empty,
                 self.dim,
-                color=palette.paper_muted,
+                color=palette.gunmetal_legacy,
             )
         )
 
@@ -914,16 +1173,6 @@ class terminal_projection:
         force: bool = False,
     ) -> None:
         now = time.monotonic()
-
-        if (
-            not force
-            and now
-            - self.last_render
-            < 0.08
-        ):
-            return
-
-        self.last_render = now
 
         safe_total = max(
             0,
@@ -954,6 +1203,37 @@ class terminal_projection:
             ),
         )
 
+        bucket = (
+            100
+            if safe_current
+            >= safe_total
+            else int(
+                fraction
+                * 20
+            )
+        )
+
+        if (
+            not force
+            and bucket
+            == self.last_snapshot
+            and now
+            - self.last_render
+            < 1.0
+        ):
+            return
+
+        if (
+            not force
+            and now
+            - self.last_render
+            < 0.25
+        ):
+            return
+
+        self.last_render = now
+        self.last_snapshot = bucket
+
         elapsed = max(
             now
             - self.phase_started,
@@ -980,19 +1260,14 @@ class terminal_projection:
             else 0.0
         )
 
-        percent = (
-            fraction
-            * 100.0
-        )
-
         terminal_width = self.width()
 
         bar_width = (
-            14
-            if terminal_width < 72
-            else 22
-            if terminal_width < 104
-            else 30
+            18
+            if terminal_width < 64
+            else 28
+            if terminal_width < 96
+            else 40
         )
 
         pieces = [
@@ -1001,25 +1276,30 @@ class terminal_projection:
                     label
                 ).casefold(),
                 self.bold,
-                color=palette.ice,
+                color=palette.gold,
             ),
             self.bar(
                 fraction,
                 bar_width,
             ),
             self.c(
-                f"{percent:5.1f}%",
-                color=palette.acid,
+                f"{fraction * 100:5.1f}%",
+                self.bold,
+                color=palette.pink,
             ),
             self.c(
-                f"{safe_current:,}/"
-                f"{safe_total:,}",
-                self.dim,
-                color=palette.paper_muted,
+                (
+                    f"{safe_current:,}/"
+                    f"{safe_total:,}"
+                ),
+                color=palette.text_soft,
             ),
         ]
 
-        if bytes_total:
+        if (
+            bytes_total
+            and terminal_width >= 72
+        ):
             pieces.append(
                 self.c(
                     (
@@ -1027,24 +1307,27 @@ class terminal_projection:
                         f"/"
                         f"{self.human_bytes(bytes_total)}"
                     ),
-                    color=palette.paper,
+                    color=palette.text,
                 )
             )
 
-        if byte_rate:
+        if (
+            byte_rate
+            and terminal_width >= 86
+        ):
             pieces.append(
                 self.c(
                     self.rate(
                         byte_rate
                     ),
-                    color=palette.amber,
+                    color=palette.gold,
                 )
             )
 
         if (
             eta > 0.5
-            and safe_current
-            < safe_total
+            and safe_current < safe_total
+            and terminal_width >= 100
         ):
             pieces.append(
                 self.c(
@@ -1052,54 +1335,16 @@ class terminal_projection:
                         f"eta "
                         f"{self.duration(eta)}"
                     ),
-                    self.dim,
-                    color=palette.paper_muted,
+                    color=palette.text_soft,
                 )
             )
 
-        text = (
+        self.line(
             "  "
             + "  ".join(
                 pieces
             )
         )
-
-        if self.tty:
-            plain_width = len(
-                self.plain(
-                    text
-                )
-            )
-
-            padding = max(
-                0,
-                self.last_line_width
-                - plain_width,
-            )
-
-            self.stream.write(
-                "\r"
-                + text
-                + (
-                    " "
-                    * padding
-                )
-            )
-
-            self.stream.flush()
-
-            self.last_line_width = (
-                plain_width
-            )
-
-        elif (
-            force
-            or safe_current
-            == safe_total
-        ):
-            self.line(
-                text
-            )
 
     def spinner(
         self,
@@ -1108,20 +1353,21 @@ class terminal_projection:
         detail: str = "",
         frame: int = 0,
     ) -> None:
-        if self.unicode:
-            frames = (
-                "◐",
-                "◓",
-                "◑",
-                "◒",
+        frames = (
+            (
+                "◢",
+                "◣",
+                "◤",
+                "◥",
             )
-        else:
-            frames = (
+            if self.unicode
+            else (
                 "|",
                 "/",
                 "-",
                 "\\",
             )
+        )
 
         marker = frames[
             frame
@@ -1130,188 +1376,256 @@ class terminal_projection:
             )
         ]
 
-        text = (
-            f"  "
-            f"{self.c(marker, self.bold, color=palette.ice)} "
-            f"{self.c(label.casefold(), self.bold, color=palette.paper)}"
-        )
+        suffix = ""
 
         if detail:
-            text += (
+            suffix = (
                 "  "
                 + self.c(
                     detail,
-                    self.dim,
-                    color=palette.paper_muted,
+                    color=palette.text_soft,
                 )
             )
 
-        if self.tty:
-            plain_width = len(
-                self.plain(
-                    text
-                )
+        self.line(
+            "  "
+            + self.c(
+                marker,
+                self.bold,
+                color=palette.pink,
             )
-
-            padding = max(
-                0,
-                self.last_line_width
-                - plain_width,
+            + " "
+            + self.c(
+                label,
+                self.bold,
+                color=palette.gold,
             )
-
-            self.stream.write(
-                "\r"
-                + text
-                + (
-                    " "
-                    * padding
-                )
-            )
-
-            self.stream.flush()
-
-            self.last_line_width = (
-                plain_width
-            )
-
-        else:
-            self.line(
-                text
-            )
+            + suffix
+        )
 
     def sparkline(
         self,
-        values: Sequence[float],
+        values: Iterable[float],
+        *,
+        width: int = 24,
     ) -> str:
-        if not values:
+        sequence = [
+            float(
+                value
+            )
+            for value in values
+        ]
+
+        if not sequence:
             return ""
 
-        if not self.unicode:
-            return "".join(
-                "."
-                if value
-                < 0.5
-                else "#"
-                for value
-                in values
-            )
+        sequence = sequence[
+            -max(
+                1,
+                width,
+            ):
+        ]
 
-        blocks = (
-            "▁",
-            "▂",
-            "▃",
-            "▄",
-            "▅",
-            "▆",
-            "▇",
-            "█",
+        low = min(
+            sequence
         )
 
-        minimum = min(
-            values
+        high = max(
+            sequence
         )
-        maximum = max(
-            values
+
+        characters = (
+            "▁▂▃▄▅▆▇█"
+            if self.unicode
+            else ".:-=+*#@"
         )
 
         span = (
-            maximum
-            - minimum
+            high
+            - low
         )
 
-        if math.isclose(
-            span,
-            0.0,
-        ):
-            return (
-                blocks[3]
-                * len(
-                    values
+        rendered = ""
+
+        for value in sequence:
+            index = (
+                0
+                if span <= 0
+                else min(
+                    len(
+                        characters
+                    )
+                    - 1,
+                    int(
+                        (
+                            (
+                                value
+                                - low
+                            )
+                            / span
+                        )
+                        * (
+                            len(
+                                characters
+                            )
+                            - 1
+                        )
+                    ),
                 )
             )
 
-        return "".join(
-            blocks[
-                min(
-                    7,
-                    max(
-                        0,
-                        round(
-                            (
-                                value
-                                - minimum
-                            )
-                            / span
-                            * 7
-                        ),
-                    ),
-                )
+            rendered += characters[
+                index
             ]
-            for value
-            in values
+
+        return self.gradient(
+            rendered,
+            start=palette.gold_deep,
+            end=palette.pink,
         )
 
     def table(
         self,
-        rows: Iterable[
-            tuple[Any, Any]
-        ],
+        rows: Sequence[Sequence[Any]],
+        *,
+        headers: Sequence[str] | None = None,
     ) -> None:
-        materialized = [
-            (
+        data = [
+            [
                 str(
-                    left
-                ),
-                str(
-                    right
-                ),
-            )
-            for left, right
-            in rows
+                    cell
+                )
+                for cell in row
+            ]
+            for row in rows
         ]
 
-        if not materialized:
+        if headers:
+            data.insert(
+                0,
+                [
+                    str(
+                        cell
+                    )
+                    for cell in headers
+                ],
+            )
+
+        if not data:
             return
 
-        label_width = min(
-            24,
-            max(
-                len(
-                    left
-                )
-                for left, _
-                in materialized
-            ),
+        columns = max(
+            len(
+                row
+            )
+            for row in data
         )
 
-        for left, right in materialized:
-            rendered_left = self.c(
-                left.casefold(),
-                self.dim,
-                color=palette.paper_muted,
-            )
+        widths = [
+            0
+        ] * columns
 
-            rendered_right = self.c(
-                right,
-                color=palette.paper,
-            )
+        for row in data:
+            for index in range(
+                columns
+            ):
+                cell = (
+                    row[index]
+                    if index < len(
+                        row
+                    )
+                    else ""
+                )
+
+                widths[index] = min(
+                    30,
+                    max(
+                        widths[index],
+                        len(
+                            cell
+                        ),
+                    ),
+                )
+
+        for row_index, row in enumerate(
+            data
+        ):
+            cells: list[str] = []
+
+            for index in range(
+                columns
+            ):
+                cell = (
+                    row[index]
+                    if index < len(
+                        row
+                    )
+                    else ""
+                )
+
+                cell = cell[
+                    :widths[index]
+                ].ljust(
+                    widths[index]
+                )
+
+                is_header = (
+                    bool(
+                        headers
+                    )
+                    and row_index == 0
+                )
+
+                cells.append(
+                    self.c(
+                        cell,
+                        (
+                            self.bold
+                            if is_header
+                            else ""
+                        ),
+                        color=(
+                            palette.gold
+                            if is_header
+                            else palette.text
+                        ),
+                    )
+                )
 
             self.line(
-                f"  "
-                f"{rendered_left:<{label_width + 9}} "
-                f"{rendered_right}"
+                "  "
+                + self.c(
+                    "│",
+                    color=palette.gunmetal_legacy,
+                ).join(
+                    cells
+                )
             )
+
+            if (
+                headers
+                and row_index == 0
+            ):
+                self.line(
+                    "  "
+                    + self.c(
+                        "┼".join(
+                            "─"
+                            * width
+                            for width in widths
+                        ),
+                        color=palette.gunmetal_legacy,
+                    )
+                )
 
     def success(
         self,
+        *,
         artifact_size: int = 0,
         source_files: int = 0,
         elapsed: float | None = None,
-        *,
-        message: str | None = None,
+        **fields: Any,
     ) -> None:
-        self.clear_progress()
-
         elapsed_value = (
             time.monotonic()
             - self.started
@@ -1319,126 +1633,183 @@ class terminal_projection:
             else elapsed
         )
 
-        marker = (
-            "✓"
-            if self.unicode
-            else "OK"
-        )
-
-        label = (
-            message
-            or (
-                f"{self.application} complete"
-            )
-        )
-
-        self.line()
-
-        self.line(
-            f"{self.c(marker, self.bold, color=palette.green)} "
-            f"{self.c(label.casefold(), self.bold, color=palette.green)}"
-        )
+        lines = [
+            self.c(
+                "VERIFIED PROJECTION",
+                self.bold,
+                color=palette.gold,
+            ),
+            self.c(
+                (
+                    "◆ source  "
+                    "◆ hash  "
+                    "◆ package  "
+                    "◆ publish  "
+                    "◆ verify"
+                ),
+                self.bold,
+                color=palette.pink,
+            ),
+        ]
 
         if source_files:
-            self.note(
-                "source files",
-                f"{source_files:,}",
+            lines.append(
+                self.c(
+                    "source files  ",
+                    color=palette.text_soft,
+                )
+                + self.c(
+                    f"{source_files:,}",
+                    color=palette.text,
+                )
             )
 
         if artifact_size:
-            self.note(
-                "gzip",
-                self.human_bytes(
-                    artifact_size
-                ),
+            lines.append(
+                self.c(
+                    "artifact      ",
+                    color=palette.text_soft,
+                )
+                + self.c(
+                    self.human_bytes(
+                        artifact_size
+                    ),
+                    color=palette.gold,
+                )
             )
 
-        self.note(
-            "elapsed",
-            self.duration(
-                elapsed_value
-            ),
+        lines.append(
+            self.c(
+                "elapsed       ",
+                color=palette.text_soft,
+            )
+            + self.c(
+                self.duration(
+                    elapsed_value
+                ),
+                color=palette.text,
+            )
         )
 
-        if (
-            self.application
-            == "sdump"
-        ):
-            self.note(
-                "local artifact",
-                "deleted after verified publication",
-                "good",
+        for key, value in fields.items():
+            if value is None:
+                continue
+
+            label = str(
+                key
+            ).replace(
+                "_",
+                " ",
             )
+
+            lines.append(
+                self.c(
+                    f"{label:<13}",
+                    color=palette.text_soft,
+                )
+                + self.c(
+                    value,
+                    color=palette.text,
+                )
+            )
+
+        self.line()
+
+        self._box(
+            lines,
+            accent=palette.gold,
+            title="◆ savant // complete",
+        )
+
+        self.line(
+            "  "
+            + self.c(
+                "◆",
+                self.bold,
+                color=palette.pink,
+            )
+            + " "
+            + self.c(
+                (
+                    f"{self.application} "
+                    f"complete"
+                ),
+                self.bold,
+                color=palette.gold,
+            )
+        )
 
         self.line(
             self.c(
                 self.rule(),
-                self.dim,
-                color=palette.green,
+                color=palette.gunmetal_legacy,
             )
         )
 
     def failure(
         self,
         message: str,
+        *,
+        detail: str = "",
     ) -> None:
-        self.clear_progress()
+        lines = [
+            self.c(
+                str(
+                    message
+                ),
+                self.bold,
+                color=palette.pink,
+            ),
+        ]
 
-        marker = (
-            "✕"
-            if self.unicode
-            else "ERROR"
-        )
+        if detail:
+            lines.append(
+                self.c(
+                    detail,
+                    color=palette.text_soft,
+                )
+            )
 
         self.line()
 
-        self.line(
-            f"{self.c(marker, self.bold, color=palette.red)} "
-            f"{self.c(f'{self.application} failed', self.bold, color=palette.red)}"
-        )
-
-        self.line(
-            "  "
-            + self.c(
-                message,
-                color=palette.paper,
-            )
-        )
-
-        self.line(
-            self.c(
-                self.rule(),
-                self.dim,
-                color=palette.red,
-            )
+        self._box(
+            lines,
+            accent=palette.pink,
+            title="◆ savant // fault",
         )
 
     def command(
         self,
         command: str,
         *,
-        context: str = "",
+        detail: str = "",
     ) -> None:
-        marker = (
-            "›"
-            if self.unicode
-            else ">"
-        )
+        suffix = ""
 
-        self.line(
-            f"{self.c(marker, self.bold, color=palette.violet)} "
-            f"{self.c(command, self.bold, color=palette.paper)}"
-        )
-
-        if context:
-            self.line(
+        if detail:
+            suffix = (
                 "  "
                 + self.c(
-                    context,
-                    self.dim,
-                    color=palette.paper_muted,
+                    detail,
+                    color=palette.text_soft,
                 )
             )
+
+        self.line(
+            "  "
+            + self.c(
+                "$",
+                self.bold,
+                color=palette.pink,
+            )
+            + " "
+            + self.c(
+                command,
+                self.bold,
+                color=palette.gold,
+            )
+            + suffix
+        )
 
 
 TerminalUI = terminal_projection
