@@ -11,7 +11,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
-from .base import ProviderError
+from providers.base import ProviderError
 
 
 OPUS_ROOT = Path(

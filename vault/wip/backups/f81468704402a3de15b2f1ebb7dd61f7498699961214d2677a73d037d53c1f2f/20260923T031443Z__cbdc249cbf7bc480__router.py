@@ -67,8 +67,7 @@ def load_provider_module(
     provider_id: str,
 ):
     return importlib.import_module(
-        f".providers.{provider_id}",
-        package=__package__,
+        f"providers.{provider_id}"
     )
 
 

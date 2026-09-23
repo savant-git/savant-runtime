@@ -11,7 +11,7 @@ import urllib.parse
 import urllib.request
 from typing import Any, Dict
 
-from .base import ProviderError
+from providers.base import ProviderError
 
 
 OWNER = "opus"

@@ -86,7 +86,8 @@ const PANEL_IDS = [
   "settings",
 ] as const;
 
-type PanelId = string;
+type PanelId =
+  typeof PANEL_IDS[number];
 
 
 const PrioritySchema =
@@ -151,12 +152,14 @@ const InstanceSchema =
     pipeline:
       z.array(
         z.string(),
-      ).min(18),
+      ).length(18),
 
     panels:
       z.array(
-        z.string(),
-      ).min(9),
+        z.enum(
+          PANEL_IDS,
+        ),
+      ).length(9),
 
     capabilities:
       z.array(
@@ -369,12 +372,12 @@ const useSplyce =
 
 
 const PANEL_ICONS:
-Partial<Record<
+Record<
   PanelId,
   ComponentType<{
     size?: number;
   }>
->> = {
+> = {
   overview:
     Grid3X3,
   capabilities:
@@ -2376,15 +2379,7 @@ function SplyceWorkspace({
       break;
 
     default:
-      content =
-        config.exile_id
-        === "exile:urge"
-          ? (
-            <UrgeWorkbench
-              config={config}
-            />
-          )
-          : null;
+      content = null;
   }
 
   return (

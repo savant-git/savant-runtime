@@ -7,9 +7,9 @@ import os
 from pathlib import Path
 from typing import Any, Dict
 
-from .base import ProviderError
-from . import native_text
-from . import universal_text
+from providers.base import ProviderError
+from providers import native_text
+from providers import universal_text
 
 try:
     from ..admission_projection import (
