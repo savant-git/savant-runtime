@@ -7,18 +7,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, Iterable, List
 
-try:
-    from .router import execute_text_request
-    from .trait_mesh import (
-        default_trait_requirements,
-        execute_mesh,
-    )
-except ImportError:
-    from router import execute_text_request
-    from trait_mesh import (
-        default_trait_requirements,
-        execute_mesh,
-    )
+from router import execute_text_request
 
 
 ROOT = Path(
@@ -341,10 +330,6 @@ class UniqueOrchestrator:
         required_layers: (
             Iterable[str] | None
         ) = None,
-        provider_model_evidence: (
-            Iterable[Dict[str, Any]] | None
-        ) = None,
-        trait_composition: bool = True,
     ) -> Dict[str, Any]:
         context = dict(
             context or {}
@@ -406,143 +391,34 @@ class UniqueOrchestrator:
             "falsifier",
         ]
 
-        trait_mesh_projection = None
+        for index in range(
+            pass_count
+        ):
+            if calls >= maximum_calls:
+                break
 
-        if trait_composition:
-            requirements = (
-                default_trait_requirements()
-            )[:pass_count]
+            role = independent_roles[
+                index
+                % len(independent_roles)
+            ]
 
-            remaining_calls = max(
-                0,
-                maximum_calls - calls,
+            item = self._execute(
+                role=role,
+                stage=(
+                    "independent_inference"
+                ),
+                task=task,
+                context=context,
+                required_capabilities=(
+                    required_capabilities
+                ),
+                required_layers=(
+                    required_layers
+                ),
             )
 
-            if (
-                requirements
-                and remaining_calls > 0
-            ):
-                trait_mesh_projection = (
-                    execute_mesh(
-                        task=task,
-                        context=context,
-                        requirements=(
-                            requirements
-                        ),
-                        provider_model_evidence=(
-                            list(
-                                provider_model_evidence
-                                or []
-                            )
-                        ),
-                        candidates_per_trait=1,
-                        maximum_total_calls=min(
-                            len(requirements),
-                            remaining_calls,
-                        ),
-                    )
-                )
-
-                calls += int(
-                    trait_mesh_projection.get(
-                        "inference_calls",
-                        0,
-                    )
-                )
-
-                role_by_trait = {
-                    "analysis": "analyst",
-                    "skepticism": "skeptic",
-                    "divergence": (
-                        "alternativist"
-                    ),
-                    "falsification": (
-                        "falsifier"
-                    ),
-                    "integration": (
-                        "integrator"
-                    ),
-                }
-
-                for execution in (
-                    trait_mesh_projection.get(
-                        "executions",
-                        [],
-                    )
-                ):
-                    if (
-                        execution.get("status")
-                        != "complete"
-                    ):
-                        continue
-
-                    trait_id = str(
-                        execution.get(
-                            "trait_id",
-                            "analysis",
-                        )
-                    )
-
-                    response = execution.get(
-                        "response"
-                    )
-
-                    if not isinstance(
-                        response,
-                        dict,
-                    ):
-                        continue
-
-                    passes.append(
-                        InferencePass(
-                            pass_id=str(
-                                execution.get(
-                                    "execution_id"
-                                )
-                            ),
-                            role=(
-                                role_by_trait.get(
-                                    trait_id,
-                                    trait_id,
-                                )
-                            ),
-                            stage=(
-                                "trait_composed_"
-                                "inference"
-                            ),
-                            response=response,
-                        )
-                    )
-
-        if not trait_composition:
-            for index in range(
-                pass_count
-            ):
-                if calls >= maximum_calls:
-                    break
-
-                role = independent_roles[
-                    index
-                    % len(independent_roles)
-                ]
-
-                item = self._execute(
-                    role=role,
-                    stage=(
-                        "independent_inference"
-                    ),
-                    task=task,
-                    context=context,
-                    required_capabilities=(
-                        required_capabilities
-                    ),
-                    required_layers=(
-                        required_layers
-                    ),
-                )
-
-                passes.append(item)
-                calls += 1
+            passes.append(item)
+            calls += 1
 
         critique_passes: List[
             InferencePass
@@ -640,9 +516,6 @@ class UniqueOrchestrator:
                 synthesis=None,
                 synthesis_critique=None,
                 final=None,
-                trait_mesh_projection=(
-                    trait_mesh_projection
-                ),
             )
 
         synthesis = self._execute(
@@ -775,9 +648,6 @@ class UniqueOrchestrator:
                 synthesis_critique
             ),
             final=final,
-            trait_mesh_projection=(
-                trait_mesh_projection
-            ),
         )
 
     def _bounded_result(
@@ -799,9 +669,6 @@ class UniqueOrchestrator:
         final: (
             InferencePass | None
         ),
-        trait_mesh_projection: (
-            Dict[str, Any] | None
-        ) = None,
     ) -> Dict[str, Any]:
         request_identity = {
             "task": task,
@@ -834,9 +701,6 @@ class UniqueOrchestrator:
                 self.policy
             ),
             "inference_calls": calls,
-            "trait_mesh": (
-                trait_mesh_projection
-            ),
             "passes": [
                 item.projection()
                 for item in passes
@@ -887,10 +751,6 @@ class UniqueOrchestrator:
                 ),
                 "provider_outputs_are_not_"
                 "assumed_deterministic": True,
-                "trait_composition": (
-                    trait_mesh_projection
-                    is not None
-                ),
             },
             "authority_effect": "none",
         }
@@ -934,7 +794,6 @@ def health() -> Dict[str, Any]:
             )
         ),
         "bounded_recursion": True,
-        "trait_composition": True,
         "dissent_preserved": True,
         "unknown_preserved": True,
         "consensus_creates_authority": (

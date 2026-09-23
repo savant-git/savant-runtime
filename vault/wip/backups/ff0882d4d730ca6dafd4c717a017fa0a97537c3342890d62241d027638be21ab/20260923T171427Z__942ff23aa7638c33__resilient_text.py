@@ -126,9 +126,6 @@ def _retryable(
         "service unavailable",
         "overloaded",
         "capacity",
-        "all admitted opus catalog provider profiles failed",
-        "no admitted opus catalog provider could be executed",
-        "no admitted opus catalog provider projection available",
     )
 
     return any(
