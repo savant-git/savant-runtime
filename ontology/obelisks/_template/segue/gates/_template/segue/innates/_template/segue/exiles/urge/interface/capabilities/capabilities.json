@@ -2,6 +2,117 @@
   "id": "urge.capabilities",
   "owner": "urge",
   "type": "capability_manifest",
-  "status": "stub",
-  "capabilities": []
+  "status": "active",
+  "capabilities": [
+    {
+      "id": "iteration",
+      "authority_effect": "none",
+      "projection_only": true
+    },
+    {
+      "id": "improvement_cycles",
+      "authority_effect": "none",
+      "projection_only": true
+    },
+    {
+      "id": "revision_pressure",
+      "authority_effect": "none",
+      "projection_only": true
+    },
+    {
+      "id": "criterion_pressure",
+      "authority_effect": "none",
+      "projection_only": true
+    },
+    {
+      "id": "branching",
+      "authority_effect": "none",
+      "projection_only": true
+    },
+    {
+      "id": "candidate_deduplication",
+      "authority_effect": "none",
+      "projection_only": true
+    },
+    {
+      "id": "bounded_iteration",
+      "authority_effect": "none",
+      "projection_only": true
+    },
+    {
+      "id": "deterministic_selection",
+      "authority_effect": "none",
+      "projection_only": true
+    },
+    {
+      "id": "lineage_projection",
+      "authority_effect": "none",
+      "projection_only": true
+    },
+    {
+      "id": "provenance_preservation",
+      "authority_effect": "none",
+      "projection_only": true
+    },
+    {
+      "id": "failure_isolation",
+      "authority_effect": "none",
+      "projection_only": true
+    },
+    {
+      "id": "harmonic_resonance",
+      "authority_effect": "none",
+      "projection_only": true
+    },
+    {
+      "id": "conceptual_focus",
+      "authority_effect": "none",
+      "projection_only": true
+    },
+    {
+      "id": "semantic_attractor",
+      "authority_effect": "none",
+      "projection_only": true
+    },
+    {
+      "id": "consensus_projection",
+      "authority_effect": "none",
+      "projection_only": true
+    },
+    {
+      "id": "ambiguity_projection",
+      "authority_effect": "none",
+      "projection_only": true
+    },
+    {
+      "id": "stability_projection",
+      "authority_effect": "none",
+      "projection_only": true
+    },
+    {
+      "id": "separation_projection",
+      "authority_effect": "none",
+      "projection_only": true
+    },
+    {
+      "id": "pairwise_projection",
+      "authority_effect": "none",
+      "projection_only": true
+    },
+    {
+      "id": "deterministic_replay",
+      "authority_effect": "none",
+      "projection_only": true
+    }
+  ],
+  "boundaries": {
+    "declares_truth": false,
+    "verifies_fact": false,
+    "admits_evidence": false,
+    "mutates_canon": false,
+    "mutates_source": false,
+    "creates_authority": false,
+    "selects_provider": false,
+    "executes_model": false
+  }
 }

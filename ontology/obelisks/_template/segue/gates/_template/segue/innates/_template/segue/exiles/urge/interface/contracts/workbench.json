@@ -1,0 +1,71 @@
+{
+  "id": "urge.workbench",
+  "owner": "exile:urge",
+  "type": "projection_contract",
+  "status": "active",
+  "version": "1.0.0",
+  "inputs": {
+    "iteration": {
+      "owner": "exile:urge",
+      "required": false
+    },
+    "creative": {
+      "owner": "exile:urge",
+      "required": false,
+      "dependencies": [
+        "exile:opus",
+        "exile:underscore"
+      ]
+    },
+    "logo": {
+      "owner": "exile:urge",
+      "required": false
+    },
+    "renderer": {
+      "owner": "savant-svg-renderer",
+      "required": false,
+      "status": "reserved"
+    }
+  },
+  "surfaces": [
+    "candidate-stage",
+    "candidate-strip",
+    "pressure-map",
+    "criterion-matrix",
+    "creative-frontier",
+    "underscore-discrimination",
+    "opus-lineage",
+    "logo-stress-tests",
+    "renderer-slot",
+    "iteration-lineage",
+    "runtime-metrics"
+  ],
+  "ownership": {
+    "iteration": "exile:urge",
+    "provider_orchestration": "exile:opus",
+    "structural_discrimination": "exile:underscore",
+    "renderer": "savant-svg-renderer"
+  },
+  "invariants": [
+    "workbench state is projected rather than authoritative",
+    "candidate history remains lineage-preserving",
+    "opus remains the owner of provider routing",
+    "underscore remains the owner of vessel discrimination",
+    "urge remains the owner of iteration and revision pressure",
+    "the unfinished svg renderer remains an optional typed dependency",
+    "absence of the svg renderer must not block non-rendering iteration",
+    "renderer completion must not require redesign of urge",
+    "provider lineage remains visible",
+    "derived workbench state remains rebuildable"
+  ],
+  "boundaries": {
+    "authoritative": false,
+    "projection_only": true,
+    "mutates_canon": false,
+    "mutates_source": false,
+    "creates_authority": false,
+    "owns_provider_routing": false,
+    "owns_underscore": false,
+    "owns_renderer": false
+  }
+}

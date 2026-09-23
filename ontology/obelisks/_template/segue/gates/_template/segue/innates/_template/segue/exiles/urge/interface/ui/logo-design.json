@@ -1,0 +1,103 @@
+{
+  "id": "urge.ui.logo-design",
+  "owner": "exile:urge",
+  "type": "ui_projection_contract",
+  "status": "active",
+  "version": "1.0.0",
+  "workspace": {
+    "mode": "logo-design",
+    "stages": [
+      "brief",
+      "alignment",
+      "divergence",
+      "iteration",
+      "comparison",
+      "stress-test",
+      "selection",
+      "system-extension"
+    ]
+  },
+  "candidate_representation": {
+    "required": [
+      "concept",
+      "artifact",
+      "rationale",
+      "provenance"
+    ],
+    "optional": [
+      "geometry",
+      "construction",
+      "palette",
+      "typography",
+      "motion",
+      "applications",
+      "metadata"
+    ]
+  },
+  "inspection_modes": [
+    "full-color",
+    "monochrome",
+    "inverse",
+    "silhouette",
+    "micro-scale",
+    "large-scale",
+    "blur",
+    "low-resolution",
+    "negative-space",
+    "geometry",
+    "construction-grid",
+    "horizontal-lockup",
+    "vertical-lockup",
+    "symbol-only",
+    "wordmark-only"
+  ],
+  "comparison_dimensions": [
+    "conceptual_fit",
+    "distinctiveness",
+    "anti_cliche",
+    "semantic_density",
+    "surprising_coherence",
+    "legibility",
+    "scalability",
+    "silhouette_strength",
+    "reproduction_resilience",
+    "memorability",
+    "system_extensibility",
+    "negative_space_intelligence",
+    "geometry_integrity",
+    "monochrome_integrity",
+    "micro_scale_integrity",
+    "large_scale_presence",
+    "motion_potential",
+    "identity_ownership"
+  ],
+  "controls": {
+    "iterate": true,
+    "branch": true,
+    "compare": true,
+    "pin_candidate": true,
+    "preserve_candidate": true,
+    "inspect_lineage": true,
+    "inspect_provenance": true,
+    "inspect_pressure": true,
+    "change_iteration_budget": true,
+    "change_branch_factor": true,
+    "change_target": true,
+    "change_patience": true
+  },
+  "anti_cliche_surface": {
+    "show_known_tropes": true,
+    "show_similarity_pressure": true,
+    "show_candidate_family_overlap": true,
+    "show_structural_distinction": true,
+    "show_surface_only_variation_warning": true
+  },
+  "boundaries": {
+    "authoritative": false,
+    "projection_only": true,
+    "mutates_canon": false,
+    "creates_authority": false,
+    "executes_model": false,
+    "selects_provider": false
+  }
+}

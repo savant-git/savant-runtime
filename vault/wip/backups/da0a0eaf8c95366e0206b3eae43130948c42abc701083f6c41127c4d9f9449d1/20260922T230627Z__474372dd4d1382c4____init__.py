@@ -12,11 +12,6 @@ from .convergence_policy import (
     interpret as interpret_convergence,
     normalize as normalize_convergence_policy,
 )
-from .creative_orchestration import (
-    creative_engine,
-    creative_orchestration_error,
-    creative_policy,
-)
 from .drift import (
     drift_error,
     project as project_convergence_drift,
@@ -44,15 +39,6 @@ from .logo_design import (
     logo_design_error,
     run as run_logo_design,
 )
-from .logo_intelligence import (
-    logo_intelligence_error,
-    project as project_logo_intelligence,
-)
-from .renderer_slot import (
-    project as project_renderer,
-    renderer_binding,
-    renderer_slot_error,
-)
 from .stability import (
     project as project_stability,
     stability_error,
@@ -68,9 +54,6 @@ __all__ = [
     "convergence_error",
     "convergence_policy_error",
     "create_logo_design_job",
-    "creative_engine",
-    "creative_orchestration_error",
-    "creative_policy",
     "drift_error",
     "engine",
     "execution_boundary",
@@ -81,7 +64,6 @@ __all__ = [
     "job_adapter",
     "job_adapter_error",
     "logo_design_error",
-    "logo_intelligence_error",
     "normalize_convergence_policy",
     "policy",
     "project",
@@ -89,12 +71,8 @@ __all__ = [
     "project_convergence_composition",
     "project_convergence_drift",
     "project_iteration",
-    "project_logo_intelligence",
-    "project_renderer",
     "project_stability",
     "proposal",
-    "renderer_binding",
-    "renderer_slot_error",
     "run_logo_design",
     "stability_error",
 ]

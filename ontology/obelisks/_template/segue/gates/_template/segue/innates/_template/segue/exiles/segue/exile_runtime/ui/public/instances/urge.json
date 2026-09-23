@@ -26,87 +26,72 @@
       "status": "accepted"
     },
     {
-      "group": "extension-slot",
-      "id": "reserved:04",
-      "status": "unresolved"
+      "group": "runtime-projection",
+      "id": "iteration:bounded-cycles",
+      "status": "implemented"
     },
     {
-      "group": "extension-slot",
-      "id": "reserved:05",
-      "status": "unresolved"
+      "group": "runtime-projection",
+      "id": "iteration:branching",
+      "status": "implemented"
     },
     {
-      "group": "extension-slot",
-      "id": "reserved:06",
-      "status": "unresolved"
+      "group": "runtime-projection",
+      "id": "iteration:lineage",
+      "status": "implemented"
     },
     {
-      "group": "extension-slot",
-      "id": "reserved:07",
-      "status": "unresolved"
+      "group": "runtime-projection",
+      "id": "iteration:criterion-pressure",
+      "status": "implemented"
     },
     {
-      "group": "extension-slot",
-      "id": "reserved:08",
-      "status": "unresolved"
+      "group": "runtime-projection",
+      "id": "iteration:candidate-deduplication",
+      "status": "implemented"
     },
     {
-      "group": "extension-slot",
-      "id": "reserved:09",
-      "status": "unresolved"
+      "group": "runtime-projection",
+      "id": "creative:opus-orchestration",
+      "status": "implemented"
     },
     {
-      "group": "extension-slot",
-      "id": "reserved:10",
-      "status": "unresolved"
+      "group": "runtime-projection",
+      "id": "creative:underscore-vessel",
+      "status": "implemented"
     },
     {
-      "group": "extension-slot",
-      "id": "reserved:11",
-      "status": "unresolved"
+      "group": "runtime-projection",
+      "id": "creative:structural-divergence",
+      "status": "implemented"
     },
     {
-      "group": "extension-slot",
-      "id": "reserved:12",
-      "status": "unresolved"
+      "group": "runtime-projection",
+      "id": "creative:cliche-pressure",
+      "status": "implemented"
     },
     {
-      "group": "extension-slot",
-      "id": "reserved:13",
-      "status": "unresolved"
+      "group": "runtime-projection",
+      "id": "creative:adversarial-synthesis",
+      "status": "implemented"
     },
     {
-      "group": "extension-slot",
-      "id": "reserved:14",
-      "status": "unresolved"
+      "group": "runtime-projection",
+      "id": "domain:logo-design",
+      "status": "implemented"
     },
     {
-      "group": "extension-slot",
-      "id": "reserved:15",
-      "status": "unresolved"
-    },
-    {
-      "group": "extension-slot",
-      "id": "reserved:16",
-      "status": "unresolved"
-    },
-    {
-      "group": "extension-slot",
-      "id": "reserved:17",
-      "status": "unresolved"
-    },
-    {
-      "group": "extension-slot",
-      "id": "reserved:18",
-      "status": "unresolved"
+      "group": "integration-slot",
+      "id": "renderer:savant-svg-renderer",
+      "status": "reserved"
     }
   ],
   "designation": "iteration / improvement cycles / revision pressure",
   "enhancements": [
     "instance overlay architecture",
     "authority-derived identity projection",
-    "Graffiti-owned brand substrate",
-    "procedural GPU atmosphere",
+    "graffiti-owned brand substrate",
+    "procedural gpu atmosphere",
     "instanced shard field",
     "adaptive rendering quality",
     "reduced-motion compliance",
@@ -125,11 +110,30 @@
     "activity event stream",
     "provenance inspector",
     "authority visibility",
-    "live telemetry HUD",
+    "live telemetry hud",
     "responsive dock system",
     "focus-mode panels",
     "semantic status signals",
-    "deterministic instance compilation"
+    "deterministic instance compilation",
+    "live iteration workbench",
+    "candidate branch field",
+    "criterion pressure map",
+    "candidate lineage graph",
+    "candidate comparison matrix",
+    "convergence inspector",
+    "creative frontier inspector",
+    "underscore vessel discrimination inspector",
+    "opus provider lineage inspector",
+    "cliche pressure inspector",
+    "structural distinction inspector",
+    "adversarial synthesis inspector",
+    "logo intelligence workspace",
+    "logo stress-test matrix",
+    "renderer integration slot",
+    "immutable candidate pinning",
+    "branch-preserving comparison",
+    "projection digest visibility",
+    "provider fallback visibility"
   ],
   "exile_id": "exile:urge",
   "health": [
@@ -171,9 +175,19 @@
     }
   ],
   "instance_id": "ui:exile:urge",
-  "name": "Urge",
+  "name": "urge",
   "panels": [
     "overview",
+    "workbench",
+    "candidates",
+    "pressure",
+    "creative-frontier",
+    "logo-design",
+    "comparison",
+    "lineage",
+    "providers",
+    "underscore",
+    "renderer",
     "capabilities",
     "pipeline",
     "graph",
@@ -183,6 +197,125 @@
     "provenance",
     "settings"
   ],
+  "workbench": {
+    "primary": "candidate-stage",
+    "regions": [
+      "command-rail",
+      "objective",
+      "candidate-stage",
+      "candidate-strip",
+      "pressure-map",
+      "criterion-matrix",
+      "frontier",
+      "lineage",
+      "runtime-hud"
+    ],
+    "controls": [
+      "iterate",
+      "branch",
+      "preserve",
+      "compare",
+      "reject",
+      "promote",
+      "inspect",
+      "stop"
+    ],
+    "interaction": {
+      "candidate-selection": "non-destructive",
+      "branching": "lineage-preserving",
+      "comparison": "side-by-side-and-delta",
+      "history": "immutable-projection",
+      "keyboard-first": true,
+      "reduced-motion": true,
+      "responsive": true
+    }
+  },
+  "creative_frontier": {
+    "owner": "underscore:vessel",
+    "views": [
+      "survivability",
+      "subversion",
+      "divergence",
+      "cliche-risk",
+      "pareto-frontier",
+      "mmr-frontier",
+      "discriminants",
+      "recommended-tests"
+    ]
+  },
+  "provider_surface": {
+    "owner": "opus",
+    "views": [
+      "route",
+      "selected-provider",
+      "selected-model",
+      "fallback-order",
+      "attempts",
+      "capabilities",
+      "layers",
+      "failures",
+      "lineage"
+    ]
+  },
+  "logo_design": {
+    "stages": [
+      "brief",
+      "constraint-resolution",
+      "cliche-baselines",
+      "structural-divergence",
+      "underscore-discrimination",
+      "adversarial-synthesis",
+      "iteration",
+      "comparison",
+      "stress-testing",
+      "selection",
+      "identity-system-extension",
+      "renderer-projection"
+    ],
+    "inspection_modes": [
+      "concept",
+      "mechanism",
+      "silhouette",
+      "monochrome",
+      "inverse",
+      "micro-scale",
+      "large-scale",
+      "negative-space",
+      "geometry",
+      "horizontal-lockup",
+      "vertical-lockup",
+      "symbol-only",
+      "wordmark-only",
+      "motion-potential"
+    ],
+    "criteria": [
+      "conceptual_fit",
+      "distinctiveness",
+      "anti_cliche",
+      "semantic_density",
+      "surprising_coherence",
+      "legibility",
+      "scalability",
+      "silhouette_strength",
+      "reproduction_resilience",
+      "memorability",
+      "system_extensibility",
+      "negative_space_intelligence",
+      "geometry_integrity",
+      "monochrome_integrity",
+      "micro_scale_integrity",
+      "large_scale_presence",
+      "motion_potential",
+      "identity_ownership"
+    ]
+  },
+  "renderer": {
+    "id": "savant-svg-renderer",
+    "status": "reserved",
+    "owner": "external-to-urge",
+    "binding": null,
+    "rule": "instance the completed renderer through urge's typed renderer slot without duplicating renderer substance or transferring renderer authority"
+  },
   "pipeline": [
     "admission",
     "identity_resolution",
@@ -197,6 +330,13 @@
     "supersession_analysis",
     "execution_planning",
     "domain_execution",
+    "creative_divergence",
+    "underscore_discrimination",
+    "revision_pressure",
+    "candidate_branching",
+    "candidate_evaluation",
+    "adversarial_synthesis",
+    "convergence_analysis",
     "state_derivation",
     "change_detection",
     "projection",
@@ -205,19 +345,19 @@
   ],
   "priority_modes": [
     {
-      "description": "Minimum dependency-closed requirement.",
+      "description": "minimum dependency-closed requirement.",
       "id": "mandatory",
-      "label": "Mandatory"
+      "label": "mandatory"
     },
     {
-      "description": "Mandatory plus materially important work.",
+      "description": "mandatory plus materially important work.",
       "id": "salient",
-      "label": "Salient"
+      "label": "salient"
     },
     {
-      "description": "Complete admissible expansion.",
+      "description": "complete admissible expansion.",
       "id": "arbitrary",
-      "label": "Arbitrary"
+      "label": "arbitrary"
     }
   ],
   "projection": {
@@ -227,14 +367,13 @@
     "rebuildable": true,
     "reserved_capability_slots": true
   },
-  "projection_digest": "7b307cb6d3fb39af72a7be71a7eba50cc1dc46ddb20bad8c2a4e613f5b587843",
   "purposes": [
     "iteration",
     "improvement cycles",
     "revision pressure"
   ],
-  "schema": "savant://ui/exile-instance/1.0.0",
-  "sigil": "UR",
+  "schema": "savant://ui/exile-instance/1.1.0",
+  "sigil": "ur",
   "status": "accepted",
   "validation": [
     {

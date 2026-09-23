@@ -22,7 +22,6 @@ import {
 
 import "./savant-ui.css";
 import "./splyce.css";
-import "./urge-workbench.css";
 
 
 const queryClient =

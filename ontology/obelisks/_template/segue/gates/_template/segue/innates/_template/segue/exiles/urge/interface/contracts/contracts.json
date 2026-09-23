@@ -2,6 +2,120 @@
   "id": "urge.contracts",
   "owner": "urge",
   "type": "interface_contract_manifest",
-  "status": "stub",
-  "contracts": []
+  "status": "active",
+  "contracts": [
+    {
+      "id": "urge.iteration.job",
+      "version": "1.0.0",
+      "input": {
+        "required": [
+          "id",
+          "objective",
+          "payload",
+          "criteria"
+        ],
+        "optional": [
+          "constraints",
+          "provenance",
+          "dependencies",
+          "metadata"
+        ]
+      },
+      "output": {
+        "required": [
+          "best",
+          "alternates",
+          "lineage",
+          "failures",
+          "metrics",
+          "stop_reason",
+          "digest"
+        ]
+      },
+      "authority_effect": "none",
+      "projection_only": true
+    },
+    {
+      "id": "urge.iteration.evaluator",
+      "version": "1.0.0",
+      "input": {
+        "required": [
+          "payload",
+          "context"
+        ]
+      },
+      "output": {
+        "required": [
+          "scores"
+        ],
+        "optional": [
+          "findings",
+          "evidence",
+          "metadata"
+        ]
+      },
+      "authority_effect": "none"
+    },
+    {
+      "id": "urge.iteration.reviser",
+      "version": "1.0.0",
+      "input": {
+        "required": [
+          "payload",
+          "pressure"
+        ]
+      },
+      "output": {
+        "sequence": true,
+        "item_required": [
+          "payload"
+        ],
+        "item_optional": [
+          "rationale",
+          "provenance",
+          "metadata"
+        ]
+      },
+      "authority_effect": "none"
+    },
+    {
+      "id": "urge.iteration.composition",
+      "version": "1.0.0",
+      "input": {
+        "required": [
+          "job",
+          "evaluator",
+          "reviser"
+        ],
+        "optional": [
+          "run_policy",
+          "convergence_policy",
+          "initial_payload"
+        ]
+      },
+      "output": {
+        "required": [
+          "iteration",
+          "convergence",
+          "convergence_interpretation",
+          "lineage",
+          "capabilities",
+          "boundaries",
+          "digest"
+        ]
+      },
+      "authority_effect": "none",
+      "projection_only": true
+    }
+  ],
+  "boundaries": {
+    "declares_truth": false,
+    "verifies_fact": false,
+    "admits_evidence": false,
+    "mutates_canon": false,
+    "mutates_source": false,
+    "creates_authority": false,
+    "selects_provider": false,
+    "executes_model": false
+  }
 }

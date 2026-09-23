@@ -67,10 +67,6 @@ import {
   persist,
 } from "zustand/middleware";
 
-import {
-  UrgeWorkbench,
-} from "./UrgeWorkbench";
-
 import "@xyflow/react/dist/style.css";
 
 
@@ -2299,18 +2295,9 @@ function SplyceWorkspace({
   switch (panel) {
     case "overview":
       content =
-        config.exile_id
-        === "exile:urge"
-          ? (
-            <UrgeWorkbench
-              config={config}
-            />
-          )
-          : (
-            <Overview
-              config={config}
-            />
-          );
+        <Overview
+          config={config}
+        />;
       break;
 
     case "capabilities":
