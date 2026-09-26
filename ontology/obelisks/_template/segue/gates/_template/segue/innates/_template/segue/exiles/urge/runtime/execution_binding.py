@@ -10,6 +10,10 @@ from .creative_orchestration import (
 from .logo_intelligence import (
     project as project_logo_intelligence,
 )
+from .praxis import (
+    CAPABILITY as PRAXIS_CAPABILITY,
+    execute_step as execute_praxis_step,
+)
 from .renderer_slot import (
     project as project_renderer,
     renderer_binding,
@@ -23,7 +27,7 @@ CAPABILITY = "exile:urge:iterate"
 
 SCHEMA = (
     "savant://runtime/urge/"
-    "execution-binding/1.0.0"
+    "execution-binding/1.1.0"
 )
 
 OWNER = "exile:urge"
@@ -534,14 +538,21 @@ def register(
         execute,
     )
 
+    dispatcher.register(
+        PRAXIS_CAPABILITY,
+        execute_praxis_step,
+    )
+
     return CAPABILITY
 
 
 __all__ = [
     "CAPABILITY",
     "OWNER",
+    "PRAXIS_CAPABILITY",
     "SCHEMA",
     "execute",
+    "execute_praxis_step",
     "normalize_request",
     "register",
     "urge_execution_error",

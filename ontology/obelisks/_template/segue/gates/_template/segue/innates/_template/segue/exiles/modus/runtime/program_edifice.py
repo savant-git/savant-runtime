@@ -53,12 +53,12 @@ class ProgramedificeSegue:
     propagation_policy: str = "composition-only"
     authority_state: str = "accepted"
     authority_source: str = (
-        "current-user-directive:"
-        "program-composition-edifice"
+        "accepted-decision:"
+        "AD-20260923-001"
     )
     provenance: tuple[str, ...] = (
-        "current-user-directive:"
-        "program-composition-edifice",
+        "accepted-decision:"
+        "AD-20260923-001",
         "canon:FOUNDATION-008",
     )
     valid: bool = True
@@ -310,7 +310,7 @@ def make_program_edifice_segue(
 PROGRAM_edifice_SEGUES = (
     make_program_edifice_segue(
         parent_instance="line",
-        child_instance="character",
+        child_instance="glyph",
         ordinal=1,
     ),
     make_program_edifice_segue(
@@ -568,7 +568,7 @@ class ProgramLevel:
 class Programedifice:
     schema = (
         "savant://program/"
-        "edifice/1.3.0"
+        "edifice/1.4.0"
     )
 
     owner = "exile:modus"
@@ -1140,3 +1140,4 @@ if __name__ == "__main__":
     raise SystemExit(
         main()
     )
+

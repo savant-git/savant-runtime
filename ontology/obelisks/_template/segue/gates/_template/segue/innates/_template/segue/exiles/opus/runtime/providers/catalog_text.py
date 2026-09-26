@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 import os
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any, Dict, Mapping, Sequence
 
 from .base import ProviderError
 from . import native_text
@@ -37,7 +37,7 @@ EXPLICIT_PROFILE_ENV = (
 )
 
 SCHEMA = (
-    "savant.opus.catalog-text.v4"
+    "savant.opus.catalog-text.v5"
 )
 
 OWNER = "opus"
@@ -450,6 +450,356 @@ def _admitted_candidates(
     )
 
 
+def _bounded_score(
+    value: Any,
+    *,
+    default: float = 0.5,
+) -> float:
+    try:
+        result = float(
+            value
+        )
+    except (
+        TypeError,
+        ValueError,
+    ):
+        result = default
+
+    return max(
+        0.0,
+        min(
+            1.0,
+            result,
+        ),
+    )
+
+
+def _evidence_profile(
+    item: Mapping[str, Any],
+) -> str:
+    return str(
+        item.get(
+            "provider_profile"
+        )
+        or item.get(
+            "provider"
+        )
+        or ""
+    ).strip()
+
+
+def _evidence_model(
+    item: Mapping[str, Any],
+) -> str:
+    return str(
+        item.get(
+            "model"
+        )
+        or ""
+    ).strip()
+
+
+def _evidence_trait(
+    item: Mapping[str, Any],
+) -> str:
+    return str(
+        item.get(
+            "trait_id"
+        )
+        or ""
+    ).strip()
+
+
+def _evidence_value(
+    item: Mapping[str, Any],
+) -> float:
+    score = _bounded_score(
+        item.get(
+            "score"
+        )
+    )
+
+    confidence = _bounded_score(
+        item.get(
+            "confidence"
+        )
+    )
+
+    reliability = _bounded_score(
+        item.get(
+            "reliability"
+        )
+    )
+
+    return (
+        score
+        * confidence
+        * reliability
+    )
+
+
+def _rank_candidates(
+    request: Dict[str, Any],
+    candidates: list[
+        tuple[
+            str,
+            Dict[str, Any],
+            str | None,
+        ]
+    ],
+) -> tuple[
+    list[
+        tuple[
+            str,
+            Dict[str, Any],
+            str | None,
+        ]
+    ],
+    list[Dict[str, Any]],
+    bool,
+]:
+    trait_id = str(
+        request.get(
+            "trait_id"
+        )
+        or ""
+    ).strip()
+
+    raw_evidence = request.get(
+        "provider_model_evidence"
+    )
+
+    if (
+        not trait_id
+        or not isinstance(
+            raw_evidence,
+            Sequence,
+        )
+        or isinstance(
+            raw_evidence,
+            (
+                str,
+                bytes,
+                bytearray,
+            ),
+        )
+    ):
+        return (
+            candidates,
+            [],
+            False,
+        )
+
+    candidate_ids = {
+        profile_id
+        for (
+            profile_id,
+            _,
+            _,
+        ) in candidates
+    }
+
+    candidate_models = {
+        profile_id: str(
+            admitted_model
+            or ""
+        ).strip()
+        for (
+            profile_id,
+            _,
+            admitted_model,
+        ) in candidates
+    }
+
+    evidence_rows: list[
+        Dict[str, Any]
+    ] = []
+
+    profile_scores: dict[
+        str,
+        list[float],
+    ] = {}
+
+    for raw_item in raw_evidence:
+        if not isinstance(
+            raw_item,
+            Mapping,
+        ):
+            continue
+
+        evidence_trait = (
+            _evidence_trait(
+                raw_item
+            )
+        )
+
+        if (
+            evidence_trait
+            and evidence_trait
+            != trait_id
+        ):
+            continue
+
+        evidence_profile = (
+            _evidence_profile(
+                raw_item
+            )
+        )
+
+        evidence_model = (
+            _evidence_model(
+                raw_item
+            )
+        )
+
+        matched_profile = ""
+
+        if (
+            evidence_profile
+            in candidate_ids
+        ):
+            matched_profile = (
+                evidence_profile
+            )
+
+        elif evidence_model:
+            for (
+                profile_id,
+                admitted_model,
+            ) in candidate_models.items():
+                if (
+                    admitted_model
+                    and admitted_model
+                    == evidence_model
+                ):
+                    matched_profile = (
+                        profile_id
+                    )
+                    break
+
+        if not matched_profile:
+            continue
+
+        value = _evidence_value(
+            raw_item
+        )
+
+        profile_scores.setdefault(
+            matched_profile,
+            [],
+        ).append(
+            value
+        )
+
+        evidence_rows.append(
+            {
+                "trait_id": trait_id,
+                "provider_profile": (
+                    matched_profile
+                ),
+                "model": (
+                    evidence_model
+                    or candidate_models.get(
+                        matched_profile,
+                        "",
+                    )
+                ),
+                "score": _bounded_score(
+                    raw_item.get(
+                        "score"
+                    )
+                ),
+                "confidence": (
+                    _bounded_score(
+                        raw_item.get(
+                            "confidence"
+                        )
+                    )
+                ),
+                "reliability": (
+                    _bounded_score(
+                        raw_item.get(
+                            "reliability"
+                        )
+                    )
+                ),
+                "selection_value": (
+                    value
+                ),
+                "provenance": (
+                    raw_item.get(
+                        "provenance"
+                    )
+                ),
+            }
+        )
+
+    if not profile_scores:
+        return (
+            candidates,
+            evidence_rows,
+            False,
+        )
+
+    aggregate_scores = {
+        profile_id: (
+            sum(values)
+            / len(values)
+        )
+        for (
+            profile_id,
+            values,
+        ) in profile_scores.items()
+        if values
+    }
+
+    original_order = {
+        profile_id: index
+        for (
+            index,
+            (
+                profile_id,
+                _,
+                _,
+            ),
+        ) in enumerate(
+            candidates
+        )
+    }
+
+    ranked = sorted(
+        candidates,
+        key=lambda candidate: (
+            0
+            if candidate[0]
+            in aggregate_scores
+            else 1,
+            -aggregate_scores.get(
+                candidate[0],
+                0.0,
+            ),
+            original_order[
+                candidate[0]
+            ],
+        ),
+    )
+
+    for row in evidence_rows:
+        row[
+            "aggregate_profile_score"
+        ] = aggregate_scores.get(
+            row[
+                "provider_profile"
+            ]
+        )
+
+    return (
+        ranked,
+        evidence_rows,
+        True,
+    )
+
+
 def _selection_candidates(
     request: Dict[str, Any],
 ) -> tuple[
@@ -461,6 +811,8 @@ def _selection_candidates(
         ]
     ],
     str | None,
+    bool,
+    list[Dict[str, Any]],
     bool,
 ]:
     requested = str(
@@ -514,6 +866,8 @@ def _selection_candidates(
             ],
             None,
             True,
+            [],
+            False,
         )
 
     (
@@ -530,24 +884,37 @@ def _selection_candidates(
             "provider projection available"
         )
 
-    return (
-        [
-            (
-                profile_id,
-                dict(
-                    profiles[
-                        profile_id
-                    ]
-                ),
-                admitted_models.get(
+    candidates = [
+        (
+            profile_id,
+            dict(
+                profiles[
                     profile_id
-                ),
-            )
-            for profile_id
-            in admitted
-        ],
+                ]
+            ),
+            admitted_models.get(
+                profile_id
+            ),
+        )
+        for profile_id
+        in admitted
+    ]
+
+    (
+        ranked_candidates,
+        selection_evidence,
+        evidence_ranked,
+    ) = _rank_candidates(
+        request,
+        candidates,
+    )
+
+    return (
+        ranked_candidates,
         admission_digest,
         False,
+        selection_evidence,
+        evidence_ranked,
     )
 
 
@@ -629,6 +996,8 @@ def infer(
         candidates,
         admission_digest,
         explicit_selection,
+        selection_evidence,
+        evidence_ranked,
     ) = _selection_candidates(
         request
     )
@@ -751,6 +1120,38 @@ def infer(
         ] = bool(
             admission_digest
         )
+
+        result[
+            "trait_evidence_ranked"
+        ] = evidence_ranked
+
+        result[
+            "trait_selection_evidence"
+        ] = selection_evidence
+
+        result[
+            "selection_trait_id"
+        ] = str(
+            request.get(
+                "trait_id"
+            )
+            or ""
+        ).strip()
+
+        result[
+            "selection_candidates"
+        ] = [
+            candidate_profile
+            for (
+                candidate_profile,
+                _,
+                _,
+            ) in candidates
+        ]
+
+        result[
+            "selection_authority_effect"
+        ] = "none"
 
         if admission_digest:
             result[

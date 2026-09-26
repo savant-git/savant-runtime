@@ -160,6 +160,57 @@ def _provider_available(
         return False
 
 
+def _result_model(
+    result: Dict[str, Any],
+    selected: Dict[str, Any],
+) -> str:
+    return str(
+        result.get(
+            "model"
+        )
+        or selected.get(
+            "selected_model"
+        )
+        or ""
+    ).strip()
+
+
+def _result_provider_profile(
+    result: Dict[str, Any],
+) -> str | None:
+    value = str(
+        result.get(
+            "provider_profile"
+        )
+        or ""
+    ).strip()
+
+    return value or None
+
+
+def _catalog_attempts(
+    result: Dict[str, Any],
+) -> list[Dict[str, Any]]:
+    value = result.get(
+        "catalog_attempts"
+    )
+
+    if not isinstance(
+        value,
+        list,
+    ):
+        return []
+
+    return [
+        dict(item)
+        for item in value
+        if isinstance(
+            item,
+            dict,
+        )
+    ]
+
+
 def execute_text_request_resilient(
     request: Dict[str, Any],
 ) -> Dict[str, Any]:
@@ -416,27 +467,57 @@ def execute_text_request_resilient(
                 "must be an object"
             )
 
-        attempts.append(
-            {
-                "provider": provider_id,
-                "model": (
-                    selected.get(
-                        "selected_model"
-                    )
-                ),
-                "state": "succeeded",
-            }
+        resolved_model = _result_model(
+            result,
+            selected,
         )
 
-        result[
-            "lineage"
+        resolved_profile = (
+            _result_provider_profile(
+                result
+            )
+        )
+
+        catalog_attempts = (
+            _catalog_attempts(
+                result
+            )
+        )
+
+        successful_attempt: Dict[
+            str,
+            Any,
+        ] = {
+            "provider": provider_id,
+            "model": resolved_model,
+            "state": "succeeded",
+        }
+
+        if resolved_profile:
+            successful_attempt[
+                "provider_profile"
+            ] = resolved_profile
+
+        if catalog_attempts:
+            successful_attempt[
+                "catalog_attempts"
+            ] = catalog_attempts
+
+        attempts.append(
+            successful_attempt
+        )
+
+        lineage: Dict[
+            str,
+            Any,
         ] = {
             "owner": OWNER,
             "route": ROUTE_ID,
             "provider": provider_id,
-            "model": selected.get(
-                "selected_model"
+            "provider_profile": (
+                resolved_profile
             ),
+            "model": resolved_model,
             "policy": policy_data.get(
                 "id"
             ),
@@ -485,6 +566,36 @@ def execute_text_request_resilient(
             ),
             "schema": SCHEMA,
         }
+
+        if catalog_attempts:
+            lineage[
+                "catalog_attempts"
+            ] = catalog_attempts
+
+        admission_digest = str(
+            result.get(
+                "admission_projection_digest"
+            )
+            or ""
+        ).strip()
+
+        if admission_digest:
+            lineage[
+                "admission_projection_digest"
+            ] = admission_digest
+
+        lineage[
+            "admission_selected"
+        ] = bool(
+            result.get(
+                "admission_selected",
+                False,
+            )
+        )
+
+        result[
+            "lineage"
+        ] = lineage
 
         return result
 
@@ -588,6 +699,9 @@ def projection() -> Dict[str, Any]:
         ),
         "providers": providers,
         "execution_time_fallback": True,
+        "catalog_lineage_preserved": True,
+        "model_lineage_preserved": True,
+        "migration_portable": True,
         "authority_effect": "none",
     }
 

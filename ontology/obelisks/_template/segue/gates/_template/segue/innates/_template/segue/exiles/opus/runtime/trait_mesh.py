@@ -436,7 +436,7 @@ def execute_trait(
         "trait_id": (
             requirement.trait_id
         ),
-        "prompt": trait_prompt(
+        "message": trait_prompt(
             task=task,
             context=context,
             requirement=requirement,

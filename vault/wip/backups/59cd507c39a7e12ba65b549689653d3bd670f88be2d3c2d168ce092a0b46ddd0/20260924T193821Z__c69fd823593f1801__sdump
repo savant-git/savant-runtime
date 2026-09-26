@@ -1,0 +1,62 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import sys
+
+
+runtime_path = (
+    "/root/savant-runtime/runtime"
+)
+
+sdump_path = (
+    "/root/savant-runtime/"
+    "tools/sdump-enterprise"
+)
+
+for path in (
+    sdump_path,
+    runtime_path,
+):
+    if path not in sys.path:
+        sys.path.insert(
+            0,
+            path,
+        )
+
+
+import sdump_enterprise.stream_dump as stream_dump
+
+from savant_terminal import (
+    terminal,
+)
+
+
+stream_dump.ui = terminal(
+    "sdump",
+    subtitle=(
+        "deterministic source projection "
+        "· verified publication"
+    ),
+)
+
+
+try:
+    raise SystemExit(
+        stream_dump.main()
+    )
+
+except (
+    stream_dump.StreamDumpError,
+    RuntimeError,
+    OSError,
+) as error:
+    stream_dump.ui.failure(
+        str(
+            error
+        )
+    )
+
+    raise SystemExit(
+        1
+    )

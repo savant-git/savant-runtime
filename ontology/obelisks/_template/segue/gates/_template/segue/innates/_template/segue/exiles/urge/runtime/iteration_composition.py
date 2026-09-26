@@ -286,10 +286,43 @@ def project(
         },
     }
 
+    digestable = dict(
+        projection
+    )
+
+    digestable[
+        "iteration"
+    ] = dict(
+        projection[
+            "iteration"
+        ]
+    )
+
+    digestable[
+        "iteration"
+    ][
+        "metrics"
+    ] = dict(
+        projection[
+            "iteration"
+        ][
+            "metrics"
+        ]
+    )
+
+    digestable[
+        "iteration"
+    ][
+        "metrics"
+    ].pop(
+        "duration_ns",
+        None,
+    )
+
     projection[
         "digest"
     ] = _digest(
-        projection
+        digestable
     )
 
     return projection

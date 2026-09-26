@@ -1,610 +1,808 @@
-.urge-workbench {
-  display: grid;
-  gap: 18px;
-  min-width: 0;
-}
+.urge-praxis {
+  --ur-bg: #080a0c;
+  --ur-panel: #101316;
+  --ur-panel-2: #14181c;
+  --ur-line: rgba(255, 255, 255, 0.09);
+  --ur-line-2: rgba(255, 255, 255, 0.18);
+  --ur-text: rgba(255, 255, 255, 0.94);
+  --ur-muted: rgba(255, 255, 255, 0.48);
+  --ur-faint: rgba(255, 255, 255, 0.25);
+  --ur-hot: #d8ff57;
+  --ur-danger: #ff6f76;
 
-.urge-hero {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 24px;
-  align-items: end;
-  overflow: hidden;
-  padding: 30px;
-  border: 1px solid
-    color-mix(in srgb, var(--sp-accent) 22%, transparent);
+  min-height: 100%;
+  padding: clamp(20px, 3vw, 42px);
+  color: var(--ur-text);
   background:
     radial-gradient(
-      circle at 72% 20%,
-      color-mix(in srgb, var(--sp-accent) 12%, transparent),
-      transparent 34%
+      circle at 74% 16%,
+      rgba(216, 255, 87, 0.06),
+      transparent 30rem
     ),
-    linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.035),
-      rgba(255, 255, 255, 0.008)
-    );
+    var(--ur-bg);
 }
 
-.urge-hero::after {
-  position: absolute;
-  right: -80px;
-  bottom: -160px;
-  width: 360px;
-  height: 360px;
-  border: 1px solid
-    color-mix(in srgb, var(--sp-accent) 16%, transparent);
-  border-radius: 50%;
-  content: "";
-  box-shadow:
-    0 0 0 38px rgba(255, 255, 255, 0.008),
-    0 0 0 82px rgba(255, 255, 255, 0.005);
-  pointer-events: none;
-}
-
-.urge-kicker,
-.urge-section-title {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-}
-
-.urge-kicker {
-  margin-bottom: 15px;
-  color: var(--sp-accent);
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-}
-
-.urge-hero h1 {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0 12px;
-  margin: 0;
-  font-size: clamp(36px, 5vw, 72px);
-  font-weight: 720;
-  letter-spacing: -0.055em;
-  line-height: 0.94;
-}
-
-.urge-hero h1 span {
-  color: color-mix(in srgb, currentColor 34%, transparent);
-}
-
-.urge-hero p {
-  max-width: 680px;
-  margin: 18px 0 0;
-  color: rgba(255, 255, 255, 0.55);
-  font-size: 13px;
-  line-height: 1.7;
-}
-
-.urge-runtime-state {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  min-width: 145px;
-  gap: 4px;
-  padding: 15px 17px;
-  border-left: 1px solid var(--sp-accent);
-  background: rgba(0, 0, 0, 0.18);
-}
-
-.urge-runtime-state span {
-  display: flex;
-  gap: 7px;
-  align-items: center;
-  color: rgba(255, 255, 255, 0.45);
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.urge-runtime-state strong {
-  font-size: 20px;
-  font-weight: 680;
-}
-
-.urge-runtime-state small {
-  color: rgba(255, 255, 255, 0.36);
-  font-size: 9px;
-}
-
-.urge-modebar {
-  display: flex;
-  justify-content: space-between;
-  gap: 18px;
-  align-items: center;
-  padding: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  background: rgba(255, 255, 255, 0.018);
-}
-
-.urge-modebar > div {
-  display: flex;
-  gap: 5px;
-  align-items: center;
-}
-
-.urge-modebar button {
-  display: flex;
-  gap: 7px;
-  align-items: center;
-  padding: 9px 12px;
-  border: 1px solid transparent;
-  background: transparent;
-  color: rgba(255, 255, 255, 0.48);
-  cursor: pointer;
-  font: inherit;
-  font-size: 10px;
-  font-weight: 720;
-  letter-spacing: 0.04em;
-}
-
-.urge-modebar button[data-active="true"] {
-  border-color:
-    color-mix(in srgb, var(--sp-accent) 30%, transparent);
-  background:
-    color-mix(in srgb, var(--sp-accent) 9%, transparent);
-  color: var(--sp-accent);
-}
-
-.urge-owner-chain {
-  color: rgba(255, 255, 255, 0.3);
-}
-
-.urge-owner-chain span {
-  display: grid;
-  gap: 1px;
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-}
-
-.urge-owner-chain small {
-  color: rgba(255, 255, 255, 0.25);
-  font-size: 7px;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-}
-
-.urge-grid {
-  display: grid;
-  grid-template-columns:
-    minmax(260px, 0.72fr)
-    minmax(360px, 1.28fr);
-  gap: 12px;
-}
-
-.urge-grid > section {
-  min-width: 0;
-  padding: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.065);
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255, 255, 255, 0.026),
-      rgba(255, 255, 255, 0.008)
-    );
-}
-
-.urge-section-title {
-  min-height: 30px;
-  margin-bottom: 15px;
-}
-
-.urge-section-title > svg {
-  color: var(--sp-accent);
-}
-
-.urge-section-title > div {
-  display: grid;
-  gap: 1px;
-}
-
-.urge-section-title small {
-  color: rgba(255, 255, 255, 0.28);
-  font-size: 8px;
-  font-weight: 800;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-
-.urge-section-title strong {
-  font-size: 11px;
-  font-weight: 680;
-  letter-spacing: 0.025em;
-}
-
-.urge-objective textarea {
+.urge-praxis *,
+.urge-praxis *::before,
+.urge-praxis *::after {
   box-sizing: border-box;
-  width: 100%;
-  min-height: 150px;
-  resize: vertical;
-  padding: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.075);
-  outline: none;
-  background: rgba(0, 0, 0, 0.16);
-  color: rgba(255, 255, 255, 0.82);
+}
+
+.urge-praxis button,
+.urge-praxis input,
+.urge-praxis textarea {
   font: inherit;
-  font-size: 12px;
+}
+
+.urge-praxis-hero {
+  max-width: 1500px;
+  margin: 0 auto 25px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.urge-praxis-kicker {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 13px;
+  color: var(--ur-hot);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.urge-praxis-hero h1 {
+  margin: 0;
+  font-size: clamp(38px, 5vw, 72px);
+  font-weight: 620;
+  line-height: 0.9;
+  letter-spacing: -0.055em;
+}
+
+.urge-praxis-hero h1 em {
+  display: block;
+  color: var(--ur-muted);
+  font-style: normal;
+  font-weight: 350;
+}
+
+.urge-praxis-hero p {
+  max-width: 620px;
+  margin: 18px 0 0;
+  color: var(--ur-muted);
+  font-size: 13px;
   line-height: 1.65;
 }
 
-.urge-objective textarea:focus {
-  border-color:
-    color-mix(in srgb, var(--sp-accent) 52%, transparent);
+.urge-praxis-state {
+  min-width: 190px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 11px 14px;
+  border: 1px solid var(--ur-line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.025);
 }
 
-.urge-objective-meta {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px;
-  margin-top: 9px;
+.urge-praxis-state > i {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--ur-faint);
 }
 
-.urge-objective-meta span {
+.urge-praxis-state[data-state="running"] > i,
+.urge-praxis-state[data-state="interval"] > i,
+.urge-praxis-state[data-state="complete"] > i {
+  background: var(--ur-hot);
+  box-shadow: 0 0 16px rgba(216, 255, 87, 0.45);
+}
+
+.urge-praxis-state[data-state="running"] > i {
+  animation: urge-pulse 1s ease-in-out infinite;
+}
+
+.urge-praxis-state[data-state="fault"] > i {
+  background: var(--ur-danger);
+}
+
+.urge-praxis-state > div {
   display: grid;
-  gap: 3px;
-  color: rgba(255, 255, 255, 0.25);
+  gap: 2px;
+}
+
+.urge-praxis-state small {
+  color: var(--ur-faint);
   font-size: 8px;
+  font-weight: 800;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
-.urge-objective-meta strong {
-  color: rgba(255, 255, 255, 0.58);
-  font-size: 9px;
+.urge-praxis-state strong {
+  color: var(--ur-text);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: lowercase;
 }
 
-.urge-run {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  gap: 8px;
-  align-items: center;
-  margin-top: 14px;
-  padding: 12px;
-  border: 1px solid
-    color-mix(in srgb, var(--sp-accent) 42%, transparent);
+.urge-praxis-shell {
+  max-width: 1500px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(300px, 390px) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.urge-praxis-controls,
+.urge-praxis-preview {
+  border: 1px solid var(--ur-line);
+  border-radius: 20px;
   background:
-    color-mix(in srgb, var(--sp-accent) 12%, transparent);
-  color: var(--sp-accent);
-  cursor: pointer;
-  font: inherit;
-  font-size: 10px;
-  font-weight: 820;
-  letter-spacing: 0.12em;
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.025),
+      transparent 240px
+    ),
+    rgba(16, 19, 22, 0.94);
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.2);
+}
+
+.urge-praxis-controls {
+  padding: 19px;
+}
+
+.urge-praxis-controls > section + section {
+  margin-top: 27px;
+}
+
+.urge-praxis-section-title {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 13px;
+}
+
+.urge-praxis-section-title > span {
+  width: 29px;
+  height: 29px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--ur-line);
+  border-radius: 50%;
+  color: var(--ur-hot);
+  font-size: 8px;
+  font-weight: 900;
+}
+
+.urge-praxis-section-title > div {
+  display: grid;
+  gap: 1px;
+}
+
+.urge-praxis-section-title strong {
+  font-size: 11px;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
-.urge-run:disabled {
-  cursor: not-allowed;
-  opacity: 0.4;
+.urge-praxis-section-title small {
+  color: var(--ur-muted);
+  font-size: 9px;
 }
 
-.urge-stage {
-  position: relative;
-  overflow: hidden;
-}
-
-.urge-score {
-  margin-left: auto;
-  color: var(--sp-accent);
-  font-size: 28px;
-  font-weight: 300;
-}
-
-.urge-mark-field {
+.urge-praxis-controls label {
   display: grid;
-  grid-template-columns: minmax(140px, 0.7fr) 1fr;
-  gap: 20px;
-  align-items: center;
-  min-height: 205px;
+  gap: 6px;
+  margin-top: 11px;
 }
 
-.urge-mark {
-  position: relative;
-  width: min(160px, 100%);
-  aspect-ratio: 1;
-  margin: auto;
-}
-
-.urge-mark span {
-  position: absolute;
-  border: 1px solid
-    color-mix(in srgb, var(--sp-accent) 68%, transparent);
-}
-
-.urge-mark span:nth-child(1) {
-  inset: 12%;
-  border-radius: 50% 50% 12% 50%;
-  transform: rotate(31deg);
-}
-
-.urge-mark span:nth-child(2) {
-  inset: 31% 5% 31% 5%;
-  border-right-color: transparent;
-  border-left-color: var(--sp-accent);
-  transform: rotate(-19deg);
-}
-
-.urge-mark span:nth-child(3) {
-  top: 47%;
-  left: 47%;
-  width: 9%;
-  height: 9%;
-  border: 0;
-  background: var(--sp-accent);
-  transform: rotate(45deg);
-}
-
-.urge-mechanism small {
-  color: rgba(255, 255, 255, 0.28);
+.urge-praxis-controls label > span {
+  color: var(--ur-muted);
   font-size: 8px;
   font-weight: 800;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
-.urge-mechanism p {
-  margin: 8px 0 0;
-  color: rgba(255, 255, 255, 0.68);
-  font-size: 12px;
-  line-height: 1.65;
+.urge-praxis-controls input,
+.urge-praxis-controls textarea {
+  width: 100%;
+  border: 1px solid var(--ur-line);
+  border-radius: 10px;
+  outline: 0;
+  background: rgba(0, 0, 0, 0.23);
+  color: var(--ur-text);
+  padding: 10px 11px;
+  transition:
+    border-color 140ms ease,
+    box-shadow 140ms ease;
 }
 
-.urge-stage-metrics {
+.urge-praxis-controls textarea {
+  resize: vertical;
+  min-height: 70px;
+  line-height: 1.5;
+}
+
+.urge-praxis-controls input:focus,
+.urge-praxis-controls textarea:focus {
+  border-color: rgba(216, 255, 87, 0.45);
+  box-shadow: 0 0 0 3px rgba(216, 255, 87, 0.05);
+}
+
+.urge-praxis-controls input:disabled,
+.urge-praxis-controls textarea:disabled {
+  opacity: 0.55;
+}
+
+.urge-praxis-pair {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 7px;
-}
-
-.urge-metric {
-  display: grid;
-  gap: 3px;
-  padding: 9px;
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
-}
-
-.urge-metric span {
-  color: rgba(255, 255, 255, 0.27);
-  font-size: 8px;
-  text-transform: uppercase;
-}
-
-.urge-metric strong {
-  font-size: 13px;
-  font-weight: 580;
-}
-
-.urge-criteria {
-  display: grid;
-  gap: 8px;
-}
-
-.urge-criteria > div {
-  display: grid;
-  grid-template-columns:
-    minmax(105px, 0.8fr)
-    minmax(80px, 1fr)
-    28px;
+  grid-template-columns: 1fr 1fr;
   gap: 9px;
-  align-items: center;
 }
 
-.urge-criteria span,
-.urge-criteria strong {
+.urge-praxis-cadence {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  margin-top: 10px;
+  color: var(--ur-muted);
   font-size: 9px;
 }
 
-.urge-criteria > div > span:first-child {
-  color: rgba(255, 255, 255, 0.5);
+.urge-praxis-cadence strong {
+  color: var(--ur-hot);
+  font-size: 11px;
 }
 
-.urge-criteria strong {
-  color: rgba(255, 255, 255, 0.38);
-  font-weight: 550;
-  text-align: right;
-}
-
-.urge-meter {
-  position: relative;
-  height: 2px;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.07);
-}
-
-.urge-meter span {
-  position: absolute;
-  inset: 0 auto 0 0;
-  background: var(--sp-accent);
-}
-
-.urge-candidates {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 7px;
-}
-
-.urge-candidates button {
-  display: grid;
-  gap: 5px;
-  min-height: 95px;
-  padding: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.065);
-  background: rgba(0, 0, 0, 0.12);
-  color: rgba(255, 255, 255, 0.52);
-  cursor: pointer;
-  font: inherit;
-  text-align: left;
-}
-
-.urge-candidates button[data-active="true"] {
-  border-color:
-    color-mix(in srgb, var(--sp-accent) 48%, transparent);
-  background:
-    color-mix(in srgb, var(--sp-accent) 7%, transparent);
-}
-
-.urge-candidates button span {
-  font-size: 10px;
-  font-weight: 720;
-}
-
-.urge-candidates button strong {
-  color: var(--sp-accent);
-  font-size: 24px;
-  font-weight: 300;
-}
-
-.urge-candidates button small {
-  color: rgba(255, 255, 255, 0.25);
-  font-size: 8px;
-}
-
-.urge-lineage {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  align-items: center;
-  margin-top: 13px;
-}
-
-.urge-lineage span {
-  display: flex;
-  gap: 5px;
-  align-items: center;
-  color: rgba(255, 255, 255, 0.34);
-  font-size: 8px;
-}
-
-.urge-lineage i {
-  display: grid;
-  width: 16px;
-  height: 16px;
-  place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.09);
+.urge-praxis-cadence i {
+  width: 3px;
+  height: 3px;
+  margin: 0 4px;
   border-radius: 50%;
-  color: var(--sp-accent);
-  font-style: normal;
+  background: var(--ur-faint);
 }
 
-.urge-capability-strip > div:last-child {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
+.urge-praxis-baseline {
+  overflow: hidden;
+  border: 1px dashed var(--ur-line-2);
+  border-radius: 13px;
+  background: rgba(0, 0, 0, 0.18);
 }
 
-.urge-capability-strip > div:last-child span {
-  display: flex;
+.urge-praxis-baseline > img {
+  width: 100%;
+  height: 150px;
+  display: block;
+  object-fit: contain;
+  background:
+    repeating-conic-gradient(
+      rgba(255, 255, 255, 0.025) 0 25%,
+      transparent 0 50%
+    )
+    0 / 18px 18px;
+}
+
+.urge-praxis-scratch {
+  height: 116px;
+  display: grid;
+  place-items: center;
+  align-content: center;
   gap: 5px;
-  align-items: center;
-  padding: 6px 8px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  color: rgba(255, 255, 255, 0.42);
+  color: var(--ur-faint);
+  text-align: center;
+}
+
+.urge-praxis-scratch svg {
+  color: var(--ur-hot);
+}
+
+.urge-praxis-scratch strong {
+  color: var(--ur-text);
+  font-size: 10px;
+}
+
+.urge-praxis-scratch small {
   font-size: 8px;
 }
 
-.urge-capability-strip > div:last-child svg {
-  color: var(--sp-accent);
-}
-
-.urge-reserved {
+.urge-praxis-baseline > div:last-child {
   display: flex;
-  gap: 12px;
-  align-items: center;
+  gap: 7px;
+  padding: 8px;
+  border-top: 1px solid var(--ur-line);
 }
 
-.urge-reserved > span {
-  width: 8px;
-  height: 38px;
+.urge-praxis-upload,
+.urge-praxis-baseline button {
+  flex: 1;
+  min-height: 32px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 6px !important;
+  margin: 0 !important;
+  border: 1px solid var(--ur-line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.025);
+  color: var(--ur-muted);
+  cursor: pointer;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.urge-praxis-upload input {
+  display: none;
+}
+
+.urge-praxis-advanced {
+  margin-top: 20px;
+  padding: 13px 0;
+  border-top: 1px solid var(--ur-line);
+  border-bottom: 1px solid var(--ur-line);
+}
+
+.urge-praxis-advanced summary {
+  color: var(--ur-muted);
+  cursor: pointer;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.urge-praxis-error {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin-top: 13px;
+  padding: 10px;
+  border: 1px solid rgba(255, 111, 118, 0.3);
+  border-radius: 9px;
+  background: rgba(255, 111, 118, 0.07);
+  color: var(--ur-danger);
+  font-size: 9px;
+  line-height: 1.4;
+}
+
+.urge-praxis-actions {
+  display: flex;
+  gap: 7px;
+  margin-top: 15px;
+}
+
+.urge-praxis-actions button {
+  min-height: 43px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.urge-praxis-run {
+  flex: 1;
+  border: 0;
+  background: var(--ur-hot);
+  color: #0a0c08;
+}
+
+.urge-praxis-run small {
+  opacity: 0.5;
+}
+
+.urge-praxis-run:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.urge-praxis-pause {
+  flex: 1;
+  border: 1px solid rgba(216, 255, 87, 0.25);
+  background: rgba(216, 255, 87, 0.06);
+  color: var(--ur-hot);
+}
+
+.urge-praxis-stop {
+  flex: 1;
+  border: 1px solid rgba(255, 111, 118, 0.28);
+  background: rgba(255, 111, 118, 0.06);
+  color: var(--ur-danger);
+}
+
+.urge-praxis-reset {
+  border: 1px solid var(--ur-line);
+  background: transparent;
+  color: var(--ur-muted);
+  padding: 0 12px;
+}
+
+.urge-praxis-preview {
+  position: sticky;
+  top: 15px;
+  overflow: hidden;
+}
+
+.urge-praxis-preview > header {
+  min-height: 67px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 19px;
+}
+
+.urge-praxis-preview > header > div:first-child {
+  display: grid;
+  gap: 3px;
+}
+
+.urge-praxis-preview > header small,
+.urge-praxis-direction span,
+.urge-praxis-evidence span {
+  color: var(--ur-faint);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.urge-praxis-preview > header strong {
+  font-size: 12px;
+}
+
+.urge-praxis-count {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.urge-praxis-count b {
+  font-size: 24px;
+  font-weight: 450;
+  letter-spacing: -0.05em;
+}
+
+.urge-praxis-count span {
+  color: var(--ur-faint);
+  font-size: 10px;
+}
+
+.urge-praxis-progress {
+  height: 2px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.urge-praxis-progress span {
+  height: 100%;
+  display: block;
+  background: var(--ur-hot);
+  box-shadow: 0 0 13px rgba(216, 255, 87, 0.35);
+  transition: width 240ms ease;
+}
+
+.urge-praxis-canvas {
+  position: relative;
+  min-height: clamp(420px, 58vh, 680px);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
   background:
-    repeating-linear-gradient(
-      to bottom,
-      var(--sp-accent) 0 4px,
-      transparent 4px 8px
+    radial-gradient(
+      circle at center,
+      rgba(255, 255, 255, 0.035),
+      transparent 55%
+    ),
+    #0a0d0f;
+  border-bottom: 1px solid var(--ur-line);
+}
+
+.urge-praxis-canvas::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.25;
+  pointer-events: none;
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px
+    );
+  background-size: 40px 40px;
+  mask-image:
+    radial-gradient(
+      circle,
+      #000,
+      transparent 75%
     );
 }
 
-.urge-reserved div {
+.urge-praxis-canvas[data-image="true"] {
+  background:
+    repeating-conic-gradient(
+      rgba(255, 255, 255, 0.024) 0 25%,
+      rgba(0, 0, 0, 0.04) 0 50%
+    )
+    0 / 22px 22px,
+    #0a0d0f;
+}
+
+.urge-praxis-canvas > img {
+  position: relative;
+  z-index: 1;
+  width: min(82%, 820px);
+  max-height: 72vh;
+  object-fit: contain;
+  filter:
+    drop-shadow(
+      0 30px 60px
+      rgba(0, 0, 0, 0.4)
+    );
+}
+
+.urge-praxis-empty {
+  position: relative;
+  z-index: 1;
+  width: min(410px, 80%);
+  display: grid;
+  place-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.urge-praxis-empty > span {
+  width: 68px;
+  height: 68px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--ur-line-2);
+  border-radius: 19px;
+  color: var(--ur-hot);
+  font-size: 17px;
+  font-weight: 850;
+  letter-spacing: -0.05em;
+}
+
+.urge-praxis-empty strong {
+  font-size: 14px;
+  font-weight: 550;
+}
+
+.urge-praxis-empty p {
+  margin: 0;
+  color: var(--ur-muted);
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.urge-praxis-working {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 10px;
+  border: 1px solid var(--ur-line);
+  border-radius: 999px;
+  background: rgba(8, 10, 12, 0.75);
+  color: var(--ur-hot);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  backdrop-filter: blur(12px);
+}
+
+.urge-praxis-working svg {
+  animation: urge-spin 1s linear infinite;
+}
+
+.urge-praxis-direction {
+  min-height: 62px;
+  display: grid;
+  align-content: center;
+  gap: 4px;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--ur-line);
+}
+
+.urge-praxis-direction strong {
+  max-width: 800px;
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.urge-praxis-timeline {
+  min-height: 103px;
+  display: flex;
+  gap: 7px;
+  overflow-x: auto;
+  padding: 11px 14px;
+}
+
+.urge-praxis-timeline > button {
+  flex: 0 0 67px;
   display: grid;
   gap: 3px;
+  border: 0;
+  background: transparent;
+  color: var(--ur-muted);
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
 }
 
-.urge-reserved strong {
-  font-size: 10px;
+.urge-praxis-timeline > button > div {
+  position: relative;
+  width: 67px;
+  height: 53px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--ur-line);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.22);
 }
 
-.urge-reserved p {
-  max-width: 420px;
-  margin: 0;
-  color: rgba(255, 255, 255, 0.34);
+.urge-praxis-timeline > button[data-active="true"] > div {
+  border-color: rgba(216, 255, 87, 0.55);
+  box-shadow: 0 0 0 2px rgba(216, 255, 87, 0.05);
+}
+
+.urge-praxis-timeline img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.urge-praxis-timeline > button > div > span {
+  color: var(--ur-faint);
+  font-size: 15px;
+}
+
+.urge-praxis-timeline > button > div > i {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  width: 15px;
+  height: 15px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--ur-hot);
+  color: #090b08;
+}
+
+.urge-praxis-timeline small {
+  color: var(--ur-faint);
+  font-size: 7px;
+  text-transform: uppercase;
+}
+
+.urge-praxis-timeline strong {
   font-size: 9px;
-  line-height: 1.55;
+}
+
+.urge-praxis-no-history {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  color: var(--ur-faint);
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.urge-praxis-evidence {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px 10px;
+  padding: 11px 17px 14px;
+  border-top: 1px solid var(--ur-line);
+}
+
+.urge-praxis-evidence strong {
+  margin-right: 8px;
+  color: var(--ur-muted);
+  font-size: 8px;
+  font-weight: 700;
+}
+
+@keyframes urge-pulse {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes urge-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @media (max-width: 980px) {
-  .urge-grid {
+  .urge-praxis-shell {
     grid-template-columns: 1fr;
   }
 
-  .urge-owner-chain {
-    display: none !important;
+  .urge-praxis-preview {
+    position: static;
   }
 }
 
 @media (max-width: 620px) {
-  .urge-hero {
-    grid-template-columns: 1fr;
-    padding: 22px;
+  .urge-praxis {
+    padding: 16px 11px;
   }
 
-  .urge-runtime-state {
-    width: auto;
+  .urge-praxis-hero {
+    align-items: flex-start;
+    flex-direction: column;
   }
 
-  .urge-modebar {
-    align-items: stretch;
+  .urge-praxis-hero h1 {
+    font-size: 43px;
   }
 
-  .urge-modebar > div:first-child {
+  .urge-praxis-state {
     width: 100%;
   }
 
-  .urge-modebar button {
-    flex: 1;
-    justify-content: center;
-  }
-
-  .urge-mark-field {
+  .urge-praxis-pair {
     grid-template-columns: 1fr;
   }
 
-  .urge-candidates {
-    grid-template-columns: 1fr;
-  }
-
-  .urge-stage-metrics {
-    grid-template-columns: 1fr;
+  .urge-praxis-canvas {
+    min-height: 360px;
   }
 }
 
-[data-splyce-reduced-motion] .urge-workbench * {
-  scroll-behavior: auto !important;
-  transition-duration: 0s !important;
-  animation-duration: 0s !important;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .urge-workbench * {
-    scroll-behavior: auto !important;
-    transition-duration: 0s !important;
-    animation-duration: 0s !important;
+@media (
+  prefers-reduced-motion:
+  reduce
+) {
+  .urge-praxis *,
+  .urge-praxis *::before,
+  .urge-praxis *::after {
+    animation-duration:
+      0.001ms !important;
+    animation-iteration-count:
+      1 !important;
+    transition-duration:
+      0.001ms !important;
   }
 }

@@ -2,17 +2,15 @@
 
 from __future__ import annotations
 
+import os
+from pathlib import Path
+import shutil
 import sys
+import tempfile
 
 
-runtime_path = (
-    "/root/savant-runtime/runtime"
-)
-
-sdump_path = (
-    "/root/savant-runtime/"
-    "tools/sdump-enterprise"
-)
+runtime_path = "/root/savant-runtime/runtime"
+sdump_path = "/root/savant-runtime/tools/sdump-enterprise"
 
 for path in (
     sdump_path,
@@ -27,9 +25,7 @@ for path in (
 
 import sdump_enterprise.stream_dump as stream_dump
 
-from savant_terminal import (
-    terminal,
-)
+from savant_terminal import terminal
 
 
 stream_dump.ui = terminal(
@@ -38,6 +34,284 @@ stream_dump.ui = terminal(
         "deterministic source projection "
         "· verified publication"
     ),
+)
+
+
+_snapshot_workspace = (
+    tempfile.TemporaryDirectory(
+        prefix="savant-sdump-source-"
+    )
+)
+
+_snapshot_root = (
+    Path(
+        _snapshot_workspace.name
+    )
+    / "source"
+)
+
+_snapshot_root.mkdir(
+    parents=True,
+    exist_ok=True,
+)
+
+
+def _same_source_revision(
+    before,
+    after,
+) -> bool:
+    return (
+        before.st_dev
+        == after.st_dev
+        and before.st_ino
+        == after.st_ino
+        and before.st_size
+        == after.st_size
+        and before.st_mtime_ns
+        == after.st_mtime_ns
+    )
+
+
+def _snapshot_candidate(
+    candidate,
+) -> Path:
+    source = (
+        candidate.absolute_path
+    )
+
+    destination = (
+        _snapshot_root
+        / candidate.relative_path
+    )
+
+    destination.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    last_error = None
+
+    for attempt in range(
+        1,
+        4,
+    ):
+        temporary = (
+            destination.parent
+            / (
+                "."
+                + destination.name
+                + ".sdump-"
+                + str(
+                    os.getpid()
+                )
+                + "-"
+                + str(
+                    attempt
+                )
+            )
+        )
+
+        try:
+            before = source.stat()
+
+            with (
+                source.open(
+                    "rb"
+                )
+            ) as reader, (
+                temporary.open(
+                    "wb"
+                )
+            ) as writer:
+                shutil.copyfileobj(
+                    reader,
+                    writer,
+                    length=(
+                        stream_dump
+                        .chunk_size
+                    ),
+                )
+
+                writer.flush()
+
+                os.fsync(
+                    writer.fileno()
+                )
+
+            after = source.stat()
+
+            copied = (
+                temporary.stat()
+            )
+
+            if (
+                _same_source_revision(
+                    before,
+                    after,
+                )
+                and copied.st_size
+                == before.st_size
+            ):
+                shutil.copystat(
+                    source,
+                    temporary,
+                    follow_symlinks=False,
+                )
+
+                temporary.replace(
+                    destination
+                )
+
+                return destination
+
+            last_error = (
+                "source changed while "
+                "snapshotting"
+            )
+
+        except OSError as error:
+            last_error = str(
+                error
+            )
+
+        finally:
+            try:
+                temporary.unlink(
+                    missing_ok=True
+                )
+            except OSError:
+                pass
+
+    raise stream_dump.StreamDumpError(
+        "unable to capture stable source "
+        "revision after 3 attempts: "
+        f"{candidate.relative_path}: "
+        f"{last_error or 'source remained mutable'}"
+    )
+
+
+_original_write_file_record = (
+    stream_dump.write_file_record
+)
+
+
+def _write_file_record_from_snapshot(
+    handle,
+    candidate,
+    artifact_digest,
+):
+    snapshot_path = (
+        _snapshot_candidate(
+            candidate
+        )
+    )
+
+    candidate.absolute_path = (
+        snapshot_path
+    )
+
+    rendered, source_bytes, source_sha = (
+        _original_write_file_record(
+            handle,
+            candidate,
+            artifact_digest,
+        )
+    )
+
+    candidate.size = (
+        source_bytes
+    )
+
+    return (
+        rendered,
+        source_bytes,
+        source_sha,
+    )
+
+
+_original_discover_source = (
+    stream_dump.discover_source
+)
+
+
+def _discover_source_with_live_total(
+    root,
+):
+    candidates, discovery = (
+        _original_discover_source(
+            root
+        )
+    )
+
+    class _LiveCandidateBytes(int):
+        def __new__(
+            cls,
+            initial,
+            admitted_candidates,
+        ):
+            instance = int.__new__(
+                cls,
+                initial,
+            )
+
+            instance._candidates = (
+                admitted_candidates
+            )
+
+            return instance
+
+        def _current(
+            self,
+        ):
+            return sum(
+                candidate.size
+                for candidate
+                in self._candidates
+            )
+
+        def __eq__(
+            self,
+            other,
+        ):
+            return (
+                self._current()
+                == int(
+                    other
+                )
+            )
+
+        def __req__(
+            self,
+            other,
+        ):
+            return (
+                int(
+                    other
+                )
+                == self._current()
+            )
+
+    discovery[
+        "candidate_bytes"
+    ] = _LiveCandidateBytes(
+        discovery[
+            "candidate_bytes"
+        ],
+        candidates,
+    )
+
+    return (
+        candidates,
+        discovery,
+    )
+
+
+stream_dump.write_file_record = (
+    _write_file_record_from_snapshot
+)
+
+stream_dump.discover_source = (
+    _discover_source_with_live_total
 )
 
 
@@ -60,3 +334,6 @@ except (
     raise SystemExit(
         1
     )
+
+finally:
+    _snapshot_workspace.cleanup()
