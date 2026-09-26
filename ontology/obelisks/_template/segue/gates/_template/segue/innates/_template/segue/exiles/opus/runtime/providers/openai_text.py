@@ -189,14 +189,137 @@ def normalize_tools(
     return result
 
 
+def normalize_input_images(
+    value: Any,
+) -> list[Dict[str, Any]]:
+    if value is None:
+        return []
+
+    if not isinstance(
+        value,
+        list,
+    ):
+        raise ProviderError(
+            "input_images must be a list"
+        )
+
+    result: list[
+        Dict[str, Any]
+    ] = []
+
+    for index, row in enumerate(
+        value,
+        start=1,
+    ):
+        if isinstance(
+            row,
+            str,
+        ):
+            source = row.strip()
+            detail = "auto"
+            label = (
+                f"image-{index}"
+            )
+        elif isinstance(
+            row,
+            dict,
+        ):
+            source = str(
+                row.get(
+                    "source"
+                )
+                or row.get(
+                    "url"
+                )
+                or row.get(
+                    "image_url"
+                )
+                or ""
+            ).strip()
+
+            detail = str(
+                row.get(
+                    "detail"
+                )
+                or "auto"
+            ).strip().lower()
+
+            label = str(
+                row.get(
+                    "label"
+                )
+                or f"image-{index}"
+            ).strip()
+        else:
+            raise ProviderError(
+                "each input image must "
+                "be a string or object"
+            )
+
+        if not source:
+            raise ProviderError(
+                "input image source "
+                "is required"
+            )
+
+        if not (
+            source.startswith(
+                "https://"
+            )
+            or source.startswith(
+                "http://"
+            )
+            or source.startswith(
+                "data:image/"
+            )
+        ):
+            raise ProviderError(
+                "input image source must "
+                "be an http(s) URL or "
+                "image data URL"
+            )
+
+        if detail not in {
+            "auto",
+            "low",
+            "high",
+        }:
+            raise ProviderError(
+                "input image detail must "
+                "be auto, low, or high"
+            )
+
+        result.append(
+            {
+                "source": source,
+                "detail": detail,
+                "label": label,
+            }
+        )
+
+    return result
+
+
 def build_input_items(
     *,
     message: str,
     system: str,
     context: str,
     continuation_input: Any,
+    input_images: Any = None,
 ) -> list[Dict[str, Any]]:
+    images = normalize_input_images(
+        input_images
+    )
+
     if continuation_input is not None:
+        if images:
+            raise ProviderError(
+                "input_images cannot be "
+                "combined with "
+                "continuation_input"
+            )
+
         if not isinstance(
             continuation_input,
             list,
@@ -217,10 +340,10 @@ def build_input_items(
             )
         ]
 
-    user_content = message
+    user_text = message
 
     if context:
-        user_content = (
+        user_text = (
             "Context:\n"
             + context
             + "\n\nUser:\n"
@@ -239,12 +362,57 @@ def build_input_items(
             }
         )
 
-    input_items.append(
-        {
-            "role": "user",
-            "content": user_content,
-        }
-    )
+    if images:
+        content: list[
+            Dict[str, Any]
+        ] = []
+
+        if user_text:
+            content.append(
+                {
+                    "type": "input_text",
+                    "text": user_text,
+                }
+            )
+
+        for image in images:
+            content.append(
+                {
+                    "type": "input_text",
+                    "text": (
+                        "Reference label: "
+                        + image[
+                            "label"
+                        ]
+                    ),
+                }
+            )
+
+            content.append(
+                {
+                    "type": "input_image",
+                    "image_url": image[
+                        "source"
+                    ],
+                    "detail": image[
+                        "detail"
+                    ],
+                }
+            )
+
+        input_items.append(
+            {
+                "role": "user",
+                "content": content,
+            }
+        )
+    else:
+        input_items.append(
+            {
+                "role": "user",
+                "content": user_text,
+            }
+        )
 
     return input_items
 
@@ -283,9 +451,14 @@ def infer(
         )
     )
 
+    input_images = request.get(
+        "input_images"
+    )
+
     if (
         not message
         and continuation_input is None
+        and not input_images
     ):
         raise ProviderError(
             "text inference request "
@@ -332,6 +505,7 @@ def infer(
             continuation_input=(
                 continuation_input
             ),
+            input_images=input_images,
         )
     )
 

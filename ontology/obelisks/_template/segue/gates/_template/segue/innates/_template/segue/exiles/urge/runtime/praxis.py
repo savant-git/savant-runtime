@@ -7,8 +7,10 @@ from dataclasses import dataclass
 from typing import Any, Mapping, Sequence
 
 from .creative_orchestration import (
-    creative_engine,
     creative_policy,
+)
+from .image_renderer import (
+    binding as image_renderer_binding,
 )
 from .logo_intelligence import (
     project as project_logo_intelligence,
@@ -21,8 +23,8 @@ from .workbench_projection import (
 )
 
 
-SCHEMA = "savant://runtime/urge/praxis/1.0.0"
-STEP_SCHEMA = "savant://runtime/urge/praxis-step/1.0.0"
+SCHEMA = "savant://runtime/urge/praxis/1.1.0"
+STEP_SCHEMA = "savant://runtime/urge/praxis-step/1.1.0"
 OWNER = "exile:urge"
 
 CAPABILITY = "exile:urge:praxis-step"
@@ -33,11 +35,15 @@ MIN_INTERVAL_MS = 0
 MAX_INTERVAL_MS = 86_400_000
 
 
-class praxis_error(RuntimeError):
+class praxis_error(
+    RuntimeError
+):
     pass
 
 
-def _canonical_json(value: Any) -> str:
+def _canonical_json(
+    value: Any,
+) -> str:
     try:
         return json.dumps(
             value,
@@ -46,15 +52,25 @@ def _canonical_json(value: Any) -> str:
             separators=(",", ":"),
             allow_nan=False,
         )
-    except (TypeError, ValueError) as exc:
+    except (
+        TypeError,
+        ValueError,
+    ) as exc:
         raise praxis_error(
-            "praxis projection must be canonical-json serializable"
+            "praxis projection must be "
+            "canonical-json serializable"
         ) from exc
 
 
-def _digest(value: Any) -> str:
+def _digest(
+    value: Any,
+) -> str:
     return hashlib.sha256(
-        _canonical_json(value).encode("utf-8")
+        _canonical_json(
+            value
+        ).encode(
+            "utf-8"
+        )
     ).hexdigest()
 
 
@@ -66,12 +82,19 @@ def _mapping(
     if value is None:
         return {}
 
-    if not isinstance(value, Mapping):
+    if not isinstance(
+        value,
+        Mapping,
+    ):
         raise praxis_error(
             f"{field} must be a mapping"
         )
 
-    return deepcopy(dict(value))
+    return deepcopy(
+        dict(
+            value
+        )
+    )
 
 
 def _strings(
@@ -82,10 +105,18 @@ def _strings(
     if value is None:
         return ()
 
-    if isinstance(value, str):
-        value = (value,)
+    if isinstance(
+        value,
+        str,
+    ):
+        value = (
+            value,
+        )
 
-    if not isinstance(value, Sequence):
+    if not isinstance(
+        value,
+        Sequence,
+    ):
         raise praxis_error(
             f"{field} must be a sequence"
         )
@@ -94,13 +125,24 @@ def _strings(
     seen: set[str] = set()
 
     for item in value:
-        text = str(item).strip()
+        text = str(
+            item
+        ).strip()
 
-        if text and text not in seen:
-            seen.add(text)
-            output.append(text)
+        if (
+            text
+            and text not in seen
+        ):
+            seen.add(
+                text
+            )
+            output.append(
+                text
+            )
 
-    return tuple(output)
+    return tuple(
+        output
+    )
 
 
 def _bounded_int(
@@ -111,13 +153,21 @@ def _bounded_int(
     maximum: int,
 ) -> int:
     try:
-        number = int(value)
-    except (TypeError, ValueError) as exc:
+        number = int(
+            value
+        )
+    except (
+        TypeError,
+        ValueError,
+    ) as exc:
         raise praxis_error(
             f"{field} must be an integer"
         ) from exc
 
-    if number < minimum or number > maximum:
+    if (
+        number < minimum
+        or number > maximum
+    ):
         raise praxis_error(
             f"{field} must be between "
             f"{minimum} and {maximum}"
@@ -175,7 +225,9 @@ def _normalize_baseline(
         )
     ).strip().lower()
 
-    if not media_type.startswith("image/"):
+    if not media_type.startswith(
+        "image/"
+    ):
         raise praxis_error(
             "baseline media_type must be image/*"
         )
@@ -189,13 +241,16 @@ def _normalize_baseline(
 
     if not digest:
         digest = hashlib.sha256(
-            source.encode("utf-8")
+            source.encode(
+                "utf-8"
+            )
         ).hexdigest()
 
     return {
         "kind": "image",
         "name": name,
-        "media_type": media_type,
+        "media_type":
+            media_type,
         "source": source,
         "digest": digest,
     }
@@ -210,54 +265,94 @@ class praxis_parameters:
     name: str
     iterations: int
     interval_ms: int
-    baseline: dict[str, Any] | None
-    constraints: tuple[str, ...]
-    invariants: tuple[str, ...]
-    cliches: tuple[str, ...]
-    context: dict[str, Any]
-    creative_policy: dict[str, Any]
+    baseline: dict[
+        str,
+        Any,
+    ] | None
+    constraints: tuple[
+        str,
+        ...,
+    ]
+    invariants: tuple[
+        str,
+        ...,
+    ]
+    cliches: tuple[
+        str,
+        ...,
+    ]
+    context: dict[
+        str,
+        Any,
+    ]
+    creative_policy: dict[
+        str,
+        Any,
+    ]
 
     def public_projection(
         self,
     ) -> dict[str, Any]:
         baseline = None
 
-        if self.baseline is not None:
+        if (
+            self.baseline
+            is not None
+        ):
             baseline = {
-                key: deepcopy(value)
+                key:
+                    deepcopy(
+                        value
+                    )
                 for key, value
                 in self.baseline.items()
                 if key != "source"
             }
 
         return {
-            "objective": self.objective,
-            "name": self.name,
-            "iterations": self.iterations,
-            "interval_ms": self.interval_ms,
-            "baseline": baseline,
-            "constraints": list(
-                self.constraints
-            ),
-            "invariants": list(
-                self.invariants
-            ),
-            "cliches": list(
-                self.cliches
-            ),
-            "context": deepcopy(
-                self.context
-            ),
-            "creative_policy": deepcopy(
-                self.creative_policy
-            ),
+            "objective":
+                self.objective,
+            "name":
+                self.name,
+            "iterations":
+                self.iterations,
+            "interval_ms":
+                self.interval_ms,
+            "baseline":
+                baseline,
+            "constraints":
+                list(
+                    self.constraints
+                ),
+            "invariants":
+                list(
+                    self.invariants
+                ),
+            "cliches":
+                list(
+                    self.cliches
+                ),
+            "context":
+                deepcopy(
+                    self.context
+                ),
+            "creative_policy":
+                deepcopy(
+                    self.creative_policy
+                ),
         }
 
 
 def normalize_parameters(
-    payload: Mapping[str, Any],
+    payload: Mapping[
+        str,
+        Any,
+    ],
 ) -> praxis_parameters:
-    if not isinstance(payload, Mapping):
+    if not isinstance(
+        payload,
+        Mapping,
+    ):
         raise praxis_error(
             "payload must be a mapping"
         )
@@ -311,23 +406,35 @@ def normalize_parameters(
         name=name,
         iterations=iterations,
         interval_ms=interval_ms,
-        baseline=_normalize_baseline(
-            payload.get("baseline")
+        baseline=(
+            _normalize_baseline(
+                payload.get(
+                    "baseline"
+                )
+            )
         ),
         constraints=_strings(
-            payload.get("constraints"),
+            payload.get(
+                "constraints"
+            ),
             field="constraints",
         ),
         invariants=_strings(
-            payload.get("invariants"),
+            payload.get(
+                "invariants"
+            ),
             field="invariants",
         ),
         cliches=_strings(
-            payload.get("cliches"),
+            payload.get(
+                "cliches"
+            ),
             field="cliches",
         ),
         context=_mapping(
-            payload.get("context"),
+            payload.get(
+                "context"
+            ),
             field="context",
         ),
         creative_policy=_mapping(
@@ -340,7 +447,10 @@ def normalize_parameters(
 
 
 def _policy(
-    values: Mapping[str, Any],
+    values: Mapping[
+        str,
+        Any,
+    ],
 ) -> creative_policy:
     allowed = {
         "divergence_passes",
@@ -353,11 +463,18 @@ def _policy(
         "mmr_lambda",
     }
 
-    unknown = set(values) - allowed
+    unknown = (
+        set(
+            values
+        )
+        - allowed
+    )
 
     if unknown:
         names = ", ".join(
-            sorted(unknown)
+            sorted(
+                unknown
+            )
         )
 
         raise praxis_error(
@@ -367,7 +484,9 @@ def _policy(
 
     try:
         return creative_policy(
-            **dict(values)
+            **dict(
+                values
+            )
         )
     except (
         TypeError,
@@ -380,7 +499,10 @@ def _policy(
 
 
 def _previous_baselines(
-    previous: Mapping[str, Any] | None,
+    previous: Mapping[
+        str,
+        Any,
+    ] | None,
 ) -> tuple[str, ...]:
     if previous is None:
         return ()
@@ -396,14 +518,18 @@ def _previous_baselines(
 
     if digest:
         values.append(
-            f"praxis-iteration:{digest}"
+            "praxis-iteration:"
+            + digest
         )
 
     workbench = previous.get(
         "workbench"
     )
 
-    if isinstance(workbench, Mapping):
+    if isinstance(
+        workbench,
+        Mapping,
+    ):
         workbench_digest = str(
             workbench.get(
                 "digest",
@@ -417,13 +543,19 @@ def _previous_baselines(
                 + workbench_digest
             )
 
-    return tuple(values)
+    return tuple(
+        values
+    )
 
 
 def _baseline_references(
-    parameters: praxis_parameters,
+    parameters:
+        praxis_parameters,
 ) -> tuple[str, ...]:
-    if parameters.baseline is None:
+    if (
+        parameters.baseline
+        is None
+    ):
         return ()
 
     return (
@@ -436,22 +568,30 @@ def _baseline_references(
 
 def _iteration_context(
     *,
-    parameters: praxis_parameters,
+    parameters:
+        praxis_parameters,
     index: int,
-    previous: Mapping[str, Any] | None,
+    previous: Mapping[
+        str,
+        Any,
+    ] | None,
 ) -> dict[str, Any]:
     context = deepcopy(
         parameters.context
     )
 
     context.update({
-        "surface": context.get(
-            "surface",
-            "splyce",
-        ),
-        "mode": "logo",
-        "praxis": True,
-        "praxis_iteration": index,
+        "surface":
+            context.get(
+                "surface",
+                "splyce",
+            ),
+        "mode":
+            "logo",
+        "praxis":
+            True,
+        "praxis_iteration":
+            index,
         "praxis_iterations":
             parameters.iterations,
         "praxis_interval_ms":
@@ -459,19 +599,29 @@ def _iteration_context(
         "praxis_start":
             (
                 "baseline"
-                if parameters.baseline
-                is not None
+                if (
+                    parameters.baseline
+                    is not None
+                )
                 else "scratch"
             ),
     })
 
-    if parameters.baseline is not None:
+    if (
+        parameters.baseline
+        is not None
+    ):
         context[
             "baseline_image"
         ] = {
-            key: deepcopy(value)
+            key:
+                deepcopy(
+                    value
+                )
             for key, value
-            in parameters.baseline.items()
+            in parameters
+            .baseline
+            .items()
             if key != "source"
         }
 
@@ -479,12 +629,14 @@ def _iteration_context(
         context[
             "previous_iteration"
         ] = {
-            "index": previous.get(
-                "index"
-            ),
-            "digest": previous.get(
-                "digest"
-            ),
+            "index":
+                previous.get(
+                    "index"
+                ),
+            "digest":
+                previous.get(
+                    "digest"
+                ),
         }
 
     return context
@@ -492,7 +644,8 @@ def _iteration_context(
 
 def _iteration_objective(
     *,
-    parameters: praxis_parameters,
+    parameters:
+        praxis_parameters,
     index: int,
 ) -> str:
     if index == 1:
@@ -524,16 +677,24 @@ def _iteration_objective(
 
 
 def execute_step(
-    payload: Mapping[str, Any],
+    payload: Mapping[
+        str,
+        Any,
+    ],
 ) -> dict[str, Any]:
-    if not isinstance(payload, Mapping):
+    if not isinstance(
+        payload,
+        Mapping,
+    ):
         raise praxis_error(
             "payload must be a mapping"
         )
 
-    parameters_payload = payload.get(
-        "parameters",
-        payload,
+    parameters_payload = (
+        payload.get(
+            "parameters",
+            payload,
+        )
     )
 
     if not isinstance(
@@ -544,8 +705,10 @@ def execute_step(
             "parameters must be a mapping"
         )
 
-    parameters = normalize_parameters(
-        parameters_payload
+    parameters = (
+        normalize_parameters(
+            parameters_payload
+        )
     )
 
     index = _bounded_int(
@@ -555,11 +718,15 @@ def execute_step(
         ),
         field="index",
         minimum=1,
-        maximum=parameters.iterations,
+        maximum=(
+            parameters.iterations
+        ),
     )
 
-    previous_raw = payload.get(
-        "previous"
+    previous_raw = (
+        payload.get(
+            "previous"
+        )
     )
 
     previous = (
@@ -567,7 +734,10 @@ def execute_step(
             previous_raw,
             field="previous",
         )
-        if previous_raw is not None
+        if (
+            previous_raw
+            is not None
+        )
         else None
     )
 
@@ -584,44 +754,62 @@ def execute_step(
         )
     )
 
-    objective = _iteration_objective(
-        parameters=parameters,
-        index=index,
+    objective = (
+        _iteration_objective(
+            parameters=parameters,
+            index=index,
+        )
     )
 
-    context = _iteration_context(
-        parameters=parameters,
-        index=index,
-        previous=previous,
+    context = (
+        _iteration_context(
+            parameters=parameters,
+            index=index,
+            previous=previous,
+        )
     )
 
     brief = {
-        "name": parameters.name,
-        "context": context,
+        "name":
+            parameters.name,
+        "context":
+            context,
         "praxis": {
-            "iteration": index,
+            "iteration":
+                index,
             "iterations":
                 parameters.iterations,
-            "start": (
-                "baseline"
-                if parameters.baseline
-                is not None
-                else "scratch"
-            ),
+            "start":
+                (
+                    "baseline"
+                    if (
+                        parameters.baseline
+                        is not None
+                    )
+                    else "scratch"
+                ),
         },
     }
 
-    logo = project_logo_intelligence(
-        name=parameters.name,
-        brief=brief,
-        objective=objective,
-        constraints=parameters.constraints,
-        protected_invariants=(
-            parameters.invariants
-        ),
-        known_cliches=parameters.cliches,
-        references_to_avoid=baselines,
-        run_policy=policy,
+    logo = (
+        project_logo_intelligence(
+            name=parameters.name,
+            brief=brief,
+            objective=objective,
+            constraints=(
+                parameters.constraints
+            ),
+            protected_invariants=(
+                parameters.invariants
+            ),
+            known_cliches=(
+                parameters.cliches
+            ),
+            references_to_avoid=(
+                baselines
+            ),
+            run_policy=policy,
+        )
     )
 
     creative = logo[
@@ -630,12 +818,22 @@ def execute_step(
 
     renderer = project_renderer(
         candidate=logo,
+        binding=(
+            image_renderer_binding(
+                baseline=(
+                    parameters.baseline
+                )
+            )
+        ),
         context={
             "urge_capability":
                 CAPABILITY,
-            "mode": "logo",
-            "praxis": True,
-            "iteration": index,
+            "mode":
+                "logo",
+            "praxis":
+                True,
+            "iteration":
+                index,
             "iterations":
                 parameters.iterations,
             "objective":
@@ -643,45 +841,65 @@ def execute_step(
         },
     )
 
-    workbench = project_workbench(
-        creative=creative,
-        logo=logo,
-        renderer=renderer,
+    workbench = (
+        project_workbench(
+            creative=creative,
+            logo=logo,
+            renderer=renderer,
+        )
     )
 
     result = {
-        "schema": STEP_SCHEMA,
-        "owner": OWNER,
-        "capability": CAPABILITY,
-        "index": index,
+        "schema":
+            STEP_SCHEMA,
+        "owner":
+            OWNER,
+        "capability":
+            CAPABILITY,
+        "index":
+            index,
         "iterations":
             parameters.iterations,
-        "complete": (
-            index
-            == parameters.iterations
-        ),
+        "complete":
+            (
+                index
+                == parameters.iterations
+            ),
         "parameters":
-            parameters.public_projection(),
-        "creative": creative,
-        "logo": logo,
-        "renderer": renderer,
-        "workbench": workbench,
+            parameters
+            .public_projection(),
+        "creative":
+            creative,
+        "logo":
+            logo,
+        "renderer":
+            renderer,
+        "workbench":
+            workbench,
         "lineage": {
-            "previous_digest": (
-                previous.get(
-                    "digest"
-                )
-                if previous is not None
-                else None
-            ),
-            "baseline_digest": (
-                parameters.baseline[
-                    "digest"
-                ]
-                if parameters.baseline
-                is not None
-                else None
-            ),
+            "previous_digest":
+                (
+                    previous.get(
+                        "digest"
+                    )
+                    if (
+                        previous
+                        is not None
+                    )
+                    else None
+                ),
+            "baseline_digest":
+                (
+                    parameters
+                    .baseline[
+                        "digest"
+                    ]
+                    if (
+                        parameters.baseline
+                        is not None
+                    )
+                    else None
+                ),
             "creative_digest":
                 creative.get(
                     "digest"
@@ -690,14 +908,20 @@ def execute_step(
                 logo.get(
                     "digest"
                 ),
+            "renderer_digest":
+                renderer.get(
+                    "digest"
+                ),
             "workbench_digest":
                 workbench.get(
                     "digest"
                 ),
         },
         "ownership": {
-            "iteration": OWNER,
-            "creative_pressure": OWNER,
+            "iteration":
+                OWNER,
+            "creative_pressure":
+                OWNER,
             "provider_orchestration":
                 "exile:opus",
             "renderer":
@@ -709,16 +933,24 @@ def execute_step(
                 ),
         },
         "boundaries": {
-            "creates_authority": False,
-            "mutates_canon": False,
-            "mutates_source": False,
-            "owns_provider_routing": False,
-            "owns_renderer": False,
-            "projection_only": True,
+            "creates_authority":
+                False,
+            "mutates_canon":
+                False,
+            "mutates_source":
+                False,
+            "owns_provider_routing":
+                False,
+            "owns_renderer":
+                False,
+            "projection_only":
+                True,
         },
     }
 
-    result["digest"] = _digest(
+    result[
+        "digest"
+    ] = _digest(
         result
     )
 
@@ -726,47 +958,71 @@ def execute_step(
 
 
 def project_praxis(
-    payload: Mapping[str, Any],
+    payload: Mapping[
+        str,
+        Any,
+    ],
 ) -> dict[str, Any]:
-    parameters = normalize_parameters(
-        payload
+    parameters = (
+        normalize_parameters(
+            payload
+        )
     )
 
     result = {
-        "schema": SCHEMA,
-        "owner": OWNER,
-        "capability": CAPABILITY,
+        "schema":
+            SCHEMA,
+        "owner":
+            OWNER,
+        "capability":
+            CAPABILITY,
         "parameters":
-            parameters.public_projection(),
+            parameters
+            .public_projection(),
         "execution": {
-            "mode": "client-paced",
+            "mode":
+                "client-paced",
             "step_capability":
                 CAPABILITY,
             "iterations":
                 parameters.iterations,
             "interval_ms":
                 parameters.interval_ms,
-            "live_projection": True,
-            "resume_supported": True,
+            "live_projection":
+                True,
+            "resume_supported":
+                True,
+            "renderer":
+                "openai:gpt-image-2",
         },
         "boundaries": {
-            "creates_authority": False,
-            "mutates_canon": False,
-            "mutates_source": False,
-            "owns_provider_routing": False,
-            "owns_renderer": False,
-            "projection_only": True,
+            "creates_authority":
+                False,
+            "mutates_canon":
+                False,
+            "mutates_source":
+                False,
+            "owns_provider_routing":
+                False,
+            "owns_renderer":
+                False,
+            "projection_only":
+                True,
         },
     }
 
-    result["digest"] = _digest(
+    result[
+        "digest"
+    ] = _digest(
         result
     )
 
     return result
 
 
-def register(dispatcher: Any) -> str:
+def register(
+    dispatcher: Any,
+) -> str:
     if not hasattr(
         dispatcher,
         "register",
