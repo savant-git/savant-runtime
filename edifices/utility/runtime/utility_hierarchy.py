@@ -10,7 +10,7 @@ from typing import Any, Mapping
 
 schema = (
     "savant://runtime/sieve/"
-    "utility-hierarchy/1.0.0"
+    "utility-edifice/1.0.0"
 )
 
 owner = "sieve"
@@ -18,7 +18,7 @@ owner = "sieve"
 authority_effect = "none"
 
 accepted_decision = (
-    "AD-20260926-002-utility-hierarchy"
+    "AD-20260926-002-utility-edifice"
 )
 
 levels = (
@@ -46,7 +46,7 @@ superseded_levels = (
 )
 
 
-class utility_hierarchy_error(
+class utility_edifice_error(
     RuntimeError
 ):
     pass
@@ -63,7 +63,7 @@ class utility_identity:
         self,
     ) -> None:
         if self.level not in levels:
-            raise utility_hierarchy_error(
+            raise utility_edifice_error(
                 "unknown utility level: "
                 f"{self.level}"
             )
@@ -89,7 +89,7 @@ class utility_identity:
             "level": self.level,
             "ordinal":
                 self.ordinal,
-            "hierarchy":
+            "edifice":
                 list(levels),
         }
 
@@ -118,7 +118,7 @@ def digest(
     ).hexdigest()
 
 
-def hierarchy_projection(
+def edifice_projection(
 ) -> dict[str, Any]:
     projection = {
         "schema": schema,
@@ -132,7 +132,7 @@ def hierarchy_projection(
         "level_count":
             len(levels),
         "supersedes": {
-            "hierarchy":
+            "edifice":
                 list(
                     superseded_levels
                 ),
@@ -194,10 +194,10 @@ def require_current_level(
     if not is_current_level(
         level
     ):
-        raise utility_hierarchy_error(
+        raise utility_edifice_error(
             "utility level requires "
             "semantic reclassification "
-            "under current hierarchy: "
+            "under current edifice: "
             f"{level}"
         )
 
@@ -218,13 +218,13 @@ def migrate_level(
     if not is_superseded_level(
         level
     ):
-        raise utility_hierarchy_error(
+        raise utility_edifice_error(
             "unknown utility level: "
             f"{level}"
         )
 
     if semantic_level is None:
-        raise utility_hierarchy_error(
+        raise utility_edifice_error(
             "superseded utility level "
             "cannot be migrated by "
             "ordinal position; provide "
@@ -248,8 +248,8 @@ def validate_projection(
         )
         != accepted_decision
     ):
-        raise utility_hierarchy_error(
-            "utility hierarchy projection "
+        raise utility_edifice_error(
+            "utility edifice projection "
             "does not identify current "
             "accepted decision"
         )
@@ -260,8 +260,8 @@ def validate_projection(
             (),
         )
     ) != levels:
-        raise utility_hierarchy_error(
-            "utility hierarchy projection "
+        raise utility_edifice_error(
+            "utility edifice projection "
             "does not match current levels"
         )
 
@@ -269,7 +269,7 @@ def validate_projection(
 def selftest(
 ) -> dict[str, Any]:
     projection = (
-        hierarchy_projection()
+        edifice_projection()
     )
 
     checks: dict[
@@ -278,7 +278,7 @@ def selftest(
     ] = {}
 
     checks[
-        "hierarchy_exact"
+        "edifice_exact"
     ] = tuple(
         projection[
             "levels"
@@ -389,7 +389,7 @@ def selftest(
             "current"
         )
     except (
-        utility_hierarchy_error
+        utility_edifice_error
     ):
         rejected_ordinal_migration = (
             True
@@ -421,7 +421,7 @@ def selftest(
 
         validation_passed = True
     except (
-        utility_hierarchy_error
+        utility_edifice_error
     ):
         validation_passed = False
 
@@ -432,8 +432,8 @@ def selftest(
     )
 
     deterministic = (
-        hierarchy_projection()
-        == hierarchy_projection()
+        edifice_projection()
+        == edifice_projection()
     )
 
     checks[
@@ -443,7 +443,7 @@ def selftest(
     return {
         "schema":
             "savant://runtime/sieve/"
-            "utility-hierarchy-selftest/"
+            "utility-edifice-selftest/"
             "1.0.0",
         "ok":
             all(

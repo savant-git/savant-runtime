@@ -82,7 +82,7 @@ dimensions = (
         id="sophistication",
         label="sophistication",
         description=(
-            "depth, restraint, hierarchy, "
+            "depth, restraint, edifice, "
             "nuance, and maturity of the design"
         ),
         default_weight=1.0,
@@ -141,7 +141,7 @@ dimensions = (
         id="composition",
         label="composition",
         description=(
-            "balance, hierarchy, proportion, "
+            "balance, edifice, proportion, "
             "rhythm, tension, and spatial logic"
         ),
         default_weight=0.9,
@@ -164,7 +164,7 @@ dimensions = (
         label="typography",
         description=(
             "letterform quality, spacing, "
-            "relationship to the mark, hierarchy, "
+            "relationship to the mark, edifice, "
             "and typographic appropriateness"
         ),
         default_weight=0.8,

@@ -110,7 +110,7 @@ def project(
         "scale_shift",
         "representation_shift",
         "interaction_reversal",
-        "hierarchy_reversal",
+        "edifice_reversal",
         "material_behavior",
         "failure_as_signal",
         "asymmetry",
@@ -172,7 +172,7 @@ def project(
         {
             "stage": "invert",
             "instruction": (
-                "challenge assumptions, hierarchy, interaction direction, representation, "
+                "challenge assumptions, edifice, interaction direction, representation, "
                 "scale, sequence, and conventional ownership of visible elements"
             ),
         },
