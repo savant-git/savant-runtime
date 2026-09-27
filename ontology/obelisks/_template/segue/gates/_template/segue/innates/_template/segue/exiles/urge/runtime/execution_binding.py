@@ -14,6 +14,10 @@ from .praxis import (
     CAPABILITY as PRAXIS_CAPABILITY,
     execute_step as execute_praxis_step,
 )
+from .praxis_live import (
+    CAPABILITY as PRAXIS_LIVE_CAPABILITY,
+    execute as execute_praxis_rigor,
+)
 from .renderer_slot import (
     project as project_renderer,
     renderer_binding,
@@ -27,7 +31,7 @@ CAPABILITY = "exile:urge:iterate"
 
 SCHEMA = (
     "savant://runtime/urge/"
-    "execution-binding/1.1.0"
+    "execution-binding/1.2.0"
 )
 
 OWNER = "exile:urge"
@@ -52,11 +56,14 @@ def _mapping(
         Mapping,
     ):
         raise urge_execution_error(
-            f"{field} must be a mapping"
+            field
+            + " must be a mapping"
         )
 
     return deepcopy(
-        dict(value)
+        dict(
+            value
+        )
     )
 
 
@@ -72,42 +79,88 @@ def _strings(
         value,
         str,
     ):
-        value = (
-            value,
-        )
-
-    if not isinstance(
+        values = value.splitlines()
+    elif isinstance(
         value,
         (
             list,
             tuple,
         ),
     ):
+        values = value
+    else:
         raise urge_execution_error(
-            f"{field} must be a sequence"
+            field
+            + " must be text or a sequence"
         )
 
-    output: list[str] = []
-    seen: set[str] = set()
-
-    for item in value:
-        text = str(
+    return tuple(
+        str(
             item
         ).strip()
+        for item in values
+        if str(
+            item
+        ).strip()
+    )
 
-        if (
-            text
-            and text not in seen
-        ):
-            seen.add(
-                text
-            )
-            output.append(
-                text
-            )
 
-    return tuple(
-        output
+def _policy(
+    value: Any,
+) -> creative_policy:
+    if value is None:
+        return creative_policy()
+
+    if isinstance(
+        value,
+        creative_policy,
+    ):
+        return value
+
+    if not isinstance(
+        value,
+        Mapping,
+    ):
+        raise urge_execution_error(
+            "creative_policy must be "
+            "a mapping"
+        )
+
+    allowed = {
+        "candidate_count",
+        "minimum_score",
+        "maximum_rounds",
+        "divergence_pressure",
+        "adversarial_pressure",
+        "convergence_pressure",
+    }
+
+    unknown = (
+        set(
+            value
+        )
+        - allowed
+    )
+
+    if unknown:
+        raise urge_execution_error(
+            "unknown creative_policy fields: "
+            + ", ".join(
+                sorted(
+                    unknown
+                )
+            )
+        )
+
+    return creative_policy(
+        **{
+            key:
+                value[
+                    key
+                ]
+            for key in allowed
+            if key in value
+        }
     )
 
 
@@ -125,6 +178,21 @@ def normalize_request(
             "payload must be a mapping"
         )
 
+    mode = str(
+        payload.get(
+            "mode",
+            "creative",
+        )
+    ).strip().lower()
+
+    if mode not in {
+        "creative",
+        "logo",
+    }:
+        raise urge_execution_error(
+            "mode must be creative or logo"
+        )
+
     objective = str(
         payload.get(
             "objective",
@@ -137,21 +205,6 @@ def normalize_request(
             "objective is required"
         )
 
-    mode = str(
-        payload.get(
-            "mode",
-            "job",
-        )
-    ).strip().lower()
-
-    if mode not in {
-        "job",
-        "logo",
-    }:
-        raise urge_execution_error(
-            "mode must be job or logo"
-        )
-
     name = str(
         payload.get(
             "name",
@@ -159,150 +212,100 @@ def normalize_request(
         )
     ).strip()
 
+    if (
+        mode == "logo"
+        and not name
+    ):
+        raise urge_execution_error(
+            "name is required for logo mode"
+        )
+
+    constraints = _strings(
+        payload.get(
+            "constraints"
+        ),
+        field="constraints",
+    )
+
+    invariants = _strings(
+        payload.get(
+            "invariants"
+        ),
+        field="invariants",
+    )
+
+    cliches = _strings(
+        payload.get(
+            "cliches"
+        ),
+        field="cliches",
+    )
+
+    baselines = _strings(
+        payload.get(
+            "baselines"
+        ),
+        field="baselines",
+    )
+
     brief = _mapping(
         payload.get(
-            "brief",
+            "brief"
         ),
         field="brief",
     )
 
-    if mode == "logo":
-        if not name:
-            name = str(
-                brief.get(
-                    "name",
-                    "",
-                )
-            ).strip()
+    context = _mapping(
+        payload.get(
+            "context"
+        ),
+        field="context",
+    )
 
-        if not name:
-            raise urge_execution_error(
-                "name is required "
-                "for logo mode"
-            )
+    renderer = payload.get(
+        "renderer"
+    )
+
+    if (
+        renderer is not None
+        and not isinstance(
+            renderer,
+            renderer_binding,
+        )
+    ):
+        raise urge_execution_error(
+            "renderer must be a "
+            "renderer_binding"
+        )
 
     return {
-        "objective":
-            objective,
         "mode":
             mode,
+        "objective":
+            objective,
         "name":
             name,
+        "constraints":
+            constraints,
+        "invariants":
+            invariants,
+        "cliches":
+            cliches,
+        "baselines":
+            baselines,
         "brief":
             brief,
-        "constraints":
-            _strings(
-                payload.get(
-                    "constraints",
-                ),
-                field="constraints",
-            ),
-        "invariants":
-            _strings(
-                payload.get(
-                    "invariants",
-                ),
-                field="invariants",
-            ),
-        "cliches":
-            _strings(
-                payload.get(
-                    "cliches",
-                ),
-                field="cliches",
-            ),
-        "baselines":
-            _strings(
-                payload.get(
-                    "baselines",
-                ),
-                field="baselines",
-            ),
         "context":
-            _mapping(
-                payload.get(
-                    "context",
-                ),
-                field="context",
-            ),
+            context,
         "creative_policy":
-            _mapping(
+            _policy(
                 payload.get(
-                    "creative_policy",
-                ),
-                field="creative_policy",
+                    "creative_policy"
+                )
             ),
         "renderer":
-            payload.get(
-                "renderer"
-            ),
+            renderer,
     }
-
-
-def _policy(
-    values: Mapping[
-        str,
-        Any,
-    ],
-) -> creative_policy:
-    allowed = {
-        "divergence_passes",
-        "candidates_per_pass",
-        "frontier_size",
-        "mutation_depth",
-        "synthesis_candidates",
-        "cliche_threshold",
-        "similarity_threshold",
-        "mmr_lambda",
-    }
-
-    unknown = (
-        set(values)
-        - allowed
-    )
-
-    if unknown:
-        names = ", ".join(
-            sorted(
-                unknown
-            )
-        )
-
-        raise urge_execution_error(
-            "unknown creative policy "
-            f"fields: {names}"
-        )
-
-    try:
-        return creative_policy(
-            **dict(values)
-        )
-    except (
-        TypeError,
-        ValueError,
-    ) as exc:
-        raise urge_execution_error(
-            "invalid creative policy: "
-            f"{exc}"
-        ) from exc
-
-
-def _renderer_binding(
-    value: Any,
-) -> renderer_binding | None:
-    if value is None:
-        return None
-
-    if isinstance(
-        value,
-        renderer_binding,
-    ):
-        return value
-
-    raise urge_execution_error(
-        "renderer must be a "
-        "renderer_binding instance"
-    )
 
 
 def _creative_projection(
@@ -410,18 +413,13 @@ def execute(
         payload
     )
 
-    policy = _policy(
-        request[
-            "creative_policy"
-        ]
-    )
+    policy = request[
+        "creative_policy"
+    ]
 
-    if (
-        request[
-            "mode"
-        ]
-        == "logo"
-    ):
+    if request[
+        "mode"
+    ] == "logo":
         logo = _logo_projection(
             request=request,
             policy=policy,
@@ -430,42 +428,32 @@ def execute(
         creative = logo[
             "creative_projection"
         ]
-
-        renderer_candidate = logo
-
     else:
         logo = None
 
-        creative = (
-            _creative_projection(
-                request=request,
-                policy=policy,
-            )
-        )
-
-        renderer_candidate = (
-            creative
+        creative = _creative_projection(
+            request=request,
+            policy=policy,
         )
 
     renderer = project_renderer(
         candidate=(
-            renderer_candidate
+            logo
+            if logo is not None
+            else creative
         ),
-        binding=_renderer_binding(
-            request[
-                "renderer"
-            ]
-        ),
+        binding=request[
+            "renderer"
+        ],
         context={
+            **request[
+                "context"
+            ],
             "urge_capability":
                 CAPABILITY,
             "mode":
                 request[
                     "mode"
-                ],
-            "objective":
-                request[
-                    "objective"
                 ],
         },
     )
@@ -476,15 +464,6 @@ def execute(
         renderer=renderer,
     )
 
-    public_request = {
-        key: deepcopy(
-            value
-        )
-        for key, value
-        in request.items()
-        if key != "renderer"
-    }
-
     return {
         "schema":
             SCHEMA,
@@ -492,8 +471,10 @@ def execute(
             OWNER,
         "capability":
             CAPABILITY,
-        "request":
-            public_request,
+        "mode":
+            request[
+                "mode"
+            ],
         "creative":
             creative,
         "logo":
@@ -502,6 +483,19 @@ def execute(
             renderer,
         "workbench":
             workbench,
+        "ownership": {
+            "creative_pressure":
+                OWNER,
+            "provider_orchestration":
+                "exile:opus",
+            "renderer":
+                renderer.get(
+                    "renderer",
+                    {},
+                ).get(
+                    "owner"
+                ),
+        },
         "boundaries": {
             "creates_authority":
                 False,
@@ -543,6 +537,11 @@ def register(
         execute_praxis_step,
     )
 
+    dispatcher.register(
+        PRAXIS_LIVE_CAPABILITY,
+        execute_praxis_rigor,
+    )
+
     return CAPABILITY
 
 
@@ -550,8 +549,10 @@ __all__ = [
     "CAPABILITY",
     "OWNER",
     "PRAXIS_CAPABILITY",
+    "PRAXIS_LIVE_CAPABILITY",
     "SCHEMA",
     "execute",
+    "execute_praxis_rigor",
     "execute_praxis_step",
     "normalize_request",
     "register",
