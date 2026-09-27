@@ -1151,3 +1151,362 @@ def classify_rows(
         source_digest = digest(
             row
         )
+
+        partition_projection = {
+            "schema": schema,
+            "owner": owner,
+            "authority_effect":
+                authority_effect,
+            "authoritative": False,
+            "rebuildable": True,
+            "category": category_id,
+            "accepted": accepted,
+            "candidate": candidate,
+            "score": round(
+                winner_score,
+                6,
+            ),
+            "confidence": round(
+                winner_confidence,
+                6,
+            ),
+            "margin": round(
+                margin,
+                6,
+            ),
+            "catchall":
+                profile.catchall,
+            "conversation_id":
+                conversation,
+            "message_id":
+                message_identity(row),
+            "runtime_profile_digest":
+                profile.source_digest,
+            "source_digest":
+                source_digest,
+            "evidence":
+                ranked_evidence,
+        }
+
+        partition_projection[
+            "classification_digest"
+        ] = digest(
+            partition_projection
+        )
+
+        projected = dict(row)
+
+        projected[
+            "extr_partition"
+        ] = partition_projection
+
+        results.append(
+            projected
+        )
+
+    return results
+
+
+def datrix_projection(
+    row: Mapping[str, Any],
+) -> dict[str, Any]:
+    partition = row.get(
+        "extr_partition"
+    )
+
+    if not isinstance(
+        partition,
+        Mapping,
+    ):
+        raise partition_error(
+            "datrix projection requires "
+            "extr_partition"
+        )
+
+    source_digest = partition.get(
+        "source_digest"
+    )
+
+    classification_digest = (
+        partition.get(
+            "classification_digest"
+        )
+    )
+
+    category = partition.get(
+        "category"
+    )
+
+    if not source_digest:
+        raise partition_error(
+            "extr_partition requires "
+            "source_digest"
+        )
+
+    if not classification_digest:
+        raise partition_error(
+            "extr_partition requires "
+            "classification_digest"
+        )
+
+    if not category:
+        raise partition_error(
+            "extr_partition requires category"
+        )
+
+    projection = {
+        "schema":
+            "savant://runtime/extr/"
+            "datrix-projection/1.0.0",
+        "owner": owner,
+        "authority_effect":
+            authority_effect,
+        "authoritative": False,
+        "rebuildable": True,
+        "storage_selected": False,
+        "source_digest":
+            source_digest,
+        "classification_digest":
+            classification_digest,
+        "category":
+            category,
+        "accepted":
+            bool(
+                partition.get(
+                    "accepted",
+                    False,
+                )
+            ),
+        "conversation_id":
+            partition.get(
+                "conversation_id"
+            ),
+        "message_id":
+            partition.get(
+                "message_id"
+            ),
+        "runtime_profile_digest":
+            partition.get(
+                "runtime_profile_digest"
+            ),
+        "evidence":
+            partition.get(
+                "evidence",
+                [],
+            ),
+    }
+
+    projection[
+        "projection_digest"
+    ] = digest(
+        projection
+    )
+
+    return projection
+
+
+def selftest() -> dict[str, Any]:
+    profile = load_runtime_profile(
+        {
+            "categories": [
+                {
+                    "id": "alpha",
+                    "minimum_score": 1.0,
+                    "signals": {
+                        "identity": [
+                            "alpha_unique"
+                        ]
+                    },
+                },
+                {
+                    "id": "beta",
+                    "minimum_score": 1.0,
+                    "signals": {
+                        "identity": [
+                            "beta_unique"
+                        ]
+                    },
+                },
+                {
+                    "id": "other",
+                },
+            ],
+            "catchall": "other",
+        }
+    )
+
+    rows = [
+        {
+            "id": "one",
+            "text": "alpha_unique",
+        },
+        {
+            "id": "two",
+            "text": "beta_unique",
+        },
+        {
+            "id": "three",
+            "text": "unrelated",
+        },
+    ]
+
+    first = classify_rows(
+        [
+            dict(row)
+            for row in rows
+        ],
+        profile,
+    )
+
+    second = classify_rows(
+        [
+            dict(row)
+            for row in rows
+        ],
+        profile,
+    )
+
+    categories = [
+        row[
+            "extr_partition"
+        ][
+            "category"
+        ]
+        for row in first
+    ]
+
+    projections = [
+        datrix_projection(row)
+        for row in first
+    ]
+
+    checks = {
+        "three_records":
+            len(first) == 3,
+        "runtime_categories":
+            categories
+            == [
+                "alpha",
+                "beta",
+                "other",
+            ],
+        "deterministic_classification":
+            first == second,
+        "partition_non_authoritative":
+            all(
+                row[
+                    "extr_partition"
+                ][
+                    "authoritative"
+                ]
+                is False
+                for row in first
+            ),
+        "partition_rebuildable":
+            all(
+                row[
+                    "extr_partition"
+                ][
+                    "rebuildable"
+                ]
+                is True
+                for row in first
+            ),
+        "datrix_projection_count":
+            len(projections) == 3,
+        "datrix_non_authoritative":
+            all(
+                projection[
+                    "authoritative"
+                ]
+                is False
+                for projection
+                in projections
+            ),
+        "datrix_rebuildable":
+            all(
+                projection[
+                    "rebuildable"
+                ]
+                is True
+                for projection
+                in projections
+            ),
+        "no_datrix_storage":
+            all(
+                projection[
+                    "storage_selected"
+                ]
+                is False
+                for projection
+                in projections
+            ),
+        "authority_none":
+            all(
+                projection[
+                    "authority_effect"
+                ]
+                == "none"
+                for projection
+                in projections
+            ),
+        "projection_deterministic":
+            projections
+            == [
+                datrix_projection(row)
+                for row in second
+            ],
+    }
+
+    return {
+        "schema":
+            "savant://runtime/extr/"
+            "partition-selftest/3.0.0",
+        "ok":
+            all(
+                checks.values()
+            ),
+        "checks":
+            checks,
+    }
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        prog="extr-partition"
+    )
+
+    parser.add_argument(
+        "--selftest",
+        action="store_true",
+    )
+
+    args = parser.parse_args()
+
+    if args.selftest:
+        result = selftest()
+
+        print(
+            json.dumps(
+                result,
+                ensure_ascii=False,
+                sort_keys=True,
+                indent=2,
+            )
+        )
+
+        return (
+            0
+            if result["ok"]
+            else 1
+        )
+
+    raise partition_error(
+        "no operation selected"
+    )
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )
