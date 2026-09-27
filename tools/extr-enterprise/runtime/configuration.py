@@ -7,10 +7,10 @@ import hashlib
 import json
 from typing import Any, Mapping, Sequence
 
-from utility_hierarchy import (
+from utility_edifice import (
     accepted_decision as utility_accepted_decision,
-    hierarchy_projection as utility_hierarchy_projection,
-    levels as utility_hierarchy,
+    edifice_projection as utility_edifice_projection,
+    levels as utility_edifice,
 )
 
 
@@ -29,7 +29,7 @@ authority_effect = "none"
 # forbids translating that classification by ordinal position.
 #
 # None therefore means "not yet semantically reclassified", not
-# "outside the utility hierarchy".
+# "outside the utility edifice".
 utility_level: str | None = None
 superseded_utility_level = "current"
 
@@ -91,7 +91,7 @@ class utility_identity:
     def current(self) -> bool:
         return (
             self.level is not None
-            and self.level in utility_hierarchy
+            and self.level in utility_edifice
         )
 
     @property
@@ -99,7 +99,7 @@ class utility_identity:
         if not self.current:
             return None
 
-        return utility_hierarchy.index(
+        return utility_edifice.index(
             self.level
         )
 
@@ -673,8 +673,8 @@ class configuration_current:
                 self.authority_effect,
             "utility":
                 self.utility.projection(),
-            "utility_hierarchy":
-                utility_hierarchy_projection(),
+            "utility_edifice":
+                utility_edifice_projection(),
             "columns": [
                 value.projection()
                 for value in self.columns
@@ -1743,13 +1743,13 @@ def selftest() -> dict[str, Any]:
                 ),
             )["required"]
             == ["markdown"],
-        "utility_hierarchy_exact":
+        "utility_edifice_exact":
             tuple(
-                utility_hierarchy_projection()[
+                utility_edifice_projection()[
                     "levels"
                 ]
             )
-            == utility_hierarchy,
+            == utility_edifice,
         "utility_unclassified":
             (
                 utility.level is None
@@ -1779,8 +1779,8 @@ def selftest() -> dict[str, Any]:
             definition.definition_digest,
         "recipe_digest":
             recipe_one.recipe_digest,
-        "utility_hierarchy_digest":
-            utility_hierarchy_projection()[
+        "utility_edifice_digest":
+            utility_edifice_projection()[
                 "projection_digest"
             ],
         "reconstruction": {

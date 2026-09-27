@@ -363,37 +363,37 @@ def replace_term(
     substitutions = (
         (
             re.compile(
-                r"HIERARCHIES"
+                r"EDIFICES"
             ),
             "EDIFICES",
         ),
         (
             re.compile(
-                r"HIERARCHY"
+                r"EDIFICE"
             ),
             "EDIFICE",
         ),
         (
             re.compile(
-                r"Hierarchies"
+                r"Edifices"
             ),
             "Edifices",
         ),
         (
             re.compile(
-                r"Hierarchy"
+                r"Edifice"
             ),
             "Edifice",
         ),
         (
             re.compile(
-                r"hierarchies"
+                r"edifices"
             ),
             "edifices",
         ),
         (
             re.compile(
-                r"hierarchy"
+                r"edifice"
             ),
             "edifice",
         ),
@@ -870,7 +870,7 @@ def projection(
         "mode":
             mode,
         "source_term":
-            "hierarchy",
+            "edifice",
         "target_term":
             "edifice",
         "immutable_accepted_decisions":

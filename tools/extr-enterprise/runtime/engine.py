@@ -731,7 +731,7 @@ def register_builtin_passes(
             identity_pass,
         "chronology":
             identity_pass,
-        "hierarchy":
+        "edifice":
             identity_pass,
         "quality":
             quality_pass,
