@@ -3,14 +3,10 @@
 from __future__ import annotations
 
 import argparse
-from dataclasses import dataclass
 import hashlib
 import json
-import os
+import shutil
 from pathlib import Path
-import re
-import time
-from typing import Iterable, Iterator
 
 
 root = Path(
@@ -19,910 +15,543 @@ root = Path(
 
 schema = (
     "savant://runtime/edifices/"
-    "terminology-migration/1.0.2"
+    "terminology-repair/2.1.0"
 )
 
-source_pattern = re.compile(
-    r"hierarch(?:y|ies)",
-    flags=re.IGNORECASE,
-)
-
-immutable_roots = (
-    root
-    / "authority"
-    / "accepted-decisions",
-)
-
-historical_roots = (
-    root / "vault",
-    root / "imports",
+backup_root = (
     root
     / "evolution"
     / "structure-migration"
-    / "backups",
-    root
-    / "evolution"
-    / "structure-migration"
-    / "baseline-captures",
+    / "backups"
+    / "20260927-edifice-terminology-repair"
 )
 
-external_directory_names = {
-    ".git",
-    "__pycache__",
-    "node_modules",
-    "site-packages",
-    "dist-packages",
-    ".venv",
-    "venv",
+canonical = {
+    (
+        root
+        / "edifices"
+        / "utility"
+        / "runtime"
+        / "utility_edifice.py"
+    ): (
+        "e1bbc2f7a1b161fac740897cbaa44e23"
+        "993aecd410031e41d23f0fd674c9c84a"
+    ),
+    (
+        root
+        / "tools"
+        / "extr-enterprise"
+        / "runtime"
+        / "utility_edifice.py"
+    ): (
+        "862633cb635fb53d991ff59e4870db234"
+        "570198158becd7c5520d1024974dac1"
+    ),
 }
 
-binary_suffixes = {
-    ".7z",
-    ".a",
-    ".bin",
-    ".bz2",
-    ".class",
-    ".db",
-    ".dll",
-    ".dylib",
-    ".exe",
-    ".gif",
-    ".gz",
-    ".ico",
-    ".jar",
-    ".jpeg",
-    ".jpg",
-    ".lock",
-    ".mp3",
-    ".mp4",
-    ".o",
-    ".pdf",
-    ".png",
-    ".pyc",
-    ".pyo",
-    ".so",
-    ".sqlite",
-    ".sqlite3",
-    ".tar",
-    ".tgz",
-    ".webp",
-    ".woff",
-    ".woff2",
-    ".xz",
-    ".zip",
+legacy = {
+    (
+        root
+        / "edifices"
+        / "utility"
+        / "runtime"
+        / "utility_hierarchy.py"
+    ): (
+        "0573ec87fe4149f0bb458d00ff19d7e7"
+        "a5e8b47e43fdd4438c75e25d1e251460"
+    ),
+    (
+        root
+        / "tools"
+        / "extr-enterprise"
+        / "runtime"
+        / "utility_hierarchy.py"
+    ): (
+        "85aa4ed5dd86cb0b1d60146cd7e86f51"
+        "ae5bea6de5f8cc4fc1370992af1d8239"
+    ),
 }
 
-maximum_content_retries = 8
-retry_delay_seconds = 0.05
+historical_wrong = (
+    root
+    / "runtime"
+    / "identity-promotion"
+    / "transactions"
+    / "quirk.nocturne.veil"
+    / "promotion-20260801T031644Z-ad7be0812595f48d"
+    / "backup"
+    / "edifices"
+)
+
+historical_original = (
+    historical_wrong.parent
+    / "hierarchies"
+)
+
+scan_roots = (
+    root
+    / "edifices"
+    / "utility",
+    root
+    / "tools"
+    / "extr-enterprise",
+)
 
 
-class migration_error(
+class repair_error(
     RuntimeError
 ):
     pass
 
 
-@dataclass(
-    frozen=True,
-    slots=True,
-)
-class change:
-    kind: str
-    before: str
-    after: str
-    digest_before: str | None
-    digest_after: str | None
-
-    def projection(
-        self,
-    ) -> dict[
-        str,
-        str | None,
-    ]:
-        return {
-            "kind":
-                self.kind,
-            "before":
-                self.before,
-            "after":
-                self.after,
-            "digest_before":
-                self.digest_before,
-            "digest_after":
-                self.digest_after,
-        }
-
-
-def digest_bytes(
-    value: bytes,
+def sha256(
+    path: Path,
 ) -> str:
-    return hashlib.sha256(
-        value
-    ).hexdigest()
+    digest = hashlib.sha256()
+
+    with path.open(
+        "rb"
+    ) as handle:
+        for chunk in iter(
+            lambda: handle.read(
+                1024 * 1024
+            ),
+            b"",
+        ):
+            digest.update(
+                chunk
+            )
+
+    return digest.hexdigest()
 
 
 def relative(
     path: Path,
 ) -> str:
-    try:
-        return str(
-            path.relative_to(
-                root
-            )
-        )
-    except ValueError:
-        return str(
-            path
-        )
-
-
-def lexical_parts(
-    path: Path,
-) -> tuple[str, ...]:
-    try:
-        return (
-            path.relative_to(
-                root
-            ).parts
-        )
-    except ValueError:
-        return ()
-
-
-def is_under(
-    path: Path,
-    parents: Iterable[Path],
-) -> bool:
-    try:
-        relative_path = (
-            path.relative_to(
-                root
-            )
-        )
-    except ValueError:
-        return False
-
-    for parent in parents:
-        try:
-            relative_parent = (
-                parent.relative_to(
-                    root
-                )
-            )
-        except ValueError:
-            continue
-
-        try:
-            relative_path.relative_to(
-                relative_parent
-            )
-            return True
-        except ValueError:
-            continue
-
-    return False
-
-
-def is_external(
-    path: Path,
-) -> bool:
-    parts = lexical_parts(
-        path
-    )
-
-    if not parts:
-        return path != root
-
-    for part in parts:
-        if (
-            part
-            in external_directory_names
-        ):
-            return True
-
-        if part.startswith(
-            ".venv"
-        ):
-            return True
-
-    return False
-
-
-def protected(
-    path: Path,
-) -> bool:
-    if path.is_symlink():
-        return True
-
-    return (
-        is_under(
-            path,
-            immutable_roots,
-        )
-        or is_under(
-            path,
-            historical_roots,
-        )
-        or is_external(
-            path
+    return str(
+        path.relative_to(
+            root
         )
     )
 
 
-def walk_current(
-) -> Iterator[Path]:
-    for (
-        directory,
-        directory_names,
-        file_names,
-    ) in os.walk(
-        root,
-        topdown=True,
-        followlinks=False,
-    ):
-        directory_path = Path(
-            directory
-        )
-
-        retained_directories: list[
-            str
-        ] = []
-
-        for name in sorted(
-            directory_names
-        ):
-            candidate = (
-                directory_path
-                / name
-            )
-
-            if candidate.is_symlink():
-                continue
-
-            if protected(
-                candidate
-            ):
-                continue
-
-            retained_directories.append(
-                name
-            )
-
-        directory_names[:] = (
-            retained_directories
-        )
-
-        for name in sorted(
-            retained_directories
-        ):
-            yield (
-                directory_path
-                / name
-            )
-
-        for name in sorted(
-            file_names
-        ):
-            candidate = (
-                directory_path
-                / name
-            )
-
-            if candidate.is_symlink():
-                continue
-
-            if protected(
-                candidate
-            ):
-                continue
-
-            yield candidate
-
-
-def textual(
-    path: Path,
-) -> bool:
-    if path.is_symlink():
-        return False
-
-    if not path.is_file():
-        return False
-
-    if (
-        path.suffix.lower()
-        in binary_suffixes
-    ):
-        return False
-
-    try:
-        with path.open(
-            "rb"
-        ) as handle:
-            sample = handle.read(
-                8192
-            )
-    except OSError:
-        return False
-
-    if b"\x00" in sample:
-        return False
-
-    try:
-        sample.decode(
-            "utf-8"
-        )
-    except UnicodeDecodeError:
-        return False
-
-    return True
-
-
-def replace_term(
-    value: str,
-) -> str:
-    substitutions = (
-        (
-            re.compile(
-                r"EDIFICES"
-            ),
-            "EDIFICES",
-        ),
-        (
-            re.compile(
-                r"EDIFICE"
-            ),
-            "EDIFICE",
-        ),
-        (
-            re.compile(
-                r"Edifices"
-            ),
-            "Edifices",
-        ),
-        (
-            re.compile(
-                r"Edifice"
-            ),
-            "Edifice",
-        ),
-        (
-            re.compile(
-                r"edifices"
-            ),
-            "edifices",
-        ),
-        (
-            re.compile(
-                r"edifice"
-            ),
-            "edifice",
-        ),
-    )
-
-    projected = value
-
-    for (
-        pattern,
-        replacement,
-    ) in substitutions:
-        projected = pattern.sub(
-            replacement,
-            projected,
-        )
-
-    return projected
-
-
-def stable_signature(
-    path: Path,
-) -> tuple[
-    int,
-    int,
-    int,
-]:
-    status = path.stat()
-
-    return (
-        status.st_ino,
-        status.st_size,
-        status.st_mtime_ns,
-    )
-
-
-def transform_current_file(
-    path: Path,
-) -> change | None:
-    if path.is_symlink():
-        return None
-
-    for attempt in range(
-        maximum_content_retries
-    ):
-        try:
-            signature_before = (
-                stable_signature(
-                    path
-                )
-            )
-
-            before_bytes = (
-                path.read_bytes()
-            )
-
-            signature_after_read = (
-                stable_signature(
-                    path
-                )
-            )
-        except (
-            FileNotFoundError,
-            OSError,
-        ):
-            return None
-
-        if (
-            signature_before
-            != signature_after_read
-        ):
-            time.sleep(
-                retry_delay_seconds
-            )
-            continue
-
-        try:
-            before = (
-                before_bytes.decode(
-                    "utf-8"
-                )
-            )
-        except UnicodeDecodeError:
-            return None
-
-        after = replace_term(
-            before
-        )
-
-        if after == before:
-            return None
-
-        after_bytes = (
-            after.encode(
-                "utf-8"
-            )
-        )
-
-        temporary = (
-            path.with_name(
-                f".{path.name}."
-                f"edifice-migration."
-                f"{os.getpid()}.tmp"
-            )
-        )
-
-        try:
-            temporary.write_bytes(
-                after_bytes
-            )
-
-            try:
-                signature_before_replace = (
-                    stable_signature(
-                        path
-                    )
-                )
-            except (
-                FileNotFoundError,
-                OSError,
-            ):
-                temporary.unlink(
-                    missing_ok=True
-                )
-                return None
-
-            if (
-                signature_before_replace
-                != signature_after_read
-            ):
-                temporary.unlink(
-                    missing_ok=True
-                )
-
-                time.sleep(
-                    retry_delay_seconds
-                )
-
-                continue
-
-            os.replace(
-                temporary,
-                path,
-            )
-
-            return change(
-                kind="content",
-                before=
-                    relative(
-                        path
-                    ),
-                after=
-                    relative(
-                        path
-                    ),
-                digest_before=
-                    digest_bytes(
-                        before_bytes
-                    ),
-                digest_after=
-                    digest_bytes(
-                        after_bytes
-                    ),
-            )
-
-        finally:
-            try:
-                temporary.unlink(
-                    missing_ok=True
-                )
-            except OSError:
-                pass
-
-    raise migration_error(
-        "live file remained unstable "
-        "through all migration retries: "
-        f"{path}"
-    )
-
-
-def apply_content(
-) -> list[change]:
-    applied: list[
-        change
-    ] = []
-
-    candidates = [
-        path
-        for path
-        in walk_current()
-        if textual(
-            path
-        )
-    ]
-
-    for path in candidates:
-        item = transform_current_file(
-            path
-        )
-
-        if item is not None:
-            applied.append(
-                item
-            )
-
-    return applied
-
-
-def renamed_path(
+def backup_path(
     path: Path,
 ) -> Path:
-    return path.with_name(
-        replace_term(
-            path.name
+    return (
+        backup_root
+        / path.relative_to(
+            root
         )
     )
 
 
-def apply_paths(
-) -> list[change]:
-    candidates = [
+def verify_digest(
+    path: Path,
+    expected: str,
+    label: str,
+) -> str:
+    if not path.is_file():
+        raise repair_error(
+            f"missing {label}: "
+            f"{path}"
+        )
+
+    actual = sha256(
         path
-        for path
-        in walk_current()
-        if (
-            replace_term(
-                path.name
-            )
-            != path.name
-        )
-    ]
-
-    candidates.sort(
-        key=lambda item: (
-            len(
-                item.parts
-            ),
-            str(
-                item
-            ),
-        ),
-        reverse=True,
     )
 
-    applied: list[
-        change
-    ] = []
-
-    for path in candidates:
-        if not path.exists():
-            continue
-
-        if path.is_symlink():
-            continue
-
-        destination = (
-            renamed_path(
-                path
-            )
+    if actual != expected:
+        raise repair_error(
+            f"{label} changed since "
+            "audited snapshot: "
+            f"{path}\n"
+            f"expected={expected}\n"
+            f"actual={actual}"
         )
 
-        if destination.exists():
-            raise migration_error(
-                "rename destination "
-                "already exists: "
-                f"{destination}"
-            )
-
-        before = relative(
-            path
-        )
-
-        path.rename(
-            destination
-        )
-
-        applied.append(
-            change(
-                kind="path",
-                before=before,
-                after=
-                    relative(
-                        destination
-                    ),
-                digest_before=None,
-                digest_after=None,
-            )
-        )
-
-    return applied
+    return actual
 
 
-def planned_content(
-) -> list[change]:
-    changes: list[
-        change
-    ] = []
-
-    for path in walk_current():
-        if not textual(
-            path
-        ):
-            continue
-
-        try:
-            before_bytes = (
-                path.read_bytes()
-            )
-
-            before = (
-                before_bytes.decode(
-                    "utf-8"
-                )
-            )
-        except (
-            OSError,
-            UnicodeDecodeError,
-        ):
-            continue
-
-        after = replace_term(
-            before
-        )
-
-        if after == before:
-            continue
-
-        after_bytes = (
-            after.encode(
-                "utf-8"
-            )
-        )
-
-        changes.append(
-            change(
-                kind="content",
-                before=
-                    relative(
-                        path
-                    ),
-                after=
-                    relative(
-                        path
-                    ),
-                digest_before=
-                    digest_bytes(
-                        before_bytes
-                    ),
-                digest_after=
-                    digest_bytes(
-                        after_bytes
-                    ),
-            )
-        )
-
-    return changes
-
-
-def planned_paths(
-) -> list[change]:
-    candidates = [
-        path
-        for path
-        in walk_current()
-        if (
-            replace_term(
-                path.name
-            )
-            != path.name
-        )
-    ]
-
-    candidates.sort(
-        key=lambda item: (
-            len(
-                item.parts
-            ),
-            str(
-                item
-            ),
-        ),
-        reverse=True,
-    )
-
-    return [
-        change(
-            kind="path",
-            before=
-                relative(
-                    path
-                ),
-            after=
-                relative(
-                    renamed_path(
-                        path
-                    )
-                ),
-            digest_before=None,
-            digest_after=None,
-        )
-        for path
-        in candidates
-    ]
-
-
-def remaining_current(
+def active_references(
 ) -> list[str]:
-    remaining: list[
-        str
-    ] = []
+    needle = (
+        "utility_"
+        + "hierarchy"
+    )
 
-    for path in walk_current():
-        if source_pattern.search(
-            path.name
-        ):
-            remaining.append(
-                "path:"
-                + relative(
-                    path
-                )
-            )
+    findings: list[str] = []
 
-        if not textual(
-            path
-        ):
+    skipped = set(
+        legacy
+    )
+
+    suffixes = {
+        ".py",
+        ".json",
+        ".md",
+        ".txt",
+        ".yaml",
+        ".yml",
+        ".toml",
+        ".sh",
+        ".service",
+        ".timer",
+        ".js",
+        ".jsx",
+        ".ts",
+        ".tsx",
+    }
+
+    for base in scan_roots:
+        if not base.exists():
             continue
 
-        try:
-            content = (
-                path.read_text(
-                    encoding="utf-8"
-                )
-            )
-        except (
-            OSError,
-            UnicodeDecodeError,
+        for path in base.rglob(
+            "*"
         ):
-            continue
+            if (
+                path in skipped
+                or path.is_symlink()
+                or not path.is_file()
+                or "__pycache__"
+                in path.parts
+            ):
+                continue
 
-        if source_pattern.search(
-            content
-        ):
-            remaining.append(
-                "content:"
-                + relative(
-                    path
-                )
-            )
+            if (
+                path.suffix.lower()
+                not in suffixes
+            ):
+                continue
+
+            try:
+                with path.open(
+                    "r",
+                    encoding="utf-8",
+                ) as handle:
+                    for line_number, line in enumerate(
+                        handle,
+                        1,
+                    ):
+                        if needle in line:
+                            findings.append(
+                                f"{relative(path)}:"
+                                f"{line_number}"
+                            )
+
+            except (
+                OSError,
+                UnicodeDecodeError,
+            ):
+                continue
 
     return sorted(
         set(
-            remaining
+            findings
         )
     )
 
 
-def projection(
-    *,
-    mode: str,
-    content: list[change],
-    paths: list[change],
-    remaining: list[str],
-) -> dict[
-    str,
-    object,
-]:
-    payload: dict[
+def preflight(
+) -> dict[str, object]:
+    state: dict[
         str,
         object,
     ] = {
-        "schema":
-            schema,
-        "authority_effect":
-            "none",
-        "mode":
-            mode,
-        "source_term":
-            "edifice",
-        "target_term":
-            "edifice",
-        "immutable_accepted_decisions":
-            True,
-        "historical_evidence_preserved":
-            True,
-        "external_dependencies_preserved":
-            True,
-        "symlinks_preserved":
-            True,
-        "symlinks_traversed":
-            False,
-        "live_content_retry_limit":
-            maximum_content_retries,
-        "content_changes": [
-            item.projection()
-            for item
-            in content
-        ],
-        "path_changes": [
-            item.projection()
-            for item
-            in paths
-        ],
-        "remaining_current":
-            remaining,
-        "ok":
-            (
-                mode != "apply"
-                or not remaining
-            ),
+        "canonical": {},
+        "legacy": {},
+        "references":
+            active_references(),
     }
 
-    encoded = json.dumps(
-        payload,
-        ensure_ascii=False,
-        sort_keys=True,
-        separators=(",", ":"),
-    ).encode(
-        "utf-8"
+    if state[
+        "references"
+    ]:
+        raise repair_error(
+            "active legacy utility "
+            "references remain:\n"
+            + "\n".join(
+                state[
+                    "references"
+                ]
+            )
+        )
+
+    canonical_state = {}
+
+    for (
+        path,
+        expected,
+    ) in canonical.items():
+        canonical_state[
+            relative(
+                path
+            )
+        ] = verify_digest(
+            path,
+            expected,
+            "canonical file",
+        )
+
+    state[
+        "canonical"
+    ] = canonical_state
+
+    legacy_state = {}
+
+    for (
+        path,
+        expected,
+    ) in legacy.items():
+        archived = backup_path(
+            path
+        )
+
+        if path.exists():
+            legacy_state[
+                relative(
+                    path
+                )
+            ] = (
+                "active:"
+                + verify_digest(
+                    path,
+                    expected,
+                    "legacy file",
+                )
+            )
+
+        elif archived.exists():
+            legacy_state[
+                relative(
+                    path
+                )
+            ] = (
+                "archived:"
+                + verify_digest(
+                    archived,
+                    expected,
+                    "legacy backup",
+                )
+            )
+
+        else:
+            raise repair_error(
+                "legacy file missing "
+                "without verified archive: "
+                f"{path}"
+            )
+
+    state[
+        "legacy"
+    ] = legacy_state
+
+    wrong_exists = (
+        historical_wrong.exists()
     )
 
-    payload[
-        "projection_digest"
-    ] = digest_bytes(
-        encoded
+    original_exists = (
+        historical_original.exists()
     )
 
-    return payload
+    if (
+        wrong_exists
+        == original_exists
+    ):
+        raise repair_error(
+            "historical path state "
+            "invalid; exactly one path "
+            "variant must exist"
+        )
+
+    state[
+        "historical"
+    ] = {
+        "wrong_exists":
+            wrong_exists,
+        "original_exists":
+            original_exists,
+    }
+
+    return state
 
 
-def main() -> int:
+def archive_legacy(
+    path: Path,
+    expected: str,
+) -> str | None:
+    if not path.exists():
+        return None
+
+    verify_digest(
+        path,
+        expected,
+        "legacy file",
+    )
+
+    destination = backup_path(
+        path
+    )
+
+    destination.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    if destination.exists():
+        verify_digest(
+            destination,
+            expected,
+            "legacy backup",
+        )
+
+    else:
+        shutil.copy2(
+            path,
+            destination,
+        )
+
+        verify_digest(
+            destination,
+            expected,
+            "legacy backup",
+        )
+
+    path.unlink()
+
+    return relative(
+        destination
+    )
+
+
+def apply_repairs(
+) -> list[
+    dict[str, str]
+]:
+    operations: list[
+        dict[str, str]
+    ] = []
+
+    if historical_wrong.exists():
+        if historical_original.exists():
+            raise repair_error(
+                "historical destination "
+                "already exists"
+            )
+
+        historical_wrong.rename(
+            historical_original
+        )
+
+        operations.append(
+            {
+                "operation":
+                    "restore_historical_path",
+                "from":
+                    relative(
+                        historical_wrong
+                    ),
+                "to":
+                    relative(
+                        historical_original
+                    ),
+            }
+        )
+
+    for (
+        path,
+        expected,
+    ) in legacy.items():
+        archived = archive_legacy(
+            path,
+            expected,
+        )
+
+        if archived is not None:
+            operations.append(
+                {
+                    "operation":
+                        "archive_and_remove_legacy_path",
+                    "path":
+                        relative(
+                            path
+                        ),
+                    "backup":
+                        archived,
+                }
+            )
+
+    return operations
+
+
+def postcheck(
+) -> dict[str, object]:
+    for (
+        path,
+        expected,
+    ) in canonical.items():
+        verify_digest(
+            path,
+            expected,
+            "canonical file",
+        )
+
+    for (
+        path,
+        expected,
+    ) in legacy.items():
+        if path.exists():
+            raise repair_error(
+                "legacy active path "
+                "remains: "
+                f"{path}"
+            )
+
+        verify_digest(
+            backup_path(
+                path
+            ),
+            expected,
+            "legacy backup",
+        )
+
+    if (
+        historical_wrong.exists()
+        or not historical_original.is_dir()
+    ):
+        raise repair_error(
+            "historical provenance "
+            "path was not restored"
+        )
+
+    references = (
+        active_references()
+    )
+
+    if references:
+        raise repair_error(
+            "active legacy references "
+            "remain after repair:\n"
+            + "\n".join(
+                references
+            )
+        )
+
+    return {
+        "historical_path":
+            relative(
+                historical_original
+            ),
+        "legacy_active_paths":
+            [],
+        "active_legacy_references":
+            [],
+    }
+
+
+def main(
+) -> int:
     parser = (
         argparse.ArgumentParser()
     )
@@ -937,25 +566,28 @@ def main() -> int:
     )
 
     if not root.is_dir():
-        raise migration_error(
-            "savant runtime root "
-            "unavailable"
+        raise repair_error(
+            "runtime root unavailable: "
+            f"{root}"
         )
+
+    before = preflight()
 
     if not arguments.apply:
-        result = projection(
-            mode="plan",
-            content=
-                planned_content(),
-            paths=
-                planned_paths(),
-            remaining=
-                remaining_current(),
-        )
-
         print(
             json.dumps(
-                result,
+                {
+                    "schema":
+                        schema,
+                    "mode":
+                        "plan",
+                    "global_text_replacement":
+                        False,
+                    "preflight":
+                        before,
+                    "ok":
+                        True,
+                },
                 ensure_ascii=False,
                 sort_keys=True,
                 indent=2,
@@ -964,35 +596,37 @@ def main() -> int:
 
         return 0
 
-    content = apply_content()
-
-    paths = apply_paths()
-
-    remaining = (
-        remaining_current()
+    operations = (
+        apply_repairs()
     )
 
-    result = projection(
-        mode="apply",
-        content=content,
-        paths=paths,
-        remaining=remaining,
+    after = (
+        postcheck()
     )
 
     print(
         json.dumps(
-            result,
+            {
+                "schema":
+                    schema,
+                "mode":
+                    "apply",
+                "global_text_replacement":
+                    False,
+                "operations":
+                    operations,
+                "post":
+                    after,
+                "ok":
+                    True,
+            },
             ensure_ascii=False,
             sort_keys=True,
             indent=2,
         )
     )
 
-    return (
-        0
-        if not remaining
-        else 1
-    )
+    return 0
 
 
 if __name__ == "__main__":
