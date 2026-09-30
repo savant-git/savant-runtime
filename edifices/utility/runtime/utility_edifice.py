@@ -22,7 +22,11 @@ owner = "utility"
 authority_effect = "none"
 
 accepted_decision = (
-    "AD-20260926-002-utility-edifice"
+    "AD-20260926-002-utility-hierarchy"
+)
+
+terminology_decision = (
+    "ad-20260928-001-three-primary-edifices"
 )
 
 levels = (
@@ -129,6 +133,8 @@ def edifice_projection(
             True,
         "accepted_decision":
             accepted_decision,
+        "terminology_decision":
+            terminology_decision,
         "levels":
             list(
                 levels
@@ -272,6 +278,16 @@ def selftest(
                 "authority_effect"
             ]
             == "none",
+        "substance_authority":
+            first[
+                "accepted_decision"
+            ]
+            == accepted_decision,
+        "terminology_authority":
+            first[
+                "terminology_decision"
+            ]
+            == terminology_decision,
         "deterministic":
             first == second,
         "glyph_atomic":

@@ -15,7 +15,7 @@ root = Path(
 
 schema = (
     "savant://runtime/edifices/"
-    "terminology-repair/2.1.0"
+    "terminology-repair/2.1.1"
 )
 
 backup_root = (
@@ -34,8 +34,8 @@ canonical = {
         / "runtime"
         / "utility_edifice.py"
     ): (
-        "e1bbc2f7a1b161fac740897cbaa44e23"
-        "993aecd410031e41d23f0fd674c9c84a"
+        "bcd2bbdceef8b3eb2ff37989b3d8ddf0"
+        "e0067bc98b2c1c5e2d04cac55bce777b"
     ),
     (
         root

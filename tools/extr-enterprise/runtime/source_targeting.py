@@ -1046,11 +1046,19 @@ def runtime_matches(
         str
     ] = set()
 
-    prioritized = (
+    correlation_signals = (
         set(
             signals
         )
-        or set(
+        - {
+            "savant"
+        }
+    )
+
+    prioritized = (
+        correlation_signals
+        if signals
+        else set(
             candidate_tokens
         )
     )

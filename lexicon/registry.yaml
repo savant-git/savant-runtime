@@ -1,9 +1,9 @@
 registry_id: savant.lexicon
-version: 2
+version: 3
 authority:
   source: user
-  revision: lexical-migration-20260809
-  timestamp: '2026-08-09'
+  revision: ad-20260928-001-three-primary-edifices
+  timestamp: '2026-09-28'
 constitution: docs/LEXICON_CONSTITUTION.md
 schema: schemas/registry.schema.yaml
 policies:
@@ -15,6 +15,62 @@ validators:
 projections:
 - projections/projection_registry.yaml
 lexemes:
+- id: lex:architecture:edifice
+  canonical: edifice
+  concept: canonical savant primary architectural composition dimension
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - ad-20260928-001-three-primary-edifices
+    authority: accepted
+    confidence: confirmed
+- id: lex:architecture:identity-edifice
+  canonical: identity edifice
+  concept: primary architectural edifice expressing what kind of thing an instance is
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - ad-20260928-001-three-primary-edifices
+    authority: accepted
+    confidence: confirmed
+- id: lex:architecture:programming-edifice
+  canonical: programming edifice
+  concept: primary architectural edifice expressing programming composition
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - ad-20260928-001-three-primary-edifices
+    authority: accepted
+    confidence: confirmed
+- id: lex:architecture:utility-edifice
+  canonical: utility edifice
+  concept: primary architectural edifice expressing emergent functional composition
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - ad-20260928-001-three-primary-edifices
+    authority: accepted
+    confidence: confirmed
 - id: lex:composition:centra
   canonical: Centra
   concept: Specialization center for a reusable Tidal shade
@@ -168,6 +224,34 @@ lexemes:
     sources:
     - user-rename-20260809
     confidence: confirmed
+- id: lex:core:determinism
+  canonical: Determinism
+  concept: Stable semantic reproducibility from equivalent admitted inputs under the same compatible rules
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - ad-20260928-002-truth-first-semantic-identity
+    confidence: confirmed
+  description: Equivalent admitted semantic inputs processed under the same compatible rules, schema, and algorithm version produce the same semantic result independent of incidental execution state.
+- id: lex:core:truth
+  canonical: Truth
+  concept: Epistemic fidelity to what admitted evidence supports
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - ad-20260928-002-truth-first-semantic-identity
+    confidence: confirmed
+  description: Preserves what admitted evidence supports together with uncertainty, contradiction, and unknowns; authority may govern acceptance but does not manufacture factual truth.
 - id: lex:core:kindred
   canonical: Kindred
   concept: Canonical relationship methodology and universal typed relationship system
@@ -1234,8 +1318,8 @@ lexemes:
     sources:
     - historical-user-lexicon
     confidence: confirmed
-- id: lex:service:kindred
-  canonical: Kindred
+- id: lex:service:kinship
+  canonical: Kinship
   concept: Functional relationship-plane service
   description: Active Savant service that compiles functional relationship planes from Kindred relationship
     authority.
@@ -1255,18 +1339,18 @@ lexemes:
     history: []
   provenance:
     sources:
-    - accepted-graph:service:kindred
+    - accepted-graph:service:kinship
     - accepted-graph:system:kindred
-    - runtime/kindred/
+    - runtime/kinship/
     authority: accepted
     confidence: confirmed
   metadata:
-    accepted_graph_id: service:kindred
+    accepted_graph_id: service:kinship
     system_dependency: system:kindred
-    implementation_ref: runtime/kindred
+    implementation_ref: runtime/kinship
     implemented_through: exile:modus
     role: compile-functional-relationship-planes
-    external_service_identity: service:kindred
+    external_service_identity: service:kinship
     external_kindred_identity: system:kindred
     external_modus_identity: exile:modus
     lexicon_kindred_identity: lex:core:kindred

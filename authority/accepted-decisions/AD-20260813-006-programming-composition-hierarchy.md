@@ -1,4 +1,4 @@
-nano /root/savant-runtime/authority/accepted-decisions/AD-20260813-006-programming-composition-edifice.md ` `# AD-20260813-006 — Canonical Programming Composition edifice  Status: accepted Accepted: 2026-08-13 Authority: current user directive Scope: Savant programming composition Supersedes: - section 3, "Canonical content edifice", of AD-20260806-002 where inconsistent - older programming/content edifices where inconsistent - module/service/suite/estate as programming edifice levels  ## 1. Decision  Savant programming substance is recursively instance-composed.  The canonical ascending programming edifice is:  ```text character → line → segment → snippet → script → engine → subsystem → system → application ` 
+nano /root/savant-runtime/authority/accepted-decisions/AD-20260813-006-programming-composition-hierarchy.md ` `# AD-20260813-006 — Canonical Programming Composition Hierarchy  Status: accepted Accepted: 2026-08-13 Authority: current user directive Scope: Savant programming composition Supersedes: - section 3, "Canonical content hierarchy", of AD-20260806-002 where inconsistent - older programming/content hierarchies where inconsistent - module/service/suite/estate as programming hierarchy levels  ## 1. Decision  Savant programming substance is recursively instance-composed.  The canonical ascending programming hierarchy is:  ```text character → line → segment → snippet → script → engine → subsystem → system → application ` 
 These nine levels are semantic composition levels.
  
 They do not require nine unique physical storage models.
@@ -70,9 +70,9 @@ Composition of subsystems implementing one independently coherent operational do
  
 Operable composition of systems presented through one bounded application identity.
  
-## 3. Non-edifice programming structures
+## 3. Non-hierarchy programming structures
  
-The following remain valid programming concepts but are not levels in this edifice:
+The following remain valid programming concepts but are not levels in this hierarchy:
  
  
 - token
@@ -129,7 +129,7 @@ The following remain valid programming concepts but are not levels in this edifi
  
 They describe syntax, implementation roles, packaging, interfaces, runtime roles, or operational boundaries.
  
-They must not silently become competing edifice levels.
+They must not silently become competing hierarchy levels.
  
 ## 4. Instance law
  
@@ -163,7 +163,7 @@ Every transition between independently meaningful programming units is represent
 This includes transitions:
  
  
-- between edifice levels;
+- between hierarchy levels;
  
 - between sibling instances;
  
@@ -195,13 +195,13 @@ Rubrics continue to own executable implementation at the legitimate instance sco
  
 Cabals continue to hold genuinely shared implementation at the narrowest legitimate common scope.
  
-Neither Rubric nor Cabal is a programming edifice level.
+Neither Rubric nor Cabal is a programming hierarchy level.
  
 ## 8. Compatibility
  
 Existing physical modules, services, packages, libraries, files, classes, functions, and runtime APIs remain valid.
  
-This decision does not require arbitrary renaming merely to match edifice terminology.
+This decision does not require arbitrary renaming merely to match hierarchy terminology.
  
 Classification changes before physical migration.
  
@@ -211,13 +211,13 @@ Physical migration requires dependency-safe implementation authority.
  
 Historical accepted decisions remain unchanged.
  
-Where an earlier document states a conflicting programming edifice, this decision governs current interpretation.
+Where an earlier document states a conflicting programming hierarchy, this decision governs current interpretation.
  
 Historical names remain evidence and lineage.
  
 ## 10. Completion condition
  
-Programming edifice classification is canonical when all current programming-edifice canon resolves to:
+Programming hierarchy classification is canonical when all current programming-hierarchy canon resolves to:
  `character → line → segment → snippet → script → engine → subsystem → system → application ` ` Update the direct composition rule:  ```bash nano /root/savant-runtime/ontology/obelisks/segue/authority_graph/canon/SCRIPT_COMPOSITION_RULE.md ` `# SCRIPT COMPOSITION RULE  STATUS: CANON AUTHORITY: USER DIRECTIVE UPDATED: 2026-08-13 SUPERSESSION: AD-20260813-006  Scripts are not atomic.  Canonical programming composition is:  ```text character → line → segment → snippet → script → engine → subsystem → system → application ` 
 A line is composed of characters.
  
@@ -274,9 +274,9 @@ The authoritative structure is the instance composition graph.
  
 Transitions with independently meaningful semantics are represented through typed segues.
  
-No edifice level requires a unique storage model.
+No hierarchy level requires a unique storage model.
  
-Module, service, package, library, class, function, interface, contract, schema, adapter, provider, command, validator, test, migration, task, and receipt remain valid programming structures but are not competing levels in the canonical programming edifice.
+Module, service, package, library, class, function, interface, contract, schema, adapter, provider, command, validator, test, migration, task, and receipt remain valid programming structures but are not competing levels in the canonical programming hierarchy.
  ` Update the projection rule:  ```bash nano /root/savant-runtime/ontology/obelisks/segue/authority_graph/canon/INSTANCE_PROJECTION_RULE.md ` `# INSTANCE PROJECTION RULE  STATUS: CANON AUTHORITY: USER DIRECTIVE UPDATED: 2026-08-13 SUPERSESSION: AD-20260813-006  Instances are authoritative where their governing authority declares them authoritative.  Files are projections unless explicitly marked as authority.  Canonical programming projection follows:  ```text character instances → line instances → segment instances → snippet instances → script instances → engine instances → subsystem instances → system instances → application instances ` 
 Each higher level composes lower-level instances by reference.
  
@@ -330,8 +330,8 @@ Deleting a projection must never delete its authoritative source instances.
 Canonical substance must not be reconstructed from a projection when authoritative primitives remain available.
  
 Instance chains may be superseded only through governing authority.
- ` Update the universal instance document. This also fixes its stale `shard/gate` identity terminology visible in the August 13 dump. 3  ```bash nano /root/savant-runtime/ontology/obelisks/segue/authority_graph/canon/UNIVERSAL_INSTANCE_STRUCTURE.md ` `# UNIVERSAL INSTANCE STRUCTURE  STATUS: CANON AUTHORITY: USER DIRECTIVE UPDATED: 2026-08-13 SUPERSESSION: AD-20260813-006  Every stable Savant element may be represented as an instance.  Every instance may compose other instances.  Every edifice level uses the same recursive structural model.  Files do not become primary architecture merely by existing.  Authority lives in authoritative primitives, instance relationships, segues, policies, lineage, provenance, and accepted governing decisions.  ## Programming edifice  ```text character → line → segment → snippet → script → engine → subsystem → system → application ` 
-## Identity edifice
+ ` Update the universal instance document. This also fixes its stale `shard/gate` identity terminology visible in the August 13 dump. 3  ```bash nano /root/savant-runtime/ontology/obelisks/segue/authority_graph/canon/UNIVERSAL_INSTANCE_STRUCTURE.md ` `# UNIVERSAL INSTANCE STRUCTURE  STATUS: CANON AUTHORITY: USER DIRECTIVE UPDATED: 2026-08-13 SUPERSESSION: AD-20260813-006  Every stable Savant element may be represented as an instance.  Every instance may compose other instances.  Every hierarchy level uses the same recursive structural model.  Files do not become primary architecture merely by existing.  Authority lives in authoritative primitives, instance relationships, segues, policies, lineage, provenance, and accepted governing decisions.  ## Programming hierarchy  ```text character → line → segment → snippet → script → engine → subsystem → system → application ` 
+## Identity hierarchy
  `iota → mote → trait → quirk → prodigal → exile → innate → portal → obelisk ` 
 ## Universal properties
  
@@ -378,7 +378,7 @@ A stable instance supports, where applicable:
  
 
  
-No edifice type receives a fundamentally different storage model.
+No hierarchy type receives a fundamentally different storage model.
  
 Only semantics, authority, relationships, composition, and legitimate facilities differ.
  
@@ -389,12 +389,12 @@ A file is not inherently the instance.
 A projection is not inherently the instance.
  
 Canonical substance exists once and is composed by reference wherever possible.
- ` Replace the stale recursive-composition document:  ```bash nano /root/savant-runtime/ontology/obelisks/segue/authority_graph/canon/RECURSIVE_COMPOSITION.md ` `# RECURSIVE COMPOSITION  STATUS: CANON AUTHORITY: USER DIRECTIVE UPDATED: 2026-08-13 SUPERSESSION: AD-20260813-006  Every stable Savant element is recursively composable.  Composition is instance-first.  Duplication is not composition.  edifice describes semantic emergence.  It does not require a different architecture at every level.  ## Programming emergence  ```text character     ↓ line     ↓ segment     ↓ snippet     ↓ script     ↓ engine     ↓ subsystem     ↓ system     ↓ application ` 
+ ` Replace the stale recursive-composition document:  ```bash nano /root/savant-runtime/ontology/obelisks/segue/authority_graph/canon/RECURSIVE_COMPOSITION.md ` `# RECURSIVE COMPOSITION  STATUS: CANON AUTHORITY: USER DIRECTIVE UPDATED: 2026-08-13 SUPERSESSION: AD-20260813-006  Every stable Savant element is recursively composable.  Composition is instance-first.  Duplication is not composition.  Hierarchy describes semantic emergence.  It does not require a different architecture at every level.  ## Programming emergence  ```text character     ↓ line     ↓ segment     ↓ snippet     ↓ script     ↓ engine     ↓ subsystem     ↓ system     ↓ application ` 
 ## Identity emergence
  `iota     ↓ mote     ↓ trait     ↓ quirk     ↓ prodigal     ↓ exile     ↓ innate     ↓ portal     ↓ obelisk ` 
 These are separate semantic axes.
  
-They must not be collapsed into one synthetic edifice.
+They must not be collapsed into one synthetic hierarchy.
  
 Programming structures may be owned by or attached to identity structures without becoming identity levels.
  
@@ -407,9 +407,9 @@ Transitions are represented through typed segues where the transition carries in
 No level introduces a unique storage model merely because of its level.
  
 Only semantic responsibility, composition, authority, interfaces, relationships, and legitimate facilities change.
- ` Add the missing code-transition canon. This implements the specific idea that transitions inside code itself can be first-class rather than leaving snippets/functions as opaque monoliths.  ```bash nano /root/savant-runtime/ontology/obelisks/segue/authority_graph/canon/CODE_SEGUE_RULE.md ` `# CODE SEGUE RULE  STATUS: CANON AUTHORITY: USER DIRECTIVE ACCEPTED: 2026-08-13 DEPENDS_ON: AD-20260813-006  ## Core rule  Programming composition is segue-mediated wherever a transition possesses independently meaningful semantics.  Code units do not require artificial direct coupling when the relationship between them can be represented explicitly.  ## Valid endpoints  A code segue may connect:  - line → line - line → segment - segment → segment - segment → snippet - snippet → snippet - snippet → script - script → script - script → engine - engine → engine - engine → subsystem - subsystem → subsystem - subsystem → system - system → system - system → application  A segue may also connect functional structures such as:  - function → function - method → method - callable → callable - block → block - adapter → contract - provider → adapter - command → runtime - validator → subject - test → subject  These structures do not thereby become edifice levels.  ## Segue responsibilities  A code segue may encode:  - control transfer - data transfer - type conversion - contract adaptation - lifecycle transition - error transition - state transition - dependency boundary - compatibility boundary - normalization - serialization - deserialization - validation handoff - provider handoff - projection handoff - composition attachment  ## Segue identity  A stable reusable segue exposes:  - id - source - target - type - authority - lineage - provenance - dependencies - compatibility - contract - validation - extensions  ## Non-duplication law  A segue references its endpoints.  It does not duplicate them.  Reusable transition behavior is substantiated once and instanced wherever compatible.  ## Granularity law  Not every adjacency requires a materialized segue.  A segue becomes a stable instance when the transition itself requires identity, reuse, policy, validation, compatibility, observation, extension, or governance.  Pure language syntax remains syntax.  Savant must not create meaningless segue objects between every literal source line merely to satisfy structural aesthetics.  ## Projection  Projected code may render segue behavior as ordinary native source syntax.  The absence of a visible "segue" keyword in generated Python, JavaScript, shell, or another target language does not erase the underlying composition relationship.  Generated source remains a projection of the composition graph. ` 
-Add the programming lexicon so the rest of the implemented programming vocabulary does not get accidentally promoted into competing edifice levels:
- `nano /root/savant-runtime/ontology/obelisks/segue/authority_graph/canon/PROGRAMMING_LEXICON_CANON.md ` `# PROGRAMMING LEXICON CANON  STATUS: CANON AUTHORITY: USER DIRECTIVE ACCEPTED: 2026-08-13 DEPENDS_ON: AD-20260813-006  ## Purpose  This document separates Savant's canonical programming edifice from orthogonal programming vocabulary already required by implementation.  A term may be structurally important without being a edifice level.  ## Canonical edifice terms  ### character  Atomic textual or symbolic source unit.  ### line  Ordered composition of characters occupying one logical source line.  ### segment  Bounded coherent composition of related lines.  ### snippet  Reusable bounded composition of one or more segments.  ### script  Executable or interpretable composition of snippets and their segues.  ### engine  Bounded operational mechanism composed from scripts.  ### subsystem  Bounded internal capability domain composed from engines.  ### system  Independently coherent operational domain composed from subsystems.  ### application  Operable application identity composed from systems.  ## Syntax terms  ### token  Language-level lexical unit recognized by a parser or tokenizer.  ### identifier  Token naming a language-level entity.  ### literal  Source representation of a value.  ### expression  Language construct evaluating to a value or result.  ### statement  Language construct expressing an executable or declarative action.  ### block  Language-defined grouping of statements or declarations.  These are syntax classifications, not Savant programming edifice levels.  ## Callable terms  ### function  Named or addressable callable implementation.  ### method  Callable bound through an object, class, or equivalent language construct.  ### callable  General executable invocation surface.  ### class  Language construct defining data and/or behavior according to the target language.  These may occur inside segments, snippets, scripts, or larger projections.  Their native-language boundaries do not override Savant composition identity.  ## Interface terms  ### interface  Declared interaction surface.  ### contract  Explicit requirements governing interaction between participants.  ### schema  Machine-validatable structural contract for data or configuration.  ### adapter  Compatibility mechanism translating one legitimate interface or representation into another.  ### provider  Implementation supplying a bounded capability through a defined interface.  ### validator  Mechanism evaluating a subject against explicit invariants or contracts.  These describe roles and boundaries rather than edifice levels.  ## Operational terms  ### command  Invocable user, operator, or machine-facing execution entrypoint.  ### test  Executable verification of behavior or invariants.  ### migration  Governed transition from one compatible state or representation to another.  ### task  Bounded unit of intended work.  ### receipt  Evidence artifact recording execution, validation, mutation, or another governed event.  These are operational structures, not programming edifice levels.  ## Packaging terms  ### file  Filesystem artifact.  A file may be a projection, evidence artifact, authority artifact, configuration, source representation, or another declared kind.  Filesystem presence alone establishes no authority.  ### module  Language or packaging boundary grouping implementation.  Module remains valid terminology but is not a canonical Savant programming edifice level.  ### package  Packaging or namespace unit containing related implementation.  ### library  Reusable implementation collection exposed for consumption.  ### service  Operational deployment or interface boundary.  Service remains valid terminology but is not a canonical Savant programming edifice level.  These describe packaging or deployment.  They do not compete with:  ```text character → line → segment → snippet → script → engine → subsystem → system → application ` 
+ ` Add the missing code-transition canon. This implements the specific idea that transitions inside code itself can be first-class rather than leaving snippets/functions as opaque monoliths.  ```bash nano /root/savant-runtime/ontology/obelisks/segue/authority_graph/canon/CODE_SEGUE_RULE.md ` `# CODE SEGUE RULE  STATUS: CANON AUTHORITY: USER DIRECTIVE ACCEPTED: 2026-08-13 DEPENDS_ON: AD-20260813-006  ## Core rule  Programming composition is segue-mediated wherever a transition possesses independently meaningful semantics.  Code units do not require artificial direct coupling when the relationship between them can be represented explicitly.  ## Valid endpoints  A code segue may connect:  - line → line - line → segment - segment → segment - segment → snippet - snippet → snippet - snippet → script - script → script - script → engine - engine → engine - engine → subsystem - subsystem → subsystem - subsystem → system - system → system - system → application  A segue may also connect functional structures such as:  - function → function - method → method - callable → callable - block → block - adapter → contract - provider → adapter - command → runtime - validator → subject - test → subject  These structures do not thereby become hierarchy levels.  ## Segue responsibilities  A code segue may encode:  - control transfer - data transfer - type conversion - contract adaptation - lifecycle transition - error transition - state transition - dependency boundary - compatibility boundary - normalization - serialization - deserialization - validation handoff - provider handoff - projection handoff - composition attachment  ## Segue identity  A stable reusable segue exposes:  - id - source - target - type - authority - lineage - provenance - dependencies - compatibility - contract - validation - extensions  ## Non-duplication law  A segue references its endpoints.  It does not duplicate them.  Reusable transition behavior is substantiated once and instanced wherever compatible.  ## Granularity law  Not every adjacency requires a materialized segue.  A segue becomes a stable instance when the transition itself requires identity, reuse, policy, validation, compatibility, observation, extension, or governance.  Pure language syntax remains syntax.  Savant must not create meaningless segue objects between every literal source line merely to satisfy structural aesthetics.  ## Projection  Projected code may render segue behavior as ordinary native source syntax.  The absence of a visible "segue" keyword in generated Python, JavaScript, shell, or another target language does not erase the underlying composition relationship.  Generated source remains a projection of the composition graph. ` 
+Add the programming lexicon so the rest of the implemented programming vocabulary does not get accidentally promoted into competing hierarchy levels:
+ `nano /root/savant-runtime/ontology/obelisks/segue/authority_graph/canon/PROGRAMMING_LEXICON_CANON.md ` `# PROGRAMMING LEXICON CANON  STATUS: CANON AUTHORITY: USER DIRECTIVE ACCEPTED: 2026-08-13 DEPENDS_ON: AD-20260813-006  ## Purpose  This document separates Savant's canonical programming hierarchy from orthogonal programming vocabulary already required by implementation.  A term may be structurally important without being a hierarchy level.  ## Canonical hierarchy terms  ### character  Atomic textual or symbolic source unit.  ### line  Ordered composition of characters occupying one logical source line.  ### segment  Bounded coherent composition of related lines.  ### snippet  Reusable bounded composition of one or more segments.  ### script  Executable or interpretable composition of snippets and their segues.  ### engine  Bounded operational mechanism composed from scripts.  ### subsystem  Bounded internal capability domain composed from engines.  ### system  Independently coherent operational domain composed from subsystems.  ### application  Operable application identity composed from systems.  ## Syntax terms  ### token  Language-level lexical unit recognized by a parser or tokenizer.  ### identifier  Token naming a language-level entity.  ### literal  Source representation of a value.  ### expression  Language construct evaluating to a value or result.  ### statement  Language construct expressing an executable or declarative action.  ### block  Language-defined grouping of statements or declarations.  These are syntax classifications, not Savant programming hierarchy levels.  ## Callable terms  ### function  Named or addressable callable implementation.  ### method  Callable bound through an object, class, or equivalent language construct.  ### callable  General executable invocation surface.  ### class  Language construct defining data and/or behavior according to the target language.  These may occur inside segments, snippets, scripts, or larger projections.  Their native-language boundaries do not override Savant composition identity.  ## Interface terms  ### interface  Declared interaction surface.  ### contract  Explicit requirements governing interaction between participants.  ### schema  Machine-validatable structural contract for data or configuration.  ### adapter  Compatibility mechanism translating one legitimate interface or representation into another.  ### provider  Implementation supplying a bounded capability through a defined interface.  ### validator  Mechanism evaluating a subject against explicit invariants or contracts.  These describe roles and boundaries rather than hierarchy levels.  ## Operational terms  ### command  Invocable user, operator, or machine-facing execution entrypoint.  ### test  Executable verification of behavior or invariants.  ### migration  Governed transition from one compatible state or representation to another.  ### task  Bounded unit of intended work.  ### receipt  Evidence artifact recording execution, validation, mutation, or another governed event.  These are operational structures, not programming hierarchy levels.  ## Packaging terms  ### file  Filesystem artifact.  A file may be a projection, evidence artifact, authority artifact, configuration, source representation, or another declared kind.  Filesystem presence alone establishes no authority.  ### module  Language or packaging boundary grouping implementation.  Module remains valid terminology but is not a canonical Savant programming hierarchy level.  ### package  Packaging or namespace unit containing related implementation.  ### library  Reusable implementation collection exposed for consumption.  ### service  Operational deployment or interface boundary.  Service remains valid terminology but is not a canonical Savant programming hierarchy level.  These describe packaging or deployment.  They do not compete with:  ```text character → line → segment → snippet → script → engine → subsystem → system → application ` 
 ## Savant composition terms
  
 ### instance
@@ -459,7 +459,7 @@ For example, one projected Python file may simultaneously be:
  
 - implementation owner: Rubric
  
-- edifice identity: script
+- hierarchy identity: script
  
 - composed from: snippets
  
@@ -473,8 +473,8 @@ These classifications do not conflict because they describe different axes.
  
 New terminology must not be created merely to rename an existing concept.
  
-New programming edifice levels require explicit user authority.
+New programming hierarchy levels require explicit user authority.
  
-Implementation roles must not silently become edifice levels through repeated filesystem use.
+Implementation roles must not silently become hierarchy levels through repeated filesystem use.
  
 Historical terminology remains historical evidence unless current authority adopts it.

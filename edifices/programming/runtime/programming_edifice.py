@@ -23,7 +23,11 @@ authority_effect = "none"
 
 composition_decision = (
     "AD-20260813-006-programming-"
-    "composition-edifice"
+    "composition-hierarchy"
+)
+
+terminology_decision = (
+    "ad-20260928-001-three-primary-edifices"
 )
 
 atomic_decision = (
@@ -246,6 +250,8 @@ def edifice_projection(
         "authority": {
             "composition":
                 composition_decision,
+            "terminology":
+                terminology_decision,
             "atomic":
                 atomic_decision,
         },
@@ -430,6 +436,13 @@ def selftest(
                 "composition"
             ]
             == composition_decision,
+        "terminology_authority":
+            first[
+                "authority"
+            ][
+                "terminology"
+            ]
+            == terminology_decision,
         "atomic_authority":
             first[
                 "authority"
