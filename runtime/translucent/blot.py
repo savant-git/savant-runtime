@@ -1126,6 +1126,55 @@ def reconstruction_runtime(
     )
 
 
+def reconstruction_verify_projection(
+    *,
+    svg: str,
+    document: Mapping[str, Any],
+    execution_contract: Mapping[str, Any],
+    projection_receipt: Mapping[str, Any],
+    expected: Mapping[str, Any] | None = None,
+    failure_router: Any = None,
+) -> Any:
+    from runtime.translucent.blot_verify import (
+        verify_projection,
+    )
+
+    return verify_projection(
+        svg=svg,
+        document=document,
+        execution_contract=execution_contract,
+        projection_receipt=projection_receipt,
+        expected=expected,
+        failure_router=failure_router,
+    )
+
+
+def reconstruction_verification_manifest() -> dict[str, Any]:
+    from runtime.translucent import blot_verify
+
+    verification = blot_verify.manifest()
+
+    body = {
+        "schema": f"{SCHEMA}.reconstruction-verification",
+        "name": NAME,
+        "authority_effect": AUTHORITY_EFFECT,
+        "projection_only": True,
+        "authoritative": False,
+        "verification_schema": verification["schema"],
+        "verification_digest": verification["digest"],
+        "verification_lock": list(
+            verification["verification_lock"]
+        ),
+        "failure_routing": verification["failure_routing"],
+        "projection_is_authority": False,
+    }
+
+    return {
+        **body,
+        "digest": _digest(body),
+    }
+
+
 def reconstruction_manifest() -> dict[str, Any]:
     from runtime.translucent import blot_integration
 

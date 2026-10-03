@@ -2984,6 +2984,50 @@ lexemes:
     sources:
     - lexical-migration-20260809
     confidence: confirmed
+- id: lex:utility:wax
+  canonical: wax
+  concept: utility tactic for uploading one or more runtime files to the configured external object-store bucket root
+  description: canonical savant utility identity for the capability historically named upl; wax transfers explicitly selected files from within savant-runtime to the configured object-store bucket root without applying an implicit prefix
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history:
+    - event: canonical-name-established
+      historical_name: upl
+      successor: lex:utility:wax
+  provenance:
+    sources:
+    - current-user-directive-20261003
+    - ad-20260926-002-utility-hierarchy
+    authority: accepted
+    confidence: confirmed
+  metadata:
+    utility_level: tactic
+    historical_command_name: upl
+- id: lex:utility:wane
+  canonical: wane
+  concept: utility tactic for downloading explicitly selected external object-store objects into the runtime directory from which the tactic is invoked
+  description: canonical savant utility identity for the capability historically named dow; wane retrieves explicitly selected objects into the invoking directory within savant-runtime without imposing an implicit download directory
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history:
+    - event: canonical-name-established
+      historical_name: dow
+      successor: lex:utility:wane
+  provenance:
+    sources:
+    - current-user-directive-20261003
+    - ad-20260926-002-utility-hierarchy
+    authority: accepted
+    confidence: confirmed
+  metadata:
+    utility_level: tactic
+    historical_command_name: dow
 reserved:
 - Instance
 - Projection

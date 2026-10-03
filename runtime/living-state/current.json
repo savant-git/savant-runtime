@@ -184,16 +184,16 @@
     "values_included": false
   },
   "filesystem": {
-    "bytes": 21424776453,
+    "bytes": 21428129488,
     "evidence_classes": {
-      "authority_candidate": 1193,
-      "backup_evidence": 1029,
-      "implementation_evidence": 31029,
+      "authority_candidate": 1200,
+      "backup_evidence": 1045,
+      "implementation_evidence": 31117,
       "imported_or_historical_evidence": 48,
       "live_state_projection": 4,
-      "migration_evidence": 472,
-      "runtime_projection_or_state": 11359,
-      "vault_evidence": 19789
+      "migration_evidence": 473,
+      "runtime_projection_or_state": 11385,
+      "vault_evidence": 19814
     },
     "extensions": {
       ".0": 2,
@@ -214,8 +214,8 @@
       ".before": 9,
       ".before-command-projection-20260727t082847z": 1,
       ".before-deadlock-fix-20260727t053009z": 1,
-      ".before-determinism-fix-20260731t224639z": 1,
-      ".before-determinism-fix-20260731t233602z": 1,
+      ".before-determinism-fix-20260731t224639z": 2,
+      ".before-determinism-fix-20260731t233602z": 2,
       ".before-discovery-extension-20260801t002506z": 1,
       ".before-reference-queue-fix-20260801t002434z": 1,
       ".before_api_debug_20260624t223930z": 1,
@@ -291,14 +291,14 @@
       ".jpeg": 11,
       ".jpg": 9,
       ".js": 350,
-      ".json": 20414,
+      ".json": 20445,
       ".jsonl": 33,
       ".jsx": 96,
-      ".lock": 350,
+      ".lock": 359,
       ".log": 20,
       ".map": 10,
       ".markdown-it": 1,
-      ".md": 893,
+      ".md": 897,
       ".mit": 1,
       ".mmd": 2,
       ".mp3": 1,
@@ -316,13 +316,13 @@
       ".pth": 1,
       ".pxd": 4,
       ".pxi": 1,
-      ".py": 12587,
+      ".py": 12651,
       ".pyi": 99,
       ".pyx": 6,
       ".real": 1,
       ".rst": 8,
-      ".save": 24,
-      ".service": 3,
+      ".save": 25,
+      ".service": 6,
       ".sh": 258,
       ".so": 56,
       ".sqlite": 2,
@@ -342,20 +342,21 @@
       ".tsbuildinfo": 2,
       ".tsv": 2,
       ".tsx": 104,
-      ".txt": 25176,
+      ".txt": 25179,
       ".typed": 174,
       ".wav": 1,
       ".webp": 2,
       ".woff2": 7,
       ".work": 1,
       ".xml": 1,
-      ".yaml": 214,
-      "[none]": 1259
+      ".yaml": 254,
+      ".zip": 1,
+      "[none]": 1264
     },
     "failures": [],
-    "files": 64923,
-    "source_candidates": 61202,
-    "symlink_count": 3408,
+    "files": 65086,
+    "source_candidates": 61363,
+    "symlink_count": 3412,
     "symlinks": [
       {
         "path": "palaver_ultra",
@@ -400,6 +401,22 @@
       {
         "path": ".venv_voice/bin/python3.12",
         "target": "python3"
+      },
+      {
+        "path": "bin/dow",
+        "target": "/root/savant-runtime/edifices/utility/tactics/wane/runtime/wane.py"
+      },
+      {
+        "path": "bin/upl",
+        "target": "/root/savant-runtime/edifices/utility/tactics/wax/runtime/wax.py"
+      },
+      {
+        "path": "bin/wane",
+        "target": "/root/savant-runtime/edifices/utility/tactics/wane/runtime/wane.py"
+      },
+      {
+        "path": "bin/wax",
+        "target": "/root/savant-runtime/edifices/utility/tactics/wax/runtime/wax.py"
       },
       {
         "path": "canon-system/.venv/bin/python",
@@ -13992,7 +14009,7 @@
     ]
   },
   "filesystem_presence_establishes_authority": false,
-  "generated_at_unix_ns": 1790989817300497014,
+  "generated_at_unix_ns": 1791068579993744201,
   "git": null,
   "latest_sdump": {
     "mtime_ns": 1789655596444500342,
@@ -14001,6 +14018,14 @@
     "size": 72154
   },
   "listening_tcp": [
+    {
+      "local": "127.0.0.1:8791",
+      "peer": "0.0.0.0:*",
+      "process": "users:((\"python3\",pid=2133043,fd=3))                                                       ",
+      "recv_q": "0",
+      "send_q": "5",
+      "state": "LISTEN"
+    },
     {
       "local": "127.0.0.1:8787",
       "peer": "0.0.0.0:*",
@@ -14060,7 +14085,7 @@
     {
       "local": "0.0.0.0:5173",
       "peer": "0.0.0.0:*",
-      "process": "users:((\"python3\",pid=1362808,fd=3))                                                       ",
+      "process": "users:((\"python3\",pid=2132463,fd=3))                                                       ",
       "recv_q": "0",
       "send_q": "5",
       "state": "LISTEN"
@@ -14076,7 +14101,7 @@
     {
       "local": "0.0.0.0:22",
       "peer": "0.0.0.0:*",
-      "process": "users:((\"sshd\",pid=1362819,fd=3),(\"systemd\",pid=1,fd=191))                                 ",
+      "process": "users:((\"sshd\",pid=1362819,fd=3),(\"systemd\",pid=1,fd=165))                                 ",
       "recv_q": "0",
       "send_q": "4096",
       "state": "LISTEN"
@@ -14116,7 +14141,7 @@
     {
       "local": "[::]:22",
       "peer": "[::]:*",
-      "process": "users:((\"sshd\",pid=1362819,fd=4),(\"systemd\",pid=1,fd=194))",
+      "process": "users:((\"sshd\",pid=1362819,fd=4),(\"systemd\",pid=1,fd=166))",
       "recv_q": "0",
       "send_q": "4096",
       "state": "LISTEN"
@@ -14240,13 +14265,8 @@
       "size": 258
     }
   ],
-  "previous_snapshot_hash": "a170d8e3d3e77b9b313ba0e59a5096f7225c497c7977615ebf7cecf5fab26497",
+  "previous_snapshot_hash": "132572eac62d95892acdd57ab64c1e14560bbd7cbbcdf86f1e17f4e5d2db5f92",
   "processes": [
-    {
-      "command": "/usr/bin/python3 /root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/runtime/frontend_server.py --host 0.0.0.0 --port 5173",
-      "cwd": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/apps/webui-nextgen",
-      "pid": 1362808
-    },
     {
       "command": "/root/savant-runtime/.venv_voice/bin/python /root/savant-runtime/palaver_voice_backend.py",
       "cwd": "/root/savant-runtime",
@@ -14258,30 +14278,40 @@
       "pid": 1362849
     },
     {
+      "command": "/usr/bin/python3 /root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/runtime/frontend_server.py --host 0.0.0.0 --port 5173",
+      "cwd": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/apps/webui-nextgen",
+      "pid": 2132463
+    },
+    {
+      "command": "/usr/bin/python3 -m runtime.attachment_api --host 127.0.0.1 --port 8791",
+      "cwd": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver",
+      "pid": 2133043
+    },
+    {
       "command": "/usr/bin/python3 /root/savant-runtime/runtime/living-state/engine.py --interval 15 --reconcile-interval 300",
       "cwd": "/root/savant-runtime",
-      "pid": 1989654
+      "pid": 2179021
     },
     {
       "command": "/usr/bin/python3 /root/savant-runtime/runtime/living-state/checkpoint.py",
       "cwd": "/root/savant-runtime",
-      "pid": 1989655
+      "pid": 2179022
     },
     {
       "command": "python3 /root/savant-runtime/bin/sdump savant-runtime",
       "cwd": "/root",
-      "pid": 1989659
+      "pid": 2179024
     }
   ],
   "projection_only": true,
   "runtime_root": "/root/savant-runtime",
   "schema": "savant.living-state.v1",
-  "sequence": 156942,
+  "sequence": 160960,
   "services": [
     {
-      "active_since": "Sat 2026-10-03 01:10:16 UTC",
+      "active_since": "Sat 2026-10-03 23:02:59 UTC",
       "active_state": "activating",
-      "exec_start": "{ path=/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/commands/palaver_server ; argv[]=/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/commands/palaver_server ; ignore_errors=no ; start_time=[Sat 2026-10-03 01:10:16 UTC] ; stop_time=[Sat 2026-10-03 01:10:16 UTC] ; pid=1989677 ; code=exited ; status=1 }",
+      "exec_start": "{ path=/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/commands/palaver_server ; argv[]=/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/commands/palaver_server ; ignore_errors=no ; start_time=[Sat 2026-10-03 23:02:59 UTC] ; stop_time=[Sat 2026-10-03 23:02:59 UTC] ; pid=2179033 ; code=exited ; status=1 }",
       "fragment_path": "/etc/systemd/system/palaver.service",
       "load_state": "loaded",
       "main_pid": "0",
@@ -14291,24 +14321,24 @@
       "working_directory": "/root/savant-runtime"
     },
     {
-      "active_since": "Sat 2026-10-03 01:10:16 UTC",
-      "active_state": "activating",
-      "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/runtime/attachment_api.py --host 127.0.0.1 --port 8791 ; ignore_errors=no ; start_time=[Sat 2026-10-03 01:10:16 UTC] ; stop_time=[Sat 2026-10-03 01:10:16 UTC] ; pid=1989676 ; code=exited ; status=1 }",
+      "active_since": "Sat 2026-10-03 16:32:07 UTC",
+      "active_state": "active",
+      "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 -m runtime.attachment_api --host 127.0.0.1 --port 8791 ; ignore_errors=no ; start_time=[Sat 2026-10-03 16:32:07 UTC] ; stop_time=[n/a] ; pid=2133043 ; code=(null) ; status=0/0 }",
       "fragment_path": "/etc/systemd/system/palaver-attachment.service",
       "load_state": "loaded",
-      "main_pid": "0",
+      "main_pid": "2133043",
       "name": "palaver-attachment.service",
       "query_ok": true,
-      "sub_state": "auto-restart",
-      "working_directory": "/root/savant-runtime"
+      "sub_state": "running",
+      "working_directory": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver"
     },
     {
-      "active_since": "Wed 2026-09-30 06:11:00 UTC",
+      "active_since": "Sat 2026-10-03 16:28:41 UTC",
       "active_state": "active",
       "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/runtime/frontend_server.py --host 0.0.0.0 --port 5173 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
       "fragment_path": "/etc/systemd/system/palaver-frontend.service",
       "load_state": "loaded",
-      "main_pid": "1362808",
+      "main_pid": "2132463",
       "name": "palaver-frontend.service",
       "query_ok": true,
       "sub_state": "running",
@@ -14327,19 +14357,19 @@
       "working_directory": ""
     },
     {
-      "active_since": "Sat 2026-10-03 01:10:02 UTC",
+      "active_since": "Sat 2026-10-03 23:02:46 UTC",
       "active_state": "active",
-      "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /root/savant-runtime/runtime/living-state/engine.py --interval 15 --reconcile-interval 300 ; ignore_errors=no ; start_time=[Sat 2026-10-03 01:10:02 UTC] ; stop_time=[n/a] ; pid=1989654 ; code=(null) ; status=0/0 }",
+      "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /root/savant-runtime/runtime/living-state/engine.py --interval 15 --reconcile-interval 300 ; ignore_errors=no ; start_time=[Sat 2026-10-03 23:02:46 UTC] ; stop_time=[n/a] ; pid=2179021 ; code=(null) ; status=0/0 }",
       "fragment_path": "/etc/systemd/system/savant-living-state.service",
       "load_state": "loaded",
-      "main_pid": "1989654",
+      "main_pid": "2179021",
       "name": "savant-living-state.service",
       "query_ok": true,
       "sub_state": "running",
       "working_directory": "/root/savant-runtime"
     }
   ],
-  "snapshot_hash": "f4c78ce5bb2197f528a0c7cfed1e4a688701a99c833a3e54c78740684c2fd649",
+  "snapshot_hash": "e90b0fee8d9a0b0f5141dda140ea05dd2d96657ac94c3cbd0d90d4534b6880f3",
   "sqlite": [
     {
       "authority_effect": "none",
@@ -14557,30 +14587,30 @@
   ],
   "system": {
     "disk": {
-      "free": 11459956736,
+      "free": 11362283520,
       "total": 82086711296,
-      "used": 70609977344
+      "used": 70707650560
     },
     "load_average": {
-      "15m": 1.1396484375,
-      "1m": 1.32568359375,
-      "5m": 1.22265625
+      "15m": 1.0361328125,
+      "1m": 1.0556640625,
+      "5m": 1.06103515625
     },
     "memory": {
-      "Active": 591376384,
-      "Active(anon)": 347566080,
-      "Active(file)": 243810304,
+      "Active": 611840000,
+      "Active(anon)": 362049536,
+      "Active(file)": 249790464,
       "AnonHugePages": 0,
-      "AnonPages": 374083584,
+      "AnonPages": 397791232,
       "Bounce": 0,
-      "Buffers": 236462080,
-      "Cached": 563658752,
+      "Buffers": 232030208,
+      "Cached": 514273280,
       "CommitLimit": 5267578880,
-      "Committed_AS": 1536020480,
+      "Committed_AS": 1530519552,
       "DirectMap1G": 0,
       "DirectMap2M": 1983905792,
       "DirectMap4k": 163426304,
-      "Dirty": 2236416,
+      "Dirty": 1060864,
       "FileHugePages": 0,
       "FilePmdMapped": 0,
       "HardwareCorrupted": 0,
@@ -14590,39 +14620,39 @@
       "HugePages_Total": 0,
       "Hugepagesize": 2097152,
       "Hugetlb": 0,
-      "Inactive": 551469056,
-      "Inactive(anon)": 8577024,
-      "Inactive(file)": 542892032,
-      "KReclaimable": 316665856,
-      "KernelStack": 5046272,
-      "Mapped": 219340800,
-      "MemAvailable": 1066676224,
-      "MemFree": 155467776,
+      "Inactive": 500785152,
+      "Inactive(anon)": 17694720,
+      "Inactive(file)": 483090432,
+      "KReclaimable": 325079040,
+      "KernelStack": 5144576,
+      "Mapped": 181817344,
+      "MemAvailable": 987865088,
+      "MemFree": 122064896,
       "MemTotal": 1945235456,
       "Mlocked": 27947008,
       "NFS_Unstable": 0,
-      "PageTables": 7274496,
-      "Percpu": 163053568,
-      "SReclaimable": 316665856,
-      "SUnreclaim": 104288256,
+      "PageTables": 7409664,
+      "Percpu": 200278016,
+      "SReclaimable": 325079040,
+      "SUnreclaim": 106684416,
       "SecPageTables": 0,
-      "Shmem": 4448256,
+      "Shmem": 4452352,
       "ShmemHugePages": 0,
       "ShmemPmdMapped": 0,
-      "Slab": 420954112,
-      "SwapCached": 62279680,
-      "SwapFree": 4093829120,
+      "Slab": 431763456,
+      "SwapCached": 60456960,
+      "SwapFree": 4094795776,
       "SwapTotal": 4294963200,
       "Unaccepted": 0,
       "Unevictable": 32043008,
       "VmallocChunk": 0,
       "VmallocTotal": 35184372087808,
-      "VmallocUsed": 26906624,
+      "VmallocUsed": 27037696,
       "Writeback": 0,
       "WritebackTmp": 0,
       "Zswap": 0,
       "Zswapped": 0
     },
-    "uptime_seconds": 793371.04
+    "uptime_seconds": 872133.73
   }
 }
