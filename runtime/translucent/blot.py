@@ -1101,6 +1101,58 @@ class Blot:
         )
 
 
+def reconstruction_runtime(
+    source_digest: str,
+    *,
+    source_kind: str = "raster",
+    objective: str | None = None,
+    constraints: Mapping[str, Any] | None = None,
+    provenance: Iterable[str] = (),
+    opus_adapter: Any = None,
+    projection_profiles: Iterable[Any] | None = None,
+) -> Any:
+    from runtime.translucent.blot_integration import (
+        reconstruction_runtime as _reconstruction_runtime,
+    )
+
+    return _reconstruction_runtime(
+        source_digest,
+        source_kind=source_kind,
+        objective=objective,
+        constraints=constraints,
+        provenance=provenance,
+        opus_adapter=opus_adapter,
+        projection_profiles=projection_profiles,
+    )
+
+
+def reconstruction_manifest() -> dict[str, Any]:
+    from runtime.translucent import blot_integration
+
+    integration = blot_integration.manifest()
+
+    body = {
+        "schema": f"{SCHEMA}.reconstruction",
+        "name": NAME,
+        "authority_effect": AUTHORITY_EFFECT,
+        "projection_only": True,
+        "authoritative": False,
+        "construction_owner": "blot.",
+        "orchestration_owner": "opus",
+        "projection_owner": "blot.",
+        "integration_schema": integration["schema"],
+        "integration_digest": integration["digest"],
+        "canonical_substance": "construction-graph",
+        "svg_is_derived": True,
+        "projection_is_authority": False,
+    }
+
+    return {
+        **body,
+        "digest": _digest(body),
+    }
+
+
 def selftest() -> dict[str, Any]:
     blot = Blot(
         width=800,

@@ -875,6 +875,79 @@ def manifest() -> dict[str, Any]:
     return result
 
 
+def reconstruction_projection_builder(
+    contract: Any,
+    *,
+    width: float,
+    height: float,
+    view_box: Any = None,
+) -> Any:
+    from runtime.translucent.svg.blot_reconstruction import (
+        ProjectionBuilder,
+    )
+
+    if view_box is None:
+        return ProjectionBuilder(
+            contract,
+            width=width,
+            height=height,
+        )
+
+    return ProjectionBuilder(
+        contract,
+        width=width,
+        height=height,
+        view_box=view_box,
+    )
+
+
+def reconstruction_path_from_primitive(
+    primitive: Mapping[str, Any],
+    **kwargs: Any,
+) -> Any:
+    from runtime.translucent.svg.blot_reconstruction import (
+        path_from_primitive,
+    )
+
+    return path_from_primitive(
+        primitive,
+        **kwargs,
+    )
+
+
+def reconstruction_manifest() -> dict[str, Any]:
+    from runtime.translucent.svg import blot_reconstruction
+
+    result = {
+        "schema":
+            blot_reconstruction.schema,
+        "owner":
+            owner,
+        "renderer":
+            "blot",
+        "authority_effect":
+            blot_reconstruction.authority_effect,
+        "projection_only":
+            blot_reconstruction.projection_only,
+        "canonical_projection":
+            True,
+        "geometry_owns_shape":
+            True,
+        "materials_decorate_geometry":
+            True,
+        "lineage_preserved":
+            True,
+        "provenance_preserved":
+            True,
+    }
+
+    result["digest"] = _digest(
+        result
+    )
+
+    return result
+
+
 def selftest(
     runtime: TranslucentSVGRuntime,
 ) -> dict[str, Any]:
@@ -1031,6 +1104,9 @@ __all__ = [
     "authority_effect",
     "manifest",
     "owner",
+    "reconstruction_manifest",
+    "reconstruction_path_from_primitive",
+    "reconstruction_projection_builder",
     "register",
     "render",
     "schema",
