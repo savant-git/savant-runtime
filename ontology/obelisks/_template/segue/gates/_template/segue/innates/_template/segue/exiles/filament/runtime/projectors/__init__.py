@@ -1,1 +1,0 @@
-"""Filament deterministic projection implementations."""
