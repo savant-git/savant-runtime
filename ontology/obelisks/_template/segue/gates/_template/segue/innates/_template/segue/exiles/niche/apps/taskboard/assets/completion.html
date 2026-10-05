@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1">
+  <meta
+    name="color-scheme"
+    content="dark">
+  <title>Niche Completion Intelligence</title>
+  <link
+    rel="icon"
+    href="/favicon.svg"
+    type="image/svg+xml">
+  <link
+    rel="stylesheet"
+    href="/styles.css">
+  <link
+    rel="stylesheet"
+    href="/assets/completion.css">
+</head>
+<body>
+
+  <div class="completion-shell">
+
+    <header class="completion-topbar">
+
+      <div class="completion-brand">
+        <div class="completion-mark">N</div>
+
+        <div>
+          <strong>Niche</strong>
+          <span>completion intelligence</span>
+        </div>
+      </div>
+
+      <div class="completion-search">
+        <input
+          id="search"
+          autocomplete="off"
+          placeholder="Search completion graph…">
+      </div>
+
+      <div class="completion-actions">
+        <a
+          class="button ghost"
+          href="/">
+          Taskboard
+        </a>
+
+        <button
+          id="refresh"
+          class="button primary">
+          Refresh
+        </button>
+      </div>
+
+    </header>
+
+    <aside class="completion-sidebar">
+
+      <div class="sidebar-label">
+        Projection depth
+      </div>
+
+      <div
+        id="depthControl"
+        class="depth-control">
+
+        <button data-depth="1">
+          <strong>1</strong>
+          <span>Objectives</span>
+        </button>
+
+        <button data-depth="2">
+          <strong>2</strong>
+          <span>Tranches</span>
+        </button>
+
+        <button data-depth="3">
+          <strong>3</strong>
+          <span>Tasks</span>
+        </button>
+
+        <button
+          data-depth="4"
+          class="active">
+          <strong>4</strong>
+          <span>Actions</span>
+        </button>
+
+      </div>
+
+      <div class="sidebar-section">
+
+        <div class="sidebar-label">
+          State
+        </div>
+
+        <select id="statusFilter">
+          <option value="">
+            All states
+          </option>
+          <option value="proposed">
+            Proposed
+          </option>
+          <option value="accepted">
+            Accepted
+          </option>
+          <option value="ready">
+            Ready
+          </option>
+          <option value="leased">
+            Leased
+          </option>
+          <option value="active">
+            Active
+          </option>
+          <option value="blocked">
+            Blocked
+          </option>
+          <option value="deferred">
+            Deferred
+          </option>
+          <option value="completed">
+            Completed
+          </option>
+          <option value="rejected">
+            Rejected
+          </option>
+          <option value="superseded">
+            Superseded
+          </option>
+        </select>
+
+        <select id="priorityFilter">
+          <option value="">
+            All priorities
+          </option>
+          <option value="critical">
+            Critical
+          </option>
+          <option value="high">
+            High
+          </option>
+          <option value="normal">
+            Normal
+          </option>
+          <option value="low">
+            Low
+          </option>
+          <option value="deferred">
+            Deferred
+          </option>
+        </select>
+
+        <select id="horizonFilter">
+          <option value="">
+            All horizons
+          </option>
+          <option value="now">
+            Now
+          </option>
+          <option value="next">
+            Next
+          </option>
+          <option value="later">
+            Later
+          </option>
+          <option value="backlog">
+            Backlog
+          </option>
+        </select>
+
+        <select id="systemFilter">
+          <option value="">
+            All systems
+          </option>
+        </select>
+
+        <select id="workstreamFilter">
+          <option value="">
+            All workstreams
+          </option>
+        </select>
+
+      </div>
+
+      <div
+        id="health"
+        class="health-card">
+        Loading Niche…
+      </div>
+
+    </aside>
+
+    <main class="completion-main">
+
+      <section class="completion-heading">
+
+        <div>
+          <span class="eyebrow">
+            Living Savant completion graph
+          </span>
+
+          <h1>
+            Completion Intelligence
+          </h1>
+
+          <p>
+            Authoritative task primitives projected through
+            selectable decomposition depth.
+          </p>
+        </div>
+
+        <div class="projection-meta">
+          <span id="generatedAt"></span>
+          <code id="digest"></code>
+        </div>
+
+      </section>
+
+      <section
+        id="metrics"
+        class="completion-metrics">
+      </section>
+
+      <section class="completion-grid">
+
+        <article class="completion-panel wide">
+
+          <div class="completion-panel-head">
+            <div>
+              <span class="eyebrow">
+                Execution
+              </span>
+              <h2>Next work</h2>
+            </div>
+
+            <span
+              id="visibleCount"
+              class="count-badge">
+            </span>
+          </div>
+
+          <div
+            id="taskTree"
+            class="task-tree">
+          </div>
+
+        </article>
+
+        <div class="completion-rail">
+
+          <article class="completion-panel">
+
+            <div class="completion-panel-head">
+              <div>
+                <span class="eyebrow">
+                  Systems
+                </span>
+                <h2>Coverage</h2>
+              </div>
+            </div>
+
+            <div
+              id="systemCoverage"
+              class="coverage-list">
+            </div>
+
+          </article>
+
+          <article class="completion-panel">
+
+            <div class="completion-panel-head">
+              <div>
+                <span class="eyebrow">
+                  Workstreams
+                </span>
+                <h2>Active surface</h2>
+              </div>
+            </div>
+
+            <div
+              id="workstreamCoverage"
+              class="coverage-list">
+            </div>
+
+          </article>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <div
+    id="scrim"
+    class="completion-scrim hidden">
+  </div>
+
+  <aside
+    id="detail"
+    class="completion-detail hidden">
+
+    <div class="detail-head">
+
+      <button
+        id="closeDetail"
+        class="icon-button">
+        ×
+      </button>
+
+      <div>
+        <span
+          id="detailId"
+          class="eyebrow">
+        </span>
+
+        <h2 id="detailTitle"></h2>
+      </div>
+
+    </div>
+
+    <div
+      id="detailBody"
+      class="detail-body">
+    </div>
+
+  </aside>
+
+  <script
+    src="/assets/completion.js"
+    defer>
+  </script>
+
+</body>
+</html>

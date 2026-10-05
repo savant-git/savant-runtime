@@ -1,0 +1,1690 @@
+from __future__ import annotations
+
+import gzip
+import hashlib
+import json
+import os
+from datetime import datetime, timezone
+from pathlib import Path
+import shutil
+import stat
+import subprocess
+import sys
+import tempfile
+from typing import Any, Iterable
+
+from .profiles import load_profile
+from .scan import (
+    discover,
+    language,
+    normalized_targets,
+)
+
+from straub.source_datrix import (
+    current_from_datrix,
+    datrix,
+)
+from straub.source_datrix_stream import (
+    reconcile_streaming,
+)
+
+
+schema = "savant.sdump.stream.v3"
+
+default_profile = "code"
+
+chunk_size = 1024 * 1024
+
+gzip_level = 9
+
+s3_bucket = "savant-ai-cluster"
+
+github_owner = "savant-git"
+
+github_repository = "savant-runtime"
+
+github_remote = (
+    "https://github.com/"
+    f"{github_owner}/"
+    f"{github_repository}.git"
+)
+
+default_env_path = Path(
+    "/root/.env"
+)
+
+
+class StreamDumpError(
+    RuntimeError
+):
+    pass
+
+
+def canonical_json(
+    value: Any,
+) -> str:
+    return json.dumps(
+        value,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(
+            ",",
+            ":",
+        ),
+    )
+
+
+def sha256_file(
+    path: Path,
+    read_size: int = chunk_size,
+) -> str:
+    digest = hashlib.sha256()
+
+    with path.open(
+        "rb"
+    ) as handle:
+        while True:
+            chunk = handle.read(
+                read_size
+            )
+
+            if not chunk:
+                break
+
+            digest.update(
+                chunk
+            )
+
+    return digest.hexdigest()
+
+
+def run(
+    command: list[str],
+    *,
+    cwd: Path | None = None,
+    env: dict[str, str] | None = None,
+    capture: bool = True,
+) -> subprocess.CompletedProcess[str]:
+    result = subprocess.run(
+        command,
+        cwd=(
+            str(cwd)
+            if cwd is not None
+            else None
+        ),
+        env=env,
+        text=True,
+        stdout=(
+            subprocess.PIPE
+            if capture
+            else None
+        ),
+        stderr=(
+            subprocess.PIPE
+            if capture
+            else None
+        ),
+        check=False,
+    )
+
+    if result.returncode != 0:
+        stdout = (
+            result.stdout.strip()
+            if result.stdout
+            else ""
+        )
+
+        stderr = (
+            result.stderr.strip()
+            if result.stderr
+            else ""
+        )
+
+        detail = (
+            stderr
+            or stdout
+            or (
+                "process exited "
+                f"{result.returncode}"
+            )
+        )
+
+        raise StreamDumpError(
+            f"command failed: "
+            f"{command[0]}: "
+            f"{detail}"
+        )
+
+    return result
+
+
+def require_executable(
+    name: str,
+) -> str:
+    executable = shutil.which(
+        name
+    )
+
+    if executable is None:
+        raise StreamDumpError(
+            "required executable "
+            f"not found: {name}"
+        )
+
+    return executable
+
+
+def load_env_file(
+    path: Path = default_env_path,
+) -> dict[str, str]:
+    if not path.is_file():
+        raise StreamDumpError(
+            f"environment file "
+            f"not found: {path}"
+        )
+
+    values: dict[
+        str,
+        str,
+    ] = {}
+
+    with path.open(
+        "r",
+        encoding="utf-8",
+        errors="strict",
+    ) as handle:
+        for raw_line in handle:
+            line = raw_line.strip()
+
+            if (
+                not line
+                or line.startswith(
+                    "#"
+                )
+            ):
+                continue
+
+            if line.startswith(
+                "export "
+            ):
+                line = line[
+                    len(
+                        "export "
+                    ):
+                ].lstrip()
+
+            key, separator, value = (
+                line.partition(
+                    "="
+                )
+            )
+
+            if not separator:
+                continue
+
+            key = key.strip()
+
+            if not key:
+                continue
+
+            value = value.strip()
+
+            if (
+                len(value) >= 2
+                and value[0]
+                == value[-1]
+                and value[0]
+                in {
+                    "'",
+                    '"',
+                }
+            ):
+                value = value[
+                    1:-1
+                ]
+
+            values[
+                key
+            ] = value
+
+    return values
+
+def now_iso() -> str:
+    return (
+        datetime.now(
+            timezone.utc
+        )
+        .isoformat(
+            timespec="microseconds"
+        )
+        .replace(
+            "+00:00",
+            "Z",
+        )
+    )
+
+def publication_environment(
+    env_path: Path = default_env_path,
+) -> dict[str, str]:
+    environment = dict(
+        os.environ
+    )
+
+    environment.update(
+        load_env_file(
+            env_path
+        )
+    )
+
+    required = (
+        "AWS_ACCESS_KEY_ID",
+        "AWS_SECRET_ACCESS_KEY",
+    )
+
+    missing = [
+        key
+        for key in required
+        if not environment.get(
+            key
+        )
+    ]
+
+    if missing:
+        raise StreamDumpError(
+            "missing S3 credential "
+            "environment variables in "
+            f"{env_path}: "
+            + ", ".join(
+                missing
+            )
+        )
+
+    return environment
+
+
+def output_path(
+    target: Path,
+) -> Path:
+    stamp = datetime.now(
+        timezone.utc
+    ).strftime(
+        "%Y%m%dT%H%M%S%fZ"
+    ).lower()
+
+    output_root = (
+        target
+        / "source"
+        / f"sdump-{stamp}"
+    )
+
+    output_root.mkdir(
+        parents=True,
+        exist_ok=False,
+    )
+
+    return (
+        output_root
+        / (
+            f"sdump_{target.name}_"
+            f"{stamp}.txt.gz"
+        )
+    )
+
+
+def write_text(
+    handle: Any,
+    value: str,
+    digest: Any | None = None,
+) -> int:
+    handle.write(
+        value
+    )
+
+    encoded = value.encode(
+        "utf-8"
+    )
+
+    if digest is not None:
+        digest.update(
+            encoded
+        )
+
+    return len(
+        encoded
+    )
+
+
+def write_json_line(
+    handle: Any,
+    value: dict[str, Any],
+    digest: Any | None = None,
+) -> int:
+    return write_text(
+        handle,
+        canonical_json(
+            value
+        )
+        + "\n",
+        digest,
+    )
+
+
+def datrix_relative_index(
+    current: dict[
+        str,
+        dict[str, Any],
+    ],
+    target: Path,
+) -> dict[
+    str,
+    dict[str, Any],
+]:
+    result: dict[
+        str,
+        dict[str, Any],
+    ] = {}
+
+    for (
+        source_path,
+        record,
+    ) in current.items():
+        source = Path(
+            source_path
+        )
+
+        if source.is_absolute():
+            try:
+                relative = (
+                    source
+                    .resolve(
+                        strict=False
+                    )
+                    .relative_to(
+                        target
+                    )
+                    .as_posix()
+                )
+
+            except ValueError:
+                continue
+
+        else:
+            if (
+                ".."
+                in source.parts
+            ):
+                continue
+
+            relative = (
+                source.as_posix()
+            )
+
+        payload = record.get(
+            "payload"
+        )
+
+        if not isinstance(
+            payload,
+            dict,
+        ):
+            continue
+
+        if payload.get(
+            "deleted",
+            False,
+        ):
+            continue
+
+        existing = result.get(
+            relative
+        )
+
+        if existing is not None:
+            existing_id = str(
+                existing.get(
+                    "id"
+                )
+                or ""
+            )
+
+            record_id = str(
+                record.get(
+                    "id"
+                )
+                or ""
+            )
+
+            if existing_id != record_id:
+                raise StreamDumpError(
+                    "multiple current Datrix "
+                    "records resolve to "
+                    f"{relative}"
+                )
+
+        result[
+            relative
+        ] = record
+
+    return result
+
+
+def discover_authoritative_source(
+    target: Path,
+    profile: Any,
+) -> tuple[
+    list[Any],
+    dict[str, Any],
+]:
+    (
+        candidates,
+        skipped,
+        failures,
+        symlinks,
+        stats,
+    ) = discover(
+        targets=normalized_targets(
+            [
+                str(
+                    target
+                )
+            ]
+        ),
+        profile=profile,
+        absolute_excluded_roots=(),
+        include_hidden=False,
+        include_secrets=False,
+        extra_patterns=(),
+        respect_gitignore=None,
+    )
+
+    if failures:
+        sample = [
+            {
+                "path":
+                    item.path,
+                "reason":
+                    item.reason,
+            }
+            for item
+            in failures[
+                :20
+            ]
+        ]
+
+        raise StreamDumpError(
+            "authoritative profile "
+            "discovery failed: "
+            + canonical_json(
+                sample
+            )
+        )
+
+    candidates = sorted(
+        candidates,
+        key=lambda candidate: (
+            candidate
+            .relative_path
+            .casefold(),
+            candidate.relative_path,
+        ),
+    )
+
+    metadata = {
+        "candidate_count":
+            len(
+                candidates
+            ),
+        "candidate_bytes":
+            sum(
+                candidate.size
+                for candidate
+                in candidates
+            ),
+        "skipped_count":
+            len(
+                skipped
+            ),
+        "symlink_count":
+            len(
+                symlinks
+            ),
+        "files_seen":
+            stats.files_seen,
+    }
+
+    return (
+        candidates,
+        metadata,
+    )
+
+
+def verify_candidate_against_datrix(
+    *,
+    candidate: Any,
+    datrix_index: dict[
+        str,
+        dict[str, Any],
+    ],
+) -> tuple[
+    dict[str, Any],
+    os.stat_result,
+    str,
+]:
+    relative = (
+        candidate.relative_path
+    )
+
+    record = datrix_index.get(
+        relative
+    )
+
+    if record is None:
+        raise StreamDumpError(
+            "profile-admitted source "
+            "missing from current source "
+            f"Datrix: {relative}"
+        )
+
+    payload = record.get(
+        "payload"
+    )
+
+    if not isinstance(
+        payload,
+        dict,
+    ):
+        raise StreamDumpError(
+            "invalid current source "
+            f"Datrix payload: {relative}"
+        )
+
+    path = (
+        candidate.absolute_path
+    )
+
+    try:
+        before = path.stat()
+
+    except OSError as error:
+        raise StreamDumpError(
+            "profile-admitted source "
+            "cannot be stat'ed: "
+            f"{relative}: {error}"
+        ) from error
+
+    if not stat.S_ISREG(
+        before.st_mode
+    ):
+        raise StreamDumpError(
+            "profile-admitted source "
+            "is no longer regular: "
+            f"{relative}"
+        )
+
+    actual_sha = sha256_file(
+        path
+    )
+
+    try:
+        after = path.stat()
+
+    except OSError as error:
+        raise StreamDumpError(
+            "profile-admitted source "
+            "changed during observation: "
+            f"{relative}: {error}"
+        ) from error
+
+    if (
+        before.st_dev
+        != after.st_dev
+        or before.st_ino
+        != after.st_ino
+        or before.st_size
+        != after.st_size
+        or before.st_mtime_ns
+        != after.st_mtime_ns
+    ):
+        raise StreamDumpError(
+            "profile-admitted source "
+            "changed during observation: "
+            f"{relative}"
+        )
+
+    expected_sha = str(
+        payload.get(
+            "sha256"
+        )
+        or ""
+    )
+
+    if not expected_sha:
+        raise StreamDumpError(
+            "current source Datrix "
+            "record has no sha256: "
+            f"{relative}"
+        )
+
+    if actual_sha != expected_sha:
+        raise StreamDumpError(
+            "profile-admitted source "
+            "differs from current source "
+            f"Datrix: {relative}"
+        )
+
+    return (
+        record,
+        before,
+        actual_sha,
+    )
+
+
+def write_file_record(
+    *,
+    handle: Any,
+    candidate: Any,
+    record: dict[str, Any],
+    file_stat: os.stat_result,
+    actual_sha: str,
+    artifact_digest: Any,
+) -> int:
+    payload = record[
+        "payload"
+    ]
+
+    relative = (
+        candidate.relative_path
+    )
+
+    metadata = {
+        "path":
+            relative,
+        "source_revision_id":
+            record.get(
+                "id"
+            ),
+        "sha256":
+            actual_sha,
+        "size":
+            file_stat.st_size,
+        "mode":
+            oct(
+                stat.S_IMODE(
+                    file_stat.st_mode
+                )
+            ),
+        "language":
+            language(
+                candidate.absolute_path
+            ),
+        "observed_at":
+            record.get(
+                "observed_at"
+            ),
+        "datrix_payload_sha256":
+            payload.get(
+                "sha256"
+            ),
+    }
+
+    rendered = 0
+
+    rendered += write_text(
+        handle,
+        "=== file ===\n",
+        artifact_digest,
+    )
+
+    rendered += write_json_line(
+        handle,
+        metadata,
+        artifact_digest,
+    )
+
+    rendered += write_text(
+        handle,
+        "=== content ===\n",
+        artifact_digest,
+    )
+
+    with candidate.absolute_path.open(
+        "r",
+        encoding="utf-8",
+        errors="replace",
+        newline=None,
+    ) as source:
+        while True:
+            chunk = source.read(
+                chunk_size
+            )
+
+            if not chunk:
+                break
+
+            rendered += write_text(
+                handle,
+                chunk,
+                artifact_digest,
+            )
+
+    rendered += write_text(
+        handle,
+        (
+            "\n=== /content ===\n"
+            "=== /file ===\n\n"
+        ),
+        artifact_digest,
+    )
+
+    return rendered
+
+
+def stream_dump(
+    target_raw: str,
+    profile_name: str = default_profile,
+) -> tuple[
+    Path,
+    list[Any],
+    dict[str, Any],
+]:
+    target = (
+        Path(
+            target_raw
+        )
+        .expanduser()
+        .resolve(
+            strict=True
+        )
+    )
+
+    if not target.is_dir():
+        raise StreamDumpError(
+            "sdump target must be "
+            "a directory"
+        )
+
+    profile = load_profile(
+        profile_name
+    )
+
+    convergence_attempts = 3
+    reconciliation: dict[str, Any] = {}
+    last_error: StreamDumpError | None = None
+
+    for convergence_attempt in range(
+        1,
+        convergence_attempts + 1,
+    ):
+        reconciliation = reconcile_streaming()
+
+        source_datrix = datrix()
+        health = source_datrix.health()
+
+        if health.get(
+            "status"
+        ) != "ok":
+            raise StreamDumpError(
+                "straub source Datrix "
+                "health is not ok"
+            )
+
+        (
+            candidates,
+            discovery,
+        ) = discover_authoritative_source(
+            target,
+            profile,
+        )
+
+        current = current_from_datrix(
+            source_datrix
+        )
+
+        datrix_index = (
+            datrix_relative_index(
+                current,
+                target,
+            )
+        )
+
+        candidate_paths = {
+            candidate.relative_path
+            for candidate
+            in candidates
+        }
+
+        verified: list[
+            tuple[
+                Any,
+                dict[str, Any],
+                os.stat_result,
+                str,
+            ]
+        ] = []
+
+        try:
+            for candidate in candidates:
+                (
+                    record,
+                    file_stat,
+                    actual_sha,
+                ) = (
+                    verify_candidate_against_datrix(
+                        candidate=candidate,
+                        datrix_index=(
+                            datrix_index
+                        ),
+                    )
+                )
+
+                verified.append(
+                    (
+                        candidate,
+                        record,
+                        file_stat,
+                        actual_sha,
+                    )
+                )
+
+            verified_paths = {
+                candidate.relative_path
+                for (
+                    candidate,
+                    _,
+                    _,
+                    _,
+                )
+                in verified
+            }
+
+            if verified_paths != candidate_paths:
+                raise StreamDumpError(
+                    "profile admission and "
+                    "verified source sets differ"
+                )
+
+            last_error = None
+            break
+
+        except StreamDumpError as error:
+            last_error = error
+
+            if convergence_attempt >= convergence_attempts:
+                raise StreamDumpError(
+                    "source failed to converge after "
+                    f"{convergence_attempts} attempts: "
+                    f"{error}"
+                ) from error
+
+    if last_error is not None:
+        raise last_error
+
+    output = output_path(
+        target
+    )
+
+    artifact_digest = (
+        hashlib.sha256()
+    )
+
+    included_files = 0
+
+    included_source_bytes = 0
+
+    rendered_bytes = 0
+
+    try:
+        with gzip.open(
+            output,
+            mode="wt",
+            encoding="utf-8",
+            newline="\n",
+            compresslevel=gzip_level,
+        ) as handle:
+            write_text(
+                handle,
+                "=== sdump manifest ===\n",
+                artifact_digest,
+            )
+
+            write_json_line(
+                handle,
+                {
+                    "schema":
+                        schema,
+                    "generated_at":
+                        now_iso(),
+                    "target":
+                        str(
+                            target
+                        ),
+                    "profile":
+                        profile.id,
+                    "semantic_source":
+                        "straub-source-datrix",
+                    "semantic_source_is_sqlite":
+                        False,
+                    "sqlite_consulted":
+                        False,
+                    "source_admission":
+                        (
+                            "authoritative-"
+                            "profile-discover"
+                        ),
+                    "source_admission_module":
+                        (
+                            "sdump_enterprise."
+                            "scan.discover"
+                        ),
+                    "source_datrix_health":
+                        "ok",
+                    "source_datrix_reconciliation":
+                        reconciliation,
+                    "source_convergence_attempt":
+                        convergence_attempt,
+                    "source_convergence_limit":
+                        convergence_attempts,
+                    "source_datrix_current_revisions":
+                        len(
+                            current
+                        ),
+                    "profile_admitted_files":
+                        len(
+                            candidates
+                        ),
+                    "profile_admitted_bytes":
+                        discovery[
+                            "candidate_bytes"
+                        ],
+                    "strict":
+                        True,
+                    "bounded_file_streaming":
+                        True,
+                    "gzip":
+                        True,
+                    "gzip_level":
+                        gzip_level,
+                    "filesystem_presence_establishes_authority":
+                        False,
+                    "authority_effect":
+                        "none",
+                },
+                artifact_digest,
+            )
+
+            write_text(
+                handle,
+                (
+                    "=== /sdump manifest ==="
+                    "\n\n"
+                ),
+                artifact_digest,
+            )
+
+            for (
+                candidate,
+                record,
+                file_stat,
+                actual_sha,
+            ) in verified:
+                rendered_bytes += (
+                    write_file_record(
+                        handle=handle,
+                        candidate=candidate,
+                        record=record,
+                        file_stat=file_stat,
+                        actual_sha=actual_sha,
+                        artifact_digest=(
+                            artifact_digest
+                        ),
+                    )
+                )
+
+                included_files += 1
+
+                included_source_bytes += (
+                    file_stat.st_size
+                )
+
+            complete = (
+                included_files
+                == len(
+                    candidates
+                )
+                and included_source_bytes
+                == discovery[
+                    "candidate_bytes"
+                ]
+            )
+
+            summary = {
+                "schema":
+                    schema,
+                "profile_admitted_files":
+                    len(
+                        candidates
+                    ),
+                "profile_admitted_bytes":
+                    discovery[
+                        "candidate_bytes"
+                    ],
+                "verified_datrix_files":
+                    len(
+                        verified
+                    ),
+                "included_files":
+                    included_files,
+                "included_source_bytes":
+                    included_source_bytes,
+                "rendered_bytes":
+                    rendered_bytes,
+                "required_not_written":
+                    (
+                        len(
+                            candidates
+                        )
+                        - included_files
+                    ),
+                "profile_equals_verified":
+                    (
+                        candidate_paths
+                        == verified_paths
+                    ),
+                "profile_equals_serialized":
+                    (
+                        included_files
+                        == len(
+                            candidate_paths
+                        )
+                    ),
+                "source_completeness":
+                    (
+                        "complete"
+                        if complete
+                        else "failed"
+                    ),
+                "content_stream_sha256":
+                    (
+                        artifact_digest
+                        .hexdigest()
+                    ),
+                "authority_effect":
+                    "none",
+            }
+
+            write_text(
+                handle,
+                "=== sdump summary ===\n",
+            )
+
+            write_json_line(
+                handle,
+                summary,
+            )
+
+            write_text(
+                handle,
+                (
+                    "=== /sdump summary ==="
+                    "\n"
+                ),
+            )
+
+    except Exception:
+        raise
+
+    if (
+        included_files
+        != len(
+            candidates
+        )
+        or included_source_bytes
+        != discovery[
+            "candidate_bytes"
+        ]
+    ):
+        raise StreamDumpError(
+            "strict source completeness "
+            "failed; partial artifact "
+            f"retained at {output}"
+        )
+
+    return (
+        output,
+        candidates,
+        {
+            "target":
+                target,
+            "profile":
+                profile,
+            "discovery":
+                discovery,
+            "source_datrix_health":
+                health,
+        },
+    )
+
+
+def s3_object_key(
+    artifact: Path,
+    environment: dict[str, str],
+) -> str:
+    prefix = (
+        environment.get(
+            "SDUMP_S3_PREFIX",
+            "sdump",
+        )
+        .strip()
+        .strip(
+            "/"
+        )
+    )
+
+    if prefix:
+        return (
+            f"{prefix}/"
+            f"{artifact.name}"
+        )
+
+    return artifact.name
+
+
+def upload_to_s3(
+    artifact: Path,
+    environment: dict[str, str],
+) -> dict[str, str]:
+    aws = require_executable(
+        "aws"
+    )
+
+    key = s3_object_key(
+        artifact,
+        environment,
+    )
+
+    destination = (
+        f"s3://{s3_bucket}/"
+        f"{key}"
+    )
+
+    run(
+        [
+            aws,
+            "s3",
+            "cp",
+            str(
+                artifact
+            ),
+            destination,
+            "--only-show-errors",
+        ],
+        env=environment,
+    )
+
+    verification = run(
+        [
+            aws,
+            "s3api",
+            "head-object",
+            "--bucket",
+            s3_bucket,
+            "--key",
+            key,
+            "--query",
+            "ContentLength",
+            "--output",
+            "text",
+        ],
+        env=environment,
+    )
+
+    remote_size_text = (
+        verification.stdout
+        .strip()
+    )
+
+    try:
+        remote_size = int(
+            remote_size_text
+        )
+
+    except ValueError as error:
+        raise StreamDumpError(
+            "S3 upload verification "
+            "returned invalid size"
+        ) from error
+
+    local_size = (
+        artifact.stat().st_size
+    )
+
+    if remote_size != local_size:
+        raise StreamDumpError(
+            "S3 upload verification "
+            "size mismatch"
+        )
+
+    return {
+        "bucket":
+            s3_bucket,
+        "key":
+            key,
+        "uri":
+            destination,
+    }
+
+
+def git_identity(
+    git: str,
+) -> tuple[str, str]:
+    name = run(
+        [
+            git,
+            "config",
+            "--global",
+            "--get",
+            "user.name",
+        ]
+    ).stdout.strip()
+
+    email = run(
+        [
+            git,
+            "config",
+            "--global",
+            "--get",
+            "user.email",
+        ]
+    ).stdout.strip()
+
+    if not name:
+        raise StreamDumpError(
+            "global git user.name "
+            "is not configured"
+        )
+
+    if not email:
+        raise StreamDumpError(
+            "global git user.email "
+            "is not configured"
+        )
+
+    return (
+        name,
+        email,
+    )
+
+
+def clean_checkout_contents(
+    checkout: Path,
+) -> None:
+    for child in checkout.iterdir():
+        if child.name == ".git":
+            continue
+
+        if child.is_dir():
+            shutil.rmtree(
+                child
+            )
+
+        else:
+            child.unlink()
+
+
+def copy_authoritative_source(
+    *,
+    checkout: Path,
+    candidates: Iterable[Any],
+) -> None:
+    for candidate in candidates:
+        destination = (
+            checkout
+            / candidate.relative_path
+        )
+
+        destination.parent.mkdir(
+            parents=True,
+            exist_ok=True,
+        )
+
+        shutil.copy2(
+            candidate.absolute_path,
+            destination,
+        )
+
+
+def push_source_to_github(
+    *,
+    candidates: list[Any],
+    environment: dict[str, str],
+) -> dict[str, Any]:
+    git = require_executable(
+        "git"
+    )
+
+    git_identity(
+        git
+    )
+
+    branch = (
+        environment.get(
+            "SDUMP_GITHUB_BRANCH",
+            "main",
+        )
+        .strip()
+        or "main"
+    )
+
+    with tempfile.TemporaryDirectory(
+        prefix="savant-sdump-git-"
+    ) as temporary:
+        checkout = Path(
+            temporary
+        ) / "repository"
+
+        run(
+            [
+                git,
+                "clone",
+                "--branch",
+                branch,
+                "--single-branch",
+                github_remote,
+                str(
+                    checkout
+                ),
+            ],
+            env=environment,
+        )
+
+        clean_checkout_contents(
+            checkout
+        )
+
+        copy_authoritative_source(
+            checkout=checkout,
+            candidates=candidates,
+        )
+
+        run(
+            [
+                git,
+                "add",
+                "--all",
+            ],
+            cwd=checkout,
+            env=environment,
+        )
+
+        status = run(
+            [
+                git,
+                "status",
+                "--porcelain",
+            ],
+            cwd=checkout,
+            env=environment,
+        ).stdout
+
+        changed = bool(
+            status.strip()
+        )
+
+        if changed:
+            commit_message = (
+                "sdump: synchronize "
+                "authoritative source"
+            )
+
+            run(
+                [
+                    git,
+                    "commit",
+                    "-m",
+                    commit_message,
+                ],
+                cwd=checkout,
+                env=environment,
+            )
+
+        run(
+            [
+                git,
+                "push",
+                "origin",
+                branch,
+            ],
+            cwd=checkout,
+            env=environment,
+        )
+
+        local_head = run(
+            [
+                git,
+                "rev-parse",
+                "HEAD",
+            ],
+            cwd=checkout,
+            env=environment,
+        ).stdout.strip()
+
+        remote_head = run(
+            [
+                git,
+                "ls-remote",
+                "--heads",
+                "origin",
+                (
+                    "refs/heads/"
+                    + branch
+                ),
+            ],
+            cwd=checkout,
+            env=environment,
+        ).stdout.strip()
+
+        if not remote_head:
+            raise StreamDumpError(
+                "GitHub branch verification "
+                "returned no remote head"
+            )
+
+        remote_commit = (
+            remote_head.split()[0]
+        )
+
+        if remote_commit != local_head:
+            raise StreamDumpError(
+                "GitHub push verification "
+                "head mismatch"
+            )
+
+        return {
+            "repository":
+                (
+                    f"{github_owner}/"
+                    f"{github_repository}"
+                ),
+            "branch":
+                branch,
+            "commit":
+                local_head,
+            "changed":
+                changed,
+            "verified":
+                True,
+        }
+
+
+def delete_local_artifact(
+    artifact: Path,
+) -> None:
+    artifact.unlink()
+
+    parent = artifact.parent
+
+    try:
+        parent.rmdir()
+
+    except OSError:
+        pass
+
+    if artifact.exists():
+        raise StreamDumpError(
+            "local sdump artifact "
+            "could not be deleted"
+        )
+
+
+def publish(
+    *,
+    artifact: Path,
+    candidates: list[Any],
+    environment: dict[str, str],
+) -> dict[str, Any]:
+    s3_result = upload_to_s3(
+        artifact,
+        environment,
+    )
+
+    github_result = (
+        push_source_to_github(
+            candidates=candidates,
+            environment=environment,
+        )
+    )
+
+    delete_local_artifact(
+        artifact
+    )
+
+    return {
+        "schema":
+            "savant.sdump.publish.v1",
+        "s3":
+            s3_result,
+        "github":
+            github_result,
+        "local_artifact_deleted":
+            True,
+        "authority_effect":
+            "none",
+    }
+
+
+def main(
+    argv: list[str] | None = None,
+) -> int:
+    arguments = list(
+        sys.argv[1:]
+        if argv is None
+        else argv
+    )
+
+    if len(
+        arguments
+    ) != 1:
+        raise StreamDumpError(
+            "usage: sdump TARGET"
+        )
+
+    target_raw = (
+        arguments[0]
+    )
+
+    environment = (
+        publication_environment()
+    )
+
+    (
+        artifact,
+        candidates,
+        metadata,
+    ) = stream_dump(
+        target_raw
+    )
+
+    artifact_sha256 = (
+        sha256_file(
+            artifact
+        )
+    )
+
+    artifact_size = (
+        artifact.stat().st_size
+    )
+
+    try:
+        publication = publish(
+            artifact=artifact,
+            candidates=candidates,
+            environment=environment,
+        )
+
+    except Exception as error:
+        raise StreamDumpError(
+            "publication failed; "
+            "local sdump retained at "
+            f"{artifact}: {error}"
+        ) from error
+
+    result = {
+        "schema":
+            "savant.sdump.command.v3",
+        "status":
+            "ok",
+        "target":
+            str(
+                metadata[
+                    "target"
+                ]
+            ),
+        "profile":
+            metadata[
+                "profile"
+            ].id,
+        "source_files":
+            len(
+                candidates
+            ),
+        "source_bytes":
+            metadata[
+                "discovery"
+            ][
+                "candidate_bytes"
+            ],
+        "artifact_sha256":
+            artifact_sha256,
+        "artifact_compressed_bytes":
+            artifact_size,
+        "s3":
+            publication[
+                "s3"
+            ],
+        "github":
+            publication[
+                "github"
+            ],
+        "local_artifact_deleted":
+            publication[
+                "local_artifact_deleted"
+            ],
+        "authority_effect":
+            "none",
+    }
+
+    print(
+        json.dumps(
+            result,
+            indent=2,
+            sort_keys=True,
+        )
+    )
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

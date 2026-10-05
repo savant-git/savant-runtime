@@ -1,0 +1,121 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/observatory",
+  "deterministic_hash": "037dd09b6340e08cc5b985a8abdf8c9cb8c673e7724899445cf46a93f207f19a",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/observatory",
+  "kind": "directory",
+  "label": "observatory",
+  "namespace": "preview.kindred",
+  "path": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/observatory",
+  "placement": {
+    "domain": "filesystem",
+    "node": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/observatory",
+    "parent": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.07ec9be948c19c174380",
+    "rank": 200,
+    "slot": "30_ontology",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.07ec9be948c19c174380",
+    "lineage.composition.2a0fcd7b7d3ae6fe8fd2",
+    "lineage.composition.777bd8b88fb59b1eaeb4",
+    "lineage.composition.b86b6e35c659d0213936",
+    "lineage.composition.d3c20b03b887a3bcd490",
+    "lineage.composition.dd3c712dbaf57db2c3e7"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/observatory",
+    "children": [
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/observatory/events",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/observatory/metrics",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/observatory/logs",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/observatory/traces",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/observatory/diagnostics"
+    ],
+    "daughters": [
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/observatory/events",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/observatory/metrics",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/observatory/logs",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/observatory/traces",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/observatory/diagnostics"
+    ],
+    "dependencies": [],
+    "fathers": [],
+    "id": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/observatory",
+    "kind": "directory",
+    "label": "observatory",
+    "legacy_id": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/observatory",
+    "lineage": [
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus"
+    ],
+    "metadata": {
+      "canonical_id": "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/observatory",
+      "child_modes": {
+        "preserving": [
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/observatory/events",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/observatory/metrics",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/observatory/logs",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/observatory/traces",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/observatory/diagnostics"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/observatory/events",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/observatory/metrics",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/observatory/logs",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/observatory/traces",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/observatory/diagnostics"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus"
+        ]
+      },
+      "projected_id": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/observatory",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus"
+    ],
+    "path": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/observatory",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/observatory",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.07ec9be948c19c174380",
+      "lineage.composition.2a0fcd7b7d3ae6fe8fd2",
+      "lineage.composition.777bd8b88fb59b1eaeb4",
+      "lineage.composition.b86b6e35c659d0213936",
+      "lineage.composition.d3c20b03b887a3bcd490",
+      "lineage.composition.dd3c712dbaf57db2c3e7"
+    ],
+    "size": 12,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

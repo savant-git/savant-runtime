@@ -1,0 +1,107 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import subprocess
+import sys
+from pathlib import Path
+
+
+LEXICON_ROOT = Path(
+    __file__
+).resolve().parents[1]
+
+ENGINE = (
+    LEXICON_ROOT
+    / "runtime"
+    / "runtime_checkpoint.py"
+)
+
+COMMANDS = {
+    "create",
+    "verify",
+    "verify-all",
+    "restore",
+    "diff",
+    "show",
+    "list",
+    "gc",
+}
+
+
+def usage() -> None:
+    print(
+        """
+runtimecheckpointctl create
+runtimecheckpointctl create --label TEXT
+runtimecheckpointctl create --target PATH
+runtimecheckpointctl create --target PATH --target PATH
+
+runtimecheckpointctl verify
+runtimecheckpointctl verify CHECKPOINT_ID
+runtimecheckpointctl verify-all
+
+runtimecheckpointctl restore CHECKPOINT_ID --destination PATH
+runtimecheckpointctl restore CHECKPOINT_ID --destination PATH --overwrite
+
+runtimecheckpointctl diff LEFT_CHECKPOINT RIGHT_CHECKPOINT
+runtimecheckpointctl show
+runtimecheckpointctl show CHECKPOINT_ID
+runtimecheckpointctl list
+
+runtimecheckpointctl gc
+runtimecheckpointctl gc --apply
+"""
+    )
+
+
+def main() -> int:
+    if len(
+        sys.argv
+    ) < 2:
+        usage()
+        return 1
+
+    command = sys.argv[
+        1
+    ]
+
+    if command in {
+        "help",
+        "--help",
+        "-h",
+    }:
+        usage()
+        return 0
+
+    if command not in COMMANDS:
+        print(
+            f"Unknown command: {command}",
+            file=sys.stderr,
+        )
+
+        usage()
+
+        return 1
+
+    return subprocess.run(
+        [
+            sys.executable,
+            str(
+                ENGINE
+            ),
+            *sys.argv[
+                1:
+            ],
+        ],
+        cwd=str(
+            ENGINE.parent
+        ),
+        check=False,
+    ).returncode
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

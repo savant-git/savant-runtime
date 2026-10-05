@@ -1,0 +1,320 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "ae2d88449b40eda6dd2625918b083d34b61320bf29613485f7bb4181460c9187",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "namespace": "preview.kindred",
+  "node": "canon-system/projections/md",
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationships": [
+    {
+      "child_profile": "daughter",
+      "domain": "filesystem",
+      "id": "lineage.composition.1d8aebc3cc8a82edc64f",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "canon-system/projections/md",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:canon-system/projections/md",
+        "canonical_target": "fs:canon-system/projections/md/edifice",
+        "continuation": "preserving",
+        "id": "lineage.composition.1d8aebc3cc8a82edc64f",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/canon-system/projections/md/edifice"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "canon-system/projections/md",
+        "status": "active",
+        "symbolic_child_alias": "daughter",
+        "symbolic_parent_alias": "parent",
+        "target": "canon-system/projections/md/edifice",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "canon-system/projections/md/edifice"
+    },
+    {
+      "child_profile": "daughter",
+      "domain": "filesystem",
+      "id": "lineage.composition.85b5ee71629d38ce9403",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "canon-system/projections/md",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:canon-system/projections/md",
+        "canonical_target": "fs:canon-system/projections/md/policy",
+        "continuation": "preserving",
+        "id": "lineage.composition.85b5ee71629d38ce9403",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/canon-system/projections/md/policy"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "canon-system/projections/md",
+        "status": "active",
+        "symbolic_child_alias": "daughter",
+        "symbolic_parent_alias": "parent",
+        "target": "canon-system/projections/md/policy",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "canon-system/projections/md/policy"
+    },
+    {
+      "child_profile": "daughter",
+      "domain": "filesystem",
+      "id": "lineage.composition.b44161e70378cb033a8f",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "canon-system/projections/md",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:canon-system/projections/md",
+        "canonical_target": "fs:canon-system/projections/md/foundation",
+        "continuation": "preserving",
+        "id": "lineage.composition.b44161e70378cb033a8f",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/canon-system/projections/md/foundation"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "canon-system/projections/md",
+        "status": "active",
+        "symbolic_child_alias": "daughter",
+        "symbolic_parent_alias": "parent",
+        "target": "canon-system/projections/md/foundation",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "canon-system/projections/md/foundation"
+    },
+    {
+      "child_profile": "daughter",
+      "domain": "filesystem",
+      "id": "lineage.composition.ba375f9e73b28a9c1090",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "canon-system/projections/md",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:canon-system/projections/md",
+        "canonical_target": "fs:canon-system/projections/md/exile",
+        "continuation": "preserving",
+        "id": "lineage.composition.ba375f9e73b28a9c1090",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/canon-system/projections/md/exile"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "canon-system/projections/md",
+        "status": "active",
+        "symbolic_child_alias": "daughter",
+        "symbolic_parent_alias": "parent",
+        "target": "canon-system/projections/md/exile",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "canon-system/projections/md/exile"
+    },
+    {
+      "child_profile": "daughter",
+      "domain": "filesystem",
+      "id": "lineage.composition.bb25d7ff15d6f1b1b115",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "canon-system/projections",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:canon-system/projections",
+        "canonical_target": "fs:canon-system/projections/md",
+        "continuation": "preserving",
+        "id": "lineage.composition.bb25d7ff15d6f1b1b115",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/canon-system/projections/md"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "canon-system/projections",
+        "status": "active",
+        "symbolic_child_alias": "daughter",
+        "symbolic_parent_alias": "parent",
+        "target": "canon-system/projections/md",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "canon-system/projections/md"
+    }
+  ],
+  "schema": "savant.kindred.preview.relationship_projection.v2"
+}

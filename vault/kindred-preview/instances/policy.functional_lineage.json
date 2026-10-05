@@ -1,0 +1,69 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "policy.functional_lineage",
+  "deterministic_hash": "7e96134497b07dd21e29a1584a396bbac8c85a34b09d6f70ebe9f13608ec396c",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "policy.functional_lineage",
+  "kind": "policy",
+  "label": "policy.functional_lineage",
+  "namespace": "preview.kindred",
+  "path": null,
+  "placement": {
+    "domain": "unclassified",
+    "node": "policy.functional_lineage",
+    "parent": "savant-runtime",
+    "placement_basis": "orphan_attachment",
+    "primary_relationship_id": null,
+    "rank": 50,
+    "slot": "20_authority",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "policy.functional_lineage",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "policy.functional_lineage",
+    "kind": "policy",
+    "label": "policy.functional_lineage",
+    "legacy_id": null,
+    "lineage": [],
+    "metadata": {
+      "authority_source_path": "/root/savant-runtime/authority_graph/policies/functional_lineage.json",
+      "canonical_id": "policy.functional_lineage",
+      "child_modes": {},
+      "child_roles": {},
+      "lineage_placeholder": false,
+      "parent_roles": {},
+      "projected_id": "policy.functional_lineage"
+    },
+    "mothers": [],
+    "parents": [],
+    "path": null,
+    "provenance": {
+      "adapter": "authority_document",
+      "source_files": [
+        "/root/savant-runtime/authority_graph/policies/functional_lineage.json"
+      ]
+    },
+    "recovery_routes": [],
+    "relationships": [],
+    "size": 7,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

@@ -1,0 +1,38 @@
+{
+  "authoritative": false,
+  "authority_tier": "provisional",
+  "canonical_id": "preview.synthetic.provisional-adapter",
+  "deterministic_hash": "7847ffdd0d854f331a333a2d92eb7bf34527b311d28bdc159d8581f193a0954f",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "preview.synthetic.provisional-adapter",
+  "kind": "adapter",
+  "label": "Provisional Adapter Example",
+  "namespace": "preview.kindred",
+  "path": null,
+  "placement": {
+    "domain": "preview",
+    "node": "preview.synthetic.provisional-adapter",
+    "parent": "preview.synthetic.kindred-demo",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "preview.synthetic.lineage.provisional",
+    "rank": 10,
+    "slot": "40_runtime",
+    "state": "provisional",
+    "synthetic": true
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "reason": "isolated synthetic state demonstration",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "preview.synthetic.lineage.provisional"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "module",
+  "source_record": {},
+  "state": "provisional",
+  "synthetic": true
+}

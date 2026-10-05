@@ -1,0 +1,76 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "6dc5a4eb8b9a4f9ae6a3641759ea14c26620070699454dd5efb25b3fd90f0154",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "namespace": "preview.kindred",
+  "node": "runtime/palaver/health/health_snapshot.py",
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationships": [
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.56795908ba3f361873f5",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "runtime/palaver/health",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:runtime/palaver/health",
+        "canonical_target": "fs:runtime/palaver/health/health_snapshot.py",
+        "continuation": "projecting",
+        "id": "lineage.composition.56795908ba3f361873f5",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/runtime/palaver/health/health_snapshot.py"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "runtime/palaver/health",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "runtime/palaver/health/health_snapshot.py",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "runtime/palaver/health/health_snapshot.py"
+    }
+  ],
+  "schema": "savant.kindred.preview.relationship_projection.v2"
+}

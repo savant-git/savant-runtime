@@ -1,0 +1,103 @@
+{
+  "authoritative": false,
+  "authority_tier": "delegated",
+  "canonical_id": "fs:tools/foundation",
+  "deterministic_hash": "86a72a905a14372254b9481336cfa82d08eaf2c3527de53babb48f7dbdfff427",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "tools/foundation",
+  "kind": "directory",
+  "label": "foundation",
+  "namespace": "preview.kindred",
+  "path": "tools/foundation",
+  "placement": {
+    "domain": "filesystem",
+    "node": "tools/foundation",
+    "parent": "tools",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.7bc0970fac97e354cccd",
+    "rank": 20,
+    "slot": "60_tools",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.5193884ce169384c429d",
+    "lineage.composition.7bc0970fac97e354cccd",
+    "lineage.composition.af965a65643a881b5e55"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": false,
+    "canonical_id": "fs:tools/foundation",
+    "children": [
+      "tools/foundation/project_foundation_status.py",
+      "tools/foundation/strict_repair_gate.py"
+    ],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "tools/foundation",
+    "kind": "directory",
+    "label": "foundation",
+    "legacy_id": "tools/foundation",
+    "lineage": [
+      "tools"
+    ],
+    "metadata": {
+      "canonical_id": "fs:tools/foundation",
+      "child_modes": {
+        "projecting": [
+          "fs:tools/foundation/project_foundation_status.py",
+          "fs:tools/foundation/strict_repair_gate.py"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:tools/foundation/project_foundation_status.py",
+          "fs:tools/foundation/strict_repair_gate.py"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:tools"
+        ]
+      },
+      "projected_id": "tools/foundation",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "tools"
+    ],
+    "path": "tools/foundation",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "tools/foundation",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.5193884ce169384c429d",
+      "lineage.composition.7bc0970fac97e354cccd",
+      "lineage.composition.af965a65643a881b5e55"
+    ],
+    "size": 12,
+    "sons": [
+      "tools/foundation/project_foundation_status.py",
+      "tools/foundation/strict_repair_gate.py"
+    ]
+  },
+  "state": "active",
+  "synthetic": false
+}

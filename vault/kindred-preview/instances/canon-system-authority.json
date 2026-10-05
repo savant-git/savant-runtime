@@ -1,0 +1,115 @@
+{
+  "authoritative": false,
+  "authority_tier": "delegated",
+  "canonical_id": "fs:canon-system/authority",
+  "deterministic_hash": "a270db2f82dbc48b1189fbe02bad83e4aaad83768150747b478ed64db84b2391",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "canon-system/authority",
+  "kind": "directory",
+  "label": "authority",
+  "namespace": "preview.kindred",
+  "path": "canon-system/authority",
+  "placement": {
+    "domain": "filesystem",
+    "node": "canon-system/authority",
+    "parent": "canon-system",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.8c3fe1ca7a40a95afc1f",
+    "rank": 10,
+    "slot": "20_authority",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.7037b3ecea574b322b5d",
+    "lineage.composition.8c3fe1ca7a40a95afc1f",
+    "lineage.composition.9b7f5cb8f1bdcbf37cf2",
+    "lineage.composition.9bd773b2a3e9dc891c39",
+    "lineage.composition.e852847468618d450ac7"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": false,
+    "canonical_id": "fs:canon-system/authority",
+    "children": [
+      "canon-system/authority/policies",
+      "canon-system/authority/edifices",
+      "canon-system/authority/foundation",
+      "canon-system/authority/exiles"
+    ],
+    "daughters": [
+      "canon-system/authority/policies",
+      "canon-system/authority/edifices",
+      "canon-system/authority/foundation",
+      "canon-system/authority/exiles"
+    ],
+    "dependencies": [],
+    "fathers": [],
+    "id": "canon-system/authority",
+    "kind": "directory",
+    "label": "authority",
+    "legacy_id": "canon-system/authority",
+    "lineage": [
+      "canon-system"
+    ],
+    "metadata": {
+      "canonical_id": "fs:canon-system/authority",
+      "child_modes": {
+        "preserving": [
+          "fs:canon-system/authority/policies",
+          "fs:canon-system/authority/edifices",
+          "fs:canon-system/authority/foundation",
+          "fs:canon-system/authority/exiles"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:canon-system/authority/policies",
+          "fs:canon-system/authority/edifices",
+          "fs:canon-system/authority/foundation",
+          "fs:canon-system/authority/exiles"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:canon-system"
+        ]
+      },
+      "projected_id": "canon-system/authority",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "canon-system"
+    ],
+    "path": "canon-system/authority",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "canon-system/authority",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.7037b3ecea574b322b5d",
+      "lineage.composition.8c3fe1ca7a40a95afc1f",
+      "lineage.composition.9b7f5cb8f1bdcbf37cf2",
+      "lineage.composition.9bd773b2a3e9dc891c39",
+      "lineage.composition.e852847468618d450ac7"
+    ],
+    "size": 12,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

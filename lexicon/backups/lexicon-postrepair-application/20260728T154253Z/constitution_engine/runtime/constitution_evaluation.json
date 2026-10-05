@@ -1,0 +1,2489 @@
+{
+  "failed_subject_count": 0,
+  "passed": true,
+  "subject_count": 37,
+  "subjects": {
+    "constitution:auditability": {
+      "evaluations": [
+        {
+          "applies": true,
+          "checks": [
+            {
+              "actual": "constitution:auditability",
+              "expected": "constitution:auditability",
+              "operator": "equals",
+              "passed": true,
+              "path": "id",
+              "position": 0
+            },
+            {
+              "actual": "Optimize for auditability.",
+              "expected": "Optimize for auditability.",
+              "operator": "equals",
+              "passed": true,
+              "path": "canonical",
+              "position": 1
+            },
+            {
+              "actual": "active",
+              "expected": "active",
+              "operator": "equals",
+              "passed": true,
+              "path": "status",
+              "position": 2
+            },
+            {
+              "actual": "constitution",
+              "expected": "constitution",
+              "operator": "equals",
+              "passed": true,
+              "path": "scope",
+              "position": 3
+            },
+            {
+              "actual": "user",
+              "expected": "user",
+              "operator": "equals",
+              "passed": true,
+              "path": "provenance.authority",
+              "position": 4
+            },
+            {
+              "actual": {
+                "parents": [],
+                "superseded_by": [],
+                "supersedes": []
+              },
+              "expected": null,
+              "operator": "exists",
+              "passed": true,
+              "path": "lineage",
+              "position": 5
+            },
+            {
+              "actual": [
+                "constitution:lineage-exposed",
+                "constitution:provenance-exposed"
+              ],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "dependencies",
+              "position": 6
+            },
+            {
+              "actual": [],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "relationships",
+              "position": 7
+            }
+          ],
+          "passed": true,
+          "rule": "constitution:auditability",
+          "severity": "error",
+          "subject": "constitution:auditability",
+          "subject_type": "constitution",
+          "violations": []
+        }
+      ],
+      "passed": true,
+      "rule_count": 1,
+      "subject": "constitution:auditability",
+      "violation_count": 0
+    },
+    "constitution:authoritative-primitives-only": {
+      "evaluations": [
+        {
+          "applies": true,
+          "checks": [
+            {
+              "actual": "constitution:authoritative-primitives-only",
+              "expected": "constitution:authoritative-primitives-only",
+              "operator": "equals",
+              "passed": true,
+              "path": "id",
+              "position": 0
+            },
+            {
+              "actual": "Store only authoritative primitives.",
+              "expected": "Store only authoritative primitives.",
+              "operator": "equals",
+              "passed": true,
+              "path": "canonical",
+              "position": 1
+            },
+            {
+              "actual": "active",
+              "expected": "active",
+              "operator": "equals",
+              "passed": true,
+              "path": "status",
+              "position": 2
+            },
+            {
+              "actual": "constitution",
+              "expected": "constitution",
+              "operator": "equals",
+              "passed": true,
+              "path": "scope",
+              "position": 3
+            },
+            {
+              "actual": "user",
+              "expected": "user",
+              "operator": "equals",
+              "passed": true,
+              "path": "provenance.authority",
+              "position": 4
+            },
+            {
+              "actual": {
+                "parents": [],
+                "superseded_by": [],
+                "supersedes": []
+              },
+              "expected": null,
+              "operator": "exists",
+              "passed": true,
+              "path": "lineage",
+              "position": 5
+            },
+            {
+              "actual": [
+                "constitution:authority-before-inference",
+                "constitution:projection-before-storage"
+              ],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "dependencies",
+              "position": 6
+            },
+            {
+              "actual": [],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "relationships",
+              "position": 7
+            }
+          ],
+          "passed": true,
+          "rule": "constitution:authoritative-primitives-only",
+          "severity": "error",
+          "subject": "constitution:authoritative-primitives-only",
+          "subject_type": "constitution",
+          "violations": []
+        }
+      ],
+      "passed": true,
+      "rule_count": 1,
+      "subject": "constitution:authoritative-primitives-only",
+      "violation_count": 0
+    },
+    "constitution:authority-before-inference": {
+      "evaluations": [
+        {
+          "applies": true,
+          "checks": [
+            {
+              "actual": "constitution:authority-before-inference",
+              "expected": "constitution:authority-before-inference",
+              "operator": "equals",
+              "passed": true,
+              "path": "id",
+              "position": 0
+            },
+            {
+              "actual": "Authority before inference.",
+              "expected": "Authority before inference.",
+              "operator": "equals",
+              "passed": true,
+              "path": "canonical",
+              "position": 1
+            },
+            {
+              "actual": "active",
+              "expected": "active",
+              "operator": "equals",
+              "passed": true,
+              "path": "status",
+              "position": 2
+            },
+            {
+              "actual": "constitution",
+              "expected": "constitution",
+              "operator": "equals",
+              "passed": true,
+              "path": "scope",
+              "position": 3
+            },
+            {
+              "actual": "user",
+              "expected": "user",
+              "operator": "equals",
+              "passed": true,
+              "path": "provenance.authority",
+              "position": 4
+            },
+            {
+              "actual": {
+                "parents": [],
+                "superseded_by": [],
+                "supersedes": []
+              },
+              "expected": null,
+              "operator": "exists",
+              "passed": true,
+              "path": "lineage",
+              "position": 5
+            },
+            {
+              "actual": [],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "dependencies",
+              "position": 6
+            },
+            {
+              "actual": [],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "relationships",
+              "position": 7
+            }
+          ],
+          "passed": true,
+          "rule": "constitution:authority-before-inference",
+          "severity": "error",
+          "subject": "constitution:authority-before-inference",
+          "subject_type": "constitution",
+          "violations": []
+        }
+      ],
+      "passed": true,
+      "rule_count": 1,
+      "subject": "constitution:authority-before-inference",
+      "violation_count": 0
+    },
+    "constitution:authority-before-projection": {
+      "evaluations": [
+        {
+          "applies": true,
+          "checks": [
+            {
+              "actual": "constitution:authority-before-projection",
+              "expected": "constitution:authority-before-projection",
+              "operator": "equals",
+              "passed": true,
+              "path": "id",
+              "position": 0
+            },
+            {
+              "actual": "Authority before projection.",
+              "expected": "Authority before projection.",
+              "operator": "equals",
+              "passed": true,
+              "path": "canonical",
+              "position": 1
+            },
+            {
+              "actual": "active",
+              "expected": "active",
+              "operator": "equals",
+              "passed": true,
+              "path": "status",
+              "position": 2
+            },
+            {
+              "actual": "constitution",
+              "expected": "constitution",
+              "operator": "equals",
+              "passed": true,
+              "path": "scope",
+              "position": 3
+            },
+            {
+              "actual": "user",
+              "expected": "user",
+              "operator": "equals",
+              "passed": true,
+              "path": "provenance.authority",
+              "position": 4
+            },
+            {
+              "actual": {
+                "parents": [],
+                "superseded_by": [],
+                "supersedes": []
+              },
+              "expected": null,
+              "operator": "exists",
+              "passed": true,
+              "path": "lineage",
+              "position": 5
+            },
+            {
+              "actual": [
+                "constitution:authority-before-inference"
+              ],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "dependencies",
+              "position": 6
+            },
+            {
+              "actual": [],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "relationships",
+              "position": 7
+            }
+          ],
+          "passed": true,
+          "rule": "constitution:authority-before-projection",
+          "severity": "error",
+          "subject": "constitution:authority-before-projection",
+          "subject_type": "constitution",
+          "violations": []
+        }
+      ],
+      "passed": true,
+      "rule_count": 1,
+      "subject": "constitution:authority-before-projection",
+      "violation_count": 0
+    },
+    "constitution:composability": {
+      "evaluations": [
+        {
+          "applies": true,
+          "checks": [
+            {
+              "actual": "constitution:composability",
+              "expected": "constitution:composability",
+              "operator": "equals",
+              "passed": true,
+              "path": "id",
+              "position": 0
+            },
+            {
+              "actual": "Optimize for composability.",
+              "expected": "Optimize for composability.",
+              "operator": "equals",
+              "passed": true,
+              "path": "canonical",
+              "position": 1
+            },
+            {
+              "actual": "active",
+              "expected": "active",
+              "operator": "equals",
+              "passed": true,
+              "path": "status",
+              "position": 2
+            },
+            {
+              "actual": "constitution",
+              "expected": "constitution",
+              "operator": "equals",
+              "passed": true,
+              "path": "scope",
+              "position": 3
+            },
+            {
+              "actual": "user",
+              "expected": "user",
+              "operator": "equals",
+              "passed": true,
+              "path": "provenance.authority",
+              "position": 4
+            },
+            {
+              "actual": {
+                "parents": [],
+                "superseded_by": [],
+                "supersedes": []
+              },
+              "expected": null,
+              "operator": "exists",
+              "passed": true,
+              "path": "lineage",
+              "position": 5
+            },
+            {
+              "actual": [
+                "constitution:recursive-composition"
+              ],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "dependencies",
+              "position": 6
+            },
+            {
+              "actual": [],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "relationships",
+              "position": 7
+            }
+          ],
+          "passed": true,
+          "rule": "constitution:composability",
+          "severity": "error",
+          "subject": "constitution:composability",
+          "subject_type": "constitution",
+          "violations": []
+        }
+      ],
+      "passed": true,
+      "rule_count": 1,
+      "subject": "constitution:composability",
+      "violation_count": 0
+    },
+    "constitution:composition-before-duplication": {
+      "evaluations": [
+        {
+          "applies": true,
+          "checks": [
+            {
+              "actual": "constitution:composition-before-duplication",
+              "expected": "constitution:composition-before-duplication",
+              "operator": "equals",
+              "passed": true,
+              "path": "id",
+              "position": 0
+            },
+            {
+              "actual": "Prefer composition over duplication.",
+              "expected": "Prefer composition over duplication.",
+              "operator": "equals",
+              "passed": true,
+              "path": "canonical",
+              "position": 1
+            },
+            {
+              "actual": "active",
+              "expected": "active",
+              "operator": "equals",
+              "passed": true,
+              "path": "status",
+              "position": 2
+            },
+            {
+              "actual": "constitution",
+              "expected": "constitution",
+              "operator": "equals",
+              "passed": true,
+              "path": "scope",
+              "position": 3
+            },
+            {
+              "actual": "user",
+              "expected": "user",
+              "operator": "equals",
+              "passed": true,
+              "path": "provenance.authority",
+              "position": 4
+            },
+            {
+              "actual": {
+                "parents": [],
+                "superseded_by": [],
+                "supersedes": []
+              },
+              "expected": null,
+              "operator": "exists",
+              "passed": true,
+              "path": "lineage",
+              "position": 5
+            },
+            {
+              "actual": [
+                "constitution:authority-before-inference"
+              ],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "dependencies",
+              "position": 6
+            },
+            {
+              "actual": [],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "relationships",
+              "position": 7
+            }
+          ],
+          "passed": true,
+          "rule": "constitution:composition-before-duplication",
+          "severity": "error",
+          "subject": "constitution:composition-before-duplication",
+          "subject_type": "constitution",
+          "violations": []
+        }
+      ],
+      "passed": true,
+      "rule_count": 1,
+      "subject": "constitution:composition-before-duplication",
+      "violation_count": 0
+    },
+    "constitution:dependencies-exposed": {
+      "evaluations": [
+        {
+          "applies": true,
+          "checks": [
+            {
+              "actual": "constitution:dependencies-exposed",
+              "expected": "constitution:dependencies-exposed",
+              "operator": "equals",
+              "passed": true,
+              "path": "id",
+              "position": 0
+            },
+            {
+              "actual": "Everything must expose dependencies.",
+              "expected": "Everything must expose dependencies.",
+              "operator": "equals",
+              "passed": true,
+              "path": "canonical",
+              "position": 1
+            },
+            {
+              "actual": "active",
+              "expected": "active",
+              "operator": "equals",
+              "passed": true,
+              "path": "status",
+              "position": 2
+            },
+            {
+              "actual": "constitution",
+              "expected": "constitution",
+              "operator": "equals",
+              "passed": true,
+              "path": "scope",
+              "position": 3
+            },
+            {
+              "actual": "user",
+              "expected": "user",
+              "operator": "equals",
+              "passed": true,
+              "path": "provenance.authority",
+              "position": 4
+            },
+            {
+              "actual": {
+                "parents": [],
+                "superseded_by": [],
+                "supersedes": []
+              },
+              "expected": null,
+              "operator": "exists",
+              "passed": true,
+              "path": "lineage",
+              "position": 5
+            },
+            {
+              "actual": [
+                "constitution:lineage-exposed",
+                "constitution:provenance-exposed"
+              ],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "dependencies",
+              "position": 6
+            },
+            {
+              "actual": [],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "relationships",
+              "position": 7
+            }
+          ],
+          "passed": true,
+          "rule": "constitution:dependencies-exposed",
+          "severity": "error",
+          "subject": "constitution:dependencies-exposed",
+          "subject_type": "constitution",
+          "violations": []
+        }
+      ],
+      "passed": true,
+      "rule_count": 1,
+      "subject": "constitution:dependencies-exposed",
+      "violation_count": 0
+    },
+    "constitution:determinism": {
+      "evaluations": [
+        {
+          "applies": true,
+          "checks": [
+            {
+              "actual": "constitution:determinism",
+              "expected": "constitution:determinism",
+              "operator": "equals",
+              "passed": true,
+              "path": "id",
+              "position": 0
+            },
+            {
+              "actual": "Optimize for determinism.",
+              "expected": "Optimize for determinism.",
+              "operator": "equals",
+              "passed": true,
+              "path": "canonical",
+              "position": 1
+            },
+            {
+              "actual": "active",
+              "expected": "active",
+              "operator": "equals",
+              "passed": true,
+              "path": "status",
+              "position": 2
+            },
+            {
+              "actual": "constitution",
+              "expected": "constitution",
+              "operator": "equals",
+              "passed": true,
+              "path": "scope",
+              "position": 3
+            },
+            {
+              "actual": "user",
+              "expected": "user",
+              "operator": "equals",
+              "passed": true,
+              "path": "provenance.authority",
+              "position": 4
+            },
+            {
+              "actual": {
+                "parents": [],
+                "superseded_by": [],
+                "supersedes": []
+              },
+              "expected": null,
+              "operator": "exists",
+              "passed": true,
+              "path": "lineage",
+              "position": 5
+            },
+            {
+              "actual": [
+                "constitution:deterministic-projection"
+              ],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "dependencies",
+              "position": 6
+            },
+            {
+              "actual": [],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "relationships",
+              "position": 7
+            }
+          ],
+          "passed": true,
+          "rule": "constitution:determinism",
+          "severity": "error",
+          "subject": "constitution:determinism",
+          "subject_type": "constitution",
+          "violations": []
+        }
+      ],
+      "passed": true,
+      "rule_count": 1,
+      "subject": "constitution:determinism",
+      "violation_count": 0
+    },
+    "constitution:deterministic-projection": {
+      "evaluations": [
+        {
+          "applies": true,
+          "checks": [
+            {
+              "actual": "constitution:deterministic-projection",
+              "expected": "constitution:deterministic-projection",
+              "operator": "equals",
+              "passed": true,
+              "path": "id",
+              "position": 0
+            },
+            {
+              "actual": "Generate everything else through deterministic projection.",
+              "expected": "Generate everything else through deterministic projection.",
+              "operator": "equals",
+              "passed": true,
+              "path": "canonical",
+              "position": 1
+            },
+            {
+              "actual": "active",
+              "expected": "active",
+              "operator": "equals",
+              "passed": true,
+              "path": "status",
+              "position": 2
+            },
+            {
+              "actual": "constitution",
+              "expected": "constitution",
+              "operator": "equals",
+              "passed": true,
+              "path": "scope",
+              "position": 3
+            },
+            {
+              "actual": "user",
+              "expected": "user",
+              "operator": "equals",
+              "passed": true,
+              "path": "provenance.authority",
+              "position": 4
+            },
+            {
+              "actual": {
+                "parents": [],
+                "superseded_by": [],
+                "supersedes": []
+              },
+              "expected": null,
+              "operator": "exists",
+              "passed": true,
+              "path": "lineage",
+              "position": 5
+            },
+            {
+              "actual": [
+                "constitution:authoritative-primitives-only"
+              ],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "dependencies",
+              "position": 6
+            },
+            {
+              "actual": [],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "relationships",
+              "position": 7
+            }
+          ],
+          "passed": true,
+          "rule": "constitution:deterministic-projection",
+          "severity": "error",
+          "subject": "constitution:deterministic-projection",
+          "subject_type": "constitution",
+          "violations": []
+        }
+      ],
+      "passed": true,
+      "rule_count": 1,
+      "subject": "constitution:deterministic-projection",
+      "violation_count": 0
+    },
+    "constitution:emergence-before-hardcoding": {
+      "evaluations": [
+        {
+          "applies": true,
+          "checks": [
+            {
+              "actual": "constitution:emergence-before-hardcoding",
+              "expected": "constitution:emergence-before-hardcoding",
+              "operator": "equals",
+              "passed": true,
+              "path": "id",
+              "position": 0
+            },
+            {
+              "actual": "Prefer emergence over hardcoding.",
+              "expected": "Prefer emergence over hardcoding.",
+              "operator": "equals",
+              "passed": true,
+              "path": "canonical",
+              "position": 1
+            },
+            {
+              "actual": "active",
+              "expected": "active",
+              "operator": "equals",
+              "passed": true,
+              "path": "status",
+              "position": 2
+            },
+            {
+              "actual": "constitution",
+              "expected": "constitution",
+              "operator": "equals",
+              "passed": true,
+              "path": "scope",
+              "position": 3
+            },
+            {
+              "actual": "user",
+              "expected": "user",
+              "operator": "equals",
+              "passed": true,
+              "path": "provenance.authority",
+              "position": 4
+            },
+            {
+              "actual": {
+                "parents": [],
+                "superseded_by": [],
+                "supersedes": []
+              },
+              "expected": null,
+              "operator": "exists",
+              "passed": true,
+              "path": "lineage",
+              "position": 5
+            },
+            {
+              "actual": [
+                "constitution:projection-before-storage"
+              ],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "dependencies",
+              "position": 6
+            },
+            {
+              "actual": [],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "relationships",
+              "position": 7
+            }
+          ],
+          "passed": true,
+          "rule": "constitution:emergence-before-hardcoding",
+          "severity": "error",
+          "subject": "constitution:emergence-before-hardcoding",
+          "subject_type": "constitution",
+          "violations": []
+        }
+      ],
+      "passed": true,
+      "rule_count": 1,
+      "subject": "constitution:emergence-before-hardcoding",
+      "violation_count": 0
+    },
+    "constitution:extensibility": {
+      "evaluations": [
+        {
+          "applies": true,
+          "checks": [
+            {
+              "actual": "constitution:extensibility",
+              "expected": "constitution:extensibility",
+              "operator": "equals",
+              "passed": true,
+              "path": "id",
+              "position": 0
+            },
+            {
+              "actual": "Optimize for extensibility.",
+              "expected": "Optimize for extensibility.",
+              "operator": "equals",
+              "passed": true,
+              "path": "canonical",
+              "position": 1
+            },
+            {
+              "actual": "active",
+              "expected": "active",
+              "operator": "equals",
+              "passed": true,
+              "path": "status",
+              "position": 2
+            },
+            {
+              "actual": "constitution",
+              "expected": "constitution",
+              "operator": "equals",
+              "passed": true,
+              "path": "scope",
+              "position": 3
+            },
+            {
+              "actual": "user",
+              "expected": "user",
+              "operator": "equals",
+              "passed": true,
+              "path": "provenance.authority",
+              "position": 4
+            },
+            {
+              "actual": {
+                "parents": [],
+                "superseded_by": [],
+                "supersedes": []
+              },
+              "expected": null,
+              "operator": "exists",
+              "passed": true,
+              "path": "lineage",
+              "position": 5
+            },
+            {
+              "actual": [
+                "constitution:future-extension"
+              ],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "dependencies",
+              "position": 6
+            },
+            {
+              "actual": [],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "relationships",
+              "position": 7
+            }
+          ],
+          "passed": true,
+          "rule": "constitution:extensibility",
+          "severity": "error",
+          "subject": "constitution:extensibility",
+          "subject_type": "constitution",
+          "violations": []
+        }
+      ],
+      "passed": true,
+      "rule_count": 1,
+      "subject": "constitution:extensibility",
+      "violation_count": 0
+    },
+    "constitution:future-attachment": {
+      "evaluations": [
+        {
+          "applies": true,
+          "checks": [
+            {
+              "actual": "constitution:future-attachment",
+              "expected": "constitution:future-attachment",
+              "operator": "equals",
+              "passed": true,
+              "path": "id",
+              "position": 0
+            },
+            {
+              "actual": "Everything must support future attachment.",
+              "expected": "Everything must support future attachment.",
+              "operator": "equals",
+              "passed": true,
+              "path": "canonical",
+              "position": 1
+            },
+            {
+              "actual": "active",
+              "expected": "active",
+              "operator": "equals",
+              "passed": true,
+              "path": "status",
+              "position": 2
+            },
+            {
+              "actual": "constitution",
+              "expected": "constitution",
+              "operator": "equals",
+              "passed": true,
+              "path": "scope",
+              "position": 3
+            },
+            {
+              "actual": "user",
+              "expected": "user",
+              "operator": "equals",
+              "passed": true,
+              "path": "provenance.authority",
+              "position": 4
+            },
+            {
+              "actual": {
+                "parents": [],
+                "superseded_by": [],
+                "supersedes": []
+              },
+              "expected": null,
+              "operator": "exists",
+              "passed": true,
+              "path": "lineage",
+              "position": 5
+            },
+            {
+              "actual": [
+                "constitution:future-extension"
+              ],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "dependencies",
+              "position": 6
+            },
+            {
+              "actual": [],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "relationships",
+              "position": 7
+            }
+          ],
+          "passed": true,
+          "rule": "constitution:future-attachment",
+          "severity": "error",
+          "subject": "constitution:future-attachment",
+          "subject_type": "constitution",
+          "violations": []
+        }
+      ],
+      "passed": true,
+      "rule_count": 1,
+      "subject": "constitution:future-attachment",
+      "violation_count": 0
+    },
+    "constitution:future-extension": {
+      "evaluations": [
+        {
+          "applies": true,
+          "checks": [
+            {
+              "actual": "constitution:future-extension",
+              "expected": "constitution:future-extension",
+              "operator": "equals",
+              "passed": true,
+              "path": "id",
+              "position": 0
+            },
+            {
+              "actual": "Everything must support future extension.",
+              "expected": "Everything must support future extension.",
+              "operator": "equals",
+              "passed": true,
+              "path": "canonical",
+              "position": 1
+            },
+            {
+              "actual": "active",
+              "expected": "active",
+              "operator": "equals",
+              "passed": true,
+              "path": "status",
+              "position": 2
+            },
+            {
+              "actual": "constitution",
+              "expected": "constitution",
+              "operator": "equals",
+              "passed": true,
+              "path": "scope",
+              "position": 3
+            },
+            {
+              "actual": "user",
+              "expected": "user",
+              "operator": "equals",
+              "passed": true,
+              "path": "provenance.authority",
+              "position": 4
+            },
+            {
+              "actual": {
+                "parents": [],
+                "superseded_by": [],
+                "supersedes": []
+              },
+              "expected": null,
+              "operator": "exists",
+              "passed": true,
+              "path": "lineage",
+              "position": 5
+            },
+            {
+              "actual": [
+                "constitution:composition-before-duplication"
+              ],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "dependencies",
+              "position": 6
+            },
+            {
+              "actual": [],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "relationships",
+              "position": 7
+            }
+          ],
+          "passed": true,
+          "rule": "constitution:future-extension",
+          "severity": "error",
+          "subject": "constitution:future-extension",
+          "subject_type": "constitution",
+          "violations": []
+        }
+      ],
+      "passed": true,
+      "rule_count": 1,
+      "subject": "constitution:future-extension",
+      "violation_count": 0
+    },
+    "constitution:future-optionality": {
+      "evaluations": [
+        {
+          "applies": true,
+          "checks": [
+            {
+              "actual": "constitution:future-optionality",
+              "expected": "constitution:future-optionality",
+              "operator": "equals",
+              "passed": true,
+              "path": "id",
+              "position": 0
+            },
+            {
+              "actual": "Optimize for future optionality.",
+              "expected": "Optimize for future optionality.",
+              "operator": "equals",
+              "passed": true,
+              "path": "canonical",
+              "position": 1
+            },
+            {
+              "actual": "active",
+              "expected": "active",
+              "operator": "equals",
+              "passed": true,
+              "path": "status",
+              "position": 2
+            },
+            {
+              "actual": "constitution",
+              "expected": "constitution",
+              "operator": "equals",
+              "passed": true,
+              "path": "scope",
+              "position": 3
+            },
+            {
+              "actual": "user",
+              "expected": "user",
+              "operator": "equals",
+              "passed": true,
+              "path": "provenance.authority",
+              "position": 4
+            },
+            {
+              "actual": {
+                "parents": [],
+                "superseded_by": [],
+                "supersedes": []
+              },
+              "expected": null,
+              "operator": "exists",
+              "passed": true,
+              "path": "lineage",
+              "position": 5
+            },
+            {
+              "actual": [
+                "constitution:future-extension",
+                "constitution:future-attachment"
+              ],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "dependencies",
+              "position": 6
+            },
+            {
+              "actual": [],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "relationships",
+              "position": 7
+            }
+          ],
+          "passed": true,
+          "rule": "constitution:future-optionality",
+          "severity": "error",
+          "subject": "constitution:future-optionality",
+          "subject_type": "constitution",
+          "violations": []
+        }
+      ],
+      "passed": true,
+      "rule_count": 1,
+      "subject": "constitution:future-optionality",
+      "violation_count": 0
+    },
+    "constitution:graph-addressability": {
+      "evaluations": [
+        {
+          "applies": true,
+          "checks": [
+            {
+              "actual": "constitution:graph-addressability",
+              "expected": "constitution:graph-addressability",
+              "operator": "equals",
+              "passed": true,
+              "path": "id",
+              "position": 0
+            },
+            {
+              "actual": "Everything must be graph-addressable.",
+              "expected": "Everything must be graph-addressable.",
+              "operator": "equals",
+              "passed": true,
+              "path": "canonical",
+              "position": 1
+            },
+            {
+              "actual": "active",
+              "expected": "active",
+              "operator": "equals",
+              "passed": true,
+              "path": "status",
+              "position": 2
+            },
+            {
+              "actual": "constitution",
+              "expected": "constitution",
+              "operator": "equals",
+              "passed": true,
+              "path": "scope",
+              "position": 3
+            },
+            {
+              "actual": "user",
+              "expected": "user",
+              "operator": "equals",
+              "passed": true,
+              "path": "provenance.authority",
+              "position": 4
+            },
+            {
+              "actual": {
+                "parents": [],
+                "superseded_by": [],
+                "supersedes": []
+              },
+              "expected": null,
+              "operator": "exists",
+              "passed": true,
+              "path": "lineage",
+              "position": 5
+            },
+            {
+              "actual": [
+                "constitution:lineage-exposed",
+                "constitution:provenance-exposed",
+                "constitution:dependencies-exposed",
+                "constitution:relationships-exposed"
+              ],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "dependencies",
+              "position": 6
+            },
+            {
+              "actual": [],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "relationships",
+              "position": 7
+            }
+          ],
+          "passed": true,
+          "rule": "constitution:graph-addressability",
+          "severity": "error",
+          "subject": "constitution:graph-addressability",
+          "subject_type": "constitution",
+          "violations": []
+        }
+      ],
+      "passed": true,
+      "rule_count": 1,
+      "subject": "constitution:graph-addressability",
+      "violation_count": 0
+    },
+    "constitution:instances-primary": {
+      "evaluations": [
+        {
+          "applies": true,
+          "checks": [
+            {
+              "actual": "constitution:instances-primary",
+              "expected": "constitution:instances-primary",
+              "operator": "equals",
+              "passed": true,
+              "path": "id",
+              "position": 0
+            },
+            {
+              "actual": "Use instances as primary architectural primitives.",
+              "expected": "Use instances as primary architectural primitives.",
+              "operator": "equals",
+              "passed": true,
+              "path": "canonical",
+              "position": 1
+            },
+            {
+              "actual": "active",
+              "expected": "active",
+              "operator": "equals",
+              "passed": true,
+              "path": "status",
+              "position": 2
+            },
+            {
+              "actual": "constitution",
+              "expected": "constitution",
+              "operator": "equals",
+              "passed": true,
+              "path": "scope",
+              "position": 3
+            },
+            {
+              "actual": "user",
+              "expected": "user",
+              "operator": "equals",
+              "passed": true,
+              "path": "provenance.authority",
+              "position": 4
+            },
+            {
+              "actual": {
+                "parents": [],
+                "superseded_by": [],
+                "supersedes": []
+              },
+              "expected": null,
+              "operator": "exists",
+              "passed": true,
+              "path": "lineage",
+              "position": 5
+            },
+            {
+              "actual": [
+                "constitution:composition-before-duplication"
+              ],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "dependencies",
+              "position": 6
+            },
+            {
+              "actual": [],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "relationships",
+              "position": 7
+            }
+          ],
+          "passed": true,
+          "rule": "constitution:instances-primary",
+          "severity": "error",
+          "subject": "constitution:instances-primary",
+          "subject_type": "constitution",
+          "violations": []
+        }
+      ],
+      "passed": true,
+      "rule_count": 1,
+      "subject": "constitution:instances-primary",
+      "violation_count": 0
+    },
+    "constitution:kindred-canonical": {
+      "evaluations": [
+        {
+          "applies": true,
+          "checks": [
+            {
+              "actual": "constitution:kindred-canonical",
+              "expected": "constitution:kindred-canonical",
+              "operator": "equals",
+              "passed": true,
+              "path": "id",
+              "position": 0
+            },
+            {
+              "actual": "Kindred is the canonical relationship methodology term.",
+              "expected": "Kindred is the canonical relationship methodology term.",
+              "operator": "equals",
+              "passed": true,
+              "path": "canonical",
+              "position": 1
+            },
+            {
+              "actual": "active",
+              "expected": "active",
+              "operator": "equals",
+              "passed": true,
+              "path": "status",
+              "position": 2
+            },
+            {
+              "actual": "constitution",
+              "expected": "constitution",
+              "operator": "equals",
+              "passed": true,
+              "path": "scope",
+              "position": 3
+            },
+            {
+              "actual": "user",
+              "expected": "user",
+              "operator": "equals",
+              "passed": true,
+              "path": "provenance.authority",
+              "position": 4
+            },
+            {
+              "actual": {
+                "parents": [],
+                "superseded_by": [],
+                "supersedes": []
+              },
+              "expected": null,
+              "operator": "exists",
+              "passed": true,
+              "path": "lineage",
+              "position": 5
+            },
+            {
+              "actual": [
+                "constitution:relationships-exposed"
+              ],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "dependencies",
+              "position": 6
+            },
+            {
+              "actual": [],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "relationships",
+              "position": 7
+            }
+          ],
+          "passed": true,
+          "rule": "constitution:kindred-canonical",
+          "severity": "error",
+          "subject": "constitution:kindred-canonical",
+          "subject_type": "constitution",
+          "violations": []
+        }
+      ],
+      "passed": true,
+      "rule_count": 1,
+      "subject": "constitution:kindred-canonical",
+      "violation_count": 0
+    },
+    "constitution:kindred-forbidden": {
+      "evaluations": [
+        {
+          "applies": true,
+          "checks": [
+            {
+              "actual": "constitution:kindred-forbidden",
+              "expected": "constitution:kindred-forbidden",
+              "operator": "equals",
+              "passed": true,
+              "path": "id",
+              "position": 0
+            },
+            {
+              "actual": "The term kindred is forbidden where kindred is intended.",
+              "expected": "The term kindred is forbidden where kindred is intended.",
+              "operator": "equals",
+              "passed": true,
+              "path": "canonical",
+              "position": 1
+            },
+            {
+              "actual": "active",
+              "expected": "active",
+              "operator": "equals",
+              "passed": true,
+              "path": "status",
+              "position": 2
+            },
+            {
+              "actual": "constitution",
+              "expected": "constitution",
+              "operator": "equals",
+              "passed": true,
+              "path": "scope",
+              "position": 3
+            },
+            {
+              "actual": "user",
+              "expected": "user",
+              "operator": "equals",
+              "passed": true,
+              "path": "provenance.authority",
+              "position": 4
+            },
+            {
+              "actual": {
+                "parents": [],
+                "superseded_by": [],
+                "supersedes": []
+              },
+              "expected": null,
+              "operator": "exists",
+              "passed": true,
+              "path": "lineage",
+              "position": 5
+            },
+            {
+              "actual": [
+                "constitution:kindred-canonical"
+              ],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "dependencies",
+              "position": 6
+            },
+            {
+              "actual": [],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "relationships",
+              "position": 7
+            }
+          ],
+          "passed": true,
+          "rule": "constitution:kindred-forbidden",
+          "severity": "error",
+          "subject": "constitution:kindred-forbidden",
+          "subject_type": "constitution",
+          "violations": []
+        }
+      ],
+      "passed": true,
+      "rule_count": 1,
+      "subject": "constitution:kindred-forbidden",
+      "violation_count": 0
+    },
+    "constitution:lineage-exposed": {
+      "evaluations": [
+        {
+          "applies": true,
+          "checks": [
+            {
+              "actual": "constitution:lineage-exposed",
+              "expected": "constitution:lineage-exposed",
+              "operator": "equals",
+              "passed": true,
+              "path": "id",
+              "position": 0
+            },
+            {
+              "actual": "Everything must expose lineage.",
+              "expected": "Everything must expose lineage.",
+              "operator": "equals",
+              "passed": true,
+              "path": "canonical",
+              "position": 1
+            },
+            {
+              "actual": "active",
+              "expected": "active",
+              "operator": "equals",
+              "passed": true,
+              "path": "status",
+              "position": 2
+            },
+            {
+              "actual": "constitution",
+              "expected": "constitution",
+              "operator": "equals",
+              "passed": true,
+              "path": "scope",
+              "position": 3
+            },
+            {
+              "actual": "user",
+              "expected": "user",
+              "operator": "equals",
+              "passed": true,
+              "path": "provenance.authority",
+              "position": 4
+            },
+            {
+              "actual": {
+                "parents": [],
+                "superseded_by": [],
+                "supersedes": []
+              },
+              "expected": null,
+              "operator": "exists",
+              "passed": true,
+              "path": "lineage",
+              "position": 5
+            },
+            {
+              "actual": [
+                "constitution:authoritative-primitives-only"
+              ],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "dependencies",
+              "position": 6
+            },
+            {
+              "actual": [],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "relationships",
+              "position": 7
+            }
+          ],
+          "passed": true,
+          "rule": "constitution:lineage-exposed",
+          "severity": "error",
+          "subject": "constitution:lineage-exposed",
+          "subject_type": "constitution",
+          "violations": []
+        }
+      ],
+      "passed": true,
+      "rule_count": 1,
+      "subject": "constitution:lineage-exposed",
+      "violation_count": 0
+    },
+    "constitution:no-dead-end": {
+      "evaluations": [
+        {
+          "applies": true,
+          "checks": [
+            {
+              "actual": "constitution:no-dead-end",
+              "expected": "constitution:no-dead-end",
+              "operator": "equals",
+              "passed": true,
+              "path": "id",
+              "position": 0
+            },
+            {
+              "actual": "No subsystem may become a dead end.",
+              "expected": "No subsystem may become a dead end.",
+              "operator": "equals",
+              "passed": true,
+              "path": "canonical",
+              "position": 1
+            },
+            {
+              "actual": "active",
+              "expected": "active",
+              "operator": "equals",
+              "passed": true,
+              "path": "status",
+              "position": 2
+            },
+            {
+              "actual": "constitution",
+              "expected": "constitution",
+              "operator": "equals",
+              "passed": true,
+              "path": "scope",
+              "position": 3
+            },
+            {
+              "actual": "user",
+              "expected": "user",
+              "operator": "equals",
+              "passed": true,
+              "path": "provenance.authority",
+              "position": 4
+            },
+            {
+              "actual": {
+                "parents": [],
+                "superseded_by": [],
+                "supersedes": []
+              },
+              "expected": null,
+              "operator": "exists",
+              "passed": true,
+              "path": "lineage",
+              "position": 5
+            },
+            {
+              "actual": [
+                "constitution:future-extension",
+                "constitution:future-attachment",
+                "constitution:recursive-composition",
+                "constitution:graph-addressability"
+              ],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "dependencies",
+              "position": 6
+            },
+            {
+              "actual": [],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "relationships",
+              "position": 7
+            }
+          ],
+          "passed": true,
+          "rule": "constitution:no-dead-end",
+          "severity": "error",
+          "subject": "constitution:no-dead-end",
+          "subject_type": "constitution",
+          "violations": []
+        }
+      ],
+      "passed": true,
+      "rule_count": 1,
+      "subject": "constitution:no-dead-end",
+      "violation_count": 0
+    },
+    "constitution:no-replacement-to-extend": {
+      "evaluations": [
+        {
+          "applies": true,
+          "checks": [
+            {
+              "actual": "constitution:no-replacement-to-extend",
+              "expected": "constitution:no-replacement-to-extend",
+              "operator": "equals",
+              "passed": true,
+              "path": "id",
+              "position": 0
+            },
+            {
+              "actual": "No subsystem may require architectural replacement to extend.",
+              "expected": "No subsystem may require architectural replacement to extend.",
+              "operator": "equals",
+              "passed": true,
+              "path": "canonical",
+              "position": 1
+            },
+            {
+              "actual": "active",
+              "expected": "active",
+              "operator": "equals",
+              "passed": true,
+              "path": "status",
+              "position": 2
+            },
+            {
+              "actual": "constitution",
+              "expected": "constitution",
+              "operator": "equals",
+              "passed": true,
+              "path": "scope",
+              "position": 3
+            },
+            {
+              "actual": "user",
+              "expected": "user",
+              "operator": "equals",
+              "passed": true,
+              "path": "provenance.authority",
+              "position": 4
+            },
+            {
+              "actual": {
+                "parents": [],
+                "superseded_by": [],
+                "supersedes": []
+              },
+              "expected": null,
+              "operator": "exists",
+              "passed": true,
+              "path": "lineage",
+              "position": 5
+            },
+            {
+              "actual": [
+                "constitution:no-dead-end"
+              ],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "dependencies",
+              "position": 6
+            },
+            {
+              "actual": [],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "relationships",
+              "position": 7
+            }
+          ],
+          "passed": true,
+          "rule": "constitution:no-replacement-to-extend",
+          "severity": "error",
+          "subject": "constitution:no-replacement-to-extend",
+          "subject_type": "constitution",
+          "violations": []
+        }
+      ],
+      "passed": true,
+      "rule_count": 1,
+      "subject": "constitution:no-replacement-to-extend",
+      "violation_count": 0
+    },
+    "constitution:projection-before-storage": {
+      "evaluations": [
+        {
+          "applies": true,
+          "checks": [
+            {
+              "actual": "constitution:projection-before-storage",
+              "expected": "constitution:projection-before-storage",
+              "operator": "equals",
+              "passed": true,
+              "path": "id",
+              "position": 0
+            },
+            {
+              "actual": "Prefer projection over storage.",
+              "expected": "Prefer projection over storage.",
+              "operator": "equals",
+              "passed": true,
+              "path": "canonical",
+              "position": 1
+            },
+            {
+              "actual": "active",
+              "expected": "active",
+              "operator": "equals",
+              "passed": true,
+              "path": "status",
+              "position": 2
+            },
+            {
+              "actual": "constitution",
+              "expected": "constitution",
+              "operator": "equals",
+              "passed": true,
+              "path": "scope",
+              "position": 3
+            },
+            {
+              "actual": "user",
+              "expected": "user",
+              "operator": "equals",
+              "passed": true,
+              "path": "provenance.authority",
+              "position": 4
+            },
+            {
+              "actual": {
+                "parents": [],
+                "superseded_by": [],
+                "supersedes": []
+              },
+              "expected": null,
+              "operator": "exists",
+              "passed": true,
+              "path": "lineage",
+              "position": 5
+            },
+            {
+              "actual": [
+                "constitution:authority-before-projection"
+              ],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "dependencies",
+              "position": 6
+            },
+            {
+              "actual": [],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "relationships",
+              "position": 7
+            }
+          ],
+          "passed": true,
+          "rule": "constitution:projection-before-storage",
+          "severity": "error",
+          "subject": "constitution:projection-before-storage",
+          "subject_type": "constitution",
+          "violations": []
+        }
+      ],
+      "passed": true,
+      "rule_count": 1,
+      "subject": "constitution:projection-before-storage",
+      "violation_count": 0
+    },
+    "constitution:provenance-exposed": {
+      "evaluations": [
+        {
+          "applies": true,
+          "checks": [
+            {
+              "actual": "constitution:provenance-exposed",
+              "expected": "constitution:provenance-exposed",
+              "operator": "equals",
+              "passed": true,
+              "path": "id",
+              "position": 0
+            },
+            {
+              "actual": "Everything must expose provenance.",
+              "expected": "Everything must expose provenance.",
+              "operator": "equals",
+              "passed": true,
+              "path": "canonical",
+              "position": 1
+            },
+            {
+              "actual": "active",
+              "expected": "active",
+              "operator": "equals",
+              "passed": true,
+              "path": "status",
+              "position": 2
+            },
+            {
+              "actual": "constitution",
+              "expected": "constitution",
+              "operator": "equals",
+              "passed": true,
+              "path": "scope",
+              "position": 3
+            },
+            {
+              "actual": "user",
+              "expected": "user",
+              "operator": "equals",
+              "passed": true,
+              "path": "provenance.authority",
+              "position": 4
+            },
+            {
+              "actual": {
+                "parents": [],
+                "superseded_by": [],
+                "supersedes": []
+              },
+              "expected": null,
+              "operator": "exists",
+              "passed": true,
+              "path": "lineage",
+              "position": 5
+            },
+            {
+              "actual": [
+                "constitution:authoritative-primitives-only"
+              ],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "dependencies",
+              "position": 6
+            },
+            {
+              "actual": [],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "relationships",
+              "position": 7
+            }
+          ],
+          "passed": true,
+          "rule": "constitution:provenance-exposed",
+          "severity": "error",
+          "subject": "constitution:provenance-exposed",
+          "subject_type": "constitution",
+          "violations": []
+        }
+      ],
+      "passed": true,
+      "rule_count": 1,
+      "subject": "constitution:provenance-exposed",
+      "violation_count": 0
+    },
+    "constitution:recoverability": {
+      "evaluations": [
+        {
+          "applies": true,
+          "checks": [
+            {
+              "actual": "constitution:recoverability",
+              "expected": "constitution:recoverability",
+              "operator": "equals",
+              "passed": true,
+              "path": "id",
+              "position": 0
+            },
+            {
+              "actual": "Optimize for recoverability.",
+              "expected": "Optimize for recoverability.",
+              "operator": "equals",
+              "passed": true,
+              "path": "canonical",
+              "position": 1
+            },
+            {
+              "actual": "active",
+              "expected": "active",
+              "operator": "equals",
+              "passed": true,
+              "path": "status",
+              "position": 2
+            },
+            {
+              "actual": "constitution",
+              "expected": "constitution",
+              "operator": "equals",
+              "passed": true,
+              "path": "scope",
+              "position": 3
+            },
+            {
+              "actual": "user",
+              "expected": "user",
+              "operator": "equals",
+              "passed": true,
+              "path": "provenance.authority",
+              "position": 4
+            },
+            {
+              "actual": {
+                "parents": [],
+                "superseded_by": [],
+                "supersedes": []
+              },
+              "expected": null,
+              "operator": "exists",
+              "passed": true,
+              "path": "lineage",
+              "position": 5
+            },
+            {
+              "actual": [
+                "constitution:auditability"
+              ],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "dependencies",
+              "position": 6
+            },
+            {
+              "actual": [],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "relationships",
+              "position": 7
+            }
+          ],
+          "passed": true,
+          "rule": "constitution:recoverability",
+          "severity": "error",
+          "subject": "constitution:recoverability",
+          "subject_type": "constitution",
+          "violations": []
+        }
+      ],
+      "passed": true,
+      "rule_count": 1,
+      "subject": "constitution:recoverability",
+      "violation_count": 0
+    },
+    "constitution:recursive-composition": {
+      "evaluations": [
+        {
+          "applies": true,
+          "checks": [
+            {
+              "actual": "constitution:recursive-composition",
+              "expected": "constitution:recursive-composition",
+              "operator": "equals",
+              "passed": true,
+              "path": "id",
+              "position": 0
+            },
+            {
+              "actual": "Everything must be recursively composable.",
+              "expected": "Everything must be recursively composable.",
+              "operator": "equals",
+              "passed": true,
+              "path": "canonical",
+              "position": 1
+            },
+            {
+              "actual": "active",
+              "expected": "active",
+              "operator": "equals",
+              "passed": true,
+              "path": "status",
+              "position": 2
+            },
+            {
+              "actual": "constitution",
+              "expected": "constitution",
+              "operator": "equals",
+              "passed": true,
+              "path": "scope",
+              "position": 3
+            },
+            {
+              "actual": "user",
+              "expected": "user",
+              "operator": "equals",
+              "passed": true,
+              "path": "provenance.authority",
+              "position": 4
+            },
+            {
+              "actual": {
+                "parents": [],
+                "superseded_by": [],
+                "supersedes": []
+              },
+              "expected": null,
+              "operator": "exists",
+              "passed": true,
+              "path": "lineage",
+              "position": 5
+            },
+            {
+              "actual": [
+                "constitution:composition-before-duplication",
+                "constitution:relationships-exposed"
+              ],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "dependencies",
+              "position": 6
+            },
+            {
+              "actual": [],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "relationships",
+              "position": 7
+            }
+          ],
+          "passed": true,
+          "rule": "constitution:recursive-composition",
+          "severity": "error",
+          "subject": "constitution:recursive-composition",
+          "subject_type": "constitution",
+          "violations": []
+        }
+      ],
+      "passed": true,
+      "rule_count": 1,
+      "subject": "constitution:recursive-composition",
+      "violation_count": 0
+    },
+    "constitution:relationships-exposed": {
+      "evaluations": [
+        {
+          "applies": true,
+          "checks": [
+            {
+              "actual": "constitution:relationships-exposed",
+              "expected": "constitution:relationships-exposed",
+              "operator": "equals",
+              "passed": true,
+              "path": "id",
+              "position": 0
+            },
+            {
+              "actual": "Everything must expose relationships.",
+              "expected": "Everything must expose relationships.",
+              "operator": "equals",
+              "passed": true,
+              "path": "canonical",
+              "position": 1
+            },
+            {
+              "actual": "active",
+              "expected": "active",
+              "operator": "equals",
+              "passed": true,
+              "path": "status",
+              "position": 2
+            },
+            {
+              "actual": "constitution",
+              "expected": "constitution",
+              "operator": "equals",
+              "passed": true,
+              "path": "scope",
+              "position": 3
+            },
+            {
+              "actual": "user",
+              "expected": "user",
+              "operator": "equals",
+              "passed": true,
+              "path": "provenance.authority",
+              "position": 4
+            },
+            {
+              "actual": {
+                "parents": [],
+                "superseded_by": [],
+                "supersedes": []
+              },
+              "expected": null,
+              "operator": "exists",
+              "passed": true,
+              "path": "lineage",
+              "position": 5
+            },
+            {
+              "actual": [
+                "constitution:dependencies-exposed"
+              ],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "dependencies",
+              "position": 6
+            },
+            {
+              "actual": [],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "relationships",
+              "position": 7
+            }
+          ],
+          "passed": true,
+          "rule": "constitution:relationships-exposed",
+          "severity": "error",
+          "subject": "constitution:relationships-exposed",
+          "subject_type": "constitution",
+          "violations": []
+        }
+      ],
+      "passed": true,
+      "rule_count": 1,
+      "subject": "constitution:relationships-exposed",
+      "violation_count": 0
+    },
+    "constitution:segues-primary": {
+      "evaluations": [
+        {
+          "applies": true,
+          "checks": [
+            {
+              "actual": "constitution:segues-primary",
+              "expected": "constitution:segues-primary",
+              "operator": "equals",
+              "passed": true,
+              "path": "id",
+              "position": 0
+            },
+            {
+              "actual": "Use segues as primary architectural primitives.",
+              "expected": "Use segues as primary architectural primitives.",
+              "operator": "equals",
+              "passed": true,
+              "path": "canonical",
+              "position": 1
+            },
+            {
+              "actual": "active",
+              "expected": "active",
+              "operator": "equals",
+              "passed": true,
+              "path": "status",
+              "position": 2
+            },
+            {
+              "actual": "constitution",
+              "expected": "constitution",
+              "operator": "equals",
+              "passed": true,
+              "path": "scope",
+              "position": 3
+            },
+            {
+              "actual": "user",
+              "expected": "user",
+              "operator": "equals",
+              "passed": true,
+              "path": "provenance.authority",
+              "position": 4
+            },
+            {
+              "actual": {
+                "parents": [],
+                "superseded_by": [],
+                "supersedes": []
+              },
+              "expected": null,
+              "operator": "exists",
+              "passed": true,
+              "path": "lineage",
+              "position": 5
+            },
+            {
+              "actual": [
+                "constitution:instances-primary"
+              ],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "dependencies",
+              "position": 6
+            },
+            {
+              "actual": [],
+              "expected": "list",
+              "operator": "matches_type",
+              "passed": true,
+              "path": "relationships",
+              "position": 7
+            }
+          ],
+          "passed": true,
+          "rule": "constitution:segues-primary",
+          "severity": "error",
+          "subject": "constitution:segues-primary",
+          "subject_type": "constitution",
+          "violations": []
+        }
+      ],
+      "passed": true,
+      "rule_count": 1,
+      "subject": "constitution:segues-primary",
+      "violation_count": 0
+    },
+    "instance:kindred:registry": {
+      "evaluations": [],
+      "passed": true,
+      "rule_count": 0,
+      "subject": "instance:kindred:registry",
+      "violation_count": 0
+    },
+    "instance:lexicon:constitution": {
+      "evaluations": [],
+      "passed": true,
+      "rule_count": 0,
+      "subject": "instance:lexicon:constitution",
+      "violation_count": 0
+    },
+    "instance:lexicon:registry": {
+      "evaluations": [],
+      "passed": true,
+      "rule_count": 0,
+      "subject": "instance:lexicon:registry",
+      "violation_count": 0
+    },
+    "instance:ontology:registry": {
+      "evaluations": [],
+      "passed": true,
+      "rule_count": 0,
+      "subject": "instance:ontology:registry",
+      "violation_count": 0
+    },
+    "projection:instance:dependency_manifest": {
+      "evaluations": [],
+      "passed": true,
+      "rule_count": 0,
+      "subject": "projection:instance:dependency_manifest",
+      "violation_count": 0
+    },
+    "projection:instance:graph_node": {
+      "evaluations": [],
+      "passed": true,
+      "rule_count": 0,
+      "subject": "projection:instance:graph_node",
+      "violation_count": 0
+    },
+    "projection:segue:graph_edge": {
+      "evaluations": [],
+      "passed": true,
+      "rule_count": 0,
+      "subject": "projection:segue:graph_edge",
+      "violation_count": 0
+    },
+    "segue:constitution:governs_registry": {
+      "evaluations": [],
+      "passed": true,
+      "rule_count": 0,
+      "subject": "segue:constitution:governs_registry",
+      "violation_count": 0
+    },
+    "segue:kindred:groups_instances": {
+      "evaluations": [],
+      "passed": true,
+      "rule_count": 0,
+      "subject": "segue:kindred:groups_instances",
+      "violation_count": 0
+    },
+    "segue:ontology:classifies_lexicon": {
+      "evaluations": [],
+      "passed": true,
+      "rule_count": 0,
+      "subject": "segue:ontology:classifies_lexicon",
+      "violation_count": 0
+    }
+  }
+}

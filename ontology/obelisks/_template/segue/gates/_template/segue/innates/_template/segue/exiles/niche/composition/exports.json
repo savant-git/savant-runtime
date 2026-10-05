@@ -1,0 +1,31 @@
+{
+  "id": "niche.exports",
+  "owner": "niche",
+  "status": "active",
+  "exports": [
+    {
+      "id": "niche.living-task-engine",
+      "type": "runtime",
+      "path": "runtime/living_task.py",
+      "symbol": "LivingTaskEngine"
+    },
+    {
+      "id": "niche.living-task-engine-factory",
+      "type": "runtime_factory",
+      "path": "runtime/living_task.py",
+      "symbol": "engine"
+    },
+    {
+      "id": "niche.dryve-lifecycle",
+      "type": "runtime_adapter",
+      "path": "runtime/dryve_lifecycle.py",
+      "symbol": "NicheDryveLifecycle"
+    },
+    {
+      "id": "niche.dryve-lifecycle-factory",
+      "type": "runtime_factory",
+      "path": "runtime/dryve_lifecycle.py",
+      "symbol": "lifecycle"
+    }
+  ]
+}

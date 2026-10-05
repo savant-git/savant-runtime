@@ -1,0 +1,105 @@
+schema: savant://lexicon/cyphor-binding/2.0.0
+
+binding_id: binding:lexicon:cyphor
+owner_id: system:lexicon
+
+rut: exchange
+tidal: cyphor
+tidal_shade: cyphor:lexicon
+
+authority_state: accepted
+enabled: true
+version: 2.0.0
+
+specialization:
+  centra: centra:lexical-governance
+  veneer: null
+  visage: null
+  credenda: credenda:canonical-terminology
+
+parameters:
+  canonical_write_terms_only: true
+  historical_alias_reads: true
+  preserve_lexical_history: true
+  destructive_rename: false
+  preserve_lineage: true
+  preserve_provenance: true
+  deterministic_resolution: true
+  fail_closed_on_ambiguity: true
+
+dependencies: []
+
+lineage:
+  supersedes:
+    - binding:lexicon:cypher
+  superseded_by: []
+
+provenance:
+  authority: user
+  accepted_at: "2026-08-09"
+  source: VISCERA NOVEL project directive
+  previous_binding: binding:lexicon:cypher
+
+compatibility:
+  minimum_tidal_version: "1.0.0"
+  linka: null
+  reversible: true
+
+  historical_aliases:
+    cypher: cyphor
+    slot: rut
+    instance: shade
+    focal: centra
+    central: centra
+    overlay: veneer
+    mask: visage
+    policy: credenda
+
+  historical_identifiers:
+    binding:lexicon:cypher: binding:lexicon:cyphor
+    cypher:lexicon: cyphor:lexicon
+    tidal:cypher: tidal:cyphor
+
+jurisdiction:
+  canonical_owner: cyphor
+
+  pryme_authority_consumption: true
+  scrybe_history_consumption: true
+  thryce_validation_consumption: true
+  spyral_evolution_consumption: true
+  lythe_wavre_consumption: true
+  splyce_presentation_consumption: true
+  dryve_migration_consumption: true
+  scyon_structure_consumption: true
+
+lexicon_responsibilities:
+  canonical_lexeme_resolution: true
+  historical_alias_resolution: true
+  supersession_resolution: true
+  lexical_normalization: true
+  semantic_equivalence: true
+  compatibility_vocabulary: true
+  lexical_translation: true
+  lexical_validation_wavres: true
+  terminology_evolution: true
+  lexical_collision_detection: true
+
+invariants:
+  canonical_tidal: cyphor
+  canonical_shade: cyphor:lexicon
+  canonical_centra: centra:lexical-governance
+
+  independent_lexicon_store: false
+  duplicate_lexical_authority: false
+  historical_lineage_preserved: true
+  provenance_preserved: true
+  canonical_write_terms_only: true
+  historical_alias_reads_allowed: true
+  destructive_rename_allowed: false
+  wavres_authoritative: false
+
+  cypher_is_historical: true
+  cyphor_is_canonical: true
+
+mutation_authorized: false
+physical_migration_authorized: false

@@ -1,0 +1,328 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import json
+import subprocess
+import sys
+from pathlib import Path
+from typing import Any
+
+
+ENGINE = Path(
+    '/root/savant-runtime/lexicon/constitution_engine/constitution_engine.py'
+)
+
+LEXICON_ROOT = ENGINE.parents[1]
+
+
+def execute(
+    operation: str,
+    arguments: list[str],
+    *,
+    capture: bool = False,
+) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(
+        [
+            sys.executable,
+            str(ENGINE),
+            operation,
+            *arguments,
+        ],
+        cwd=str(
+            LEXICON_ROOT
+        ),
+        text=True,
+        capture_output=capture,
+        check=False,
+    )
+
+
+def decode_output(
+    completed: subprocess.CompletedProcess[str],
+) -> Any:
+    try:
+        return json.loads(
+            completed.stdout
+        )
+
+    except json.JSONDecodeError:
+        return {
+            "raw_stdout": completed.stdout,
+            "raw_stderr": completed.stderr,
+        }
+
+
+def forward(
+    operation: str,
+    arguments: list[str],
+) -> int:
+    return execute(
+        operation,
+        arguments,
+    ).returncode
+
+
+def integrity(
+    arguments: list[str],
+) -> int:
+    if arguments:
+        print(
+            "constitutionctl integrity accepts no arguments",
+            file=sys.stderr,
+        )
+
+        return 2
+
+    evaluation = execute(
+        "evaluate-all",
+        [],
+        capture=True,
+    )
+
+    if evaluation.returncode != 0:
+        sys.stdout.write(
+            evaluation.stdout
+        )
+
+        sys.stderr.write(
+            evaluation.stderr
+        )
+
+        return evaluation.returncode
+
+    graph = execute(
+        "graph",
+        [],
+        capture=True,
+    )
+
+    if graph.returncode != 0:
+        sys.stdout.write(
+            graph.stdout
+        )
+
+        sys.stderr.write(
+            graph.stderr
+        )
+
+        return graph.returncode
+
+    order = execute(
+        "order",
+        [],
+        capture=True,
+    )
+
+    if order.returncode != 0:
+        sys.stdout.write(
+            order.stdout
+        )
+
+        sys.stderr.write(
+            order.stderr
+        )
+
+        return order.returncode
+
+    snapshot = execute(
+        "snapshot",
+        [],
+        capture=True,
+    )
+
+    if snapshot.returncode != 0:
+        sys.stdout.write(
+            snapshot.stdout
+        )
+
+        sys.stderr.write(
+            snapshot.stderr
+        )
+
+        return snapshot.returncode
+
+    evaluation_payload = decode_output(
+        evaluation
+    )
+
+    graph_payload = decode_output(
+        graph
+    )
+
+    order_payload = decode_output(
+        order
+    )
+
+    snapshot_payload = decode_output(
+        snapshot
+    )
+
+    evaluation_passed = bool(
+        isinstance(
+            evaluation_payload,
+            dict,
+        )
+        and evaluation_payload.get(
+            "passed",
+            False,
+        )
+    )
+
+    snapshot_passed = bool(
+        isinstance(
+            snapshot_payload,
+            dict,
+        )
+        and snapshot_payload.get(
+            "passed",
+            False,
+        )
+    )
+
+    graph_valid = bool(
+        isinstance(
+            graph_payload,
+            dict,
+        )
+        and isinstance(
+            graph_payload.get(
+                "nodes"
+            ),
+            list,
+        )
+        and isinstance(
+            graph_payload.get(
+                "edges"
+            ),
+            list,
+        )
+    )
+
+    order_valid = bool(
+        isinstance(
+            order_payload,
+            dict,
+        )
+        and isinstance(
+            order_payload.get(
+                "rules"
+            ),
+            list,
+        )
+    )
+
+    passed = all(
+        [
+            evaluation_passed,
+            snapshot_passed,
+            graph_valid,
+            order_valid,
+        ]
+    )
+
+    print(
+        json.dumps(
+            {
+                "operation": "integrity",
+                "passed": passed,
+                "evaluation": evaluation_payload,
+                "graph": graph_payload,
+                "order": order_payload,
+                "snapshot": snapshot_payload,
+            },
+            indent=2,
+            sort_keys=True,
+            ensure_ascii=False,
+        )
+    )
+
+    return (
+        0
+        if passed
+        else 1
+    )
+
+
+def usage() -> None:
+    print(
+        """constitutionctl validate
+constitutionctl compile [--output PATH]
+constitutionctl integrity
+constitutionctl resolve RULE_ID
+constitutionctl rules SUBJECT_ID
+constitutionctl evaluate SUBJECT_ID
+constitutionctl check RULE_ID SUBJECT_ID
+constitutionctl evaluate-all
+constitutionctl graph
+constitutionctl order
+constitutionctl snapshot
+constitutionctl materialize [--output PATH]"""
+    )
+
+
+def main() -> int:
+    arguments = sys.argv[1:]
+
+    if not arguments:
+        usage()
+        return 1
+
+    if arguments[0] in {
+        "help",
+        "--help",
+        "-h",
+    }:
+        usage()
+        return 0
+
+    operation = arguments[0]
+    remaining = arguments[1:]
+
+    if operation == "validate":
+        return forward(
+            "evaluate-all",
+            remaining,
+        )
+
+    if operation == "compile":
+        return forward(
+            "materialize",
+            remaining,
+        )
+
+    if operation == "integrity":
+        return integrity(
+            remaining
+        )
+
+    if operation in {
+        "resolve",
+        "rules",
+        "evaluate",
+        "check",
+        "evaluate-all",
+        "graph",
+        "order",
+        "snapshot",
+        "materialize",
+    }:
+        return forward(
+            operation,
+            remaining,
+        )
+
+    print(
+        f"constitutionctl: unsupported operation: {operation}",
+        file=sys.stderr,
+    )
+
+    usage()
+
+    return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

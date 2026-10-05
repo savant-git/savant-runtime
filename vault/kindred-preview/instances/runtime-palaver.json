@@ -1,0 +1,163 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:runtime/palaver",
+  "deterministic_hash": "b3bdf10d86aafbb4d8f42f00b5b3d35d406e12e4e958bbec81dd3c27d1d1ea1e",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "runtime/palaver",
+  "kind": "directory",
+  "label": "palaver",
+  "namespace": "preview.kindred",
+  "path": "runtime/palaver",
+  "placement": {
+    "domain": "filesystem",
+    "node": "runtime/palaver",
+    "parent": "runtime",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.268c97f13f00aff73bf0",
+    "rank": 50,
+    "slot": "40_runtime",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.268c97f13f00aff73bf0",
+    "lineage.composition.27ee18502e5a31835bec",
+    "lineage.composition.454c60eb3465071000a8",
+    "lineage.composition.6630becab7af56bc4c28",
+    "lineage.composition.6af5c8e19762c4a8a2a8",
+    "lineage.composition.82a5fda8dc0481f0701b",
+    "lineage.composition.8a1e85aaa10a68e500d0",
+    "lineage.composition.8d38b6f6d1ae49080883",
+    "lineage.composition.8fd6b90f94ec49b8f6a9",
+    "lineage.composition.9c0e5b80dda76bd9de2c",
+    "lineage.composition.9c56282e0955e2a7d904",
+    "lineage.composition.a8e39971e1e22f4a5eac",
+    "lineage.composition.b3429ece682b932aae2a"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:runtime/palaver",
+    "children": [
+      "runtime/palaver/health",
+      "runtime/palaver/lineage",
+      "runtime/palaver/observatories",
+      "runtime/palaver/topology",
+      "runtime/palaver/investigation",
+      "runtime/palaver/graph",
+      "runtime/palaver/schema",
+      "runtime/palaver/contracts",
+      "runtime/palaver/registry",
+      "runtime/palaver/search",
+      "runtime/palaver/fields",
+      "runtime/palaver/authority"
+    ],
+    "daughters": [
+      "runtime/palaver/health",
+      "runtime/palaver/lineage",
+      "runtime/palaver/observatories",
+      "runtime/palaver/topology",
+      "runtime/palaver/investigation",
+      "runtime/palaver/graph",
+      "runtime/palaver/schema",
+      "runtime/palaver/contracts",
+      "runtime/palaver/registry",
+      "runtime/palaver/search",
+      "runtime/palaver/fields",
+      "runtime/palaver/authority"
+    ],
+    "dependencies": [],
+    "fathers": [],
+    "id": "runtime/palaver",
+    "kind": "directory",
+    "label": "palaver",
+    "legacy_id": "runtime/palaver",
+    "lineage": [
+      "runtime"
+    ],
+    "metadata": {
+      "canonical_id": "fs:runtime/palaver",
+      "child_modes": {
+        "preserving": [
+          "fs:runtime/palaver/health",
+          "fs:runtime/palaver/lineage",
+          "fs:runtime/palaver/observatories",
+          "fs:runtime/palaver/topology",
+          "fs:runtime/palaver/investigation",
+          "fs:runtime/palaver/graph",
+          "fs:runtime/palaver/schema",
+          "fs:runtime/palaver/contracts",
+          "fs:runtime/palaver/registry",
+          "fs:runtime/palaver/search",
+          "fs:runtime/palaver/fields",
+          "fs:runtime/palaver/authority"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:runtime/palaver/health",
+          "fs:runtime/palaver/lineage",
+          "fs:runtime/palaver/observatories",
+          "fs:runtime/palaver/topology",
+          "fs:runtime/palaver/investigation",
+          "fs:runtime/palaver/graph",
+          "fs:runtime/palaver/schema",
+          "fs:runtime/palaver/contracts",
+          "fs:runtime/palaver/registry",
+          "fs:runtime/palaver/search",
+          "fs:runtime/palaver/fields",
+          "fs:runtime/palaver/authority"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:runtime"
+        ]
+      },
+      "projected_id": "runtime/palaver",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "runtime"
+    ],
+    "path": "runtime/palaver",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "runtime/palaver",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.268c97f13f00aff73bf0",
+      "lineage.composition.27ee18502e5a31835bec",
+      "lineage.composition.454c60eb3465071000a8",
+      "lineage.composition.6630becab7af56bc4c28",
+      "lineage.composition.6af5c8e19762c4a8a2a8",
+      "lineage.composition.82a5fda8dc0481f0701b",
+      "lineage.composition.8a1e85aaa10a68e500d0",
+      "lineage.composition.8d38b6f6d1ae49080883",
+      "lineage.composition.8fd6b90f94ec49b8f6a9",
+      "lineage.composition.9c0e5b80dda76bd9de2c",
+      "lineage.composition.9c56282e0955e2a7d904",
+      "lineage.composition.a8e39971e1e22f4a5eac",
+      "lineage.composition.b3429ece682b932aae2a"
+    ],
+    "size": 12,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

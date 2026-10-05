@@ -1,0 +1,76 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "40c66256ef42289021a31a7d30bead1eee79504e0f28ad87bc1c6d845086ad73",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "namespace": "preview.kindred",
+  "node": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/notary/registry/manifests",
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationships": [
+    {
+      "child_profile": "daughter",
+      "domain": "filesystem",
+      "id": "lineage.composition.fe5d7265a78711ed7369",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/notary/registry",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/notary/registry",
+        "canonical_target": "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/notary/registry/manifests",
+        "continuation": "preserving",
+        "id": "lineage.composition.fe5d7265a78711ed7369",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/notary/registry/manifests"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/notary/registry",
+        "status": "active",
+        "symbolic_child_alias": "daughter",
+        "symbolic_parent_alias": "parent",
+        "target": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/notary/registry/manifests",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/notary/registry/manifests"
+    }
+  ],
+  "schema": "savant.kindred.preview.relationship_projection.v2"
+}

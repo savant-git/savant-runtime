@@ -1,0 +1,382 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+
+from pathlib import Path
+from typing import Any
+
+
+runtime_root = Path(
+    "/root/savant-runtime/runtime"
+)
+
+if str(runtime_root) not in sys.path:
+    sys.path.insert(
+        0,
+        str(runtime_root),
+    )
+
+
+from living_governance_packets import (  # noqa: E402
+    consumer_packet,
+    evaluate_and_packet,
+    living_governance_evaluator_unavailable,
+    living_governance_packet_error,
+    packets,
+    selftest,
+    status,
+    taxonomy,
+    technical_exit_codes,
+)
+
+
+def read_json(
+    path: str,
+) -> Any:
+    if path == "-":
+        return json.load(
+            sys.stdin
+        )
+
+    return json.loads(
+        Path(path).read_text(
+            encoding="utf-8"
+        )
+    )
+
+
+def read_object(
+    path: str,
+) -> dict[str, Any]:
+    value = read_json(path)
+
+    if not isinstance(
+        value,
+        dict,
+    ):
+        raise ValueError(
+            "input must be a JSON object"
+        )
+
+    return value
+
+
+def add_packet_arguments(
+    parser: argparse.ArgumentParser,
+) -> None:
+    parser.add_argument(
+        "--consumer",
+        required=True,
+        choices=(
+            "palaver",
+            "opus",
+            "scrybe",
+            "niche",
+            "kindred",
+        ),
+    )
+
+    parser.add_argument(
+        "--evaluation",
+        required=True,
+    )
+
+    parser.add_argument(
+        "--request",
+    )
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="living-governance-packet",
+        description=(
+            "compact Living Governance "
+            "consumer packets with stable "
+            "machine semantics and provenance"
+        ),
+    )
+
+    commands = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    commands.add_parser(
+        "status"
+    )
+
+    commands.add_parser(
+        "selftest"
+    )
+
+    commands.add_parser(
+        "taxonomy"
+    )
+
+    packet = commands.add_parser(
+        "packet"
+    )
+
+    add_packet_arguments(
+        packet
+    )
+
+    packet_set = commands.add_parser(
+        "packet-set"
+    )
+
+    packet_set.add_argument(
+        "--evaluation",
+        required=True,
+    )
+
+    packet_set.add_argument(
+        "--request",
+    )
+
+    evaluate = commands.add_parser(
+        "evaluate"
+    )
+
+    evaluate.add_argument(
+        "--consumer",
+        required=True,
+        choices=(
+            "palaver",
+            "opus",
+            "scrybe",
+            "niche",
+            "kindred",
+        ),
+    )
+
+    evaluate.add_argument(
+        "--request",
+        required=True,
+    )
+
+    return parser
+
+
+def emit(
+    output: Any,
+) -> None:
+    print(
+        json.dumps(
+            output,
+            indent=2,
+            ensure_ascii=False,
+            sort_keys=True,
+        )
+    )
+
+
+def decision_exit_code(
+    output: Any,
+) -> int:
+    if not isinstance(
+        output,
+        dict,
+    ):
+        return 0
+
+    exit_value = output.get(
+        "exit"
+    )
+
+    if isinstance(
+        exit_value,
+        dict,
+    ):
+        code = exit_value.get(
+            "code"
+        )
+
+        if isinstance(
+            code,
+            int,
+        ):
+            return code
+
+    return 0
+
+
+def main() -> int:
+    args = (
+        build_parser()
+        .parse_args()
+    )
+
+    try:
+        if args.command == "status":
+            output = status()
+            code = 0
+
+        elif args.command == "selftest":
+            output = selftest()
+            code = 0
+
+        elif args.command == "taxonomy":
+            output = taxonomy()
+            code = 0
+
+        elif args.command == "packet":
+            output = consumer_packet(
+                consumer=
+                    args.consumer,
+
+                evaluation=
+                    read_object(
+                        args.evaluation
+                    ),
+
+                request=(
+                    read_object(
+                        args.request
+                    )
+                    if args.request
+                    else None
+                ),
+            )
+
+            code = decision_exit_code(
+                output
+            )
+
+        elif args.command == "packet-set":
+            output = packets(
+                evaluation=
+                    read_object(
+                        args.evaluation
+                    ),
+
+                request=(
+                    read_object(
+                        args.request
+                    )
+                    if args.request
+                    else None
+                ),
+            )
+
+            code = 0
+
+        elif args.command == "evaluate":
+            output = evaluate_and_packet(
+                consumer=
+                    args.consumer,
+
+                request=
+                    read_object(
+                        args.request
+                    ),
+            )
+
+            code = decision_exit_code(
+                output
+            )
+
+        else:
+            raise ValueError(
+                "unknown command"
+            )
+
+    except (
+        OSError,
+        ValueError,
+        json.JSONDecodeError,
+    ) as exc:
+        output = {
+            "ok":
+                False,
+
+            "owner":
+                "living-governance",
+
+            "authority_effect":
+                "none",
+
+            "reason_code":
+                "lg.input.invalid",
+
+            "error":
+                str(exc),
+
+            "authority_transfer":
+                False,
+        }
+
+        emit(output)
+
+        return technical_exit_codes[
+            "invalid_input"
+        ]
+
+    except (
+        living_governance_evaluator_unavailable
+    ) as exc:
+        output = {
+            "ok":
+                False,
+
+            "owner":
+                "living-governance",
+
+            "authority_effect":
+                "none",
+
+            "reason_code":
+                "lg.evaluator.unavailable",
+
+            "error":
+                str(exc),
+
+            "authority_transfer":
+                False,
+        }
+
+        emit(output)
+
+        return technical_exit_codes[
+            "evaluator_unavailable"
+        ]
+
+    except living_governance_packet_error as exc:
+        output = {
+            "ok":
+                False,
+
+            "owner":
+                "living-governance",
+
+            "authority_effect":
+                "none",
+
+            "reason_code":
+                "lg.input.invalid",
+
+            "error":
+                str(exc),
+
+            "authority_transfer":
+                False,
+        }
+
+        emit(output)
+
+        return technical_exit_codes[
+            "evaluation_error"
+        ]
+
+    emit(output)
+
+    return code
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

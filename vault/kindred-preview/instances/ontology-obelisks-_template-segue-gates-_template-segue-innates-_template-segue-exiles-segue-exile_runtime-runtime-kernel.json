@@ -1,0 +1,121 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime/kernel",
+  "deterministic_hash": "4fa61428802aac246fb7e55311c98aa9f59a1aca80905719e63dbc54701d5cac",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime/kernel",
+  "kind": "directory",
+  "label": "kernel",
+  "namespace": "preview.kindred",
+  "path": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime/kernel",
+  "placement": {
+    "domain": "filesystem",
+    "node": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime/kernel",
+    "parent": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.4ed6cafc3e837a0da56a",
+    "rank": 90,
+    "slot": "30_ontology",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.204bd3d199f345c32522",
+    "lineage.composition.4ed6cafc3e837a0da56a",
+    "lineage.composition.86565d45ebd27ce63533",
+    "lineage.composition.a4615358137bfd1a989e",
+    "lineage.composition.bc467c42ff6c1ac4c2fa",
+    "lineage.composition.da3b0cfddf2fbde2a53d"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime/kernel",
+    "children": [
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime/kernel/ONTOLOGY_OS.py",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime/kernel/KERNEL.py",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime/kernel/RUN_ONTOLOGY_OS.py",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime/kernel/__init__.py",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime/kernel/RUN_KERNEL.py"
+    ],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime/kernel",
+    "kind": "directory",
+    "label": "kernel",
+    "legacy_id": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime/kernel",
+    "lineage": [
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime"
+    ],
+    "metadata": {
+      "canonical_id": "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime/kernel",
+      "child_modes": {
+        "projecting": [
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime/kernel/ONTOLOGY_OS.py",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime/kernel/KERNEL.py",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime/kernel/RUN_ONTOLOGY_OS.py",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime/kernel/__init__.py",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime/kernel/RUN_KERNEL.py"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime/kernel/ONTOLOGY_OS.py",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime/kernel/KERNEL.py",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime/kernel/RUN_ONTOLOGY_OS.py",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime/kernel/__init__.py",
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime/kernel/RUN_KERNEL.py"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime"
+        ]
+      },
+      "projected_id": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime/kernel",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime"
+    ],
+    "path": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime/kernel",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime/kernel",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.204bd3d199f345c32522",
+      "lineage.composition.4ed6cafc3e837a0da56a",
+      "lineage.composition.86565d45ebd27ce63533",
+      "lineage.composition.a4615358137bfd1a989e",
+      "lineage.composition.bc467c42ff6c1ac4c2fa",
+      "lineage.composition.da3b0cfddf2fbde2a53d"
+    ],
+    "size": 12,
+    "sons": [
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime/kernel/ONTOLOGY_OS.py",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime/kernel/KERNEL.py",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime/kernel/RUN_ONTOLOGY_OS.py",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime/kernel/__init__.py",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/runtime/kernel/RUN_KERNEL.py"
+    ]
+  },
+  "state": "active",
+  "synthetic": false
+}

@@ -1,0 +1,109 @@
+{
+  "authoritative": false,
+  "authority_tier": "delegated",
+  "canonical_id": "fs:canon-system/runtime",
+  "deterministic_hash": "44381c9c7c31f5a805f8227c6ca3cfbb696ee1de20edf4277b4517d71476e284",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "canon-system/runtime",
+  "kind": "directory",
+  "label": "runtime",
+  "namespace": "preview.kindred",
+  "path": "canon-system/runtime",
+  "placement": {
+    "domain": "filesystem",
+    "node": "canon-system/runtime",
+    "parent": "canon-system",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.faeeab89a779c72530a6",
+    "rank": 90,
+    "slot": "20_authority",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.5a4ca7e3173d45da9be8",
+    "lineage.composition.86cd904f50130324ca76",
+    "lineage.composition.ad118af819a5cf429b20",
+    "lineage.composition.faeeab89a779c72530a6"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": false,
+    "canonical_id": "fs:canon-system/runtime",
+    "children": [
+      "canon-system/runtime/canonctl.py",
+      "canon-system/runtime/canon_proposals.py",
+      "canon-system/runtime/canon.sqlite3"
+    ],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "canon-system/runtime",
+    "kind": "directory",
+    "label": "runtime",
+    "legacy_id": "canon-system/runtime",
+    "lineage": [
+      "canon-system"
+    ],
+    "metadata": {
+      "canonical_id": "fs:canon-system/runtime",
+      "child_modes": {
+        "projecting": [
+          "fs:canon-system/runtime/canonctl.py",
+          "fs:canon-system/runtime/canon_proposals.py",
+          "fs:canon-system/runtime/canon.sqlite3"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:canon-system/runtime/canonctl.py",
+          "fs:canon-system/runtime/canon_proposals.py",
+          "fs:canon-system/runtime/canon.sqlite3"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:canon-system"
+        ]
+      },
+      "projected_id": "canon-system/runtime",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "canon-system"
+    ],
+    "path": "canon-system/runtime",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "canon-system/runtime",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.5a4ca7e3173d45da9be8",
+      "lineage.composition.86cd904f50130324ca76",
+      "lineage.composition.ad118af819a5cf429b20",
+      "lineage.composition.faeeab89a779c72530a6"
+    ],
+    "size": 12,
+    "sons": [
+      "canon-system/runtime/canonctl.py",
+      "canon-system/runtime/canon_proposals.py",
+      "canon-system/runtime/canon.sqlite3"
+    ]
+  },
+  "state": "active",
+  "synthetic": false
+}

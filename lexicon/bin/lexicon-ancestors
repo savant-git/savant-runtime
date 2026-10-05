@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+LEXICON_ROOT="$HOME/savant-runtime/lexicon"
+
+exec python3 \
+  "$LEXICON_ROOT/runtime/lexicon_engine.py" \
+  ancestors \
+  "$@"

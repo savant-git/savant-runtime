@@ -1,0 +1,46 @@
+{
+  "evidence": [
+    "event-c1ecc45bbc0bafba75bc7558"
+  ],
+  "extensions": {
+    "backup": "backups/masterplan/segue-reconciliation/20260802T194138Z__084378dc849b8bd1/masterplan.json",
+    "event_id": "event-c1ecc45bbc0bafba75bc7558",
+    "graph_digest_after": "8c6665cbe06237f3e5e5f1480e68c093232c79ac006bd7592e02a90e34332945",
+    "graph_digest_before": "484218151f172c4a2385797ad7373ba71354df6c5644552327276edd765c51c2",
+    "snapshot": "authority/task-graph/snapshots/20260802T194138Z__084378dc849b8bd1__segue-reconciliation.json"
+  },
+  "id": "receipt-14c3ff9564868b9644d8d8f1",
+  "occurred_at": "2026-08-02T19:41:38+00:00",
+  "operation": "masterplan.segues.duplicate-reconciliation",
+  "outputs": [
+    "authority/task-graph/masterplan.json",
+    "authority/task-graph/snapshots/20260802T194138Z__084378dc849b8bd1__segue-reconciliation.json"
+  ],
+  "passed": true,
+  "provenance": {
+    "contract_version": "1.0.0",
+    "generated_at": "2026-08-02T19:41:38+00:00",
+    "generated_by": "prodigal.niche.masterplan.apply_duplicate_segue_reconciliation",
+    "sources": [
+      {
+        "authority_state": "accepted",
+        "source_id": "decision-8039a2c3a32e59d3c2f4fe77",
+        "source_kind": "accepted-decision",
+        "source_path": "authority/task-graph/decisions/decision-8039a2c3a32e59d3c2f4fe77.json"
+      },
+      {
+        "authority_state": "proposed",
+        "source_id": "6c9a1d4c26ef64cf75cc6313736034670781c72f7fed765a9d3a357253b0fbcf",
+        "source_kind": "segue-reconciliation-plan",
+        "source_path": "reports/niche/masterplan/segue-reconciliation/latest.json"
+      }
+    ],
+    "transformations": [
+      "validate_plan_graph_digest",
+      "validate_decision_authority",
+      "validate_exact_plan_authorization",
+      "remove_authorized_duplicate_segues"
+    ]
+  },
+  "task_id": "SAV-P4A-003"
+}

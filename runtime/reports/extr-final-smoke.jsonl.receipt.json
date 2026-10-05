@@ -1,0 +1,56 @@
+{
+  "authoritative": false,
+  "authority_effect": "none",
+  "capabilities": {
+    "atomic_output": true,
+    "authority_neutral": true,
+    "binary_refusal": true,
+    "classification_alternatives": true,
+    "concatenated_json": true,
+    "csv_projection": true,
+    "debris_suppression": true,
+    "encoding_detection": true,
+    "exact_deduplication": true,
+    "fenced_json_salvage": true,
+    "format_detection": true,
+    "html_text_projection": true,
+    "json5": false,
+    "jsonl": true,
+    "ndjson": true,
+    "near_deduplication": true,
+    "plain_text_fallback": true,
+    "project_confidence": true,
+    "project_profiles": true,
+    "rapidfuzz": false,
+    "raw_fallback_on_json_corruption": true,
+    "recursive_json_text_projection": true,
+    "rtf_text_projection": true,
+    "simhash": true,
+    "source_lineage": true,
+    "stable_fingerprints": true,
+    "strict_json": true,
+    "tsv_projection": true,
+    "unicode_repair": true
+  },
+  "digest": "26a26d9cbfecd1c453ff441e169dadd4a193b709a6c55b6cfa47d50af7026304",
+  "parser": {
+    "kind": "text"
+  },
+  "rebuildable": true,
+  "schema": "savant.extr.universal.receipt.v1",
+  "source": {
+    "bytes": 141225,
+    "encoding": "utf-8",
+    "encoding_confidence": 1.0,
+    "kind": "text",
+    "path": "/root/savant-runtime/source/sdump-20260712T073433Z/sdump_extr_v6_071226.txt",
+    "sha256": "6efb9b16b0bce3dd9b0ab629159bf8a6421356f6f582d305392f79043e128785"
+  },
+  "statistics": {
+    "debris_removed": 0,
+    "exact_duplicates_removed": 202,
+    "near_duplicates_removed": 16,
+    "segments_seen": 965,
+    "segments_written": 747
+  }
+}

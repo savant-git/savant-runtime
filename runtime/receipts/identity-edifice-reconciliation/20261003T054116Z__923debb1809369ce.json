@@ -1,0 +1,265 @@
+{
+  "authority_effect": "implements-current-user-directive",
+  "authority_sources": {
+    "carbon": {
+      "path": "canon-system/authority/exiles/carbon.yaml",
+      "sha256": "5a938fb81fafaf65b50293febaed6c40142cc3b9dd35c438292e89155def4e38"
+    },
+    "cataxis": {
+      "path": "canon-system/authority/exiles/cataxis.yaml",
+      "sha256": "0991006315310b84454b53506037fdb720ce4e87ebf03135e86039e389ab6820"
+    },
+    "coda": {
+      "path": "canon-system/authority/exiles/coda.yaml",
+      "sha256": "2c2c0e943c475efef9d3ab19bc5857bfaaa179be7d31397568a1902c78bf0819"
+    },
+    "envoy": {
+      "path": "canon-system/authority/exiles/envoy.yaml",
+      "sha256": "792a7b77e4ce1613c7d032403f1f4757e705a5a7e51d72d77c24ad77fac2d2a9"
+    },
+    "filament": {
+      "path": "canon-system/authority/exiles/filament.yaml",
+      "sha256": "13b7854d443105ed566ca75b8dd0ce8d2768a6d8374414e3d2589a076fe9d3e8"
+    },
+    "graffiti": {
+      "path": "canon-system/authority/exiles/graffiti.yaml",
+      "sha256": "da87b675c4ce74c54d38cd7328034cadba6bae460d14c3250239eb8f69b52851"
+    },
+    "lore": {
+      "path": "canon-system/authority/exiles/lore.yaml",
+      "sha256": "c7351a830b7c68f0002238b450552c5fe364502d632eab720f294e68c88b73cf"
+    },
+    "mobius": {
+      "path": "canon-system/authority/exiles/mobius.yaml",
+      "sha256": "2c69536e5e977cab08475c247e687fbba55082061a041148bcc1ea09f0c293af"
+    },
+    "modus": {
+      "path": "canon-system/authority/exiles/modus.yaml",
+      "sha256": "0ffe6cf91620cd907c194f6348575dbebc6a34a895811839f2d5602b7f8457d4"
+    },
+    "niche": {
+      "path": "canon-system/authority/exiles/niche.yaml",
+      "sha256": "91a7969dd4611720f5ff0315ae78007dee961f7e0ebc02af25c70f5aff2baf5b"
+    },
+    "notary": {
+      "path": "canon-system/authority/exiles/notary.yaml",
+      "sha256": "5bcf8f44485718093e5e87add0c651b88978f3d8e802911d1f56645a342d971e"
+    },
+    "opus": {
+      "path": "canon-system/authority/exiles/opus.yaml",
+      "sha256": "a7c0c0050697954deaeca246e8e12987c41c65fb02fc0c74dab84c8dc2c1bd69"
+    },
+    "pact": {
+      "path": "canon-system/authority/exiles/pact.yaml",
+      "sha256": "88a7a7d73254141c7e6c0d2c9e333af22b6d730aa39e27ac77c12ca3d36e33ba"
+    },
+    "palaver": {
+      "path": "canon-system/authority/exiles/palaver.yaml",
+      "sha256": "901fc5d5854b8ab6fa7d06bded1b27dcdd6c60d8a8809e618f4c71f3f4569d93"
+    },
+    "shatter": {
+      "path": "canon-system/authority/exiles/shatter.yaml",
+      "sha256": "4311a48da4ec18d7e01e36a56f1c160ab911c3880e0f1a4ea8cc14e840c3f133"
+    },
+    "underscore": {
+      "path": "canon-system/authority/exiles/underscore.yaml",
+      "sha256": "e81d639d70045d8a313d862974936d4b108bfc3b5f7664fe2adcf5fca3d42812"
+    },
+    "urge": {
+      "path": "canon-system/authority/exiles/urge.yaml",
+      "sha256": "1cda1b0ed723e24fb12014f53b77cdf8380ef934b9653991bbb74e36b340271d"
+    },
+    "zero": {
+      "path": "canon-system/authority/exiles/zero.yaml",
+      "sha256": "ed93d533e375b9ca7ebc0f59ffc9e2372e803d4e3c18e1c191e9273480c31f8d"
+    }
+  },
+  "backup": "/root/savant-runtime/repair_backups/identity-edifice-reconciliation/20261003T054116Z",
+  "changes": [
+    {
+      "action": "write_instance_projection",
+      "path": "edifices/identity/exiles/carbon/instance.yaml"
+    },
+    {
+      "action": "write_segue_projection",
+      "path": "edifices/identity/exiles/carbon/segue/instance.yaml"
+    },
+    {
+      "action": "write_instance_projection",
+      "path": "edifices/identity/exiles/cataxis/instance.yaml"
+    },
+    {
+      "action": "write_segue_projection",
+      "path": "edifices/identity/exiles/cataxis/segue/instance.yaml"
+    },
+    {
+      "action": "write_instance_projection",
+      "path": "edifices/identity/exiles/coda/instance.yaml"
+    },
+    {
+      "action": "write_segue_projection",
+      "path": "edifices/identity/exiles/coda/segue/instance.yaml"
+    },
+    {
+      "action": "write_instance_projection",
+      "path": "edifices/identity/exiles/envoy/instance.yaml"
+    },
+    {
+      "action": "write_segue_projection",
+      "path": "edifices/identity/exiles/envoy/segue/instance.yaml"
+    },
+    {
+      "action": "write_instance_projection",
+      "path": "edifices/identity/exiles/filament/instance.yaml"
+    },
+    {
+      "action": "write_segue_projection",
+      "path": "edifices/identity/exiles/filament/segue/instance.yaml"
+    },
+    {
+      "action": "write_instance_projection",
+      "path": "edifices/identity/exiles/graffiti/instance.yaml"
+    },
+    {
+      "action": "write_segue_projection",
+      "path": "edifices/identity/exiles/graffiti/segue/instance.yaml"
+    },
+    {
+      "action": "write_instance_projection",
+      "path": "edifices/identity/exiles/lore/instance.yaml"
+    },
+    {
+      "action": "write_segue_projection",
+      "path": "edifices/identity/exiles/lore/segue/instance.yaml"
+    },
+    {
+      "action": "write_instance_projection",
+      "path": "edifices/identity/exiles/mobius/instance.yaml"
+    },
+    {
+      "action": "write_segue_projection",
+      "path": "edifices/identity/exiles/mobius/segue/instance.yaml"
+    },
+    {
+      "action": "write_instance_projection",
+      "path": "edifices/identity/exiles/modus/instance.yaml"
+    },
+    {
+      "action": "write_segue_projection",
+      "path": "edifices/identity/exiles/modus/segue/instance.yaml"
+    },
+    {
+      "action": "write_instance_projection",
+      "path": "edifices/identity/exiles/niche/instance.yaml"
+    },
+    {
+      "action": "write_segue_projection",
+      "path": "edifices/identity/exiles/niche/segue/instance.yaml"
+    },
+    {
+      "action": "move_and_link",
+      "from": "edifices/identity/exiles/niche/prodigals",
+      "to": "edifices/identity/exiles/niche/segue/prodigals"
+    },
+    {
+      "action": "write_instance_projection",
+      "path": "edifices/identity/exiles/notary/instance.yaml"
+    },
+    {
+      "action": "write_segue_projection",
+      "path": "edifices/identity/exiles/notary/segue/instance.yaml"
+    },
+    {
+      "action": "write_instance_projection",
+      "path": "edifices/identity/exiles/opus/instance.yaml"
+    },
+    {
+      "action": "write_segue_projection",
+      "path": "edifices/identity/exiles/opus/segue/instance.yaml"
+    },
+    {
+      "action": "move_and_link",
+      "from": "edifices/identity/exiles/opus/prodigals",
+      "to": "edifices/identity/exiles/opus/segue/prodigals"
+    },
+    {
+      "action": "move_and_link",
+      "from": "edifices/identity/exiles/opus/segue/prodigals/nocturne/quirks",
+      "to": "edifices/identity/exiles/opus/segue/prodigals/nocturne/segue/quirks"
+    },
+    {
+      "action": "write_instance_projection",
+      "path": "edifices/identity/exiles/pact/instance.yaml"
+    },
+    {
+      "action": "write_segue_projection",
+      "path": "edifices/identity/exiles/pact/segue/instance.yaml"
+    },
+    {
+      "action": "write_instance_projection",
+      "path": "edifices/identity/exiles/palaver/instance.yaml"
+    },
+    {
+      "action": "write_segue_projection",
+      "path": "edifices/identity/exiles/palaver/segue/instance.yaml"
+    },
+    {
+      "action": "write_instance_projection",
+      "path": "edifices/identity/exiles/shatter/instance.yaml"
+    },
+    {
+      "action": "write_segue_projection",
+      "path": "edifices/identity/exiles/shatter/segue/instance.yaml"
+    },
+    {
+      "action": "write_instance_projection",
+      "path": "edifices/identity/exiles/underscore/instance.yaml"
+    },
+    {
+      "action": "write_segue_projection",
+      "path": "edifices/identity/exiles/underscore/segue/instance.yaml"
+    },
+    {
+      "action": "write_instance_projection",
+      "path": "edifices/identity/exiles/urge/instance.yaml"
+    },
+    {
+      "action": "write_segue_projection",
+      "path": "edifices/identity/exiles/urge/segue/instance.yaml"
+    },
+    {
+      "action": "write_instance_projection",
+      "path": "edifices/identity/exiles/zero/instance.yaml"
+    },
+    {
+      "action": "write_segue_projection",
+      "path": "edifices/identity/exiles/zero/segue/instance.yaml"
+    },
+    {
+      "action": "materialize_reference",
+      "path": "edifices/identity/exiles/modus/segue/prodigals/coalesce/instance.yaml",
+      "source": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/segue/prodigals/coalesce/entity.json"
+    },
+    {
+      "action": "link_existing_canonical",
+      "path": "edifices/identity/exiles/modus/prodigals",
+      "target": "segue/prodigals"
+    },
+    {
+      "action": "write_projection",
+      "path": "edifices/identity/projections/exiles.json"
+    }
+  ],
+  "decision": "authority/accepted-decisions/ad-20261003-001-materialize-eighteen-exiles-and-segues.md",
+  "occurred_at": "2026-10-03T05:41:16.194068Z",
+  "operation": "identity-edifice-reconciliation",
+  "schema": "savant://receipt/identity-edifice-reconciliation/1.0.0",
+  "semantic_digest": "923debb1809369cee270dbe1a7f58481a577cf170969be3063ce227451b9eb1e",
+  "verification": {
+    "actual_expected_exile_count": 18,
+    "errors": [],
+    "expected_exile_count": 18,
+    "passed": true,
+    "warnings": []
+  }
+}

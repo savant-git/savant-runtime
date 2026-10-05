@@ -1,0 +1,177 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import subprocess
+import sys
+from pathlib import Path
+
+
+ROOT = Path("/root/savant-runtime")
+
+PYTHON = (
+    ROOT
+    / "bin"
+    / "identity-quality-python"
+)
+
+BUILDER = (
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "build_authoritative_task_graph.py"
+)
+
+MASTERPLANCTL = (
+    ROOT
+    / "bin"
+    / "masterplanctl"
+)
+
+
+def execute(
+    command: list[str],
+) -> int:
+    return subprocess.run(
+        command,
+        cwd=str(ROOT),
+        check=False,
+    ).returncode
+
+
+def usage() -> int:
+    print(
+        """
+masterplan-build build
+masterplan-build strict
+masterplan-build verify
+masterplan-build status
+masterplan-build next
+masterplan-build agent-context
+"""
+    )
+
+    return 0
+
+
+def build(
+    *,
+    strict: bool,
+    remaining: list[str],
+) -> int:
+    command = [
+        str(PYTHON),
+        str(BUILDER),
+    ]
+
+    if strict:
+        command.append(
+            "--strict"
+        )
+
+    command.extend(
+        remaining
+    )
+
+    return execute(
+        command
+    )
+
+
+def main() -> int:
+    arguments = sys.argv[1:]
+
+    if not arguments:
+        return usage()
+
+    command = arguments[0]
+    remaining = arguments[1:]
+
+    if command in {
+        "help",
+        "--help",
+        "-h",
+    }:
+        return usage()
+
+    if command == "build":
+        return build(
+            strict=False,
+            remaining=remaining,
+        )
+
+    if command == "strict":
+        return build(
+            strict=True,
+            remaining=remaining,
+        )
+
+    if command == "verify":
+        status = build(
+            strict=True,
+            remaining=[],
+        )
+
+        if status:
+            return status
+
+        return execute(
+            [
+                str(MASTERPLANCTL),
+                "verify",
+            ]
+        )
+
+    if command == "status":
+        return execute(
+            [
+                str(MASTERPLANCTL),
+                "status",
+            ]
+        )
+
+    if command == "next":
+        status = build(
+            strict=True,
+            remaining=[],
+        )
+
+        if status:
+            return status
+
+        return execute(
+            [
+                str(MASTERPLANCTL),
+                "next",
+            ]
+        )
+
+    if command == "agent-context":
+        status = build(
+            strict=True,
+            remaining=[],
+        )
+
+        if status:
+            return status
+
+        return execute(
+            [
+                str(MASTERPLANCTL),
+                "show",
+                "agent-context",
+            ]
+        )
+
+    print(
+        f"ERROR: unknown command: {command}",
+        file=sys.stderr,
+    )
+
+    return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

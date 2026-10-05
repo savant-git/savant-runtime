@@ -1,0 +1,31 @@
+{
+  "behavior": {
+    "deduplication": "sha256_content_addressing",
+    "default_profile": "compact",
+    "local_purge": "only_after_verified_upload",
+    "secret_posture": "exclude_secret_files_and_redact_content",
+    "upload_verification": "s3_size_and_sha256_metadata"
+  },
+  "entrypoint": "sdump.snippet.cli",
+  "id": "sdump.composition.enterprise-v3",
+  "instances": [
+    "sdump.snippet.--init--",
+    "sdump.snippet.--main--",
+    "sdump.snippet.cli",
+    "sdump.snippet.ignore",
+    "sdump.snippet.model",
+    "sdump.snippet.profiles",
+    "sdump.snippet.receipt",
+    "sdump.snippet.redact",
+    "sdump.snippet.render",
+    "sdump.snippet.scan",
+    "sdump.snippet.upload",
+    "sdump.snippet.util"
+  ],
+  "profiles": [
+    "profiles/code.json",
+    "profiles/compact.json",
+    "profiles/forensic.json"
+  ],
+  "schema": "savant.snippet_composition.v1"
+}

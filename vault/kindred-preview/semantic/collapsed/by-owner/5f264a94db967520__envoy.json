@@ -1,0 +1,61 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "a6f23944761f1af09710fce5846291285bfa47721d8b8faf72e73859e6b2d4ba",
+  "generated_at": "2026-07-17T11:47:04+00:00",
+  "members": [
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/envoy/voice_engine.py",
+      "collapse_reason": "file_attachment",
+      "extension": ".py",
+      "id": "runtime/envoy/voice_engine.py",
+      "instance_hash": "b40db5b5b185be0c5e6eb58bafb33c9382acb2cecae413b1ce01a1ecab8c4bc9",
+      "instance_record": "instances/runtime-envoy-voice_engine.py.json",
+      "kind": "file",
+      "label": "voice_engine.py",
+      "normalized_path": "runtime/envoy/voice_engine.py",
+      "original_lineage_to_owner": [
+        "runtime/envoy/voice_engine.py",
+        "runtime/envoy"
+      ],
+      "original_parent": "runtime/envoy",
+      "path": "runtime/envoy/voice_engine.py",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.ebe13646349dbf1ae1a0"
+      ],
+      "semantic_owner": "runtime/envoy",
+      "shard_level": "record",
+      "state": "active",
+      "synthetic": false
+    }
+  ],
+  "owner": "runtime/envoy",
+  "owner_label": "envoy",
+  "projection_only": true,
+  "provenance": {
+    "generator": "kindred.semantic_view_builder.v1",
+    "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+  },
+  "schema": "savant.kindred.semantic_projection.v1.collapsed_owner",
+  "summary": {
+    "by_extension": {
+      ".py": 1
+    },
+    "by_kind": {
+      "file": 1
+    },
+    "by_reason": {
+      "file_attachment": 1
+    },
+    "by_state": {
+      "active": 1
+    },
+    "direct": 1,
+    "nested": 0,
+    "total": 1
+  }
+}

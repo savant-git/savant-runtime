@@ -1,0 +1,42 @@
+{
+  "id": "coda.exports",
+  "owner": "coda",
+  "type": "composition_export_manifest",
+  "status": "active",
+  "exports": [
+    {
+      "id": "coda.replace_text",
+      "kind": "runtime_operation",
+      "implementation": "runtime/mutation.py",
+      "symbol": "replace_text",
+      "purpose": "Perform controlled durable replacement of text files within the Savant runtime.",
+      "authority_effect": "none"
+    },
+    {
+      "id": "coda.mutation_status",
+      "kind": "runtime_projection",
+      "implementation": "runtime/mutation.py",
+      "symbol": "status",
+      "purpose": "Project Coda mutation capabilities without performing mutation.",
+      "authority_effect": "none"
+    },
+    {
+      "id": "coda.palaver_replace_file",
+      "kind": "runtime_bridge",
+      "implementation": "runtime/palaver_bridge.py",
+      "symbol": "replace_file",
+      "consumer": "palaver",
+      "purpose": "Accept Palaver mutation requests through the Coda authority boundary.",
+      "authority_effect": "none"
+    },
+    {
+      "id": "coda.palaver_bridge_status",
+      "kind": "runtime_projection",
+      "implementation": "runtime/palaver_bridge.py",
+      "symbol": "bridge_status",
+      "consumer": "palaver",
+      "authority_effect": "none"
+    }
+  ],
+  "authority_transfer": false
+}

@@ -1,0 +1,309 @@
+/*
+savant niche dependency gravity
+deterministic topology projection
+authority_effect: none
+*/
+
+:root {
+  --niche-gravity-edge:
+    color-mix(
+      in srgb,
+      var(--savant-primary, #7fe7ff) 28%,
+      transparent
+    );
+  --niche-gravity-upstream:
+    var(--savant-blocked, #ff785f);
+  --niche-gravity-origin:
+    var(--savant-primary, #7fe7ff);
+  --niche-gravity-downstream:
+    var(--savant-ready, #8fffb0);
+  --niche-gravity-neutral:
+    var(--savant-unknown, #9aa6aa);
+}
+
+.niche-dependency-gravity {
+  position: fixed;
+  inset-inline-start:
+    max(0.75rem, env(safe-area-inset-left));
+  inset-block-start:
+    max(5rem, env(safe-area-inset-top));
+  z-index: 57;
+  inline-size:
+    min(32rem, calc(100vw - 1.5rem));
+  max-block-size:
+    min(74dvh, 46rem);
+  display: grid;
+  grid-template-rows:
+    auto minmax(0, 1fr);
+  overflow: hidden;
+  border:
+    1px solid var(--niche-gravity-edge);
+  background:
+    color-mix(
+      in srgb,
+      var(--savant-background, #050708) 97%,
+      transparent
+    );
+  box-shadow:
+    0 1.5rem 4rem rgb(0 0 0 / 0.42);
+}
+
+.niche-dependency-gravity[hidden] {
+  display: none !important;
+}
+
+.niche-gravity-head {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr) auto;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.72rem;
+  border-block-end:
+    1px solid var(--niche-gravity-edge);
+}
+
+.niche-gravity-kicker,
+.niche-gravity-close,
+.niche-gravity-chip,
+.niche-gravity-label,
+.niche-gravity-node,
+.niche-gravity-boundary {
+  font-family:
+    ui-monospace,
+    "SFMono-Regular",
+    Consolas,
+    monospace;
+}
+
+.niche-gravity-kicker {
+  margin: 0 0 0.2rem;
+  color:
+    var(--savant-primary, #7fe7ff);
+  font-size: 0.55rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.niche-gravity-title {
+  margin: 0;
+  color:
+    var(--savant-text, #eef7f8);
+  font:
+    730 0.95rem/1.1
+    system-ui,
+    sans-serif;
+}
+
+.niche-gravity-close {
+  min-inline-size: 2.75rem;
+  min-block-size: 2.75rem;
+  border:
+    1px solid var(--niche-gravity-edge);
+  color:
+    var(--savant-text, #eef7f8);
+  background: transparent;
+  cursor: pointer;
+}
+
+.niche-gravity-close:hover,
+.niche-gravity-close:focus-visible {
+  outline: none;
+  border-color:
+    var(--savant-primary, #7fe7ff);
+}
+
+.niche-gravity-body {
+  min-block-size: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 0.75rem;
+}
+
+.niche-gravity-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-block-end: 0.75rem;
+}
+
+.niche-gravity-chip {
+  padding: 0.3rem 0.42rem;
+  border:
+    1px solid var(--niche-gravity-edge);
+  color:
+    var(--savant-text-muted, #879397);
+  font-size: 0.53rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.niche-gravity-field {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(7rem, 0.72fr)
+    minmax(0, 1fr);
+  gap: 0.55rem;
+  align-items: stretch;
+}
+
+.niche-gravity-band {
+  position: relative;
+  min-inline-size: 0;
+  min-block-size: 14rem;
+  padding: 0.58rem;
+  border:
+    1px solid var(--niche-gravity-edge);
+  background:
+    linear-gradient(
+      to bottom,
+      color-mix(
+        in srgb,
+        var(--savant-surface, #0b1113) 88%,
+        transparent
+      ),
+      transparent
+    );
+}
+
+.niche-gravity-band[data-band="upstream"] {
+  box-shadow:
+    inset 2px 0
+    color-mix(
+      in srgb,
+      var(--niche-gravity-upstream) 72%,
+      transparent
+    );
+}
+
+.niche-gravity-band[data-band="origin"] {
+  box-shadow:
+    inset 0 2px
+    var(--niche-gravity-origin);
+}
+
+.niche-gravity-band[data-band="downstream"] {
+  box-shadow:
+    inset -2px 0
+    color-mix(
+      in srgb,
+      var(--niche-gravity-downstream) 72%,
+      transparent
+    );
+}
+
+.niche-gravity-label {
+  display: block;
+  margin-block-end: 0.55rem;
+  color:
+    var(--savant-text-muted, #879397);
+  font-size: 0.52rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.niche-gravity-stack {
+  display: grid;
+  gap: 0.38rem;
+}
+
+.niche-gravity-node {
+  inline-size: 100%;
+  min-block-size: 2.55rem;
+  padding: 0.48rem 0.52rem;
+  border:
+    1px solid var(--niche-gravity-edge);
+  color:
+    var(--savant-text, #eef7f8);
+  background:
+    var(--savant-background, #050708);
+  font-size: 0.6rem;
+  line-height: 1.4;
+  text-align: start;
+  overflow-wrap: anywhere;
+}
+
+button.niche-gravity-node {
+  cursor: pointer;
+}
+
+button.niche-gravity-node:hover,
+button.niche-gravity-node:focus-visible {
+  outline: none;
+  border-color:
+    var(--savant-primary, #7fe7ff);
+}
+
+.niche-gravity-origin {
+  display: grid;
+  place-items: center;
+  min-block-size: 10rem;
+  text-align: center;
+}
+
+.niche-gravity-origin .niche-gravity-node {
+  border-color:
+    var(--niche-gravity-origin);
+  text-align: center;
+}
+
+.niche-gravity-empty {
+  padding: 0.58rem;
+  border:
+    1px dashed var(--niche-gravity-edge);
+  color:
+    var(--savant-text-muted, #879397);
+  font:
+    0.6rem/1.5
+    ui-monospace,
+    monospace;
+}
+
+.niche-gravity-boundary {
+  margin-block-start: 0.75rem;
+  padding: 0.65rem;
+  border:
+    1px dashed var(--niche-gravity-edge);
+  color:
+    var(--savant-text-muted, #879397);
+  font-size: 0.61rem;
+  line-height: 1.55;
+}
+
+@media (max-width: 700px) {
+  .niche-dependency-gravity {
+    inset-inline:
+      max(0.45rem, env(safe-area-inset-left))
+      max(0.45rem, env(safe-area-inset-right));
+    inset-block-start: auto;
+    inset-block-end:
+      max(0.45rem, env(safe-area-inset-bottom));
+    inline-size: auto;
+    max-block-size: 72dvh;
+  }
+
+  .niche-gravity-field {
+    grid-template-columns: 1fr;
+  }
+
+  .niche-gravity-band {
+    min-block-size: 0;
+  }
+
+  .niche-gravity-origin {
+    min-block-size: 5rem;
+  }
+}
+
+@media (forced-colors: active) {
+  .niche-dependency-gravity,
+  .niche-gravity-close,
+  .niche-gravity-chip,
+  .niche-gravity-band,
+  .niche-gravity-node,
+  .niche-gravity-empty,
+  .niche-gravity-boundary {
+    border-color: CanvasText;
+  }
+}

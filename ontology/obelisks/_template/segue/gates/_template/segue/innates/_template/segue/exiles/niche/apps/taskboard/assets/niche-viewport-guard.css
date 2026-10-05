@@ -1,0 +1,488 @@
+/*
+ * savant / niche
+ * viewport geometry guard
+ * authority_effect: none
+ */
+
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+
+    min-width: 0;
+
+    overflow-x: clip;
+}
+
+body {
+    min-height:
+        var(
+            --niche-visual-height,
+            100vh
+        );
+}
+
+.topbar,
+.statusrail,
+#main,
+.surface,
+.execute-grid,
+.execution-core,
+.oracle,
+.peripheral,
+.metric-panel,
+.flow-board,
+.graph-stage,
+.objective-grid,
+.evidence-grid,
+.living-grid,
+.timeline,
+.history-list {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.topbar {
+    width: 100%;
+
+    padding-left:
+        max(
+            8px,
+            env(safe-area-inset-left)
+        );
+
+    padding-right:
+        max(
+            8px,
+            env(safe-area-inset-right)
+        );
+}
+
+.nav {
+    min-width: 0;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    overscroll-behavior-x: contain;
+
+    scrollbar-width: thin;
+}
+
+.nav > * {
+    flex: 0 0 auto;
+}
+
+.statusrail {
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    overscroll-behavior-x: contain;
+}
+
+#main {
+    width: 100%;
+
+    padding-left:
+        max(
+            8px,
+            env(safe-area-inset-left)
+        );
+
+    padding-right:
+        max(
+            8px,
+            env(safe-area-inset-right)
+        );
+
+    padding-bottom:
+        max(
+            10px,
+            env(safe-area-inset-bottom)
+        );
+}
+
+.surface {
+    width: 100%;
+}
+
+.execute-grid {
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(
+            260px,
+            min(
+                32vw,
+                420px
+            )
+        );
+}
+
+.peripheral {
+    grid-column:
+        1 / -1;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0, 1fr)
+        );
+
+    gap: 10px;
+}
+
+.graph-stage {
+    width: 100%;
+
+    max-height:
+        calc(
+            var(
+                --niche-visual-height,
+                100vh
+            ) -
+            180px
+        );
+
+    overflow: auto;
+
+    contain:
+        layout
+        paint;
+}
+
+#graph-nodes,
+#graph-edges {
+    transform-origin:
+        0 0;
+}
+
+.inspector,
+.niche-focus,
+.niche-diagnostics {
+    max-height:
+        calc(
+            var(
+                --niche-visual-height,
+                100vh
+            ) -
+            max(
+                8px,
+                env(safe-area-inset-top)
+            ) -
+            max(
+                8px,
+                env(safe-area-inset-bottom)
+            )
+        );
+}
+
+.palette-shell,
+.dialog-shell {
+    top:
+        var(
+            --niche-visual-top,
+            0px
+        );
+
+    left:
+        var(
+            --niche-visual-left,
+            0px
+        );
+
+    width:
+        var(
+            --niche-visual-width,
+            100vw
+        );
+
+    height:
+        var(
+            --niche-visual-height,
+            100vh
+        );
+
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.palette,
+.dialog {
+    max-width:
+        calc(
+            var(
+                --niche-visual-width,
+                100vw
+            ) -
+            20px
+        );
+
+    max-height:
+        calc(
+            var(
+                --niche-visual-height,
+                100vh
+            ) -
+            20px
+        );
+
+    overflow: auto;
+}
+
+html[data-niche-keyboard="open"]
+    .palette-shell,
+html[data-niche-keyboard="open"]
+    .dialog-shell {
+    align-items: flex-start;
+
+    padding-top: 8px;
+}
+
+html[data-niche-keyboard="open"]
+    .palette,
+html[data-niche-keyboard="open"]
+    .dialog {
+    max-height:
+        calc(
+            var(
+                --niche-visual-height,
+                100vh
+            ) -
+            16px
+        );
+}
+
+@media (max-width: 980px) {
+    .execute-grid {
+        grid-template-columns:
+            minmax(0, 1fr);
+    }
+
+    .peripheral {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+    }
+}
+
+@media (max-width: 680px) {
+    .topbar {
+        display: grid;
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            auto;
+
+        gap: 7px;
+    }
+
+    .brand {
+        min-width: 0;
+    }
+
+    .brand > div {
+        min-width: 0;
+    }
+
+    .brand span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .nav {
+        grid-column:
+            1 / -1;
+
+        order: 3;
+
+        width: 100%;
+    }
+
+    .top-actions {
+        align-self: start;
+    }
+
+    .key-button span {
+        display: none;
+    }
+
+    .frontier-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .execute-action {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .start-next {
+        width: 100%;
+    }
+
+    .execute-secondary {
+        display: grid;
+
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+    }
+
+    .execute-secondary button {
+        min-width: 0;
+    }
+
+    .peripheral {
+        grid-template-columns:
+            minmax(0, 1fr);
+    }
+
+    .surface-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .flow-board {
+        grid-auto-columns:
+            minmax(
+                min(
+                    82vw,
+                    320px
+                ),
+                1fr
+            );
+    }
+
+    .inspector,
+    .niche-focus,
+    .niche-diagnostics {
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        width: 100%;
+        max-width: 100%;
+
+        max-height:
+            min(
+                82dvh,
+                calc(
+                    var(
+                        --niche-visual-height,
+                        100vh
+                    ) -
+                    8px
+                )
+            );
+
+        border-right: 0;
+        border-bottom: 0;
+        border-left: 0;
+    }
+}
+
+@media (max-width: 380px) {
+    #main {
+        padding-left: 6px;
+        padding-right: 6px;
+    }
+
+    .execute-secondary {
+        grid-template-columns:
+            minmax(0, 1fr);
+    }
+
+    .frontier-labels {
+        font-size: 7px;
+    }
+
+    .statusrail {
+        font-size: 8px;
+    }
+}
+
+@media (max-height: 620px) {
+    .topbar {
+        position: relative;
+    }
+
+    .statusrail {
+        position: relative;
+    }
+
+    .surface {
+        padding-top: 8px;
+    }
+
+    .execution-core,
+    .oracle,
+    .metric-panel {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .graph-stage {
+        max-height:
+            calc(
+                var(
+                    --niche-visual-height,
+                    100vh
+                ) -
+                120px
+            );
+    }
+}
+
+@media (
+    orientation: landscape
+)
+and (max-height: 500px) {
+    .brand > div > span:last-child {
+        display: none;
+    }
+
+    .statusrail {
+        max-height: 30px;
+    }
+
+    .execute-grid {
+        grid-template-columns:
+            minmax(0, 1.35fr)
+            minmax(240px, .65fr);
+    }
+
+    .peripheral {
+        grid-template-columns:
+            repeat(
+                3,
+                minmax(0, 1fr)
+            );
+    }
+}
+
+@media (pointer: coarse) {
+    button,
+    [role="button"],
+    .task-card,
+    .graph-node {
+        touch-action: manipulation;
+    }
+
+    button,
+    [role="button"] {
+        min-height: 42px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}

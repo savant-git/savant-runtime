@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#090b0e">
+  <meta
+    name="description"
+    content="Niche, Savant's executable task environment."
+  >
+  <title>Savant / Niche</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#workspace">Skip to workspace</a>
+
+  <div id="app" class="shell">
+    <header class="topbar">
+      <div class="brand" aria-label="Savant Niche">
+        <div class="brand-mark" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <div>
+          <div class="eyebrow">SAVANT</div>
+          <div class="brand-name">NICHE</div>
+        </div>
+      </div>
+
+      <nav class="mode-nav" aria-label="Niche views">
+        <button class="mode active" data-view="execute">Execute</button>
+        <button class="mode" data-view="flow">Flow</button>
+        <button class="mode" data-view="constellation">Constellation</button>
+        <button class="mode" data-view="objectives">Objectives</button>
+        <button class="mode" data-view="timeline">Timeline</button>
+        <button class="mode" data-view="evidence">Evidence</button>
+        <button class="mode" data-view="living">Living</button>
+        <button class="mode" data-view="history">History</button>
+      </nav>
+
+      <div class="top-actions">
+        <button
+          id="searchButton"
+          class="quiet-button"
+          type="button"
+          aria-label="Search tasks"
+        >
+          Search
+          <kbd>/</kbd>
+        </button>
+
+        <button
+          id="commandButton"
+          class="quiet-button"
+          type="button"
+          aria-label="Open command palette"
+        >
+          Command
+          <kbd>⌘K</kbd>
+        </button>
+
+        <div
+          id="connectionIndicator"
+          class="connection"
+          data-state="loading"
+          title="Niche connection state"
+        >
+          <span class="connection-dot"></span>
+          <span id="connectionLabel">connecting</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="status-rail" aria-label="Savant status">
+      <div class="status-cell">
+        <span class="status-label">Task engine</span>
+        <strong id="taskEngineStatus">checking</strong>
+      </div>
+
+      <div class="status-cell">
+        <span class="status-label">Ready</span>
+        <strong id="readyCount">0</strong>
+      </div>
+
+      <div class="status-cell">
+        <span class="status-label">Active</span>
+        <strong id="activeCount">0</strong>
+      </div>
+
+      <div class="status-cell">
+        <span class="status-label">Blocked</span>
+        <strong id="blockedCount">0</strong>
+      </div>
+
+      <div class="status-cell">
+        <span class="status-label">Living fabric</span>
+        <strong id="fabricStatus">checking</strong>
+      </div>
+
+      <div class="status-cell">
+        <span class="status-label">Surfaces</span>
+        <strong id="surfaceCount">0</strong>
+      </div>
+
+      <div class="status-cell status-cell-wide">
+        <span class="status-label">Last reconciliation</span>
+        <strong id="lastRefresh">waiting</strong>
+      </div>
+    </section>
+
+    <main id="workspace" class="workspace">
+      <section
+        id="executeView"
+        class="view active"
+        data-view-panel="execute"
+        aria-labelledby="executeHeading"
+      >
+        <div class="execute-grid">
+          <section class="execution-core">
+            <div class="section-heading">
+              <div>
+                <div class="eyebrow">EXECUTABLE FRONTIER</div>
+                <h1 id="executeHeading">What next?</h1>
+              </div>
+
+              <div id="frontierState" class="frontier-state">
+                determining frontier
+              </div>
+            </div>
+
+            <div id="nextTaskPanel" class="next-task-panel">
+              <div class="loading-field">
+                <div class="loading-line"></div>
+                <div class="loading-line short"></div>
+                <div class="loading-block"></div>
+              </div>
+            </div>
+
+            <div class="execute-controls">
+              <button
+                id="startNextButton"
+                class="primary-action"
+                type="button"
+                disabled
+              >
+                <span class="primary-action-kicker">GUIDED EXECUTION</span>
+                <span id="startNextLabel">START NEXT</span>
+              </button>
+
+              <button
+                id="whyButton"
+                class="secondary-action"
+                type="button"
+                disabled
+              >
+                Why this?
+              </button>
+
+              <button
+                id="dependenciesButton"
+                class="secondary-action"
+                type="button"
+                disabled
+              >
+                Dependencies
+              </button>
+
+              <button
+                id="impactButton"
+                class="secondary-action"
+                type="button"
+                disabled
+              >
+                Impact
+              </button>
+            </div>
+
+            <section class="frontier-map-section">
+              <div class="subheading-row">
+                <div>
+                  <div class="eyebrow">CAUSAL FIELD</div>
+                  <h2>Executable frontier</h2>
+                </div>
+
+                <div class="legend">
+                  <span><i class="legend-dot complete"></i> established</span>
+                  <span><i class="legend-dot ready"></i> executable</span>
+                  <span><i class="legend-dot blocked"></i> constrained</span>
+                  <span><i class="legend-dot future"></i> future</span>
+                </div>
+              </div>
+
+              <div id="frontierMap" class="frontier-map">
+                <svg
+                  id="frontierSvg"
+                  class="frontier-svg"
+                  aria-label="Task dependency frontier"
+                ></svg>
+              </div>
+            </section>
+          </section>
+
+          <aside class="intelligence-column">
+            <section class="instrument oracle">
+              <div class="instrument-header">
+                <div>
+                  <div class="eyebrow">PRIORITY ORACLE</div>
+                  <h2>Why now?</h2>
+                </div>
+                <span class="projection-tag">deterministic</span>
+              </div>
+
+              <div id="oracleBody" class="oracle-body">
+                <p class="muted">Waiting for task state.</p>
+              </div>
+            </section>
+
+            <section class="instrument">
+              <div class="instrument-header">
+                <div>
+                  <div class="eyebrow">UNLOCK HORIZON</div>
+                  <h2>What follows?</h2>
+                </div>
+              </div>
+
+              <div id="unlockHorizon" class="stack-list">
+                <p class="muted">No task selected.</p>
+              </div>
+            </section>
+
+            <section class="instrument">
+              <div class="instrument-header">
+                <div>
+                  <div class="eyebrow">BLOCKER RADAR</div>
+                  <h2>Structural drag</h2>
+                </div>
+              </div>
+
+              <div id="blockerRadar" class="stack-list">
+                <p class="muted">Calculating blockers.</p>
+              </div>
+            </section>
+          </aside>
+        </div>
+      </section>
+
+      <section
+        id="flowView"
+        class="view"
+        data-view-panel="flow"
+        aria-labelledby="flowHeading"
+      >
+        <div class="view-header">
+          <div>
+            <div class="eyebrow">FLOW</div>
+            <h1 id="flowHeading">Execution lanes</h1>
+            <p>One task state, projected by execution condition.</p>
+          </div>
+
+          <div class="view-tools">
+            <button class="quiet-button" data-filter="ready">Ready only</button>
+            <button class="quiet-button" data-filter="blocked">Blocked only</button>
+            <button class="quiet-button" data-filter="all">Clear filter</button>
+          </div>
+        </div>
+
+        <div id="flowBoard" class="flow-board"></div>
+      </section>
+
+      <section
+        id="constellationView"
+        class="view"
+        data-view-panel="constellation"
+        aria-labelledby="constellationHeading"
+      >
+        <div class="view-header">
+          <div>
+            <div class="eyebrow">CONSTELLATION</div>
+            <h1 id="constellationHeading">Dependency topology</h1>
+            <p>Navigate work as a causal structure rather than a list.</p>
+          </div>
+
+          <div class="view-tools">
+            <button id="fitGraphButton" class="quiet-button">Fit graph</button>
+            <button id="resetGraphButton" class="quiet-button">Reset</button>
+          </div>
+        </div>
+
+        <div id="constellationCanvas" class="constellation-canvas">
+          <svg
+            id="constellationSvg"
+            class="constellation-svg"
+            aria-label="Task dependency constellation"
+          ></svg>
+        </div>
+      </section>
+
+      <section
+        id="objectivesView"
+        class="view"
+        data-view-panel="objectives"
+        aria-labelledby="objectivesHeading"
+      >
+        <div class="view-header">
+          <div>
+            <div class="eyebrow">OBJECTIVES</div>
+            <h1 id="objectivesHeading">Strategic topology</h1>
+            <p>Progress without pretending every task has equal structural weight.</p>
+          </div>
+        </div>
+
+        <div id="objectivesGrid" class="objectives-grid"></div>
+      </section>
+
+      <section
+        id="timelineView"
+        class="view"
+        data-view-panel="timeline"
+        aria-labelledby="timelineHeading"
+      >
+        <div class="view-header">
+          <div>
+            <div class="eyebrow">TIMELINE</div>
+            <h1 id="timelineHeading">Execution chronology</h1>
+            <p>Immutable history projected as change over time.</p>
+          </div>
+        </div>
+
+        <div id="timeline" class="timeline"></div>
+      </section>
+
+      <section
+        id="evidenceView"
+        class="view"
+        data-view-panel="evidence"
+        aria-labelledby="evidenceHeading"
+      >
+        <div class="view-header">
+          <div>
+            <div class="eyebrow">EVIDENCE</div>
+            <h1 id="evidenceHeading">Completion proof</h1>
+            <p>Receipts and completion conditions remain distinct from visual state.</p>
+          </div>
+        </div>
+
+        <div id="evidenceGrid" class="evidence-grid"></div>
+      </section>
+
+      <section
+        id="livingView"
+        class="view"
+        data-view-panel="living"
+        aria-labelledby="livingHeading"
+      >
+        <div class="view-header">
+          <div>
+            <div class="eyebrow">LIVING OBSERVATORY</div>
+            <h1 id="livingHeading">Savant living fabric</h1>
+            <p>
+              Projection surfaces, freshness, provenance and runtime state.
+              Presence never establishes authority.
+            </p>
+          </div>
+
+          <div class="living-summary">
+            <div>
+              <span>Fabric</span>
+              <strong id="livingFabricHealth">unknown</strong>
+            </div>
+            <div>
+              <span>Sequence</span>
+              <strong id="livingSequence">unknown</strong>
+            </div>
+            <div>
+              <span>Hash</span>
+              <strong id="livingHash">unknown</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="living-layout">
+          <div>
+            <div id="livingFilters" class="living-filters"></div>
+            <div id="livingField" class="living-field"></div>
+          </div>
+
+          <aside id="livingInspector" class="living-inspector">
+            <div class="empty-inspector">
+              Select a living surface to inspect its projection.
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section
+        id="historyView"
+        class="view"
+        data-view-panel="history"
+        aria-labelledby="historyHeading"
+      >
+        <div class="view-header">
+          <div>
+            <div class="eyebrow">HISTORY</div>
+            <h1 id="historyHeading">Replay</h1>
+            <p>Inspect recorded transitions without mutating the present.</p>
+          </div>
+        </div>
+
+        <div id="historyReplay" class="history-replay"></div>
+      </section>
+    </main>
+
+    <aside
+      id="taskInspector"
+      class="task-inspector"
+      aria-hidden="true"
+      aria-label="Task inspector"
+    >
+      <div class="inspector-top">
+        <div>
+          <div class="eyebrow">TASK INSPECTOR</div>
+          <div id="inspectorTaskId" class="inspector-id"></div>
+        </div>
+
+        <button
+          id="closeInspectorButton"
+          class="icon-button"
+          type="button"
+          aria-label="Close task inspector"
+        >
+          ×
+        </button>
+      </div>
+
+      <div id="inspectorContent" class="inspector-content"></div>
+    </aside>
+
+    <div
+      id="modalBackdrop"
+      class="modal-backdrop"
+      hidden
+    ></div>
+
+    <section
+      id="commandPalette"
+      class="command-palette"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="commandTitle"
+      hidden
+    >
+      <div class="command-input-row">
+        <span class="command-glyph">›</span>
+        <input
+          id="commandInput"
+          type="text"
+          autocomplete="off"
+          spellcheck="false"
+          placeholder="Command Niche…"
+          aria-label="Niche command"
+        >
+        <kbd>esc</kbd>
+      </div>
+
+      <div class="command-caption" id="commandTitle">
+        COMMAND ENVIRONMENT
+      </div>
+
+      <div id="commandResults" class="command-results"></div>
+    </section>
+
+    <section
+      id="searchPalette"
+      class="command-palette"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="searchTitle"
+      hidden
+    >
+      <div class="command-input-row">
+        <span class="command-glyph">⌕</span>
+        <input
+          id="searchInput"
+          type="search"
+          autocomplete="off"
+          spellcheck="false"
+          placeholder="Search tasks, objectives, states, dependencies…"
+          aria-label="Search Niche"
+        >
+        <kbd>esc</kbd>
+      </div>
+
+      <div class="command-caption" id="searchTitle">
+        GLOBAL SEARCH
+      </div>
+
+      <div id="searchResults" class="command-results"></div>
+    </section>
+
+    <div
+      id="toastRegion"
+      class="toast-region"
+      aria-live="polite"
+      aria-atomic="true"
+    ></div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

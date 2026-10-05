@@ -1,0 +1,146 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import subprocess
+import sys
+from pathlib import Path
+
+
+ROOT = Path("/root/savant-runtime")
+
+PYTHON = (
+    ROOT
+    / "bin"
+    / "identity-quality-python"
+)
+
+REPLAYER = (
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "replay_masterplan_graph.py"
+)
+
+
+def execute(
+    command: list[str],
+) -> int:
+    return subprocess.run(
+        command,
+        cwd=str(ROOT),
+        check=False,
+    ).returncode
+
+
+def usage() -> int:
+    print(
+        """
+masterplan-replay compare
+masterplan-replay strict
+masterplan-replay apply
+masterplan-replay apply-strict
+masterplan-replay help
+
+Compatibility:
+  compare performs the normal replay comparison.
+  Replay always compares reconstructed and authoritative state.
+"""
+    )
+
+    return 0
+
+
+def run(
+    *,
+    apply: bool,
+    strict: bool,
+) -> int:
+    command = [
+        str(PYTHON),
+        str(REPLAYER),
+    ]
+
+    if apply:
+        command.append(
+            "--apply"
+        )
+
+    if strict:
+        command.append(
+            "--strict"
+        )
+
+    return execute(
+        command
+    )
+
+
+def main() -> int:
+    arguments = sys.argv[1:]
+
+    if not arguments:
+        return usage()
+
+    command = arguments[0]
+
+    if len(arguments) > 1:
+        print(
+            "ERROR: unexpected arguments: "
+            + " ".join(arguments[1:]),
+            file=sys.stderr,
+        )
+
+        return 2
+
+    if command in {
+        "help",
+        "--help",
+        "-h",
+    }:
+        return usage()
+
+    if command in {
+        "compare",
+        "replay",
+        "check",
+    }:
+        return run(
+            apply=False,
+            strict=False,
+        )
+
+    if command in {
+        "strict",
+        "compare-strict",
+        "replay-strict",
+    }:
+        return run(
+            apply=False,
+            strict=True,
+        )
+
+    if command == "apply":
+        return run(
+            apply=True,
+            strict=False,
+        )
+
+    if command == "apply-strict":
+        return run(
+            apply=True,
+            strict=True,
+        )
+
+    print(
+        f"ERROR: unknown replay command: {command}",
+        file=sys.stderr,
+    )
+
+    return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

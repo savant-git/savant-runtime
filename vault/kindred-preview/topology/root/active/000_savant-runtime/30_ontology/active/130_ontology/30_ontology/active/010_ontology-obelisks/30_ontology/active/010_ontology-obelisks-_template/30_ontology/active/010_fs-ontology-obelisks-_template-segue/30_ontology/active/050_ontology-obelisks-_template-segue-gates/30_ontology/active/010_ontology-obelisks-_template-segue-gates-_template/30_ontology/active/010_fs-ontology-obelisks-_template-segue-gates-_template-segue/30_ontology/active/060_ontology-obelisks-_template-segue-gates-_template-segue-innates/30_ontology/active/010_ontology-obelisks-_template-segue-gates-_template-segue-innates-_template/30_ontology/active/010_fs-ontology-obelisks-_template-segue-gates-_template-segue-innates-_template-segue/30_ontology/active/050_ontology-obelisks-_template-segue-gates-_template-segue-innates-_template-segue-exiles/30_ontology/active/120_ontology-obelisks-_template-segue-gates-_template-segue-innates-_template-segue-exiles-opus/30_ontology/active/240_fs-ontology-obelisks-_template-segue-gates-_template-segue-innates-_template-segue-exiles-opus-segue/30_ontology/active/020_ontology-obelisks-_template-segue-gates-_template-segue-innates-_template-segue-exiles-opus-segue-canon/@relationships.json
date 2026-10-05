@@ -1,0 +1,137 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "6b1d3f1ceda9ff74b8aa298c772271961fa4466d02f448a839450e4545195b1c",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "namespace": "preview.kindred",
+  "node": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/segue/canon",
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationships": [
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.0355a5aa31e90c776a45",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/segue/canon",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/segue/canon",
+        "canonical_target": "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/segue/canon/transition.md",
+        "continuation": "projecting",
+        "id": "lineage.composition.0355a5aa31e90c776a45",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/segue/canon/transition.md"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/segue/canon",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/segue/canon/transition.md",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/segue/canon/transition.md"
+    },
+    {
+      "child_profile": "daughter",
+      "domain": "filesystem",
+      "id": "lineage.composition.bde7775f5007bfd14aba",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/segue",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/segue",
+        "canonical_target": "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/segue/canon",
+        "continuation": "preserving",
+        "id": "lineage.composition.bde7775f5007bfd14aba",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/segue/canon"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/segue",
+        "status": "active",
+        "symbolic_child_alias": "daughter",
+        "symbolic_parent_alias": "parent",
+        "target": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/segue/canon",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/segue/canon"
+    }
+  ],
+  "schema": "savant.kindred.preview.relationship_projection.v2"
+}

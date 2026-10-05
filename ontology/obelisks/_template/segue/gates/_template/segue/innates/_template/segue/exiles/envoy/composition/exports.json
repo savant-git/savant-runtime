@@ -1,0 +1,71 @@
+{
+  "id": "envoy.exports",
+  "owner": "envoy",
+  "status": "active",
+  "exports": [
+    {
+      "id": "persona.list",
+      "runtime": "runtime/persona_engine.py",
+      "symbol": "list_personas",
+      "authority": "envoy",
+      "consumers": [
+        "palaver"
+      ]
+    },
+    {
+      "id": "persona.resolve",
+      "runtime": "runtime/persona_engine.py",
+      "symbol": "load_persona",
+      "authority": "envoy",
+      "consumers": [
+        "palaver",
+        "envoy.voice"
+      ]
+    },
+    {
+      "id": "voice.resolve",
+      "runtime": "runtime/voice_engine.py",
+      "symbol": "resolve_voice",
+      "authority": "envoy",
+      "consumers": [
+        "palaver"
+      ]
+    },
+    {
+      "id": "voice.synthesize",
+      "runtime": "runtime/voice_engine.py",
+      "symbol": "synthesize",
+      "authority": "envoy",
+      "execution_owner": "opus",
+      "consumers": [
+        "palaver"
+      ]
+    },
+    {
+      "id": "voice.synthesize_base64",
+      "runtime": "runtime/voice_engine.py",
+      "symbol": "synthesize_base64",
+      "authority": "envoy",
+      "execution_owner": "opus",
+      "consumers": [
+        "palaver"
+      ]
+    },
+    {
+      "id": "opus.text_bridge",
+      "runtime": "runtime/opus_bridge.py",
+      "symbol": "infer_with_opus",
+      "authority": "envoy",
+      "execution_owner": "opus",
+      "route": "text_inference_route"
+    },
+    {
+      "id": "opus.voice_bridge",
+      "runtime": "runtime/opus_bridge.py",
+      "symbol": "synthesize_with_opus",
+      "authority": "envoy",
+      "execution_owner": "opus",
+      "route": "voice_tts_route"
+    }
+  ]
+}

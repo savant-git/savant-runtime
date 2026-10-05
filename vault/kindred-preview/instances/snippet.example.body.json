@@ -1,0 +1,105 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "snippet.example.body",
+  "deterministic_hash": "ee91fa1757429c2d6d9befb8c48732ff4838157085bcdcab1c03cc3a259dc48b",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "snippet.example.body",
+  "kind": "instance",
+  "label": "snippet.example.body",
+  "namespace": "preview.kindred",
+  "path": null,
+  "placement": {
+    "domain": "global",
+    "node": "snippet.example.body",
+    "parent": "line.example.echo",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.source.1fc6b7ba4745e1dd067e",
+    "rank": 10,
+    "slot": "80_children",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.pattern.373dcff02533f01b9b77",
+    "lineage.source.1fc6b7ba4745e1dd067e",
+    "lineage.source.bd55cce5100904ab7ed2"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "snippet.example.body",
+    "children": [
+      "script.example"
+    ],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [
+      "template.snippet_instance"
+    ],
+    "id": "snippet.example.body",
+    "kind": "instance",
+    "label": "snippet.example.body",
+    "legacy_id": null,
+    "lineage": [
+      "line.example.echo",
+      "template.snippet_instance"
+    ],
+    "metadata": {
+      "authority_source_path": "/root/savant-runtime/ontology/obelisks/segue/authority_graph/instances/content/snippets/example_body.json",
+      "canonical_id": "snippet.example.body",
+      "child_modes": {
+        "neutral": [
+          "script.example"
+        ]
+      },
+      "child_roles": {
+        "source": [
+          "script.example"
+        ]
+      },
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "pattern": [
+          "template.snippet_instance"
+        ],
+        "source": [
+          "line.example.echo"
+        ]
+      },
+      "projected_id": "snippet.example.body"
+    },
+    "mothers": [
+      "line.example.echo"
+    ],
+    "parents": [
+      "line.example.echo",
+      "template.snippet_instance"
+    ],
+    "path": null,
+    "provenance": {
+      "adapter": "authority_document",
+      "created_by": "manual.nano",
+      "source_files": [
+        "/root/savant-runtime/ontology/obelisks/segue/authority_graph/instances/content/snippets/example_body.json"
+      ]
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.pattern.373dcff02533f01b9b77",
+      "lineage.source.1fc6b7ba4745e1dd067e",
+      "lineage.source.bd55cce5100904ab7ed2"
+    ],
+    "size": 7,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

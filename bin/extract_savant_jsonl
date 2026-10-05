@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="/root/savant-runtime"
+SCRIPT="${ROOT}/bin/extract_savant_jsonl.py"
+VENV="${ROOT}/.venv_extract"
+
+if [ -x "${VENV}/bin/python" ]; then
+    exec "${VENV}/bin/python" "${SCRIPT}" "$@"
+fi
+
+exec python3 "${SCRIPT}" "$@"

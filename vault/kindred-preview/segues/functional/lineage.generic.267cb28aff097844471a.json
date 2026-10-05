@@ -1,0 +1,70 @@
+{
+  "authoritative": false,
+  "child_profile": "child",
+  "deterministic_hash": "99db3e3d8cf93e085ae7a558358eaabe09377ff1959791e6c1e3ec20eb8e4727",
+  "domain": "global",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "lineage.generic.267cb28aff097844471a",
+  "impeti": [],
+  "namespace": "preview.kindred",
+  "parent_profile": "parent",
+  "plane": "functional",
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "role": "generic",
+  "schema": "savant.kindred.preview.functional_segue.v2",
+  "source": "edifice:identity:4",
+  "source_record": {
+    "axis": "unspecified",
+    "canonical_source": "edifice:identity:4",
+    "canonical_target": "exile:niche",
+    "continuation": "neutral",
+    "id": "lineage.generic.267cb28aff097844471a",
+    "inheritance": {
+      "conflict_policy": "child_wins",
+      "exclude": [],
+      "fields": [],
+      "mode": "reference"
+    },
+    "inverse": "generic_child",
+    "kind": "generic",
+    "metadata": {
+      "adapter": "authority",
+      "source_field": "lineage.parents",
+      "source_path": "/root/savant-runtime/canon-system/authority/exiles/niche.yaml"
+    },
+    "order": 0,
+    "propagation": {
+      "channels": [
+        "validation",
+        "projection",
+        "regeneration"
+      ],
+      "enabled": true
+    },
+    "provenance": {
+      "created_by": "authority_adapter",
+      "created_from": [
+        "/root/savant-runtime/canon-system/authority/exiles/niche.yaml"
+      ],
+      "source_files": [
+        "/root/savant-runtime/canon-system/authority/exiles/niche.yaml"
+      ]
+    },
+    "role": "generic",
+    "scope": "global",
+    "source": "edifice:identity:4",
+    "status": "active",
+    "symbolic_child_alias": "child",
+    "symbolic_parent_alias": "parent",
+    "target": "exile:niche",
+    "weight": 1
+  },
+  "state": "active",
+  "synthetic": false,
+  "target": "exile:niche"
+}

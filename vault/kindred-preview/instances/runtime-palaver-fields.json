@@ -1,0 +1,97 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:runtime/palaver/fields",
+  "deterministic_hash": "5bf288d01f2de3db20c465ee3a069f1866be01f0e9aa00bc076121340714cb82",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "runtime/palaver/fields",
+  "kind": "directory",
+  "label": "fields",
+  "namespace": "preview.kindred",
+  "path": "runtime/palaver/fields",
+  "placement": {
+    "domain": "filesystem",
+    "node": "runtime/palaver/fields",
+    "parent": "runtime/palaver",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.a8e39971e1e22f4a5eac",
+    "rank": 30,
+    "slot": "40_runtime",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.a8e39971e1e22f4a5eac",
+    "lineage.composition.df7b1bd1383dc351b7cd"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:runtime/palaver/fields",
+    "children": [
+      "runtime/palaver/fields/structural_fields.py"
+    ],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "runtime/palaver/fields",
+    "kind": "directory",
+    "label": "fields",
+    "legacy_id": "runtime/palaver/fields",
+    "lineage": [
+      "runtime/palaver"
+    ],
+    "metadata": {
+      "canonical_id": "fs:runtime/palaver/fields",
+      "child_modes": {
+        "projecting": [
+          "fs:runtime/palaver/fields/structural_fields.py"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:runtime/palaver/fields/structural_fields.py"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:runtime/palaver"
+        ]
+      },
+      "projected_id": "runtime/palaver/fields",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "runtime/palaver"
+    ],
+    "path": "runtime/palaver/fields",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "runtime/palaver/fields",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.a8e39971e1e22f4a5eac",
+      "lineage.composition.df7b1bd1383dc351b7cd"
+    ],
+    "size": 12,
+    "sons": [
+      "runtime/palaver/fields/structural_fields.py"
+    ]
+  },
+  "state": "active",
+  "synthetic": false
+}

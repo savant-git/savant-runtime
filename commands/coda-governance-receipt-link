@@ -1,0 +1,273 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+
+from pathlib import Path
+from typing import Any
+
+
+coda_runtime = Path(
+    "/root/savant-runtime/"
+    "ontology/obelisks/_template/"
+    "segue/gates/_template/segue/"
+    "innates/_template/segue/"
+    "exiles/coda/runtime"
+)
+
+if str(
+    coda_runtime
+) not in sys.path:
+    sys.path.insert(
+        0,
+        str(
+            coda_runtime
+        ),
+    )
+
+
+from governance_receipts import (  # noqa: E402
+    build_link_receipt,
+    coda_governance_receipt_error,
+    persist_linkage,
+    selftest,
+    status,
+)
+
+from living_governance_receipts import (  # noqa: E402
+    living_governance_receipt_error,
+)
+
+
+def read_json(
+    path: str,
+) -> Any:
+    if path == "-":
+        return json.load(
+            sys.stdin
+        )
+
+    return json.loads(
+        Path(
+            path
+        ).read_text(
+            encoding="utf-8"
+        )
+    )
+
+
+def read_object(
+    path: str,
+) -> dict[str, Any]:
+    value = read_json(
+        path
+    )
+
+    if not isinstance(
+        value,
+        dict,
+    ):
+        raise ValueError(
+            "input must be a JSON object"
+        )
+
+    return value
+
+
+def add_link_arguments(
+    parser: argparse.ArgumentParser,
+) -> None:
+    parser.add_argument(
+        "--coda-receipt",
+        required=True,
+    )
+
+    parser.add_argument(
+        "--governance-evaluation",
+        required=True,
+    )
+
+    parser.add_argument(
+        "--mutation-plan"
+    )
+
+    parser.add_argument(
+        "--mutation-plan-ref"
+    )
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="coda-governance-receipt-link",
+        description=(
+            "Coda-owned durable linkage "
+            "for Living Governance "
+            "mutation evaluation receipts"
+        ),
+    )
+
+    commands = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    commands.add_parser(
+        "status"
+    )
+
+    commands.add_parser(
+        "selftest"
+    )
+
+    build = commands.add_parser(
+        "build"
+    )
+
+    add_link_arguments(
+        build
+    )
+
+    persist = commands.add_parser(
+        "persist"
+    )
+
+    add_link_arguments(
+        persist
+    )
+
+    return parser
+
+
+def linkage_arguments(
+    args: argparse.Namespace,
+) -> dict[str, Any]:
+    return {
+        "coda_receipt":
+            read_object(
+                args.coda_receipt
+            ),
+
+        "governance_evaluation":
+            read_object(
+                args.governance_evaluation
+            ),
+
+        "mutation_plan":
+            (
+                read_object(
+                    args.mutation_plan
+                )
+                if args.mutation_plan
+                else None
+            ),
+
+        "mutation_plan_ref":
+            args.mutation_plan_ref,
+    }
+
+
+def main() -> int:
+    args = (
+        build_parser()
+        .parse_args()
+    )
+
+    try:
+        if args.command == "status":
+            output = status()
+
+        elif args.command == "selftest":
+            output = selftest()
+
+        elif args.command == "build":
+            output = build_link_receipt(
+                **linkage_arguments(
+                    args
+                )
+            )
+
+        elif args.command == "persist":
+            output = persist_linkage(
+                **linkage_arguments(
+                    args
+                )
+            )
+
+        else:
+            raise ValueError(
+                "unknown command"
+            )
+
+    except (
+        OSError,
+        ValueError,
+        json.JSONDecodeError,
+        coda_governance_receipt_error,
+        living_governance_receipt_error,
+    ) as exc:
+        print(
+            json.dumps(
+                {
+                    "schema":
+                        (
+                            "savant.coda."
+                            "governance-receipts.v1"
+                        ),
+
+                    "owner":
+                        "coda",
+
+                    "governance_owner":
+                        "living-governance",
+
+                    "authority_effect":
+                        "none",
+
+                    "ok":
+                        False,
+
+                    "error":
+                        str(
+                            exc
+                        ),
+
+                    "authority_transfer":
+                        False,
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+
+        return 1
+
+    print(
+        json.dumps(
+            output,
+            indent=2,
+            ensure_ascii=False,
+            sort_keys=True,
+        )
+    )
+
+    if (
+        isinstance(
+            output,
+            dict,
+        )
+        and output.get(
+            "ok"
+        )
+        is False
+    ):
+        return 1
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

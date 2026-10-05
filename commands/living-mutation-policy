@@ -1,0 +1,273 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+
+from pathlib import Path
+from typing import Any
+
+
+root = Path(
+    "/root/savant-runtime"
+)
+
+if str(
+    root
+) not in sys.path:
+    sys.path.insert(
+        0,
+        str(
+            root
+        ),
+    )
+
+
+from runtime.living_mutation_policy import (  # noqa: E402
+    evaluate_mutation,
+    status,
+)
+
+
+def read_content(
+    *,
+    text: str | None,
+    file_path: str | None,
+) -> str:
+    if (
+        text is not None
+        and file_path is not None
+    ):
+        raise ValueError(
+            (
+                "--text and --file "
+                "are mutually exclusive"
+            )
+        )
+
+    if text is not None:
+        return text
+
+    if file_path is not None:
+        return Path(
+            file_path
+        ).read_text(
+            encoding="utf-8"
+        )
+
+    raise ValueError(
+        "either --text or --file is required"
+    )
+
+
+def parse_evidence(
+    values: list[str],
+) -> list[Any]:
+    output: list[Any] = []
+
+    for value in values:
+        candidate = value.strip()
+
+        if not candidate:
+            continue
+
+        if candidate.startswith(
+            "{"
+        ):
+            parsed = json.loads(
+                candidate
+            )
+
+            if not isinstance(
+                parsed,
+                dict,
+            ):
+                raise ValueError(
+                    (
+                        "object evidence must "
+                        "decode to a json object"
+                    )
+                )
+
+            output.append(
+                parsed
+            )
+
+        else:
+            output.append(
+                candidate
+            )
+
+    return output
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="living-mutation-policy",
+        description=(
+            "evaluate coda mutation intent "
+            "through living governance"
+        ),
+    )
+
+    subparsers = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    subparsers.add_parser(
+        "status"
+    )
+
+    evaluate_parser = subparsers.add_parser(
+        "evaluate"
+    )
+
+    evaluate_parser.add_argument(
+        "--path",
+        required=True,
+    )
+
+    content_group = (
+        evaluate_parser.add_mutually_exclusive_group(
+            required=True
+        )
+    )
+
+    content_group.add_argument(
+        "--text"
+    )
+
+    content_group.add_argument(
+        "--file"
+    )
+
+    evaluate_parser.add_argument(
+        "--operation",
+        default="replace_text",
+    )
+
+    evaluate_parser.add_argument(
+        "--caller",
+        default="palaver",
+    )
+
+    evaluate_parser.add_argument(
+        "--mutation-owner",
+        default="coda",
+    )
+
+    evaluate_parser.add_argument(
+        "--relative-path"
+    )
+
+    evaluate_parser.add_argument(
+        "--expected-digest"
+    )
+
+    evaluate_parser.add_argument(
+        "--intent"
+    )
+
+    evaluate_parser.add_argument(
+        "--authority-granted",
+        action="store_true",
+    )
+
+    evaluate_parser.add_argument(
+        "--evidence",
+        action="append",
+        default=[],
+    )
+
+    return parser
+
+
+def main() -> int:
+    parser = build_parser()
+
+    args = parser.parse_args()
+
+    try:
+        if args.command == "status":
+            output = status()
+
+        elif args.command == "evaluate":
+            content = read_content(
+                text=args.text,
+                file_path=args.file,
+            )
+
+            output = evaluate_mutation(
+                path=args.path,
+                content=content,
+                operation=args.operation,
+                caller=args.caller,
+                mutation_owner=args.mutation_owner,
+                relative_path=args.relative_path,
+                expected_digest=args.expected_digest,
+                intent=args.intent,
+                authority_granted=
+                    args.authority_granted,
+                evidence=parse_evidence(
+                    args.evidence
+                ),
+            )
+
+        else:
+            parser.error(
+                "unknown command"
+            )
+
+            return 2
+
+    except (
+        OSError,
+        ValueError,
+        json.JSONDecodeError,
+    ) as exc:
+        print(
+            json.dumps(
+                {
+                    "ok":
+                        False,
+
+                    "error":
+                        str(
+                            exc
+                        ),
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+
+        return 1
+
+    print(
+        json.dumps(
+            output,
+            indent=2,
+            ensure_ascii=False,
+            sort_keys=True,
+        )
+    )
+
+    if (
+        args.command == "evaluate"
+        and not output.get(
+            "allowed",
+            False,
+        )
+    ):
+        return 1
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

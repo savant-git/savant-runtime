@@ -1,0 +1,89 @@
+/*
+ * savant / niche
+ * living health waveform
+ * authority_effect: none
+ */
+
+.niche-health-wave {
+    margin-bottom: 14px;
+
+    border:
+        1px solid
+        var(
+            --line,
+            rgba(255,255,255,.08)
+        );
+
+    background:
+        rgba(255,255,255,.012);
+}
+
+.niche-health-wave header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    padding: 10px 12px;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.06);
+}
+
+.niche-health-wave h2 {
+    margin: 2px 0 0;
+
+    font-size: 12px;
+}
+
+#niche-health-wave-label {
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+
+    opacity: .48;
+}
+
+.niche-health-wave-stage {
+    height:
+        clamp(
+            68px,
+            10vw,
+            112px
+        );
+
+    overflow: hidden;
+}
+
+#niche-health-wave-svg {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+}
+
+#niche-health-wave-line {
+    fill: none;
+
+    stroke:
+        currentColor;
+
+    stroke-width: 1.2;
+
+    opacity: .55;
+}
+
+@media (max-width: 600px) {
+    .niche-health-wave header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #niche-health-wave-line {
+        transition: none !important;
+    }
+}

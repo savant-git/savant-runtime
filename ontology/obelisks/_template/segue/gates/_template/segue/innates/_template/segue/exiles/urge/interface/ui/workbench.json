@@ -1,0 +1,151 @@
+{
+  "id": "urge.ui.workbench",
+  "owner": "exile:urge",
+  "type": "splyce_surface_projection",
+  "status": "active",
+  "version": "1.0.0",
+  "host": "splyce",
+  "composition": {
+    "mode": "instance-extension",
+    "replace_host": false,
+    "duplicate_host": false
+  },
+  "regions": [
+    {
+      "id": "command-rail",
+      "role": "control",
+      "priority": 1
+    },
+    {
+      "id": "objective",
+      "role": "context",
+      "priority": 2
+    },
+    {
+      "id": "candidate-stage",
+      "role": "primary",
+      "priority": 3
+    },
+    {
+      "id": "candidate-strip",
+      "role": "branch-navigation",
+      "priority": 4
+    },
+    {
+      "id": "pressure-map",
+      "role": "revision-pressure",
+      "priority": 5
+    },
+    {
+      "id": "criterion-matrix",
+      "role": "evaluation",
+      "priority": 6
+    },
+    {
+      "id": "creative-frontier",
+      "role": "structural-divergence",
+      "priority": 7
+    },
+    {
+      "id": "lineage",
+      "role": "history",
+      "priority": 8
+    },
+    {
+      "id": "runtime-hud",
+      "role": "execution-state",
+      "priority": 9
+    }
+  ],
+  "candidate_stage": {
+    "modes": [
+      "best",
+      "alternate",
+      "comparison",
+      "lineage",
+      "logo",
+      "renderer"
+    ],
+    "actions": [
+      "iterate",
+      "branch",
+      "preserve",
+      "compare",
+      "reject",
+      "promote",
+      "inspect",
+      "stop"
+    ],
+    "mutation_policy": "non-destructive"
+  },
+  "creative_frontier": {
+    "owner": "exile:underscore",
+    "dimensions": [
+      "survivability_score",
+      "subversion_score",
+      "divergence_score",
+      "cliche_risk",
+      "constraint_score",
+      "baseline_similarity",
+      "sibling_similarity"
+    ],
+    "views": [
+      "ranked",
+      "pareto",
+      "mmr",
+      "discriminants",
+      "recommended-tests"
+    ]
+  },
+  "opus": {
+    "owner": "exile:opus",
+    "views": [
+      "route",
+      "provider",
+      "model",
+      "fallback",
+      "attempts",
+      "required-capabilities",
+      "required-layers",
+      "lineage"
+    ]
+  },
+  "logo": {
+    "views": [
+      "brief",
+      "concept",
+      "mechanism",
+      "structural-difference",
+      "anti-cliche",
+      "stress-tests",
+      "identity-system",
+      "renderer"
+    ],
+    "renderer": {
+      "id": "savant-svg-renderer",
+      "state": "reserved",
+      "required_for_iteration": false
+    }
+  },
+  "accessibility": {
+    "keyboard_first": true,
+    "visible_focus": true,
+    "reduced_motion": true,
+    "screen_reader_semantics": true,
+    "contrast_preservation": true
+  },
+  "responsive": {
+    "desktop": "multi-region-workbench",
+    "tablet": "stacked-primary-with-drawers",
+    "mobile": "candidate-first-single-column"
+  },
+  "boundaries": {
+    "authoritative": false,
+    "projection_only": true,
+    "creates_authority": false,
+    "mutates_canon": false,
+    "owns_provider_routing": false,
+    "owns_underscore": false,
+    "owns_renderer": false
+  }
+}

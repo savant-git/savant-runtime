@@ -1,0 +1,808 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "0ccb89d253fd249eb85fc73a323a1b21eca429031e9fdef867f35349e6321d49",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "namespace": "preview.kindred",
+  "node": "ontology/obelisks/segue/runtime_reports",
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationships": [
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.0cfb81127f0c45e01d76",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "ontology/obelisks/segue/runtime_reports",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:ontology/obelisks/segue/runtime_reports",
+        "canonical_target": "fs:ontology/obelisks/segue/runtime_reports/entity_validation.json",
+        "continuation": "projecting",
+        "id": "lineage.composition.0cfb81127f0c45e01d76",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/ontology/obelisks/segue/runtime_reports/entity_validation.json"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "ontology/obelisks/segue/runtime_reports",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "ontology/obelisks/segue/runtime_reports/entity_validation.json",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "ontology/obelisks/segue/runtime_reports/entity_validation.json"
+    },
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.26669ff8163b6c74fb89",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "ontology/obelisks/segue/runtime_reports",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:ontology/obelisks/segue/runtime_reports",
+        "canonical_target": "fs:ontology/obelisks/segue/runtime_reports/observatory_events.jsonl",
+        "continuation": "projecting",
+        "id": "lineage.composition.26669ff8163b6c74fb89",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/ontology/obelisks/segue/runtime_reports/observatory_events.jsonl"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "ontology/obelisks/segue/runtime_reports",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "ontology/obelisks/segue/runtime_reports/observatory_events.jsonl",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "ontology/obelisks/segue/runtime_reports/observatory_events.jsonl"
+    },
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.44445870bfa19ca44b3b",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "ontology/obelisks/segue/runtime_reports",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:ontology/obelisks/segue/runtime_reports",
+        "canonical_target": "fs:ontology/obelisks/segue/runtime_reports/registry_manifests.json",
+        "continuation": "projecting",
+        "id": "lineage.composition.44445870bfa19ca44b3b",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/ontology/obelisks/segue/runtime_reports/registry_manifests.json"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "ontology/obelisks/segue/runtime_reports",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "ontology/obelisks/segue/runtime_reports/registry_manifests.json",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "ontology/obelisks/segue/runtime_reports/registry_manifests.json"
+    },
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.54aac316237f8171cbf2",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "ontology/obelisks/segue/runtime_reports",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:ontology/obelisks/segue/runtime_reports",
+        "canonical_target": "fs:ontology/obelisks/segue/runtime_reports/registry_defaults.json",
+        "continuation": "projecting",
+        "id": "lineage.composition.54aac316237f8171cbf2",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/ontology/obelisks/segue/runtime_reports/registry_defaults.json"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "ontology/obelisks/segue/runtime_reports",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "ontology/obelisks/segue/runtime_reports/registry_defaults.json",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "ontology/obelisks/segue/runtime_reports/registry_defaults.json"
+    },
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.68c3cd4f051bc8cb041c",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "ontology/obelisks/segue/runtime_reports",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:ontology/obelisks/segue/runtime_reports",
+        "canonical_target": "fs:ontology/obelisks/segue/runtime_reports/registry_schemas.json",
+        "continuation": "projecting",
+        "id": "lineage.composition.68c3cd4f051bc8cb041c",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/ontology/obelisks/segue/runtime_reports/registry_schemas.json"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "ontology/obelisks/segue/runtime_reports",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "ontology/obelisks/segue/runtime_reports/registry_schemas.json",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "ontology/obelisks/segue/runtime_reports/registry_schemas.json"
+    },
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.6d3deda6d8dc1bd8dc66",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "ontology/obelisks/segue/runtime_reports",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:ontology/obelisks/segue/runtime_reports",
+        "canonical_target": "fs:ontology/obelisks/segue/runtime_reports/entity_graph.json",
+        "continuation": "projecting",
+        "id": "lineage.composition.6d3deda6d8dc1bd8dc66",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/ontology/obelisks/segue/runtime_reports/entity_graph.json"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "ontology/obelisks/segue/runtime_reports",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "ontology/obelisks/segue/runtime_reports/entity_graph.json",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "ontology/obelisks/segue/runtime_reports/entity_graph.json"
+    },
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.733f9dede0447a220dfc",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "ontology/obelisks/segue/runtime_reports",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:ontology/obelisks/segue/runtime_reports",
+        "canonical_target": "fs:ontology/obelisks/segue/runtime_reports/registry_contracts.json",
+        "continuation": "projecting",
+        "id": "lineage.composition.733f9dede0447a220dfc",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/ontology/obelisks/segue/runtime_reports/registry_contracts.json"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "ontology/obelisks/segue/runtime_reports",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "ontology/obelisks/segue/runtime_reports/registry_contracts.json",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "ontology/obelisks/segue/runtime_reports/registry_contracts.json"
+    },
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.7ed6c029c73d0eb2bd51",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "ontology/obelisks/segue/runtime_reports",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:ontology/obelisks/segue/runtime_reports",
+        "canonical_target": "fs:ontology/obelisks/segue/runtime_reports/registry_templates.json",
+        "continuation": "projecting",
+        "id": "lineage.composition.7ed6c029c73d0eb2bd51",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/ontology/obelisks/segue/runtime_reports/registry_templates.json"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "ontology/obelisks/segue/runtime_reports",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "ontology/obelisks/segue/runtime_reports/registry_templates.json",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "ontology/obelisks/segue/runtime_reports/registry_templates.json"
+    },
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.93db0617f9db4e5c9889",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "ontology/obelisks/segue/runtime_reports",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:ontology/obelisks/segue/runtime_reports",
+        "canonical_target": "fs:ontology/obelisks/segue/runtime_reports/registry_versions.json",
+        "continuation": "projecting",
+        "id": "lineage.composition.93db0617f9db4e5c9889",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/ontology/obelisks/segue/runtime_reports/registry_versions.json"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "ontology/obelisks/segue/runtime_reports",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "ontology/obelisks/segue/runtime_reports/registry_versions.json",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "ontology/obelisks/segue/runtime_reports/registry_versions.json"
+    },
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.c228b7b52792b8f8c3f7",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "ontology/obelisks/segue/runtime_reports",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:ontology/obelisks/segue/runtime_reports",
+        "canonical_target": "fs:ontology/obelisks/segue/runtime_reports/registry_interfaces.json",
+        "continuation": "projecting",
+        "id": "lineage.composition.c228b7b52792b8f8c3f7",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/ontology/obelisks/segue/runtime_reports/registry_interfaces.json"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "ontology/obelisks/segue/runtime_reports",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "ontology/obelisks/segue/runtime_reports/registry_interfaces.json",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "ontology/obelisks/segue/runtime_reports/registry_interfaces.json"
+    },
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.d1e39c0a44e261a9a40d",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "ontology/obelisks/segue/runtime_reports",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:ontology/obelisks/segue/runtime_reports",
+        "canonical_target": "fs:ontology/obelisks/segue/runtime_reports/registry_capabilities.json",
+        "continuation": "projecting",
+        "id": "lineage.composition.d1e39c0a44e261a9a40d",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/ontology/obelisks/segue/runtime_reports/registry_capabilities.json"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "ontology/obelisks/segue/runtime_reports",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "ontology/obelisks/segue/runtime_reports/registry_capabilities.json",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "ontology/obelisks/segue/runtime_reports/registry_capabilities.json"
+    },
+    {
+      "child_profile": "daughter",
+      "domain": "filesystem",
+      "id": "lineage.composition.d48a4049828328814c80",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "ontology/obelisks/segue",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:ontology/obelisks/segue",
+        "canonical_target": "fs:ontology/obelisks/segue/runtime_reports",
+        "continuation": "preserving",
+        "id": "lineage.composition.d48a4049828328814c80",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/ontology/obelisks/segue/runtime_reports"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "ontology/obelisks/segue",
+        "status": "active",
+        "symbolic_child_alias": "daughter",
+        "symbolic_parent_alias": "parent",
+        "target": "ontology/obelisks/segue/runtime_reports",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "ontology/obelisks/segue/runtime_reports"
+    },
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.deb73b60256a475cbd9d",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "ontology/obelisks/segue/runtime_reports",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:ontology/obelisks/segue/runtime_reports",
+        "canonical_target": "fs:ontology/obelisks/segue/runtime_reports/runtime_files.json",
+        "continuation": "projecting",
+        "id": "lineage.composition.deb73b60256a475cbd9d",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/ontology/obelisks/segue/runtime_reports/runtime_files.json"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "ontology/obelisks/segue/runtime_reports",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "ontology/obelisks/segue/runtime_reports/runtime_files.json",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "ontology/obelisks/segue/runtime_reports/runtime_files.json"
+    }
+  ],
+  "schema": "savant.kindred.preview.relationship_projection.v2"
+}

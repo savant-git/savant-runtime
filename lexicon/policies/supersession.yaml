@@ -1,0 +1,79 @@
+policy: SAVANT_LEXICON_SUPERSESSION
+version: 1
+
+supersession:
+
+  append_only:
+    true
+
+  newest_authority_wins:
+    true
+
+  preserve_all_prior_states:
+    true
+
+  require_reason:
+    true
+
+  require_authority:
+    true
+
+  require_timestamp:
+    true
+
+  require_predecessor_reference:
+    true
+
+  require_successor_reference:
+    true
+
+  graph:
+
+    directed:
+      true
+
+    acyclic:
+      true
+
+    edge:
+      supersedes
+
+  predecessor:
+
+    retained:
+      true
+
+    status:
+      superseded
+
+    canonical_reserved:
+      true
+
+    aliases_reserved:
+      true
+
+    identity_reserved:
+      true
+
+  successor:
+
+    requires_new_identity:
+      true
+
+    may_inherit_aliases:
+      true
+
+    may_inherit_dependencies:
+      true
+
+    may_inherit_relationships:
+      true
+
+  forbidden:
+
+    - destructive_replacement
+    - history_deletion
+    - identity_reuse
+    - silent_redefinition
+    - canonical_lexeme_mutation
+    - circular_supersession

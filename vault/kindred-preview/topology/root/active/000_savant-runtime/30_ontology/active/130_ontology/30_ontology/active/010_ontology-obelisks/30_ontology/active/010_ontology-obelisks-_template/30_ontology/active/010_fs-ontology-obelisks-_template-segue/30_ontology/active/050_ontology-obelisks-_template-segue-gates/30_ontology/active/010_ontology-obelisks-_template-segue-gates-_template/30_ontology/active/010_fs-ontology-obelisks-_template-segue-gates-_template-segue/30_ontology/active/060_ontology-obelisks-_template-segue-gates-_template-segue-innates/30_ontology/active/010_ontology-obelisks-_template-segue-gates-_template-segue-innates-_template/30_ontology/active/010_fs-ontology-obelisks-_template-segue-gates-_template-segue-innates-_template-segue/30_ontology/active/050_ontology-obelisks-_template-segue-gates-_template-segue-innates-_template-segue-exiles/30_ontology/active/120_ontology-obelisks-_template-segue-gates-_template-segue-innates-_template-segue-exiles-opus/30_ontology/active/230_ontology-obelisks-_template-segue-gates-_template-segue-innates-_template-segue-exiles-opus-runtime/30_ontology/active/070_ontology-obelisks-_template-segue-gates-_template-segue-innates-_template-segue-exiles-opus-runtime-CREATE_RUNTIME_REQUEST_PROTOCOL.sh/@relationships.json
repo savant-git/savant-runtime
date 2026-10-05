@@ -1,0 +1,76 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "3145d1079f56f5c9fb0f3f2776e1c1b193906aa40bd445fe6315cba88daca79a",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "namespace": "preview.kindred",
+  "node": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/runtime/CREATE_RUNTIME_REQUEST_PROTOCOL.sh",
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationships": [
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.72b955756d7aeb31e20b",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/runtime",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/runtime",
+        "canonical_target": "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/runtime/CREATE_RUNTIME_REQUEST_PROTOCOL.sh",
+        "continuation": "projecting",
+        "id": "lineage.composition.72b955756d7aeb31e20b",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/runtime/CREATE_RUNTIME_REQUEST_PROTOCOL.sh"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/runtime",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/runtime/CREATE_RUNTIME_REQUEST_PROTOCOL.sh",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/runtime/CREATE_RUNTIME_REQUEST_PROTOCOL.sh"
+    }
+  ],
+  "schema": "savant.kindred.preview.relationship_projection.v2"
+}

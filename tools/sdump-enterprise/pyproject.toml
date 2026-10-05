@@ -1,0 +1,8 @@
+[project]
+name = "savant-sdump-enterprise"
+version = "3.0.0"
+description = "Deterministic, deduplicated, secret-safe source and canon projection with verified S3 purge."
+requires-python = ">=3.10"
+
+[project.scripts]
+sdump = "sdump_enterprise.cli:entrypoint"

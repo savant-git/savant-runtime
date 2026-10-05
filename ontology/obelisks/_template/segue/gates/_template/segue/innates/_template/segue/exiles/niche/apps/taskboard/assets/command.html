@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" data-niche-theme="nexus-industrial">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SAVANT / NICHE / COMMAND // 2026.1</title>
+    <meta name="theme-color" content="#010406">
+
+    <!-- Design Tokens & Theming Framework -->
+    <link rel="stylesheet" href="/assets/niche-themes.css">
+    <link rel="stylesheet" href="/assets/niche.css">
+    <link rel="stylesheet" href="/assets/niche-navigation.css">
+    <link rel="stylesheet" href="/assets/opus-orchestrator.css">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <header class="topbar">
+        <div class="brand">
+            <span class="brand-badge">SAVANT</span>
+            <div class="brand-title">NICHE RUNTIME</div>
+        </div>
+
+        <nav class="nav" role="navigation" aria-label="Main Navigation">
+            <button type="button" data-view="execute" class="active">Execute</button>
+            <button type="button" data-view="navigation">Atlas</button>
+            <button type="button" data-view="flow">Flow</button>
+            <button type="button" data-view="constellation">Constellation</button>
+            <button type="button" data-view="objectives">Objectives</button>
+            <button type="button" data-view="timeline">Timeline</button>
+            <button type="button" data-view="evidence">Evidence</button>
+            <button type="button" data-view="living">Living</button>
+            <button type="button" data-view="history">History</button>
+        </nav>
+
+        <div class="theme-control">
+            <select id="niche-theme" aria-label="Visual Theme Selection"></select>
+        </div>
+    </header>
+
+    <!-- Sub-Header Real-time Telemetry Rail -->
+    <div id="statusrail" class="statusrail">
+        <div class="status-left">
+            <span class="status-tag">ACTIVE: OPUS ORCHESTRATOR</span>
+            <span id="projection-status">projection stable</span>
+        </div>
+        <div class="status-right">
+            <span id="api-status-text">connected</span>
+            <span id="fabric-status-text">surfaces healthy</span>
+        </div>
+    </div>
+
+    <!-- Main Dynamic Application Surfaces -->
+    <main class="surfaces">
+        <!-- 1. Execute Surface -->
+        <section id="surface-execute" class="surface active" data-surface="execute">
+            <div class="content-grid">
+                <article class="interactive-card">
+                    <span class="brand-badge">RECOMMENDED STEP</span>
+                    <h1 id="execute-heading">No executable action exposed</h1>
+                    <p id="execute-purpose">Niche will not fabricate a next action when available task state does not establish one.</p>
+                    <div class="card-meta">
+                        <span id="execute-priority">PRIORITY UNKNOWN</span>
+                        <div id="execute-ancestry"></div>
+                    </div>
+                    <button id="start-next" class="atlas-cmd-btn frontier" style="width:100%;height:2.6rem;margin-top:1rem;">
+                        <span id="start-next-label">START NEXT</span>
+                    </button>
+                    <small id="start-next-detail" style="color:var(--text-muted);display:block;margin-top:0.4rem;"></small>
+                </article>
+
+                <article class="interactive-card">
+                    <span class="brand-badge">ORACLE INFERENCE</span>
+                    <div id="oracle-factors" style="display:flex;flex-direction:column;gap:0.6rem;margin-top:0.5rem;"></div>
+                    <p id="oracle-explanation" style="font-size:0.75rem;color:var(--text-muted);margin-top:0.8rem;"></p>
+                </article>
+
+                <article class="interactive-card">
+                    <span class="brand-badge">FRONTIER DENSITY</span>
+                    <div id="frontier-track" style="position:relative;width:100%;height:2rem;margin-top:1rem;background:rgba(255,255,255,0.03);border-radius:3px;"></div>
+                    <div id="blocker-list" style="margin-top:1rem;display:flex;flex-direction:column;gap:0.4rem;"></div>
+                </article>
+            </div>
+        </section>
+
+        <!-- 2. Atlas Surface (Injected and Managed by niche-navigation.js) -->
+        <section id="surface-navigation" class="surface niche-navigation-surface atlas-surface" data-surface="navigation" hidden></section>
+
+        <!-- 3. Flow Surface -->
+        <section id="surface-flow" class="surface" data-surface="flow" hidden>
+            <div id="flow-summary" style="font-size:0.75rem;color:var(--text-muted);margin-bottom:1rem;"></div>
+            <div id="flow-board" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(14rem, 1fr));gap:1rem;"></div>
+        </section>
+
+        <!-- 4. Constellation Graph Surface -->
+        <section id="surface-constellation" class="surface" data-surface="constellation" hidden>
+            <div id="constellation-summary" style="font-size:0.75rem;color:var(--text-muted);margin-bottom:1rem;"></div>
+            <div id="graph-stage" style="position:relative;width:100%;height:38rem;background:#020508;border:1px solid var(--border-subtle);border-radius:4px;overflow:hidden;">
+                <svg id="graph-edges" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;"></svg>
+                <div id="graph-nodes" style="position:absolute;inset:0;width:100%;height:100%;"></div>
+            </div>
+        </section>
+
+        <!-- 5. Objectives Surface -->
+        <section id="surface-objectives" class="surface" data-surface="objectives" hidden>
+            <div id="objective-summary" style="font-size:0.75rem;color:var(--text-muted);margin-bottom:1rem;"></div>
+            <div id="objective-grid" class="content-grid"></div>
+        </section>
+
+        <!-- 6. Timeline Surface -->
+        <section id="surface-timeline" class="surface" data-surface="timeline" hidden>
+            <div id="timeline" class="content-grid"></div>
+        </section>
+
+        <!-- 7. Evidence Surface -->
+        <section id="surface-evidence" class="surface" data-surface="evidence" hidden>
+            <div id="evidence-summary" style="font-size:0.75rem;color:var(--text-muted);margin-bottom:1rem;"></div>
+            <div id="evidence-grid" class="content-grid"></div>
+        </section>
+
+        <!-- 8. Living Surface -->
+        <section id="surface-living" class="surface" data-surface="living" hidden>
+            <div id="fabric-identity" style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.5rem;"></div>
+            <div id="living-summary" style="display:flex;gap:1.5rem;margin-bottom:1rem;"></div>
+            <div id="living-grid" class="content-grid"></div>
+        </section>
+
+        <!-- 9. History Surface -->
+        <section id="surface-history" class="surface" data-surface="history" hidden>
+            <div id="history-list" class="content-grid"></div>
+        </section>
+    </main>
+
+    <!-- Global Inspector Sidebar -->
+    <aside id="inspector" class="atlas-drawer" aria-hidden="true">
+        <div class="atlas-drawer-header">
+            <h2 id="inspector-title">INSPECTOR</h2>
+            <button id="close-inspector" type="button" aria-label="Close Inspector">×</button>
+        </div>
+        <div id="inspector-body" class="atlas-drawer-body"></div>
+    </aside>
+
+    <!-- Global Notification Container -->
+    <div id="toasts" style="position:fixed;bottom:1.5rem;right:1.5rem;z-index:200;display:flex;flex-direction:column;gap:0.5rem;pointer-events:none;"></div>
+
+    <!-- Scripts: Execution Stack & Runtime Integrations -->
+    <script src="/assets/niche-themes.js"></script>
+    <script src="/assets/niche-core-projection-bridge-r1.js"></script>
+    <script src="/assets/niche-vnext-r3.js"></script>
+    <script src="/assets/niche-navigation.js"></script>
+    <script src="/assets/opus-orchestrator.js"></script>
+</body>
+</html>

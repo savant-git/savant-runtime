@@ -1,0 +1,447 @@
+/*
+ * savant / niche
+ * execution focus
+ * authority_effect: none
+ */
+
+.niche-focus-panel {
+    position: fixed;
+    z-index: 88;
+
+    top:
+        max(
+            10px,
+            env(safe-area-inset-top)
+        );
+
+    right:
+        max(
+            10px,
+            env(safe-area-inset-right)
+        );
+
+    bottom:
+        max(
+            10px,
+            env(safe-area-inset-bottom)
+        );
+
+    width:
+        min(
+            440px,
+            calc(
+                100vw -
+                20px -
+                env(safe-area-inset-left) -
+                env(safe-area-inset-right)
+            )
+        );
+
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+
+    border:
+        1px solid
+        var(
+            --line,
+            rgba(255,255,255,.1)
+        );
+
+    background:
+        rgba(11,13,15,.98);
+
+    box-shadow:
+        0 24px 80px
+        rgba(0,0,0,.45);
+
+    overflow: hidden;
+
+    contain:
+        layout paint;
+}
+
+.niche-focus-panel[hidden] {
+    display: none !important;
+}
+
+.niche-focus-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    flex: 0 0 auto;
+
+    padding: 14px 16px;
+
+    border-bottom:
+        1px solid
+        var(
+            --line,
+            rgba(255,255,255,.1)
+        );
+}
+
+.niche-focus-head > div {
+    min-width: 0;
+}
+
+.niche-focus-head h2 {
+    margin: 2px 0 0;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.niche-focus-body {
+    flex: 1 1 auto;
+
+    min-width: 0;
+    min-height: 0;
+
+    padding: 16px;
+
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+.niche-focus-identity {
+    min-width: 0;
+
+    padding-bottom: 16px;
+
+    border-bottom:
+        1px solid
+        var(
+            --line,
+            rgba(255,255,255,.08)
+        );
+}
+
+.niche-focus-identity h2 {
+    margin: 5px 0 8px;
+
+    font-size:
+        clamp(
+            20px,
+            2.4vw,
+            30px
+        );
+
+    line-height: 1.08;
+
+    overflow-wrap: anywhere;
+}
+
+.niche-focus-identity code {
+    display: block;
+
+    max-width: 100%;
+
+    font-size: 10px;
+
+    opacity: .52;
+
+    overflow-wrap: anywhere;
+    white-space: normal;
+}
+
+.niche-focus-metrics {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0,1fr)
+        );
+
+    gap: 1px;
+
+    margin: 14px 0;
+
+    background:
+        var(
+            --line,
+            rgba(255,255,255,.08)
+        );
+}
+
+.niche-focus-row {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    min-width: 0;
+
+    padding: 11px;
+
+    background:
+        rgba(11,13,15,.98);
+}
+
+.niche-focus-row span {
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: .12em;
+
+    opacity: .46;
+}
+
+.niche-focus-row strong {
+    min-width: 0;
+
+    font-size: 15px;
+
+    overflow-wrap: anywhere;
+}
+
+.niche-focus-section {
+    min-width: 0;
+
+    margin-top: 18px;
+}
+
+.niche-focus-section h3 {
+    margin: 0 0 8px;
+
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+
+    opacity: .65;
+}
+
+.niche-focus-empty {
+    margin: 0;
+
+    font-size: 11px;
+    line-height: 1.5;
+
+    opacity: .46;
+}
+
+.niche-focus-task-list {
+    display: grid;
+    gap: 5px;
+}
+
+.niche-focus-task {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+
+    width: 100%;
+    min-width: 0;
+
+    border:
+        1px solid
+        var(
+            --line,
+            rgba(255,255,255,.08)
+        );
+
+    padding: 9px 10px;
+
+    background:
+        rgba(255,255,255,.02);
+
+    color: inherit;
+
+    text-align: left;
+
+    cursor: pointer;
+}
+
+.niche-focus-task:hover,
+.niche-focus-task:focus-visible {
+    border-color: currentColor;
+
+    outline: none;
+}
+
+.niche-focus-task span,
+.niche-focus-task small {
+    max-width: 100%;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.niche-focus-task small {
+    font-size: 9px;
+
+    opacity: .42;
+}
+
+.niche-focus-receipts {
+    display: grid;
+    gap: 5px;
+}
+
+.niche-focus-receipts code {
+    display: block;
+
+    max-width: 100%;
+
+    padding: 7px 8px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    font-size: 9px;
+
+    overflow-wrap: anywhere;
+    white-space: normal;
+}
+
+.niche-focus-actions {
+    position: sticky;
+    bottom: -16px;
+
+    display: grid;
+    gap: 6px;
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0,1fr)
+        );
+
+    margin:
+        22px -16px -16px;
+
+    padding: 10px 16px
+        max(
+            12px,
+            env(safe-area-inset-bottom)
+        );
+
+    border-top:
+        1px solid
+        var(
+            --line,
+            rgba(255,255,255,.08)
+        );
+
+    background:
+        rgba(11,13,15,.98);
+}
+
+.niche-focus-actions button {
+    min-width: 0;
+    min-height: 40px;
+
+    border:
+        1px solid
+        var(
+            --line,
+            rgba(255,255,255,.1)
+        );
+
+    padding: 7px;
+
+    background: transparent;
+
+    color: inherit;
+
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: .06em;
+
+    cursor: pointer;
+
+    overflow-wrap: anywhere;
+}
+
+.niche-focus-actions button:hover,
+.niche-focus-actions button:focus-visible {
+    border-color: currentColor;
+
+    outline: none;
+}
+
+body.niche-focus-open
+    #main {
+    padding-right:
+        min(
+            460px,
+            32vw
+        );
+}
+
+@media (max-width: 1100px) {
+    body.niche-focus-open
+        #main {
+        padding-right: 0;
+    }
+
+    .niche-focus-panel {
+        width:
+            min(
+                420px,
+                calc(
+                    100vw -
+                    20px
+                )
+            );
+    }
+}
+
+@media (max-width: 700px) {
+    .niche-focus-panel {
+        top: auto;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        width: 100%;
+        max-width: 100%;
+
+        height:
+            min(
+                78dvh,
+                var(
+                    --niche-safe-height,
+                    78vh
+                )
+            );
+
+        border-right: 0;
+        border-bottom: 0;
+        border-left: 0;
+    }
+
+    .niche-focus-actions {
+        grid-template-columns:
+            minmax(0,1fr);
+    }
+}
+
+@media (max-width: 390px) {
+    .niche-focus-metrics {
+        grid-template-columns:
+            minmax(0,1fr);
+    }
+}
+
+@media (pointer: coarse) {
+    .niche-focus-task,
+    .niche-focus-actions button,
+    .niche-focus-head button {
+        min-height: 44px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .niche-focus-panel,
+    .niche-focus-task,
+    .niche-focus-actions button {
+        transition: none !important;
+    }
+}

@@ -1,0 +1,83 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:ontology/obelisks/segue/projections",
+  "deterministic_hash": "cc77912aa4bc7992a5d77332dd234f573252942848a3e0c0ef3c31d33b8aa5f4",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "ontology/obelisks/segue/projections",
+  "kind": "directory",
+  "label": "projections",
+  "namespace": "preview.kindred",
+  "path": "ontology/obelisks/segue/projections",
+  "placement": {
+    "domain": "filesystem",
+    "node": "ontology/obelisks/segue/projections",
+    "parent": "ontology/obelisks/segue",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.298fe1f40270b23df032",
+    "rank": 80,
+    "slot": "30_ontology",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.298fe1f40270b23df032"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:ontology/obelisks/segue/projections",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "ontology/obelisks/segue/projections",
+    "kind": "directory",
+    "label": "projections",
+    "legacy_id": "ontology/obelisks/segue/projections",
+    "lineage": [
+      "ontology/obelisks/segue"
+    ],
+    "metadata": {
+      "canonical_id": "fs:ontology/obelisks/segue/projections",
+      "child_modes": {},
+      "child_roles": {},
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:ontology/obelisks/segue"
+        ]
+      },
+      "projected_id": "ontology/obelisks/segue/projections",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "ontology/obelisks/segue"
+    ],
+    "path": "ontology/obelisks/segue/projections",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "ontology/obelisks/segue/projections",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.298fe1f40270b23df032"
+    ],
+    "size": 12,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

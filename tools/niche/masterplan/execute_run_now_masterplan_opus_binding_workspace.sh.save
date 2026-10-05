@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+VALIDATOR="/root/savant-runtime/tools/niche/masterplan/validate_run_now_masterplan_opus_binding_workspace.sh"
+
+if [[ ! -f "${VALIDATOR}" ]]; then
+    printf 'ERROR: validator missing: %s\n' "${VALIDATOR}" >&2
+    exit 1
+fi
+
+chmod 0755 \
+    "${VALIDATOR}"
+
+bash -n \
+    "${VALIDATOR}"
+
+exec /usr/bin/bash \
+    "${VALIDATOR}"

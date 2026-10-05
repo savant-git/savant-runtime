@@ -1,0 +1,112 @@
+version: 1
+id: savant.ai-capabilities
+
+policy:
+  activation: auto
+  native_fallback: required
+  provider_neutral: true
+  graceful_degradation: true
+  authority_from_ai: forbidden
+  mutation_from_ai: forbidden
+  secrets_in_canon: forbidden
+
+modes:
+  native:
+    minimum_usable_providers: 0
+  augmented:
+    minimum_usable_providers: 1
+  orchestrated:
+    minimum_usable_providers: 2
+
+providers:
+  openai:
+    enabled: auto
+    secret_env:
+      - OPENAI_API_KEY
+    capabilities:
+      - generate
+      - analyze
+      - classify
+      - critique
+      - summarize
+      - transform
+      - plan
+      - infer
+
+  anthropic:
+    enabled: auto
+    secret_env:
+      - ANTHROPIC_API_KEY
+    capabilities:
+      - generate
+      - analyze
+      - classify
+      - critique
+      - summarize
+      - transform
+      - plan
+      - infer
+
+  google:
+    enabled: auto
+    secret_env:
+      - GEMINI_API_KEY
+      - GOOGLE_API_KEY
+    secret_policy: any
+    capabilities:
+      - generate
+      - analyze
+      - classify
+      - critique
+      - summarize
+      - transform
+      - plan
+      - infer
+      - multimodal
+
+  perplexity:
+    enabled: auto
+    secret_env:
+      - PERPLEXITY_API_KEY
+      - PPLX_API_KEY
+    secret_policy: any
+    capabilities:
+      - generate
+      - analyze
+      - research
+      - summarize
+
+  groq:
+    enabled: auto
+    secret_env:
+      - GROQ_API_KEY
+    capabilities:
+      - generate
+      - classify
+      - transform
+
+  deepseek:
+    enabled: auto
+    secret_env:
+      - DEEPSEEK_API_KEY
+    capabilities:
+      - generate
+      - analyze
+      - critique
+      - plan
+      - infer
+
+eligibility:
+  default:
+    eligible: false
+    authority_effect: none
+    mutation_effect: none
+    native_fallback: required
+
+  opus_ready:
+    eligible: true
+    authority_effect: none
+    mutation_effect: none
+    native_fallback: required
+    provider_neutral: true
+    graceful_degradation: required

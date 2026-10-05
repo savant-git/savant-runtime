@@ -1,0 +1,66 @@
+{
+  "authoritative": false,
+  "child_profile": "daughter",
+  "deterministic_hash": "12877b571e0042030a124d907e7ca8a97af29caadf223ebea7c89a781781a35d",
+  "domain": "filesystem",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "lineage.composition.557a43f1385be1ec5d36",
+  "impeti": [],
+  "namespace": "preview.kindred",
+  "parent_profile": "parent",
+  "plane": "lineage",
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "role": "composition",
+  "schema": "savant.kindred.preview.lineage_segue.v2",
+  "source": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/niche/graph",
+  "source_record": {
+    "axis": "containment",
+    "canonical_source": "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/niche/graph",
+    "canonical_target": "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/niche/graph/edges",
+    "continuation": "preserving",
+    "id": "lineage.composition.557a43f1385be1ec5d36",
+    "inheritance": {
+      "conflict_policy": "child_wins",
+      "exclude": [],
+      "fields": [],
+      "mode": "reference"
+    },
+    "inverse": "component",
+    "kind": "contains",
+    "metadata": {
+      "legacy_edge_kind": "contains",
+      "projection": "filesystem_edifice"
+    },
+    "order": 0,
+    "propagation": {
+      "channels": [
+        "validation",
+        "projection",
+        "regeneration"
+      ],
+      "enabled": true
+    },
+    "provenance": {
+      "created_by": "filesystem_adapter",
+      "source_files": [
+        "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/niche/graph/edges"
+      ]
+    },
+    "role": "composition",
+    "scope": "filesystem",
+    "source": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/niche/graph",
+    "status": "active",
+    "symbolic_child_alias": "daughter",
+    "symbolic_parent_alias": "parent",
+    "target": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/niche/graph/edges",
+    "weight": 2
+  },
+  "state": "active",
+  "synthetic": false,
+  "target": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/niche/graph/edges"
+}

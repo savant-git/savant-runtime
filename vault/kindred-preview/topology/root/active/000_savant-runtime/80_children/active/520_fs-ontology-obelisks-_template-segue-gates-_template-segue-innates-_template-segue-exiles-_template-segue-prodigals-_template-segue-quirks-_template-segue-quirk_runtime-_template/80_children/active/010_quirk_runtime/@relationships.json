@@ -1,0 +1,96 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "42309dd75f81aa628f7f8e8970bde79b344de617be8fe302a2cca1a976d8d346",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "namespace": "preview.kindred",
+  "node": "quirk_runtime",
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationships": [
+    {
+      "child_profile": "daughter",
+      "domain": "global",
+      "id": "lineage.pattern.16398854c189c55b4d84",
+      "impeti": [],
+      "parent_profile": "father",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "pattern",
+      "source": "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/_template/segue/prodigals/_template/segue/quirks/_template/segue/quirk_runtime/_template",
+      "source_record": {
+        "axis": "form",
+        "canonical_source": "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/_template/segue/prodigals/_template/segue/quirks/_template/segue/quirk_runtime/_template",
+        "canonical_target": "quirk_runtime",
+        "continuation": "preserving",
+        "id": "lineage.pattern.16398854c189c55b4d84",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [
+            "schema",
+            "structure",
+            "interfaces",
+            "policies",
+            "constraints",
+            "metadata"
+          ],
+          "mode": "merge"
+        },
+        "inverse": "realization",
+        "kind": "pattern",
+        "metadata": {
+          "adapter": "authority",
+          "reference_normalization": [
+            {
+              "canonical": "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/_template/segue/prodigals/_template/segue/quirks/_template/segue/quirk_runtime/_template",
+              "changed": true,
+              "kind": "filesystem_absolute",
+              "matched_path": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/_template/segue/prodigals/_template/segue/quirks/_template/segue/quirk_runtime/_template",
+              "original": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/_template/segue/prodigals/_template/segue/quirks/_template/segue/quirk_runtime/_template"
+            }
+          ],
+          "source_field": "template",
+          "source_path": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/_template/segue/quirks/_template/segue/quirk_runtime/entity.json"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "authority_adapter",
+          "created_from": [
+            "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/_template/segue/quirks/_template/segue/quirk_runtime/entity.json"
+          ],
+          "source_files": [
+            "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/_template/segue/quirks/_template/segue/quirk_runtime/entity.json"
+          ]
+        },
+        "role": "pattern",
+        "scope": "global",
+        "source": "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/_template/segue/prodigals/_template/segue/quirks/_template/segue/quirk_runtime/_template",
+        "status": "active",
+        "symbolic_child_alias": "daughter",
+        "symbolic_parent_alias": "father",
+        "target": "quirk_runtime",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "quirk_runtime"
+    }
+  ],
+  "schema": "savant.kindred.preview.relationship_projection.v2"
+}

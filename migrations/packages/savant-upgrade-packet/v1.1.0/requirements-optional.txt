@@ -1,0 +1,7 @@
+# Optional adapters. The core compiler uses only Python 3.12 standard library.
+# Pin and hash only after live benchmarks and supply-chain review.
+networkx>=3.4,<4
+pydantic>=2.10,<3
+hypothesis>=6.120,<7
+opentelemetry-api>=1.29,<2
+opentelemetry-sdk>=1.29,<2

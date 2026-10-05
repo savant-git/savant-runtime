@@ -1,0 +1,67 @@
+{
+  "id": "carbon.dependencies",
+  "owner": "carbon",
+  "type": "dependency_projection",
+  "status": "active",
+  "required": [],
+  "optional": [
+    {
+      "id": "source_instances",
+      "relationship": "simulation_input",
+      "binding": "reference",
+      "authority_transfer": false
+    },
+    {
+      "id": "admitted_evidence",
+      "relationship": "initial_condition_evidence",
+      "binding": "reference",
+      "authority_transfer": false
+    },
+    {
+      "id": "accepted_decisions",
+      "relationship": "declared_constraint",
+      "binding": "reference",
+      "authority_transfer": false
+    },
+    {
+      "id": "execution_backends",
+      "relationship": "specialized_simulation_execution",
+      "binding": "replaceable_attachment",
+      "authority_transfer": false
+    }
+  ],
+  "applications": [
+    {
+      "id": "avatar_forge",
+      "relationship": "carbon_owned_simulation_specialization",
+      "required_for_carbon": false
+    }
+  ],
+  "specializations": [
+    {
+      "id": "oriel",
+      "relationship": "carbon_owned_simulation_specialization",
+      "specialization": "chronometric_logistics_simulation",
+      "required_for_carbon": false,
+      "manifest": "registry/manifests/oriel.json",
+      "capabilities": "registry/capabilities/oriel.json",
+      "capability_provider": "runtime/oriel_capabilities.py",
+      "introspection_provider": "runtime/oriel_introspection.py",
+      "projection_owner": "filament",
+      "transformation_owner": "modus",
+      "authority_effect": "none",
+      "authority_transfer": false
+    }
+  ],
+  "rules": {
+    "carbon_identity_requires_external_backend": false,
+    "carbon_semantics_require_external_backend": false,
+    "optional_dependencies_are_replaceable": true,
+    "imported_authority_remains_external": true,
+    "dependency_failure_must_be_exposed": true,
+    "specialization_failure_must_be_exposed": true,
+    "oriel_failure_does_not_redefine_carbon": true,
+    "oriel_failure_may_degrade_chronometric_logistics_simulation": true,
+    "authority_transfer": false
+  }
+}

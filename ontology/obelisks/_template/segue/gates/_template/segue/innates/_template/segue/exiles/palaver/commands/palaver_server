@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+palaver_root="/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver"
+enterprise="$palaver_root/commands/palaver_enterprise"
+env_file="/root/.env"
+
+if [ -f "$env_file" ]; then
+    set -a
+    # shellcheck disable=SC1091
+    source "$env_file"
+    set +a
+fi
+
+if [ ! -x "$enterprise" ]; then
+    echo "[ERROR] Palaver enterprise launcher unavailable: $enterprise" >&2
+    exit 1
+fi
+
+exec "$enterprise" "$@"

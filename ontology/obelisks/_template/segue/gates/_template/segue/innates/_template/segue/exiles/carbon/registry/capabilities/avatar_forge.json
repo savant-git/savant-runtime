@@ -1,0 +1,32 @@
+{
+  "id": "carbon.capabilities.avatar_forge",
+  "owner": "carbon",
+  "kind": "simulation_application",
+  "status": "active",
+  "simulation_substrate": "carbon.simulation",
+  "specialization": "embodied_identity_simulation",
+  "requires_explicit_consent": true,
+  "capabilities": [
+    "photo_intake",
+    "identity_manifest",
+    "texture_projection_manifest",
+    "voice_profile_manifest",
+    "rig_export_manifest",
+    "embodiment_simulation",
+    "embodiment_branching",
+    "embodiment_checkpointing",
+    "embodiment_replay",
+    "embodiment_comparison",
+    "embodiment_interrogation",
+    "carbon_packet_audit"
+  ],
+  "invariants": {
+    "source_material_remains_source": true,
+    "simulation_state_remains_derived": true,
+    "represented_identity_authority_preserved": true,
+    "consent_preserved": true,
+    "lineage_preserved": true,
+    "provenance_preserved": true,
+    "authority_transfer": false
+  }
+}

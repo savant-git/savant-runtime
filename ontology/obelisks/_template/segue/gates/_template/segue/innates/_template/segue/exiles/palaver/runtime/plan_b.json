@@ -1,0 +1,35 @@
+{
+  "schema": "savant.palaver.runtime.v1",
+  "runtime_id": "plan_b_resilient",
+  "owner": "palaver",
+  "status": "active",
+  "authority_effect": "none",
+  "canonical_command": "commands/palaver",
+  "server_command": "commands/palaver_server",
+  "inference_command": "commands/palaver_infer",
+  "health_command": "commands/palaver_health",
+  "legacy_command": "commands/palaver_legacy",
+  "bind": {
+    "host": "127.0.0.1",
+    "port": 8790,
+    "environment_host": "PALAVER_BIND_HOST",
+    "environment_port": "PALAVER_BIND_PORT"
+  },
+  "execution": {
+    "conversation_owner": "palaver",
+    "persona_owner": "envoy",
+    "provider_execution_owner": "opus",
+    "provider_fallback_owner": "opus",
+    "default_persona": "orobouros"
+  },
+  "dependencies": {
+    "legacy_server_required": false,
+    "legacy_webui_required": false,
+    "graph_required_for_text_inference": false,
+    "voice_required_for_text_inference": false
+  },
+  "compatibility": {
+    "legacy_runtime_preserved": true,
+    "legacy_runtime_command": "commands/palaver_legacy"
+  }
+}

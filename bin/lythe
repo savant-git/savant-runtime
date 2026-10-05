@@ -1,0 +1,190 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+
+ROOT = Path("/root/savant-runtime")
+
+if str(ROOT) not in sys.path:
+    sys.path.insert(
+        0,
+        str(ROOT),
+    )
+
+
+from runtime.lythe import (  # noqa: E402
+    DerivationSpec,
+    Lythe,
+)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Lythe — Savant living "
+            "derivation substrate"
+        )
+    )
+
+    commands = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    commands.add_parser("profile")
+    commands.add_parser("validate")
+    commands.add_parser("health")
+    commands.add_parser("self-test")
+
+    arguments = parser.parse_args()
+
+    lythe = Lythe()
+
+    if arguments.command == "profile":
+        result = lythe.profile()
+
+    elif arguments.command == "validate":
+        result = lythe.validate()
+
+    elif arguments.command == "health":
+        result = lythe.health()
+
+    elif arguments.command == "self-test":
+        source = {
+            "id": "exile:filament",
+            "identity": {
+                "name": "Filament",
+                "status": "accepted",
+            },
+            "capabilities": {
+                "projection": True,
+                "workers": True,
+            },
+        }
+
+        spec = DerivationSpec(
+            spec_id="lythe:self-test",
+            source_id="exile:filament",
+            fields={
+                "name":
+                    "identity.name",
+                "status":
+                    "identity.status",
+                "projection":
+                    "capabilities.projection",
+            },
+            constants={
+                "view":
+                    "runtime-summary",
+            },
+            metadata={
+                "purpose":
+                    "focused integration test",
+            },
+        )
+
+        projection = lythe.derive(
+            source,
+            spec,
+            dependencies={
+                "contract":
+                    "filament.projection"
+            },
+        )
+
+        determinism = (
+            lythe.verify_determinism(
+                source,
+                spec,
+                dependencies={
+                    "contract":
+                        "filament.projection"
+                },
+            )
+        )
+
+        freshness = lythe.freshness(
+            projection,
+            source,
+            dependencies={
+                "contract":
+                    "filament.projection"
+            },
+        )
+
+        rebuild = lythe.rebuild_report(
+            projection,
+            source,
+            dependencies={
+                "contract":
+                    "filament.projection"
+            },
+        )
+
+        result = {
+            "projection": projection,
+            "determinism": determinism,
+            "freshness": freshness,
+            "rebuild": rebuild,
+            "valid": (
+                determinism[
+                    "deterministic"
+                ]
+                is True
+                and freshness[
+                    "fresh"
+                ]
+                is True
+                and rebuild[
+                    "rebuild_required"
+                ]
+                is False
+                and projection[
+                    "authoritative"
+                ]
+                is False
+                and projection[
+                    "mutation_performed"
+                ]
+                is False
+                and projection[
+                    "execution_authorized"
+                ]
+                is False
+            ),
+        }
+
+    else:
+        raise RuntimeError(
+            "unsupported command"
+        )
+
+    print(
+        json.dumps(
+            result,
+            indent=2,
+            sort_keys=True,
+            default=str,
+        )
+    )
+
+    if (
+        arguments.command
+        in (
+            "validate",
+            "self-test",
+        )
+        and not result["valid"]
+    ):
+        return 1
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

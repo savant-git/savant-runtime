@@ -1,0 +1,1185 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "224df7c04ff8c4623ab4703bdba8e22e51ee856efeb06c6c9ecb54f48dc7bfe3",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "namespace": "preview.kindred",
+  "node": "edifice:identity:4",
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationships": [
+    {
+      "child_profile": "child",
+      "domain": "global",
+      "id": "lineage.generic.204c0da42d18f1f8a49c",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "functional",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "generic",
+      "source": "edifice:identity:4",
+      "source_record": {
+        "axis": "unspecified",
+        "canonical_source": "edifice:identity:4",
+        "canonical_target": "exile:cataxis",
+        "continuation": "neutral",
+        "id": "lineage.generic.204c0da42d18f1f8a49c",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "generic_child",
+        "kind": "generic",
+        "metadata": {
+          "adapter": "authority",
+          "source_field": "lineage.parents",
+          "source_path": "/root/savant-runtime/canon-system/authority/exiles/cataxis.yaml"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "authority_adapter",
+          "created_from": [
+            "/root/savant-runtime/canon-system/authority/exiles/cataxis.yaml"
+          ],
+          "source_files": [
+            "/root/savant-runtime/canon-system/authority/exiles/cataxis.yaml"
+          ]
+        },
+        "role": "generic",
+        "scope": "global",
+        "source": "edifice:identity:4",
+        "status": "active",
+        "symbolic_child_alias": "child",
+        "symbolic_parent_alias": "parent",
+        "target": "exile:cataxis",
+        "weight": 1
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "exile:cataxis"
+    },
+    {
+      "child_profile": "child",
+      "domain": "global",
+      "id": "lineage.generic.267cb28aff097844471a",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "functional",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "generic",
+      "source": "edifice:identity:4",
+      "source_record": {
+        "axis": "unspecified",
+        "canonical_source": "edifice:identity:4",
+        "canonical_target": "exile:niche",
+        "continuation": "neutral",
+        "id": "lineage.generic.267cb28aff097844471a",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "generic_child",
+        "kind": "generic",
+        "metadata": {
+          "adapter": "authority",
+          "source_field": "lineage.parents",
+          "source_path": "/root/savant-runtime/canon-system/authority/exiles/niche.yaml"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "authority_adapter",
+          "created_from": [
+            "/root/savant-runtime/canon-system/authority/exiles/niche.yaml"
+          ],
+          "source_files": [
+            "/root/savant-runtime/canon-system/authority/exiles/niche.yaml"
+          ]
+        },
+        "role": "generic",
+        "scope": "global",
+        "source": "edifice:identity:4",
+        "status": "active",
+        "symbolic_child_alias": "child",
+        "symbolic_parent_alias": "parent",
+        "target": "exile:niche",
+        "weight": 1
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "exile:niche"
+    },
+    {
+      "child_profile": "child",
+      "domain": "global",
+      "id": "lineage.generic.32e79ac538ab4d8808a4",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "functional",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "generic",
+      "source": "edifice:identity:4",
+      "source_record": {
+        "axis": "unspecified",
+        "canonical_source": "edifice:identity:4",
+        "canonical_target": "exile:underscore",
+        "continuation": "neutral",
+        "id": "lineage.generic.32e79ac538ab4d8808a4",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "generic_child",
+        "kind": "generic",
+        "metadata": {
+          "adapter": "authority",
+          "source_field": "lineage.parents",
+          "source_path": "/root/savant-runtime/canon-system/authority/exiles/underscore.yaml"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "authority_adapter",
+          "created_from": [
+            "/root/savant-runtime/canon-system/authority/exiles/underscore.yaml"
+          ],
+          "source_files": [
+            "/root/savant-runtime/canon-system/authority/exiles/underscore.yaml"
+          ]
+        },
+        "role": "generic",
+        "scope": "global",
+        "source": "edifice:identity:4",
+        "status": "active",
+        "symbolic_child_alias": "child",
+        "symbolic_parent_alias": "parent",
+        "target": "exile:underscore",
+        "weight": 1
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "exile:underscore"
+    },
+    {
+      "child_profile": "child",
+      "domain": "global",
+      "id": "lineage.generic.34f2cbb184766625df4a",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "functional",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "generic",
+      "source": "edifice:identity:4",
+      "source_record": {
+        "axis": "unspecified",
+        "canonical_source": "edifice:identity:4",
+        "canonical_target": "exile:shatter",
+        "continuation": "neutral",
+        "id": "lineage.generic.34f2cbb184766625df4a",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "generic_child",
+        "kind": "generic",
+        "metadata": {
+          "adapter": "authority",
+          "source_field": "lineage.parents",
+          "source_path": "/root/savant-runtime/canon-system/authority/exiles/shatter.yaml"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "authority_adapter",
+          "created_from": [
+            "/root/savant-runtime/canon-system/authority/exiles/shatter.yaml"
+          ],
+          "source_files": [
+            "/root/savant-runtime/canon-system/authority/exiles/shatter.yaml"
+          ]
+        },
+        "role": "generic",
+        "scope": "global",
+        "source": "edifice:identity:4",
+        "status": "active",
+        "symbolic_child_alias": "child",
+        "symbolic_parent_alias": "parent",
+        "target": "exile:shatter",
+        "weight": 1
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "exile:shatter"
+    },
+    {
+      "child_profile": "child",
+      "domain": "global",
+      "id": "lineage.generic.4eac84135f1b6d119872",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "functional",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "generic",
+      "source": "edifice:identity:4",
+      "source_record": {
+        "axis": "unspecified",
+        "canonical_source": "edifice:identity:4",
+        "canonical_target": "exile:coda",
+        "continuation": "neutral",
+        "id": "lineage.generic.4eac84135f1b6d119872",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "generic_child",
+        "kind": "generic",
+        "metadata": {
+          "adapter": "authority",
+          "source_field": "lineage.parents",
+          "source_path": "/root/savant-runtime/canon-system/authority/exiles/coda.yaml"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "authority_adapter",
+          "created_from": [
+            "/root/savant-runtime/canon-system/authority/exiles/coda.yaml"
+          ],
+          "source_files": [
+            "/root/savant-runtime/canon-system/authority/exiles/coda.yaml"
+          ]
+        },
+        "role": "generic",
+        "scope": "global",
+        "source": "edifice:identity:4",
+        "status": "active",
+        "symbolic_child_alias": "child",
+        "symbolic_parent_alias": "parent",
+        "target": "exile:coda",
+        "weight": 1
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "exile:coda"
+    },
+    {
+      "child_profile": "child",
+      "domain": "global",
+      "id": "lineage.generic.61cf284b1a5282181e61",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "functional",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "generic",
+      "source": "edifice:identity:4",
+      "source_record": {
+        "axis": "unspecified",
+        "canonical_source": "edifice:identity:4",
+        "canonical_target": "exile:modus",
+        "continuation": "neutral",
+        "id": "lineage.generic.61cf284b1a5282181e61",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "generic_child",
+        "kind": "generic",
+        "metadata": {
+          "adapter": "authority",
+          "source_field": "lineage.parents",
+          "source_path": "/root/savant-runtime/canon-system/authority/exiles/modus.yaml"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "authority_adapter",
+          "created_from": [
+            "/root/savant-runtime/canon-system/authority/exiles/modus.yaml"
+          ],
+          "source_files": [
+            "/root/savant-runtime/canon-system/authority/exiles/modus.yaml"
+          ]
+        },
+        "role": "generic",
+        "scope": "global",
+        "source": "edifice:identity:4",
+        "status": "active",
+        "symbolic_child_alias": "child",
+        "symbolic_parent_alias": "parent",
+        "target": "exile:modus",
+        "weight": 1
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "exile:modus"
+    },
+    {
+      "child_profile": "child",
+      "domain": "global",
+      "id": "lineage.generic.6ca192705b13d2de1bdc",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "functional",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "generic",
+      "source": "edifice:identity:4",
+      "source_record": {
+        "axis": "unspecified",
+        "canonical_source": "edifice:identity:4",
+        "canonical_target": "exile:envoy",
+        "continuation": "neutral",
+        "id": "lineage.generic.6ca192705b13d2de1bdc",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "generic_child",
+        "kind": "generic",
+        "metadata": {
+          "adapter": "authority",
+          "source_field": "lineage.parents",
+          "source_path": "/root/savant-runtime/canon-system/authority/exiles/envoy.yaml"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "authority_adapter",
+          "created_from": [
+            "/root/savant-runtime/canon-system/authority/exiles/envoy.yaml"
+          ],
+          "source_files": [
+            "/root/savant-runtime/canon-system/authority/exiles/envoy.yaml"
+          ]
+        },
+        "role": "generic",
+        "scope": "global",
+        "source": "edifice:identity:4",
+        "status": "active",
+        "symbolic_child_alias": "child",
+        "symbolic_parent_alias": "parent",
+        "target": "exile:envoy",
+        "weight": 1
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "exile:envoy"
+    },
+    {
+      "child_profile": "child",
+      "domain": "global",
+      "id": "lineage.generic.6eb1406a515ca31ec045",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "functional",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "generic",
+      "source": "edifice:identity:4",
+      "source_record": {
+        "axis": "unspecified",
+        "canonical_source": "edifice:identity:4",
+        "canonical_target": "exile:filament",
+        "continuation": "neutral",
+        "id": "lineage.generic.6eb1406a515ca31ec045",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "generic_child",
+        "kind": "generic",
+        "metadata": {
+          "adapter": "authority",
+          "source_field": "lineage.parents",
+          "source_path": "/root/savant-runtime/canon-system/authority/exiles/filament.yaml"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "authority_adapter",
+          "created_from": [
+            "/root/savant-runtime/canon-system/authority/exiles/filament.yaml"
+          ],
+          "source_files": [
+            "/root/savant-runtime/canon-system/authority/exiles/filament.yaml"
+          ]
+        },
+        "role": "generic",
+        "scope": "global",
+        "source": "edifice:identity:4",
+        "status": "active",
+        "symbolic_child_alias": "child",
+        "symbolic_parent_alias": "parent",
+        "target": "exile:filament",
+        "weight": 1
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "exile:filament"
+    },
+    {
+      "child_profile": "child",
+      "domain": "global",
+      "id": "lineage.generic.6fd8d7ae2f91b3442d75",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "functional",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "generic",
+      "source": "edifice:identity:4",
+      "source_record": {
+        "axis": "unspecified",
+        "canonical_source": "edifice:identity:4",
+        "canonical_target": "exile:zero",
+        "continuation": "neutral",
+        "id": "lineage.generic.6fd8d7ae2f91b3442d75",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "generic_child",
+        "kind": "generic",
+        "metadata": {
+          "adapter": "authority",
+          "source_field": "lineage.parents",
+          "source_path": "/root/savant-runtime/canon-system/authority/exiles/zero.yaml"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "authority_adapter",
+          "created_from": [
+            "/root/savant-runtime/canon-system/authority/exiles/zero.yaml"
+          ],
+          "source_files": [
+            "/root/savant-runtime/canon-system/authority/exiles/zero.yaml"
+          ]
+        },
+        "role": "generic",
+        "scope": "global",
+        "source": "edifice:identity:4",
+        "status": "active",
+        "symbolic_child_alias": "child",
+        "symbolic_parent_alias": "parent",
+        "target": "exile:zero",
+        "weight": 1
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "exile:zero"
+    },
+    {
+      "child_profile": "child",
+      "domain": "global",
+      "id": "lineage.generic.827000698ca8c9d5876c",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "functional",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "generic",
+      "source": "edifice:identity:4",
+      "source_record": {
+        "axis": "unspecified",
+        "canonical_source": "edifice:identity:4",
+        "canonical_target": "exile:opus",
+        "continuation": "neutral",
+        "id": "lineage.generic.827000698ca8c9d5876c",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "generic_child",
+        "kind": "generic",
+        "metadata": {
+          "adapter": "authority",
+          "source_field": "lineage.parents",
+          "source_path": "/root/savant-runtime/canon-system/authority/exiles/opus.yaml"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "authority_adapter",
+          "created_from": [
+            "/root/savant-runtime/canon-system/authority/exiles/opus.yaml"
+          ],
+          "source_files": [
+            "/root/savant-runtime/canon-system/authority/exiles/opus.yaml"
+          ]
+        },
+        "role": "generic",
+        "scope": "global",
+        "source": "edifice:identity:4",
+        "status": "active",
+        "symbolic_child_alias": "child",
+        "symbolic_parent_alias": "parent",
+        "target": "exile:opus",
+        "weight": 1
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "exile:opus"
+    },
+    {
+      "child_profile": "child",
+      "domain": "global",
+      "id": "lineage.generic.9fcc3c9c778e57d3707b",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "functional",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "generic",
+      "source": "edifice:identity:4",
+      "source_record": {
+        "axis": "unspecified",
+        "canonical_source": "edifice:identity:4",
+        "canonical_target": "exile:notary",
+        "continuation": "neutral",
+        "id": "lineage.generic.9fcc3c9c778e57d3707b",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "generic_child",
+        "kind": "generic",
+        "metadata": {
+          "adapter": "authority",
+          "source_field": "lineage.parents",
+          "source_path": "/root/savant-runtime/canon-system/authority/exiles/notary.yaml"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "authority_adapter",
+          "created_from": [
+            "/root/savant-runtime/canon-system/authority/exiles/notary.yaml"
+          ],
+          "source_files": [
+            "/root/savant-runtime/canon-system/authority/exiles/notary.yaml"
+          ]
+        },
+        "role": "generic",
+        "scope": "global",
+        "source": "edifice:identity:4",
+        "status": "active",
+        "symbolic_child_alias": "child",
+        "symbolic_parent_alias": "parent",
+        "target": "exile:notary",
+        "weight": 1
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "exile:notary"
+    },
+    {
+      "child_profile": "child",
+      "domain": "global",
+      "id": "lineage.generic.aab24cc3dfccc8441118",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "functional",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "generic",
+      "source": "edifice:identity:4",
+      "source_record": {
+        "axis": "unspecified",
+        "canonical_source": "edifice:identity:4",
+        "canonical_target": "exile:carbon",
+        "continuation": "neutral",
+        "id": "lineage.generic.aab24cc3dfccc8441118",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "generic_child",
+        "kind": "generic",
+        "metadata": {
+          "adapter": "authority",
+          "source_field": "lineage.parents",
+          "source_path": "/root/savant-runtime/canon-system/authority/exiles/carbon.yaml"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "authority_adapter",
+          "created_from": [
+            "/root/savant-runtime/canon-system/authority/exiles/carbon.yaml"
+          ],
+          "source_files": [
+            "/root/savant-runtime/canon-system/authority/exiles/carbon.yaml"
+          ]
+        },
+        "role": "generic",
+        "scope": "global",
+        "source": "edifice:identity:4",
+        "status": "active",
+        "symbolic_child_alias": "child",
+        "symbolic_parent_alias": "parent",
+        "target": "exile:carbon",
+        "weight": 1
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "exile:carbon"
+    },
+    {
+      "child_profile": "child",
+      "domain": "global",
+      "id": "lineage.generic.ac9176e8c0cef9e7f6cf",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "functional",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "generic",
+      "source": "edifice:identity:4",
+      "source_record": {
+        "axis": "unspecified",
+        "canonical_source": "edifice:identity:4",
+        "canonical_target": "exile:pact",
+        "continuation": "neutral",
+        "id": "lineage.generic.ac9176e8c0cef9e7f6cf",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "generic_child",
+        "kind": "generic",
+        "metadata": {
+          "adapter": "authority",
+          "source_field": "lineage.parents",
+          "source_path": "/root/savant-runtime/canon-system/authority/exiles/pact.yaml"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "authority_adapter",
+          "created_from": [
+            "/root/savant-runtime/canon-system/authority/exiles/pact.yaml"
+          ],
+          "source_files": [
+            "/root/savant-runtime/canon-system/authority/exiles/pact.yaml"
+          ]
+        },
+        "role": "generic",
+        "scope": "global",
+        "source": "edifice:identity:4",
+        "status": "active",
+        "symbolic_child_alias": "child",
+        "symbolic_parent_alias": "parent",
+        "target": "exile:pact",
+        "weight": 1
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "exile:pact"
+    },
+    {
+      "child_profile": "child",
+      "domain": "global",
+      "id": "lineage.generic.b76530ca53c61c1a63b6",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "functional",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "generic",
+      "source": "edifice:identity:4",
+      "source_record": {
+        "axis": "unspecified",
+        "canonical_source": "edifice:identity:4",
+        "canonical_target": "exile:graffiti",
+        "continuation": "neutral",
+        "id": "lineage.generic.b76530ca53c61c1a63b6",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "generic_child",
+        "kind": "generic",
+        "metadata": {
+          "adapter": "authority",
+          "source_field": "lineage.parents",
+          "source_path": "/root/savant-runtime/canon-system/authority/exiles/graffiti.yaml"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "authority_adapter",
+          "created_from": [
+            "/root/savant-runtime/canon-system/authority/exiles/graffiti.yaml"
+          ],
+          "source_files": [
+            "/root/savant-runtime/canon-system/authority/exiles/graffiti.yaml"
+          ]
+        },
+        "role": "generic",
+        "scope": "global",
+        "source": "edifice:identity:4",
+        "status": "active",
+        "symbolic_child_alias": "child",
+        "symbolic_parent_alias": "parent",
+        "target": "exile:graffiti",
+        "weight": 1
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "exile:graffiti"
+    },
+    {
+      "child_profile": "child",
+      "domain": "global",
+      "id": "lineage.generic.bc6c13e0c15f5727320f",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "functional",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "generic",
+      "source": "edifice:identity:4",
+      "source_record": {
+        "axis": "unspecified",
+        "canonical_source": "edifice:identity:4",
+        "canonical_target": "exile:palaver",
+        "continuation": "neutral",
+        "id": "lineage.generic.bc6c13e0c15f5727320f",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "generic_child",
+        "kind": "generic",
+        "metadata": {
+          "adapter": "authority",
+          "source_field": "lineage.parents",
+          "source_path": "/root/savant-runtime/canon-system/authority/exiles/palaver.yaml"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "authority_adapter",
+          "created_from": [
+            "/root/savant-runtime/canon-system/authority/exiles/palaver.yaml"
+          ],
+          "source_files": [
+            "/root/savant-runtime/canon-system/authority/exiles/palaver.yaml"
+          ]
+        },
+        "role": "generic",
+        "scope": "global",
+        "source": "edifice:identity:4",
+        "status": "active",
+        "symbolic_child_alias": "child",
+        "symbolic_parent_alias": "parent",
+        "target": "exile:palaver",
+        "weight": 1
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "exile:palaver"
+    },
+    {
+      "child_profile": "child",
+      "domain": "global",
+      "id": "lineage.generic.d0f6d52404b43bf56d1f",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "functional",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "generic",
+      "source": "edifice:identity:4",
+      "source_record": {
+        "axis": "unspecified",
+        "canonical_source": "edifice:identity:4",
+        "canonical_target": "exile:lore",
+        "continuation": "neutral",
+        "id": "lineage.generic.d0f6d52404b43bf56d1f",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "generic_child",
+        "kind": "generic",
+        "metadata": {
+          "adapter": "authority",
+          "source_field": "lineage.parents",
+          "source_path": "/root/savant-runtime/canon-system/authority/exiles/lore.yaml"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "authority_adapter",
+          "created_from": [
+            "/root/savant-runtime/canon-system/authority/exiles/lore.yaml"
+          ],
+          "source_files": [
+            "/root/savant-runtime/canon-system/authority/exiles/lore.yaml"
+          ]
+        },
+        "role": "generic",
+        "scope": "global",
+        "source": "edifice:identity:4",
+        "status": "active",
+        "symbolic_child_alias": "child",
+        "symbolic_parent_alias": "parent",
+        "target": "exile:lore",
+        "weight": 1
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "exile:lore"
+    },
+    {
+      "child_profile": "child",
+      "domain": "global",
+      "id": "lineage.generic.d36086e9774c235abf3f",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "functional",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "generic",
+      "source": "edifice:identity:4",
+      "source_record": {
+        "axis": "unspecified",
+        "canonical_source": "edifice:identity:4",
+        "canonical_target": "exile:mobius",
+        "continuation": "neutral",
+        "id": "lineage.generic.d36086e9774c235abf3f",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "generic_child",
+        "kind": "generic",
+        "metadata": {
+          "adapter": "authority",
+          "source_field": "lineage.parents",
+          "source_path": "/root/savant-runtime/canon-system/authority/exiles/mobius.yaml"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "authority_adapter",
+          "created_from": [
+            "/root/savant-runtime/canon-system/authority/exiles/mobius.yaml"
+          ],
+          "source_files": [
+            "/root/savant-runtime/canon-system/authority/exiles/mobius.yaml"
+          ]
+        },
+        "role": "generic",
+        "scope": "global",
+        "source": "edifice:identity:4",
+        "status": "active",
+        "symbolic_child_alias": "child",
+        "symbolic_parent_alias": "parent",
+        "target": "exile:mobius",
+        "weight": 1
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "exile:mobius"
+    },
+    {
+      "child_profile": "child",
+      "domain": "global",
+      "id": "lineage.generic.fa6f2e999f864029d88a",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "functional",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "generic",
+      "source": "edifice:identity:4",
+      "source_record": {
+        "axis": "unspecified",
+        "canonical_source": "edifice:identity:4",
+        "canonical_target": "exile:urge",
+        "continuation": "neutral",
+        "id": "lineage.generic.fa6f2e999f864029d88a",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "generic_child",
+        "kind": "generic",
+        "metadata": {
+          "adapter": "authority",
+          "source_field": "lineage.parents",
+          "source_path": "/root/savant-runtime/canon-system/authority/exiles/urge.yaml"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "authority_adapter",
+          "created_from": [
+            "/root/savant-runtime/canon-system/authority/exiles/urge.yaml"
+          ],
+          "source_files": [
+            "/root/savant-runtime/canon-system/authority/exiles/urge.yaml"
+          ]
+        },
+        "role": "generic",
+        "scope": "global",
+        "source": "edifice:identity:4",
+        "status": "active",
+        "symbolic_child_alias": "child",
+        "symbolic_parent_alias": "parent",
+        "target": "exile:urge",
+        "weight": 1
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "exile:urge"
+    }
+  ],
+  "schema": "savant.kindred.preview.relationship_projection.v2"
+}

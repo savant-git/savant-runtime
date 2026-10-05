@@ -1,0 +1,50 @@
+{
+  "schema": "savant://vault/dimensions/sys/policies/1.0.0",
+  "classes": {
+    "keystone": {
+      "mutable": true,
+      "digest_bound": true,
+      "requires_review": true
+    },
+    "panorama": {
+      "mutable": true,
+      "digest_bound": true,
+      "requires_review": false
+    },
+    "relic": {
+      "mutable": false,
+      "digest_bound": true,
+      "requires_review": true
+    },
+    "gateway": {
+      "mutable": false,
+      "digest_bound": true,
+      "requires_review": true
+    },
+    "exhibit": {
+      "mutable": false,
+      "digest_bound": true,
+      "requires_review": true
+    },
+    "trial": {
+      "mutable": false,
+      "digest_bound": true,
+      "requires_review": false
+    },
+    "criterion": {
+      "mutable": false,
+      "digest_bound": true,
+      "requires_review": true
+    },
+    "shadow": {
+      "mutable": false,
+      "digest_bound": false,
+      "requires_review": false
+    },
+    "zygote": {
+      "mutable": true,
+      "digest_bound": false,
+      "requires_review": false
+    }
+  }
+}

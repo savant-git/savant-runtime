@@ -1,0 +1,149 @@
+id: edifice:temporal
+kind: edifice
+status: provisional
+version: 1
+title: temporal edifice
+question: what temporal extent or organization does it occupy?
+authority:
+  state: provisional
+  tier: 1
+  confidence: 0.72
+index_scheme:
+- '00'
+- '0'
+- '1'
+- '2'
+- '3'
+- '4'
+- '5'
+- '6'
+- '7'
+construction_law: level_n = deterministic_projection(instances_of_level_n_minus_1)
+levels:
+- index: '00'
+  label: tick
+  status: provisional
+  definition: null
+  future_slots:
+  - aliases
+  - validation_rules
+  - projection_rules
+  - examples
+  open_questions:
+  - definition requires expansion
+- index: '0'
+  label: moment
+  status: provisional
+  definition: null
+  future_slots:
+  - aliases
+  - validation_rules
+  - projection_rules
+  - examples
+  open_questions:
+  - definition requires expansion
+- index: '1'
+  label: interval
+  status: provisional
+  definition: null
+  future_slots:
+  - aliases
+  - validation_rules
+  - projection_rules
+  - examples
+  open_questions:
+  - definition requires expansion
+- index: '2'
+  label: event
+  status: provisional
+  definition: null
+  future_slots:
+  - aliases
+  - validation_rules
+  - projection_rules
+  - examples
+  open_questions:
+  - definition requires expansion
+- index: '3'
+  label: phase
+  status: provisional
+  definition: null
+  future_slots:
+  - aliases
+  - validation_rules
+  - projection_rules
+  - examples
+  open_questions:
+  - definition requires expansion
+- index: '4'
+  label: epoch
+  status: provisional
+  definition: null
+  future_slots:
+  - aliases
+  - validation_rules
+  - projection_rules
+  - examples
+  open_questions:
+  - definition requires expansion
+- index: '5'
+  label: era
+  status: provisional
+  definition: null
+  future_slots:
+  - aliases
+  - validation_rules
+  - projection_rules
+  - examples
+  open_questions:
+  - definition requires expansion
+- index: '6'
+  label: timeline
+  status: provisional
+  definition: null
+  future_slots:
+  - aliases
+  - validation_rules
+  - projection_rules
+  - examples
+  open_questions:
+  - definition requires expansion
+- index: '7'
+  label: continuum
+  status: provisional
+  definition: null
+  future_slots:
+  - aliases
+  - validation_rules
+  - projection_rules
+  - examples
+  open_questions:
+  - definition requires expansion
+global_local_policy:
+  status: provisional
+  global_indexes: []
+  local_indexes: []
+  open_questions:
+  - scope boundary not yet finalized
+non_overlap: []
+future_slots:
+- classification_rules
+- migration_rules
+- cross_axis_constraints
+open_questions:
+- level labels remain revisable
+lineage:
+  parents:
+  - foundation:dynamic-canon
+  supersedes: []
+  superseded_by: []
+provenance:
+  created_at: '2026-07-11T00:00:00Z'
+  created_by: canon_bootstrap
+  sources:
+  - SHARDISM_REFRACTALISM_MIGRATION_CONTEXT.txt
+  - project conversation
+dependencies:
+- foundation:dynamic-canon
+relationships: []
+attachments: []

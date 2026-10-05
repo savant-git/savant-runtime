@@ -1,0 +1,33 @@
+id: policy:supersession
+kind: policy
+status: canonical
+version: 1
+rules:
+- never delete authoritative history
+- a replacement record must declare supersedes
+- the replaced record must be marked superseded
+- semantic identity remains stable across versions
+- breaking changes require migration notes
+future_slots:
+- branching_supersession
+- merge_resolution
+- signature_policy
+open_questions: []
+authority:
+  state: canonical
+  tier: 0
+  confidence: 1.0
+lineage:
+  parents:
+  - foundation:dynamic-canon
+  supersedes: []
+  superseded_by: []
+provenance:
+  created_at: '2026-07-11T00:00:00Z'
+  created_by: canon_bootstrap
+  sources:
+  - user directive
+dependencies:
+- foundation:dynamic-canon
+relationships: []
+attachments: []

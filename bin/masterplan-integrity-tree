@@ -1,0 +1,135 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import subprocess
+import sys
+from pathlib import Path
+
+
+ROOT = Path("/root/savant-runtime")
+
+PYTHON = (
+    ROOT
+    / "bin"
+    / "identity-quality-python"
+)
+
+BUILDER = (
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "build_masterplan_merkle_tree.py"
+)
+
+LATEST = (
+    ROOT
+    / "authority"
+    / "task-graph"
+    / "integrity"
+    / "latest.json"
+)
+
+
+def execute(
+    command: list[str],
+) -> int:
+    return subprocess.run(
+        command,
+        cwd=str(ROOT),
+        check=False,
+    ).returncode
+
+
+def usage() -> int:
+    print(
+        """
+masterplan-integrity-tree build
+masterplan-integrity-tree persist
+masterplan-integrity-tree verify [TREE_PATH]
+masterplan-integrity-tree refresh-verify
+"""
+    )
+
+    return 0
+
+
+def main() -> int:
+    arguments = sys.argv[1:]
+
+    if not arguments:
+        return usage()
+
+    command = arguments[0]
+    remaining = arguments[1:]
+
+    if command in {
+        "help",
+        "--help",
+        "-h",
+    }:
+        return usage()
+
+    if command == "build":
+        mapped = [
+            "build",
+        ]
+
+    elif command == "persist":
+        mapped = [
+            "build",
+            "--persist",
+        ]
+
+    elif command == "verify":
+        tree_path = (
+            remaining[0]
+            if remaining
+            else str(LATEST)
+        )
+
+        mapped = [
+            "verify",
+            tree_path,
+        ]
+
+    elif command == "refresh-verify":
+        status = execute(
+            [
+                str(PYTHON),
+                str(BUILDER),
+                "build",
+                "--persist",
+            ]
+        )
+
+        if status:
+            return status
+
+        mapped = [
+            "verify",
+            str(LATEST),
+        ]
+
+    else:
+        print(
+            (
+                "ERROR: unknown integrity-tree "
+                f"command: {command}"
+            ),
+            file=sys.stderr,
+        )
+
+        return 2
+
+    return execute(
+        [
+            str(PYTHON),
+            str(BUILDER),
+            *mapped,
+        ]
+    )
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

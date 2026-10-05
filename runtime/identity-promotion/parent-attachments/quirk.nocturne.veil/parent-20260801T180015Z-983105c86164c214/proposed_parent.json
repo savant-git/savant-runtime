@@ -1,0 +1,467 @@
+{
+  "apertures": [
+    {
+      "admission": "Requires compatible contract, validated authority, explicit lineage, and complete provenance.",
+      "id": "prodigal.nocturne.future",
+      "purpose": "Admit future compatible attachments without replacing this identity."
+    },
+    {
+      "admission": "Requires an independent bounded runtime, versioned contracts, authority, lineage, provenance, security review, tests, and deterministic composition behavior.",
+      "id": "prodigal.nocturne.quirk",
+      "purpose": "Admit compatible future quirks."
+    },
+    {
+      "admission": "Requires a reversible adapter, explicit request and result contracts, authority isolation, auditability, and passing integration tests.",
+      "id": "prodigal.nocturne.opus",
+      "purpose": "Attach Nocturne to Opus without transferring orchestration authority."
+    },
+    {
+      "admission": "Projection must remain deterministic, disposable, and non-authoritative.",
+      "id": "prodigal.nocturne.observatory",
+      "purpose": "Admit read-only projections of runtime state, lineage, provenance, failures, metrics, and composition graphs."
+    },
+    {
+      "admission": "Parent retains its authority. Child retains its internal authority. No authority is inherited.",
+      "id": "quirk.nocturne.veil.attachment",
+      "purpose": "Admit the declared child through a reversible contract-governed attachment."
+    }
+  ],
+  "authority": {
+    "class": "identity_definition",
+    "owner": "prodigal.nocturne",
+    "precedence": 700,
+    "source": "edifices/identity/exiles/opus/prodigals/nocturne/definition.json"
+  },
+  "capabilities": [
+    {
+      "description": "Specialized intelligence gathering, hidden service access, structured extraction, and threat analysis on the dark web while maintaining operational security.",
+      "id": "prodigal.nocturne.declared_purpose",
+      "status": "proposed"
+    },
+    {
+      "description": "Compose enabled quirks through validated versioned contracts.",
+      "id": "prodigal.nocturne.contract_governed_composition",
+      "status": "active"
+    },
+    {
+      "description": "Preserve attributable partial results when policy permits incomplete execution.",
+      "id": "prodigal.nocturne.partial_result_preservation",
+      "status": "active"
+    },
+    {
+      "description": "Isolate quirk failures without silently substituting unavailable behavior.",
+      "id": "prodigal.nocturne.failure_isolation",
+      "status": "active"
+    },
+    {
+      "description": "Propagate source and transformation provenance through every composition stage.",
+      "id": "prodigal.nocturne.provenance_propagation",
+      "status": "active"
+    },
+    {
+      "description": "Exclude volatile telemetry from authoritative composition digests.",
+      "id": "prodigal.nocturne.deterministic_projection",
+      "status": "active"
+    },
+    {
+      "description": "Attach Nocturne to Opus through a separately governed reversible adapter.",
+      "id": "prodigal.nocturne.opus_attachment",
+      "status": "proposed"
+    }
+  ],
+  "composition": {
+    "children": [
+      "quirk.nocturne.veil",
+      "quirk.nocturne.lantern",
+      "quirk.nocturne.scribe",
+      "quirk.nocturne.echo"
+    ],
+    "composition_policy": "Select and execute enabled quirks through versioned contracts; preserve each quirk's authority, lineage, provenance, failures, and independent runtime identity.",
+    "execution_order": [
+      "veil",
+      "lantern",
+      "scribe",
+      "echo"
+    ],
+    "fusion_stages": [
+      "admission",
+      "authority_resolution",
+      "policy_resolution",
+      "quirk_selection",
+      "dependency_resolution",
+      "execution_planning",
+      "quirk_execution",
+      "result_normalization",
+      "cross_quirk_correlation",
+      "validation",
+      "provenance_propagation",
+      "output_projection",
+      "attestation"
+    ],
+    "maximum_children": 4,
+    "minimum_children": 2,
+    "shared_children": []
+  },
+  "contracts": {
+    "errors": [
+      {
+        "code": "implementation.unavailable",
+        "condition": "Required executable behavior is absent, incomplete, or unverified.",
+        "recoverable": true
+      },
+      {
+        "code": "nocturne.input.missing",
+        "condition": "A required enabled quirk has no request payload.",
+        "recoverable": true
+      },
+      {
+        "code": "nocturne.stage.failure",
+        "condition": "A quirk request, import, validation, or execution stage fails.",
+        "recoverable": true
+      },
+      {
+        "code": "nocturne.stage.halted",
+        "condition": "Composition halts under fail-closed policy before a later stage executes.",
+        "recoverable": true
+      }
+    ],
+    "inputs": [
+      {
+        "name": "nocturne_request",
+        "required": true,
+        "schema": "nocturne_fusion_contracts.NocturneRequest"
+      },
+      {
+        "name": "fusion_policy",
+        "required": true,
+        "schema": "nocturne_fusion_contracts.FusionPolicy"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "stage_result",
+        "required": false,
+        "schema": "nocturne_fusion_contracts.StageResult"
+      },
+      {
+        "name": "nocturne_result",
+        "required": true,
+        "schema": "nocturne_fusion_contracts.NocturneResult"
+      }
+    ]
+  },
+  "dependencies": {
+    "external": [],
+    "optional": [
+      {
+        "id": "opus.nocturne.adapter",
+        "kind": "aperture",
+        "required": false
+      }
+    ],
+    "required": [
+      {
+        "id": "python.pydantic",
+        "kind": "library",
+        "required": true
+      }
+    ],
+    "runtime": [
+      {
+        "id": "nocturne.fusion.contracts",
+        "kind": "contract_module",
+        "required": true
+      },
+      {
+        "id": "quirk.nocturne.veil",
+        "kind": "quirk_runtime",
+        "required": false
+      },
+      {
+        "id": "quirk.nocturne.lantern",
+        "kind": "quirk_runtime",
+        "required": false
+      },
+      {
+        "id": "quirk.nocturne.scribe",
+        "kind": "quirk_runtime",
+        "required": false
+      },
+      {
+        "id": "quirk.nocturne.echo",
+        "kind": "quirk_runtime",
+        "required": false
+      },
+      {
+        "id": "opus.nocturne.adapter",
+        "kind": "attachment_adapter",
+        "required": false
+      },
+      {
+        "authority_transfer": false,
+        "id": "quirk.nocturne.veil",
+        "kind": "child_identity",
+        "required": false
+      }
+    ]
+  },
+  "dna": {
+    "core_traits": [
+      "stealth",
+      "persistence",
+      "pattern_recognition",
+      "operational_security"
+    ],
+    "emergent_traits": [
+      "adaptive_routing",
+      "entity_correlation",
+      "threat_modeling"
+    ]
+  },
+  "extensions": {},
+  "future_extensions": {
+    "planned": [
+      "dark_web_simulation",
+      "adversarial_reconnaissance",
+      "cross_network_correlation"
+    ]
+  },
+  "id": "prodigal.nocturne",
+  "identity": {
+    "aliases": [],
+    "classification": "cross_cutting",
+    "domain": "Dark Web Intelligence & Reconnaissance",
+    "historical_names": [],
+    "name": "Nocturne"
+  },
+  "kind": "prodigal",
+  "level": 3,
+  "lifecycle": {
+    "allowed_transitions": [
+      "proposed",
+      "canonical",
+      "active",
+      "deprecated",
+      "superseded",
+      "retired"
+    ],
+    "state": "canonical"
+  },
+  "lineage": {
+    "children": [
+      "quirk.nocturne.veil",
+      "quirk.nocturne.lantern",
+      "quirk.nocturne.scribe",
+      "quirk.nocturne.echo"
+    ],
+    "parent_exile": "opus",
+    "parents": [
+      "exile.opus"
+    ],
+    "sources": [
+      "edifices/identity/exiles/opus/prodigals/nocturne/definition.json"
+    ],
+    "superseded_by": [],
+    "supersedes": []
+  },
+  "observability": {
+    "audit": true,
+    "events": [
+      "nocturne.request.accepted",
+      "nocturne.policy.resolved",
+      "nocturne.stage.started",
+      "nocturne.stage.completed",
+      "nocturne.stage.failed",
+      "nocturne.stage.skipped",
+      "nocturne.composition.completed",
+      "nocturne.composition.failed"
+    ],
+    "health": [
+      "definition_valid",
+      "contracts_available",
+      "runtime_importable",
+      "quirk_runtimes_discoverable",
+      "tests_passing",
+      "composition_deterministic",
+      "authority_boundaries_preserved"
+    ],
+    "metrics": [
+      "execution_count",
+      "success_count",
+      "failure_count",
+      "duration_seconds",
+      "enabled_count",
+      "completed_count",
+      "failed_count",
+      "skipped_count",
+      "partial"
+    ]
+  },
+  "parent_exile": "opus",
+  "policies": {
+    "allowed_exiles": [
+      "filament",
+      "graffiti",
+      "shatter",
+      "opus",
+      "lore"
+    ],
+    "attachment": "shared",
+    "instantiation": "multiple"
+  },
+  "provenance": {
+    "captured_by": "savant.identity-quality.upgrader",
+    "created_at": "2026-07-31",
+    "created_from": [
+      "edifices/identity/exiles/opus/prodigals/nocturne/definition.json",
+      "edifices/identity/exiles/opus/prodigals/nocturne/runtime/nocturne_runtime.py",
+      "edifices/identity/exiles/opus/prodigals/nocturne/tests/test_nocturne_runtime.py",
+      "edifices/identity/exiles/opus/prodigals/nocturne/contracts/nocturne_fusion_contracts.py",
+      "edifices/identity/exiles/opus/prodigals/nocturne/adapters/opus/opus_nocturne_adapter.py",
+      "edifices/identity/exiles/opus/prodigals/nocturne/adapters/opus/tests/test_opus_nocturne_adapter.py",
+      "edifices/identity/exiles/opus/prodigals/nocturne/contracts/opus_attachment_contracts.py"
+    ],
+    "source_hashes": {
+      "edifices/identity/exiles/opus/prodigals/nocturne/adapters/opus/opus_nocturne_adapter.py": "0ea3b33e36709cac14b3755a7cb57824686c0eded98f18726e3bce934764fd44",
+      "edifices/identity/exiles/opus/prodigals/nocturne/adapters/opus/tests/test_opus_nocturne_adapter.py": "2131555559d4df3d80933944b4a7ac2b7851262eb633615a0e06bc535cfc7bf6",
+      "edifices/identity/exiles/opus/prodigals/nocturne/contracts/nocturne_fusion_contracts.py": "5df78e627a9e55637f4fa150709d4f88dfdf3ca819e315bb62c245cd3384af3f",
+      "edifices/identity/exiles/opus/prodigals/nocturne/contracts/opus_attachment_contracts.py": "80d663b4a86150f611deafb94a4d7917631b5624e19da7b7e715016e073787ab",
+      "edifices/identity/exiles/opus/prodigals/nocturne/definition.json": "2f472f2b3104e3632f57fab4b98b0b8dc21dce20bb3cf1073f1905e6f669f6e4",
+      "edifices/identity/exiles/opus/prodigals/nocturne/runtime/nocturne_runtime.py": "81106d7680c1ff7f88b740650c3294b1dc2f634c4eb79f836de760c0b494ae9c",
+      "edifices/identity/exiles/opus/prodigals/nocturne/tests/test_nocturne_runtime.py": "1b47137ae67a0172e96fd3bb9399479f79f5faefbb5cd3334b4f8822d5f5cc81"
+    },
+    "transformations": [
+      "admit_child_without_authority_transfer"
+    ]
+  },
+  "purpose": "Specialized intelligence gathering, hidden service access, structured extraction, and threat analysis on the dark web while maintaining operational security.",
+  "relationships": [
+    {
+      "direction": "outbound",
+      "target": "exile.opus",
+      "type": "composition"
+    },
+    {
+      "direction": "outbound",
+      "target": "quirk.nocturne.veil",
+      "type": "composes"
+    },
+    {
+      "direction": "outbound",
+      "target": "quirk.nocturne.lantern",
+      "type": "composes"
+    },
+    {
+      "direction": "outbound",
+      "target": "quirk.nocturne.scribe",
+      "type": "composes"
+    },
+    {
+      "direction": "outbound",
+      "target": "quirk.nocturne.echo",
+      "type": "composes"
+    },
+    {
+      "direction": "outbound",
+      "target": "exile.opus",
+      "type": "attaches_to"
+    },
+    {
+      "adapter": "edifices/identity/exiles/opus/prodigals/nocturne/adapters/opus/opus_nocturne_adapter.py",
+      "authority_transfer": false,
+      "direction": "outbound",
+      "reversible": true,
+      "target": "exile.opus",
+      "type": "attaches_to"
+    },
+    {
+      "authority_transfer": false,
+      "contract_governed": true,
+      "direction": "outbound",
+      "reversible": true,
+      "subject_definition": "edifices/identity/exiles/opus/prodigals/nocturne/quirks/veil/definition.json",
+      "target": "quirk.nocturne.veil",
+      "type": "composes"
+    }
+  ],
+  "runtime": {
+    "adapters": [
+      "edifices/identity/exiles/opus/prodigals/nocturne/adapters/opus/opus_nocturne_adapter.py"
+    ],
+    "commands": [
+      "bin/nocturnectl"
+    ],
+    "deterministic": true,
+    "entrypoints": [
+      "edifices/identity/exiles/opus/prodigals/nocturne/runtime/nocturne_runtime.py"
+    ],
+    "hooks": [
+      "admission",
+      "authority_resolution",
+      "policy_resolution",
+      "quirk_selection",
+      "dependency_resolution",
+      "execution_planning",
+      "quirk_execution",
+      "result_normalization",
+      "cross_quirk_correlation",
+      "validation",
+      "provenance_propagation",
+      "output_projection",
+      "attestation"
+    ],
+    "implementation": "partial",
+    "side_effects": []
+  },
+  "security": {
+    "boundary": "Nocturne may invoke only explicitly enabled local quirk runtimes. It inherits no network, filesystem-write, subprocess, provider, secret, or orchestration authority from Opus.",
+    "data_classification": "sensitive",
+    "network_policy": "deny_by_default",
+    "permissions": [
+      "import_declared_local_quirk_runtime",
+      "validate_declared_quirk_contract",
+      "execute_declared_local_quirk_runtime",
+      "project_declared_stage_result"
+    ],
+    "sandbox": true
+  },
+  "status": "canonical",
+  "validation": {
+    "acceptance": [
+      "Every quirk remains independently executable.",
+      "Nocturne invokes quirks only through declared contracts.",
+      "Equal requests, policies, versions, and inputs produce equal composition digests.",
+      "Volatile telemetry never alters authoritative composition identity.",
+      "Partial results preserve exact stage status, failure, lineage, and provenance.",
+      "Unavailable behavior is never silently substituted or fabricated.",
+      "Nocturne does not acquire Opus API orchestration authority."
+    ],
+    "integration_tests": [
+      "edifices/identity/exiles/opus/prodigals/nocturne/quirks/veil/tests/test_veil_runtime.py",
+      "edifices/identity/exiles/opus/prodigals/nocturne/quirks/lantern/tests/test_lantern_runtime.py",
+      "edifices/identity/exiles/opus/prodigals/nocturne/quirks/scribe/tests/test_scribe_runtime.py",
+      "edifices/identity/exiles/opus/prodigals/nocturne/quirks/echo/tests/test_echo_runtime.py",
+      "edifices/identity/exiles/opus/prodigals/nocturne/adapters/opus/tests/test_opus_nocturne_adapter.py"
+    ],
+    "property_tests": [
+      "equal_requests_produce_equal_composition_digests",
+      "canonical_serialization_is_stable",
+      "stage_results_preserve_provenance",
+      "required_quirks_must_be_enabled"
+    ],
+    "security_tests": [
+      "missing_required_payload_fails_closed",
+      "missing_optional_payload_is_skipped",
+      "nocturne_inherits_no_opus_orchestration_authority",
+      "nocturne_cannot_select_external_providers",
+      "nocturne_cannot_read_opus_secrets",
+      "unresolved_provider_request_is_rejected",
+      "forbidden_policy_flag_is_rejected",
+      "attachment_is_reversible"
+    ],
+    "unit_tests": [
+      "edifices/identity/exiles/opus/prodigals/nocturne/tests/test_nocturne_runtime.py"
+    ]
+  },
+  "version": "2.1"
+}

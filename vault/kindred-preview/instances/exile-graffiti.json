@@ -1,0 +1,87 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "exile:graffiti",
+  "deterministic_hash": "c5f169ec2c0e649ba1cd41488e8474d5824ce2ec30aa08aafa906f6fc2942717",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "exile:graffiti",
+  "kind": "exile",
+  "label": "graffiti",
+  "namespace": "preview.kindred",
+  "path": null,
+  "placement": {
+    "domain": "unclassified",
+    "node": "exile:graffiti",
+    "parent": "savant-runtime",
+    "placement_basis": "orphan_attachment",
+    "primary_relationship_id": null,
+    "rank": 70,
+    "slot": "30_ontology",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.generic.b76530ca53c61c1a63b6"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "exile:graffiti",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "exile:graffiti",
+    "kind": "exile",
+    "label": "graffiti",
+    "legacy_id": null,
+    "lineage": [
+      "edifice:identity:4"
+    ],
+    "metadata": {
+      "authority_source_path": "/root/savant-runtime/canon-system/authority/exiles/graffiti.yaml",
+      "canonical_id": "exile:graffiti",
+      "child_modes": {},
+      "child_roles": {},
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "generic": [
+          "edifice:identity:4"
+        ]
+      },
+      "projected_id": "exile:graffiti"
+    },
+    "mothers": [],
+    "parents": [
+      "edifice:identity:4"
+    ],
+    "path": null,
+    "provenance": {
+      "adapter": "authority_document",
+      "created_at": "2026-07-11T00:00:00Z",
+      "created_by": "canon_bootstrap",
+      "source_files": [
+        "/root/savant-runtime/canon-system/authority/exiles/graffiti.yaml"
+      ],
+      "sources": [
+        "sdump_savant-runtime_071026.txt",
+        "project conversation"
+      ]
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.generic.b76530ca53c61c1a63b6"
+    ],
+    "size": 7,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

@@ -1,0 +1,14 @@
+{
+  "id": "policy.recursive_composition",
+  "kind": "policy",
+  "status": "active",
+  "authority": "UNIVERSAL_INSTANCE_STRUCTURE",
+  "rule": "Every instance may compose instances. No edifice level receives a special storage model.",
+  "composition": {
+    "minimum_children": 0,
+    "maximum_children": null,
+    "allow_nested_instances": true,
+    "allow_future_instance_types": true,
+    "allow_cross_edifice_composition": true
+  }
+}

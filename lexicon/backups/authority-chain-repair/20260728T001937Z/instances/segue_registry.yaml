@@ -1,0 +1,156 @@
+registry_id: savant_segue_registry
+
+version: 1
+
+authority:
+  source: constitutional_runtime
+  revision: 1
+  timestamp: "2026-07-26T00:00:00Z"
+
+segues:
+
+  - id: segue:constitution:governs_registry
+
+    canonical: Constitution Governs Registry
+
+    description: >
+      Connects the constitutional authority instance to the lexicon registry
+      instance without duplicating either endpoint.
+
+    status: active
+
+    from: instance:lexicon:constitution
+
+    to: instance:lexicon:registry
+
+    relation: governs
+
+    direction: directed
+
+    conditions:
+      - type: source_exists
+        reference: constitution.yaml
+
+      - type: target_exists
+        reference: registry.yaml
+
+    effects:
+      - type: constrain
+        target: instance:lexicon:registry
+
+    dependencies: []
+
+    metadata:
+      authoritative: true
+
+    provenance:
+      source: constitutional_runtime
+      confidence: confirmed
+      evidence:
+        - constitution.yaml
+        - registry.yaml
+
+    lineage:
+      derived_from:
+        - instance:lexicon:constitution
+        - instance:lexicon:registry
+      supersedes: []
+      superseded_by: null
+      history:
+        - revision: 1
+          action: created
+          timestamp: "2026-07-26T00:00:00Z"
+
+  - id: segue:ontology:classifies_lexicon
+
+    canonical: Ontology Classifies Lexicon
+
+    description: >
+      Connects the ontology registry instance to the lexicon registry instance.
+
+    status: active
+
+    from: instance:ontology:registry
+
+    to: instance:lexicon:registry
+
+    relation: classifies
+
+    direction: directed
+
+    conditions: []
+
+    effects:
+      - type: expose_classification
+        target: instance:lexicon:registry
+
+    dependencies:
+      - segue:constitution:governs_registry
+
+    metadata:
+      authoritative: true
+
+    provenance:
+      source: constitutional_runtime
+      confidence: confirmed
+      evidence:
+        - ontology/ontology_registry.yaml
+        - registry.yaml
+
+    lineage:
+      derived_from:
+        - instance:ontology:registry
+        - instance:lexicon:registry
+      supersedes: []
+      superseded_by: null
+      history:
+        - revision: 1
+          action: created
+          timestamp: "2026-07-26T00:00:00Z"
+
+  - id: segue:kindred:groups_instances
+
+    canonical: Kindred Groups Instances
+
+    description: >
+      Connects the kindred registry instance to the lexicon registry instance.
+
+    status: active
+
+    from: instance:kindred:registry
+
+    to: instance:lexicon:registry
+
+    relation: groups
+
+    direction: directed
+
+    conditions: []
+
+    effects:
+      - type: expose_membership
+        target: instance:lexicon:registry
+
+    dependencies:
+      - segue:ontology:classifies_lexicon
+
+    metadata:
+      authoritative: true
+
+    provenance:
+      source: constitutional_runtime
+      confidence: confirmed
+      evidence:
+        - kindred/kindred_registry.yaml
+        - instances/instance_registry.yaml
+
+    lineage:
+      derived_from:
+        - instance:kindred:registry
+        - instance:lexicon:registry
+      supersedes: []
+      superseded_by: null
+      history:
+        - revision: 1
+          action: created
+          timestamp: "2026-07-26T00:00:00Z"

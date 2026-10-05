@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+runtime_root="/root/savant-runtime"
+chimera_root="${runtime_root}/runtime/chimera"
+venv_root="${chimera_root}/venv"
+python_bin="${venv_root}/bin/python"
+engine="${chimera_root}/chimera.py"
+env_file="/root/.env"
+
+if [[ -f "$env_file" ]]; then
+    set -a
+    source "$env_file"
+    set +a
+fi
+
+if [[ ! -x "$python_bin" ]]; then
+    printf '%s\n' \
+        "chimera virtual environment is unavailable: ${python_bin}" \
+        >&2
+    exit 1
+fi
+
+if [[ ! -f "$engine" ]]; then
+    printf '%s\n' \
+        "chimera runtime is unavailable: ${engine}" \
+        >&2
+    exit 1
+fi
+
+exec "$python_bin" "$engine" "$@"

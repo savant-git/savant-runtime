@@ -1,0 +1,83 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:ontology/obelisks/segue/authority_graph/instances/shard",
+  "deterministic_hash": "31e2d6fee0bf78267405410f6ad7f0910a99ad46fe9a942c3f3bbd9942fb28b2",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "ontology/obelisks/segue/authority_graph/instances/shard",
+  "kind": "directory",
+  "label": "shard",
+  "namespace": "preview.kindred",
+  "path": "ontology/obelisks/segue/authority_graph/instances/shard",
+  "placement": {
+    "domain": "filesystem",
+    "node": "ontology/obelisks/segue/authority_graph/instances/shard",
+    "parent": "ontology/obelisks/segue/authority_graph/instances",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.b22b99d2b8c1a76a330b",
+    "rank": 150,
+    "slot": "30_ontology",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.b22b99d2b8c1a76a330b"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:ontology/obelisks/segue/authority_graph/instances/shard",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "ontology/obelisks/segue/authority_graph/instances/shard",
+    "kind": "directory",
+    "label": "shard",
+    "legacy_id": "ontology/obelisks/segue/authority_graph/instances/shard",
+    "lineage": [
+      "ontology/obelisks/segue/authority_graph/instances"
+    ],
+    "metadata": {
+      "canonical_id": "fs:ontology/obelisks/segue/authority_graph/instances/shard",
+      "child_modes": {},
+      "child_roles": {},
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:ontology/obelisks/segue/authority_graph/instances"
+        ]
+      },
+      "projected_id": "ontology/obelisks/segue/authority_graph/instances/shard",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "ontology/obelisks/segue/authority_graph/instances"
+    ],
+    "path": "ontology/obelisks/segue/authority_graph/instances/shard",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "ontology/obelisks/segue/authority_graph/instances/shard",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.b22b99d2b8c1a76a330b"
+    ],
+    "size": 12,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

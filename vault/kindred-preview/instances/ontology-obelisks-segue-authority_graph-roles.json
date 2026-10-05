@@ -1,0 +1,83 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:ontology/obelisks/segue/authority_graph/roles",
+  "deterministic_hash": "c326f1055d1105daacd6885458856ba912a88019a31b348888992def2dbe9931",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "ontology/obelisks/segue/authority_graph/roles",
+  "kind": "directory",
+  "label": "roles",
+  "namespace": "preview.kindred",
+  "path": "ontology/obelisks/segue/authority_graph/roles",
+  "placement": {
+    "domain": "filesystem",
+    "node": "ontology/obelisks/segue/authority_graph/roles",
+    "parent": "ontology/obelisks/segue/authority_graph",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.b3741c55bb004d6624b8",
+    "rank": 90,
+    "slot": "30_ontology",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.b3741c55bb004d6624b8"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:ontology/obelisks/segue/authority_graph/roles",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "ontology/obelisks/segue/authority_graph/roles",
+    "kind": "directory",
+    "label": "roles",
+    "legacy_id": "ontology/obelisks/segue/authority_graph/roles",
+    "lineage": [
+      "ontology/obelisks/segue/authority_graph"
+    ],
+    "metadata": {
+      "canonical_id": "fs:ontology/obelisks/segue/authority_graph/roles",
+      "child_modes": {},
+      "child_roles": {},
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:ontology/obelisks/segue/authority_graph"
+        ]
+      },
+      "projected_id": "ontology/obelisks/segue/authority_graph/roles",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "ontology/obelisks/segue/authority_graph"
+    ],
+    "path": "ontology/obelisks/segue/authority_graph/roles",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "ontology/obelisks/segue/authority_graph/roles",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.b3741c55bb004d6624b8"
+    ],
+    "size": 12,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

@@ -1,0 +1,83 @@
+{
+  "authoritative": false,
+  "authority_tier": "delegated",
+  "canonical_id": "fs:canon-system/authority/exiles/shatter.yaml",
+  "deterministic_hash": "f72bfcb6f8db31fbe86abee69fb7907f8ed7f60b3beb15d96f571d2eaeaed5cf",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "canon-system/authority/exiles/shatter.yaml",
+  "kind": "file",
+  "label": "shatter.yaml",
+  "namespace": "preview.kindred",
+  "path": "canon-system/authority/exiles/shatter.yaml",
+  "placement": {
+    "domain": "filesystem",
+    "node": "canon-system/authority/exiles/shatter.yaml",
+    "parent": "canon-system/authority/exiles",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.8aecac29a1c1fc193ef2",
+    "rank": 150,
+    "slot": "20_authority",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.8aecac29a1c1fc193ef2"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "record",
+  "source_record": {
+    "authority": false,
+    "canonical_id": "fs:canon-system/authority/exiles/shatter.yaml",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "canon-system/authority/exiles/shatter.yaml",
+    "kind": "file",
+    "label": "shatter.yaml",
+    "legacy_id": "canon-system/authority/exiles/shatter.yaml",
+    "lineage": [
+      "canon-system/authority/exiles"
+    ],
+    "metadata": {
+      "canonical_id": "fs:canon-system/authority/exiles/shatter.yaml",
+      "child_modes": {},
+      "child_roles": {},
+      "is_directory": false,
+      "is_file": true,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:canon-system/authority/exiles"
+        ]
+      },
+      "projected_id": "canon-system/authority/exiles/shatter.yaml",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "canon-system/authority/exiles"
+    ],
+    "path": "canon-system/authority/exiles/shatter.yaml",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "canon-system/authority/exiles/shatter.yaml",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.8aecac29a1c1fc193ef2"
+    ],
+    "size": 7,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

@@ -1,0 +1,93 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "policy:unknowns",
+  "deterministic_hash": "df84287832d0f6d3cc26155214165a9aa1a8be6a4979db2e0da6c5146ca29528",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "policy:unknowns",
+  "kind": "policy",
+  "label": "policy:unknowns",
+  "namespace": "preview.kindred",
+  "path": null,
+  "placement": {
+    "domain": "unclassified",
+    "node": "policy:unknowns",
+    "parent": "savant-runtime",
+    "placement_basis": "orphan_attachment",
+    "primary_relationship_id": null,
+    "rank": 110,
+    "slot": "20_authority",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.dependency.41e0daaab0d079c79110",
+    "lineage.generic.4b12209ba2aaf9c3e31d"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "policy:unknowns",
+    "children": [],
+    "daughters": [],
+    "dependencies": [
+      "foundation:dynamic-canon"
+    ],
+    "fathers": [],
+    "id": "policy:unknowns",
+    "kind": "policy",
+    "label": "policy:unknowns",
+    "legacy_id": null,
+    "lineage": [
+      "foundation:dynamic-canon"
+    ],
+    "metadata": {
+      "authority_source_path": "/root/savant-runtime/canon-system/authority/policies/unknowns.yaml",
+      "canonical_id": "policy:unknowns",
+      "child_modes": {},
+      "child_roles": {},
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "dependency": [
+          "foundation:dynamic-canon"
+        ],
+        "generic": [
+          "foundation:dynamic-canon"
+        ]
+      },
+      "projected_id": "policy:unknowns"
+    },
+    "mothers": [],
+    "parents": [
+      "foundation:dynamic-canon"
+    ],
+    "path": null,
+    "provenance": {
+      "adapter": "authority_document",
+      "created_at": "2026-07-11T00:00:00Z",
+      "created_by": "canon_bootstrap",
+      "source_files": [
+        "/root/savant-runtime/canon-system/authority/policies/unknowns.yaml"
+      ],
+      "sources": [
+        "user directive"
+      ]
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.dependency.41e0daaab0d079c79110",
+      "lineage.generic.4b12209ba2aaf9c3e31d"
+    ],
+    "size": 7,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

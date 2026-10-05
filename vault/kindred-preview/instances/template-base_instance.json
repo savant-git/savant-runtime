@@ -1,0 +1,83 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "template:base_instance",
+  "deterministic_hash": "1704ba5556da1b585f058789df9a0735acbafad4c2da6c19835a78db7a26428c",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "template:base_instance",
+  "kind": "template",
+  "label": "template:base_instance",
+  "namespace": "preview.kindred",
+  "path": null,
+  "placement": {
+    "domain": "global",
+    "node": "template:base_instance",
+    "parent": "archetype:universal_instance",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.pattern.a54d19d3492331563f7e",
+    "rank": 10,
+    "slot": "20_authority",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.pattern.a54d19d3492331563f7e"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "template:base_instance",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [
+      "archetype:universal_instance"
+    ],
+    "id": "template:base_instance",
+    "kind": "template",
+    "label": "template:base_instance",
+    "legacy_id": null,
+    "lineage": [
+      "archetype:universal_instance"
+    ],
+    "metadata": {
+      "authority_source_path": "/root/savant-runtime/authority_graph/templates/base_instance.json",
+      "canonical_id": "template:base_instance",
+      "child_modes": {},
+      "child_roles": {},
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "pattern": [
+          "archetype:universal_instance"
+        ]
+      },
+      "projected_id": "template:base_instance"
+    },
+    "mothers": [],
+    "parents": [
+      "archetype:universal_instance"
+    ],
+    "path": null,
+    "provenance": {
+      "adapter": "authority_document",
+      "source_files": [
+        "/root/savant-runtime/authority_graph/templates/base_instance.json"
+      ]
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.pattern.a54d19d3492331563f7e"
+    ],
+    "size": 7,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

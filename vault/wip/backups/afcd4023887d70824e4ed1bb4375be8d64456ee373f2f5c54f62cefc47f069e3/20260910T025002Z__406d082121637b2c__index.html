@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta
+    name="viewport"
+    content="width=device-width,initial-scale=1,viewport-fit=cover"
+  >
+  <meta
+    name="color-scheme"
+    content="dark"
+  >
+  <title>atlas</title>
+  <link
+    rel="stylesheet"
+    href="/assets/atlas.css"
+  >
+</head>
+<body>
+  <div id="atlas-shell">
+    <header id="atlas-rail">
+      <div class="atlas-brand">
+        <strong>atlas</strong>
+        <span id="atlas-health">loading</span>
+      </div>
+
+      <div class="atlas-controls">
+        <button
+          type="button"
+          data-action="fit"
+          title="fit map"
+        >
+          fit
+        </button>
+
+        <button
+          type="button"
+          data-action="reset"
+          title="reset view"
+        >
+          reset
+        </button>
+
+        <button
+          type="button"
+          data-action="authority"
+          title="authority lens"
+        >
+          authority
+        </button>
+
+        <button
+          type="button"
+          data-action="tasks"
+          title="task lens"
+        >
+          tasks
+        </button>
+
+        <button
+          type="button"
+          data-action="dependencies"
+          title="dependency trace"
+        >
+          dependencies
+        </button>
+
+        <button
+          type="button"
+          data-action="unresolved"
+          title="unresolved tasks"
+        >
+          unresolved
+        </button>
+
+        <button
+          type="button"
+          data-action="search"
+          title="search"
+        >
+          search
+        </button>
+
+        <button
+          type="button"
+          data-action="refresh"
+          title="refresh projection"
+        >
+          refresh
+        </button>
+      </div>
+    </header>
+
+    <main id="atlas-stage">
+      <canvas
+        id="atlas-canvas"
+        aria-hidden="true"
+      ></canvas>
+
+      <div
+        id="atlas-status-strip"
+        aria-live="polite"
+      >
+        <span id="atlas-zoom-label">world</span>
+        <span id="atlas-selection-label">nothing selected</span>
+        <span id="atlas-metrics"></span>
+      </div>
+
+      <aside
+        id="atlas-inspector"
+        hidden
+      >
+        <div class="atlas-inspector-head">
+          <strong id="atlas-inspector-title"></strong>
+
+          <button
+            type="button"
+            data-action="close-inspector"
+            aria-label="close inspector"
+          >
+            ×
+          </button>
+        </div>
+
+        <div id="atlas-inspector-body"></div>
+      </aside>
+
+      <section
+        id="atlas-search"
+        hidden
+      >
+        <div class="atlas-search-box">
+          <input
+            id="atlas-search-input"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            placeholder="search atlas"
+            aria-label="search atlas"
+          >
+
+          <button
+            type="button"
+            data-action="close-search"
+          >
+            close
+          </button>
+        </div>
+
+        <div
+          id="atlas-search-results"
+          role="listbox"
+        ></div>
+      </section>
+
+      <div id="atlas-minimap-wrap">
+        <canvas
+          id="atlas-minimap"
+          aria-label="atlas minimap"
+        ></canvas>
+      </div>
+
+      <div
+        id="atlas-toast"
+        hidden
+        role="status"
+        aria-live="polite"
+      ></div>
+
+      <div
+        id="atlas-semantic"
+        class="visually-hidden"
+        aria-live="polite"
+      ></div>
+    </main>
+  </div>
+
+  <script src="/assets/atlas.js"></script>
+<script src="atlas-static-bridge.js"></script>
+</body>
+</html>

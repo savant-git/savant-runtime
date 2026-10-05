@@ -1,0 +1,159 @@
+{
+  "id": "carbon.segue.edges",
+  "owner": "carbon",
+  "type": "segue_edge_registry",
+  "status": "active",
+  "edges": [
+    {
+      "source": "source:instance",
+      "target": "exile:carbon",
+      "relation": "provides_simulation_primitive_to",
+      "binding": "reference",
+      "authority_transfer": false
+    },
+    {
+      "source": "evidence:admitted",
+      "target": "exile:carbon",
+      "relation": "may_ground_initial_condition_of",
+      "binding": "reference",
+      "optional": true,
+      "authority_transfer": false
+    },
+    {
+      "source": "decision:accepted",
+      "target": "exile:carbon",
+      "relation": "may_constrain_simulation",
+      "binding": "reference",
+      "optional": true,
+      "authority_transfer": false
+    },
+    {
+      "source": "source:external_historical_reality",
+      "target": "exile:carbon/specialization:oriel",
+      "relation": "may_constrain_chronometric_logistics_simulation",
+      "binding": "reference",
+      "optional": true,
+      "authority_transfer": false
+    },
+    {
+      "source": "exile:carbon",
+      "target": "carbon:simulation_definition",
+      "relation": "defines"
+    },
+    {
+      "source": "carbon:simulation_definition",
+      "target": "carbon:simulation_instance",
+      "relation": "instantiates"
+    },
+    {
+      "source": "carbon:simulation_instance",
+      "target": "carbon:simulation_branch",
+      "relation": "establishes_root_branch"
+    },
+    {
+      "source": "carbon:simulation_branch",
+      "target": "carbon:simulation_execution",
+      "relation": "executes_through"
+    },
+    {
+      "source": "carbon:simulation_execution",
+      "target": "carbon:simulation_state",
+      "relation": "projects"
+    },
+    {
+      "source": "carbon:simulation_state",
+      "target": "carbon:simulation_checkpoint",
+      "relation": "may_checkpoint_as"
+    },
+    {
+      "source": "carbon:simulation_checkpoint",
+      "target": "carbon:simulation_branch",
+      "relation": "may_fork_into",
+      "preserves_ancestry": true
+    },
+    {
+      "source": "carbon:simulation_execution",
+      "target": "carbon:simulation_receipt",
+      "relation": "emits"
+    },
+    {
+      "source": "carbon:simulation_receipt",
+      "target": "carbon:simulation_replay",
+      "relation": "supports"
+    },
+    {
+      "source": "carbon:simulation_state",
+      "target": "carbon:simulation_comparison",
+      "relation": "may_participate_in"
+    },
+    {
+      "source": "carbon:simulation_state",
+      "target": "carbon:simulation_interrogation",
+      "relation": "may_be_queried_through"
+    },
+    {
+      "source": "carbon:simulation_execution",
+      "target": "carbon:causal_trace",
+      "relation": "may_project"
+    },
+    {
+      "source": "carbon:simulation_execution",
+      "target": "carbon:uncertainty_projection",
+      "relation": "may_project"
+    },
+    {
+      "source": "engine:attached",
+      "target": "exile:carbon",
+      "relation": "may_execute_specialized_simulation_for",
+      "binding": "replaceable_attachment",
+      "optional": true,
+      "authority_transfer": false
+    },
+    {
+      "source": "exile:carbon",
+      "target": "exile:carbon/specialization:oriel",
+      "relation": "owns_specialization",
+      "authority_transfer": false
+    },
+    {
+      "source": "carbon:simulation_instance",
+      "target": "exile:carbon/specialization:oriel",
+      "relation": "may_execute_chronometric_logistics_through",
+      "binding": "reference",
+      "authority_transfer": false
+    },
+    {
+      "source": "exile:carbon/specialization:oriel",
+      "target": "consumer:declared",
+      "relation": "may_project_by_reference_into",
+      "authority_transfer": false
+    },
+    {
+      "source": "exile:carbon",
+      "target": "carbon.apps.avatar_forge",
+      "relation": "owns_specialization"
+    },
+    {
+      "source": "carbon:simulation_instance",
+      "target": "consumer:declared",
+      "relation": "may_compose_by_reference_into",
+      "authority_transfer": false
+    }
+  ],
+  "invariants": {
+    "simulation_is_derived": true,
+    "simulation_is_not_observation": true,
+    "simulation_is_not_accepted_authority": true,
+    "oriel_is_contained_by_carbon": true,
+    "oriel_is_not_a_peer_exile": true,
+    "oriel_projection_is_derived": true,
+    "source_authority_preserved": true,
+    "external_historical_reality_authority_preserved": true,
+    "accepted_decision_authority_preserved": true,
+    "admitted_evidence_authority_preserved": true,
+    "branch_ancestry_preserved": true,
+    "attached_engines_replaceable": true,
+    "composition_by_reference": true,
+    "authority_transfer": false
+  }
+}

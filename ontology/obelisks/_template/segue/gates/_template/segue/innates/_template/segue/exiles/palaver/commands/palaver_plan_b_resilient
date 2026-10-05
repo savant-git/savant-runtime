@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+runtime="/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/runtime/plan_b_resilient.py"
+
+exec python3 \
+    "${runtime}" \
+    "$@"

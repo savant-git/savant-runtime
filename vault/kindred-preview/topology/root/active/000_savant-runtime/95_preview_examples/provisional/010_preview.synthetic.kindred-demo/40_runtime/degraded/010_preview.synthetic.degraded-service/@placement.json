@@ -1,0 +1,30 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "7dda0346b71d434eee73717b227793f4884c7108d5e7294207399eae1ae2ce4c",
+  "domain": "preview",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "namespace": "preview.kindred",
+  "node": "preview.synthetic.degraded-service",
+  "parent": "preview.synthetic.kindred-demo",
+  "placement_basis": "direct_lineage",
+  "primary_relationship_id": "preview.synthetic.lineage.degraded",
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "rank": 10,
+  "schema": "savant.kindred.preview.placement.v2",
+  "slot": "40_runtime",
+  "state": "degraded",
+  "structural_address": {
+    "domain": "preview",
+    "node": "preview.synthetic.degraded-service",
+    "parent": "preview.synthetic.kindred-demo",
+    "rank": 10,
+    "root": "savant-runtime",
+    "slot": "40_runtime",
+    "state": "degraded"
+  },
+  "synthetic": true
+}

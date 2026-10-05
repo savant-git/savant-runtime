@@ -1,0 +1,109 @@
+{
+  "authoritative": false,
+  "authority_tier": "delegated",
+  "canonical_id": "fs:canon-system/history",
+  "deterministic_hash": "9f7c634b1b35496cb1a51fcd49c409b8099386819bfc83159ea8bcd99be01c15",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "canon-system/history",
+  "kind": "directory",
+  "label": "history",
+  "namespace": "preview.kindred",
+  "path": "canon-system/history",
+  "placement": {
+    "domain": "filesystem",
+    "node": "canon-system/history",
+    "parent": "canon-system",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.24c2f250dd40aa46879c",
+    "rank": 30,
+    "slot": "20_authority",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.13c968b69e6407774264",
+    "lineage.composition.24c2f250dd40aa46879c",
+    "lineage.composition.e2ace94fa4f515e1b2c7",
+    "lineage.composition.f32926bef3c88c00111b"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": false,
+    "canonical_id": "fs:canon-system/history",
+    "children": [
+      "canon-system/history/supersessions",
+      "canon-system/history/proposals",
+      "canon-system/history/events"
+    ],
+    "daughters": [
+      "canon-system/history/supersessions",
+      "canon-system/history/proposals",
+      "canon-system/history/events"
+    ],
+    "dependencies": [],
+    "fathers": [],
+    "id": "canon-system/history",
+    "kind": "directory",
+    "label": "history",
+    "legacy_id": "canon-system/history",
+    "lineage": [
+      "canon-system"
+    ],
+    "metadata": {
+      "canonical_id": "fs:canon-system/history",
+      "child_modes": {
+        "preserving": [
+          "fs:canon-system/history/supersessions",
+          "fs:canon-system/history/proposals",
+          "fs:canon-system/history/events"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:canon-system/history/supersessions",
+          "fs:canon-system/history/proposals",
+          "fs:canon-system/history/events"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:canon-system"
+        ]
+      },
+      "projected_id": "canon-system/history",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "canon-system"
+    ],
+    "path": "canon-system/history",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "canon-system/history",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.13c968b69e6407774264",
+      "lineage.composition.24c2f250dd40aa46879c",
+      "lineage.composition.e2ace94fa4f515e1b2c7",
+      "lineage.composition.f32926bef3c88c00111b"
+    ],
+    "size": 12,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

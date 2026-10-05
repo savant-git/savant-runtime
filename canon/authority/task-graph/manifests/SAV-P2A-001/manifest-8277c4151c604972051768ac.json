@@ -1,0 +1,125 @@
+{
+  "artifacts": [
+    {
+      "byte_count": 40269,
+      "declared": "tools/identity_quality/promotion/build_identity_promotion_queue.py",
+      "exists": true,
+      "kind": "file",
+      "path": "tools/identity_quality/promotion/build_identity_promotion_queue.py",
+      "sha256": "48bbdb2493b4896b33dde47c398cfdbc5b6a5970cf1b93868ba39d7553440971"
+    },
+    {
+      "byte_count": 5018,
+      "declared": "bin/identity-promotionctl",
+      "exists": true,
+      "kind": "file",
+      "path": "bin/identity-promotionctl",
+      "sha256": "f86a3ff39b0d3832fb301d024528dda4f63572b6760e485f5548d2e07a5b281c"
+    },
+    {
+      "byte_count": 12313,
+      "declared": "reports/identity_quality/promotion/latest.json",
+      "exists": true,
+      "kind": "file",
+      "path": "reports/identity_quality/promotion/latest.json",
+      "sha256": "ac6daa1e7ae9a17ccfe9f17fe42c57a7a5bbc81cfd6c9fe11cbf2c631c8e9da9"
+    },
+    {
+      "byte_count": 1704,
+      "declared": "reports/identity_quality/promotion/latest.md",
+      "exists": true,
+      "kind": "file",
+      "path": "reports/identity_quality/promotion/latest.md",
+      "sha256": "df4886d64cb71b2e0df5700dc04f32882102dd06cca46bbb4e78be66c6f0788b"
+    }
+  ],
+  "attestations": [],
+  "content_digest": "8277c4151c604972051768ac944f28f308fa720951a3053511dc0688c6edfb23",
+  "decisions": [],
+  "events": [],
+  "evidence": [],
+  "generated_at": "2026-08-02T19:41:48+00:00",
+  "graph": {
+    "path": "authority/task-graph/masterplan.json",
+    "schema_version": "1.0.0",
+    "semantic_digest": "b394c7d9ff60bc8593ba5888cdaef7040f98eebab364a82a334d650d7916d027",
+    "sha256": "4eebe2e3d285043dd98f972d94094904178295f092369e0afa0546d788c295f8"
+  },
+  "manifest_id": "manifest-8277c4151c604972051768ac",
+  "receipts": [],
+  "schema": "savant://niche/masterplan/artifact-manifest/1.0.0",
+  "segues": [
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "edifices/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-c4986cf6456349d8fae78a56",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "edifices/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "edifices/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P2A-002",
+      "target": "SAV-P2A-001",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    }
+  ],
+  "statistics": {
+    "attestation_count": 0,
+    "decision_count": 0,
+    "declared_output_count": 4,
+    "event_count": 0,
+    "evidence_count": 0,
+    "existing_output_count": 4,
+    "missing_output_count": 0,
+    "receipt_count": 0,
+    "segue_count": 1
+  },
+  "task": {
+    "acceptance": [
+      "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+    ],
+    "authority": {
+      "accepted_at": null,
+      "accepted_by": null,
+      "authority_class": "project-owner-directed",
+      "confidence": 1.0,
+      "source": "edifices/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+      "state": "proposed",
+      "tier": 2
+    },
+    "priority": {
+      "authority_locked": false,
+      "band": "P2A",
+      "ordinal": 1,
+      "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+    },
+    "purpose": "Build deterministic identity-promotion discovery and priority queue",
+    "status": "proposed",
+    "title": "Build deterministic identity-promotion discovery and priority queue"
+  },
+  "task_id": "SAV-P2A-001"
+}

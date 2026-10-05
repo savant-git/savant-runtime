@@ -1,0 +1,109 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:ontology/obelisks/segue/authority_graph/policies",
+  "deterministic_hash": "5d3267278a90011d93841a29c482f6278a33b575f758fa6063f70c12464bd41b",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "ontology/obelisks/segue/authority_graph/policies",
+  "kind": "directory",
+  "label": "policies",
+  "namespace": "preview.kindred",
+  "path": "ontology/obelisks/segue/authority_graph/policies",
+  "placement": {
+    "domain": "filesystem",
+    "node": "ontology/obelisks/segue/authority_graph/policies",
+    "parent": "ontology/obelisks/segue/authority_graph",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.081c2a08a5e66f5a561c",
+    "rank": 60,
+    "slot": "30_ontology",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.081c2a08a5e66f5a561c",
+    "lineage.composition.4ca838ad6ae9c978120b",
+    "lineage.composition.570b42996761e4a27380",
+    "lineage.composition.82c95b994b709cd6eadb"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:ontology/obelisks/segue/authority_graph/policies",
+    "children": [
+      "ontology/obelisks/segue/authority_graph/policies/content_composition.json",
+      "ontology/obelisks/segue/authority_graph/policies/recursive_composition.json",
+      "ontology/obelisks/segue/authority_graph/policies/future_attachment.json"
+    ],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "ontology/obelisks/segue/authority_graph/policies",
+    "kind": "directory",
+    "label": "policies",
+    "legacy_id": "ontology/obelisks/segue/authority_graph/policies",
+    "lineage": [
+      "ontology/obelisks/segue/authority_graph"
+    ],
+    "metadata": {
+      "canonical_id": "fs:ontology/obelisks/segue/authority_graph/policies",
+      "child_modes": {
+        "projecting": [
+          "fs:ontology/obelisks/segue/authority_graph/policies/content_composition.json",
+          "fs:ontology/obelisks/segue/authority_graph/policies/recursive_composition.json",
+          "fs:ontology/obelisks/segue/authority_graph/policies/future_attachment.json"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:ontology/obelisks/segue/authority_graph/policies/content_composition.json",
+          "fs:ontology/obelisks/segue/authority_graph/policies/recursive_composition.json",
+          "fs:ontology/obelisks/segue/authority_graph/policies/future_attachment.json"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:ontology/obelisks/segue/authority_graph"
+        ]
+      },
+      "projected_id": "ontology/obelisks/segue/authority_graph/policies",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "ontology/obelisks/segue/authority_graph"
+    ],
+    "path": "ontology/obelisks/segue/authority_graph/policies",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "ontology/obelisks/segue/authority_graph/policies",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.081c2a08a5e66f5a561c",
+      "lineage.composition.4ca838ad6ae9c978120b",
+      "lineage.composition.570b42996761e4a27380",
+      "lineage.composition.82c95b994b709cd6eadb"
+    ],
+    "size": 12,
+    "sons": [
+      "ontology/obelisks/segue/authority_graph/policies/content_composition.json",
+      "ontology/obelisks/segue/authority_graph/policies/recursive_composition.json",
+      "ontology/obelisks/segue/authority_graph/policies/future_attachment.json"
+    ]
+  },
+  "state": "active",
+  "synthetic": false
+}

@@ -1,0 +1,97 @@
+{
+  "authoritative": false,
+  "authority_tier": "delegated",
+  "canonical_id": "fs:canon-system/projections/md/foundation",
+  "deterministic_hash": "69c48090a6f7bc609b9a0b1d59e7fec75d2502f105c7fe3705d0540a5990e235",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "canon-system/projections/md/foundation",
+  "kind": "directory",
+  "label": "foundation",
+  "namespace": "preview.kindred",
+  "path": "canon-system/projections/md/foundation",
+  "placement": {
+    "domain": "filesystem",
+    "node": "canon-system/projections/md/foundation",
+    "parent": "canon-system/projections/md",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.b44161e70378cb033a8f",
+    "rank": 20,
+    "slot": "20_authority",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.b44161e70378cb033a8f",
+    "lineage.composition.c228990d2ac459710878"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": false,
+    "canonical_id": "fs:canon-system/projections/md/foundation",
+    "children": [
+      "canon-system/projections/md/foundation/dynamic-canon.md"
+    ],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "canon-system/projections/md/foundation",
+    "kind": "directory",
+    "label": "foundation",
+    "legacy_id": "canon-system/projections/md/foundation",
+    "lineage": [
+      "canon-system/projections/md"
+    ],
+    "metadata": {
+      "canonical_id": "fs:canon-system/projections/md/foundation",
+      "child_modes": {
+        "projecting": [
+          "fs:canon-system/projections/md/foundation/dynamic-canon.md"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:canon-system/projections/md/foundation/dynamic-canon.md"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:canon-system/projections/md"
+        ]
+      },
+      "projected_id": "canon-system/projections/md/foundation",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "canon-system/projections/md"
+    ],
+    "path": "canon-system/projections/md/foundation",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "canon-system/projections/md/foundation",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.b44161e70378cb033a8f",
+      "lineage.composition.c228990d2ac459710878"
+    ],
+    "size": 12,
+    "sons": [
+      "canon-system/projections/md/foundation/dynamic-canon.md"
+    ]
+  },
+  "state": "active",
+  "synthetic": false
+}

@@ -1,0 +1,322 @@
+.palaver-focus-backdrop {
+  position: fixed;
+  z-index: 72;
+  inset: 0;
+  border: 0;
+  background: rgba(4,5,4,.55);
+  backdrop-filter: blur(8px);
+}
+
+.palaver-focus-rail {
+  position: fixed;
+  z-index: 73;
+  top: 12px;
+  right: 12px;
+  bottom: 12px;
+  display: grid;
+  grid-template-rows:
+    auto
+    auto
+    minmax(0,1fr)
+    auto;
+  width: min(410px, calc(100% - 24px));
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 28px;
+  background:
+    linear-gradient(
+      150deg,
+      rgba(22,23,21,.995),
+      rgba(9,10,9,.995)
+    );
+  box-shadow:
+    -40px 0 130px rgba(0,0,0,.5);
+}
+
+.palaver-focus-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 72px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.palaver-focus-head > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--signal);
+}
+
+.palaver-focus-head span {
+  font-size: 9px;
+  font-weight: 760;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.palaver-focus-head button {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  cursor: pointer;
+  color: #92968e;
+  background: rgba(255,255,255,.025);
+}
+
+.palaver-focus-search {
+  display: grid;
+  grid-template-columns:
+    auto
+    minmax(0,1fr)
+    auto;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 14px;
+  border-bottom: 1px solid var(--line);
+  color: #6d7169;
+}
+
+.palaver-focus-search input {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  color: var(--paper);
+  background: transparent;
+  font-size: 10px;
+}
+
+.palaver-focus-search input::placeholder {
+  color: #60645d;
+}
+
+.palaver-focus-search span {
+  min-width: 24px;
+  text-align: right;
+  color: #666a62;
+  font-size: 8px;
+}
+
+.palaver-focus-list {
+  min-height: 0;
+  padding: 7px;
+  overflow: auto;
+}
+
+.palaver-focus-list > button {
+  display: grid;
+  grid-template-columns:
+    auto
+    minmax(0,1fr)
+    auto;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 58px;
+  padding: 8px 10px;
+  border: 1px solid transparent;
+  border-radius: 13px;
+  cursor: pointer;
+  color: #858981;
+  background: transparent;
+  text-align: left;
+}
+
+.palaver-focus-list > button:hover {
+  color: var(--paper);
+  border-color: var(--line);
+  background: rgba(255,255,255,.035);
+}
+
+.palaver-focus-list > button.active {
+  color: var(--paper);
+  border-color: rgba(215,255,84,.18);
+  background: rgba(215,255,84,.045);
+}
+
+.palaver-focus-index {
+  display: grid;
+  place-items: center;
+  width: 29px;
+  height: 29px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  color: var(--signal);
+  font-size: 8px;
+  font-weight: 760;
+}
+
+.palaver-focus-list > button > span:nth-child(2) {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.palaver-focus-list strong {
+  color: #aeb1aa;
+  font-size: 8px;
+  font-weight: 720;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.palaver-focus-list small {
+  overflow: hidden;
+  color: #777b73;
+  font-size: 9px;
+  line-height: 1.4;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.palaver-focus-empty {
+  padding: 24px 16px;
+  color: #686c64;
+  font-size: 10px;
+}
+
+.palaver-focus-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 58px;
+  padding: 9px 11px;
+  border-top: 1px solid var(--line);
+}
+
+.palaver-focus-foot > div {
+  display: flex;
+  gap: 5px;
+}
+
+.palaver-focus-foot button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  cursor: pointer;
+  color: #91958d;
+  background: rgba(255,255,255,.025);
+}
+
+.palaver-focus-foot button:hover {
+  color: var(--paper);
+  border-color: var(--line-strong);
+}
+
+.palaver-focus-branch {
+  gap: 7px;
+}
+
+.palaver-focus-branch span {
+  font-size: 9px;
+}
+
+.palaver-focus-branch strong {
+  display: grid;
+  place-items: center;
+  min-width: 19px;
+  height: 19px;
+  padding: 0 5px;
+  border-radius: 999px;
+  color: var(--ink);
+  background: var(--signal);
+  font-size: 8px;
+}
+
+.palaver-conversation-tools {
+  display: grid;
+  gap: 10px;
+  padding: 10px 12px;
+  border-top: 1px solid var(--line);
+}
+
+.palaver-conversation-tools > header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 0;
+}
+
+.palaver-conversation-tools > header span {
+  color: #8e9289;
+  font-size: 8px;
+  font-weight: 720;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.palaver-conversation-tools > header small {
+  color: #5e625b;
+  font-size: 8px;
+}
+
+.palaver-conversation-tools > div {
+  display: grid;
+  grid-template-columns:
+    repeat(5, minmax(0,1fr));
+  gap: 5px;
+}
+
+.palaver-conversation-tools > div > button {
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+  min-width: 0;
+  min-height: 49px;
+  padding: 7px 5px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  cursor: pointer;
+  color: #858981;
+  background: rgba(255,255,255,.025);
+  font-size: 8px;
+}
+
+.palaver-conversation-tools > div > button:hover:not(:disabled) {
+  color: var(--paper);
+  border-color: var(--line-strong);
+  background: rgba(255,255,255,.05);
+}
+
+.palaver-conversation-tools > div > button.danger:hover:not(:disabled) {
+  color: #ff9a79;
+  border-color: rgba(255,106,61,.2);
+  background: rgba(255,106,61,.05);
+}
+
+.palaver-conversation-tools > footer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #5f635c;
+  font-size: 8px;
+}
+
+@media (max-width: 760px) {
+  .palaver-focus-rail {
+    top: 7px;
+    right: 7px;
+    bottom: 7px;
+    width: calc(100% - 14px);
+    border-radius: 24px;
+  }
+
+  .palaver-conversation-tools > div {
+    grid-template-columns:
+      repeat(3, minmax(0,1fr));
+  }
+}

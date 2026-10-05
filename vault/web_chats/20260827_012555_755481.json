@@ -1,0 +1,6 @@
+{
+  "timestamp": "2026-08-27T01:25:55.755516+00:00",
+  "user": "curl -sS -o /tmp/palaver-health.out -w 'HTTP %{http_code}\\n' \\\nhttp://127.0.0.1:8787/health\n\ncat /tmp/palaver-health.out",
+  "assistant": "The Palaver health endpoint is /api/health, not /health.\n\nRun:\ncurl -sS -o /tmp/palaver-health.out -w 'HTTP %{http_code}\\n' http://127.0.0.1:8787/api/health\ncat /tmp/palaver-health.out",
+  "trace": "memory empty\nopenai ok"
+}

@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+VENV="/root/savant-runtime/.venv-identity-quality"
+PYTHON="$VENV/bin/python"
+
+if [[ ! -x "$PYTHON" ]]; then
+  printf 'ERROR: identity-quality virtual environment is missing: %s\n' "$VENV" >&2
+  exit 1
+fi
+
+exec "$PYTHON" "$@"

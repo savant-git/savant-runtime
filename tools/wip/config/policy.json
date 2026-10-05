@@ -1,0 +1,59 @@
+{
+  "schema": "savant.wip.policy.v1",
+  "projection_only": true,
+  "authority_effect": "none",
+  "editor": "/usr/bin/nano",
+  "backup": {
+    "enabled": true,
+    "retention_per_file": 25,
+    "hash_algorithm": "sha256",
+    "root": "/root/savant-runtime/vault/wip/backups"
+  },
+  "receipts": {
+    "enabled": true,
+    "root": "/root/savant-runtime/vault/wip/receipts"
+  },
+  "locking": {
+    "enabled": true,
+    "root": "/root/savant-runtime/vault/wip/locks",
+    "mode": "exclusive_nonblocking"
+  },
+  "wipe": {
+    "interactive_only": true,
+    "binary_refusal": true,
+    "backup_before_wipe": true,
+    "default_answer": "keep"
+  },
+  "preview": {
+    "enabled": true,
+    "maximum_lines": 12,
+    "maximum_line_characters": 240,
+    "binary_sample_bytes": 65536
+  },
+  "warnings": {
+    "symbolic_links": true,
+    "hard_links": true,
+    "git_state": true,
+    "authority_surfaces": true,
+    "sensitive_names": true
+  },
+  "authority_path_markers": [
+    "/authority/",
+    "/canon/",
+    "/canon-system/",
+    "/decisions/"
+  ],
+  "sensitive_names": [
+    ".env",
+    "credentials",
+    "credentials.json",
+    "id_rsa",
+    "id_ed25519"
+  ],
+  "sensitive_suffixes": [
+    ".pem",
+    ".key",
+    ".p12",
+    ".pfx"
+  ]
+}

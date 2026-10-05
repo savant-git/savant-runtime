@@ -1,0 +1,338 @@
+{
+  "authority_effect": "none",
+  "evidence": {
+    "conflict_count": 0,
+    "safe_to_project": true,
+    "source_count": 38,
+    "unresolved_conflict_count": 0
+  },
+  "occurred_at": "2026-08-25T19:36:34.812014+00:00",
+  "operation": "canon.authority.reconciliation",
+  "outputs": [
+    "canon-system/projections/authority-reconciliation/20260825T193634Z__e2f81bd306ecbff2__authority-reconciliation.json",
+    "canon-system/projections/authority-reconciliation/latest.json"
+  ],
+  "passed": true,
+  "provenance": {
+    "generated_by": "canon-system.runtime.authority_reconciliation_commit",
+    "sources": [
+      {
+        "authority_class": "accepted-decision",
+        "authority_state": "accepted",
+        "digest": "f962df6047ec42a8bdb6039e58c1efbb9868e0d0d59b74dae2df8038ca2f2723",
+        "source_id": "AD-20260805-001-identity-edifice-portal",
+        "source_kind": "accepted-decision",
+        "source_path": "authority/accepted-decisions/AD-20260805-001-identity-edifice-portal.md"
+      },
+      {
+        "authority_class": "accepted-decision",
+        "authority_state": "accepted",
+        "digest": "5461b04b6904c0c4e4b85c6a1ca68a9cc34dd80ffe308dc050989f9de7a5efb5",
+        "source_id": "AD-20260806-002-canonical-recursive-runtime-structure",
+        "source_kind": "accepted-decision",
+        "source_path": "authority/accepted-decisions/AD-20260806-002-canonical-recursive-runtime-structure.md"
+      },
+      {
+        "authority_class": "accepted-decision",
+        "authority_state": "accepted",
+        "digest": "4eafc7b0c08fa59741e555e8df9e79e76190c6530a24027d8fa389e3b2c7b789",
+        "source_id": "AD-20260806-003-recursive-identity-tier-criteria",
+        "source_kind": "accepted-decision",
+        "source_path": "authority/accepted-decisions/AD-20260806-003-recursive-identity-tier-criteria.md"
+      },
+      {
+        "authority_class": "accepted-decision",
+        "authority_state": "accepted",
+        "digest": "b095f12a855801ab78861c4ba370e58b47d17dd165adbde2efb9062f22aa54da",
+        "source_id": "AD-20260806-004-scyon-focal-architecture",
+        "source_kind": "accepted-decision",
+        "source_path": "authority/accepted-decisions/AD-20260806-004-scyon-focal-architecture.md"
+      },
+      {
+        "authority_class": "accepted-decision",
+        "authority_state": "accepted",
+        "digest": "e8dfff3f2cc53022308ae26cac6a6d73285a1bd7bd8b852544b83ab3ba939525",
+        "source_id": "AD-20260806-005-scyon-focal-mutation-boundary",
+        "source_kind": "accepted-decision",
+        "source_path": "authority/accepted-decisions/AD-20260806-005-scyon-focal-mutation-boundary.md"
+      },
+      {
+        "authority_class": "accepted-decision",
+        "authority_state": "accepted",
+        "digest": "1273c5a7a303955554c2f6958e77eed5eb45d4b6a07212b1163e50287738af85",
+        "source_id": "AD-20260813-006-programming-composition-edifice",
+        "source_kind": "accepted-decision",
+        "source_path": "authority/accepted-decisions/AD-20260813-006-programming-composition-edifice.md"
+      },
+      {
+        "authority_class": "project-owner-directed",
+        "authority_state": "authoritative",
+        "digest": "e7c0ef8575b770b17a3d874c0fbc97078ca10723da43296e45ffd5a91c47b2eb",
+        "source_id": "savant.masterplan",
+        "source_kind": "authoritative-task-graph",
+        "source_path": "authority/task-graph/masterplan.json"
+      },
+      {
+        "authority_class": "unknown",
+        "authority_state": "accepted",
+        "digest": "cbc87bc70f080de11fe403b3326f5a5be47b7f573e67e43935c1c0f013f8760b",
+        "source_id": "exile:carbon",
+        "source_kind": "exile",
+        "source_path": "canon-system/authority/exiles/carbon.yaml"
+      },
+      {
+        "authority_class": "unknown",
+        "authority_state": "accepted",
+        "digest": "7198d2aa65c17bb58ab1e6db88b6e5cd7e0ccb881e6f07bc167aae7431097ab9",
+        "source_id": "exile:cataxis",
+        "source_kind": "exile",
+        "source_path": "canon-system/authority/exiles/cataxis.yaml"
+      },
+      {
+        "authority_class": "unknown",
+        "authority_state": "accepted",
+        "digest": "ae541f28868bc6bc051fb173c4bb94f9c5b5f52b71b481fadb9e76810071b01b",
+        "source_id": "exile:coda",
+        "source_kind": "exile",
+        "source_path": "canon-system/authority/exiles/coda.yaml"
+      },
+      {
+        "authority_class": "unknown",
+        "authority_state": "accepted",
+        "digest": "5a7f54effdf886e58e929b5a2bf3844de3f6ef03e405767287b610bc7ffa3393",
+        "source_id": "exile:envoy",
+        "source_kind": "exile",
+        "source_path": "canon-system/authority/exiles/envoy.yaml"
+      },
+      {
+        "authority_class": "unknown",
+        "authority_state": "accepted",
+        "digest": "ca9cd13279bafec8f286f6c5f10669c28c02f9317ad870977e7ae656d9f40aed",
+        "source_id": "exile:filament",
+        "source_kind": "exile",
+        "source_path": "canon-system/authority/exiles/filament.yaml"
+      },
+      {
+        "authority_class": "unknown",
+        "authority_state": "accepted",
+        "digest": "a01c89265ce1bf6480d11233e96a51fc620cc33c19eb370d500bcaaf80dd3f7b",
+        "source_id": "exile:graffiti",
+        "source_kind": "exile",
+        "source_path": "canon-system/authority/exiles/graffiti.yaml"
+      },
+      {
+        "authority_class": "unknown",
+        "authority_state": "provisional",
+        "digest": "b040804dba859eb1e809e9722b6d2f91f85c31169eee81f3f2421cb2d5b75168",
+        "source_id": "exile:lore",
+        "source_kind": "exile",
+        "source_path": "canon-system/authority/exiles/lore.yaml"
+      },
+      {
+        "authority_class": "unknown",
+        "authority_state": "provisional",
+        "digest": "3b5e4a2eb64b84d819fa1d7d1b6c054cc3a90925badb50bc990c52e7158bee75",
+        "source_id": "exile:mobius",
+        "source_kind": "exile",
+        "source_path": "canon-system/authority/exiles/mobius.yaml"
+      },
+      {
+        "authority_class": "unknown",
+        "authority_state": "accepted",
+        "digest": "2bb229550d4587901ade1bc1d9c1f446fa5b0a5317139b0e8bf8add26c11c125",
+        "source_id": "exile:modus",
+        "source_kind": "exile",
+        "source_path": "canon-system/authority/exiles/modus.yaml"
+      },
+      {
+        "authority_class": "unknown",
+        "authority_state": "accepted",
+        "digest": "d5bbb0da14cb66b8bc13ecfa7a0d55a3ccc1f6813159eaae337c0ed0052deb4e",
+        "source_id": "exile:niche",
+        "source_kind": "exile",
+        "source_path": "canon-system/authority/exiles/niche.yaml"
+      },
+      {
+        "authority_class": "unknown",
+        "authority_state": "provisional",
+        "digest": "6c6499c589de8f3d16910d50453095766b6989ba3fded5f13dbe141590efe8e4",
+        "source_id": "exile:notary",
+        "source_kind": "exile",
+        "source_path": "canon-system/authority/exiles/notary.yaml"
+      },
+      {
+        "authority_class": "unknown",
+        "authority_state": "accepted",
+        "digest": "2029b011b22918768d2020b9950b31171d77b90391d1667967a10083adc47ac9",
+        "source_id": "exile:opus",
+        "source_kind": "exile",
+        "source_path": "canon-system/authority/exiles/opus.yaml"
+      },
+      {
+        "authority_class": "unknown",
+        "authority_state": "provisional",
+        "digest": "d450f6c85e8e562760d181eaa3bffefaa0592dd810cf18d088a06daff5793489",
+        "source_id": "exile:pact",
+        "source_kind": "exile",
+        "source_path": "canon-system/authority/exiles/pact.yaml"
+      },
+      {
+        "authority_class": "unknown",
+        "authority_state": "provisional",
+        "digest": "12d99f53841ceefdc9e7282c412bda5c1275f032cffc8097a37e3d33783ed56e",
+        "source_id": "exile:palaver",
+        "source_kind": "exile",
+        "source_path": "canon-system/authority/exiles/palaver.yaml"
+      },
+      {
+        "authority_class": "unknown",
+        "authority_state": "provisional",
+        "digest": "7ca98d03ee745bef4823a21ae9765e8220c8c23a987cd341e3cb459391afcd06",
+        "source_id": "exile:shatter",
+        "source_kind": "exile",
+        "source_path": "canon-system/authority/exiles/shatter.yaml"
+      },
+      {
+        "authority_class": "unknown",
+        "authority_state": "accepted",
+        "digest": "d105e72b105df0c3b07b7f9895131081a114f404e2beac4a2677107d86e61599",
+        "source_id": "exile:underscore",
+        "source_kind": "exile",
+        "source_path": "canon-system/authority/exiles/underscore.yaml"
+      },
+      {
+        "authority_class": "unknown",
+        "authority_state": "accepted",
+        "digest": "24aabc4c01cc73fd5a4cfcdc0f7c486c29880151b5bcf2b87f447522e35054f8",
+        "source_id": "exile:urge",
+        "source_kind": "exile",
+        "source_path": "canon-system/authority/exiles/urge.yaml"
+      },
+      {
+        "authority_class": "unknown",
+        "authority_state": "accepted",
+        "digest": "a7d2f807f3da6b08915c4d20d654d25ada302d1b2e46b50b1061adc484cc5386",
+        "source_id": "exile:zero",
+        "source_kind": "exile",
+        "source_path": "canon-system/authority/exiles/zero.yaml"
+      },
+      {
+        "authority_class": "unknown",
+        "authority_state": "canonical",
+        "digest": "70bcce46d55b8d4f961adf6e0899ddf53ebc4cb8c491dbbe41922c8a0e025b92",
+        "source_id": "foundation:dynamic-canon",
+        "source_kind": "foundation",
+        "source_path": "canon-system/authority/foundation/dynamic_canon.yaml"
+      },
+      {
+        "authority_class": "unknown",
+        "authority_state": "provisional",
+        "digest": "9530f9e4de6300c12aeb901f018886ddb2dd62b65192b54b6ae31bdd5a1dd7d2",
+        "source_id": "edifice:abstraction",
+        "source_kind": "edifice",
+        "source_path": "canon-system/authority/edifices/abstraction.yaml"
+      },
+      {
+        "authority_class": "unknown",
+        "authority_state": "provisional",
+        "digest": "adac0b568b9dddfc0e7e3c6b4a612a7add17533621a5afb0e4b6bdf764a1e2cd",
+        "source_id": "edifice:authority",
+        "source_kind": "edifice",
+        "source_path": "canon-system/authority/edifices/authority.yaml"
+      },
+      {
+        "authority_class": "unknown",
+        "authority_state": "canonical",
+        "digest": "cd8f38ec3884f148b9bdd16adcde5851d5f1694d6145296445e15b3f11f473e0",
+        "source_id": "edifice:content",
+        "source_kind": "edifice",
+        "source_path": "canon-system/authority/edifices/content.yaml"
+      },
+      {
+        "authority_class": "unknown",
+        "authority_state": "provisional",
+        "digest": "dd7548207d182e77b1699db12ea0caa49f40f8ba49c169ae90e495fa8f16aa5c",
+        "source_id": "edifice:emergence",
+        "source_kind": "edifice",
+        "source_path": "canon-system/authority/edifices/emergence.yaml"
+      },
+      {
+        "authority_class": "unknown",
+        "authority_state": "canonical",
+        "digest": "40de00615fb86d54e453478677ccf58454ba1c68e987aef18f01268ea2b8b568",
+        "source_id": "edifice:identity",
+        "source_kind": "edifice",
+        "source_path": "canon-system/authority/edifices/identity.yaml"
+      },
+      {
+        "authority_class": "unknown",
+        "authority_state": "provisional",
+        "digest": "2d376a7511ccb82ac1172c96bc16755e2b81b5ef592c6467ec2e5239e6dbe8b6",
+        "source_id": "edifice:projection",
+        "source_kind": "edifice",
+        "source_path": "canon-system/authority/edifices/projection.yaml"
+      },
+      {
+        "authority_class": "unknown",
+        "authority_state": "canonical",
+        "digest": "dae3fe56a11f8243233a14f2a8be767cda2198d5b2db62a8bd5b306f06376eb4",
+        "source_id": "edifice:scale",
+        "source_kind": "edifice",
+        "source_path": "canon-system/authority/edifices/scale.yaml"
+      },
+      {
+        "authority_class": "unknown",
+        "authority_state": "provisional",
+        "digest": "acae1df81a650591446b9ae00cf4b7bd21469760a78f4bbe3999ce1a75e85a30",
+        "source_id": "edifice:segue",
+        "source_kind": "edifice",
+        "source_path": "canon-system/authority/edifices/segue.yaml"
+      },
+      {
+        "authority_class": "unknown",
+        "authority_state": "provisional",
+        "digest": "95584a2fc1f40fdbdcac2c2fb9cdc1f9587b3bd673c1657c01b737af8fb9e49a",
+        "source_id": "edifice:temporal",
+        "source_kind": "edifice",
+        "source_path": "canon-system/authority/edifices/temporal.yaml"
+      },
+      {
+        "authority_class": "unknown",
+        "authority_state": "canonical",
+        "digest": "5769844af28e947415dd07f802525d5c4bb73a52912a4f0cd954146ef5a9860e",
+        "source_id": "policy:projection",
+        "source_kind": "policy",
+        "source_path": "canon-system/authority/policies/projection.yaml"
+      },
+      {
+        "authority_class": "unknown",
+        "authority_state": "canonical",
+        "digest": "6700d82487c15d377ea801f55288a352c4990fc2b53acd2b28d83da36b847e75",
+        "source_id": "policy:supersession",
+        "source_kind": "policy",
+        "source_path": "canon-system/authority/policies/supersession.yaml"
+      },
+      {
+        "authority_class": "unknown",
+        "authority_state": "canonical",
+        "digest": "19caaf2109ce0c6947b5b1f260cf7f1573ea56aede21f719dac00210ad0ba643",
+        "source_id": "policy:unknowns",
+        "source_kind": "policy",
+        "source_path": "canon-system/authority/policies/unknowns.yaml"
+      }
+    ],
+    "transformations": [
+      "collect_declared_authority",
+      "preserve_source_authority_state",
+      "deterministically_order_precedence",
+      "detect_metadata_conflicts",
+      "refuse_unresolved_equal_precedence",
+      "project_without_authority_transfer"
+    ]
+  },
+  "receipt_digest": "20b641578e351805d5fe351dd740fa2a74e023a377ac0c299cb5faff06507753",
+  "reconciliation_schema": "savant://canon/authority-reconciliation/1.0.0",
+  "schema": "savant://canon/authority-reconciliation-receipt/1.0.0",
+  "semantic_digest": "e2f81bd306ecbff2ec562629f85d7ed0d3ad00b71d9cc46da9b4a90e7b613c36",
+  "task_id": "SAV-P0-001"
+}

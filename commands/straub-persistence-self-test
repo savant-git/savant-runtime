@@ -1,0 +1,188 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import json
+import sys
+import tempfile
+from pathlib import Path
+
+
+root = Path(
+    "/root/savant-runtime"
+)
+
+if str(root) not in sys.path:
+    sys.path.insert(
+        0,
+        str(root),
+    )
+
+
+from runtime.straub import (
+    AtomicCapsulePersistence,
+    StraubRegistry,
+)
+
+
+def main() -> int:
+    registry = StraubRegistry()
+
+    subject = registry.substantiate(
+        {
+            "id":
+                "instance:straub:"
+                "persistence-self-test:subject",
+            "kind":
+                "instance",
+            "payload": {
+                "value":
+                    "durable",
+            },
+            "provenance": {
+                "source":
+                    "straub:"
+                    "persistence-self-test",
+                "confidence":
+                    "confirmed",
+            },
+        }
+    )
+
+    with tempfile.TemporaryDirectory(
+        prefix="straub-persistence-test-"
+    ) as directory:
+        path = (
+            Path(
+                directory
+            )
+            / "straub.json"
+        )
+
+        persistence = (
+            AtomicCapsulePersistence(
+                path
+            )
+        )
+
+        before = (
+            registry.export_capsule()
+        )
+
+        checkpoint = (
+            registry.checkpoint(
+                persistence
+            )
+        )
+
+        recovered = (
+            StraubRegistry.recover(
+                persistence
+            )
+        )
+
+        after = (
+            recovered.export_capsule()
+        )
+
+        health = (
+            persistence.health()
+        )
+
+        passed = bool(
+            subject[
+                "id"
+            ]
+            == recovered.instance(
+                subject[
+                    "id"
+                ]
+            )[
+                "id"
+            ]
+            and before[
+                "digest"
+            ]
+            == after[
+                "digest"
+            ]
+            and checkpoint[
+                "capsule_digest"
+            ]
+            == before[
+                "digest"
+            ]
+            and health[
+                "durable"
+            ]
+            is True
+            and health[
+                "authoritative"
+            ]
+            is False
+            and health[
+                "file_mode"
+            ]
+            == "0o600"
+            and health[
+                "atomic_replace"
+            ]
+            is True
+            and health[
+                "file_fsync"
+            ]
+            is True
+            and health[
+                "directory_fsync"
+            ]
+            is True
+            and health[
+                "storage_engine_selected"
+            ]
+            is False
+        )
+
+        output = {
+            "schema":
+                "savant.straub."
+                "persistence-self-test.v1",
+            "passed":
+                passed,
+            "capsule_digest":
+                before[
+                    "digest"
+                ],
+            "recovery_digest":
+                after[
+                    "digest"
+                ],
+            "checkpoint":
+                checkpoint,
+            "persistence":
+                health,
+            "storage_engine":
+                None,
+            "authority_effect":
+                "none",
+        }
+
+        print(
+            json.dumps(
+                output,
+                indent=2,
+                sort_keys=True,
+                ensure_ascii=False,
+            )
+        )
+
+        return (
+            0
+            if passed
+            else 1
+        )
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

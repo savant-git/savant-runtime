@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+PALAVER_ROOT="/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver"
+SAVANT_ENV="/root/savant-runtime/.env"
+ROOT_ENV="/root/.env"
+
+if [ -f "$ROOT_ENV" ]; then
+  set -a
+  # shellcheck disable=SC1091
+  source "$ROOT_ENV"
+  set +a
+fi
+
+if [ -f "$SAVANT_ENV" ]; then
+  set -a
+  # shellcheck disable=SC1091
+  source "$SAVANT_ENV"
+  set +a
+fi
+
+COMMAND="${1:-serve}"
+
+case "$COMMAND" in
+  inspect)
+    exec python3 \
+      "$PALAVER_ROOT/runtime/deployment.py" \
+      inspect
+    ;;
+
+  check)
+    exec python3 \
+      "$PALAVER_ROOT/runtime/deployment.py" \
+      check
+    ;;
+
+  integration-inspect)
+    cd "$PALAVER_ROOT"
+    exec python3 \
+      -m runtime.transport_integration \
+      --inspect
+    ;;
+
+  serve)
+    cd "$PALAVER_ROOT"
+    exec python3 \
+      -m runtime.transport_integration
+    ;;
+
+  *)
+    printf '%s\n' \
+      "usage: palaver-enterprise {inspect|check|integration-inspect|serve}" \
+      >&2
+    exit 2
+    ;;
+esac

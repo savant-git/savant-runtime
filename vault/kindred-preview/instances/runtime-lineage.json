@@ -1,0 +1,142 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:runtime/lineage",
+  "deterministic_hash": "242f6b52d8817bbff342f6a7b5d6c8cca672386e6e63066ab4f30171eee3739e",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "runtime/lineage",
+  "kind": "directory",
+  "label": "lineage",
+  "namespace": "preview.kindred",
+  "path": "runtime/lineage",
+  "placement": {
+    "domain": "filesystem",
+    "node": "runtime/lineage",
+    "parent": "runtime",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.f547960ac2c1c867965b",
+    "rank": 30,
+    "slot": "40_runtime",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.29409dcd97625685617d",
+    "lineage.composition.323be15091a58437d62a",
+    "lineage.composition.3df44510ee42bb6a248a",
+    "lineage.composition.72c68336b3c8ac6be490",
+    "lineage.composition.9697d57641a52074bccc",
+    "lineage.composition.b49699f9cdf14582712a",
+    "lineage.composition.e55753283c912c3ddb1e",
+    "lineage.composition.efe5a3daff208fda3829",
+    "lineage.composition.f547960ac2c1c867965b"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:runtime/lineage",
+    "children": [
+      "runtime/lineage/__init__.py",
+      "runtime/lineage/engine.py",
+      "runtime/lineage/cli.py",
+      "runtime/lineage/references.py",
+      "runtime/lineage/registry.py",
+      "runtime/lineage/adapters",
+      "runtime/lineage/projection.py",
+      "runtime/lineage/model.py"
+    ],
+    "daughters": [
+      "runtime/lineage/adapters"
+    ],
+    "dependencies": [],
+    "fathers": [],
+    "id": "runtime/lineage",
+    "kind": "directory",
+    "label": "lineage",
+    "legacy_id": "runtime/lineage",
+    "lineage": [
+      "runtime"
+    ],
+    "metadata": {
+      "canonical_id": "fs:runtime/lineage",
+      "child_modes": {
+        "preserving": [
+          "fs:runtime/lineage/adapters"
+        ],
+        "projecting": [
+          "fs:runtime/lineage/__init__.py",
+          "fs:runtime/lineage/engine.py",
+          "fs:runtime/lineage/cli.py",
+          "fs:runtime/lineage/references.py",
+          "fs:runtime/lineage/registry.py",
+          "fs:runtime/lineage/projection.py",
+          "fs:runtime/lineage/model.py"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:runtime/lineage/__init__.py",
+          "fs:runtime/lineage/engine.py",
+          "fs:runtime/lineage/cli.py",
+          "fs:runtime/lineage/references.py",
+          "fs:runtime/lineage/registry.py",
+          "fs:runtime/lineage/adapters",
+          "fs:runtime/lineage/projection.py",
+          "fs:runtime/lineage/model.py"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:runtime"
+        ]
+      },
+      "projected_id": "runtime/lineage",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "runtime"
+    ],
+    "path": "runtime/lineage",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "runtime/lineage",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.29409dcd97625685617d",
+      "lineage.composition.323be15091a58437d62a",
+      "lineage.composition.3df44510ee42bb6a248a",
+      "lineage.composition.72c68336b3c8ac6be490",
+      "lineage.composition.9697d57641a52074bccc",
+      "lineage.composition.b49699f9cdf14582712a",
+      "lineage.composition.e55753283c912c3ddb1e",
+      "lineage.composition.efe5a3daff208fda3829",
+      "lineage.composition.f547960ac2c1c867965b"
+    ],
+    "size": 12,
+    "sons": [
+      "runtime/lineage/__init__.py",
+      "runtime/lineage/engine.py",
+      "runtime/lineage/cli.py",
+      "runtime/lineage/references.py",
+      "runtime/lineage/registry.py",
+      "runtime/lineage/projection.py",
+      "runtime/lineage/model.py"
+    ]
+  },
+  "state": "active",
+  "synthetic": false
+}

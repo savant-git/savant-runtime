@@ -1,0 +1,118 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:canon",
+  "deterministic_hash": "2a049fde75ae372861d7726e80ca970e81ad834bbdade898203567c4bb115341",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "canon",
+  "kind": "directory",
+  "label": "canon",
+  "namespace": "preview.kindred",
+  "path": "canon",
+  "placement": {
+    "domain": "filesystem",
+    "node": "canon",
+    "parent": "savant-runtime",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.442ac0687b87cf74d35f",
+    "rank": 20,
+    "slot": "20_authority",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.442ac0687b87cf74d35f",
+    "lineage.composition.60de2c2309cc355a9453",
+    "lineage.composition.b2e4d932f0d0e9bcc804",
+    "lineage.composition.c8cc9e5d213b1e90fa7b",
+    "lineage.composition.e579d89fb66db7c6c9a3"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:canon",
+    "children": [
+      "canon/foundation",
+      "canon/palaver",
+      "canon/004_timelines.md.save",
+      "canon/edifices"
+    ],
+    "daughters": [
+      "canon/foundation",
+      "canon/palaver",
+      "canon/edifices"
+    ],
+    "dependencies": [],
+    "fathers": [],
+    "id": "canon",
+    "kind": "directory",
+    "label": "canon",
+    "legacy_id": "canon",
+    "lineage": [
+      "savant-runtime"
+    ],
+    "metadata": {
+      "canonical_id": "fs:canon",
+      "child_modes": {
+        "preserving": [
+          "fs:canon/foundation",
+          "fs:canon/palaver",
+          "fs:canon/edifices"
+        ],
+        "projecting": [
+          "fs:canon/004_timelines.md.save"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:canon/foundation",
+          "fs:canon/palaver",
+          "fs:canon/004_timelines.md.save",
+          "fs:canon/edifices"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:."
+        ]
+      },
+      "projected_id": "canon",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "savant-runtime"
+    ],
+    "path": "canon",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "canon",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.442ac0687b87cf74d35f",
+      "lineage.composition.60de2c2309cc355a9453",
+      "lineage.composition.b2e4d932f0d0e9bcc804",
+      "lineage.composition.c8cc9e5d213b1e90fa7b",
+      "lineage.composition.e579d89fb66db7c6c9a3"
+    ],
+    "size": 12,
+    "sons": [
+      "canon/004_timelines.md.save"
+    ]
+  },
+  "state": "active",
+  "synthetic": false
+}

@@ -1,0 +1,97 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:authority_graph/schemas",
+  "deterministic_hash": "4f368f9cdef5f6ae3fbca9cafc5b7aaf6100b8639b4f7eaae7fb5cae6e3ac76f",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "authority_graph/schemas",
+  "kind": "directory",
+  "label": "schemas",
+  "namespace": "preview.kindred",
+  "path": "authority_graph/schemas",
+  "placement": {
+    "domain": "filesystem",
+    "node": "authority_graph/schemas",
+    "parent": "authority_graph",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.9916e449f82a7701bf3f",
+    "rank": 70,
+    "slot": "20_authority",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.9916e449f82a7701bf3f",
+    "lineage.composition.eb64b489f5a91e2cdcf9"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:authority_graph/schemas",
+    "children": [
+      "authority_graph/schemas/lineage_segue.schema.json"
+    ],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "authority_graph/schemas",
+    "kind": "directory",
+    "label": "schemas",
+    "legacy_id": "authority_graph/schemas",
+    "lineage": [
+      "authority_graph"
+    ],
+    "metadata": {
+      "canonical_id": "fs:authority_graph/schemas",
+      "child_modes": {
+        "projecting": [
+          "fs:authority_graph/schemas/lineage_segue.schema.json"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:authority_graph/schemas/lineage_segue.schema.json"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:authority_graph"
+        ]
+      },
+      "projected_id": "authority_graph/schemas",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "authority_graph"
+    ],
+    "path": "authority_graph/schemas",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "authority_graph/schemas",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.9916e449f82a7701bf3f",
+      "lineage.composition.eb64b489f5a91e2cdcf9"
+    ],
+    "size": 12,
+    "sons": [
+      "authority_graph/schemas/lineage_segue.schema.json"
+    ]
+  },
+  "state": "active",
+  "synthetic": false
+}

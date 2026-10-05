@@ -1,0 +1,192 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import subprocess
+import sys
+from pathlib import Path
+
+
+ROOT = Path("/root/savant-runtime")
+
+PYTHON = (
+    ROOT
+    / "bin"
+    / "identity-quality-python"
+)
+
+MASTERPLAN_BUILD = (
+    ROOT
+    / "bin"
+    / "masterplan-build"
+)
+
+GATE = (
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "enforce_masterplan_gate.py"
+)
+
+
+def execute(
+    command: list[str],
+) -> int:
+    return subprocess.run(
+        command,
+        cwd=str(ROOT),
+        check=False,
+    ).returncode
+
+
+def refresh() -> int:
+    return execute(
+        [
+            str(MASTERPLAN_BUILD),
+            "strict",
+        ]
+    )
+
+
+def run_gate(
+    arguments: list[str],
+    *,
+    rebuild: bool,
+) -> int:
+    if rebuild:
+        status = refresh()
+
+        if status:
+            return status
+
+    return execute(
+        [
+            str(PYTHON),
+            str(GATE),
+            *arguments,
+        ]
+    )
+
+
+def usage() -> int:
+    print(
+        """
+masterplan-gate context
+masterplan-gate refresh-context
+masterplan-gate authorize PATH [PATH ...]
+masterplan-gate refresh-authorize PATH [PATH ...]
+masterplan-gate lease --agent NAME [--ttl-minutes N] PATH [PATH ...]
+masterplan-gate refresh-lease --agent NAME [--ttl-minutes N] PATH [PATH ...]
+masterplan-gate validate
+masterplan-gate revoke
+masterplan-gate status
+"""
+    )
+
+    return 0
+
+
+def main() -> int:
+    arguments = sys.argv[1:]
+
+    if not arguments:
+        return usage()
+
+    command = arguments[0]
+    remaining = arguments[1:]
+
+    if command in {
+        "help",
+        "--help",
+        "-h",
+    }:
+        return usage()
+
+    if command == "context":
+        return run_gate(
+            [
+                "context",
+            ],
+            rebuild=False,
+        )
+
+    if command == "refresh-context":
+        return run_gate(
+            [
+                "context",
+            ],
+            rebuild=True,
+        )
+
+    if command == "authorize":
+        return run_gate(
+            [
+                "authorize",
+                *remaining,
+            ],
+            rebuild=False,
+        )
+
+    if command == "refresh-authorize":
+        return run_gate(
+            [
+                "authorize",
+                *remaining,
+            ],
+            rebuild=True,
+        )
+
+    if command == "lease":
+        return run_gate(
+            [
+                "lease",
+                *remaining,
+            ],
+            rebuild=False,
+        )
+
+    if command == "refresh-lease":
+        return run_gate(
+            [
+                "lease",
+                *remaining,
+            ],
+            rebuild=True,
+        )
+
+    if command == "validate":
+        return run_gate(
+            [
+                "validate",
+            ],
+            rebuild=False,
+        )
+
+    if command == "revoke":
+        return run_gate(
+            [
+                "revoke",
+            ],
+            rebuild=False,
+        )
+
+    if command == "status":
+        return run_gate(
+            [
+                "status",
+            ],
+            rebuild=False,
+        )
+
+    print(
+        f"ERROR: unknown command: {command}",
+        file=sys.stderr,
+    )
+
+    return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

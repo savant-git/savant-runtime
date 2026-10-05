@@ -1,0 +1,54 @@
+{
+  "id": "coda.capabilities",
+  "owner": "coda",
+  "type": "capability_manifest",
+  "status": "active",
+  "singular_purpose": "Perform controlled durable mutation of the Savant filesystem.",
+  "capabilities": [
+    {
+      "id": "filesystem_mutation",
+      "status": "active",
+      "owner": "coda"
+    },
+    {
+      "id": "text_file_replacement",
+      "status": "active",
+      "owner": "coda",
+      "operation": "replace_text"
+    },
+    {
+      "id": "root_confinement",
+      "status": "active",
+      "root": "/root/savant-runtime"
+    },
+    {
+      "id": "protected_path_rejection",
+      "status": "active"
+    },
+    {
+      "id": "optimistic_concurrency",
+      "status": "active",
+      "mechanism": "expected_sha256_digest"
+    },
+    {
+      "id": "atomic_replacement",
+      "status": "active"
+    },
+    {
+      "id": "post_write_digest_verification",
+      "status": "active",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "mutation_receipts",
+      "status": "active",
+      "durable": true
+    },
+    {
+      "id": "palaver_mutation_bridge",
+      "status": "active",
+      "authority_transfer": false
+    }
+  ],
+  "authority_effect": "none"
+}

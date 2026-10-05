@@ -1,0 +1,808 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "5ef25ddb48fbb1fd7de5901a9f5b64462c9316169fee8f042b2efc1522c2be69",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "namespace": "preview.kindred",
+  "node": "runtime/palaver",
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationships": [
+    {
+      "child_profile": "daughter",
+      "domain": "filesystem",
+      "id": "lineage.composition.268c97f13f00aff73bf0",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "runtime",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:runtime",
+        "canonical_target": "fs:runtime/palaver",
+        "continuation": "preserving",
+        "id": "lineage.composition.268c97f13f00aff73bf0",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/runtime/palaver"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "runtime",
+        "status": "active",
+        "symbolic_child_alias": "daughter",
+        "symbolic_parent_alias": "parent",
+        "target": "runtime/palaver",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "runtime/palaver"
+    },
+    {
+      "child_profile": "daughter",
+      "domain": "filesystem",
+      "id": "lineage.composition.27ee18502e5a31835bec",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "runtime/palaver",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:runtime/palaver",
+        "canonical_target": "fs:runtime/palaver/health",
+        "continuation": "preserving",
+        "id": "lineage.composition.27ee18502e5a31835bec",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/runtime/palaver/health"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "runtime/palaver",
+        "status": "active",
+        "symbolic_child_alias": "daughter",
+        "symbolic_parent_alias": "parent",
+        "target": "runtime/palaver/health",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "runtime/palaver/health"
+    },
+    {
+      "child_profile": "daughter",
+      "domain": "filesystem",
+      "id": "lineage.composition.454c60eb3465071000a8",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "runtime/palaver",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:runtime/palaver",
+        "canonical_target": "fs:runtime/palaver/lineage",
+        "continuation": "preserving",
+        "id": "lineage.composition.454c60eb3465071000a8",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/runtime/palaver/lineage"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "runtime/palaver",
+        "status": "active",
+        "symbolic_child_alias": "daughter",
+        "symbolic_parent_alias": "parent",
+        "target": "runtime/palaver/lineage",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "runtime/palaver/lineage"
+    },
+    {
+      "child_profile": "daughter",
+      "domain": "filesystem",
+      "id": "lineage.composition.6630becab7af56bc4c28",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "runtime/palaver",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:runtime/palaver",
+        "canonical_target": "fs:runtime/palaver/observatories",
+        "continuation": "preserving",
+        "id": "lineage.composition.6630becab7af56bc4c28",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/runtime/palaver/observatories"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "runtime/palaver",
+        "status": "active",
+        "symbolic_child_alias": "daughter",
+        "symbolic_parent_alias": "parent",
+        "target": "runtime/palaver/observatories",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "runtime/palaver/observatories"
+    },
+    {
+      "child_profile": "daughter",
+      "domain": "filesystem",
+      "id": "lineage.composition.6af5c8e19762c4a8a2a8",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "runtime/palaver",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:runtime/palaver",
+        "canonical_target": "fs:runtime/palaver/topology",
+        "continuation": "preserving",
+        "id": "lineage.composition.6af5c8e19762c4a8a2a8",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/runtime/palaver/topology"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "runtime/palaver",
+        "status": "active",
+        "symbolic_child_alias": "daughter",
+        "symbolic_parent_alias": "parent",
+        "target": "runtime/palaver/topology",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "runtime/palaver/topology"
+    },
+    {
+      "child_profile": "daughter",
+      "domain": "filesystem",
+      "id": "lineage.composition.82a5fda8dc0481f0701b",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "runtime/palaver",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:runtime/palaver",
+        "canonical_target": "fs:runtime/palaver/investigation",
+        "continuation": "preserving",
+        "id": "lineage.composition.82a5fda8dc0481f0701b",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/runtime/palaver/investigation"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "runtime/palaver",
+        "status": "active",
+        "symbolic_child_alias": "daughter",
+        "symbolic_parent_alias": "parent",
+        "target": "runtime/palaver/investigation",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "runtime/palaver/investigation"
+    },
+    {
+      "child_profile": "daughter",
+      "domain": "filesystem",
+      "id": "lineage.composition.8a1e85aaa10a68e500d0",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "runtime/palaver",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:runtime/palaver",
+        "canonical_target": "fs:runtime/palaver/graph",
+        "continuation": "preserving",
+        "id": "lineage.composition.8a1e85aaa10a68e500d0",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/runtime/palaver/graph"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "runtime/palaver",
+        "status": "active",
+        "symbolic_child_alias": "daughter",
+        "symbolic_parent_alias": "parent",
+        "target": "runtime/palaver/graph",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "runtime/palaver/graph"
+    },
+    {
+      "child_profile": "daughter",
+      "domain": "filesystem",
+      "id": "lineage.composition.8d38b6f6d1ae49080883",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "runtime/palaver",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:runtime/palaver",
+        "canonical_target": "fs:runtime/palaver/schema",
+        "continuation": "preserving",
+        "id": "lineage.composition.8d38b6f6d1ae49080883",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/runtime/palaver/schema"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "runtime/palaver",
+        "status": "active",
+        "symbolic_child_alias": "daughter",
+        "symbolic_parent_alias": "parent",
+        "target": "runtime/palaver/schema",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "runtime/palaver/schema"
+    },
+    {
+      "child_profile": "daughter",
+      "domain": "filesystem",
+      "id": "lineage.composition.8fd6b90f94ec49b8f6a9",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "runtime/palaver",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:runtime/palaver",
+        "canonical_target": "fs:runtime/palaver/contracts",
+        "continuation": "preserving",
+        "id": "lineage.composition.8fd6b90f94ec49b8f6a9",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/runtime/palaver/contracts"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "runtime/palaver",
+        "status": "active",
+        "symbolic_child_alias": "daughter",
+        "symbolic_parent_alias": "parent",
+        "target": "runtime/palaver/contracts",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "runtime/palaver/contracts"
+    },
+    {
+      "child_profile": "daughter",
+      "domain": "filesystem",
+      "id": "lineage.composition.9c0e5b80dda76bd9de2c",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "runtime/palaver",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:runtime/palaver",
+        "canonical_target": "fs:runtime/palaver/registry",
+        "continuation": "preserving",
+        "id": "lineage.composition.9c0e5b80dda76bd9de2c",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/runtime/palaver/registry"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "runtime/palaver",
+        "status": "active",
+        "symbolic_child_alias": "daughter",
+        "symbolic_parent_alias": "parent",
+        "target": "runtime/palaver/registry",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "runtime/palaver/registry"
+    },
+    {
+      "child_profile": "daughter",
+      "domain": "filesystem",
+      "id": "lineage.composition.9c56282e0955e2a7d904",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "runtime/palaver",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:runtime/palaver",
+        "canonical_target": "fs:runtime/palaver/search",
+        "continuation": "preserving",
+        "id": "lineage.composition.9c56282e0955e2a7d904",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/runtime/palaver/search"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "runtime/palaver",
+        "status": "active",
+        "symbolic_child_alias": "daughter",
+        "symbolic_parent_alias": "parent",
+        "target": "runtime/palaver/search",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "runtime/palaver/search"
+    },
+    {
+      "child_profile": "daughter",
+      "domain": "filesystem",
+      "id": "lineage.composition.a8e39971e1e22f4a5eac",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "runtime/palaver",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:runtime/palaver",
+        "canonical_target": "fs:runtime/palaver/fields",
+        "continuation": "preserving",
+        "id": "lineage.composition.a8e39971e1e22f4a5eac",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/runtime/palaver/fields"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "runtime/palaver",
+        "status": "active",
+        "symbolic_child_alias": "daughter",
+        "symbolic_parent_alias": "parent",
+        "target": "runtime/palaver/fields",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "runtime/palaver/fields"
+    },
+    {
+      "child_profile": "daughter",
+      "domain": "filesystem",
+      "id": "lineage.composition.b3429ece682b932aae2a",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "runtime/palaver",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:runtime/palaver",
+        "canonical_target": "fs:runtime/palaver/authority",
+        "continuation": "preserving",
+        "id": "lineage.composition.b3429ece682b932aae2a",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/runtime/palaver/authority"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "runtime/palaver",
+        "status": "active",
+        "symbolic_child_alias": "daughter",
+        "symbolic_parent_alias": "parent",
+        "target": "runtime/palaver/authority",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "runtime/palaver/authority"
+    }
+  ],
+  "schema": "savant.kindred.preview.relationship_projection.v2"
+}

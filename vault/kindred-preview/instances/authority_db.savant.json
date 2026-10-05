@@ -1,0 +1,85 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "authority_db.savant",
+  "deterministic_hash": "a6404157a0675bd789267d45f930239e07a27e452d0f67005ee3c1f0bc40921d",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "authority_db.savant",
+  "kind": "instance",
+  "label": "authority_db.savant",
+  "namespace": "preview.kindred",
+  "path": null,
+  "placement": {
+    "domain": "global",
+    "node": "authority_db.savant",
+    "parent": "runtime.filament.projection_engine",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.4048a8e87b9f165cd3e1",
+    "rank": 10,
+    "slot": "80_children",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.4048a8e87b9f165cd3e1"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "authority_db.savant",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "authority_db.savant",
+    "kind": "instance",
+    "label": "authority_db.savant",
+    "legacy_id": null,
+    "lineage": [
+      "runtime.filament.projection_engine"
+    ],
+    "metadata": {
+      "authority_source_path": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/projections/json/authority_db__savant.json",
+      "canonical_id": "authority_db.savant",
+      "child_modes": {},
+      "child_roles": {},
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "runtime.filament.projection_engine"
+        ]
+      },
+      "path": "ontology/obelisks/segue/authority_db/savant_authority.sqlite",
+      "projected_id": "authority_db.savant",
+      "purpose": "Store authoritative primitives."
+    },
+    "mothers": [],
+    "parents": [
+      "runtime.filament.projection_engine"
+    ],
+    "path": null,
+    "provenance": {
+      "adapter": "authority_document",
+      "created_at": "2026-06-29 05:20:31",
+      "source_files": [
+        "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/projections/json/authority_db__savant.json"
+      ],
+      "updated_at": "2026-06-29 05:20:31"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.4048a8e87b9f165cd3e1"
+    ],
+    "size": 7,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

@@ -1,0 +1,97 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:canon/edifices",
+  "deterministic_hash": "3a7565b8886e235f17e3907d9db0c21c0b405e51ab66c76c66e7f89d667c477d",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "canon/edifices",
+  "kind": "directory",
+  "label": "edifices",
+  "namespace": "preview.kindred",
+  "path": "canon/edifices",
+  "placement": {
+    "domain": "filesystem",
+    "node": "canon/edifices",
+    "parent": "canon",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.e579d89fb66db7c6c9a3",
+    "rank": 30,
+    "slot": "20_authority",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.ccc0536a96683f5cc159",
+    "lineage.composition.e579d89fb66db7c6c9a3"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:canon/edifices",
+    "children": [
+      "canon/edifices/identity_edifice.md"
+    ],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "canon/edifices",
+    "kind": "directory",
+    "label": "edifices",
+    "legacy_id": "canon/edifices",
+    "lineage": [
+      "canon"
+    ],
+    "metadata": {
+      "canonical_id": "fs:canon/edifices",
+      "child_modes": {
+        "projecting": [
+          "fs:canon/edifices/identity_edifice.md"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:canon/edifices/identity_edifice.md"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:canon"
+        ]
+      },
+      "projected_id": "canon/edifices",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "canon"
+    ],
+    "path": "canon/edifices",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "canon/edifices",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.ccc0536a96683f5cc159",
+      "lineage.composition.e579d89fb66db7c6c9a3"
+    ],
+    "size": 12,
+    "sons": [
+      "canon/edifices/identity_edifice.md"
+    ]
+  },
+  "state": "active",
+  "synthetic": false
+}

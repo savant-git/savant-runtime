@@ -1,0 +1,529 @@
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  background: #020407;
+}
+
+body {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  overflow-x: clip;
+}
+
+#root {
+  width: 100%;
+  min-width: 0;
+  overflow-x: clip;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+img,
+svg,
+canvas {
+  max-width: 100%;
+}
+
+.space-scene-shell {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100svh;
+  pointer-events: none;
+}
+
+.space-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+.space-canvas canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.cinematic-interaction-surface {
+  display: none !important;
+}
+
+.cinematic-atmospheric-glass,
+.cinematic-optical-frame,
+.cinematic-mode-transition,
+.cinematic-camera-affordance {
+  pointer-events: none;
+}
+
+.scene-overlay,
+.cinematic-flight-console,
+.cinematic-object-inspector {
+  pointer-events: auto;
+}
+
+main,
+.app-main,
+.site-main {
+  position: relative;
+  z-index: 2;
+}
+
+.hero,
+.chapter,
+.section,
+.mission-section,
+.systems-section,
+.trajectory-section,
+.moon-section,
+.gateway-section,
+.future-section {
+  position: relative;
+  min-width: 0;
+}
+
+@media (
+  max-width: 900px
+) {
+  :root {
+    --mobile-gutter:
+      clamp(
+        18px,
+        5vw,
+        26px
+      );
+
+    --mobile-display:
+      clamp(
+        3.35rem,
+        15vw,
+        5.8rem
+      );
+
+    --mobile-heading:
+      clamp(
+        2.3rem,
+        10vw,
+        4rem
+      );
+  }
+
+  .space-scene-shell {
+    height: 100svh;
+  }
+
+  .cinematic-flight-console {
+    display: none !important;
+  }
+
+  .cinematic-optical-frame {
+    opacity: 0.42;
+  }
+
+  .scene-overlay {
+    top:
+      max(
+        72px,
+        env(
+          safe-area-inset-top
+        )
+      ) !important;
+    right: 16px !important;
+    bottom: auto !important;
+    left: 16px !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+
+  .scene-overlay__telemetry,
+  .scene-overlay__secondary,
+  .scene-overlay__legend,
+  .scene-overlay__reference,
+  .scene-overlay__details,
+  .scene-overlay__coordinates {
+    display: none !important;
+  }
+
+  .cinematic-camera-affordance {
+    right: 16px !important;
+    bottom:
+      calc(
+        18px +
+        env(
+          safe-area-inset-bottom
+        )
+      ) !important;
+    left: auto !important;
+    width: auto !important;
+    max-width:
+      calc(
+        100vw -
+        32px
+      ) !important;
+    opacity: 0.7;
+  }
+
+  .cinematic-object-inspector {
+    top: auto !important;
+    right: 16px !important;
+    bottom:
+      calc(
+        64px +
+        env(
+          safe-area-inset-bottom
+        )
+      ) !important;
+    left: 16px !important;
+    width: auto !important;
+    max-width: none !important;
+    transform: none !important;
+  }
+
+  main,
+  .app-main,
+  .site-main {
+    width: 100%;
+    min-width: 0;
+    overflow: clip;
+  }
+
+  .hero,
+  .chapter,
+  .section,
+  .mission-section,
+  .systems-section,
+  .trajectory-section,
+  .moon-section,
+  .gateway-section,
+  .future-section {
+    width: 100%;
+    max-width: 100%;
+    padding-right:
+      var(
+        --mobile-gutter
+      ) !important;
+    padding-left:
+      var(
+        --mobile-gutter
+      ) !important;
+  }
+
+  .hero {
+    display: flex;
+    min-height: 100svh;
+    flex-direction: column;
+    justify-content: center;
+    padding-top:
+      max(
+        104px,
+        13svh
+      ) !important;
+    padding-bottom:
+      max(
+        72px,
+        9svh
+      ) !important;
+  }
+
+  .hero h1,
+  .hero-title,
+  [class*="hero"]
+    h1 {
+    width: min(
+      100%,
+      8.5ch
+    ) !important;
+    max-width: 8.5ch !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    font-size:
+      var(
+        --mobile-display
+      ) !important;
+    line-height: 0.87 !important;
+    letter-spacing:
+      -0.055em !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+    hyphens: none !important;
+  }
+
+  .hero p,
+  .hero-copy,
+  .hero-description,
+  [class*="hero"]
+    p {
+    width: min(
+      100%,
+      34rem
+    ) !important;
+    max-width: 34rem !important;
+    font-size:
+      clamp(
+        1rem,
+        4vw,
+        1.16rem
+      ) !important;
+    line-height: 1.45 !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+  }
+
+  .hero-actions,
+  .hero-cta,
+  .hero-buttons,
+  [class*="hero"]
+    [class*="action"] {
+    display: flex !important;
+    width: 100%;
+    flex-wrap: wrap !important;
+    align-items: center;
+    gap: 8px 10px !important;
+  }
+
+  .hero-actions a,
+  .hero-actions button,
+  .hero-cta a,
+  .hero-cta button,
+  .hero-buttons a,
+  .hero-buttons button {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    padding:
+      10px 14px !important;
+    white-space: nowrap;
+  }
+
+  .hero-meta,
+  .hero-stats,
+  .hero-features,
+  [class*="hero"]
+    [class*="meta"],
+  [class*="hero"]
+    [class*="feature"] {
+    display: grid !important;
+    width: min(
+      100%,
+      32rem
+    ) !important;
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(
+          0,
+          1fr
+        )
+      ) !important;
+    gap:
+      7px
+      14px !important;
+  }
+
+  .hero-meta > *,
+  .hero-stats > *,
+  .hero-features > * {
+    min-width: 0;
+    font-size:
+      clamp(
+        0.66rem,
+        2.6vw,
+        0.8rem
+      ) !important;
+    line-height: 1.25 !important;
+    overflow-wrap: break-word;
+  }
+
+  .chapter h2,
+  .section h2,
+  .section-title,
+  [class*="section"]
+    h2 {
+    max-width: 11ch !important;
+    font-size:
+      var(
+        --mobile-heading
+      ) !important;
+    line-height: 0.94 !important;
+    letter-spacing:
+      -0.04em !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+  }
+
+  .mission-explorer,
+  [class*="mission-explorer"] {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .mission-explorer__switcher,
+  .mission-switcher,
+  .mission-tabs,
+  [class*="mission"]
+    [class*="switcher"] {
+    display: grid !important;
+    width: 100% !important;
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(
+          0,
+          1fr
+        )
+      ) !important;
+    gap: 6px !important;
+  }
+
+  .mission-explorer__switcher button,
+  .mission-switcher button,
+  .mission-tabs button,
+  [class*="mission"]
+    [class*="switcher"]
+    button {
+    display: grid !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 58px !important;
+    align-content: center;
+    padding:
+      9px
+      10px !important;
+    overflow: hidden;
+    text-align: left !important;
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+    line-height: 1.08 !important;
+  }
+
+  .mission-explorer__switcher
+    button
+    *,
+  .mission-switcher
+    button
+    *,
+  .mission-tabs
+    button
+    * {
+    min-width: 0;
+    max-width: 100%;
+    white-space: normal !important;
+  }
+
+  .mission-explorer__visual,
+  .mission-visual,
+  .trajectory-engine,
+  .system-grid,
+  [class*="mission"]
+    [class*="visual"] {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+}
+
+@media (
+  max-width: 600px
+) {
+  :root {
+    --mobile-gutter:
+      16px;
+  }
+
+  .hero {
+    padding-top:
+      max(
+        96px,
+        12svh
+      ) !important;
+  }
+
+  .hero h1,
+  .hero-title,
+  [class*="hero"]
+    h1 {
+    font-size:
+      clamp(
+        3rem,
+        15.5vw,
+        4.5rem
+      ) !important;
+  }
+
+  .mission-explorer__switcher,
+  .mission-switcher,
+  .mission-tabs,
+  [class*="mission"]
+    [class*="switcher"] {
+    grid-template-columns:
+      1fr !important;
+  }
+
+  .mission-explorer__switcher button,
+  .mission-switcher button,
+  .mission-tabs button {
+    min-height: 50px !important;
+  }
+
+  .cinematic-object-inspector__target {
+    display: none !important;
+  }
+
+  .cinematic-object-inspector__data {
+    display: grid !important;
+    grid-template-columns:
+      1fr !important;
+  }
+
+  .cinematic-object-inspector__data
+    > div {
+    display: grid !important;
+    grid-template-columns:
+      72px
+      minmax(
+        0,
+        1fr
+      ) !important;
+  }
+}
+
+@media (
+  max-height: 720px
+) and (
+  max-width: 900px
+) {
+  .cinematic-camera-affordance {
+    display: none !important;
+  }
+}
+
+@media (
+  prefers-reduced-motion:
+    reduce
+) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior:
+      auto !important;
+  }
+}

@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>Savant / Niche</title>
+<link rel="stylesheet" href="/assets/niche.css">
+</head>
+<body>
+<a class="skip" href="#workspace">Skip to workspace</a>
+
+<div id="app" class="app" data-view="execute">
+    <header class="topbar">
+        <div class="brand">
+            <span class="brand-mark" aria-hidden="true"></span>
+            <div>
+                <strong>SAVANT / NICHE</strong>
+                <span id="connectionLabel">CONNECTING</span>
+            </div>
+        </div>
+
+        <nav class="nav" aria-label="Niche views">
+            <button data-view-target="execute" class="active">Execute</button>
+            <button data-view-target="flow">Flow</button>
+            <button data-view-target="constellation">Constellation</button>
+            <button data-view-target="objectives">Objectives</button>
+            <button data-view-target="timeline">Timeline</button>
+            <button data-view-target="evidence">Evidence</button>
+            <button data-view-target="living">Living</button>
+            <button data-view-target="history">History</button>
+        </nav>
+
+        <div class="top-actions">
+            <button id="searchButton" class="icon-button" aria-label="Search">⌕</button>
+            <button id="paletteButton" class="key-button" aria-label="Open command palette">
+                <span>Command</span><kbd>⌘K</kbd>
+            </button>
+        </div>
+    </header>
+
+    <div class="statusrail" aria-label="System status">
+        <span><i id="taskHealthDot"></i><b id="taskHealth">task engine</b></span>
+        <span><i id="livingHealthDot"></i><b id="livingHealth">living fabric</b></span>
+        <span id="statusReady">ready 0</span>
+        <span id="statusBlocked">blocked 0</span>
+        <span id="statusActive">active 0</span>
+        <span id="statusComplete">complete 0</span>
+        <span id="lastRefresh">awaiting state</span>
+    </div>
+
+    <main id="workspace" tabindex="-1">
+        <section class="surface active" data-surface="execute">
+            <div class="execute-grid">
+                <section class="execution-core">
+                    <div class="eyebrow">EXECUTABLE FRONTIER</div>
+                    <div class="frontier-heading">
+                        <div>
+                            <h1 id="nextTitle">Resolving next legitimate action…</h1>
+                            <p id="nextPurpose">Niche is reading authoritative task state.</p>
+                        </div>
+                        <span id="nextPriority" class="priority">UNKNOWN</span>
+                    </div>
+
+                    <div id="ancestry" class="ancestry"></div>
+
+                    <div class="execute-action">
+                        <button id="startNext" class="start-next" disabled>
+                            <span class="start-symbol">▶</span>
+                            <span>
+                                <strong>START NEXT</strong>
+                                <small id="startHint">waiting for task state</small>
+                            </span>
+                        </button>
+
+                        <div class="execute-secondary">
+                            <button id="showWhy">Show why</button>
+                            <button id="showDependencies">Dependencies</button>
+                            <button id="showImpact">Impact</button>
+                            <button id="showEvidence">Evidence</button>
+                        </div>
+                    </div>
+
+                    <div class="frontier-map">
+                        <div class="frontier-labels">
+                            <span>ESTABLISHED</span>
+                            <span>EXECUTABLE FRONTIER</span>
+                            <span>DEPENDENT FUTURE</span>
+                        </div>
+                        <div id="frontierTrack" class="frontier-track"></div>
+                    </div>
+                </section>
+
+                <aside class="oracle">
+                    <div class="panel-heading">
+                        <div>
+                            <span class="eyebrow">PRIORITY ORACLE</span>
+                            <h2>Why this task now?</h2>
+                        </div>
+                        <span class="deterministic">DETERMINISTIC</span>
+                    </div>
+                    <div id="oracleFactors" class="oracle-factors"></div>
+                    <div id="oracleExplanation" class="oracle-explanation">
+                        Waiting for task state.
+                    </div>
+                </aside>
+
+                <section class="peripheral">
+                    <article class="metric-panel">
+                        <span class="eyebrow">EXECUTION STATE</span>
+                        <div id="executionMetrics" class="metric-grid"></div>
+                    </article>
+
+                    <article class="metric-panel">
+                        <span class="eyebrow">BLOCKER RADAR</span>
+                        <div id="blockerRadar" class="compact-list"></div>
+                    </article>
+
+                    <article class="metric-panel">
+                        <span class="eyebrow">RECENT CHANGE</span>
+                        <div id="recentChanges" class="compact-list"></div>
+                    </article>
+                </section>
+            </div>
+        </section>
+
+        <section class="surface" data-surface="flow">
+            <div class="surface-heading">
+                <div>
+                    <span class="eyebrow">FLOW</span>
+                    <h1>Execution topology</h1>
+                </div>
+                <div id="filterTokens" class="filter-tokens"></div>
+            </div>
+            <div id="flowBoard" class="flow-board"></div>
+        </section>
+
+        <section class="surface" data-surface="constellation">
+            <div class="surface-heading">
+                <div>
+                    <span class="eyebrow">CONSTELLATION</span>
+                    <h1>Causal field</h1>
+                </div>
+                <div class="view-tools">
+                    <button id="fitGraph">Fit</button>
+                    <button id="resetGraph">Reset</button>
+                </div>
+            </div>
+            <div id="graphStage" class="graph-stage">
+                <svg id="graphEdges" aria-hidden="true"></svg>
+                <div id="graphNodes" class="graph-nodes"></div>
+            </div>
+        </section>
+
+        <section class="surface" data-surface="objectives">
+            <div class="surface-heading">
+                <div>
+                    <span class="eyebrow">OBJECTIVES</span>
+                    <h1>Work by outcome</h1>
+                </div>
+            </div>
+            <div id="objectiveGrid" class="objective-grid"></div>
+        </section>
+
+        <section class="surface" data-surface="timeline">
+            <div class="surface-heading">
+                <div>
+                    <span class="eyebrow">TIMELINE</span>
+                    <h1>Execution chronology</h1>
+                </div>
+            </div>
+            <div id="timeline" class="timeline"></div>
+        </section>
+
+        <section class="surface" data-surface="evidence">
+            <div class="surface-heading">
+                <div>
+                    <span class="eyebrow">EVIDENCE</span>
+                    <h1>Completion gates</h1>
+                </div>
+            </div>
+            <div id="evidenceGrid" class="evidence-grid"></div>
+        </section>
+
+        <section class="surface" data-surface="living">
+            <div class="surface-heading">
+                <div>
+                    <span class="eyebrow">LIVING OBSERVATORY</span>
+                    <h1>Savant living fabric</h1>
+                </div>
+                <div id="fabricMeta" class="fabric-meta"></div>
+            </div>
+            <div id="livingSummary" class="living-summary"></div>
+            <div id="livingGrid" class="living-grid"></div>
+        </section>
+
+        <section class="surface" data-surface="history">
+            <div class="surface-heading">
+                <div>
+                    <span class="eyebrow">HISTORY</span>
+                    <h1>Immutable execution record</h1>
+                </div>
+            </div>
+            <div id="historyList" class="history-list"></div>
+        </section>
+    </main>
+
+    <aside id="inspector" class="inspector" aria-hidden="true">
+        <div class="inspector-head">
+            <div>
+                <span class="eyebrow">TASK INSPECTOR</span>
+                <h2 id="inspectorTitle">Task</h2>
+            </div>
+            <button id="closeInspector" class="icon-button" aria-label="Close inspector">×</button>
+        </div>
+        <div id="inspectorBody" class="inspector-body"></div>
+    </aside>
+
+    <div id="palette" class="palette-shell" hidden>
+        <div class="palette" role="dialog" aria-modal="true" aria-labelledby="paletteTitle">
+            <div class="palette-input">
+                <span>⌕</span>
+                <input id="paletteInput" autocomplete="off" spellcheck="false"
+                       placeholder="Search tasks or run a command…">
+                <kbd>ESC</kbd>
+            </div>
+            <div id="paletteResults" class="palette-results"></div>
+            <div class="palette-footer">
+                <span>↑↓ navigate</span>
+                <span>↵ select</span>
+                <span>esc close</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="transitionDialog" class="dialog-shell" hidden>
+        <form id="transitionForm" class="dialog">
+            <span class="eyebrow">AUTHORITATIVE TRANSITION</span>
+            <h2 id="transitionTitle">Transition task</h2>
+            <p id="transitionDescription"></p>
+
+            <label>
+                State
+                <select id="transitionState">
+                    <option value="active">active</option>
+                    <option value="blocked">blocked</option>
+                    <option value="deferred">deferred</option>
+                    <option value="complete">complete</option>
+                </select>
+            </label>
+
+            <label>
+                Reason
+                <textarea id="transitionReason" rows="3"
+                          placeholder="Explicit reason for this transition"></textarea>
+            </label>
+
+            <label>
+                Receipts
+                <textarea id="transitionReceipts" rows="3"
+                          placeholder="One evidence receipt per line"></textarea>
+            </label>
+
+            <div id="consequencePreview" class="consequence-preview"></div>
+
+            <div class="dialog-actions">
+                <button type="button" id="cancelTransition">Cancel</button>
+                <button type="submit" class="confirm">Apply transition</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="toastRegion" class="toasts" aria-live="polite"></div>
+</div>
+
+<script src="/assets/niche.js"></script>
+</body>
+</html>

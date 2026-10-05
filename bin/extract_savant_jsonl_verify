@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="/root/savant-runtime"
+SCRIPT="${ROOT}/bin/extract_savant_jsonl.py"
+LAUNCHER="${ROOT}/bin/extract_savant_jsonl"
+GLOBAL="/usr/local/bin/extract_savant_jsonl"
+
+python3 -m py_compile \
+  "${SCRIPT}"
+
+"${LAUNCHER}" \
+  --self-test
+
+"${GLOBAL}" \
+  --version
+
+printf '%s\n' \
+  'EXTRACT_SAVANT_JSONL: valid'

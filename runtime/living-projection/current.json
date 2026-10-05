@@ -1,0 +1,5473 @@
+{
+  "authority_effect": "none",
+  "capabilities": {
+    "assurance_projection": true,
+    "atomic_publication": true,
+    "authority_separation": true,
+    "blake3_when_available": true,
+    "canon_projection": true,
+    "change_reason_surface": true,
+    "content_hashing": true,
+    "context_projection": true,
+    "dependency_projection": true,
+    "deterministic_projection": true,
+    "evidence_classification": true,
+    "evolution_projection": true,
+    "failure_isolation": true,
+    "freshness_tracking": true,
+    "governance_stream_projection": true,
+    "health_projection": true,
+    "implementation_projection": true,
+    "incremental_surface_diff": true,
+    "last_known_projection": true,
+    "masterplan_projection": true,
+    "orjson_when_available": true,
+    "projection_history": true,
+    "provenance_projection": true,
+    "reverse_dependency_projection": true,
+    "secret_values_serialized": false,
+    "source_owner_preservation": true,
+    "staleness_detection": true,
+    "structure_projection": true,
+    "temporal_sequence": true
+  },
+  "change_count": 19,
+  "changed_surfaces": [
+    "assurance",
+    "canon",
+    "compatibility",
+    "context",
+    "decisions",
+    "dependencies",
+    "enhancements",
+    "evidence",
+    "evolution",
+    "implementation",
+    "invariants",
+    "masterplan",
+    "permissions",
+    "provenance",
+    "risks",
+    "rules",
+    "structure",
+    "terminology",
+    "unknowns"
+  ],
+  "filesystem_presence_establishes_authority": false,
+  "generated_at_unix_ns": 1788485026655938305,
+  "governance": {
+    "conflict_count": 0,
+    "current_records": 158,
+    "digest": "d5e83c40da51256fa235a69e71ee6c74c2e762770cdd80a739e786c6d567e1d1",
+    "ledger_events": 158,
+    "ledger_present": true
+  },
+  "living_state": {
+    "healthy": true,
+    "sequence": 26454,
+    "snapshot_hash": "60af8746fb80ce645c2945feb542321d021649047bf315b90f57c1f9c093cfb2"
+  },
+  "owners": {
+    "assurance": "living-state",
+    "canon": "lore",
+    "compatibility": "living-governance",
+    "context": "projection",
+    "decisions": "living-governance",
+    "dependencies": "living-governance",
+    "enhancements": "living-governance",
+    "evidence": "living-state",
+    "evolution": "projection",
+    "implementation": "living-state",
+    "invariants": "living-governance",
+    "masterplan": "niche",
+    "permissions": "living-governance",
+    "provenance": "living-governance",
+    "risks": "living-governance",
+    "rules": "living-governance",
+    "structure": "scyon",
+    "terminology": "living-governance",
+    "unknowns": "living-governance"
+  },
+  "previous_projection_hash": null,
+  "projection_hash": "3e7080acc87eb57ad1f22d194949dccb5bb6d7d72b5dee40fb6ac23bc3941246",
+  "projection_only": true,
+  "schema": "savant.living-projection.v1",
+  "sequence": 1,
+  "single_projection_fabric": true,
+  "source_authority_preserved": true,
+  "sources": {
+    "governance_graph": {
+      "authority_effect": "none",
+      "freshness": {
+        "age_seconds": 426051.427800738,
+        "state": "stale"
+      },
+      "mtime_ns": 1788058975255714440,
+      "path": "/root/savant-runtime/canon-system/projections/living/graph.json",
+      "present": true,
+      "size": 22579
+    },
+    "governance_snapshot": {
+      "authority_effect": "none",
+      "freshness": {
+        "age_seconds": 426051.42979946,
+        "state": "stale"
+      },
+      "mtime_ns": 1788058975253714416,
+      "path": "/root/savant-runtime/canon-system/projections/living/snapshot.json",
+      "present": true,
+      "size": 119673
+    },
+    "governance_status": {
+      "authority_effect": "none",
+      "freshness": {
+        "age_seconds": 426051.42679747,
+        "state": "stale"
+      },
+      "mtime_ns": 1788058975256714452,
+      "path": "/root/savant-runtime/canon-system/projections/living/status.json",
+      "present": true,
+      "size": 614
+    },
+    "living_state": {
+      "authority_effect": "none",
+      "freshness": {
+        "age_seconds": 1.054236411,
+        "state": "hot"
+      },
+      "mtime_ns": 1788485025629266584,
+      "path": "/root/savant-runtime/runtime/living-state/current.json",
+      "present": true,
+      "size": 4916473
+    },
+    "living_state_health": {
+      "authority_effect": "none",
+      "freshness": {
+        "age_seconds": 1.048243014,
+        "state": "hot"
+      },
+      "mtime_ns": 1788485025635266654,
+      "path": "/root/savant-runtime/runtime/living-state/health.json",
+      "present": true,
+      "size": 262
+    }
+  },
+  "surface_count": 19,
+  "surface_digests": {
+    "assurance": "d677bd71c6859b559d70165ad20215842e1639159fb46ac85bd8e7f006f9deb4",
+    "canon": "5cf5196348d7ab499027b0eed977027d6b63f3999a43a39f529083c45d36c9be",
+    "compatibility": "adcd35fe87ed6575231ba53042127164126c4e6c74f065f4cbfe1f980ebe4f63",
+    "context": "fe00446e1ff5324d3a9e3bb86783dcf96cff1316afdb0ad5fefb03a586ba60b3",
+    "decisions": "14d3f96ecb02f075aec9b896dcd9619f138a68fd280ada0b1f03d1c3e082494c",
+    "dependencies": "59c4d4cbcdd271a97255e017ad742b96b5a9d345207ddb74b061ff863f00bb93",
+    "enhancements": "97451d4e842399f8b5f664b5464f05c07d220b98b58aa4184208e346ccb717f4",
+    "evidence": "6f4ecf6d9555f5b0c80953d4ec78d09506ceb984a48927643a68eeaa47895d10",
+    "evolution": "942aa3bbdc2c53546af7782fa1022a810cf119df9dd2be5d26cd2dc92158a9e3",
+    "implementation": "51d7ce0bbca2cb35f709fff89aab619e6465aaffabd192f8d90726a3e3a61260",
+    "invariants": "277ecd7487960b47fe27e6ee55b54a62fc6821895eac86218634377b631ebb6c",
+    "masterplan": "f0cfe0351d97d2d1d60edead2428935d90dbc83f2c34012a391ba7c100ca97d0",
+    "permissions": "0ff8298bbb2479717fc6c3bf0c8ab33c3cd0c46d7a0190d1879b7b2f8442a7ed",
+    "provenance": "6f271384d2b9c709471d3712ed84a206009609e985853568fb701728eb2cc8e9",
+    "risks": "deeea62af6c309eee4201e26e6d03692a74a1169fa7d04d9ab975dbcc3d87d74",
+    "rules": "27150bbfe75c607117b23fbcc2cac66738c0258933626a222b2c036087832498",
+    "structure": "bfd463ffa7315772f9d9f90e03823af4dc24d41362745bfb9b53a6449e673180",
+    "terminology": "66ca6a66758d92572366a4693dbc8c73ddf63a757ad0482e02198f195699d12d",
+    "unknowns": "67e482233bc1558327ac0e28e0766a4c0f643d0e246929d95d77f9f8aa8d3b6e"
+  },
+  "surfaces": {
+    "assurance": {
+      "authority_effect": "none",
+      "capabilities": {
+        "atomic_snapshots": true,
+        "blake3": true,
+        "event_driven_watch": true,
+        "hash_chain": true,
+        "orjson": true,
+        "psutil": true,
+        "secret_values_serialized": false,
+        "sqlite_open_mode": "read_only"
+      },
+      "delta": {
+        "added": [
+          "runtime/living_projection.py"
+        ],
+        "added_count": 1,
+        "changed": [
+          "audit/fs_compiler/db/savant_fs_compiler.sqlite-shm",
+          "ontology/obelisks/segue/authority_db/savant_authority.sqlite-shm",
+          "runtime/niche/tasks.sqlite3-shm",
+          "runtime/scyon/integration-check.sqlite3-shm",
+          "runtime/scyon/state/living-canon.sqlite3-shm",
+          "runtime/scyon/state/living-structure-selftest.sqlite3-shm",
+          "runtime/scyon/state/living-structure.sqlite3-shm"
+        ],
+        "changed_count": 7,
+        "deleted": [
+          "runtime/.living_projection.py.swp"
+        ],
+        "deleted_count": 1
+      },
+      "filesystem": {
+        "bytes": 16694552092,
+        "evidence_classes": {
+          "authority_candidate": 1177,
+          "backup_evidence": 398,
+          "implementation_evidence": 13204,
+          "imported_or_historical_evidence": 48,
+          "live_state_projection": 4,
+          "migration_evidence": 439,
+          "runtime_projection_or_state": 794,
+          "vault_evidence": 18888
+        },
+        "failure_count": 0,
+        "files": 34952,
+        "source_candidates": 32996
+      },
+      "healthy": true,
+      "id": "living:assurance",
+      "listening_tcp_count": 17,
+      "owner": "living-state",
+      "previous_snapshot_hash": "1c29368e75253a3ecf8c67b5eec128a4b3edeb194d0fecfe724529125947a918",
+      "process_count": 10,
+      "projection_only": true,
+      "schema": "savant.living-projection.assurance.v1",
+      "sequence": 26454,
+      "services": {
+        "active": 4,
+        "known": 5
+      },
+      "snapshot_hash": "60af8746fb80ce645c2945feb542321d021649047bf315b90f57c1f9c093cfb2"
+    },
+    "canon": {
+      "authority_effect": "none",
+      "digest": "42b95c3b9c13b3aea0189981b27caf6b9990d2f41fb9fc8e1d930467ecd40857",
+      "filesystem_presence_establishes_authority": false,
+      "id": "living:canon",
+      "note": "filesystem observation only; canon authority remains with its owner",
+      "owner": "lore",
+      "projection_only": true,
+      "schema": "savant.living-projection.canon.v1",
+      "sources": [
+        {
+          "authority_effect": "none",
+          "bytes": 446190,
+          "directories": 8,
+          "files": 59,
+          "newest_mtime_ns": 1788058975256714452,
+          "path": "/root/savant-runtime/canon-system/projections",
+          "present": true
+        },
+        {
+          "authority_effect": "none",
+          "bytes": 307533,
+          "directories": 7,
+          "files": 40,
+          "newest_mtime_ns": 1788058580760020216,
+          "path": "/root/savant-runtime/canon-system/authority",
+          "present": true
+        }
+      ]
+    },
+    "compatibility": {
+      "authority": {
+        "current_user_directive": 3
+      },
+      "authority_effect": "none",
+      "conflict_count": 0,
+      "digest": "5ebe42dbfbdf821171b0fcb8002f7f3c7b6299ba753010c5ca8f6223448ae2db",
+      "governance_digest": "d5e83c40da51256fa235a69e71ee6c74c2e762770cdd80a739e786c6d567e1d1",
+      "id": "living:compatibility",
+      "kind": "compatibility",
+      "owner": "living-governance",
+      "projection_only": true,
+      "provenance": {
+        "unspecified": 3
+      },
+      "record_count": 3,
+      "records": [
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "compatibility.palaver-bootstrap",
+          "priority": 1,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "compatibility",
+          "supersedes": [],
+          "text": "palaver canonical bootstrap and verified compatibility entrypoints must continue to function unless explicitly superseded.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "compatibility.provider-adapters",
+          "priority": 2,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "compatibility",
+          "supersedes": [],
+          "text": "existing dedicated opus provider adapters remain valid while universal provider architecture extends coverage.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "compatibility.projections",
+          "priority": 3,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "compatibility",
+          "supersedes": [],
+          "text": "existing consumers of projected documents may be supported through compatibility projections without promoting those documents to authority.",
+          "version": 1
+        }
+      ],
+      "schema": "savant.living-projection.stream.v1"
+    },
+    "context": {
+      "authority_effect": "none",
+      "digest": "4c170ef40354ba7a91dcc0232818c276d7bdaa1b39749a3477d2abb51d98eed6",
+      "id": "living:context",
+      "identifiers": [
+        "compatibility.palaver-bootstrap",
+        "compatibility.projections",
+        "compatibility.provider-adapters",
+        "decision.complete-files",
+        "decision.instance-first",
+        "decision.kindred",
+        "decision.living-governance",
+        "decision.lowercase",
+        "decision.minimum-validation",
+        "decision.production-first",
+        "decision.projection",
+        "decision.root",
+        "decision.supersession",
+        "enhancement.01",
+        "enhancement.02",
+        "enhancement.03",
+        "enhancement.04",
+        "enhancement.05",
+        "enhancement.06",
+        "enhancement.07",
+        "enhancement.08",
+        "enhancement.09",
+        "enhancement.10",
+        "enhancement.11",
+        "enhancement.12",
+        "enhancement.13",
+        "enhancement.14",
+        "enhancement.15",
+        "enhancement.16",
+        "enhancement.17",
+        "enhancement.18",
+        "enhancement.19",
+        "enhancement.20",
+        "enhancement.21",
+        "enhancement.22",
+        "enhancement.23",
+        "enhancement.24",
+        "enhancement.25",
+        "enhancement.26",
+        "enhancement.27",
+        "enhancement.28",
+        "invariant.authority",
+        "invariant.compatibility",
+        "invariant.dependencies",
+        "invariant.determinism",
+        "invariant.history",
+        "invariant.identity",
+        "invariant.kindred",
+        "invariant.lineage",
+        "invariant.lowercase",
+        "invariant.no-dead-end",
+        "invariant.no-duplicate-authority",
+        "invariant.no-secret-projection",
+        "invariant.non-destructive",
+        "invariant.projection-rebuild",
+        "invariant.provenance",
+        "invariant.task-bounds",
+        "invariant.unknown-preserved",
+        "invariant.validation-evidence",
+        "masterplan.01",
+        "masterplan.02",
+        "masterplan.03",
+        "masterplan.04",
+        "masterplan.05",
+        "masterplan.06",
+        "masterplan.07",
+        "masterplan.08",
+        "masterplan.09",
+        "masterplan.10",
+        "permission.adapter",
+        "permission.archive",
+        "permission.compose",
+        "permission.extend",
+        "permission.external-library",
+        "permission.future-provider",
+        "permission.local-state",
+        "permission.optimize",
+        "permission.projection-delete",
+        "permission.provisional",
+        "permission.supersede",
+        "permission.unknown",
+        "risk.duplicate-authority",
+        "risk.historical-contamination",
+        "risk.overvalidation",
+        "risk.projection-drift",
+        "rule.authority.before-inference",
+        "rule.authority.conflict",
+        "rule.authority.precedence",
+        "rule.compatibility.explicit",
+        "rule.compatibility.living",
+        "rule.data.non-destructive",
+        "rule.decision.immutable-history",
+        "rule.decision.living",
+        "rule.dependencies.external",
+        "rule.dependencies.native-first",
+        "rule.dependencies.transparent",
+        "rule.enhancement.evidence",
+        "rule.files.absolute-path",
+        "rule.files.complete",
+        "rule.files.nano",
+        "rule.files.no-heredoc",
+        "rule.graph.addressable",
+        "rule.history.reconstructable",
+        "rule.implementation.no-regression",
+        "rule.implementation.preserve",
+        "rule.inspection.minimum",
+        "rule.lineage.required",
+        "rule.masterplan.living",
+        "rule.modularity.composition",
+        "rule.modularity.instance-first",
+        "rule.modularity.no-dead-end",
+        "rule.naming.kindred",
+        "rule.naming.lowercase",
+        "rule.production.first",
+        "rule.projection.deterministic",
+        "rule.projection.non-authoritative",
+        "rule.response.blocker",
+        "rule.risk.living",
+        "rule.rules.current-user",
+        "rule.rules.no-silent-weakening",
+        "rule.rules.not-markdown-only",
+        "rule.rules.permissions",
+        "rule.rules.scope",
+        "rule.runtime.projection-not-storage",
+        "rule.runtime.root",
+        "rule.runtime.single-authority",
+        "rule.scope.no-expansion",
+        "rule.security.authority-separation",
+        "rule.security.credentials",
+        "rule.structure.living",
+        "rule.task.finite",
+        "rule.terminology.living",
+        "rule.truth.no-invention",
+        "rule.truth.unknown",
+        "rule.unknown.living",
+        "rule.validation.minimum",
+        "rule.validation.no-fake-success",
+        "structure.authority",
+        "structure.coda",
+        "structure.constitution",
+        "structure.envoy",
+        "structure.fluid-canon",
+        "structure.kindred",
+        "structure.living-governance",
+        "structure.niche",
+        "structure.opus",
+        "structure.palaver",
+        "structure.reality",
+        "structure.scrybe",
+        "term.authority",
+        "term.kindred",
+        "term.living-engine",
+        "term.projection",
+        "term.supersession",
+        "term.unknown",
+        "unknown.current-all-runtime-dependents",
+        "unknown.current-full-authority-graph",
+        "unknown.unverified-historical-rules"
+      ],
+      "owner": "projection",
+      "projection_only": true,
+      "record_count": 158,
+      "schema": "savant.living-projection.context.v1",
+      "streams": [
+        "compatibility",
+        "decisions",
+        "enhancements",
+        "invariants",
+        "masterplan",
+        "permissions",
+        "risks",
+        "rules",
+        "structure",
+        "terminology",
+        "unknowns"
+      ]
+    },
+    "decisions": {
+      "authority": {
+        "current_user_directive": 10
+      },
+      "authority_effect": "none",
+      "conflict_count": 0,
+      "digest": "0b92d436f64e048eda85e2b555845a1898364f93f4a6959a62e9eb585e2f7d3a",
+      "governance_digest": "d5e83c40da51256fa235a69e71ee6c74c2e762770cdd80a739e786c6d567e1d1",
+      "id": "living:decisions",
+      "kind": "decisions",
+      "owner": "living-governance",
+      "projection_only": true,
+      "provenance": {
+        "unspecified": 10
+      },
+      "record_count": 10,
+      "records": [
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "decision.root",
+          "priority": 1,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "decisions",
+          "supersedes": [],
+          "text": "the default implementation root is /root/savant-runtime.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "decision.kindred",
+          "priority": 2,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "decisions",
+          "supersedes": [],
+          "text": "kindred is the canonical relationship-methodology term.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "decision.production-first",
+          "priority": 3,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "decisions",
+          "supersedes": [],
+          "text": "production-first execution with mandatory inspection only is the default implementation methodology.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "decision.minimum-validation",
+          "priority": 4,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "decisions",
+          "supersedes": [],
+          "text": "minimum sufficient validation is the default validation methodology.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "decision.instance-first",
+          "priority": 5,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "decisions",
+          "supersedes": [],
+          "text": "instances and typed segues are primary reusable implementation primitives.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "decision.projection",
+          "priority": 6,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "decisions",
+          "supersedes": [],
+          "text": "derived documents and views are projections and do not independently own authority.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "decision.supersession",
+          "priority": 7,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "decisions",
+          "supersedes": [],
+          "text": "authoritative evolution uses immutable historical records and supersession.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "decision.lowercase",
+          "priority": 8,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "decisions",
+          "supersedes": [],
+          "text": "new savant-owned terminology and paths default to lowercase.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "decision.complete-files",
+          "priority": 9,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "decisions",
+          "supersedes": [],
+          "text": "user-facing technical file replacements are delivered as complete nano files.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "decision.living-governance",
+          "priority": 10,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "decisions",
+          "supersedes": [],
+          "text": "rules, permissions, invariants, structure, masterplan, decisions, unknowns, terminology, compatibility, risk, milestones, dependencies, and enhancements share one living governance mechanism rather than separate duplicate engines.",
+          "version": 1
+        }
+      ],
+      "schema": "savant.living-projection.stream.v1"
+    },
+    "dependencies": {
+      "authority_effect": "none",
+      "edges": 0,
+      "id": "living:dependencies",
+      "nodes": 158,
+      "owner": "living-governance",
+      "projection_only": true,
+      "records": {
+        "edges": [],
+        "nodes": [
+          {
+            "authority": "current_user_directive",
+            "id": "compatibility.palaver-bootstrap",
+            "stream": "compatibility",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "compatibility.projections",
+            "stream": "compatibility",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "compatibility.provider-adapters",
+            "stream": "compatibility",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "decision.complete-files",
+            "stream": "decisions",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "decision.instance-first",
+            "stream": "decisions",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "decision.kindred",
+            "stream": "decisions",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "decision.living-governance",
+            "stream": "decisions",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "decision.lowercase",
+            "stream": "decisions",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "decision.minimum-validation",
+            "stream": "decisions",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "decision.production-first",
+            "stream": "decisions",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "decision.projection",
+            "stream": "decisions",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "decision.root",
+            "stream": "decisions",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "decision.supersession",
+            "stream": "decisions",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "enhancement.01",
+            "stream": "enhancements",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "enhancement.02",
+            "stream": "enhancements",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "enhancement.03",
+            "stream": "enhancements",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "enhancement.04",
+            "stream": "enhancements",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "enhancement.05",
+            "stream": "enhancements",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "enhancement.06",
+            "stream": "enhancements",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "enhancement.07",
+            "stream": "enhancements",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "enhancement.08",
+            "stream": "enhancements",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "enhancement.09",
+            "stream": "enhancements",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "enhancement.10",
+            "stream": "enhancements",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "enhancement.11",
+            "stream": "enhancements",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "enhancement.12",
+            "stream": "enhancements",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "enhancement.13",
+            "stream": "enhancements",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "enhancement.14",
+            "stream": "enhancements",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "enhancement.15",
+            "stream": "enhancements",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "enhancement.16",
+            "stream": "enhancements",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "enhancement.17",
+            "stream": "enhancements",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "enhancement.18",
+            "stream": "enhancements",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "enhancement.19",
+            "stream": "enhancements",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "enhancement.20",
+            "stream": "enhancements",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "enhancement.21",
+            "stream": "enhancements",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "enhancement.22",
+            "stream": "enhancements",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "enhancement.23",
+            "stream": "enhancements",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "enhancement.24",
+            "stream": "enhancements",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "enhancement.25",
+            "stream": "enhancements",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "enhancement.26",
+            "stream": "enhancements",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "enhancement.27",
+            "stream": "enhancements",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "enhancement.28",
+            "stream": "enhancements",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "invariant.authority",
+            "stream": "invariants",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "invariant.compatibility",
+            "stream": "invariants",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "invariant.dependencies",
+            "stream": "invariants",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "invariant.determinism",
+            "stream": "invariants",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "invariant.history",
+            "stream": "invariants",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "invariant.identity",
+            "stream": "invariants",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "invariant.kindred",
+            "stream": "invariants",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "invariant.lineage",
+            "stream": "invariants",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "invariant.lowercase",
+            "stream": "invariants",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "invariant.no-dead-end",
+            "stream": "invariants",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "invariant.no-duplicate-authority",
+            "stream": "invariants",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "invariant.no-secret-projection",
+            "stream": "invariants",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "invariant.non-destructive",
+            "stream": "invariants",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "invariant.projection-rebuild",
+            "stream": "invariants",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "invariant.provenance",
+            "stream": "invariants",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "invariant.task-bounds",
+            "stream": "invariants",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "invariant.unknown-preserved",
+            "stream": "invariants",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "invariant.validation-evidence",
+            "stream": "invariants",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "masterplan.01",
+            "stream": "masterplan",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "masterplan.02",
+            "stream": "masterplan",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "masterplan.03",
+            "stream": "masterplan",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "masterplan.04",
+            "stream": "masterplan",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "masterplan.05",
+            "stream": "masterplan",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "masterplan.06",
+            "stream": "masterplan",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "masterplan.07",
+            "stream": "masterplan",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "masterplan.08",
+            "stream": "masterplan",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "masterplan.09",
+            "stream": "masterplan",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "masterplan.10",
+            "stream": "masterplan",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "permission.adapter",
+            "stream": "permissions",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "permission.archive",
+            "stream": "permissions",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "permission.compose",
+            "stream": "permissions",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "permission.extend",
+            "stream": "permissions",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "permission.external-library",
+            "stream": "permissions",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "permission.future-provider",
+            "stream": "permissions",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "permission.local-state",
+            "stream": "permissions",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "permission.optimize",
+            "stream": "permissions",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "permission.projection-delete",
+            "stream": "permissions",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "permission.provisional",
+            "stream": "permissions",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "permission.supersede",
+            "stream": "permissions",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "permission.unknown",
+            "stream": "permissions",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "risk.duplicate-authority",
+            "stream": "risks",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "risk.historical-contamination",
+            "stream": "risks",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "risk.overvalidation",
+            "stream": "risks",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "risk.projection-drift",
+            "stream": "risks",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.authority.before-inference",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.authority.conflict",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.authority.precedence",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.compatibility.explicit",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.compatibility.living",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.data.non-destructive",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.decision.immutable-history",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.decision.living",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.dependencies.external",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.dependencies.native-first",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.dependencies.transparent",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.enhancement.evidence",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.files.absolute-path",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.files.complete",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.files.nano",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.files.no-heredoc",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.graph.addressable",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.history.reconstructable",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.implementation.no-regression",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.implementation.preserve",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.inspection.minimum",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.lineage.required",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.masterplan.living",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.modularity.composition",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.modularity.instance-first",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.modularity.no-dead-end",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.naming.kindred",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.naming.lowercase",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.production.first",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.projection.deterministic",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.projection.non-authoritative",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.response.blocker",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.risk.living",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.rules.current-user",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.rules.no-silent-weakening",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.rules.not-markdown-only",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.rules.permissions",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.rules.scope",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.runtime.projection-not-storage",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.runtime.root",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.runtime.single-authority",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.scope.no-expansion",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.security.authority-separation",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.security.credentials",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.structure.living",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.task.finite",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.terminology.living",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.truth.no-invention",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.truth.unknown",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.unknown.living",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.validation.minimum",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "rule.validation.no-fake-success",
+            "stream": "rules",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "structure.authority",
+            "stream": "structure",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "structure.coda",
+            "stream": "structure",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "structure.constitution",
+            "stream": "structure",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "structure.envoy",
+            "stream": "structure",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "structure.fluid-canon",
+            "stream": "structure",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "structure.kindred",
+            "stream": "structure",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "structure.living-governance",
+            "stream": "structure",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "structure.niche",
+            "stream": "structure",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "structure.opus",
+            "stream": "structure",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "structure.palaver",
+            "stream": "structure",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "structure.reality",
+            "stream": "structure",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "structure.scrybe",
+            "stream": "structure",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "term.authority",
+            "stream": "terminology",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "term.kindred",
+            "stream": "terminology",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "term.living-engine",
+            "stream": "terminology",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "term.projection",
+            "stream": "terminology",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "term.supersession",
+            "stream": "terminology",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "term.unknown",
+            "stream": "terminology",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "unknown.current-all-runtime-dependents",
+            "stream": "unknowns",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "unknown.current-full-authority-graph",
+            "stream": "unknowns",
+            "version": 1
+          },
+          {
+            "authority": "current_user_directive",
+            "id": "unknown.unverified-historical-rules",
+            "stream": "unknowns",
+            "version": 1
+          }
+        ],
+        "reverse_dependencies": {}
+      },
+      "reverse_dependency_roots": 0,
+      "schema": "savant.living-projection.dependencies.v1"
+    },
+    "enhancements": {
+      "authority": {
+        "current_user_directive": 28
+      },
+      "authority_effect": "none",
+      "conflict_count": 0,
+      "digest": "adfc43797efe0dcb942602bbe91e364caf257382f18c6a0d4e561b6abdb3ba77",
+      "governance_digest": "d5e83c40da51256fa235a69e71ee6c74c2e762770cdd80a739e786c6d567e1d1",
+      "id": "living:enhancements",
+      "kind": "enhancements",
+      "owner": "living-governance",
+      "projection_only": true,
+      "provenance": {
+        "unspecified": 28
+      },
+      "record_count": 28,
+      "records": [
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "enhancement.01",
+          "priority": 1,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "enhancements",
+          "supersedes": [],
+          "text": "one append-only governance ledger for all living governance streams.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "enhancement.02",
+          "priority": 2,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "enhancements",
+          "supersedes": [],
+          "text": "cryptographic hash chaining for governance-event integrity.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "enhancement.03",
+          "priority": 3,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "enhancements",
+          "supersedes": [],
+          "text": "stable semantic ids independent of record version.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "enhancement.04",
+          "priority": 4,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "enhancements",
+          "supersedes": [],
+          "text": "authority-aware current-state resolution.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "enhancement.05",
+          "priority": 5,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "enhancements",
+          "supersedes": [],
+          "text": "immutable supersession history.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "enhancement.06",
+          "priority": 6,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "enhancements",
+          "supersedes": [],
+          "text": "deterministic markdown projections.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "enhancement.07",
+          "priority": 7,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "enhancements",
+          "supersedes": [],
+          "text": "deterministic json projections.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "enhancement.08",
+          "priority": 8,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "enhancements",
+          "supersedes": [],
+          "text": "projection digests proving equal authority state.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "enhancement.09",
+          "priority": 9,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "enhancements",
+          "supersedes": [],
+          "text": "first-class rules stream.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "enhancement.10",
+          "priority": 10,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "enhancements",
+          "supersedes": [],
+          "text": "first-class permissions stream.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "enhancement.11",
+          "priority": 11,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "enhancements",
+          "supersedes": [],
+          "text": "first-class invariants stream.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "enhancement.12",
+          "priority": 12,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "enhancements",
+          "supersedes": [],
+          "text": "living structure projection.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "enhancement.13",
+          "priority": 13,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "enhancements",
+          "supersedes": [],
+          "text": "living masterplan projection.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "enhancement.14",
+          "priority": 14,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "enhancements",
+          "supersedes": [],
+          "text": "immutable accepted-decision stream.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "enhancement.15",
+          "priority": 15,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "enhancements",
+          "supersedes": [],
+          "text": "first-class unknown and unresolved-question stream.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "enhancement.16",
+          "priority": 16,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "enhancements",
+          "supersedes": [],
+          "text": "canonical terminology stream with supersession support.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "enhancement.17",
+          "priority": 17,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "enhancements",
+          "supersedes": [],
+          "text": "compatibility-obligation stream.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "enhancement.18",
+          "priority": 18,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "enhancements",
+          "supersedes": [],
+          "text": "material-risk stream separated from fact.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "enhancement.19",
+          "priority": 19,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "enhancements",
+          "supersedes": [],
+          "text": "dependency and reverse-dependency projection support.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "enhancement.20",
+          "priority": 20,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "enhancements",
+          "supersedes": [],
+          "text": "conflict detection without invented reconciliation.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "enhancement.21",
+          "priority": 21,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "enhancements",
+          "supersedes": [],
+          "text": "queryable historical versions.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "enhancement.22",
+          "priority": 22,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "enhancements",
+          "supersedes": [],
+          "text": "machine-readable status output suitable for palaver projection.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "enhancement.23",
+          "priority": 23,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "enhancements",
+          "supersedes": [],
+          "text": "explicit provenance on every contributed record.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "enhancement.24",
+          "priority": 24,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "enhancements",
+          "supersedes": [],
+          "text": "external dependency avoidance where standard-library behavior is sufficient.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "enhancement.25",
+          "priority": 25,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "enhancements",
+          "supersedes": [],
+          "text": "atomic projection replacement to prevent partially-written living documents.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "enhancement.26",
+          "priority": 26,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "enhancements",
+          "supersedes": [],
+          "text": "bounded validation of ledger integrity and projection reproducibility.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "enhancement.27",
+          "priority": 27,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "enhancements",
+          "supersedes": [],
+          "text": "stream-independent extension so future living concerns require data rather than another engine.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "enhancement.28",
+          "priority": 28,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "enhancements",
+          "supersedes": [],
+          "text": "human and machine projections generated from exactly the same resolved state.",
+          "version": 1
+        }
+      ],
+      "schema": "savant.living-projection.stream.v1"
+    },
+    "evidence": {
+      "authority_candidates": 1177,
+      "authority_effect": "none",
+      "backup_evidence": 398,
+      "classes": {
+        "authority_candidate": 1177,
+        "backup_evidence": 398,
+        "implementation_evidence": 13204,
+        "imported_or_historical_evidence": 48,
+        "live_state_projection": 4,
+        "migration_evidence": 439,
+        "runtime_projection_or_state": 794,
+        "vault_evidence": 18888
+      },
+      "historical_evidence": 48,
+      "id": "living:evidence",
+      "migration_evidence": 439,
+      "owner": "living-state",
+      "projection_only": true,
+      "schema": "savant.living-projection.evidence.v1",
+      "vault_evidence": 18888
+    },
+    "evolution": {
+      "added": [
+        "runtime/living_projection.py"
+      ],
+      "added_count": 1,
+      "authority_effect": "none",
+      "changed": [
+        "audit/fs_compiler/db/savant_fs_compiler.sqlite-shm",
+        "ontology/obelisks/segue/authority_db/savant_authority.sqlite-shm",
+        "runtime/niche/tasks.sqlite3-shm",
+        "runtime/scyon/integration-check.sqlite3-shm",
+        "runtime/scyon/state/living-canon.sqlite3-shm",
+        "runtime/scyon/state/living-structure-selftest.sqlite3-shm",
+        "runtime/scyon/state/living-structure.sqlite3-shm"
+      ],
+      "changed_count": 7,
+      "deleted": [
+        "runtime/.living_projection.py.swp"
+      ],
+      "deleted_count": 1,
+      "id": "living:evolution",
+      "owner": "projection",
+      "previous_snapshot_hash": "1c29368e75253a3ecf8c67b5eec128a4b3edeb194d0fecfe724529125947a918",
+      "projection_only": true,
+      "schema": "savant.living-projection.evolution.v1",
+      "sequence": 26454,
+      "snapshot_hash": "60af8746fb80ce645c2945feb542321d021649047bf315b90f57c1f9c093cfb2"
+    },
+    "implementation": {
+      "authority_effect": "none",
+      "git": null,
+      "id": "living:implementation",
+      "implementation_evidence": 13204,
+      "latest_sdump": {
+        "mtime_ns": 1787978063002277415,
+        "path": "/root/savant-runtime/source/sdump-20260829t043318900049z/sdump_savant-runtime_20260829t043318900049z.txt",
+        "sha256": "ccaf384d732cbf9a72b6247168c0fc897141f9fa6a0f232704b5d918925c275c",
+        "size": 103056228
+      },
+      "migration_evidence": 439,
+      "owner": "living-state",
+      "packages": [
+        {
+          "path": "canon-system/requirements.txt",
+          "sha256": "c58e9fc28126b678b1ee49433690bd9c6bedc9db83df133326ea00a951f2b7ca",
+          "size": 33
+        },
+        {
+          "path": "frontend/package-lock.json",
+          "sha256": "fb8ea110d8a4e987fb5905a8941a775d5f572a712f52f3f77e0507a47daac10c",
+          "size": 265807
+        },
+        {
+          "path": "frontend/package.json",
+          "sha256": "ae6f2f6cbe1ef01de28aeffce47ae1193542064f0b4a27a081b32c3c3e7d23fc",
+          "size": 1546
+        },
+        {
+          "path": "imports/savant-runtime-2-conflicts/20260806T071127Z/canon-system/requirements.txt",
+          "sha256": "0b0709dc3105d98b29f4fc6a870c15c0cf42191498384ef8a2a32d3fcf5f34ed",
+          "size": 33
+        },
+        {
+          "path": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/carbon/apps/avatar_forge/requirements.txt",
+          "sha256": "de5d4227671b14b81fea8777d7cf87def230a9d9fad64898e8ddef51deb11511",
+          "size": 129
+        },
+        {
+          "path": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/apps/webui-nextgen/package-lock.json",
+          "sha256": "6312825d447d159f3a03e42158d75aad5a4c67b02ca2d74cec2ba8a5cc5f26e5",
+          "size": 153682
+        },
+        {
+          "path": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/apps/webui-nextgen/package.json",
+          "sha256": "3d4a7b061ffb881a156114f5abc48d11623b0f27052a663f07aeb810d7d28a63",
+          "size": 1252
+        },
+        {
+          "path": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/apps/webui_ultra/package-lock.json",
+          "sha256": "8e3d133338e791e8baf4d9f3686c69ce16f4ac528424949db9e09c4bae0ab503",
+          "size": 28727
+        },
+        {
+          "path": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/apps/webui_ultra/package.json",
+          "sha256": "994babd8550760e46e664a24096257d873228556c92a707dad24f358ecbff08c",
+          "size": 415
+        },
+        {
+          "path": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/ui/package-lock.json",
+          "sha256": "700d53305a7bbcd53f49bc2a3196d0bcc68ea6e372b34c285f96778af40caebe",
+          "size": 101930
+        },
+        {
+          "path": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/exile_runtime/ui/package.json",
+          "sha256": "49c710bbdb7ac069e4a92b00239dab464835d4be27b7caf36ce75004f5f92132",
+          "size": 1245
+        },
+        {
+          "path": "present/package.json",
+          "sha256": "3227f5d1a1a81124dc273f56c7560fc023f52687ea9052c7dd0ddba072baaf27",
+          "size": 706
+        },
+        {
+          "path": "pyproject.toml",
+          "sha256": "7a6d598d3577de213a83c57ff176be8d033978317e234cc773acc7fe1b045fac",
+          "size": 718
+        },
+        {
+          "path": "tools/identity_quality/requirements.txt",
+          "sha256": "c2b00642da5324036671d92c23dc43d358f5eed4c6b018cf035e8d3d2cc6bc47",
+          "size": 103
+        },
+        {
+          "path": "tools/sdump-enterprise/pyproject.toml",
+          "sha256": "86960d596452acadd3065d56a6fb5884daf433dc74985b35c987c1f8f4dca104",
+          "size": 258
+        }
+      ],
+      "projection_only": true,
+      "runtime_projection_or_state": 794,
+      "schema": "savant.living-projection.implementation.v1",
+      "source_candidates": 32996
+    },
+    "invariants": {
+      "authority": {
+        "current_user_directive": 18
+      },
+      "authority_effect": "none",
+      "conflict_count": 0,
+      "digest": "22c1c751bc4eebbffa3b4def9a56d6104dcc734457364710e779b1ffb536e967",
+      "governance_digest": "d5e83c40da51256fa235a69e71ee6c74c2e762770cdd80a739e786c6d567e1d1",
+      "id": "living:invariants",
+      "kind": "invariants",
+      "owner": "living-governance",
+      "projection_only": true,
+      "provenance": {
+        "unspecified": 18
+      },
+      "record_count": 18,
+      "records": [
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "invariant.authority",
+          "priority": 1,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "invariants",
+          "supersedes": [],
+          "text": "derived state never outranks the authoritative primitive from which it was produced.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "invariant.history",
+          "priority": 2,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "invariants",
+          "supersedes": [],
+          "text": "accepted authoritative history is preserved.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "invariant.identity",
+          "priority": 3,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "invariants",
+          "supersedes": [],
+          "text": "semantic identity remains stable across compatible versions and supersessions.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "invariant.determinism",
+          "priority": 4,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "invariants",
+          "supersedes": [],
+          "text": "equal authority state produces equal deterministic projections.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "invariant.provenance",
+          "priority": 5,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "invariants",
+          "supersedes": [],
+          "text": "authoritative claims remain traceable to their provenance.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "invariant.lineage",
+          "priority": 6,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "invariants",
+          "supersedes": [],
+          "text": "supersession and derivation lineage remains queryable.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "invariant.no-secret-projection",
+          "priority": 7,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "invariants",
+          "supersedes": [],
+          "text": "secret credential values never appear in living projections.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "invariant.kindred",
+          "priority": 8,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "invariants",
+          "supersedes": [],
+          "text": "new relationship-methodology authority uses kindred terminology.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "invariant.lowercase",
+          "priority": 9,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "invariants",
+          "supersedes": [],
+          "text": "new savant-owned identifiers are lowercase unless compatibility or stronger authority prevents it.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "invariant.no-duplicate-authority",
+          "priority": 10,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "invariants",
+          "supersedes": [],
+          "text": "one semantic fact has one authoritative substance regardless of how many projections expose it.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "invariant.no-dead-end",
+          "priority": 11,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "invariants",
+          "supersedes": [],
+          "text": "new semantic components remain extensible and attachable.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "invariant.unknown-preserved",
+          "priority": 12,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "invariants",
+          "supersedes": [],
+          "text": "unresolved unknowns cannot disappear from projections until resolved or superseded.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "invariant.dependencies",
+          "priority": 13,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "invariants",
+          "supersedes": [],
+          "text": "material direct dependencies remain visible.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "invariant.compatibility",
+          "priority": 14,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "invariants",
+          "supersedes": [],
+          "text": "declared compatibility obligations cannot disappear through unrelated refactoring.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "invariant.non-destructive",
+          "priority": 15,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "invariants",
+          "supersedes": [],
+          "text": "evolution preserves recoverability.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "invariant.task-bounds",
+          "priority": 16,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "invariants",
+          "supersedes": [],
+          "text": "bounded work has a finite completion condition.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "invariant.validation-evidence",
+          "priority": 17,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "invariants",
+          "supersedes": [],
+          "text": "completion claims are evidence-backed.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "invariant.projection-rebuild",
+          "priority": 18,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "invariants",
+          "supersedes": [],
+          "text": "living human-readable documents are reproducible from authoritative living records.",
+          "version": 1
+        }
+      ],
+      "schema": "savant.living-projection.stream.v1"
+    },
+    "masterplan": {
+      "authority": {
+        "current_user_directive": 10
+      },
+      "authority_effect": "none",
+      "conflict_count": 0,
+      "digest": "f2120a730c00198e8063a118c34fc21fd8d2aefdb82275fc738f7cc6b9453097",
+      "governance_digest": "d5e83c40da51256fa235a69e71ee6c74c2e762770cdd80a739e786c6d567e1d1",
+      "id": "living:masterplan",
+      "kind": "masterplan",
+      "owner": "niche",
+      "projection_only": true,
+      "provenance": {
+        "unspecified": 10
+      },
+      "record_count": 10,
+      "records": [
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "masterplan.01",
+          "priority": 1,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "masterplan",
+          "supersedes": [],
+          "text": "preserve and extend the constitutional authority substrate rather than creating competing registries.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "masterplan.02",
+          "priority": 2,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "masterplan",
+          "supersedes": [],
+          "text": "complete living governance and project its current rules, structure, masterplan, decisions, unknowns, compatibility obligations, and dependency views.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "masterplan.03",
+          "priority": 3,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "masterplan",
+          "supersedes": [],
+          "text": "continue evolving palaver as the primary conversation and workstation surface while preserving subsystem ownership boundaries.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "masterplan.04",
+          "priority": 4,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "masterplan",
+          "supersedes": [],
+          "text": "complete provider-universal opus behavior through reusable protocol families and provider profiles rather than provider-by-provider duplication.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "masterplan.05",
+          "priority": 5,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "masterplan",
+          "supersedes": [],
+          "text": "project scrybe, niche, envoy, opus, coda, kindred, authority, lineage, and provenance into palaver without relocating their authority.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "masterplan.06",
+          "priority": 6,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "masterplan",
+          "supersedes": [],
+          "text": "continue replacing manually maintained derived structures with deterministic projections from authoritative primitives.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "masterplan.07",
+          "priority": 7,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "masterplan",
+          "supersedes": [],
+          "text": "preserve reversible migration, compatibility adapters, and historical lineage while superseding obsolete implementations.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "masterplan.08",
+          "priority": 8,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "masterplan",
+          "supersedes": [],
+          "text": "maintain explicit unknowns and blockers rather than filling architectural gaps through inference.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "masterplan.09",
+          "priority": 9,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "masterplan",
+          "supersedes": [],
+          "text": "keep savant extensible through reusable instances, typed segues, declarative profiles, policies, adapters, and deterministic projections.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "masterplan.10",
+          "priority": 10,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "masterplan",
+          "supersedes": [],
+          "text": "optimize only where improvement is material and does not weaken core functionality or authority.",
+          "version": 1
+        }
+      ],
+      "schema": "savant.living-projection.stream.v1",
+      "source_digest": "5c4df55820a3452a52aee6e7a3d4bee0d76a273033c122be002a3a990d246ad1",
+      "sources": [
+        {
+          "authority_effect": "none",
+          "mtime_ns": 1788441478514796872,
+          "path": "/root/savant-runtime/masterplan.json",
+          "present": true,
+          "sha256": "c795a2efac6fb3af4d1876aaa317f3112bb0ebe6d2dd33732bd0c94c9a3b7245",
+          "size": 22745
+        },
+        {
+          "authority_effect": "none",
+          "mtime_ns": 1788441492783963889,
+          "path": "/root/savant-runtime/MASTERPLAN.md",
+          "present": true,
+          "sha256": "dd8a059978f9c88d91488cc359eb53d7b301f09d3113030239930a047c931d3d",
+          "size": 33744
+        },
+        {
+          "authority_effect": "none",
+          "bytes": 129396,
+          "directories": 0,
+          "files": 2,
+          "newest_mtime_ns": 1788441464021627233,
+          "path": "/root/savant-runtime/runtime/niche/projections",
+          "present": true
+        }
+      ]
+    },
+    "permissions": {
+      "authority": {
+        "current_user_directive": 12
+      },
+      "authority_effect": "none",
+      "conflict_count": 0,
+      "digest": "1f47ae3c1a80b509f4ee2b473b4a48a177e2775d99400883dde3e26ca44628a3",
+      "governance_digest": "d5e83c40da51256fa235a69e71ee6c74c2e762770cdd80a739e786c6d567e1d1",
+      "id": "living:permissions",
+      "kind": "permissions",
+      "owner": "living-governance",
+      "projection_only": true,
+      "provenance": {
+        "unspecified": 12
+      },
+      "record_count": 12,
+      "records": [
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "permission.extend",
+          "priority": 1,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "permissions",
+          "supersedes": [],
+          "text": "a subsystem may be extended through compatible instances, typed segues, adapters, policies, attachments, and projections without requiring replacement.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "permission.provisional",
+          "priority": 2,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "permissions",
+          "supersedes": [],
+          "text": "provisional knowledge may be represented when explicitly marked provisional with appropriate provenance and confidence.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "permission.unknown",
+          "priority": 3,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "permissions",
+          "supersedes": [],
+          "text": "unknown values may remain unresolved indefinitely when authority is insufficient.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "permission.future-provider",
+          "priority": 4,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "permissions",
+          "supersedes": [],
+          "text": "future providers may attach through reusable protocol-family adapters and declarative profiles without duplicating provider substance.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "permission.projection-delete",
+          "priority": 5,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "permissions",
+          "supersedes": [],
+          "text": "disposable projections may be regenerated or removed when their authoritative primitives remain intact.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "permission.supersede",
+          "priority": 6,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "permissions",
+          "supersedes": [],
+          "text": "higher authority may supersede an accepted record without mutating or deleting the superseded historical record.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "permission.local-state",
+          "priority": 7,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "permissions",
+          "supersedes": [],
+          "text": "ui and interaction layers may store ephemeral layout, selection, focus, expansion, and preference state when those values are not falsely promoted to backend authority.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "permission.adapter",
+          "priority": 8,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "permissions",
+          "supersedes": [],
+          "text": "compatibility adapters may preserve required historical interfaces while semantic ownership moves to a newer authoritative implementation.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "permission.optimize",
+          "priority": 9,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "permissions",
+          "supersedes": [],
+          "text": "implementation may be optimized when observable behavior, authority, compatibility, lineage, and determinism are preserved.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "permission.archive",
+          "priority": 10,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "permissions",
+          "supersedes": [],
+          "text": "obsolete historical implementations may be archived rather than kept active when no required compatibility surface depends on them.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "permission.compose",
+          "priority": 11,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "permissions",
+          "supersedes": [],
+          "text": "higher-order structures may emerge from reusable lower-order instances without duplicating their underlying substance.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "permission.external-library",
+          "priority": 12,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "permissions",
+          "supersedes": [],
+          "text": "a third-party dependency may be introduced when native and already-installed capabilities are materially insufficient and the dependency satisfies governance requirements.",
+          "version": 1
+        }
+      ],
+      "schema": "savant.living-projection.stream.v1"
+    },
+    "provenance": {
+      "authority": {
+        "current_user_directive": 158
+      },
+      "authority_effect": "none",
+      "id": "living:provenance",
+      "owner": "living-governance",
+      "projection_only": true,
+      "record_count": 158,
+      "schema": "savant.living-projection.provenance.v1",
+      "sources": {
+        "unspecified": 158
+      }
+    },
+    "risks": {
+      "authority": {
+        "current_user_directive": 4
+      },
+      "authority_effect": "none",
+      "conflict_count": 0,
+      "digest": "953ca6dfa24888e285b160abe82c1cc20ac24cbc4e3f8f6fc060299b7c2530bd",
+      "governance_digest": "d5e83c40da51256fa235a69e71ee6c74c2e762770cdd80a739e786c6d567e1d1",
+      "id": "living:risks",
+      "kind": "risks",
+      "owner": "living-governance",
+      "projection_only": true,
+      "provenance": {
+        "unspecified": 4
+      },
+      "record_count": 4,
+      "records": [
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "risk.duplicate-authority",
+          "priority": 1,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "risks",
+          "supersedes": [],
+          "text": "creating new registries or manually maintained current-state documents can produce conflicting authority.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "risk.historical-contamination",
+          "priority": 2,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "risks",
+          "supersedes": [],
+          "text": "historical Savant documents contain obsolete and mutually conflicting architecture and must not automatically outrank newer accepted authority.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "risk.projection-drift",
+          "priority": 3,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "risks",
+          "supersedes": [],
+          "text": "hand-edited structure and masterplan documents can drift from runtime authority unless generated from the same living records.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "risk.overvalidation",
+          "priority": 4,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "risks",
+          "supersedes": [],
+          "text": "broad validation and inspection can become a substitute for production implementation.",
+          "version": 1
+        }
+      ],
+      "schema": "savant.living-projection.stream.v1"
+    },
+    "rules": {
+      "authority": {
+        "current_user_directive": 52
+      },
+      "authority_effect": "none",
+      "conflict_count": 0,
+      "digest": "9233d89e6f1c2c8fd161cd8a457f4cca48734ce68e35d8c21c5fb8b9e894cc23",
+      "governance_digest": "d5e83c40da51256fa235a69e71ee6c74c2e762770cdd80a739e786c6d567e1d1",
+      "id": "living:rules",
+      "kind": "rules",
+      "owner": "living-governance",
+      "projection_only": true,
+      "provenance": {
+        "unspecified": 52
+      },
+      "record_count": 52,
+      "records": [
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.authority.precedence",
+          "priority": 1,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "authority shall be resolved in this order: current user directive, accepted authoritative graph, accepted decision, constitutional canon, verified implementation, admitted evidence, deterministic projection, historical implementation, historical document, inference, speculation.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.truth.no-invention",
+          "priority": 2,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "never invent facts, content, citations, technical details, files, history, status, dependencies, behavior, timelines, implementation state, validation results, or authority.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.truth.unknown",
+          "priority": 3,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "when a required fact is unknown, represent it explicitly as unknown; unknown is not false, absent, rejected, empty, or inferred.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.authority.before-inference",
+          "priority": 4,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "authority precedes inference, convenience, historical implementation, aesthetic preference, and speculative architecture.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.authority.conflict",
+          "priority": 5,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "when sources conflict, preserve both records, apply authority precedence, and never invent reconciliation.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.decision.immutable-history",
+          "priority": 6,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "accepted decisions and authoritative records are immutable historical objects; revisions create superseding records rather than editing history.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.projection.non-authoritative",
+          "priority": 7,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "markdown, html, ui, diagrams, reports, summaries, indexes, caches, and other projections never become authority merely because they exist.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.projection.deterministic",
+          "priority": 8,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "equal authoritative state must generate equal deterministic projections.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.production.first",
+          "priority": 9,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "implementation work proceeds directly to production changes when sufficient authority and information already exist.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.inspection.minimum",
+          "priority": 10,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "perform only inspection mandatory to safely and correctly complete the immediate bounded task.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.validation.minimum",
+          "priority": 11,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "validation proves usability and shall not become the task; normally use at most syntax or compilation, one focused functional check, and one relevant integration or startup check.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.validation.no-fake-success",
+          "priority": 12,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "never claim successful implementation, integration, migration, startup, test passage, or compatibility without evidence.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.task.finite",
+          "priority": 13,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "treat every request as a finite bounded task with an explicit completion condition and stop when that condition is met.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.scope.no-expansion",
+          "priority": 14,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "do not expand a bounded implementation into audits, research, migrations, architecture redesign, observability, documentation, infrastructure, or adjacent work unless mandatory.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.implementation.preserve",
+          "priority": 15,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "use the current verified implementation as baseline unless superseded by higher authority; extend rather than reconstruct or replace.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.implementation.no-regression",
+          "priority": 16,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "reject changes that reduce verified behavior, compatibility, determinism, provenance, lineage, replay, recovery, extensibility, or dependency transparency.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.modularity.instance-first",
+          "priority": 17,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "everything that can be represented once and reused by reference or instance shall not be duplicated.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.modularity.composition",
+          "priority": 18,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "complex behavior should emerge from composition of reusable primitives, instances, typed segues, policies, projections, and attachments.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.modularity.no-dead-end",
+          "priority": 19,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "no savant subsystem, component, artifact, or semantic object may intentionally become a non-extensible dead end.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.graph.addressable",
+          "priority": 20,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "semantic elements should expose stable identity and remain graph-addressable wherever the architecture supports it.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.lineage.required",
+          "priority": 21,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "authoritative additions and substantial derived artifacts shall expose lineage and provenance sufficient to identify what produced them.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.dependencies.transparent",
+          "priority": 22,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "dependencies and dependents shall remain explicit where materially applicable; hidden coupling is prohibited.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.history.reconstructable",
+          "priority": 23,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "authoritative history shall remain reconstructable without requiring speculative inference.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.data.non-destructive",
+          "priority": 24,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "prefer reversible migration, supersession, archival preservation, and additive evolution over destructive mutation.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.naming.lowercase",
+          "priority": 25,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "savant-owned terminology, paths, filenames, identifiers, and generated savant content shall be lowercase unless external syntax, compatibility, or stronger authority requires otherwise.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.naming.kindred",
+          "priority": 26,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "the canonical relationship methodology and terminology is kindred; do not create new savant authority using the superseded term kindred.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.files.absolute-path",
+          "priority": 27,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "technical implementation instructions shall use absolute paths and shall not depend upon the current working directory, aliases, shell history, or implicit home expansion.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.files.nano",
+          "priority": 28,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "when user-facing instructions create or replace implementation files, use nano with the absolute path and provide the complete file.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.files.complete",
+          "priority": 29,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "never provide implementation fragments, placeholders, omissions, ellipses, manual merge instructions, or individual-line replacement instructions when a complete file is required.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.files.no-heredoc",
+          "priority": 30,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "do not instruct the user to create or replace implementation files with heredocs or shell redirection.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.compatibility.explicit",
+          "priority": 31,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "compatibility surfaces that must survive a change shall be preserved intentionally rather than by accidental historical behavior.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.security.credentials",
+          "priority": 32,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "credential values, secrets, tokens, passwords, and private keys shall never be copied into projections, logs, reports, diagnostics, or chat output.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.security.authority-separation",
+          "priority": 33,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "content-generation latitude, provider behavior, authority enforcement, credential secrecy, mutation control, provenance, and execution safety are separate concerns and shall not be conflated.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.runtime.root",
+          "priority": 34,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "the default savant implementation root is /root/savant-runtime unless stronger current authority establishes another root.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.runtime.projection-not-storage",
+          "priority": 35,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "store authoritative primitives and derive indexes, reverse relationships, summaries, current views, documentation, reports, and ui projections rather than maintaining duplicate derived truth.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.runtime.single-authority",
+          "priority": 36,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "never create a second authoritative registry, graph, canon, state store, or ownership source when the current constitutional system can represent the same authority.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.rules.not-markdown-only",
+          "priority": 37,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "rules are authoritative governance records first; human-readable markdown rules files are projections and must be reproducible from their authoritative records.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.rules.scope",
+          "priority": 38,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "rules shall declare their semantic scope and shall not silently govern unrelated domains merely because they are globally visible.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.rules.permissions",
+          "priority": 39,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "constraints and permissions are separate primitives; absence of permission is not automatically a prohibition unless an applicable rule explicitly establishes a closed policy.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.rules.no-silent-weakening",
+          "priority": 40,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "rules may be clarified or superseded but shall not be silently weakened.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.rules.current-user",
+          "priority": 41,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "a current explicit user directive can supersede prior savant governance within the limits of higher platform authority; the earlier record remains preserved.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.structure.living",
+          "priority": 42,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "the current savant structure shall be a deterministic living projection of authoritative structural records rather than a manually maintained competing truth source.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.masterplan.living",
+          "priority": 43,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "the savant masterplan shall be a deterministic living projection of current goals, accepted decisions, dependencies, completion state, blockers, supersessions, and milestones.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.decision.living",
+          "priority": 44,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "accepted decisions shall remain queryable as immutable living records with supersession lineage.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.unknown.living",
+          "priority": 45,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "unresolved questions and unknown values shall be first-class living records so uncertainty cannot disappear merely because a document is regenerated.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.risk.living",
+          "priority": 46,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "known material risks may be represented as living records with dependencies and resolution state, but speculative risks shall not be promoted to fact.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.compatibility.living",
+          "priority": 47,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "important compatibility obligations shall be represented as living records and projected into relevant implementation views.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.terminology.living",
+          "priority": 48,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "canonical terminology and explicit superseded aliases shall be represented as living records so vocabulary evolution preserves lineage.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.enhancement.evidence",
+          "priority": 49,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "an enhancement is considered implemented only when executable behavior or authoritative configuration representing it exists; decorative enumeration does not constitute implementation.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.dependencies.external",
+          "priority": 50,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "add external libraries only when they materially improve required behavior, have acceptable maintenance and licensing characteristics, do not duplicate existing capability, and have a clear failure or removal path.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.dependencies.native-first",
+          "priority": 51,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "prefer standard-library, browser-native, or existing savant capabilities when they satisfy the requirement without meaningful loss.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "rule.response.blocker",
+          "priority": 52,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "rules",
+          "supersedes": [],
+          "text": "when blocked, state only what is complete, what remains, the blocker, and the minimum next action.",
+          "version": 1
+        }
+      ],
+      "schema": "savant.living-projection.stream.v1"
+    },
+    "structure": {
+      "authority": {
+        "current_user_directive": 12
+      },
+      "authority_effect": "none",
+      "conflict_count": 0,
+      "digest": "9c53fb942013cb168f1817528324b922cb6be5f7d9367c899176c98e87eb86fa",
+      "governance_digest": "d5e83c40da51256fa235a69e71ee6c74c2e762770cdd80a739e786c6d567e1d1",
+      "id": "living:structure",
+      "kind": "structure",
+      "owner": "scyon",
+      "projection_only": true,
+      "provenance": {
+        "unspecified": 12
+      },
+      "record_count": 12,
+      "records": [
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "structure.reality",
+          "priority": 1,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "structure",
+          "supersedes": [],
+          "text": "savant reality is represented through authoritative recursively composable constitutional objects and their relationships.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "structure.authority",
+          "priority": 2,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "structure",
+          "supersedes": [],
+          "text": "authority stores primitives; projections derive human and machine views.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "structure.constitution",
+          "priority": 3,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "structure",
+          "supersedes": [],
+          "text": "the constitutional registry is the existing generic authority and graph substrate and shall not be duplicated by living governance.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "structure.fluid-canon",
+          "priority": 4,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "structure",
+          "supersedes": [],
+          "text": "fluid canon provides canonical truth through immutable constitutional assertions and pure queries.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "structure.palaver",
+          "priority": 5,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "structure",
+          "supersedes": [],
+          "text": "palaver owns conversation, workspace, and patch-review orchestration.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "structure.scrybe",
+          "priority": 6,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "structure",
+          "supersedes": [],
+          "text": "scrybe owns memory and context.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "structure.niche",
+          "priority": 7,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "structure",
+          "supersedes": [],
+          "text": "niche owns task context.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "structure.envoy",
+          "priority": 8,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "structure",
+          "supersedes": [],
+          "text": "envoy owns persona and voice.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "structure.opus",
+          "priority": 9,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "structure",
+          "supersedes": [],
+          "text": "opus owns inference and provider orchestration.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "structure.coda",
+          "priority": 10,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "structure",
+          "supersedes": [],
+          "text": "coda owns mutation and apply operations.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "structure.kindred",
+          "priority": 11,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "structure",
+          "supersedes": [],
+          "text": "kindred represents reusable relationship methodology without duplicating related object substance.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "structure.living-governance",
+          "priority": 12,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "structure",
+          "supersedes": [],
+          "text": "living governance stores governance evolution once and deterministically projects rules, structure, masterplan, and related views.",
+          "version": 1
+        }
+      ],
+      "schema": "savant.living-projection.stream.v1",
+      "source_digest": "aa1b05ad23370715c567e303d3991cab4df53b13767526eca3d594396b577ed6",
+      "sources": [
+        {
+          "authority_effect": "none",
+          "path": "/root/savant-runtime/SAVANT_STRUCTURE_CURRENT.md",
+          "present": false
+        },
+        {
+          "authority_effect": "none",
+          "path": "/root/savant-runtime/structure.json",
+          "present": false
+        }
+      ]
+    },
+    "terminology": {
+      "authority": {
+        "current_user_directive": 6
+      },
+      "authority_effect": "none",
+      "conflict_count": 0,
+      "digest": "9bebf88228cf178f444c024e478d029f225f2946c4cdd524199c47cfebfe2615",
+      "governance_digest": "d5e83c40da51256fa235a69e71ee6c74c2e762770cdd80a739e786c6d567e1d1",
+      "id": "living:terminology",
+      "kind": "terminology",
+      "owner": "living-governance",
+      "projection_only": true,
+      "provenance": {
+        "unspecified": 6
+      },
+      "record_count": 6,
+      "records": [
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "term.kindred",
+          "priority": 1,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "terminology",
+          "supersedes": [],
+          "text": "kindred: canonical methodology for relationship composition and traversal; supersedes new use of the historical term kindred.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "term.projection",
+          "priority": 2,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "terminology",
+          "supersedes": [],
+          "text": "projection: deterministic disposable representation derived from authoritative primitives.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "term.authority",
+          "priority": 3,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "terminology",
+          "supersedes": [],
+          "text": "authority: source-backed semantic substance permitted to govern derived state.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "term.supersession",
+          "priority": 4,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "terminology",
+          "supersedes": [],
+          "text": "supersession: immutable evolution in which a new authoritative record replaces the current applicability of an earlier record without erasing it.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "term.unknown",
+          "priority": 5,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "terminology",
+          "supersedes": [],
+          "text": "unknown: explicitly unresolved value that is not equivalent to false, empty, absent, or rejected.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "term.living-engine",
+          "priority": 6,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "terminology",
+          "supersedes": [],
+          "text": "living engine: immutable evolving authority plus deterministic current-state projection, not a document rewritten in place.",
+          "version": 1
+        }
+      ],
+      "schema": "savant.living-projection.stream.v1"
+    },
+    "unknowns": {
+      "authority": {
+        "current_user_directive": 3
+      },
+      "authority_effect": "none",
+      "conflict_count": 0,
+      "digest": "a6ffa1da997177d48083e85a5cf1573565bca1680d226cd97a880a846c7fb6be",
+      "governance_digest": "d5e83c40da51256fa235a69e71ee6c74c2e762770cdd80a739e786c6d567e1d1",
+      "id": "living:unknowns",
+      "kind": "unknowns",
+      "owner": "living-governance",
+      "projection_only": true,
+      "provenance": {
+        "unspecified": 3
+      },
+      "record_count": 3,
+      "records": [
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "unknown.current-full-authority-graph",
+          "priority": 1,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "unknowns",
+          "supersedes": [],
+          "text": "the complete live server authority graph at the moment of this bootstrap is not asserted by this bootstrap.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "unknown.current-all-runtime-dependents",
+          "priority": 2,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "unknowns",
+          "supersedes": [],
+          "text": "all current runtime dependents of every subsystem are not asserted unless established by verified implementation.",
+          "version": 1
+        },
+        {
+          "authority": "current_user_directive",
+          "authority_rank": 0,
+          "dependencies": [],
+          "id": "unknown.unverified-historical-rules",
+          "priority": 3,
+          "provenance": {
+            "asserted_by": "user",
+            "created_at": "2026-08-30T00:00:00Z",
+            "method": "living-governance-bootstrap",
+            "sources": [
+              "current user directive 2026-08-30",
+              "project sources and accepted savant authority"
+            ]
+          },
+          "relationships": [],
+          "schema": "savant.living-governance.v1",
+          "status": "active",
+          "stream": "unknowns",
+          "supersedes": [],
+          "text": "historical rules not supported by current authority or admitted evidence remain historical evidence rather than current rules.",
+          "version": 1
+        }
+      ],
+      "schema": "savant.living-projection.stream.v1"
+    }
+  },
+  "unchanged_surfaces": []
+}

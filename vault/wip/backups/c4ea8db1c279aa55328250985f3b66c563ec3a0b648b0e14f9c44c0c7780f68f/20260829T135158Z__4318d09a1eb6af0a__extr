@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+SCRIPT="/scripts/extr_ai.py"
+
+if [ ! -f "$SCRIPT" ]; then
+  echo "[FAIL] missing $SCRIPT" >&2
+  exit 127
+fi
+
+if [ "$#" -lt 1 ]; then
+  cat >&2 <<'USAGE'
+Usage:
+  extr [target ...]
+
+Examples:
+  extr conversations.json
+  extr conversations-001.json conversations-009.json
+  extr /root/exports
+  extr "/root/exports/**/*.json"
+
+Options:
+  extr --bucket my-bucket --prefix savant/extracts target
+  extr --key exact/key.txt target
+  extr --no-upload target
+  extr --raw-all target
+  extr --include-rejected target
+  extr --domains savant,viscera target
+USAGE
+  exit 2
+fi
+
+exec python3 "$SCRIPT" "$@"

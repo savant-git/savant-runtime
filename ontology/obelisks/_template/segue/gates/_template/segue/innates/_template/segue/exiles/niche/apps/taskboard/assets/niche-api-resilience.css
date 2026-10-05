@@ -1,0 +1,67 @@
+/*
+ * savant / niche
+ * api failure containment
+ * authority_effect: none
+ */
+
+#api-status,
+#task-status,
+#fabric-status,
+#authority-status {
+    transition:
+        opacity 140ms ease,
+        transform 140ms ease;
+}
+
+#api-status[data-status="healthy"],
+#task-status[data-status="healthy"],
+#fabric-status[data-status="healthy"] {
+    opacity: 1;
+}
+
+#api-status[data-status="degraded"] {
+    opacity: .72;
+}
+
+#api-status[data-status="unavailable"],
+#task-status[data-status="unavailable"],
+#fabric-status[data-status="unavailable"] {
+    opacity: .42;
+}
+
+#start-next:disabled,
+#start-next[aria-disabled="true"] {
+    cursor: not-allowed;
+
+    opacity: .38;
+
+    filter: saturate(.35);
+}
+
+#start-next:disabled
+    .start-symbol {
+    animation: none;
+}
+
+#projection-status {
+    min-width: 0;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+    #projection-status {
+        max-width: 72vw;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #api-status,
+    #task-status,
+    #fabric-status,
+    #authority-status {
+        transition: none;
+    }
+}

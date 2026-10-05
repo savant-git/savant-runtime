@@ -1,0 +1,60 @@
+{
+  "id": "palaver.dependencies",
+  "owner": "palaver",
+  "type": "dependency_manifest",
+  "status": "active",
+  "authority_effect": "none",
+  "dependencies": [
+    {
+      "id": "exile:envoy",
+      "relationship": "delegates_voice_to",
+      "status": "active",
+      "required": false,
+      "owner": "envoy",
+      "purpose": "Provide persona, voice identity, voice resolution, and synthesis capabilities without transferring ownership to Palaver.",
+      "provider": "envoy_voice_provider",
+      "runtime_module": "envoy.runtime.voice_engine",
+      "capabilities": [
+        "list_personas",
+        "resolve_persona",
+        "resolve_voice",
+        "synthesize",
+        "synthesize_base64"
+      ],
+      "failure_effect": "text_conversation_remains_available"
+    }
+  ],
+  "target_dependencies": [
+    {
+      "id": "exile:opus",
+      "relationship": "delegates_inference_to",
+      "status": "target",
+      "required_for_cutover": true,
+      "purpose": "Provide provider-neutral AI inference, model selection, provider routing, fallback, and usage lineage."
+    },
+    {
+      "id": "exile:coda",
+      "relationship": "delegates_durable_mutation_to",
+      "status": "target",
+      "required_for_cutover": true,
+      "purpose": "Perform authorized durable filesystem mutations and controlled execution."
+    },
+    {
+      "id": "exile:niche",
+      "relationship": "delegates_task_governance_to",
+      "status": "target",
+      "required_for_cutover": true,
+      "purpose": "Provide authoritative task discovery, priority, readiness, blockers, and continuation state."
+    }
+  ],
+  "invariants": [
+    "Only verified active relationships appear in dependencies.",
+    "Target dependencies are migration requirements and are not evidence of completed integration.",
+    "Palaver owns conversation and interaction mediation.",
+    "Envoy retains ownership of persona and voice identity.",
+    "Opus retains ownership of AI provider and model orchestration.",
+    "Coda retains ownership of canonical durable mutation.",
+    "Niche retains ownership of task governance.",
+    "Failure of optional voice capability must not disable text conversation."
+  ]
+}

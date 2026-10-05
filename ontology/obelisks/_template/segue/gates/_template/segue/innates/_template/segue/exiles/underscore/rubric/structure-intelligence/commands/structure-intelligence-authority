@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+IFS=$'\n\t'
+umask 027
+
+compiler="/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/underscore/rubric/structure-intelligence/source/compile_structure_intelligence_authority_v2.py"
+
+if [[ ! -s "${compiler}" ]]; then
+    printf 'ERROR: authority-aware compiler unavailable: %s\n' \
+        "${compiler}" >&2
+    exit 1
+fi
+
+exec python3 "${compiler}" "$@"

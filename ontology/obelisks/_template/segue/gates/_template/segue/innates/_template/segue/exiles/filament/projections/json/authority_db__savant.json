@@ -1,0 +1,31 @@
+{
+  "authority": "USER_DIRECTIVE",
+  "composition": {
+    "children": []
+  },
+  "extensions": {},
+  "future_extensions": {},
+  "id": "authority_db.savant",
+  "kind": "instance",
+  "level": "authority",
+  "metadata": {
+    "path": "ontology/obelisks/segue/authority_db/savant_authority.sqlite",
+    "purpose": "Store authoritative primitives."
+  },
+  "projection": {
+    "authoritative": false,
+    "database": "/root/savant-runtime/ontology/obelisks/segue/authority_db/savant_authority.sqlite",
+    "engine": "filament.runtime.projection_engine",
+    "owner": "filament",
+    "rebuildable": true,
+    "source": "sqlite.authority_db"
+  },
+  "provenance": {
+    "created_at": "2026-06-29 05:20:31",
+    "updated_at": "2026-06-29 05:20:31"
+  },
+  "relationships": [],
+  "status": "active",
+  "type": "authority_db",
+  "version": "1.0.0"
+}

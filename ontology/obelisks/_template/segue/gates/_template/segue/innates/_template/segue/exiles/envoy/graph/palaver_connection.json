@@ -1,0 +1,36 @@
+{
+  "id": "envoy:palaver_connection",
+  "type": "runtime_dependency",
+  "source": "exile:palaver",
+  "target": "exile:envoy",
+  "relation": "delegates_persona_voice_resolution_to",
+  "direction": "palaver_to_envoy",
+  "authority": "runtime",
+  "conversation_owner": "palaver",
+  "persona_owner": "envoy",
+  "voice_owner": "envoy",
+  "provider_execution_owner": "opus",
+  "operations": [
+    "list_personas",
+    "resolve_persona",
+    "resolve_voice",
+    "synthesize_base64"
+  ],
+  "http_surface": {
+    "get": [
+      "/api/voice/personas",
+      "/api/voice/persona",
+      "/api/voice/resolve"
+    ],
+    "post": [
+      "/api/voice/synthesize"
+    ]
+  },
+  "persona_precedence": [
+    "request",
+    "workspace",
+    "default"
+  ],
+  "authority_transfer": false,
+  "description": "Palaver retains conversation ownership while delegating persona and voice resolution to Envoy. Envoy delegates provider execution to Opus."
+}

@@ -1,0 +1,43 @@
+{
+  "authoritative": false,
+  "authority_tier": "derived",
+  "canonical_id": "preview.synthetic.kindred-demo",
+  "deterministic_hash": "a628b8d8201eb63fcfdc16762433d187813da2af453e48788853a0f25caac59f",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "preview.synthetic.kindred-demo",
+  "kind": "preview_family",
+  "label": "Synthetic Kindred State Demonstration",
+  "namespace": "preview.kindred",
+  "path": null,
+  "placement": {
+    "domain": "preview",
+    "node": "preview.synthetic.kindred-demo",
+    "parent": "savant-runtime",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "preview.synthetic.lineage.demo",
+    "rank": 10,
+    "slot": "95_preview_examples",
+    "state": "provisional",
+    "synthetic": true
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "reason": "isolated synthetic state demonstration",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "preview.synthetic.lineage.active",
+    "preview.synthetic.lineage.degraded",
+    "preview.synthetic.lineage.demo",
+    "preview.synthetic.lineage.provisional",
+    "preview.synthetic.lineage.quarantined",
+    "preview.synthetic.lineage.superseded"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "family",
+  "source_record": {},
+  "state": "provisional",
+  "synthetic": true
+}

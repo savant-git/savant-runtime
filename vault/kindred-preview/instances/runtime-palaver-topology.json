@@ -1,0 +1,97 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:runtime/palaver/topology",
+  "deterministic_hash": "eebc67ef28d6c142c9fddcf32efd48a1ab20033f2b2296666e4c96498c2107e7",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "runtime/palaver/topology",
+  "kind": "directory",
+  "label": "topology",
+  "namespace": "preview.kindred",
+  "path": "runtime/palaver/topology",
+  "placement": {
+    "domain": "filesystem",
+    "node": "runtime/palaver/topology",
+    "parent": "runtime/palaver",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.6af5c8e19762c4a8a2a8",
+    "rank": 120,
+    "slot": "40_runtime",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.6af5c8e19762c4a8a2a8",
+    "lineage.composition.b5bd9aaced303250cb82"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:runtime/palaver/topology",
+    "children": [
+      "runtime/palaver/topology/topology_compiler.py"
+    ],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "runtime/palaver/topology",
+    "kind": "directory",
+    "label": "topology",
+    "legacy_id": "runtime/palaver/topology",
+    "lineage": [
+      "runtime/palaver"
+    ],
+    "metadata": {
+      "canonical_id": "fs:runtime/palaver/topology",
+      "child_modes": {
+        "projecting": [
+          "fs:runtime/palaver/topology/topology_compiler.py"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:runtime/palaver/topology/topology_compiler.py"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:runtime/palaver"
+        ]
+      },
+      "projected_id": "runtime/palaver/topology",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "runtime/palaver"
+    ],
+    "path": "runtime/palaver/topology",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "runtime/palaver/topology",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.6af5c8e19762c4a8a2a8",
+      "lineage.composition.b5bd9aaced303250cb82"
+    ],
+    "size": 12,
+    "sons": [
+      "runtime/palaver/topology/topology_compiler.py"
+    ]
+  },
+  "state": "active",
+  "synthetic": false
+}

@@ -1,0 +1,772 @@
+.palaver-graph {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  min-height: 420px;
+
+  overflow: hidden;
+
+  touch-action: none;
+  user-select: none;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(215, 255, 84, 0.045),
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 30% 30%,
+      rgba(141, 104, 255, 0.06),
+      transparent 36%
+    );
+}
+
+.palaver-graph::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background-image:
+    radial-gradient(
+      rgba(255, 255, 255, 0.09) 0.7px,
+      transparent 0.7px
+    );
+
+  background-size: 21px 21px;
+
+  mask-image:
+    radial-gradient(
+      circle,
+      black,
+      transparent 76%
+    );
+
+  opacity: 0.17;
+}
+
+.palaver-graph-world {
+  position: absolute;
+  inset: 0;
+
+  transform-origin: center;
+
+  will-change: transform;
+}
+
+.palaver-graph-lines {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: visible;
+
+  pointer-events: none;
+}
+
+.palaver-graph-lines line {
+  stroke:
+    rgba(
+      244,
+      242,
+      236,
+      0.12
+    );
+
+  stroke-width: 0.8;
+
+  vector-effect:
+    non-scaling-stroke;
+
+  transition:
+    stroke 180ms ease,
+    stroke-width 180ms ease;
+}
+
+.palaver-graph-lines line.active {
+  stroke:
+    rgba(
+      215,
+      255,
+      84,
+      0.72
+    );
+
+  stroke-width: 1.8;
+}
+
+.palaver-graph-node {
+  position: absolute;
+
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+
+  width: 108px;
+
+  padding: 0;
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    );
+
+  border: 0;
+
+  cursor: pointer;
+
+  color: #8d9189;
+  background: transparent;
+
+  text-align: center;
+}
+
+.palaver-graph-node i {
+  display: block;
+
+  width: 9px;
+  height: 9px;
+
+  border: 2px solid
+    rgba(
+      215,
+      255,
+      84,
+      0.62
+    );
+
+  border-radius: 50%;
+
+  background: #11130f;
+
+  box-shadow:
+    0 0 0 5px
+      rgba(
+        215,
+        255,
+        84,
+        0.035
+      );
+
+  transition:
+    transform 220ms ease,
+    background 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.palaver-graph-node span {
+  max-width: 108px;
+
+  overflow: hidden;
+
+  font-size: 8px;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  transition:
+    color 180ms ease;
+}
+
+.palaver-graph-node:hover,
+.palaver-graph-node.active {
+  color: var(--paper);
+}
+
+.palaver-graph-node:hover i {
+  transform: scale(1.35);
+
+  box-shadow:
+    0 0 0 9px
+      rgba(
+        215,
+        255,
+        84,
+        0.05
+      );
+}
+
+.palaver-graph-node.active i {
+  transform: scale(1.45);
+
+  background: var(--signal);
+
+  box-shadow:
+    0 0 30px
+      rgba(
+        215,
+        255,
+        84,
+        0.35
+      );
+}
+
+.palaver-graph-controls {
+  position: absolute;
+  z-index: 8;
+  top: 14px;
+  left: 14px;
+
+  display: flex;
+  gap: 5px;
+}
+
+.palaver-graph-controls button {
+  display: grid;
+  place-items: center;
+
+  width: 34px;
+  height: 34px;
+
+  border: 1px solid var(--line);
+  border-radius: 11px;
+
+  cursor: pointer;
+
+  color: #9da097;
+  background:
+    rgba(
+      10,
+      11,
+      10,
+      0.84
+    );
+
+  backdrop-filter:
+    blur(15px);
+}
+
+.palaver-graph-controls button:hover {
+  color: var(--paper);
+  border-color:
+    var(--line-strong);
+}
+
+.palaver-graph-counter {
+  position: absolute;
+  z-index: 8;
+  top: 14px;
+  right: 14px;
+
+  display: grid;
+  grid-template-columns:
+    auto auto;
+  gap: 2px 6px;
+
+  padding: 8px 10px;
+
+  border: 1px solid var(--line);
+  border-radius: 11px;
+
+  background:
+    rgba(
+      10,
+      11,
+      10,
+      0.84
+    );
+
+  backdrop-filter:
+    blur(15px);
+}
+
+.palaver-graph-counter strong {
+  color: var(--paper);
+
+  font-size: 10px;
+}
+
+.palaver-graph-counter span {
+  color: #71756d;
+
+  font-size: 8px;
+}
+
+.palaver-graph-inspector {
+  position: absolute;
+  z-index: 9;
+  right: 14px;
+  bottom: 14px;
+  left: 14px;
+
+  display: grid;
+  grid-template-columns:
+    auto
+    minmax(0, 1fr)
+    auto;
+  align-items: center;
+  gap: 10px;
+
+  padding: 12px 13px;
+
+  border: 1px solid var(--line);
+  border-radius: 15px;
+
+  background:
+    rgba(
+      13,
+      14,
+      13,
+      0.93
+    );
+
+  box-shadow:
+    0 14px 50px
+      rgba(
+        0,
+        0,
+        0,
+        0.28
+      );
+
+  backdrop-filter:
+    blur(18px);
+}
+
+.palaver-graph-inspector header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  color: var(--signal);
+
+  font-size: 8px;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.palaver-graph-inspector > strong {
+  min-width: 0;
+
+  overflow: hidden;
+
+  color: var(--paper);
+
+  font-size: 11px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.palaver-graph-inspector small {
+  display: none;
+}
+
+.palaver-graph-inspector > button {
+  padding: 8px 10px;
+
+  border: 1px solid
+    rgba(
+      215,
+      255,
+      84,
+      0.18
+    );
+
+  border-radius: 9px;
+
+  cursor: pointer;
+
+  color: var(--signal);
+  background:
+    rgba(
+      215,
+      255,
+      84,
+      0.045
+    );
+
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.palaver-graph-empty {
+  display: grid;
+  place-items: center;
+
+  height: 100%;
+  min-height: 360px;
+
+  color: #767a72;
+
+  font-size: 11px;
+}
+
+.palaver-file-browser,
+.palaver-runtime-view,
+.palaver-raw-view {
+  height: 100%;
+  min-height: 0;
+}
+
+.palaver-file-browser {
+  display: grid;
+  grid-template-rows:
+    auto
+    minmax(0, 1fr);
+}
+
+.palaver-file-search {
+  display: grid;
+  grid-template-columns:
+    auto
+    minmax(0, 1fr)
+    auto;
+  align-items: center;
+  gap: 9px;
+
+  padding: 12px 14px;
+
+  border-bottom:
+    1px solid var(--line);
+
+  color: #696d65;
+}
+
+.palaver-file-search input {
+  min-width: 0;
+
+  padding: 0;
+
+  border: 0;
+  outline: 0;
+
+  color: var(--paper);
+  background: transparent;
+
+  font-size: 11px;
+}
+
+.palaver-file-search span {
+  min-width: 26px;
+
+  color: #666a62;
+
+  font-size: 8px;
+  text-align: right;
+}
+
+.palaver-file-list {
+  min-height: 0;
+
+  padding: 7px;
+
+  overflow: auto;
+}
+
+.palaver-file-list button {
+  display: grid;
+  grid-template-columns:
+    auto
+    minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+
+  width: 100%;
+  min-height: 47px;
+
+  padding: 8px 10px;
+
+  border: 1px solid transparent;
+  border-radius: 11px;
+
+  cursor: pointer;
+
+  color: #777b73;
+  background: transparent;
+
+  text-align: left;
+
+  transition:
+    color 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease;
+}
+
+.palaver-file-list button:hover {
+  color: var(--paper);
+  border-color: var(--line);
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.035
+    );
+}
+
+.palaver-file-list button > svg {
+  color: var(--signal);
+}
+
+.palaver-file-list button span {
+  display: grid;
+  gap: 3px;
+
+  min-width: 0;
+}
+
+.palaver-file-list strong,
+.palaver-file-list small {
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.palaver-file-list strong {
+  color: #b8bbb4;
+
+  font-size: 9px;
+  font-weight: 650;
+}
+
+.palaver-file-list small {
+  color: #62665f;
+
+  font-size: 8px;
+}
+
+.palaver-runtime-view {
+  display: grid;
+  grid-template-rows:
+    auto
+    minmax(0, 1fr);
+}
+
+.palaver-runtime-summary {
+  display: grid;
+  grid-template-columns:
+    auto
+    minmax(0, 1fr)
+    auto;
+  align-items: center;
+  gap: 9px;
+
+  padding: 13px 15px;
+
+  border-bottom:
+    1px solid var(--line);
+}
+
+.palaver-runtime-summary strong {
+  color: var(--signal);
+
+  font-size: 20px;
+  font-weight: 530;
+  letter-spacing: -0.04em;
+}
+
+.palaver-runtime-summary span {
+  color: #74786f;
+
+  font-size: 9px;
+}
+
+.palaver-runtime-summary button {
+  padding: 8px 10px;
+
+  border: 1px solid var(--line);
+  border-radius: 9px;
+
+  cursor: pointer;
+
+  color: #b6b9b2;
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.03
+    );
+
+  font-size: 9px;
+}
+
+.palaver-runtime-facts {
+  min-height: 0;
+
+  padding: 7px;
+
+  overflow: auto;
+}
+
+.palaver-runtime-facts article {
+  display: grid;
+  grid-template-columns:
+    minmax(130px, 0.7fr)
+    minmax(0, 1fr);
+  gap: 12px;
+
+  padding: 10px;
+
+  border-bottom:
+    1px solid
+      rgba(
+        244,
+        242,
+        236,
+        0.055
+      );
+}
+
+.palaver-runtime-facts span {
+  overflow: hidden;
+
+  color: #686c64;
+
+  font-size: 8px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.palaver-runtime-facts strong {
+  color: #b8bbb4;
+
+  font-family:
+    "SFMono-Regular",
+    Consolas,
+    monospace;
+  font-size: 9px;
+  font-weight: 430;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.palaver-raw-view {
+  position: relative;
+
+  overflow: auto;
+}
+
+.palaver-raw-view > button {
+  position: sticky;
+  z-index: 2;
+  top: 12px;
+  left:
+    calc(
+      100% - 76px
+    );
+
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  width: max-content;
+
+  padding: 7px 9px;
+
+  border: 1px solid var(--line);
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  color: #999d94;
+  background:
+    rgba(
+      10,
+      11,
+      10,
+      0.88
+    );
+
+  font-size: 8px;
+}
+
+.palaver-raw-view pre {
+  margin: -18px 0 0;
+  padding: 22px;
+
+  color: #94988f;
+
+  font-family:
+    "SFMono-Regular",
+    Consolas,
+    monospace;
+  font-size: 9px;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.palaver-voice-wave {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+
+  height: 14px;
+}
+
+.palaver-voice-wave i {
+  width: 2px;
+  height: 5px;
+
+  border-radius: 999px;
+
+  background: currentColor;
+
+  animation:
+    palaver-voice-wave
+    700ms
+    ease-in-out
+    infinite
+    alternate;
+}
+
+.palaver-voice-wave i:nth-child(2) {
+  animation-delay: 100ms;
+}
+
+.palaver-voice-wave i:nth-child(3) {
+  animation-delay: 200ms;
+}
+
+.palaver-voice-wave i:nth-child(4) {
+  animation-delay: 300ms;
+}
+
+@keyframes palaver-voice-wave {
+  to {
+    height: 13px;
+  }
+}
+
+@media (max-width: 760px) {
+  .palaver-graph {
+    min-height: 360px;
+  }
+
+  .palaver-graph-inspector {
+    grid-template-columns:
+      auto
+      minmax(0, 1fr);
+  }
+
+  .palaver-graph-inspector > button {
+    grid-column:
+      1 / -1;
+  }
+
+  .palaver-runtime-facts article {
+    grid-template-columns:
+      1fr;
+    gap: 5px;
+  }
+}
+
+@media (
+  prefers-reduced-motion:
+    reduce
+) {
+  .palaver-voice-wave i {
+    animation: none;
+  }
+}

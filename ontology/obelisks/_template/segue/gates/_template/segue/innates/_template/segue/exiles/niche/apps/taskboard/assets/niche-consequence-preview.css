@@ -1,0 +1,279 @@
+/*
+savant niche consequence preview
+projection-only interface layer
+authority_effect: none
+*/
+
+:root {
+  --niche-consequence-edge:
+    color-mix(
+      in srgb,
+      var(--savant-primary, #7fe7ff) 32%,
+      transparent
+    );
+
+  --niche-consequence-certain:
+    var(--savant-ready, #8fffb0);
+
+  --niche-consequence-connected:
+    var(--savant-primary, #7fe7ff);
+
+  --niche-consequence-unknown:
+    var(--savant-unknown, #9aa6aa);
+}
+
+.niche-consequence-preview {
+  position: fixed;
+  inset-inline-end:
+    max(
+      0.75rem,
+      env(safe-area-inset-right)
+    );
+  inset-block-start:
+    max(
+      5rem,
+      env(safe-area-inset-top)
+    );
+  z-index: 58;
+  inline-size:
+    min(
+      25rem,
+      calc(100vw - 1.5rem)
+    );
+  max-block-size:
+    min(70dvh, 42rem);
+  overflow: auto;
+  overscroll-behavior: contain;
+  border:
+    1px solid
+    var(--niche-consequence-edge);
+  border-radius: 2px;
+  background:
+    color-mix(
+      in srgb,
+      var(--savant-background, #050708) 97%,
+      transparent
+    );
+  box-shadow:
+    0 1.4rem 4rem
+    rgb(0 0 0 / 0.38);
+}
+
+.niche-consequence-preview[hidden] {
+  display: none !important;
+}
+
+.niche-consequence-head {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 1;
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.72rem;
+  border-block-end:
+    1px solid
+    var(--niche-consequence-edge);
+  background:
+    var(--savant-background, #050708);
+}
+
+.niche-consequence-kicker,
+.niche-consequence-label,
+.niche-consequence-close,
+.niche-consequence-chip {
+  font-family:
+    ui-monospace,
+    "SFMono-Regular",
+    Consolas,
+    monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.niche-consequence-kicker {
+  margin: 0 0 0.2rem;
+  color:
+    var(--savant-primary, #7fe7ff);
+  font-size: 0.56rem;
+}
+
+.niche-consequence-title {
+  margin: 0;
+  color:
+    var(--savant-text, #eef7f8);
+  font:
+    720 0.95rem/1.1
+    system-ui,
+    sans-serif;
+}
+
+.niche-consequence-close {
+  min-inline-size: 2.75rem;
+  min-block-size: 2.75rem;
+  border:
+    1px solid
+    var(--niche-consequence-edge);
+  color:
+    var(--savant-text, #eef7f8);
+  background:
+    transparent;
+  cursor: pointer;
+}
+
+.niche-consequence-close:hover,
+.niche-consequence-close:focus-visible {
+  outline: none;
+  border-color:
+    var(--savant-primary, #7fe7ff);
+}
+
+.niche-consequence-body {
+  display: grid;
+  gap: 0.75rem;
+  padding: 0.75rem;
+}
+
+.niche-consequence-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.niche-consequence-chip {
+  padding: 0.32rem 0.42rem;
+  border:
+    1px solid
+    var(--niche-consequence-edge);
+  color:
+    var(--savant-text-muted, #879397);
+  font-size: 0.54rem;
+}
+
+.niche-consequence-section {
+  padding-block-start: 0.65rem;
+  border-block-start:
+    1px solid
+    var(--niche-consequence-edge);
+}
+
+.niche-consequence-section h3 {
+  margin: 0 0 0.5rem;
+  color:
+    var(--savant-text-muted, #879397);
+  font:
+    700 0.59rem/1.2
+    ui-monospace,
+    monospace;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.niche-consequence-list {
+  display: grid;
+  gap: 0.38rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.niche-consequence-item {
+  position: relative;
+  padding:
+    0.55rem
+    0.58rem
+    0.55rem
+    0.78rem;
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--savant-border, #263237) 76%,
+      transparent
+    );
+  background:
+    color-mix(
+      in srgb,
+      var(--savant-surface, #0b1113) 78%,
+      transparent
+    );
+  color:
+    var(--savant-text, #eef7f8);
+  font:
+    0.68rem/1.45
+    ui-monospace,
+    monospace;
+  overflow-wrap: anywhere;
+}
+
+.niche-consequence-item::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: 3px;
+  background:
+    var(--niche-consequence-unknown);
+}
+
+.niche-consequence-item[data-kind="certain"]::before {
+  background:
+    var(--niche-consequence-certain);
+}
+
+.niche-consequence-item[data-kind="connected"]::before {
+  background:
+    var(--niche-consequence-connected);
+}
+
+.niche-consequence-item[data-kind="unknown"]::before {
+  background:
+    var(--niche-consequence-unknown);
+}
+
+.niche-consequence-empty {
+  padding: 0.65rem;
+  border:
+    1px dashed
+    var(--niche-consequence-edge);
+  color:
+    var(--savant-text-muted, #879397);
+  font:
+    0.65rem/1.5
+    ui-monospace,
+    monospace;
+}
+
+@media (max-width: 700px) {
+  .niche-consequence-preview {
+    inset-inline:
+      max(
+        0.45rem,
+        env(safe-area-inset-left)
+      )
+      max(
+        0.45rem,
+        env(safe-area-inset-right)
+      );
+    inset-block-start: auto;
+    inset-block-end:
+      max(
+        0.45rem,
+        env(safe-area-inset-bottom)
+      );
+    inline-size: auto;
+    max-block-size: 68dvh;
+  }
+}
+
+@media (forced-colors: active) {
+  .niche-consequence-preview,
+  .niche-consequence-close,
+  .niche-consequence-chip,
+  .niche-consequence-item {
+    border-color: CanvasText;
+  }
+}

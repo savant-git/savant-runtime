@@ -1,0 +1,60 @@
+{
+  "schema": "savant.extr.policy.v3",
+  "projection_only": true,
+  "authority_effect": "none",
+  "owner": "extr",
+  "runtime_root": "/root/savant-runtime",
+  "verified_entrypoint": "/root/savant-runtime/bin/extract_savant_jsonl.py",
+  "public_entrypoint": "/usr/local/bin/extr",
+  "output": {
+    "format": "jsonl",
+    "atomic": true,
+    "deterministic_fingerprints": true,
+    "receipts": true,
+    "resume": true
+  },
+  "input": {
+    "chatgpt_conversations_json": true,
+    "zip": true,
+    "gzip": true,
+    "bzip2": true,
+    "xz": true,
+    "lzma": true
+  },
+  "selection": {
+    "exact_signal_scoring": true,
+    "branch_reconstruction": true,
+    "current_branch_mode": true,
+    "all_branch_mode": true,
+    "context_windows": true,
+    "role_filtering": true,
+    "date_filtering": true,
+    "length_filtering": true,
+    "include_terms": true,
+    "exclude_terms": true,
+    "optional_fuzzy_augmentation": true
+  },
+  "optional_dependencies": {
+    "ijson": {
+      "purpose": "bounded-memory streaming",
+      "required": false,
+      "fallback": "stdlib json"
+    },
+    "orjson": {
+      "purpose": "accelerated json decode and jsonl serialization",
+      "required": false,
+      "fallback": "stdlib json"
+    },
+    "rapidfuzz": {
+      "purpose": "typo-tolerant relevance augmentation",
+      "required": false,
+      "fallback": "exact deterministic scoring"
+    }
+  },
+  "authority": {
+    "extraction_creates_authority": false,
+    "extraction_creates_evidence_projection": true,
+    "source_lineage_required": true,
+    "rebuildable": true
+  }
+}

@@ -1,0 +1,271 @@
+{
+  "id": "quirk.nocturne.scribe",
+  "kind": "quirk",
+  "level": 2,
+  "version": "2.1",
+  "status": "canonical",
+  "parent_prodigal": "nocturne",
+  "identity": {
+    "name": "Scribe",
+    "domain": "Content Extraction & Entity Recognition",
+    "aliases": [],
+    "historical_names": []
+  },
+  "purpose": "Structured data extraction, parsing, and entity recognition from dark web sources.",
+  "composition": {
+    "minimum_children": 2,
+    "maximum_children": 4,
+    "children": [],
+    "shared_children": [],
+    "composition_policy": "Compose authoritative children through typed relationships without duplicating their source authority."
+  },
+  "dna": {
+    "core_traits": [
+      "content_parsing",
+      "entity_extraction",
+      "structured_output",
+      "contextual_analysis"
+    ]
+  },
+  "authority": {
+    "owner": "quirk.nocturne.scribe",
+    "class": "identity_definition",
+    "precedence": 700,
+    "source": "edifices/identity/exiles/opus/prodigals/nocturne/quirks/scribe/definition.json"
+  },
+  "contracts": {
+    "inputs": [
+      {
+        "name": "extraction_request",
+        "schema": "scribe_contracts.ExtractionRequest",
+        "required": true
+      },
+      {
+        "name": "extraction_policy",
+        "schema": "scribe_contracts.ExtractionPolicy",
+        "required": true
+      },
+      {
+        "name": "source_document",
+        "schema": "scribe_contracts.SourceDocument",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "extracted_observation",
+        "schema": "scribe_contracts.ExtractedObservation",
+        "required": false
+      },
+      {
+        "name": "extraction_index",
+        "schema": "scribe_contracts.ExtractionIndex",
+        "required": true
+      },
+      {
+        "name": "scribe_result",
+        "schema": "scribe_contracts.ScribeResult",
+        "required": true
+      }
+    ],
+    "errors": [
+      {
+        "code": "implementation.unavailable",
+        "condition": "Required executable behavior is absent, incomplete, or unverified.",
+        "recoverable": true
+      },
+      {
+        "code": "scribe.runtime.failure",
+        "condition": "Source parsing or extraction cannot complete under the declared policy.",
+        "recoverable": true
+      }
+    ]
+  },
+  "capabilities": [
+    {
+      "id": "quirk.nocturne.scribe.declared_purpose",
+      "description": "Structured data extraction, parsing, and entity recognition from dark web sources.",
+      "status": "proposed"
+    },
+    {
+      "id": "quirk.nocturne.scribe.format_detection",
+      "description": "Detect text, Markdown, JSON, and HTML source formats without external access.",
+      "status": "active"
+    },
+    {
+      "id": "quirk.nocturne.scribe.structured_extraction",
+      "description": "Extract headings, paragraphs, links, text, and JSON scalar observations.",
+      "status": "active"
+    },
+    {
+      "id": "quirk.nocturne.scribe.source_span_preservation",
+      "description": "Preserve character and line spans for every extracted observation.",
+      "status": "active"
+    },
+    {
+      "id": "quirk.nocturne.scribe.provenance_preservation",
+      "description": "Preserve source references and transformation lineage through deterministic extraction.",
+      "status": "active"
+    },
+    {
+      "id": "quirk.nocturne.scribe.extractor_adapter",
+      "description": "Attach optional specialized parsers through explicit contracts and apertures.",
+      "status": "proposed"
+    }
+  ],
+  "dependencies": {
+    "required": [
+      {
+        "id": "python.pydantic",
+        "kind": "library",
+        "required": true
+      }
+    ],
+    "optional": [
+      {
+        "id": "scribe.extractor_adapter",
+        "kind": "aperture",
+        "required": false
+      }
+    ],
+    "runtime": [
+      {
+        "id": "nocturne.scribe.contracts",
+        "kind": "contract_module",
+        "required": true
+      }
+    ],
+    "external": []
+  },
+  "relationships": [
+    {
+      "type": "composition",
+      "target": "prodigal.nocturne",
+      "direction": "outbound"
+    }
+  ],
+  "lineage": {
+    "parents": [
+      "prodigal.nocturne"
+    ],
+    "sources": [
+      "edifices/identity/exiles/opus/prodigals/nocturne/quirks/scribe/definition.json"
+    ],
+    "supersedes": [],
+    "superseded_by": []
+  },
+  "provenance": {
+    "created_from": [
+      "edifices/identity/exiles/opus/prodigals/nocturne/quirks/scribe/definition.json",
+      "edifices/identity/exiles/opus/prodigals/nocturne/quirks/scribe/runtime/scribe_runtime.py",
+      "edifices/identity/exiles/opus/prodigals/nocturne/quirks/scribe/tests/test_scribe_runtime.py",
+      "edifices/identity/exiles/opus/prodigals/nocturne/contracts/scribe_contracts.py"
+    ],
+    "captured_by": "savant.identity-quality.upgrader",
+    "source_hashes": {
+      "edifices/identity/exiles/opus/prodigals/nocturne/quirks/scribe/definition.json": "77a818ce3451ee0e37d2ba39460fbd5fc577b15736847d039455876496abceb5",
+      "edifices/identity/exiles/opus/prodigals/nocturne/quirks/scribe/runtime/scribe_runtime.py": "088eb3113f5e7945649c76791e98d3d598648a227fcf3de078ac49bf4672b8f8",
+      "edifices/identity/exiles/opus/prodigals/nocturne/quirks/scribe/tests/test_scribe_runtime.py": "20e69ff6dbeb9dbf6cd150b8852040b6a3ce3a7a1df0803fe75afffe531d2d93",
+      "edifices/identity/exiles/opus/prodigals/nocturne/contracts/scribe_contracts.py": "53612e600632f779952cf1abdb5295be3413358d6ba04f21ac337d968f9865cb"
+    }
+  },
+  "runtime": {
+    "implementation": "partial",
+    "entrypoints": [
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/apps/webui-nextgen/node_modules/tunnel-rat/node_modules/zustand/esm/middleware/subscribeWithSelector.d.ts",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/apps/webui-nextgen/node_modules/tunnel-rat/node_modules/zustand/middleware/subscribeWithSelector.d.ts",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/apps/webui-nextgen/node_modules/tunnel-rat/node_modules/zustand/ts3.4/esm/middleware/subscribeWithSelector.d.ts",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/apps/webui-nextgen/node_modules/tunnel-rat/node_modules/zustand/ts3.4/middleware/subscribeWithSelector.d.ts",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/apps/webui-nextgen/node_modules/zod/src/v4/classic/tests/describe-meta-checks.test.ts",
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/apps/webui-nextgen/node_modules/zustand/middleware/subscribeWithSelector.d.ts",
+      "tools/sdump-enterprise/vendor/s3transfer/subscribers.py",
+      "edifices/identity/exiles/opus/prodigals/nocturne/quirks/scribe/runtime/scribe_runtime.py"
+    ],
+    "hooks": [],
+    "deterministic": true,
+    "side_effects": [],
+    "commands": [
+      "bin/scribectl"
+    ]
+  },
+  "security": {
+    "boundary": "Read supplied content only. Perform no network, filesystem-write, subprocess, secret, or provider access.",
+    "permissions": [],
+    "data_classification": "sensitive",
+    "network_policy": "offline_only",
+    "sandbox": true
+  },
+  "observability": {
+    "metrics": [
+      "execution_count",
+      "success_count",
+      "failure_count",
+      "duration_seconds",
+      "input_bytes",
+      "observation_count",
+      "source_format"
+    ],
+    "events": [
+      "scribe.request.accepted",
+      "scribe.format.detected",
+      "scribe.observation.extracted",
+      "scribe.index.generated",
+      "scribe.execution.failed"
+    ],
+    "health": [
+      "definition_valid",
+      "contracts_available",
+      "runtime_importable",
+      "tests_passing",
+      "source_spans_bounded"
+    ],
+    "audit": true
+  },
+  "validation": {
+    "unit_tests": [
+      "edifices/identity/exiles/opus/prodigals/nocturne/quirks/scribe/tests/test_scribe_runtime.py"
+    ],
+    "integration_tests": [],
+    "property_tests": [
+      "equal_requests_produce_equal_indexes",
+      "canonical_serialization_is_stable",
+      "source_spans_are_bounded",
+      "heading_extraction_preserves_value"
+    ],
+    "security_tests": [
+      "disallowed_format_fails_closed",
+      "runtime_performs_no_external_access"
+    ],
+    "acceptance": [
+      "Equal source material and policies produce equal extraction digests.",
+      "Every observation preserves exact bounded source spans.",
+      "Every observation preserves source provenance.",
+      "Unsupported formats fail closed.",
+      "Runtime performs no external access.",
+      "Specialized parsers remain optional attachments."
+    ]
+  },
+  "lifecycle": {
+    "state": "canonical",
+    "allowed_transitions": [
+      "proposed",
+      "canonical",
+      "active",
+      "deprecated",
+      "superseded",
+      "retired"
+    ]
+  },
+  "apertures": [
+    {
+      "id": "quirk.nocturne.scribe.future",
+      "purpose": "Admit future compatible attachments without replacing this identity.",
+      "admission": "Requires compatible contract, validated authority, explicit lineage, and complete provenance."
+    },
+    {
+      "id": "quirk.nocturne.scribe.extractor",
+      "purpose": "Admit compatible specialized extractors without replacing Scribe.",
+      "admission": "Requires deterministic behavior, versioned contracts, exact source-span provenance, security review, and complete tests."
+    }
+  ]
+}

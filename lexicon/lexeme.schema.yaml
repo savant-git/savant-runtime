@@ -1,0 +1,66 @@
+schema: lexeme
+
+version: 1
+
+fields:
+
+  id:
+    type: string
+    required: true
+
+  word:
+    type: string
+    required: true
+    unique: true
+
+  class:
+    type: string
+    required: true
+
+  definition:
+    type: string
+    required: true
+
+  authority:
+    type: boolean
+    required: true
+
+  reserved:
+    type: boolean
+    required: true
+
+  aliases:
+    type: array
+
+  parent:
+    type: string
+
+  children:
+    type: array
+
+  related:
+    type: array
+
+  opposite:
+    type: string
+
+  supersedes:
+    type: string
+
+  superseded_by:
+    type: string
+
+  validators:
+    type: array
+
+  projections:
+    type: array
+
+  provenance:
+    type: array
+
+  lineage:
+    type: array
+
+  metadata:
+    type: object

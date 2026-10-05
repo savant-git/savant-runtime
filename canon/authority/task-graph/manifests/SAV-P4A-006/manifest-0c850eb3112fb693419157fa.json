@@ -1,0 +1,166 @@
+{
+  "artifacts": [],
+  "attestations": [],
+  "content_digest": "0c850eb3112fb693419157faf61f8768a086b218ccf965f6e1725f7a4e3e022c",
+  "decisions": [],
+  "events": [],
+  "evidence": [],
+  "generated_at": "2026-08-02T19:39:32+00:00",
+  "graph": {
+    "path": "authority/task-graph/masterplan.json",
+    "schema_version": "1.0.0",
+    "semantic_digest": "484218151f172c4a2385797ad7373ba71354df6c5644552327276edd765c51c2",
+    "sha256": "f0000e11a85776acbe21e02f7a72207a508bce87f81f7b2d4a90eb52e4d5aadd"
+  },
+  "manifest_id": "manifest-0c850eb3112fb693419157fa",
+  "receipts": [],
+  "schema": "savant://niche/masterplan/artifact-manifest/1.0.0",
+  "segues": [
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "edifices/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-42928f421ed792c2fbc57f9e",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "edifices/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "edifices/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P4A-006",
+      "target": "SAV-P4A-005",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "edifices/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-8f9e0a3f3e5ef3067899ac06",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "edifices/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "edifices/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P4A-009",
+      "target": "SAV-P4A-006",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "edifices/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-fd5c2ada4bda9f274c966142",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "edifices/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "edifices/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P4A-009",
+      "target": "SAV-P4A-006",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    }
+  ],
+  "statistics": {
+    "attestation_count": 0,
+    "decision_count": 0,
+    "declared_output_count": 0,
+    "event_count": 0,
+    "evidence_count": 0,
+    "existing_output_count": 0,
+    "missing_output_count": 0,
+    "receipt_count": 0,
+    "segue_count": 3
+  },
+  "task": {
+    "acceptance": [
+      "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+    ],
+    "authority": {
+      "accepted_at": null,
+      "accepted_by": null,
+      "authority_class": "project-owner-directed",
+      "confidence": 1.0,
+      "source": "edifices/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+      "state": "proposed",
+      "tier": 2
+    },
+    "priority": {
+      "authority_locked": false,
+      "band": "P4A",
+      "ordinal": 6,
+      "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+    },
+    "purpose": "Build task completion evidence and attestation gates",
+    "status": "proposed",
+    "title": "Build task completion evidence and attestation gates"
+  },
+  "task_id": "SAV-P4A-006"
+}

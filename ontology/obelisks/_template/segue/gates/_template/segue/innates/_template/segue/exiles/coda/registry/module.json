@@ -1,0 +1,46 @@
+{
+  "id": "coda",
+  "type": "exile",
+  "status": "active",
+  "path": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/coda",
+  "composition_level": "exile",
+  "singular_purpose": "Perform controlled durable mutation of the Savant filesystem.",
+  "owners": {
+    "filesystem_mutation": "coda",
+    "conversation": "palaver"
+  },
+  "runtime": {
+    "mutation": "runtime/mutation.py",
+    "palaver_bridge": "runtime/palaver_bridge.py"
+  },
+  "operations": [
+    "replace_text"
+  ],
+  "guarantees": [
+    "root_confinement",
+    "protected_path_rejection",
+    "optimistic_concurrency",
+    "atomic_replacement",
+    "post_write_sha256_verification",
+    "durable_mutation_receipts"
+  ],
+  "contracts": [
+    "api/palaver_mutation_contract.json"
+  ],
+  "dependencies": [],
+  "dependents": [
+    "palaver"
+  ],
+  "authority_transfer": false,
+  "authority_effect": "none",
+  "contains": [
+    "api",
+    "composition",
+    "graph",
+    "interface",
+    "introspection",
+    "registry",
+    "runtime",
+    "segue"
+  ]
+}

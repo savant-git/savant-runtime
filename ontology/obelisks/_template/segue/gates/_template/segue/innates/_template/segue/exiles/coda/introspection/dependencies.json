@@ -1,0 +1,32 @@
+{
+  "id": "coda.dependencies",
+  "owner": "coda",
+  "type": "dependency_projection",
+  "status": "active",
+  "dependencies": [],
+  "dependents": [
+    {
+      "id": "exile:palaver",
+      "relation": "requests_filesystem_mutation_from",
+      "contract": "api/palaver_mutation_contract.json",
+      "authority_transfer": false
+    }
+  ],
+  "runtime_dependencies": [
+    {
+      "id": "python-standard-library",
+      "required": true,
+      "modules": [
+        "hashlib",
+        "json",
+        "os",
+        "tempfile",
+        "datetime",
+        "pathlib",
+        "typing"
+      ]
+    }
+  ],
+  "external_dependencies": [],
+  "authority_transfer": false
+}

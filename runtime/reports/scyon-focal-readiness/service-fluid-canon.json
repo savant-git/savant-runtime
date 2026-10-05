@@ -1,0 +1,31 @@
+{
+  "authority_mutation_performed": false,
+  "authority_state": "projection",
+  "blockers": [
+    {
+      "code": "implementation-owner-unresolved",
+      "message": "No explicit implemented_through Scyon-bearing identity was found."
+    }
+  ],
+  "focal_creation_performed": false,
+  "implementation": {
+    "exists": true,
+    "path": "/root/savant-runtime/runtime/fluid_canon/engine.py",
+    "sha256": "825efc7a8cd5c6613408d8da4b407c9291896eb918491158c40447a85d2b71fa"
+  },
+  "next_legal_action": "Establish or reconcile explicit implemented_through authority before creating the Focal.",
+  "owner_resolution": {
+    "owner_id": null,
+    "owner_tier": null,
+    "receipt": "/root/savant-runtime/runtime/reports/scyon-owner-resolution/service-fluid-canon.json",
+    "receipt_sha256": "82fbb4acfbc43f9257e4da8d37a7a03dc026fc01958e0c911a7f40664fe67704",
+    "resolution": "unresolved"
+  },
+  "physical_mutation_performed": false,
+  "proposed_focal_kind": "living-canon",
+  "ready_for_focal_definition": false,
+  "ready_for_registry": false,
+  "registry_registration_performed": false,
+  "schema": "savant://assurance/service-backed-focal-readiness/1.0.0",
+  "service_id": "service:fluid-canon"
+}

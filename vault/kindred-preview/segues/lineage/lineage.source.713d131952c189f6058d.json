@@ -1,0 +1,76 @@
+{
+  "authoritative": false,
+  "child_profile": "child",
+  "deterministic_hash": "cf8498278ca754170334c235229b29c716b3e26659170a3750fe9ab8d11de6a6",
+  "domain": "global",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "lineage.source.713d131952c189f6058d",
+  "impeti": [],
+  "namespace": "preview.kindred",
+  "parent_profile": "mother",
+  "plane": "lineage",
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "role": "source",
+  "schema": "savant.kindred.preview.lineage_segue.v2",
+  "source": "line.example.strict",
+  "source_record": {
+    "axis": "substance",
+    "canonical_source": "line.example.strict",
+    "canonical_target": "snippet.example.header",
+    "continuation": "neutral",
+    "id": "lineage.source.713d131952c189f6058d",
+    "inheritance": {
+      "conflict_policy": "child_wins",
+      "exclude": [],
+      "fields": [
+        "dna",
+        "content",
+        "data",
+        "capabilities",
+        "metadata"
+      ],
+      "mode": "merge"
+    },
+    "inverse": "derived",
+    "kind": "source",
+    "metadata": {
+      "adapter": "authority",
+      "source_field": "lineage.composed_from",
+      "source_path": "/root/savant-runtime/ontology/obelisks/segue/authority_graph/instances/content/snippets/example_header.json"
+    },
+    "order": 0,
+    "propagation": {
+      "channels": [
+        "validation",
+        "projection",
+        "regeneration"
+      ],
+      "enabled": true
+    },
+    "provenance": {
+      "created_by": "authority_adapter",
+      "created_from": [
+        "/root/savant-runtime/ontology/obelisks/segue/authority_graph/instances/content/snippets/example_header.json"
+      ],
+      "source_files": [
+        "/root/savant-runtime/ontology/obelisks/segue/authority_graph/instances/content/snippets/example_header.json"
+      ]
+    },
+    "role": "source",
+    "scope": "global",
+    "source": "line.example.strict",
+    "status": "active",
+    "symbolic_child_alias": "child",
+    "symbolic_parent_alias": "mother",
+    "target": "snippet.example.header",
+    "weight": 2
+  },
+  "state": "active",
+  "synthetic": false,
+  "target": "snippet.example.header"
+}

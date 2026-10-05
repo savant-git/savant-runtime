@@ -1,0 +1,31 @@
+{
+  "authority_mutation_performed": false,
+  "authority_state": "projection",
+  "blockers": [
+    {
+      "code": "implementation-owner-unresolved",
+      "message": "No explicit implemented_through Scyon-bearing identity was found."
+    }
+  ],
+  "focal_creation_performed": false,
+  "implementation": {
+    "exists": true,
+    "path": "/root/savant-runtime/runtime/memory/engine.py",
+    "sha256": "565ba255f681d2f29ebfe9d4f28adee29de840908cfdcd2b0a2dfb5a22af1099"
+  },
+  "next_legal_action": "Establish or reconcile explicit implemented_through authority before creating the Focal.",
+  "owner_resolution": {
+    "owner_id": null,
+    "owner_tier": null,
+    "receipt": "/root/savant-runtime/runtime/reports/scyon-owner-resolution/service-memory.json",
+    "receipt_sha256": "81edd526d45253508054b11f0d40e995db597ea248c848576f4835509d9e7402",
+    "resolution": "unresolved"
+  },
+  "physical_mutation_performed": false,
+  "proposed_focal_kind": "living-memory",
+  "ready_for_focal_definition": false,
+  "ready_for_registry": false,
+  "registry_registration_performed": false,
+  "schema": "savant://assurance/service-backed-focal-readiness/1.0.0",
+  "service_id": "service:memory"
+}

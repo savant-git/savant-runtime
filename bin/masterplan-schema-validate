@@ -1,0 +1,101 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import subprocess
+import sys
+from pathlib import Path
+
+
+ROOT = Path("/root/savant-runtime")
+
+PYTHON = (
+    ROOT
+    / "bin"
+    / "identity-quality-python"
+)
+
+VALIDATOR = (
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "validate_masterplan_json_schema.py"
+)
+
+
+def execute(command: list[str]) -> int:
+    return subprocess.run(
+        command,
+        cwd=str(ROOT),
+        check=False
+    ).returncode
+
+
+def usage() -> int:
+    print(
+        """
+masterplan-schema-validate validate
+masterplan-schema-validate strict
+masterplan-schema-validate publish
+masterplan-schema-validate publish-strict
+masterplan-schema-validate [OPTIONS]
+"""
+    )
+
+    return 0
+
+
+def main() -> int:
+    arguments = sys.argv[1:]
+
+    if not arguments:
+        return usage()
+
+    command = arguments[0]
+    remaining = arguments[1:]
+
+    if command in {
+        "help",
+        "--help",
+        "-h"
+    }:
+        return usage()
+
+    mapped: list[str]
+
+    if command == "validate":
+        mapped = remaining
+
+    elif command == "strict":
+        mapped = [
+            *remaining,
+            "--strict"
+        ]
+
+    elif command == "publish":
+        mapped = [
+            *remaining,
+            "--publish-schema"
+        ]
+
+    elif command == "publish-strict":
+        mapped = [
+            *remaining,
+            "--publish-schema",
+            "--strict"
+        ]
+
+    else:
+        mapped = arguments
+
+    return execute(
+        [
+            str(PYTHON),
+            str(VALIDATOR),
+            *mapped
+        ]
+    )
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

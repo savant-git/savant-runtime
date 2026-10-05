@@ -1,0 +1,160 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+
+ROOT = Path(
+    "/root/savant-runtime"
+)
+
+if str(ROOT) not in sys.path:
+    sys.path.insert(
+        0,
+        str(ROOT),
+    )
+
+
+from runtime.cypher import (  # noqa: E402
+    Cypher,
+)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Cypher — Savant living "
+            "exchange substrate"
+        )
+    )
+
+    commands = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    commands.add_parser(
+        "profile"
+    )
+
+    commands.add_parser(
+        "validate"
+    )
+
+    commands.add_parser(
+        "health"
+    )
+
+    commands.add_parser(
+        "routes"
+    )
+
+    route = commands.add_parser(
+        "route"
+    )
+
+    route.add_argument(
+        "source_type"
+    )
+
+    route.add_argument(
+        "target_type"
+    )
+
+    roundtrip = commands.add_parser(
+        "roundtrip"
+    )
+
+    roundtrip.add_argument(
+        "encoding",
+        choices=(
+            "json",
+            "yaml",
+            "text",
+        ),
+    )
+
+    roundtrip.add_argument(
+        "value"
+    )
+
+    arguments = parser.parse_args()
+
+    cypher = Cypher()
+
+    if arguments.command == "profile":
+        result = cypher.profile()
+
+    elif arguments.command == "validate":
+        result = cypher.validate()
+
+    elif arguments.command == "health":
+        result = cypher.health()
+
+    elif arguments.command == "routes":
+        result = {
+            "routes": list(
+                cypher.routes()
+            ),
+            "authoritative": False,
+        }
+
+    elif arguments.command == "route":
+        result = cypher.explain_route(
+            arguments.source_type,
+            arguments.target_type,
+        )
+
+    elif arguments.command == "roundtrip":
+        if arguments.encoding == "json":
+            value = json.loads(
+                arguments.value
+            )
+
+        elif arguments.encoding == "yaml":
+            import yaml
+
+            value = yaml.safe_load(
+                arguments.value
+            )
+
+        else:
+            value = arguments.value
+
+        result = cypher.roundtrip(
+            value,
+            arguments.encoding,
+        )
+
+    else:
+        raise RuntimeError(
+            "unsupported command"
+        )
+
+    print(
+        json.dumps(
+            result,
+            indent=2,
+            sort_keys=True,
+            default=str,
+        )
+    )
+
+    if (
+        arguments.command
+        == "validate"
+        and not result["valid"]
+    ):
+        return 1
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

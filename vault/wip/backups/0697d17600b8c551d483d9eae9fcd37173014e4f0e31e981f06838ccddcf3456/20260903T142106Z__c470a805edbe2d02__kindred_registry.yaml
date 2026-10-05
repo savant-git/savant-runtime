@@ -1,0 +1,139 @@
+registry_id: savant_kindred_registry
+
+version: 1
+
+authority:
+  source: constitutional_runtime
+  revision: 1
+  timestamp: "2026-07-26T00:00:00Z"
+
+kindreds:
+
+  - id: kindred:primitive
+
+    canonical: Primitive Kindred
+
+    description: >
+      Groups authoritative primitives that may be composed,
+      referenced, inherited, projected, and instantiated.
+
+    status: active
+
+    ontology:
+      - primitive
+
+    members: []
+
+    parents: []
+
+    children:
+      - kindred:instance
+      - kindred:segue
+
+    dependencies: []
+
+    relationships: []
+
+    provenance:
+      source: constitutional_runtime
+      confidence: confirmed
+      evidence:
+        - registry.yaml
+        - ontology/ontology_registry.yaml
+
+    lineage:
+      derived_from:
+        - ontology:primitive
+      supersedes: []
+      superseded_by: null
+      history:
+        - revision: 1
+          action: created
+          timestamp: "2026-07-26T00:00:00Z"
+
+  - id: kindred:instance
+
+    canonical: Instance Kindred
+
+    description: >
+      Groups addressable manifestations of authoritative primitives.
+
+    status: active
+
+    ontology:
+      - primitive
+      - structure
+
+    members: []
+
+    parents:
+      - kindred:primitive
+
+    children: []
+
+    dependencies:
+      - kindred:primitive
+
+    relationships:
+      - type: manifests
+        target: kindred:primitive
+
+    provenance:
+      source: constitutional_runtime
+      confidence: confirmed
+      evidence:
+        - instances/instance.schema.yaml
+
+    lineage:
+      derived_from:
+        - kindred:primitive
+      supersedes: []
+      superseded_by: null
+      history:
+        - revision: 1
+          action: created
+          timestamp: "2026-07-26T00:00:00Z"
+
+  - id: kindred:segue
+
+    canonical: Segue Kindred
+
+    description: >
+      Groups transitions that connect instances without duplicating
+      either endpoint.
+
+    status: active
+
+    ontology:
+      - relationship
+      - process
+
+    members: []
+
+    parents:
+      - kindred:primitive
+
+    children: []
+
+    dependencies:
+      - kindred:instance
+
+    relationships:
+      - type: connects
+        target: kindred:instance
+
+    provenance:
+      source: constitutional_runtime
+      confidence: confirmed
+      evidence:
+        - instances/segue.schema.yaml
+
+    lineage:
+      derived_from:
+        - kindred:primitive
+      supersedes: []
+      superseded_by: null
+      history:
+        - revision: 1
+          action: created
+          timestamp: "2026-07-26T00:00:00Z"

@@ -1,0 +1,61 @@
+ontology_id: savant_core
+
+version: 1
+
+root: ontology
+
+classes:
+
+  - id: ontology
+
+    canonical: Ontology
+
+    description: Root ontology
+
+    children:
+
+      - primitive
+      - relationship
+      - behavior
+      - structure
+      - process
+
+  - id: primitive
+
+    canonical: Primitive
+
+    parents:
+
+      - ontology
+
+  - id: relationship
+
+    canonical: Relationship
+
+    parents:
+
+      - ontology
+
+  - id: structure
+
+    canonical: Structure
+
+    parents:
+
+      - ontology
+
+  - id: process
+
+    canonical: Process
+
+    parents:
+
+      - ontology
+
+  - id: behavior
+
+    canonical: Behavior
+
+    parents:
+
+      - ontology

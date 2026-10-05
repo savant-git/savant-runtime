@@ -1,0 +1,1014 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import json
+import sys
+from pathlib import Path
+
+ROOT = Path("/root/savant-runtime").resolve()
+
+GUISE_RUNTIME = (
+    ROOT
+    / "ontology"
+    / "obelisks"
+    / "_template"
+    / "segue"
+    / "gates"
+    / "_template"
+    / "segue"
+    / "innates"
+    / "_template"
+    / "segue"
+    / "exiles"
+    / "carbon"
+    / "runtime"
+).resolve()
+
+if str(GUISE_RUNTIME) not in sys.path:
+    sys.path.insert(
+        0,
+        str(GUISE_RUNTIME),
+    )
+
+from guise import (  # noqa: E402
+    Evidence,
+    SourceReference,
+)
+from guise_runtime import GuiseRuntime  # noqa: E402
+
+
+SOURCE = SourceReference(
+    source_id=(
+        "viscera:user-directive:"
+        "sgis-touring-crew:"
+        "2026-09-13"
+    ),
+    location=(
+        "vISCERA NOVEL project conversation; "
+        "Sun Gods in Shadow touring crew "
+        "canon and subsequent corrections"
+    ),
+    source_kind="user_directive",
+    authority_class="user_directive",
+)
+
+AFFILIATION = (
+    "Sun Gods in Shadow touring organization"
+)
+
+ROSTER = (
+    (
+        "seth-french",
+        "Seth French",
+        "Tour Manager & Business Manager",
+        (),
+    ),
+    (
+        "minerva-holt",
+        "Minerva Holt",
+        "Production & Stage Manager",
+        (),
+    ),
+    (
+        "garth-french",
+        "Garth French",
+        "Tour Accountant",
+        (),
+    ),
+    (
+        "marie-conway",
+        "Marie Conway",
+        "Production Assistant",
+        (),
+    ),
+    (
+        "horace-degibbe",
+        "Horace DeGibbe",
+        "Front of House Engineer",
+        (),
+    ),
+    (
+        "bart-stories",
+        "Bart Stories",
+        "Monitor Engineer",
+        (),
+    ),
+    (
+        "harold-bisonette",
+        "Harold Bisonette",
+        "Audio Crew Chief & Systems Engineer",
+        (),
+    ),
+    (
+        "arch-helmann",
+        "Arch Helmann",
+        "System Tech 1",
+        (),
+    ),
+    (
+        "sandra-valeant",
+        "Sandra Valeant",
+        "System Tech 2",
+        (),
+    ),
+    (
+        "troy-trotter",
+        "Troy Trotter",
+        "System Tech 3",
+        (),
+    ),
+    (
+        "hank-smithy",
+        "Hank Smithy",
+        "System Tech 4",
+        (),
+    ),
+    (
+        "barry-schotansky",
+        "Barry Schotansky",
+        "RF Tech",
+        (),
+    ),
+    (
+        "agatha-aggie-ortoza",
+        "Agatha “Aggie” Ortoza",
+        "Viscera's Guitar Tech",
+        ("Aggie",),
+    ),
+    (
+        "daniel-gonzalez",
+        "Daniel Gonzalez",
+        "General Guitar & Bass Tech",
+        (),
+    ),
+    (
+        "santo-santa-garza",
+        "Santo “Santa” Garza",
+        "Drum Tech",
+        ("Santa",),
+    ),
+    (
+        "matthew-potanski",
+        "Matthew Potanski",
+        "Backline & MIDI Tech",
+        (),
+    ),
+    (
+        "benjamin-brewster",
+        "Benjamin Brewster",
+        "Lighting Director & Crew Chief",
+        (),
+    ),
+    (
+        "janet-ambargo",
+        "Janet Ambargo",
+        "Lighting Tech 1",
+        (),
+    ),
+    (
+        "samuel-hughes",
+        "Samuel Hughes",
+        "Lighting Tech 2",
+        (),
+    ),
+    (
+        "boom-franz",
+        "Boom Franz",
+        "Lighting Tech 3",
+        (),
+    ),
+    (
+        "luke-simpson",
+        "Luke Simpson",
+        "Video Director",
+        (),
+    ),
+    (
+        "kate-bulldyke-lundeen",
+        "Kate “Bulldyke” Lundeen",
+        "Video Tech",
+        ("Bulldyke",),
+    ),
+    (
+        "sai-yamata",
+        "Sai Yamata",
+        "Head Rigger",
+        (),
+    ),
+    (
+        "frederick-grant",
+        "Frederick Grant",
+        "Rigger 1",
+        (),
+    ),
+    (
+        "theodore-thorne",
+        "Theodore Thorne",
+        "Rigger 2",
+        (),
+    ),
+    (
+        "jake-horton",
+        "Jake Horton",
+        "Rigger 3",
+        (),
+    ),
+    (
+        "derek-marlow",
+        "Derek Marlow",
+        "Rigger 4",
+        (),
+    ),
+    (
+        "jeffrey-saginas",
+        "Jeffrey Saginas",
+        "Head Carpenter",
+        (),
+    ),
+    (
+        "jack-fronter",
+        "Jack Fronter",
+        "Carpenter 1",
+        (),
+    ),
+    (
+        "troy-lancette",
+        "Troy Lancette",
+        "Carpenter 2",
+        (),
+    ),
+    (
+        "holly-wharton",
+        "Holly Wharton",
+        "Carpenter 3",
+        (),
+    ),
+    (
+        "shane-chum-dundee",
+        "Shane “Chum” Dundee",
+        "Pyro & SFX Operator",
+        ("Chum",),
+    ),
+    (
+        "edith-grady",
+        "Edith Grady",
+        "Wardrobe",
+        (),
+    ),
+    (
+        "charles-chucky-houston",
+        "Charles “Chucky” Houston",
+        "Band Head of Security",
+        ("Chucky",),
+    ),
+    (
+        "hanson-hercules-heramesh",
+        "Hanson “Hercules” Heramesh",
+        "Viscera's Bodyguard",
+        ("Hercules",),
+    ),
+    (
+        "bradley-scott",
+        "Bradley Scott",
+        "Merchandise Manager",
+        (),
+    ),
+    (
+        "wallace-stanton",
+        "Wallace Stanton",
+        "Bus Driver 1",
+        (),
+    ),
+    (
+        "timothy-manning",
+        "Timothy Manning",
+        "Bus Driver 2",
+        (),
+    ),
+    (
+        "saul-block",
+        "Saul Block",
+        "Bus Driver 3",
+        (),
+    ),
+    (
+        "fawn-chomansky",
+        "Fawn Chomansky",
+        "Bus Driver 4",
+        (),
+    ),
+    (
+        "dodd-smith",
+        "Dodd Smith",
+        "Runner 1",
+        (),
+    ),
+    (
+        "kane-gorsuch",
+        "Kane Gorsuch",
+        "Runner 2",
+        (),
+    ),
+    (
+        "peter-peeny-daly",
+        "Peter “Peeny” Daly",
+        "Stagehand 1",
+        ("Peeny",),
+    ),
+    (
+        "fallon-andrews",
+        "Fallon Andrews",
+        "Stagehand 2",
+        (),
+    ),
+    (
+        "jonathan-bogara",
+        "Jonathan Bogara",
+        "Stagehand 3",
+        (),
+    ),
+    (
+        "darren-redo",
+        "Darren Redo",
+        "Stagehand 4",
+        (),
+    ),
+    (
+        "lawrence-pedreau",
+        "Lawrence Pedreau",
+        "Stagehand 5",
+        (),
+    ),
+    (
+        "keith-manson",
+        "Keith Manson",
+        "Stagehand 6",
+        (),
+    ),
+    (
+        "baela-hantersen",
+        "Baela Hantersen",
+        "Medical Officer",
+        (),
+    ),
+)
+
+
+EXTRA_EVIDENCE = {
+    "minerva-holt": (
+        (
+            "During the opening Sun Gods in Shadow "
+            "soundcheck, Minerva owns the production "
+            "clock and immediate stage workflow.",
+            "explicit",
+            ("sgis", "production", "soundcheck"),
+        ),
+    ),
+    "horace-degibbe": (
+        (
+            "Horace DeGibbe's established professional "
+            "jurisdiction is front-of-house audio.",
+            "explicit",
+            ("sgis", "audio", "foh"),
+        ),
+    ),
+    "bart-stories": (
+        (
+            "Bart Stories' established professional "
+            "jurisdiction is performer monitoring.",
+            "explicit",
+            ("sgis", "audio", "monitors"),
+        ),
+    ),
+    "harold-bisonette": (
+        (
+            "Harold Bisonette's established jurisdiction "
+            "includes audio crew leadership, PA and "
+            "system behavior, and room/system engineering.",
+            "explicit",
+            ("sgis", "audio", "systems"),
+        ),
+        (
+            "Harold Bisonette has four system-tech "
+            "positions within his functional department.",
+            "explicit",
+            ("sgis", "audio", "organization"),
+        ),
+    ),
+    "barry-schotansky": (
+        (
+            "Barry Schotansky's established professional "
+            "jurisdiction is RF and wireless matters.",
+            "explicit",
+            ("sgis", "audio", "rf"),
+        ),
+    ),
+    "sai-yamata": (
+        (
+            "Sai Yamata is the Head Rigger under whom "
+            "Derek Marlow works as Rigger 4.",
+            "explicit",
+            ("sgis", "rigging", "organization"),
+        ),
+    ),
+    "baela-hantersen": (
+        (
+            "Baela Hantersen is the touring Medical "
+            "Officer; venue medical personnel may exist "
+            "separately.",
+            "explicit",
+            ("sgis", "medical", "touring"),
+        ),
+    ),
+}
+
+
+AGGIE_EVIDENCE = (
+    (
+        "Agatha “Aggie” Ortoza is male.",
+        "explicit",
+        ("identity", "sex", "aggie"),
+    ),
+    (
+        "Aggie is a major, practically main character "
+        "in VISCERA.",
+        "explicit",
+        ("narrative-importance", "major"),
+    ),
+    (
+        "Aggie is Viscera Hood's dedicated guitar tech "
+        "for Sun Gods in Shadow.",
+        "explicit",
+        ("sgis", "guitar", "viscera"),
+    ),
+    (
+        "Aggie is excellent at his job and must not be "
+        "treated as technically incompetent merely to "
+        "make Viscera appear brilliant.",
+        "explicit",
+        ("competence", "guitar-tech"),
+    ),
+    (
+        "Before Viscera personally checks the guitar "
+        "system, Aggie has already performed the "
+        "appropriate professional precheck and the rig "
+        "appears show-ready.",
+        "explicit",
+        ("soundcheck", "precheck", "competence"),
+    ),
+    (
+        "Aggie has heard Viscera's repeatable diagnostic "
+        "playing tests hundreds of times and recognizes "
+        "their diagnostic purpose.",
+        "explicit",
+        ("relationship", "viscera", "diagnostics"),
+    ),
+    (
+        "Aggie understands practical guitar-system "
+        "troubleshooting including strain relief, "
+        "preload, mechanical isolation, vibration, "
+        "contact geometry, and service-loop behavior "
+        "where those concepts apply to the opening "
+        "soundcheck fault.",
+        "explicit",
+        ("competence", "mechanical", "guitar-system"),
+    ),
+    (
+        "During the opening soundcheck, Aggie "
+        "systematically manipulates the suspect "
+        "connection while Viscera repeats a controlled "
+        "diagnostic, establishing that a particular "
+        "distributed hand support restores correct "
+        "behavior.",
+        "explicit",
+        ("soundcheck", "diagnosis", "evidence"),
+    ),
+    (
+        "Aggie's hand becomes diagnostic evidence: the "
+        "correct support restores behavior, release "
+        "returns the defect, and inappropriate pressure "
+        "does not reproduce the correct result.",
+        "explicit",
+        ("soundcheck", "mechanical", "diagnosis"),
+    ),
+    (
+        "Viscera supplies the lateral conceptual leap "
+        "that the pocket pussy's compliant elastomer "
+        "properties may reproduce the useful behavior "
+        "of Aggie's hand; Aggie understands the "
+        "mechanical logic and collaborates on the "
+        "repair.",
+        "explicit",
+        ("soundcheck", "repair", "collaboration"),
+    ),
+    (
+        "Aggie and Viscera function as complementary "
+        "technical collaborators in the repair: "
+        "Viscera contributes unusually sensitive "
+        "performer perception and the lateral material "
+        "insight, while Aggie contributes genuine "
+        "technical expertise and implementation.",
+        "explicit",
+        ("relationship", "viscera", "collaboration"),
+    ),
+)
+
+
+PEENY_EVIDENCE = (
+    (
+        "Peter “Peeny” Daly is a peripheral character "
+        "with only a few moments in the novel.",
+        "explicit",
+        ("narrative-importance", "peripheral"),
+    ),
+    (
+        "Peeny is a touring stagehand for Sun Gods in "
+        "Shadow.",
+        "explicit",
+        ("sgis", "stagehand", "touring"),
+    ),
+    (
+        "During load-in on the morning of the opening "
+        "show, Peeny moves equipment while listening "
+        "to music through headphones and dancing rather "
+        "than giving the task his full attention.",
+        "explicit",
+        ("opening", "load-in", "behavior"),
+    ),
+    (
+        "During that load-in, a loom catches or snags "
+        "with enough resistance to stop or materially "
+        "arrest the movement.",
+        "explicit",
+        ("opening", "loom", "incident"),
+    ),
+    (
+        "Peeny goes back, frees the loom, observes no "
+        "obvious visible damage, continues working, "
+        "and does not report the incident.",
+        "explicit",
+        ("opening", "loom", "concealment"),
+    ),
+    (
+        "Later, while the crew investigates Viscera's "
+        "subtle guitar-system fault involving the same "
+        "loom, Peeny possesses potentially relevant "
+        "diagnostic history but initially withholds it.",
+        "explicit",
+        ("opening", "diagnostic-history", "concealment"),
+    ),
+    (
+        "The crew loses approximately thirty minutes "
+        "troubleshooting before Peeny sheepishly "
+        "discloses the earlier snag.",
+        "explicit",
+        ("opening", "soundcheck", "confession"),
+    ),
+    (
+        "Peeny's consequential error is not merely that "
+        "equipment was snagged; it is that he possessed "
+        "potentially relevant diagnostic information "
+        "and failed to report it.",
+        "explicit",
+        ("opening", "information", "causality"),
+    ),
+)
+
+
+MARLOW_EVIDENCE = (
+    (
+        "Derek Marlow is a peripheral character with "
+        "only a few moments in the novel.",
+        "explicit",
+        ("narrative-importance", "peripheral"),
+    ),
+    (
+        "Marlow is Rigger 4 under Head Rigger Sai "
+        "Yamata and is a skilled specialist at actual "
+        "rigging.",
+        "explicit",
+        ("sgis", "rigging", "competence"),
+    ),
+    (
+        "Marlow is competent when something is his "
+        "responsibility but conspicuously disinclined "
+        "to volunteer for work that is not.",
+        "explicit",
+        ("behavior", "responsibility", "baseline"),
+    ),
+    (
+        "Viscera does not know Marlow deeply but has "
+        "observed his normal work behavior enough that "
+        "later deviations from his non-volunteering "
+        "baseline are conspicuous.",
+        "explicit",
+        ("viscera", "observation", "baseline"),
+    ),
+    (
+        "Marlow orders a pocket pussy to the venue "
+        "hoping to obtain it discreetly.",
+        "explicit",
+        ("opening", "package", "ownership"),
+    ),
+    (
+        "The package is accidentally received by other "
+        "venue or tour personnel who know that it "
+        "belongs to Marlow.",
+        "explicit",
+        ("opening", "package", "provenance"),
+    ),
+    (
+        "A recipient spreads the anonymous fact that "
+        "someone on the tour had a pocket pussy "
+        "delivered to the venue but does not reveal "
+        "Marlow's identity.",
+        "explicit",
+        ("opening", "gossip", "anonymity"),
+    ),
+    (
+        "Marlow is deeply embarrassed and delays "
+        "collecting the package after being notified "
+        "or summoned to retrieve it.",
+        "explicit",
+        ("opening", "embarrassment", "delay"),
+    ),
+    (
+        "Because Marlow delays collection, the pocket "
+        "pussy remains with its accidental recipients "
+        "when Viscera's guitar-system crisis occurs.",
+        "explicit",
+        ("opening", "package", "causality"),
+    ),
+    (
+        "Viscera does not obtain the pocket pussy "
+        "directly from Marlow; it is brought from the "
+        "people who still possess the uncollected "
+        "delivery.",
+        "explicit",
+        ("opening", "repair", "provenance"),
+    ),
+    (
+        "After Marlow eventually attempts to collect "
+        "his package, he discovers that Viscera is "
+        "using the pocket pussy as part of the "
+        "show-critical guitar repair.",
+        "explicit",
+        ("opening", "discovery", "repair"),
+    ),
+    (
+        "Only after learning that Viscera has the "
+        "object does Marlow begin behaving strangely "
+        "around Viscera's guitar world.",
+        "explicit",
+        ("opening", "behavior", "temporal"),
+    ),
+    (
+        "Marlow repeatedly appears near guitar world "
+        "despite having no natural rigging jurisdiction "
+        "there, volunteers for nearby work, asks odd "
+        "questions about when the temporary repair "
+        "will be removed, and proposes substitutes.",
+        "explicit",
+        ("opening", "retrieval", "behavior"),
+    ),
+    (
+        "Marlow seeks opportunities for access or "
+        "privacy around the repair and is caught too "
+        "close to it, after which Viscera tells him "
+        "not to touch it.",
+        "explicit",
+        ("opening", "retrieval", "access"),
+    ),
+    (
+        "Successful testing of the pocket-pussy repair "
+        "makes Marlow unhappy rather than relieved.",
+        "explicit",
+        ("opening", "retrieval", "behavior"),
+    ),
+    (
+        "When showtime makes retrieval operationally "
+        "impossible, Marlow's strange behavior around "
+        "the repair abruptly stops.",
+        "explicit",
+        ("opening", "retrieval", "cessation"),
+    ),
+    (
+        "During discussion of the proposed audience "
+        "redistribution, Marlow asks where the displaced "
+        "people will be put; this is a physical and "
+        "logistical observation, not evidence that he "
+        "is a crowd-dynamics expert.",
+        "explicit",
+        ("opening", "crowd", "warning"),
+    ),
+    (
+        "During the later crowd emergency, Marlow "
+        "voluntarily enters the rescue effort despite "
+        "his established tendency not to volunteer "
+        "outside his responsibilities.",
+        "explicit",
+        ("opening", "crowd-crush", "behavior"),
+    ),
+    (
+        "Marlow initially helps people effectively and "
+        "continues assisting them.",
+        "explicit",
+        ("opening", "rescue", "action"),
+    ),
+    (
+        "Terrified people trying to escape grab Marlow "
+        "and collectively compromise his ability to "
+        "remain a stable rescuer; he falls and is "
+        "fatally trampled, including fatal head trauma.",
+        "explicit",
+        ("opening", "death", "crowd-crush"),
+    ),
+    (
+        "After Marlow's death, the original delivery "
+        "package remains available and identifies "
+        "Marlow as the recipient.",
+        "explicit",
+        ("opening", "aftermath", "provenance"),
+    ),
+    (
+        "The package and receiving history confirm that "
+        "Marlow's strange pre-show behavior was directed "
+        "toward recovering his own pocket pussy without "
+        "publicly admitting ownership.",
+        "explicit",
+        ("opening", "aftermath", "reconstruction"),
+    ),
+    (
+        "Viscera later infers that Marlow may have "
+        "entered the rescue effort partly in hope that "
+        "heroic behavior would replace the humiliating "
+        "pocket-pussy story, but Viscera cannot know "
+        "Marlow's internal motive.",
+        "inference",
+        ("opening", "motive", "uncertain"),
+    ),
+)
+
+
+def add_evidence(
+    graph,
+    observation: str,
+    epistemic_class: str,
+    tags: tuple[str, ...],
+) -> None:
+    graph.add_evidence(
+        Evidence(
+            subject_id=graph.character_id,
+            observation=observation,
+            source=SOURCE,
+            epistemic_class=epistemic_class,
+            evidence_state="admitted",
+            tags=tags,
+        )
+    )
+
+
+def build_character(
+    runtime: GuiseRuntime,
+    character_id: str,
+    display_name: str,
+    role: str,
+    aliases: tuple[str, ...],
+):
+    graph = runtime.new_character(
+        character_id,
+        display_name=display_name,
+    )
+
+    add_evidence(
+        graph,
+        (
+            f"{display_name} is a canonical member of "
+            f"the {AFFILIATION}."
+        ),
+        "explicit",
+        ("sgis", "affiliation"),
+    )
+
+    add_evidence(
+        graph,
+        (
+            f"{display_name}'s established touring "
+            f"position is {role}."
+        ),
+        "explicit",
+        ("sgis", "role"),
+    )
+
+    if aliases:
+        add_evidence(
+            graph,
+            (
+                f"Canonical supplied nickname"
+                f"{'s' if len(aliases) != 1 else ''}: "
+                f"{', '.join(aliases)}."
+            ),
+            "explicit",
+            ("identity", "nickname"),
+        )
+
+    graph.provenance.append(
+        {
+            "source_id": SOURCE.source_id,
+            "source_kind": SOURCE.source_kind,
+            "authority_class": (
+                SOURCE.authority_class
+            ),
+            "purpose": (
+                "Sun Gods in Shadow touring crew "
+                "character substantiation"
+            ),
+        }
+    )
+
+    graph.unresolved.append(
+        (
+            "Character information not explicitly "
+            "established by admitted VISCERA canon "
+            "remains unknown."
+        )
+    )
+
+    return graph
+
+
+def main() -> int:
+    runtime = GuiseRuntime()
+
+    character_ids = tuple(
+        item[0]
+        for item in ROSTER
+    )
+
+    if len(character_ids) != 49:
+        raise RuntimeError(
+            "canonical SGIS roster must contain "
+            "exactly 49 characters"
+        )
+
+    if len(set(character_ids)) != 49:
+        raise RuntimeError(
+            "duplicate SGIS character_id detected"
+        )
+
+    collisions = [
+        character_id
+        for character_id in character_ids
+        if runtime.store.exists(character_id)
+    ]
+
+    if collisions:
+        print(
+            json.dumps(
+                {
+                    "status": "aborted",
+                    "reason": (
+                        "existing guise character "
+                        "collision"
+                    ),
+                    "characters": collisions,
+                    "character_count": len(
+                        collisions
+                    ),
+                    "authority_effect": "none",
+                },
+                ensure_ascii=False,
+                sort_keys=True,
+                indent=2,
+            )
+        )
+        return 2
+
+    saved = []
+
+    for (
+        character_id,
+        display_name,
+        role,
+        aliases,
+    ) in ROSTER:
+        graph = build_character(
+            runtime,
+            character_id,
+            display_name,
+            role,
+            aliases,
+        )
+
+        for (
+            observation,
+            epistemic_class,
+            tags,
+        ) in EXTRA_EVIDENCE.get(
+            character_id,
+            (),
+        ):
+            add_evidence(
+                graph,
+                observation,
+                epistemic_class,
+                tags,
+            )
+
+        if character_id == (
+            "agatha-aggie-ortoza"
+        ):
+            for (
+                observation,
+                epistemic_class,
+                tags,
+            ) in AGGIE_EVIDENCE:
+                add_evidence(
+                    graph,
+                    observation,
+                    epistemic_class,
+                    tags,
+                )
+
+        elif character_id == "derek-marlow":
+            for (
+                observation,
+                epistemic_class,
+                tags,
+            ) in MARLOW_EVIDENCE:
+                add_evidence(
+                    graph,
+                    observation,
+                    epistemic_class,
+                    tags,
+                )
+
+        elif character_id == (
+            "peter-peeny-daly"
+        ):
+            for (
+                observation,
+                epistemic_class,
+                tags,
+            ) in PEENY_EVIDENCE:
+                add_evidence(
+                    graph,
+                    observation,
+                    epistemic_class,
+                    tags,
+                )
+
+        projection = graph.projection(
+            runtime.guise.manifest
+        )
+
+        saved.append(
+            runtime.store.save_projection(
+                projection
+            )
+        )
+
+    status = runtime.store.status()
+
+    missing = [
+        character_id
+        for character_id in character_ids
+        if not runtime.store.exists(
+            character_id
+        )
+    ]
+
+    result = {
+        "status": (
+            "ok"
+            if not missing
+            else "incomplete"
+        ),
+        "operation": (
+            "sgis_guise_character_import"
+        ),
+        "requested_character_count": 49,
+        "saved_character_count": len(saved),
+        "missing": missing,
+        "guise_store_character_count": (
+            status["character_count"]
+        ),
+        "saved": saved,
+        "automatic_canonization": False,
+        "authority_effect": "none",
+    }
+
+    print(
+        json.dumps(
+            result,
+            ensure_ascii=False,
+            sort_keys=True,
+            indent=2,
+        )
+    )
+
+    return 0 if not missing else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

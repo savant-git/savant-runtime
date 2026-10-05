@@ -1,0 +1,60 @@
+{
+  "id": "carbon",
+  "graph_id": "exile:carbon",
+  "type": "exile",
+  "status": "active",
+  "composition_level": "exile",
+  "path": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/carbon",
+  "singular_purpose": "advanced proprietary simulation",
+  "purpose": "Provide Savant's generalized simulation substrate for modeling, executing, branching, replaying, comparing, interrogating, and composing possible states and behaviors.",
+  "lineage": {
+    "ancestor": "oriel",
+    "evolution": "oriel_to_carbon"
+  },
+  "capabilities": [
+    "simulation_definition",
+    "simulation_instantiation",
+    "simulation_execution",
+    "simulation_state_management",
+    "simulation_composition",
+    "simulation_branching",
+    "counterfactual_branching",
+    "simulation_checkpointing",
+    "deterministic_replay",
+    "simulation_comparison",
+    "simulation_interrogation",
+    "parameter_sweeps",
+    "scenario_forking",
+    "scenario_merging",
+    "temporal_progression",
+    "event_injection",
+    "constraint_projection",
+    "dependency_projection",
+    "causal_trace_projection",
+    "uncertainty_projection",
+    "simulation_receipts",
+    "simulation_provenance",
+    "simulation_lineage",
+    "simulation_export",
+    "simulation_import",
+    "simulation_attachment",
+    "avatar_forge"
+  ],
+  "applications": [
+    "avatar_forge"
+  ],
+  "runtime": {
+    "avatar_forge_launcher": "runtime/apps/avatar_forge.sh"
+  },
+  "invariants": {
+    "simulated_state_never_silently_becomes_fact": true,
+    "simulation_output_never_creates_authority": true,
+    "source_authority_preserved": true,
+    "branch_lineage_preserved": true,
+    "provenance_preserved": true,
+    "replay_inputs_preserved": true,
+    "derived_projections_rebuildable": true,
+    "composition_by_reference": true,
+    "authority_transfer": false
+  }
+}

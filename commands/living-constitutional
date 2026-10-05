@@ -1,0 +1,153 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import json
+import sys
+
+from pathlib import Path
+
+
+root = Path(
+    "/root/savant-runtime"
+)
+
+if str(
+    root
+) not in sys.path:
+    sys.path.insert(
+        0,
+        str(
+            root
+        ),
+    )
+
+
+from runtime.constitution import (  # noqa: E402
+    ConstitutionalRegistry,
+    ConstitutionalValidator,
+)
+
+from runtime.living_governance_constitutional import (  # noqa: E402
+    install as install_governance,
+    operator_id as governance_operator_id,
+    service_id,
+)
+
+from runtime.living_guard_constitutional import (  # noqa: E402
+    install as install_guard,
+    operator_id as guard_operator_id,
+)
+
+from runtime.living_plan_constitutional import (  # noqa: E402
+    install as install_plan,
+    operator_id as plan_operator_id,
+)
+
+
+def main() -> int:
+    registry = ConstitutionalRegistry.load(
+        root
+    )
+
+    registry = install_governance(
+        registry
+    )
+
+    registry = install_guard(
+        registry
+    )
+
+    registry = install_plan(
+        registry
+    )
+
+    validation = ConstitutionalValidator(
+        registry
+    ).validate()
+
+    required = {
+        "service":
+            service_id,
+
+        "governance_operator":
+            governance_operator_id,
+
+        "guard_operator":
+            guard_operator_id,
+
+        "plan_operator":
+            plan_operator_id,
+    }
+
+    presence = {
+        name:
+            identifier in registry.ids
+        for name, identifier
+        in required.items()
+    }
+
+    constitutional_valid = bool(
+        validation.get(
+            "valid",
+            False,
+        )
+    )
+
+    ready = (
+        constitutional_valid
+        and all(
+            presence.values()
+        )
+    )
+
+    result = {
+        "schema":
+            "savant.living-constitutional.v1",
+
+        "owner":
+            "living-governance",
+
+        "authority_effect":
+            (
+                "constitutional-extension"
+                if ready
+                else "none"
+            ),
+
+        "ready":
+            ready,
+
+        "constitutional_valid":
+            constitutional_valid,
+
+        "required":
+            required,
+
+        "presence":
+            presence,
+
+        "credential_values_exposed":
+            False,
+    }
+
+    print(
+        json.dumps(
+            result,
+            indent=2,
+            ensure_ascii=False,
+            sort_keys=True,
+        )
+    )
+
+    return (
+        0
+        if ready
+        else 1
+    )
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

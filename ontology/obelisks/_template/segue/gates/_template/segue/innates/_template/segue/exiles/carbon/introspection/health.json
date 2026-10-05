@@ -1,0 +1,54 @@
+{
+  "id": "carbon.health",
+  "owner": "carbon",
+  "type": "health_projection",
+  "status": "active",
+  "authority_effect": "none",
+  "authoritative": false,
+  "rebuildable": true,
+  "checks": [
+    "simulation_definition_available",
+    "simulation_instantiation_available",
+    "simulation_execution_available",
+    "simulation_state_addressable",
+    "branch_lineage_preserved",
+    "checkpoint_identity_preserved",
+    "replay_semantics_available",
+    "comparison_non_mutating",
+    "interrogation_non_mutating",
+    "uncertainty_explicit",
+    "source_authority_preserved",
+    "simulation_results_classified_as_derived",
+    "provenance_preserved",
+    "dependencies_exposed",
+    "specializations_exposed",
+    "oriel_specialization_discoverable",
+    "oriel_capability_surface_derived",
+    "oriel_authority_effect_none",
+    "authority_transfer_disabled"
+  ],
+  "specializations": {
+    "oriel": {
+      "required_for_carbon": false,
+      "health_provider": "runtime/oriel_introspection.py",
+      "capability_provider": "runtime/oriel_capabilities.py",
+      "registry_manifest": "registry/manifests/oriel.json",
+      "registry_capabilities": "registry/capabilities/oriel.json",
+      "failure_effect": "degraded",
+      "authority_effect": "none"
+    }
+  },
+  "states": {
+    "healthy": "all required carbon invariants and required simulation surfaces are available",
+    "degraded": "carbon remains usable but one or more optional capabilities, attachments, applications, or specializations are unavailable",
+    "blocked": "a required carbon invariant or simulation primitive cannot be preserved"
+  },
+  "rules": {
+    "health_projection_creates_authority": false,
+    "optional_backend_failure_blocks_carbon": false,
+    "optional_specialization_failure_blocks_carbon": false,
+    "oriel_failure_must_be_visible": true,
+    "invariant_failure_may_block_execution": true,
+    "degraded_state_must_not_be_hidden": true
+  }
+}

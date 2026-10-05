@@ -1,0 +1,49 @@
+{
+  "id": "carbon.simulation",
+  "owner": "carbon",
+  "type": "simulation_manifest",
+  "status": "active",
+  "schema": "savant://carbon/simulation/1",
+  "singular_purpose": "advanced proprietary simulation",
+  "primitive": "simulation_instance",
+  "definition": {
+    "identity": "required",
+    "sources": "references",
+    "parameters": "mapping",
+    "constraints": "collection",
+    "relationships": "collection",
+    "events": "collection",
+    "dependencies": "references",
+    "execution_rules": "mapping",
+    "uncertainty": "explicit"
+  },
+  "execution": {
+    "branchable": true,
+    "checkpointable": true,
+    "replayable": true,
+    "comparable": true,
+    "interrogable": true,
+    "composable": true,
+    "receipted": true
+  },
+  "classification": {
+    "definition": "derived_structure",
+    "instance": "derived_instance",
+    "state": "derived_state",
+    "branch": "derived_instance",
+    "checkpoint": "immutable_derived_reference",
+    "execution": "derived_operation",
+    "result": "derived_projection",
+    "receipt": "execution_evidence"
+  },
+  "invariants": {
+    "simulation_is_not_external_reality": true,
+    "simulation_is_not_observation": true,
+    "simulation_result_is_not_accepted_authority": true,
+    "source_authority_preserved": true,
+    "lineage_preserved": true,
+    "provenance_preserved": true,
+    "uncertainty_preserved": true,
+    "authority_transfer": false
+  }
+}

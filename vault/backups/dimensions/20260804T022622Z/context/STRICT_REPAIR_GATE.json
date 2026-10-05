@@ -1,0 +1,78 @@
+{
+  "blockers": [
+    {
+      "error": "actionable_errors=1",
+      "kind": "db",
+      "path": "blocker_classification"
+    }
+  ],
+  "compile_failures": [],
+  "db": {
+    "actionable_errors": 1,
+    "available": true,
+    "broken_symlinks": 0,
+    "internal_unresolved_imports": 0
+  },
+  "foundation": [
+    {
+      "exists": true,
+      "path": "canon/foundation/000_META_REALITY_CANON.md"
+    },
+    {
+      "exists": true,
+      "path": "canon/foundation/001_META_ARCHETYPE_CANON.md"
+    },
+    {
+      "exists": true,
+      "path": "canon/foundation/002_ARCHETYPE_CANON.md"
+    },
+    {
+      "exists": true,
+      "path": "canon/foundation/003_TEMPLATE_CANON.md"
+    },
+    {
+      "exists": true,
+      "path": "canon/foundation/004_INSTANCE_CANON.md"
+    },
+    {
+      "exists": true,
+      "path": "canon/foundation/005_SEGUE_CANON.md"
+    },
+    {
+      "exists": true,
+      "path": "canon/foundation/006_AUTHORITY_GRAPH_CANON.md"
+    },
+    {
+      "exists": true,
+      "path": "canon/foundation/007_PROJECTION_CANON.md"
+    },
+    {
+      "exists": true,
+      "path": "authority_graph/meta_archetypes/universal_object.json"
+    },
+    {
+      "exists": true,
+      "path": "authority_graph/archetypes/universal_instance.json"
+    },
+    {
+      "exists": true,
+      "path": "authority_graph/templates/base_instance.json"
+    },
+    {
+      "exists": true,
+      "path": "authority_graph/policies/emergence.json"
+    },
+    {
+      "exists": true,
+      "path": "authority_graph/policies/projection.json"
+    },
+    {
+      "exists": true,
+      "path": "context/FOUNDATION_STATUS.json"
+    }
+  ],
+  "id": "strict_repair_gate",
+  "move_safe": false,
+  "move_safe_reason": "Filesystem moves remain blocked until strict repair gate and full rewrite simulation both pass.",
+  "status": "BLOCK"
+}

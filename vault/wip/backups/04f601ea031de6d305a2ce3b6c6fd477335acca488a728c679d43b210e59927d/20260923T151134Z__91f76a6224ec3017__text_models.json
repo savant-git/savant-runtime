@@ -1,0 +1,65 @@
+{
+  "id": "text_models",
+  "type": "model_projection_registry",
+  "status": "active",
+  "owner": "opus",
+  "authority_effect": "none",
+  "purpose": "deterministic model capability and specialization projection",
+  "models": {
+    "gpt-5": {
+      "providers": [
+        "openai_text"
+      ],
+      "layers": [
+        "general",
+        "reasoning",
+        "instruction",
+        "tool"
+      ]
+    },
+    "openai/gpt-oss-120b": {
+      "providers": [
+        "groq_text"
+      ],
+      "layers": [
+        "general",
+        "reasoning",
+        "tool"
+      ]
+    },
+    "claude-sonnet-5": {
+      "providers": [
+        "anthropic_text"
+      ],
+      "layers": [
+        "general",
+        "reasoning",
+        "instruction",
+        "writing",
+        "tool"
+      ]
+    },
+    "accounts/fireworks/models/deepseek-v4-pro": {
+      "providers": [
+        "fireworks_text"
+      ],
+      "layers": [
+        "general",
+        "reasoning",
+        "code",
+        "tool"
+      ]
+    },
+    "deepseek-v4-pro": {
+      "providers": [
+        "deepseek_text"
+      ],
+      "layers": [
+        "general",
+        "reasoning",
+        "code",
+        "tool"
+      ]
+    }
+  }
+}

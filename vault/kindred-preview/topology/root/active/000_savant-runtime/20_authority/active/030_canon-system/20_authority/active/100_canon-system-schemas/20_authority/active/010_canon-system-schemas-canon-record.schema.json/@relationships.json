@@ -1,0 +1,76 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "ff35db9e9a8f40f0cfd3d6239d4ec04ff56dab6b3edff084b7f5ece40be7732e",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "namespace": "preview.kindred",
+  "node": "canon-system/schemas/canon-record.schema.json",
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationships": [
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.781f4845d5f7fd3797cc",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "canon-system/schemas",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:canon-system/schemas",
+        "canonical_target": "fs:canon-system/schemas/canon-record.schema.json",
+        "continuation": "projecting",
+        "id": "lineage.composition.781f4845d5f7fd3797cc",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/canon-system/schemas/canon-record.schema.json"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "canon-system/schemas",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "canon-system/schemas/canon-record.schema.json",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "canon-system/schemas/canon-record.schema.json"
+    }
+  ],
+  "schema": "savant.kindred.preview.relationship_projection.v2"
+}

@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/apps/webui_ultra/server.py", line 1404, in do_GET
+    send_json(self, {"ok": True, "file": read_file_payload(target)})
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/apps/webui_ultra/server.py", line 624, in read_file_payload
+    target, rel = safe_rel_path(path)
+                  ^^^^^^^^^^^^^^^^^^^
+  File "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/apps/webui_ultra/server.py", line 532, in safe_rel_path
+    raise RuntimeError("blocked protected path")
+RuntimeError: blocked protected path

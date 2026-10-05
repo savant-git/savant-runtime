@@ -1,0 +1,76 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "411eb52343b6742217fd4ecbfb43289a369737eb8cf6a112fee4232830d24280",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "namespace": "preview.kindred",
+  "node": "runtime/palaver/observatories",
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationships": [
+    {
+      "child_profile": "daughter",
+      "domain": "filesystem",
+      "id": "lineage.composition.6630becab7af56bc4c28",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "runtime/palaver",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:runtime/palaver",
+        "canonical_target": "fs:runtime/palaver/observatories",
+        "continuation": "preserving",
+        "id": "lineage.composition.6630becab7af56bc4c28",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/runtime/palaver/observatories"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "runtime/palaver",
+        "status": "active",
+        "symbolic_child_alias": "daughter",
+        "symbolic_parent_alias": "parent",
+        "target": "runtime/palaver/observatories",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "runtime/palaver/observatories"
+    }
+  ],
+  "schema": "savant.kindred.preview.relationship_projection.v2"
+}

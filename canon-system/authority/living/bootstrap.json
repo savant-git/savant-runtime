@@ -1,0 +1,830 @@
+{
+  "schema": "savant.living-governance.bootstrap.v1",
+  "id": "living-governance-bootstrap",
+  "status": "accepted",
+  "version": 1,
+  "owner": "savant",
+  "authority": "current_user_directive",
+  "created_at": "2026-08-30T00:00:00Z",
+  "purpose": [
+    "establish strict living governance for savant-runtime",
+    "preserve authoritative history rather than overwrite it",
+    "project current rules structure and masterplan deterministically",
+    "prevent implementation drift",
+    "make decisions unknowns permissions dependencies risks and evolution queryable"
+  ],
+  "streams": {
+    "rules": [
+      {
+        "id": "rule.authority.precedence",
+        "priority": 1,
+        "text": "authority shall be resolved in this order: current user directive, accepted authoritative graph, accepted decision, constitutional canon, verified implementation, admitted evidence, deterministic projection, historical implementation, historical document, inference, speculation."
+      },
+      {
+        "id": "rule.truth.no-invention",
+        "priority": 2,
+        "text": "never invent facts, content, citations, technical details, files, history, status, dependencies, behavior, timelines, implementation state, validation results, or authority."
+      },
+      {
+        "id": "rule.truth.unknown",
+        "priority": 3,
+        "text": "when a required fact is unknown, represent it explicitly as unknown; unknown is not false, absent, rejected, empty, or inferred."
+      },
+      {
+        "id": "rule.authority.before-inference",
+        "priority": 4,
+        "text": "authority precedes inference, convenience, historical implementation, aesthetic preference, and speculative architecture."
+      },
+      {
+        "id": "rule.authority.conflict",
+        "priority": 5,
+        "text": "when sources conflict, preserve both records, apply authority precedence, and never invent reconciliation."
+      },
+      {
+        "id": "rule.decision.immutable-history",
+        "priority": 6,
+        "text": "accepted decisions and authoritative records are immutable historical objects; revisions create superseding records rather than editing history."
+      },
+      {
+        "id": "rule.projection.non-authoritative",
+        "priority": 7,
+        "text": "markdown, html, ui, diagrams, reports, summaries, indexes, caches, and other projections never become authority merely because they exist."
+      },
+      {
+        "id": "rule.projection.deterministic",
+        "priority": 8,
+        "text": "equal authoritative state must generate equal deterministic projections."
+      },
+      {
+        "id": "rule.production.first",
+        "priority": 9,
+        "text": "implementation work proceeds directly to production changes when sufficient authority and information already exist."
+      },
+      {
+        "id": "rule.inspection.minimum",
+        "priority": 10,
+        "text": "perform only inspection mandatory to safely and correctly complete the immediate bounded task."
+      },
+      {
+        "id": "rule.validation.minimum",
+        "priority": 11,
+        "text": "validation proves usability and shall not become the task; normally use at most syntax or compilation, one focused functional check, and one relevant integration or startup check."
+      },
+      {
+        "id": "rule.validation.no-fake-success",
+        "priority": 12,
+        "text": "never claim successful implementation, integration, migration, startup, test passage, or compatibility without evidence."
+      },
+      {
+        "id": "rule.task.finite",
+        "priority": 13,
+        "text": "treat every request as a finite bounded task with an explicit completion condition and stop when that condition is met."
+      },
+      {
+        "id": "rule.scope.no-expansion",
+        "priority": 14,
+        "text": "do not expand a bounded implementation into audits, research, migrations, architecture redesign, observability, documentation, infrastructure, or adjacent work unless mandatory."
+      },
+      {
+        "id": "rule.implementation.preserve",
+        "priority": 15,
+        "text": "use the current verified implementation as baseline unless superseded by higher authority; extend rather than reconstruct or replace."
+      },
+      {
+        "id": "rule.implementation.no-regression",
+        "priority": 16,
+        "text": "reject changes that reduce verified behavior, compatibility, determinism, provenance, lineage, replay, recovery, extensibility, or dependency transparency."
+      },
+      {
+        "id": "rule.modularity.instance-first",
+        "priority": 17,
+        "text": "everything that can be represented once and reused by reference or instance shall not be duplicated."
+      },
+      {
+        "id": "rule.modularity.composition",
+        "priority": 18,
+        "text": "complex behavior should emerge from composition of reusable primitives, instances, typed segues, policies, projections, and attachments."
+      },
+      {
+        "id": "rule.modularity.no-dead-end",
+        "priority": 19,
+        "text": "no savant subsystem, component, artifact, or semantic object may intentionally become a non-extensible dead end."
+      },
+      {
+        "id": "rule.graph.addressable",
+        "priority": 20,
+        "text": "semantic elements should expose stable identity and remain graph-addressable wherever the architecture supports it."
+      },
+      {
+        "id": "rule.lineage.required",
+        "priority": 21,
+        "text": "authoritative additions and substantial derived artifacts shall expose lineage and provenance sufficient to identify what produced them."
+      },
+      {
+        "id": "rule.dependencies.transparent",
+        "priority": 22,
+        "text": "dependencies and dependents shall remain explicit where materially applicable; hidden coupling is prohibited."
+      },
+      {
+        "id": "rule.history.reconstructable",
+        "priority": 23,
+        "text": "authoritative history shall remain reconstructable without requiring speculative inference."
+      },
+      {
+        "id": "rule.data.non-destructive",
+        "priority": 24,
+        "text": "prefer reversible migration, supersession, archival preservation, and additive evolution over destructive mutation."
+      },
+      {
+        "id": "rule.naming.lowercase",
+        "priority": 25,
+        "text": "savant-owned terminology, paths, filenames, identifiers, and generated savant content shall be lowercase unless external syntax, compatibility, or stronger authority requires otherwise."
+      },
+      {
+        "id": "rule.naming.kindred",
+        "priority": 26,
+        "text": "the canonical relationship methodology and terminology is kindred; do not create new savant authority using the superseded term kinship."
+      },
+      {
+        "id": "rule.files.absolute-path",
+        "priority": 27,
+        "text": "technical implementation instructions shall use absolute paths and shall not depend upon the current working directory, aliases, shell history, or implicit home expansion."
+      },
+      {
+        "id": "rule.files.nano",
+        "priority": 28,
+        "text": "when user-facing instructions create or replace implementation files, use nano with the absolute path and provide the complete file."
+      },
+      {
+        "id": "rule.files.complete",
+        "priority": 29,
+        "text": "never provide implementation fragments, placeholders, omissions, ellipses, manual merge instructions, or individual-line replacement instructions when a complete file is required."
+      },
+      {
+        "id": "rule.files.no-heredoc",
+        "priority": 30,
+        "text": "do not instruct the user to create or replace implementation files with heredocs or shell redirection."
+      },
+      {
+        "id": "rule.compatibility.explicit",
+        "priority": 31,
+        "text": "compatibility surfaces that must survive a change shall be preserved intentionally rather than by accidental historical behavior."
+      },
+      {
+        "id": "rule.security.credentials",
+        "priority": 32,
+        "text": "credential values, secrets, tokens, passwords, and private keys shall never be copied into projections, logs, reports, diagnostics, or chat output."
+      },
+      {
+        "id": "rule.security.authority-separation",
+        "priority": 33,
+        "text": "content-generation latitude, provider behavior, authority enforcement, credential secrecy, mutation control, provenance, and execution safety are separate concerns and shall not be conflated."
+      },
+      {
+        "id": "rule.runtime.root",
+        "priority": 34,
+        "text": "the default savant implementation root is /root/savant-runtime unless stronger current authority establishes another root."
+      },
+      {
+        "id": "rule.runtime.projection-not-storage",
+        "priority": 35,
+        "text": "store authoritative primitives and derive indexes, reverse relationships, summaries, current views, documentation, reports, and ui projections rather than maintaining duplicate derived truth."
+      },
+      {
+        "id": "rule.runtime.single-authority",
+        "priority": 36,
+        "text": "never create a second authoritative registry, graph, canon, state store, or ownership source when the current constitutional system can represent the same authority."
+      },
+      {
+        "id": "rule.rules.not-markdown-only",
+        "priority": 37,
+        "text": "rules are authoritative governance records first; human-readable markdown rules files are projections and must be reproducible from their authoritative records."
+      },
+      {
+        "id": "rule.rules.scope",
+        "priority": 38,
+        "text": "rules shall declare their semantic scope and shall not silently govern unrelated domains merely because they are globally visible."
+      },
+      {
+        "id": "rule.rules.permissions",
+        "priority": 39,
+        "text": "constraints and permissions are separate primitives; absence of permission is not automatically a prohibition unless an applicable rule explicitly establishes a closed policy."
+      },
+      {
+        "id": "rule.rules.no-silent-weakening",
+        "priority": 40,
+        "text": "rules may be clarified or superseded but shall not be silently weakened."
+      },
+      {
+        "id": "rule.rules.current-user",
+        "priority": 41,
+        "text": "a current explicit user directive can supersede prior savant governance within the limits of higher platform authority; the earlier record remains preserved."
+      },
+      {
+        "id": "rule.structure.living",
+        "priority": 42,
+        "text": "the current savant structure shall be a deterministic living projection of authoritative structural records rather than a manually maintained competing truth source."
+      },
+      {
+        "id": "rule.masterplan.living",
+        "priority": 43,
+        "text": "the savant masterplan shall be a deterministic living projection of current goals, accepted decisions, dependencies, completion state, blockers, supersessions, and milestones."
+      },
+      {
+        "id": "rule.decision.living",
+        "priority": 44,
+        "text": "accepted decisions shall remain queryable as immutable living records with supersession lineage."
+      },
+      {
+        "id": "rule.unknown.living",
+        "priority": 45,
+        "text": "unresolved questions and unknown values shall be first-class living records so uncertainty cannot disappear merely because a document is regenerated."
+      },
+      {
+        "id": "rule.risk.living",
+        "priority": 46,
+        "text": "known material risks may be represented as living records with dependencies and resolution state, but speculative risks shall not be promoted to fact."
+      },
+      {
+        "id": "rule.compatibility.living",
+        "priority": 47,
+        "text": "important compatibility obligations shall be represented as living records and projected into relevant implementation views."
+      },
+      {
+        "id": "rule.terminology.living",
+        "priority": 48,
+        "text": "canonical terminology and explicit superseded aliases shall be represented as living records so vocabulary evolution preserves lineage."
+      },
+      {
+        "id": "rule.enhancement.evidence",
+        "priority": 49,
+        "text": "an enhancement is considered implemented only when executable behavior or authoritative configuration representing it exists; decorative enumeration does not constitute implementation."
+      },
+      {
+        "id": "rule.dependencies.external",
+        "priority": 50,
+        "text": "add external libraries only when they materially improve required behavior, have acceptable maintenance and licensing characteristics, do not duplicate existing capability, and have a clear failure or removal path."
+      },
+      {
+        "id": "rule.dependencies.native-first",
+        "priority": 51,
+        "text": "prefer standard-library, browser-native, or existing savant capabilities when they satisfy the requirement without meaningful loss."
+      },
+      {
+        "id": "rule.response.blocker",
+        "priority": 52,
+        "text": "when blocked, state only what is complete, what remains, the blocker, and the minimum next action."
+      }
+    ],
+    "permissions": [
+      {
+        "id": "permission.extend",
+        "priority": 1,
+        "text": "a subsystem may be extended through compatible instances, typed segues, adapters, policies, attachments, and projections without requiring replacement."
+      },
+      {
+        "id": "permission.provisional",
+        "priority": 2,
+        "text": "provisional knowledge may be represented when explicitly marked provisional with appropriate provenance and confidence."
+      },
+      {
+        "id": "permission.unknown",
+        "priority": 3,
+        "text": "unknown values may remain unresolved indefinitely when authority is insufficient."
+      },
+      {
+        "id": "permission.future-provider",
+        "priority": 4,
+        "text": "future providers may attach through reusable protocol-family adapters and declarative profiles without duplicating provider substance."
+      },
+      {
+        "id": "permission.projection-delete",
+        "priority": 5,
+        "text": "disposable projections may be regenerated or removed when their authoritative primitives remain intact."
+      },
+      {
+        "id": "permission.supersede",
+        "priority": 6,
+        "text": "higher authority may supersede an accepted record without mutating or deleting the superseded historical record."
+      },
+      {
+        "id": "permission.local-state",
+        "priority": 7,
+        "text": "ui and interaction layers may store ephemeral layout, selection, focus, expansion, and preference state when those values are not falsely promoted to backend authority."
+      },
+      {
+        "id": "permission.adapter",
+        "priority": 8,
+        "text": "compatibility adapters may preserve required historical interfaces while semantic ownership moves to a newer authoritative implementation."
+      },
+      {
+        "id": "permission.optimize",
+        "priority": 9,
+        "text": "implementation may be optimized when observable behavior, authority, compatibility, lineage, and determinism are preserved."
+      },
+      {
+        "id": "permission.archive",
+        "priority": 10,
+        "text": "obsolete historical implementations may be archived rather than kept active when no required compatibility surface depends on them."
+      },
+      {
+        "id": "permission.compose",
+        "priority": 11,
+        "text": "higher-order structures may emerge from reusable lower-order instances without duplicating their underlying substance."
+      },
+      {
+        "id": "permission.external-library",
+        "priority": 12,
+        "text": "a third-party dependency may be introduced when native and already-installed capabilities are materially insufficient and the dependency satisfies governance requirements."
+      }
+    ],
+    "invariants": [
+      {
+        "id": "invariant.authority",
+        "priority": 1,
+        "text": "derived state never outranks the authoritative primitive from which it was produced."
+      },
+      {
+        "id": "invariant.history",
+        "priority": 2,
+        "text": "accepted authoritative history is preserved."
+      },
+      {
+        "id": "invariant.identity",
+        "priority": 3,
+        "text": "semantic identity remains stable across compatible versions and supersessions."
+      },
+      {
+        "id": "invariant.determinism",
+        "priority": 4,
+        "text": "equal authority state produces equal deterministic projections."
+      },
+      {
+        "id": "invariant.provenance",
+        "priority": 5,
+        "text": "authoritative claims remain traceable to their provenance."
+      },
+      {
+        "id": "invariant.lineage",
+        "priority": 6,
+        "text": "supersession and derivation lineage remains queryable."
+      },
+      {
+        "id": "invariant.no-secret-projection",
+        "priority": 7,
+        "text": "secret credential values never appear in living projections."
+      },
+      {
+        "id": "invariant.kindred",
+        "priority": 8,
+        "text": "new relationship-methodology authority uses kindred terminology."
+      },
+      {
+        "id": "invariant.lowercase",
+        "priority": 9,
+        "text": "new savant-owned identifiers are lowercase unless compatibility or stronger authority prevents it."
+      },
+      {
+        "id": "invariant.no-duplicate-authority",
+        "priority": 10,
+        "text": "one semantic fact has one authoritative substance regardless of how many projections expose it."
+      },
+      {
+        "id": "invariant.no-dead-end",
+        "priority": 11,
+        "text": "new semantic components remain extensible and attachable."
+      },
+      {
+        "id": "invariant.unknown-preserved",
+        "priority": 12,
+        "text": "unresolved unknowns cannot disappear from projections until resolved or superseded."
+      },
+      {
+        "id": "invariant.dependencies",
+        "priority": 13,
+        "text": "material direct dependencies remain visible."
+      },
+      {
+        "id": "invariant.compatibility",
+        "priority": 14,
+        "text": "declared compatibility obligations cannot disappear through unrelated refactoring."
+      },
+      {
+        "id": "invariant.non-destructive",
+        "priority": 15,
+        "text": "evolution preserves recoverability."
+      },
+      {
+        "id": "invariant.task-bounds",
+        "priority": 16,
+        "text": "bounded work has a finite completion condition."
+      },
+      {
+        "id": "invariant.validation-evidence",
+        "priority": 17,
+        "text": "completion claims are evidence-backed."
+      },
+      {
+        "id": "invariant.projection-rebuild",
+        "priority": 18,
+        "text": "living human-readable documents are reproducible from authoritative living records."
+      }
+    ],
+    "decisions": [
+      {
+        "id": "decision.root",
+        "priority": 1,
+        "text": "the default implementation root is /root/savant-runtime."
+      },
+      {
+        "id": "decision.kindred",
+        "priority": 2,
+        "text": "kindred is the canonical relationship-methodology term."
+      },
+      {
+        "id": "decision.production-first",
+        "priority": 3,
+        "text": "production-first execution with mandatory inspection only is the default implementation methodology."
+      },
+      {
+        "id": "decision.minimum-validation",
+        "priority": 4,
+        "text": "minimum sufficient validation is the default validation methodology."
+      },
+      {
+        "id": "decision.instance-first",
+        "priority": 5,
+        "text": "instances and typed segues are primary reusable implementation primitives."
+      },
+      {
+        "id": "decision.projection",
+        "priority": 6,
+        "text": "derived documents and views are projections and do not independently own authority."
+      },
+      {
+        "id": "decision.supersession",
+        "priority": 7,
+        "text": "authoritative evolution uses immutable historical records and supersession."
+      },
+      {
+        "id": "decision.lowercase",
+        "priority": 8,
+        "text": "new savant-owned terminology and paths default to lowercase."
+      },
+      {
+        "id": "decision.complete-files",
+        "priority": 9,
+        "text": "user-facing technical file replacements are delivered as complete nano files."
+      },
+      {
+        "id": "decision.living-governance",
+        "priority": 10,
+        "text": "rules, permissions, invariants, structure, masterplan, decisions, unknowns, terminology, compatibility, risk, milestones, dependencies, and enhancements share one living governance mechanism rather than separate duplicate engines."
+      }
+    ],
+    "structure": [
+      {
+        "id": "structure.reality",
+        "priority": 1,
+        "text": "savant reality is represented through authoritative recursively composable constitutional objects and their relationships."
+      },
+      {
+        "id": "structure.authority",
+        "priority": 2,
+        "text": "authority stores primitives; projections derive human and machine views."
+      },
+      {
+        "id": "structure.constitution",
+        "priority": 3,
+        "text": "the constitutional registry is the existing generic authority and graph substrate and shall not be duplicated by living governance."
+      },
+      {
+        "id": "structure.fluid-canon",
+        "priority": 4,
+        "text": "fluid canon provides canonical truth through immutable constitutional assertions and pure queries."
+      },
+      {
+        "id": "structure.palaver",
+        "priority": 5,
+        "text": "palaver owns conversation, workspace, and patch-review orchestration."
+      },
+      {
+        "id": "structure.scrybe",
+        "priority": 6,
+        "text": "scrybe owns memory and context."
+      },
+      {
+        "id": "structure.niche",
+        "priority": 7,
+        "text": "niche owns task context."
+      },
+      {
+        "id": "structure.envoy",
+        "priority": 8,
+        "text": "envoy owns persona and voice."
+      },
+      {
+        "id": "structure.opus",
+        "priority": 9,
+        "text": "opus owns inference and provider orchestration."
+      },
+      {
+        "id": "structure.coda",
+        "priority": 10,
+        "text": "coda owns mutation and apply operations."
+      },
+      {
+        "id": "structure.kindred",
+        "priority": 11,
+        "text": "kindred represents reusable relationship methodology without duplicating related object substance."
+      },
+      {
+        "id": "structure.living-governance",
+        "priority": 12,
+        "text": "living governance stores governance evolution once and deterministically projects rules, structure, masterplan, and related views."
+      }
+    ],
+    "masterplan": [
+      {
+        "id": "masterplan.01",
+        "priority": 1,
+        "text": "preserve and extend the constitutional authority substrate rather than creating competing registries."
+      },
+      {
+        "id": "masterplan.02",
+        "priority": 2,
+        "text": "complete living governance and project its current rules, structure, masterplan, decisions, unknowns, compatibility obligations, and dependency views."
+      },
+      {
+        "id": "masterplan.03",
+        "priority": 3,
+        "text": "continue evolving palaver as the primary conversation and workstation surface while preserving subsystem ownership boundaries."
+      },
+      {
+        "id": "masterplan.04",
+        "priority": 4,
+        "text": "complete provider-universal opus behavior through reusable protocol families and provider profiles rather than provider-by-provider duplication."
+      },
+      {
+        "id": "masterplan.05",
+        "priority": 5,
+        "text": "project scrybe, niche, envoy, opus, coda, kindred, authority, lineage, and provenance into palaver without relocating their authority."
+      },
+      {
+        "id": "masterplan.06",
+        "priority": 6,
+        "text": "continue replacing manually maintained derived structures with deterministic projections from authoritative primitives."
+      },
+      {
+        "id": "masterplan.07",
+        "priority": 7,
+        "text": "preserve reversible migration, compatibility adapters, and historical lineage while superseding obsolete implementations."
+      },
+      {
+        "id": "masterplan.08",
+        "priority": 8,
+        "text": "maintain explicit unknowns and blockers rather than filling architectural gaps through inference."
+      },
+      {
+        "id": "masterplan.09",
+        "priority": 9,
+        "text": "keep savant extensible through reusable instances, typed segues, declarative profiles, policies, adapters, and deterministic projections."
+      },
+      {
+        "id": "masterplan.10",
+        "priority": 10,
+        "text": "optimize only where improvement is material and does not weaken core functionality or authority."
+      }
+    ],
+    "terminology": [
+      {
+        "id": "term.kindred",
+        "priority": 1,
+        "text": "kindred: canonical methodology for relationship composition and traversal; supersedes new use of the historical term kinship."
+      },
+      {
+        "id": "term.projection",
+        "priority": 2,
+        "text": "projection: deterministic disposable representation derived from authoritative primitives."
+      },
+      {
+        "id": "term.authority",
+        "priority": 3,
+        "text": "authority: source-backed semantic substance permitted to govern derived state."
+      },
+      {
+        "id": "term.supersession",
+        "priority": 4,
+        "text": "supersession: immutable evolution in which a new authoritative record replaces the current applicability of an earlier record without erasing it."
+      },
+      {
+        "id": "term.unknown",
+        "priority": 5,
+        "text": "unknown: explicitly unresolved value that is not equivalent to false, empty, absent, or rejected."
+      },
+      {
+        "id": "term.living-engine",
+        "priority": 6,
+        "text": "living engine: immutable evolving authority plus deterministic current-state projection, not a document rewritten in place."
+      }
+    ],
+    "unknowns": [
+      {
+        "id": "unknown.current-full-authority-graph",
+        "priority": 1,
+        "text": "the complete live server authority graph at the moment of this bootstrap is not asserted by this bootstrap."
+      },
+      {
+        "id": "unknown.current-all-runtime-dependents",
+        "priority": 2,
+        "text": "all current runtime dependents of every subsystem are not asserted unless established by verified implementation."
+      },
+      {
+        "id": "unknown.unverified-historical-rules",
+        "priority": 3,
+        "text": "historical rules not supported by current authority or admitted evidence remain historical evidence rather than current rules."
+      }
+    ],
+    "compatibility": [
+      {
+        "id": "compatibility.palaver-bootstrap",
+        "priority": 1,
+        "text": "palaver canonical bootstrap and verified compatibility entrypoints must continue to function unless explicitly superseded."
+      },
+      {
+        "id": "compatibility.provider-adapters",
+        "priority": 2,
+        "text": "existing dedicated opus provider adapters remain valid while universal provider architecture extends coverage."
+      },
+      {
+        "id": "compatibility.projections",
+        "priority": 3,
+        "text": "existing consumers of projected documents may be supported through compatibility projections without promoting those documents to authority."
+      }
+    ],
+    "risks": [
+      {
+        "id": "risk.duplicate-authority",
+        "priority": 1,
+        "text": "creating new registries or manually maintained current-state documents can produce conflicting authority."
+      },
+      {
+        "id": "risk.historical-contamination",
+        "priority": 2,
+        "text": "historical Savant documents contain obsolete and mutually conflicting architecture and must not automatically outrank newer accepted authority."
+      },
+      {
+        "id": "risk.projection-drift",
+        "priority": 3,
+        "text": "hand-edited structure and masterplan documents can drift from runtime authority unless generated from the same living records."
+      },
+      {
+        "id": "risk.overvalidation",
+        "priority": 4,
+        "text": "broad validation and inspection can become a substitute for production implementation."
+      }
+    ],
+    "enhancements": [
+      {
+        "id": "enhancement.01",
+        "priority": 1,
+        "text": "one append-only governance ledger for all living governance streams."
+      },
+      {
+        "id": "enhancement.02",
+        "priority": 2,
+        "text": "cryptographic hash chaining for governance-event integrity."
+      },
+      {
+        "id": "enhancement.03",
+        "priority": 3,
+        "text": "stable semantic ids independent of record version."
+      },
+      {
+        "id": "enhancement.04",
+        "priority": 4,
+        "text": "authority-aware current-state resolution."
+      },
+      {
+        "id": "enhancement.05",
+        "priority": 5,
+        "text": "immutable supersession history."
+      },
+      {
+        "id": "enhancement.06",
+        "priority": 6,
+        "text": "deterministic markdown projections."
+      },
+      {
+        "id": "enhancement.07",
+        "priority": 7,
+        "text": "deterministic json projections."
+      },
+      {
+        "id": "enhancement.08",
+        "priority": 8,
+        "text": "projection digests proving equal authority state."
+      },
+      {
+        "id": "enhancement.09",
+        "priority": 9,
+        "text": "first-class rules stream."
+      },
+      {
+        "id": "enhancement.10",
+        "priority": 10,
+        "text": "first-class permissions stream."
+      },
+      {
+        "id": "enhancement.11",
+        "priority": 11,
+        "text": "first-class invariants stream."
+      },
+      {
+        "id": "enhancement.12",
+        "priority": 12,
+        "text": "living structure projection."
+      },
+      {
+        "id": "enhancement.13",
+        "priority": 13,
+        "text": "living masterplan projection."
+      },
+      {
+        "id": "enhancement.14",
+        "priority": 14,
+        "text": "immutable accepted-decision stream."
+      },
+      {
+        "id": "enhancement.15",
+        "priority": 15,
+        "text": "first-class unknown and unresolved-question stream."
+      },
+      {
+        "id": "enhancement.16",
+        "priority": 16,
+        "text": "canonical terminology stream with supersession support."
+      },
+      {
+        "id": "enhancement.17",
+        "priority": 17,
+        "text": "compatibility-obligation stream."
+      },
+      {
+        "id": "enhancement.18",
+        "priority": 18,
+        "text": "material-risk stream separated from fact."
+      },
+      {
+        "id": "enhancement.19",
+        "priority": 19,
+        "text": "dependency and reverse-dependency projection support."
+      },
+      {
+        "id": "enhancement.20",
+        "priority": 20,
+        "text": "conflict detection without invented reconciliation."
+      },
+      {
+        "id": "enhancement.21",
+        "priority": 21,
+        "text": "queryable historical versions."
+      },
+      {
+        "id": "enhancement.22",
+        "priority": 22,
+        "text": "machine-readable status output suitable for palaver projection."
+      },
+      {
+        "id": "enhancement.23",
+        "priority": 23,
+        "text": "explicit provenance on every contributed record."
+      },
+      {
+        "id": "enhancement.24",
+        "priority": 24,
+        "text": "external dependency avoidance where standard-library behavior is sufficient."
+      },
+      {
+        "id": "enhancement.25",
+        "priority": 25,
+        "text": "atomic projection replacement to prevent partially-written living documents."
+      },
+      {
+        "id": "enhancement.26",
+        "priority": 26,
+        "text": "bounded validation of ledger integrity and projection reproducibility."
+      },
+      {
+        "id": "enhancement.27",
+        "priority": 27,
+        "text": "stream-independent extension so future living concerns require data rather than another engine."
+      },
+      {
+        "id": "enhancement.28",
+        "priority": 28,
+        "text": "human and machine projections generated from exactly the same resolved state."
+      }
+    ]
+  }
+}

@@ -1,0 +1,70 @@
+registry: SAVANT_LEXICON_PROJECTIONS
+version: 1
+
+projections:
+
+  canonical_index:
+
+    enabled: true
+
+    output: runtime/canonical_index.json
+
+  alias_index:
+
+    enabled: true
+
+    output: runtime/alias_index.json
+
+  dependency_graph:
+
+    enabled: true
+
+    output: runtime/dependency_graph.json
+
+  inheritance_graph:
+
+    enabled: true
+
+    output: runtime/inheritance_graph.json
+
+  ontology_graph:
+
+    enabled: true
+
+    output: runtime/ontology_graph.json
+
+  relationship_graph:
+
+    enabled: true
+
+    output: runtime/relationship_graph.json
+
+  supersession_graph:
+
+    enabled: true
+
+    output: runtime/supersession_graph.json
+
+  reverse_dependency_graph:
+
+    enabled: true
+
+    output: runtime/reverse_dependency_graph.json
+
+  search_index:
+
+    enabled: true
+
+    output: runtime/search_index.json
+
+  reserved_index:
+
+    enabled: true
+
+    output: runtime/reserved_index.json
+
+  audit_index:
+
+    enabled: true
+
+    output: runtime/audit_index.json

@@ -1,0 +1,26 @@
+schema: "savant://projection/identity/exile-instance/1.0.0"
+id: "exile:zero"
+kind: "exile"
+name: "zero"
+status: "accepted"
+authority_effect: "none"
+authority_ref: "canon-system/authority/exiles/zero.yaml"
+authority_sha256: "ed93d533e375b9ca7ebc0f59ffc9e2372e803d4e3c18e1c191e9273480c31f8d"
+purpose_projection:
+  source: "canon-system/authority/exiles/zero.yaml"
+  current:
+    - "mathematics"
+    - "formal calculation"
+    - "quantitative invariants"
+composition:
+  parent_edifice: "identity"
+  child_level: "prodigal"
+  transition: "segue"
+invariants:
+  filesystem_presence_establishes_authority: false
+  canonical_substance_duplicated: false
+  child_substance_by_reference: true
+  projections_are_authority: false
+lineage:
+  decision: "authority/accepted-decisions/ad-20261003-001-materialize-eighteen-exiles-and-segues.md"
+generated_by: "savant.identity-edifice-reconciler.v1"

@@ -1,0 +1,69 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "registry.lineage_roles.index",
+  "deterministic_hash": "3a9e9cfe04cbc58d9cbebf5bf66fcad514fad5a7fe6956098d79e35ff7399bb5",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "registry.lineage_roles.index",
+  "kind": "role_registry_index",
+  "label": "registry.lineage_roles.index",
+  "namespace": "preview.kindred",
+  "path": null,
+  "placement": {
+    "domain": "unclassified",
+    "node": "registry.lineage_roles.index",
+    "parent": "savant-runtime",
+    "placement_basis": "orphan_attachment",
+    "primary_relationship_id": null,
+    "rank": 130,
+    "slot": "20_authority",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "module",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "registry.lineage_roles.index",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "registry.lineage_roles.index",
+    "kind": "role_registry_index",
+    "label": "registry.lineage_roles.index",
+    "legacy_id": null,
+    "lineage": [],
+    "metadata": {
+      "authority_source_path": "/root/savant-runtime/authority_graph/roles/lineage_role_registry.json",
+      "canonical_id": "registry.lineage_roles.index",
+      "child_modes": {},
+      "child_roles": {},
+      "lineage_placeholder": false,
+      "parent_roles": {},
+      "projected_id": "registry.lineage_roles.index"
+    },
+    "mothers": [],
+    "parents": [],
+    "path": null,
+    "provenance": {
+      "adapter": "authority_document",
+      "source_files": [
+        "/root/savant-runtime/authority_graph/roles/lineage_role_registry.json"
+      ]
+    },
+    "recovery_routes": [],
+    "relationships": [],
+    "size": 7,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

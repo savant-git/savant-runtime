@@ -1,0 +1,696 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+
+root = Path(
+    "/root/savant-runtime"
+)
+
+if str(root) not in sys.path:
+    sys.path.insert(
+        0,
+        str(root),
+    )
+
+
+from runtime.straub import (
+    MemoryPersistence,
+    StraubDependencyIndex,
+    StraubFunctionRegistry,
+    StraubQuery,
+    StraubRegistry,
+    content_digest,
+)
+
+
+def build_self_test() -> dict:
+    registry = StraubRegistry()
+
+    subject = registry.substantiate(
+        {
+            "id":
+                "instance:straub:self-test:subject",
+            "kind":
+                "instance",
+            "authority": {
+                "class":
+                    "accepted_authority",
+            },
+            "payload": {
+                "label":
+                    "straub self-test subject",
+            },
+            "provenance": {
+                "source":
+                    "straub:self-test",
+                "confidence":
+                    "confirmed",
+            },
+        }
+    )
+
+    label_definition = (
+        registry.define_metadata(
+            instance_id=(
+                "instance:straub:"
+                "self-test:definition:label"
+            ),
+            label="test label",
+            value_type="string",
+            applies_to=[
+                "instance",
+                "function.step",
+            ],
+            description=(
+                "self-test metadata definition"
+            ),
+            provenance={
+                "source":
+                    "straub:self-test",
+                "confidence":
+                    "confirmed",
+            },
+        )
+    )
+
+    label_value = (
+        registry.instantiate_metadata(
+            instance_id=(
+                "instance:straub:"
+                "self-test:value:label"
+            ),
+            definition_id=(
+                label_definition[
+                    "id"
+                ]
+            ),
+            value="test value",
+            provenance={
+                "source":
+                    "straub:self-test",
+                "confidence":
+                    "confirmed",
+            },
+        )
+    )
+
+    label_edge = (
+        registry.attach_metadata(
+            membrane_id=(
+                "membrane:straub:"
+                "self-test:subject-label"
+            ),
+            subject_id=(
+                subject[
+                    "id"
+                ]
+            ),
+            umbra_id=(
+                label_value[
+                    "id"
+                ]
+            ),
+            relation="described_by",
+            provenance={
+                "source":
+                    "straub:self-test",
+                "confidence":
+                    "confirmed",
+            },
+        )
+    )
+
+    functions = (
+        StraubFunctionRegistry(
+            registry
+        )
+    )
+
+    step_one = functions.define_step(
+        instance_id=(
+            "instance:straub:"
+            "self-test:function:step:one"
+        ),
+        label="first step",
+        operation="transform",
+        ordinal=1,
+        input_contract={
+            "type":
+                "object",
+        },
+        output_contract={
+            "type":
+                "object",
+        },
+        dependencies=[
+            subject[
+                "id"
+            ],
+        ],
+        deterministic=True,
+        side_effect_class="none",
+        provenance={
+            "source":
+                "straub:self-test",
+            "confidence":
+                "confirmed",
+        },
+    )
+
+    step_two = functions.define_step(
+        instance_id=(
+            "instance:straub:"
+            "self-test:function:step:two"
+        ),
+        label="second step",
+        operation="project",
+        ordinal=2,
+        input_contract={
+            "type":
+                "object",
+        },
+        output_contract={
+            "type":
+                "object",
+        },
+        dependencies=[
+            step_one[
+                "id"
+            ],
+        ],
+        deterministic=True,
+        side_effect_class="none",
+        provenance={
+            "source":
+                "straub:self-test",
+            "confidence":
+                "confirmed",
+        },
+    )
+
+    function = functions.define_function(
+        instance_id=(
+            "instance:straub:"
+            "self-test:function"
+        ),
+        label="self-test function",
+        purpose=(
+            "prove reusable first-class "
+            "function steps"
+        ),
+        step_ids=[
+            step_one[
+                "id"
+            ],
+            step_two[
+                "id"
+            ],
+        ],
+        provenance={
+            "source":
+                "straub:self-test",
+            "confidence":
+                "confirmed",
+        },
+    )
+
+    step_metadata_value = (
+        registry.instantiate_metadata(
+            instance_id=(
+                "instance:straub:"
+                "self-test:value:step-label"
+            ),
+            definition_id=(
+                label_definition[
+                    "id"
+                ]
+            ),
+            value="metadata on a function step",
+            provenance={
+                "source":
+                    "straub:self-test",
+                "confidence":
+                    "confirmed",
+            },
+        )
+    )
+
+    registry.attach_metadata(
+        membrane_id=(
+            "membrane:straub:"
+            "self-test:step-label"
+        ),
+        subject_id=(
+            step_one[
+                "id"
+            ]
+        ),
+        umbra_id=(
+            step_metadata_value[
+                "id"
+            ]
+        ),
+        relation="described_by",
+        provenance={
+            "source":
+                "straub:self-test",
+            "confidence":
+                "confirmed",
+        },
+    )
+
+    execution_id = (
+        "execution:straub:"
+        "self-test:0001"
+    )
+
+    first_input = {
+        "value":
+            "alpha",
+    }
+
+    first_output = {
+        "value":
+            "beta",
+    }
+
+    second_output = {
+        "value":
+            "gamma",
+    }
+
+    execution_one = (
+        functions.record_step_execution(
+            instance_id=(
+                "instance:straub:"
+                "self-test:execution:one"
+            ),
+            step_id=(
+                step_one[
+                    "id"
+                ]
+            ),
+            execution_id=(
+                execution_id
+            ),
+            status="succeeded",
+            input_digest=(
+                content_digest(
+                    first_input
+                )
+            ),
+            output_digest=(
+                content_digest(
+                    first_output
+                )
+            ),
+            provenance={
+                "source":
+                    "straub:self-test",
+                "confidence":
+                    "confirmed",
+            },
+        )
+    )
+
+    execution_two = (
+        functions.record_step_execution(
+            instance_id=(
+                "instance:straub:"
+                "self-test:execution:two"
+            ),
+            step_id=(
+                step_two[
+                    "id"
+                ]
+            ),
+            execution_id=(
+                execution_id
+            ),
+            status="succeeded",
+            input_digest=(
+                content_digest(
+                    first_output
+                )
+            ),
+            output_digest=(
+                content_digest(
+                    second_output
+                )
+            ),
+            previous_execution_id=(
+                execution_one[
+                    "id"
+                ]
+            ),
+            provenance={
+                "source":
+                    "straub:self-test",
+                "confidence":
+                    "confirmed",
+            },
+        )
+    )
+
+    step_projection = (
+        functions.steps(
+            function[
+                "id"
+            ]
+        )
+    )
+
+    trace = functions.trace(
+        function_id=(
+            function[
+                "id"
+            ]
+        ),
+        execution_id=(
+            execution_id
+        ),
+    )
+
+    capsule = (
+        registry.export_capsule()
+    )
+
+    query = StraubQuery(
+        capsule
+    )
+
+    step_query = query.search(
+        {
+            "kinds": [
+                "function.step",
+            ],
+        }
+    )
+
+    step_metadata = (
+        query.effective_metadata(
+            step_one[
+                "id"
+            ]
+        )
+    )
+
+    dependency_index = (
+        StraubDependencyIndex(
+            capsule
+        )
+    )
+
+    invalidation = (
+        dependency_index.invalidation(
+            [
+                step_one[
+                    "id"
+                ],
+            ]
+        )
+    )
+
+    history = registry.history()
+
+    persistence = (
+        MemoryPersistence()
+    )
+
+    checkpoint = (
+        registry.checkpoint(
+            persistence
+        )
+    )
+
+    recovered = (
+        StraubRegistry.recover(
+            persistence
+        )
+    )
+
+    recovered_functions = (
+        StraubFunctionRegistry(
+            recovered
+        )
+    )
+
+    recovered_trace = (
+        recovered_functions.trace(
+            function_id=(
+                function[
+                    "id"
+                ]
+            ),
+            execution_id=(
+                execution_id
+            ),
+        )
+    )
+
+    recovered_capsule = (
+        recovered.export_capsule()
+    )
+
+    passed = bool(
+        step_projection[
+            "step_count"
+        ]
+        == 2
+        and step_projection[
+            "steps"
+        ][
+            0
+        ][
+            "step"
+        ]
+        == step_one[
+            "id"
+        ]
+        and step_projection[
+            "steps"
+        ][
+            1
+        ][
+            "step"
+        ]
+        == step_two[
+            "id"
+        ]
+        and trace[
+            "complete"
+        ]
+        is True
+        and trace[
+            "execution_record_count"
+        ]
+        == 2
+        and trace[
+            "executions"
+        ][
+            1
+        ][
+            "previous_execution"
+        ]
+        == execution_one[
+            "id"
+        ]
+        and execution_two[
+            "lineage"
+        ][
+            "derived_from"
+        ]
+        == [
+            execution_one[
+                "id"
+            ]
+        ]
+        and step_query[
+            "result_count"
+        ]
+        == 2
+        and step_metadata[
+            "metadata_count"
+        ]
+        == 1
+        and step_metadata[
+            "metadata"
+        ][
+            0
+        ][
+            "value"
+        ]
+        == "metadata on a function step"
+        and (
+            step_two[
+                "id"
+            ]
+            in invalidation[
+                "affected"
+            ]
+        )
+        and (
+            function[
+                "id"
+            ]
+            in invalidation[
+                "affected"
+            ]
+        )
+        and (
+            execution_one[
+                "id"
+            ]
+            in invalidation[
+                "affected"
+            ]
+        )
+        and recovered_trace[
+            "digest"
+        ]
+        == trace[
+            "digest"
+        ]
+        and recovered_capsule[
+            "digest"
+        ]
+        == capsule[
+            "digest"
+        ]
+        and checkpoint[
+            "capsule_digest"
+        ]
+        == capsule[
+            "digest"
+        ]
+        and history[
+            "immutable"
+        ]
+        is True
+    )
+
+    return {
+        "schema":
+            "savant.straub.self-test.v5",
+        "passed":
+            passed,
+        "health":
+            registry.health(),
+        "function_steps":
+            step_projection,
+        "execution_trace":
+            trace,
+        "step_query":
+            step_query,
+        "step_metadata":
+            step_metadata,
+        "invalidation":
+            invalidation,
+        "history": {
+            "event_count":
+                history[
+                    "event_count"
+                ],
+            "head_digest":
+                history[
+                    "head_digest"
+                ],
+            "immutable":
+                history[
+                    "immutable"
+                ],
+        },
+        "checkpoint":
+            checkpoint,
+        "capsule_digest":
+            capsule[
+                "digest"
+            ],
+        "recovery_digest":
+            recovered_capsule[
+                "digest"
+            ],
+        "step_replay_digest":
+            recovered_trace[
+                "digest"
+            ],
+        "deterministic_step_replay":
+            (
+                recovered_trace[
+                    "digest"
+                ]
+                == trace[
+                    "digest"
+                ]
+            ),
+        "storage_engine":
+            None,
+        "execution_engine":
+            None,
+        "persistent_mutation":
+            False,
+        "authority_effect":
+            "none",
+    }
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        prog="straub"
+    )
+
+    commands = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    commands.add_parser(
+        "health"
+    )
+
+    commands.add_parser(
+        "self-test"
+    )
+
+    args = parser.parse_args()
+
+    if args.command == "health":
+        output = (
+            StraubRegistry().health()
+        )
+
+        code = 0
+
+    else:
+        output = build_self_test()
+
+        code = (
+            0
+            if output[
+                "passed"
+            ]
+            else 1
+        )
+
+    print(
+        json.dumps(
+            output,
+            indent=2,
+            sort_keys=True,
+            ensure_ascii=False,
+        )
+    )
+
+    return code
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

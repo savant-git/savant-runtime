@@ -1,0 +1,245 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+
+root = Path(
+    "/root/savant-runtime"
+)
+
+if str(root) not in sys.path:
+    sys.path.insert(
+        0,
+        str(root),
+    )
+
+
+from runtime.straub import StraubRegistry
+
+
+def build_self_test() -> dict:
+    registry = StraubRegistry()
+
+    subject = registry.substantiate(
+        {
+            "id":
+                "instance:straub:self-test:subject",
+            "kind":
+                "instance",
+            "payload": {
+                "label":
+                    "straub self-test subject",
+            },
+            "provenance": {
+                "source":
+                    "straub:self-test",
+                "confidence":
+                    "confirmed",
+            },
+        }
+    )
+
+    definition = (
+        registry.define_metadata(
+            instance_id=(
+                "instance:straub:"
+                "self-test:definition"
+            ),
+            label="test label",
+            value_type="string",
+            applies_to=[
+                "instance",
+            ],
+            description=(
+                "self-test metadata definition"
+            ),
+            provenance={
+                "source":
+                    "straub:self-test",
+                "confidence":
+                    "confirmed",
+            },
+        )
+    )
+
+    value = registry.instantiate_metadata(
+        instance_id=(
+            "instance:straub:"
+            "self-test:value"
+        ),
+        definition_id=(
+            definition[
+                "id"
+            ]
+        ),
+        value="test value",
+        provenance={
+            "source":
+                "straub:self-test",
+            "confidence":
+                "confirmed",
+        },
+    )
+
+    edge = registry.attach_metadata(
+        membrane_id=(
+            "membrane:straub:"
+            "self-test:subject-label"
+        ),
+        subject_id=(
+            subject[
+                "id"
+            ]
+        ),
+        umbra_id=(
+            value[
+                "id"
+            ]
+        ),
+        relation="described_by",
+        provenance={
+            "source":
+                "straub:self-test",
+            "confidence":
+                "confirmed",
+        },
+    )
+
+    pair = registry.dyad(
+        edge[
+            "id"
+        ]
+    )
+
+    projection = registry.radia(
+        subject_id=(
+            subject[
+                "id"
+            ]
+        )
+    )
+
+    metadata_rows = (
+        projection[
+            "subjects"
+        ][
+            0
+        ][
+            "metadata"
+        ]
+    )
+
+    passed = bool(
+        pair[
+            "subject"
+        ]
+        == subject[
+            "id"
+        ]
+        and pair[
+            "umbra"
+        ]
+        == value[
+            "id"
+        ]
+        and pair[
+            "membrane"
+        ]
+        == edge[
+            "id"
+        ]
+        and len(
+            metadata_rows
+        )
+        == 1
+        and metadata_rows[
+            0
+        ][
+            "value"
+        ]
+        == "test value"
+        and projection[
+            "authority_effect"
+        ]
+        == "none"
+    )
+
+    return {
+        "schema":
+            "savant.straub.self-test.v1",
+        "passed":
+            passed,
+        "health":
+            registry.health(),
+        "dyad":
+            pair,
+        "radia":
+            projection,
+        "storage_engine":
+            None,
+        "persistent_mutation":
+            False,
+        "authority_effect":
+            "none",
+    }
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        prog="straub"
+    )
+
+    commands = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    commands.add_parser(
+        "health"
+    )
+
+    commands.add_parser(
+        "self-test"
+    )
+
+    args = parser.parse_args()
+
+    if args.command == "health":
+        output = (
+            StraubRegistry().health()
+        )
+
+        code = 0
+
+    else:
+        output = build_self_test()
+
+        code = (
+            0
+            if output[
+                "passed"
+            ]
+            else 1
+        )
+
+    print(
+        json.dumps(
+            output,
+            indent=2,
+            sort_keys=True,
+            ensure_ascii=False,
+        )
+    )
+
+    return code
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

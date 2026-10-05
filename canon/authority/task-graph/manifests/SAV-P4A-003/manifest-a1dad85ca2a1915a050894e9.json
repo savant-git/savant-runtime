@@ -1,0 +1,304 @@
+{
+  "artifacts": [],
+  "attestations": [],
+  "content_digest": "a1dad85ca2a1915a050894e9a86b94faddd96ccdd2ce9361463db47b73f8b279",
+  "decisions": [],
+  "events": [
+    {
+      "authority": {
+        "accepted_at": "2026-08-02T19:37:47+00:00",
+        "accepted_by": "project-owner",
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "runtime/masterplan/decision-proposals/latest.json",
+        "state": "accepted",
+        "tier": 1
+      },
+      "event_type": "masterplan.segues.duplicates.reconciled",
+      "extensions": {
+        "decision_id": "decision-706b690abcf266fd6dacd74f",
+        "graph_digest_after": "f3bdbb9246a38ed2bd356c7a42dedbfe86546b5793ebc05ab45a03ffaaec303d",
+        "graph_digest_before": "63db8daf950920f24f1cb0cf7151a86c9cce8144f6343345448677d8ce50f8e2",
+        "plan_semantic_digest": "a7eab11440974f9ef45353f599db56e7296afbc2c0f6771563102c99e4209b3c",
+        "removal_ids": [
+          "segue-25496ff92a2409d8fa1bc6ef",
+          "segue-2b11db2d11c9fb35dcdfcd2f",
+          "segue-2bbd367d63a5db769a97f391",
+          "segue-2cc3a67e00284a8b262cc7ff",
+          "segue-324a0f35b063224ad66803bd",
+          "segue-4286124a65c9700a2de2eaff",
+          "segue-56cfac4130328c176baeac70",
+          "segue-7477da3f25d8c21085d6b3fe",
+          "segue-76db978555f9160b2a10f551",
+          "segue-7bfd6365eb7eaf6676a9699c",
+          "segue-89bbf17e4b7fbcaef754e5ff",
+          "segue-9399054bc08f54a2ff6041c2",
+          "segue-ac831f28436746a02d988a07",
+          "segue-b7794551d5322b5528009c71",
+          "segue-c256baef9ee859eb337c16f7",
+          "segue-c4b85dd87e56034b81c8f695",
+          "segue-c71c5d7e9723174e5fd3e529",
+          "segue-ca15212d3a8d04af793bf49b",
+          "segue-ca3c8b692cc1c620bd0df73c",
+          "segue-ccb519d16167418306e4ecba",
+          "segue-cd3edc04d2424c3e0c4c63be",
+          "segue-cfd0ba7bf09eb4830b9b7da7",
+          "segue-d179bbfeaa3a6397423c4021",
+          "segue-d201bd4b426c66f34ae6c2dd",
+          "segue-d34e59d1115728e1c82e2314",
+          "segue-d5c75ef04eb28b9848a6174a",
+          "segue-de6ba9b13b81e05a656b68f6",
+          "segue-e208bd5e30f67e7a0b74692d",
+          "segue-e5fbb14716fa875da0176f88",
+          "segue-e7120cfbd8a4cfa9efadf716",
+          "segue-e7280c9c630bcdb1c1ff1f36",
+          "segue-e8048c36070d86a7c0d8cdc7",
+          "segue-e9758f42276d3d294383d2c0",
+          "segue-eb61c29e513ef3c6f973534b",
+          "segue-ecc3f308c87fc28d7f5838bf",
+          "segue-eff150dfaede95c713a7fce3",
+          "segue-f00689309e4ff387baae01c8",
+          "segue-f01985b9cf390801e9fa8b13",
+          "segue-f18a2a7e57572ed6b68aadd7",
+          "segue-f9105936eb8f8744d4854245",
+          "segue-fd5c2ada4bda9f274c966142",
+          "segue-fde2aede31a8c49f480ec8ee"
+        ]
+      },
+      "id": "event-647ab600a6ff0f78ce01bc78",
+      "occurred_at": "2026-08-02T19:39:19+00:00",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-02T19:39:19+00:00",
+        "generated_by": "prodigal.niche.masterplan.apply_duplicate_segue_reconciliation",
+        "sources": [
+          {
+            "authority_state": "accepted",
+            "source_id": "decision-706b690abcf266fd6dacd74f",
+            "source_kind": "accepted-decision",
+            "source_path": "authority/task-graph/decisions/decision-706b690abcf266fd6dacd74f.json"
+          },
+          {
+            "authority_state": "proposed",
+            "source_id": "a7eab11440974f9ef45353f599db56e7296afbc2c0f6771563102c99e4209b3c",
+            "source_kind": "segue-reconciliation-plan",
+            "source_path": "reports/niche/masterplan/segue-reconciliation/latest.json"
+          }
+        ],
+        "transformations": [
+          "validate_plan_graph_digest",
+          "validate_decision_authority",
+          "validate_exact_plan_authorization",
+          "remove_authorized_duplicate_segues"
+        ]
+      },
+      "task_id": "SAV-P4A-003"
+    }
+  ],
+  "evidence": [],
+  "generated_at": "2026-08-02T19:39:32+00:00",
+  "graph": {
+    "path": "authority/task-graph/masterplan.json",
+    "schema_version": "1.0.0",
+    "semantic_digest": "484218151f172c4a2385797ad7373ba71354df6c5644552327276edd765c51c2",
+    "sha256": "f0000e11a85776acbe21e02f7a72207a508bce87f81f7b2d4a90eb52e4d5aadd"
+  },
+  "manifest_id": "manifest-a1dad85ca2a1915a050894e9",
+  "receipts": [
+    {
+      "evidence": [
+        "event-647ab600a6ff0f78ce01bc78"
+      ],
+      "extensions": {
+        "backup": "backups/masterplan/segue-reconciliation/20260802T193919Z__3fa0bfb82cf4e219/masterplan.json",
+        "event_id": "event-647ab600a6ff0f78ce01bc78",
+        "graph_digest_after": "26947d63314c831c53d77796fcd7e242187bb33e5e153596ddc4fdcb200549ce",
+        "graph_digest_before": "63db8daf950920f24f1cb0cf7151a86c9cce8144f6343345448677d8ce50f8e2",
+        "snapshot": "authority/task-graph/snapshots/20260802T193919Z__3fa0bfb82cf4e219__segue-reconciliation.json"
+      },
+      "id": "receipt-86b33697d597cf88e6189b9b",
+      "occurred_at": "2026-08-02T19:39:19+00:00",
+      "operation": "masterplan.segues.duplicate-reconciliation",
+      "outputs": [
+        "authority/task-graph/masterplan.json",
+        "authority/task-graph/snapshots/20260802T193919Z__3fa0bfb82cf4e219__segue-reconciliation.json"
+      ],
+      "passed": true,
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-02T19:39:19+00:00",
+        "generated_by": "prodigal.niche.masterplan.apply_duplicate_segue_reconciliation",
+        "sources": [
+          {
+            "authority_state": "accepted",
+            "source_id": "decision-706b690abcf266fd6dacd74f",
+            "source_kind": "accepted-decision",
+            "source_path": "authority/task-graph/decisions/decision-706b690abcf266fd6dacd74f.json"
+          },
+          {
+            "authority_state": "proposed",
+            "source_id": "a7eab11440974f9ef45353f599db56e7296afbc2c0f6771563102c99e4209b3c",
+            "source_kind": "segue-reconciliation-plan",
+            "source_path": "reports/niche/masterplan/segue-reconciliation/latest.json"
+          }
+        ],
+        "transformations": [
+          "validate_plan_graph_digest",
+          "validate_decision_authority",
+          "validate_exact_plan_authorization",
+          "remove_authorized_duplicate_segues"
+        ]
+      },
+      "task_id": "SAV-P4A-003"
+    }
+  ],
+  "schema": "savant://niche/masterplan/artifact-manifest/1.0.0",
+  "segues": [
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "edifices/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-20761409e9660181a4ff2842",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "edifices/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "edifices/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P4A-003",
+      "target": "SAV-P4A-002",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "edifices/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-c07df851c73f2b38af6e5ceb",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "edifices/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "edifices/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P4A-004",
+      "target": "SAV-P4A-003",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    },
+    {
+      "authority": {
+        "accepted_at": null,
+        "accepted_by": null,
+        "authority_class": "project-owner-directed",
+        "confidence": 1.0,
+        "source": "edifices/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+        "state": "proposed",
+        "tier": 2
+      },
+      "extensions": {},
+      "id": "segue-06b62efd178d6667e0a8c766",
+      "provenance": {
+        "contract_version": "1.0.0",
+        "generated_at": "2026-08-01T18:43:45-04:00",
+        "generated_by": "prodigal.niche.masterplan.build_authoritative_task_graph",
+        "sources": [
+          {
+            "authority_state": "proposed",
+            "captured_at": null,
+            "source_id": "edifices/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_kind": "proposed-roadmap-extension",
+            "source_path": "edifices/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+            "source_sha256": "53a1ae7c76b3b402dc7387520c85068d978669e0bba15fc9e1a33db46aba59af"
+          }
+        ],
+        "transformations": [
+          "source_task_to_proposed_record"
+        ]
+      },
+      "source": "SAV-P4A-007",
+      "target": "SAV-P4A-003",
+      "type": "depends_on",
+      "validity": {
+        "active": true
+      }
+    }
+  ],
+  "statistics": {
+    "attestation_count": 0,
+    "decision_count": 0,
+    "declared_output_count": 0,
+    "event_count": 1,
+    "evidence_count": 0,
+    "existing_output_count": 0,
+    "missing_output_count": 0,
+    "receipt_count": 1,
+    "segue_count": 3
+  },
+  "task": {
+    "acceptance": [
+      "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+    ],
+    "authority": {
+      "accepted_at": null,
+      "accepted_by": null,
+      "authority_class": "project-owner-directed",
+      "confidence": 1.0,
+      "source": "edifices/identity/exiles/niche/prodigals/masterplan/authority/current_work.json",
+      "state": "proposed",
+      "tier": 2
+    },
+    "priority": {
+      "authority_locked": false,
+      "band": "P4A",
+      "ordinal": 3,
+      "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+    },
+    "purpose": "Represent dependencies and blockers as typed task segues",
+    "status": "proposed",
+    "title": "Represent dependencies and blockers as typed task segues"
+  },
+  "task_id": "SAV-P4A-003"
+}

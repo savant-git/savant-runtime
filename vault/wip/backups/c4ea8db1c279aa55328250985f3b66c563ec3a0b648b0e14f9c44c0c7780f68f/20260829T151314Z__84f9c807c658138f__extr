@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+readonly python="/root/savant-runtime/tools/extr-enterprise/venv/bin/python"
+readonly entrypoint="/root/savant-runtime/tools/extr-enterprise/runtime/extr.py"
+
+if [[ ! -x "$python" ]]; then
+    printf 'extr: python environment unavailable: %s\n' \
+        "$python" >&2
+    exit 1
+fi
+
+if [[ ! -f "$entrypoint" ]]; then
+    printf 'extr: entrypoint unavailable: %s\n' \
+        "$entrypoint" >&2
+    exit 1
+fi
+
+exec "$python" \
+    "$entrypoint" \
+    "$@"

@@ -1,0 +1,3395 @@
+{
+  "authority_effect": "none",
+  "by_depth": {
+    "1": 22,
+    "2": 18,
+    "3": 72,
+    "4": 72
+  },
+  "by_horizon": {
+    "backlog": 14,
+    "later": 10,
+    "next": 40,
+    "now": 120
+  },
+  "by_priority": {
+    "critical": 122,
+    "deferred": 10,
+    "high": 36,
+    "normal": 16
+  },
+  "by_status": {
+    "accepted": 174,
+    "deferred": 10
+  },
+  "by_system": {
+    "carbon": 10,
+    "kindred": 55,
+    "masterplan": 14,
+    "niche": 37,
+    "opus": 10,
+    "palaver": 10,
+    "savant": 48
+  },
+  "by_workstream": {
+    "completion-intelligence": 37,
+    "extr": 10,
+    "family-relationship-methodology": 55,
+    "living-governance": 10,
+    "living-projections": 28,
+    "masterplan": 14,
+    "oriel": 10,
+    "provider-universal": 10,
+    "webui-nextgen": 10
+  },
+  "generated_at": "2026-09-03T13:17:44.018179+00:00",
+  "graph_digest": "ad582790fa09a21e518b0e28e491fdc3d9cff4416cf400702f977392519f30e5",
+  "owner": "exile:niche",
+  "rebuildable": true,
+  "schema": "savant://runtime/niche/completion-engine/1.0.0",
+  "selected_depth": 4,
+  "task_count": 184,
+  "tasks": [
+    {
+      "blockers": [],
+      "children": [
+        "completion:kindred-reconciliation:k0",
+        "completion:kindred-reconciliation:k1",
+        "completion:kindred-reconciliation:k2",
+        "completion:kindred-reconciliation:k3",
+        "completion:kindred-reconciliation:k4",
+        "completion:kindred-reconciliation:k5"
+      ],
+      "completion_condition": "Direct family primitives, Kindred Algebra, policies, temporal history, projections and compatibility retirement are implemented with focused proof.",
+      "dependencies": [],
+      "depth": 1,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": null,
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation",
+      "title": "Complete corrected Kindred methodology",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "Lore/fluid-canon/Scrybe integration is operational using singular authority-preserving storage, focused verification passes, and completion evidence is attached.",
+      "dependencies": [],
+      "depth": 1,
+      "evidence_receipts": [],
+      "horizon": "backlog",
+      "parent_id": null,
+      "priority": "critical",
+      "status": "accepted",
+      "system": "masterplan",
+      "task_id": "masterplan:lore-fluid-canon-scrybe-integration",
+      "title": "Complete Lore, fluid-canon, and Scrybe integration without creating duplicate canonical or memory storage.",
+      "workstream": "masterplan"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "Sources retain custody and stable identity and large inputs can be ingested with bounded memory without destructive normalization.",
+      "dependencies": [
+        "masterplan:lore-fluid-canon-scrybe-integration"
+      ],
+      "depth": 1,
+      "evidence_receipts": [],
+      "horizon": "backlog",
+      "parent_id": null,
+      "priority": "critical",
+      "status": "accepted",
+      "system": "masterplan",
+      "task_id": "masterplan:source-intelligence-si1-si2",
+      "title": "Implement source custody and identity plus bounded-memory streaming ingestion.",
+      "workstream": "masterplan"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:niche-completion:authoritative-task-reconciliation",
+        "completion:niche-completion:completion-discovery",
+        "completion:niche-completion:decomposition",
+        "completion:niche-completion:taskboard-integration"
+      ],
+      "completion_condition": "Niche contains the accepted remaining Savant work, supports depth 1-4 decomposition, preserves immutable history and evidence, and deterministically projects Masterplan.",
+      "dependencies": [],
+      "depth": 1,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": null,
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion",
+      "title": "Complete living Niche task intelligence",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:living-projection-fabric:masterplan-projection",
+        "completion:living-projection-fabric:readme-projection",
+        "completion:living-projection-fabric:structure-projection"
+      ],
+      "completion_condition": "Masterplan, Structure and README projections regenerate deterministically from authoritative primitives without becoming duplicate authority.",
+      "dependencies": [],
+      "depth": 1,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": null,
+      "priority": "critical",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-projection-fabric",
+      "title": "Complete living documentation projection fabric",
+      "workstream": "living-projections"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:kindred-reconciliation:k0:task-1",
+        "completion:kindred-reconciliation:k0:task-2",
+        "completion:kindred-reconciliation:k0:task-3",
+        "completion:kindred-reconciliation:k0:task-4"
+      ],
+      "completion_condition": "K-0 reconciliation gate is complete with required focused evidence.",
+      "dependencies": [],
+      "depth": 2,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k0",
+      "title": "K-0 reconciliation gate",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:kindred-reconciliation:k1:task-1",
+        "completion:kindred-reconciliation:k1:task-2",
+        "completion:kindred-reconciliation:k1:task-3",
+        "completion:kindred-reconciliation:k1:task-4"
+      ],
+      "completion_condition": "K-1 direct family core is complete with required focused evidence.",
+      "dependencies": [],
+      "depth": 2,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k1",
+      "title": "K-1 direct family core",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:kindred-reconciliation:k2:task-1",
+        "completion:kindred-reconciliation:k2:task-2",
+        "completion:kindred-reconciliation:k2:task-3",
+        "completion:kindred-reconciliation:k2:task-4"
+      ],
+      "completion_condition": "K-2 Kindred Algebra is complete with required focused evidence.",
+      "dependencies": [],
+      "depth": 2,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k2",
+      "title": "K-2 Kindred Algebra",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:kindred-reconciliation:k3:task-1",
+        "completion:kindred-reconciliation:k3:task-2",
+        "completion:kindred-reconciliation:k3:task-3",
+        "completion:kindred-reconciliation:k3:task-4"
+      ],
+      "completion_condition": "K-3 policy and propagation is complete with required focused evidence.",
+      "dependencies": [],
+      "depth": 2,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k3",
+      "title": "K-3 policy and propagation",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:kindred-reconciliation:k4:task-1",
+        "completion:kindred-reconciliation:k4:task-2",
+        "completion:kindred-reconciliation:k4:task-3",
+        "completion:kindred-reconciliation:k4:task-4"
+      ],
+      "completion_condition": "K-4 projection and assurance is complete with required focused evidence.",
+      "dependencies": [],
+      "depth": 2,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k4",
+      "title": "K-4 projection and assurance",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:kindred-reconciliation:k5:task-1",
+        "completion:kindred-reconciliation:k5:task-2",
+        "completion:kindred-reconciliation:k5:task-3",
+        "completion:kindred-reconciliation:k5:task-4"
+      ],
+      "completion_condition": "K-5 compatibility retirement is complete with required focused evidence.",
+      "dependencies": [],
+      "depth": 2,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k5",
+      "title": "K-5 compatibility retirement",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:niche-completion:authoritative-task-reconciliation:task-1",
+        "completion:niche-completion:authoritative-task-reconciliation:task-2",
+        "completion:niche-completion:authoritative-task-reconciliation:task-3",
+        "completion:niche-completion:authoritative-task-reconciliation:task-4"
+      ],
+      "completion_condition": "Reconcile existing task authority is complete with required focused evidence.",
+      "dependencies": [],
+      "depth": 2,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:authoritative-task-reconciliation",
+      "title": "Reconcile existing task authority",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:niche-completion:completion-discovery:task-1",
+        "completion:niche-completion:completion-discovery:task-2",
+        "completion:niche-completion:completion-discovery:task-3",
+        "completion:niche-completion:completion-discovery:task-4"
+      ],
+      "completion_condition": "Implement living completion discovery is complete with required focused evidence.",
+      "dependencies": [],
+      "depth": 2,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:completion-discovery",
+      "title": "Implement living completion discovery",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:niche-completion:decomposition:task-1",
+        "completion:niche-completion:decomposition:task-2",
+        "completion:niche-completion:decomposition:task-3",
+        "completion:niche-completion:decomposition:task-4"
+      ],
+      "completion_condition": "Implement depth-aware decomposition is complete with required focused evidence.",
+      "dependencies": [],
+      "depth": 2,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:decomposition",
+      "title": "Implement depth-aware decomposition",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:niche-completion:taskboard-integration:task-1",
+        "completion:niche-completion:taskboard-integration:task-2",
+        "completion:niche-completion:taskboard-integration:task-3",
+        "completion:niche-completion:taskboard-integration:task-4"
+      ],
+      "completion_condition": "Complete Taskboard integration is complete with required focused evidence.",
+      "dependencies": [],
+      "depth": 2,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:taskboard-integration",
+      "title": "Complete Taskboard integration",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:living-projection-fabric:masterplan-projection:task-1",
+        "completion:living-projection-fabric:masterplan-projection:task-2",
+        "completion:living-projection-fabric:masterplan-projection:task-3",
+        "completion:living-projection-fabric:masterplan-projection:task-4"
+      ],
+      "completion_condition": "Generate living Masterplan is complete with required focused evidence.",
+      "dependencies": [],
+      "depth": 2,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:living-projection-fabric",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-projection-fabric:masterplan-projection",
+      "title": "Generate living Masterplan",
+      "workstream": "living-projections"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:living-projection-fabric:readme-projection:task-1",
+        "completion:living-projection-fabric:readme-projection:task-2",
+        "completion:living-projection-fabric:readme-projection:task-3",
+        "completion:living-projection-fabric:readme-projection:task-4"
+      ],
+      "completion_condition": "Generate recursive README edifice is complete with required focused evidence.",
+      "dependencies": [],
+      "depth": 2,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:living-projection-fabric",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-projection-fabric:readme-projection",
+      "title": "Generate recursive README edifice",
+      "workstream": "living-projections"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:living-projection-fabric:structure-projection:task-1",
+        "completion:living-projection-fabric:structure-projection:task-2",
+        "completion:living-projection-fabric:structure-projection:task-3",
+        "completion:living-projection-fabric:structure-projection:task-4"
+      ],
+      "completion_condition": "Generate living Structure is complete with required focused evidence.",
+      "dependencies": [],
+      "depth": 2,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:living-projection-fabric",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-projection-fabric:structure-projection",
+      "title": "Generate living Structure",
+      "workstream": "living-projections"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:kindred-reconciliation:k0:task-1:action-1"
+      ],
+      "completion_condition": "classify eighteen-discipline expansion is implemented or explicitly resolved with evidence.",
+      "dependencies": [],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k0",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k0:task-1",
+      "title": "classify eighteen-discipline expansion",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:kindred-reconciliation:k0:task-2:action-1"
+      ],
+      "completion_condition": "classify legacy kindred surfaces is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:kindred-reconciliation:k0:task-1"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k0",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k0:task-2",
+      "title": "classify legacy kindred surfaces",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:kindred-reconciliation:k0:task-3:action-1"
+      ],
+      "completion_condition": "confirm direct Segue relationship authority is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:kindred-reconciliation:k0:task-2"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k0",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k0:task-3",
+      "title": "confirm direct Segue relationship authority",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:kindred-reconciliation:k0:task-4:action-1"
+      ],
+      "completion_condition": "stop on stronger authority conflict is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:kindred-reconciliation:k0:task-3"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k0",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k0:task-4",
+      "title": "stop on stronger authority conflict",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:kindred-reconciliation:k1:task-1:action-1"
+      ],
+      "completion_condition": "normalize parent-child primitives is implemented or explicitly resolved with evidence.",
+      "dependencies": [],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k1",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k1:task-1",
+      "title": "normalize parent-child primitives",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:kindred-reconciliation:k1:task-2:action-1"
+      ],
+      "completion_condition": "normalize alliance and affinity primitives is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:kindred-reconciliation:k1:task-1"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k1",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k1:task-2",
+      "title": "normalize alliance and affinity primitives",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:kindred-reconciliation:k1:task-3:action-1"
+      ],
+      "completion_condition": "normalize adoption step and guardian profiles is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:kindred-reconciliation:k1:task-2"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k1",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k1:task-3",
+      "title": "normalize adoption step and guardian profiles",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:kindred-reconciliation:k1:task-4:action-1"
+      ],
+      "completion_condition": "preserve lineage validity state and history is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:kindred-reconciliation:k1:task-3"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k1",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k1:task-4",
+      "title": "preserve lineage validity state and history",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:kindred-reconciliation:k2:task-1:action-1"
+      ],
+      "completion_condition": "derive sibling and full-half qualification is implemented or explicitly resolved with evidence.",
+      "dependencies": [],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k2",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k2:task-1",
+      "title": "derive sibling and full-half qualification",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:kindred-reconciliation:k2:task-2:action-1"
+      ],
+      "completion_condition": "derive grandparent and grandchild is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:kindred-reconciliation:k2:task-1"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k2",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k2:task-2",
+      "title": "derive grandparent and grandchild",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:kindred-reconciliation:k2:task-3:action-1"
+      ],
+      "completion_condition": "derive aunt uncle niece nephew is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:kindred-reconciliation:k2:task-2"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k2",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k2:task-3",
+      "title": "derive aunt uncle niece nephew",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:kindred-reconciliation:k2:task-4:action-1"
+      ],
+      "completion_condition": "derive cousins step and affinity relations is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:kindred-reconciliation:k2:task-3"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k2",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k2:task-4",
+      "title": "derive cousins step and affinity relations",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:kindred-reconciliation:k3:task-1:action-1"
+      ],
+      "completion_condition": "implement descent policies is implemented or explicitly resolved with evidence.",
+      "dependencies": [],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k3",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k3:task-1",
+      "title": "implement descent policies",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:kindred-reconciliation:k3:task-2:action-1"
+      ],
+      "completion_condition": "separate descent from propagation is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:kindred-reconciliation:k3:task-1"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k3",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k3:task-2",
+      "title": "separate descent from propagation",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:kindred-reconciliation:k3:task-3:action-1"
+      ],
+      "completion_condition": "route authority through Pryme is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:kindred-reconciliation:k3:task-2"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k3",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k3:task-3",
+      "title": "route authority through Pryme",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:kindred-reconciliation:k3:task-4:action-1"
+      ],
+      "completion_condition": "implement temporal relationship replay is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:kindred-reconciliation:k3:task-3"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k3",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k3:task-4",
+      "title": "implement temporal relationship replay",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:kindred-reconciliation:k4:task-1:action-1"
+      ],
+      "completion_condition": "integrate NetworkX behind Kindred contracts is implemented or explicitly resolved with evidence.",
+      "dependencies": [],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k4",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k4:task-1",
+      "title": "integrate NetworkX behind Kindred contracts",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:kindred-reconciliation:k4:task-2:action-1"
+      ],
+      "completion_condition": "project semantic family topology is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:kindred-reconciliation:k4:task-1"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k4",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k4:task-2",
+      "title": "project semantic family topology",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:kindred-reconciliation:k4:task-3:action-1"
+      ],
+      "completion_condition": "implement explain and derivation certificates is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:kindred-reconciliation:k4:task-2"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k4",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k4:task-3",
+      "title": "implement explain and derivation certificates",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:kindred-reconciliation:k4:task-4:action-1"
+      ],
+      "completion_condition": "prove deterministic rebuild equivalence is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:kindred-reconciliation:k4:task-3"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k4",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k4:task-4",
+      "title": "prove deterministic rebuild equivalence",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:kindred-reconciliation:k5:task-1:action-1"
+      ],
+      "completion_condition": "inventory disputed dependents is implemented or explicitly resolved with evidence.",
+      "dependencies": [],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k5",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k5:task-1",
+      "title": "inventory disputed dependents",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:kindred-reconciliation:k5:task-2:action-1"
+      ],
+      "completion_condition": "classify active compatibility historical dead is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:kindred-reconciliation:k5:task-1"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k5",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k5:task-2",
+      "title": "classify active compatibility historical dead",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:kindred-reconciliation:k5:task-3:action-1"
+      ],
+      "completion_condition": "migrate consumers semantically is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:kindred-reconciliation:k5:task-2"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k5",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k5:task-3",
+      "title": "migrate consumers semantically",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:kindred-reconciliation:k5:task-4:action-1"
+      ],
+      "completion_condition": "retire only after reverse-dependency proof is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:kindred-reconciliation:k5:task-3"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k5",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k5:task-4",
+      "title": "retire only after reverse-dependency proof",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:niche-completion:authoritative-task-reconciliation:task-1:action-1"
+      ],
+      "completion_condition": "preserve existing task primitives is implemented or explicitly resolved with evidence.",
+      "dependencies": [],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion:authoritative-task-reconciliation",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:authoritative-task-reconciliation:task-1",
+      "title": "preserve existing task primitives",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:niche-completion:authoritative-task-reconciliation:task-2:action-1"
+      ],
+      "completion_condition": "classify accepted versus proposed work is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:niche-completion:authoritative-task-reconciliation:task-1"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion:authoritative-task-reconciliation",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:authoritative-task-reconciliation:task-2",
+      "title": "classify accepted versus proposed work",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:niche-completion:authoritative-task-reconciliation:task-3:action-1"
+      ],
+      "completion_condition": "reconcile duplicate task identities is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:niche-completion:authoritative-task-reconciliation:task-2"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion:authoritative-task-reconciliation",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:authoritative-task-reconciliation:task-3",
+      "title": "reconcile duplicate task identities",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:niche-completion:authoritative-task-reconciliation:task-4:action-1"
+      ],
+      "completion_condition": "preserve task history and receipts is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:niche-completion:authoritative-task-reconciliation:task-3"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion:authoritative-task-reconciliation",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:authoritative-task-reconciliation:task-4",
+      "title": "preserve task history and receipts",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:niche-completion:completion-discovery:task-1:action-1"
+      ],
+      "completion_condition": "ingest current implementation evidence is implemented or explicitly resolved with evidence.",
+      "dependencies": [],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion:completion-discovery",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:completion-discovery:task-1",
+      "title": "ingest current implementation evidence",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:niche-completion:completion-discovery:task-2:action-1"
+      ],
+      "completion_condition": "discover explicit unfinished markers is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:niche-completion:completion-discovery:task-1"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion:completion-discovery",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:completion-discovery:task-2",
+      "title": "discover explicit unfinished markers",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:niche-completion:completion-discovery:task-3:action-1"
+      ],
+      "completion_condition": "classify system and workstream is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:niche-completion:completion-discovery:task-2"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion:completion-discovery",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:completion-discovery:task-3",
+      "title": "classify system and workstream",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:niche-completion:completion-discovery:task-4:action-1"
+      ],
+      "completion_condition": "detect stale completion assumptions is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:niche-completion:completion-discovery:task-3"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion:completion-discovery",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:completion-discovery:task-4",
+      "title": "detect stale completion assumptions",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:niche-completion:decomposition:task-1:action-1"
+      ],
+      "completion_condition": "project strategic objectives is implemented or explicitly resolved with evidence.",
+      "dependencies": [],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion:decomposition",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:decomposition:task-1",
+      "title": "project strategic objectives",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:niche-completion:decomposition:task-2:action-1"
+      ],
+      "completion_condition": "project implementation tranches is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:niche-completion:decomposition:task-1"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion:decomposition",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:decomposition:task-2",
+      "title": "project implementation tranches",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:niche-completion:decomposition:task-3:action-1"
+      ],
+      "completion_condition": "project bounded engineering tasks is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:niche-completion:decomposition:task-2"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion:decomposition",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:decomposition:task-3",
+      "title": "project bounded engineering tasks",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:niche-completion:decomposition:task-4:action-1"
+      ],
+      "completion_condition": "project executable actions is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:niche-completion:decomposition:task-3"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion:decomposition",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:decomposition:task-4",
+      "title": "project executable actions",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:niche-completion:taskboard-integration:task-1:action-1"
+      ],
+      "completion_condition": "expose decomposition depth control is implemented or explicitly resolved with evidence.",
+      "dependencies": [],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion:taskboard-integration",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:taskboard-integration:task-1",
+      "title": "expose decomposition depth control",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:niche-completion:taskboard-integration:task-2:action-1"
+      ],
+      "completion_condition": "expose system and workstream facets is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:niche-completion:taskboard-integration:task-1"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion:taskboard-integration",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:taskboard-integration:task-2",
+      "title": "expose system and workstream facets",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:niche-completion:taskboard-integration:task-3:action-1"
+      ],
+      "completion_condition": "expose dependency and evidence views is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:niche-completion:taskboard-integration:task-2"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion:taskboard-integration",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:taskboard-integration:task-3",
+      "title": "expose dependency and evidence views",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:niche-completion:taskboard-integration:task-4:action-1"
+      ],
+      "completion_condition": "expose deterministic next-work selection is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:niche-completion:taskboard-integration:task-3"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion:taskboard-integration",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:taskboard-integration:task-4",
+      "title": "expose deterministic next-work selection",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:living-projection-fabric:masterplan-projection:task-1:action-1"
+      ],
+      "completion_condition": "project Niche task graph is implemented or explicitly resolved with evidence.",
+      "dependencies": [],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:living-projection-fabric:masterplan-projection",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-projection-fabric:masterplan-projection:task-1",
+      "title": "project Niche task graph",
+      "workstream": "living-projections"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:living-projection-fabric:masterplan-projection:task-2:action-1"
+      ],
+      "completion_condition": "group tasks by Masterplan domain is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:living-projection-fabric:masterplan-projection:task-1"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:living-projection-fabric:masterplan-projection",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-projection-fabric:masterplan-projection:task-2",
+      "title": "group tasks by Masterplan domain",
+      "workstream": "living-projections"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:living-projection-fabric:masterplan-projection:task-3:action-1"
+      ],
+      "completion_condition": "project ready blocked and completed state is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:living-projection-fabric:masterplan-projection:task-2"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:living-projection-fabric:masterplan-projection",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-projection-fabric:masterplan-projection:task-3",
+      "title": "project ready blocked and completed state",
+      "workstream": "living-projections"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:living-projection-fabric:masterplan-projection:task-4:action-1"
+      ],
+      "completion_condition": "publish deterministic markdown and json is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:living-projection-fabric:masterplan-projection:task-3"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:living-projection-fabric:masterplan-projection",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-projection-fabric:masterplan-projection:task-4",
+      "title": "publish deterministic markdown and json",
+      "workstream": "living-projections"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:living-projection-fabric:readme-projection:task-1:action-1"
+      ],
+      "completion_condition": "project local element substance is implemented or explicitly resolved with evidence.",
+      "dependencies": [],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:living-projection-fabric:readme-projection",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-projection-fabric:readme-projection:task-1",
+      "title": "project local element substance",
+      "workstream": "living-projections"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:living-projection-fabric:readme-projection:task-2:action-1"
+      ],
+      "completion_condition": "compose child-first recursive substance is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:living-projection-fabric:readme-projection:task-1"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:living-projection-fabric:readme-projection",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-projection-fabric:readme-projection:task-2",
+      "title": "compose child-first recursive substance",
+      "workstream": "living-projections"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:living-projection-fabric:readme-projection:task-3:action-1"
+      ],
+      "completion_condition": "apply Modus masks where authorized is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:living-projection-fabric:readme-projection:task-2"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:living-projection-fabric:readme-projection",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-projection-fabric:readme-projection:task-3",
+      "title": "apply Modus masks where authorized",
+      "workstream": "living-projections"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:living-projection-fabric:readme-projection:task-4:action-1"
+      ],
+      "completion_condition": "publish machine and human twins is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:living-projection-fabric:readme-projection:task-3"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:living-projection-fabric:readme-projection",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-projection-fabric:readme-projection:task-4",
+      "title": "publish machine and human twins",
+      "workstream": "living-projections"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:living-projection-fabric:structure-projection:task-1:action-1"
+      ],
+      "completion_condition": "consume living structural state is implemented or explicitly resolved with evidence.",
+      "dependencies": [],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:living-projection-fabric:structure-projection",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-projection-fabric:structure-projection:task-1",
+      "title": "consume living structural state",
+      "workstream": "living-projections"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:living-projection-fabric:structure-projection:task-2:action-1"
+      ],
+      "completion_condition": "preserve authority distinctions is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:living-projection-fabric:structure-projection:task-1"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:living-projection-fabric:structure-projection",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-projection-fabric:structure-projection:task-2",
+      "title": "preserve authority distinctions",
+      "workstream": "living-projections"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:living-projection-fabric:structure-projection:task-3:action-1"
+      ],
+      "completion_condition": "project current system organization is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:living-projection-fabric:structure-projection:task-2"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:living-projection-fabric:structure-projection",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-projection-fabric:structure-projection:task-3",
+      "title": "project current system organization",
+      "workstream": "living-projections"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:living-projection-fabric:structure-projection:task-4:action-1"
+      ],
+      "completion_condition": "publish deterministic current structure is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:living-projection-fabric:structure-projection:task-3"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:living-projection-fabric:structure-projection",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-projection-fabric:structure-projection:task-4",
+      "title": "publish deterministic current structure",
+      "workstream": "living-projections"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k0:task-1",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k0:task-1:action-1",
+      "title": "Execute: classify eighteen-discipline expansion",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k0:task-2",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k0:task-2:action-1",
+      "title": "Execute: classify legacy kindred surfaces",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k0:task-3",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k0:task-3:action-1",
+      "title": "Execute: confirm direct Segue relationship authority",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k0:task-4",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k0:task-4:action-1",
+      "title": "Execute: stop on stronger authority conflict",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k1:task-1",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k1:task-1:action-1",
+      "title": "Execute: normalize parent-child primitives",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k1:task-2",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k1:task-2:action-1",
+      "title": "Execute: normalize alliance and affinity primitives",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k1:task-3",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k1:task-3:action-1",
+      "title": "Execute: normalize adoption step and guardian profiles",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k1:task-4",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k1:task-4:action-1",
+      "title": "Execute: preserve lineage validity state and history",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k2:task-1",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k2:task-1:action-1",
+      "title": "Execute: derive sibling and full-half qualification",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k2:task-2",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k2:task-2:action-1",
+      "title": "Execute: derive grandparent and grandchild",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k2:task-3",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k2:task-3:action-1",
+      "title": "Execute: derive aunt uncle niece nephew",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k2:task-4",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k2:task-4:action-1",
+      "title": "Execute: derive cousins step and affinity relations",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k3:task-1",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k3:task-1:action-1",
+      "title": "Execute: implement descent policies",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k3:task-2",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k3:task-2:action-1",
+      "title": "Execute: separate descent from propagation",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k3:task-3",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k3:task-3:action-1",
+      "title": "Execute: route authority through Pryme",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k3:task-4",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k3:task-4:action-1",
+      "title": "Execute: implement temporal relationship replay",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k4:task-1",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k4:task-1:action-1",
+      "title": "Execute: integrate NetworkX behind Kindred contracts",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k4:task-2",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k4:task-2:action-1",
+      "title": "Execute: project semantic family topology",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k4:task-3",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k4:task-3:action-1",
+      "title": "Execute: implement explain and derivation certificates",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k4:task-4",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k4:task-4:action-1",
+      "title": "Execute: prove deterministic rebuild equivalence",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k5:task-1",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k5:task-1:action-1",
+      "title": "Execute: inventory disputed dependents",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k5:task-2",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k5:task-2:action-1",
+      "title": "Execute: classify active compatibility historical dead",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k5:task-3",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k5:task-3:action-1",
+      "title": "Execute: migrate consumers semantically",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:kindred-reconciliation:k5:task-4",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "kindred",
+      "task_id": "completion:kindred-reconciliation:k5:task-4:action-1",
+      "title": "Execute: retire only after reverse-dependency proof",
+      "workstream": "family-relationship-methodology"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion:authoritative-task-reconciliation:task-1",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:authoritative-task-reconciliation:task-1:action-1",
+      "title": "Execute: preserve existing task primitives",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion:authoritative-task-reconciliation:task-2",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:authoritative-task-reconciliation:task-2:action-1",
+      "title": "Execute: classify accepted versus proposed work",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion:authoritative-task-reconciliation:task-3",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:authoritative-task-reconciliation:task-3:action-1",
+      "title": "Execute: reconcile duplicate task identities",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion:authoritative-task-reconciliation:task-4",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:authoritative-task-reconciliation:task-4:action-1",
+      "title": "Execute: preserve task history and receipts",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion:completion-discovery:task-1",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:completion-discovery:task-1:action-1",
+      "title": "Execute: ingest current implementation evidence",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion:completion-discovery:task-2",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:completion-discovery:task-2:action-1",
+      "title": "Execute: discover explicit unfinished markers",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion:completion-discovery:task-3",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:completion-discovery:task-3:action-1",
+      "title": "Execute: classify system and workstream",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion:completion-discovery:task-4",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:completion-discovery:task-4:action-1",
+      "title": "Execute: detect stale completion assumptions",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion:decomposition:task-1",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:decomposition:task-1:action-1",
+      "title": "Execute: project strategic objectives",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion:decomposition:task-2",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:decomposition:task-2:action-1",
+      "title": "Execute: project implementation tranches",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion:decomposition:task-3",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:decomposition:task-3:action-1",
+      "title": "Execute: project bounded engineering tasks",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion:decomposition:task-4",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:decomposition:task-4:action-1",
+      "title": "Execute: project executable actions",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion:taskboard-integration:task-1",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:taskboard-integration:task-1:action-1",
+      "title": "Execute: expose decomposition depth control",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion:taskboard-integration:task-2",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:taskboard-integration:task-2:action-1",
+      "title": "Execute: expose system and workstream facets",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion:taskboard-integration:task-3",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:taskboard-integration:task-3:action-1",
+      "title": "Execute: expose dependency and evidence views",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:niche-completion:taskboard-integration:task-4",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "niche",
+      "task_id": "completion:niche-completion:taskboard-integration:task-4:action-1",
+      "title": "Execute: expose deterministic next-work selection",
+      "workstream": "completion-intelligence"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:living-projection-fabric:masterplan-projection:task-1",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-projection-fabric:masterplan-projection:task-1:action-1",
+      "title": "Execute: project Niche task graph",
+      "workstream": "living-projections"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:living-projection-fabric:masterplan-projection:task-2",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-projection-fabric:masterplan-projection:task-2:action-1",
+      "title": "Execute: group tasks by Masterplan domain",
+      "workstream": "living-projections"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:living-projection-fabric:masterplan-projection:task-3",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-projection-fabric:masterplan-projection:task-3:action-1",
+      "title": "Execute: project ready blocked and completed state",
+      "workstream": "living-projections"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:living-projection-fabric:masterplan-projection:task-4",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-projection-fabric:masterplan-projection:task-4:action-1",
+      "title": "Execute: publish deterministic markdown and json",
+      "workstream": "living-projections"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:living-projection-fabric:readme-projection:task-1",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-projection-fabric:readme-projection:task-1:action-1",
+      "title": "Execute: project local element substance",
+      "workstream": "living-projections"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:living-projection-fabric:readme-projection:task-2",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-projection-fabric:readme-projection:task-2:action-1",
+      "title": "Execute: compose child-first recursive substance",
+      "workstream": "living-projections"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:living-projection-fabric:readme-projection:task-3",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-projection-fabric:readme-projection:task-3:action-1",
+      "title": "Execute: apply Modus masks where authorized",
+      "workstream": "living-projections"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:living-projection-fabric:readme-projection:task-4",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-projection-fabric:readme-projection:task-4:action-1",
+      "title": "Execute: publish machine and human twins",
+      "workstream": "living-projections"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:living-projection-fabric:structure-projection:task-1",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-projection-fabric:structure-projection:task-1:action-1",
+      "title": "Execute: consume living structural state",
+      "workstream": "living-projections"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:living-projection-fabric:structure-projection:task-2",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-projection-fabric:structure-projection:task-2:action-1",
+      "title": "Execute: preserve authority distinctions",
+      "workstream": "living-projections"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:living-projection-fabric:structure-projection:task-3",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-projection-fabric:structure-projection:task-3:action-1",
+      "title": "Execute: project current system organization",
+      "workstream": "living-projections"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "now",
+      "parent_id": "completion:living-projection-fabric:structure-projection:task-4",
+      "priority": "critical",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-projection-fabric:structure-projection:task-4:action-1",
+      "title": "Execute: publish deterministic current structure",
+      "workstream": "living-projections"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:carbon-oriel-proof:closure-proof"
+      ],
+      "completion_condition": "The final Carbon/Oriel closure operator succeeds with focused evidence while simulation remains non-canonical.",
+      "dependencies": [],
+      "depth": 1,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": null,
+      "priority": "high",
+      "status": "accepted",
+      "system": "carbon",
+      "task_id": "completion:carbon-oriel-proof",
+      "title": "Close Carbon/Oriel operational proof",
+      "workstream": "oriel"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "Segmentation is deterministic and every segment retains exact source-boundary provenance sufficient to recover its source.",
+      "dependencies": [
+        "masterplan:source-intelligence-si1-si2"
+      ],
+      "depth": 1,
+      "evidence_receipts": [],
+      "horizon": "backlog",
+      "parent_id": null,
+      "priority": "high",
+      "status": "accepted",
+      "system": "masterplan",
+      "task_id": "masterplan:source-intelligence-si3",
+      "title": "Implement deterministic semantic segmentation with exact source-boundary provenance.",
+      "workstream": "masterplan"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "Source Intelligence relevance can feed Scrybe retrieval while authority interpretation remains Pryme-governed and cannot manufacture authority.",
+      "dependencies": [
+        "masterplan:source-intelligence-si3"
+      ],
+      "depth": 1,
+      "evidence_receipts": [],
+      "horizon": "backlog",
+      "parent_id": null,
+      "priority": "high",
+      "status": "accepted",
+      "system": "masterplan",
+      "task_id": "masterplan:source-intelligence-si4-si5",
+      "title": "Bind Scrybe relevance/recall mechanics and Pryme authority interpretation to Source Intelligence.",
+      "workstream": "masterplan"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "Evidence assurance and admission operate through their accepted owners without Source Intelligence becoming an evidence authority.",
+      "dependencies": [
+        "masterplan:source-intelligence-si4-si5"
+      ],
+      "depth": 1,
+      "evidence_receipts": [],
+      "horizon": "backlog",
+      "parent_id": null,
+      "priority": "high",
+      "status": "accepted",
+      "system": "masterplan",
+      "task_id": "masterplan:source-intelligence-si6",
+      "title": "Bind Source Intelligence evidence assurance to Thryce and evidence admission to Notary.",
+      "workstream": "masterplan"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "Admitted Source Intelligence records are consumable by Lore/fluid canon with authority, provenance, and admission lineage preserved.",
+      "dependencies": [
+        "masterplan:source-intelligence-si6"
+      ],
+      "depth": 1,
+      "evidence_receipts": [],
+      "horizon": "backlog",
+      "parent_id": null,
+      "priority": "high",
+      "status": "accepted",
+      "system": "masterplan",
+      "task_id": "masterplan:source-intelligence-si7",
+      "title": "Bind admitted Source Intelligence records into Lore/fluid canon without creating a competing canonical store.",
+      "workstream": "masterplan"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "Human, machine, and bounded AI views are reproducible projections of the same Source Intelligence primitives.",
+      "dependencies": [
+        "masterplan:source-intelligence-si7"
+      ],
+      "depth": 1,
+      "evidence_receipts": [],
+      "horizon": "backlog",
+      "parent_id": null,
+      "priority": "high",
+      "status": "accepted",
+      "system": "masterplan",
+      "task_id": "masterplan:source-intelligence-si8",
+      "title": "Implement human, machine, and AI Source Intelligence projections through the accepted projection architecture.",
+      "workstream": "masterplan"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "At least one focused replay/recovery path reconstructs the required derived state from retained primitives and provenance.",
+      "dependencies": [
+        "masterplan:source-intelligence-si8"
+      ],
+      "depth": 1,
+      "evidence_receipts": [],
+      "horizon": "backlog",
+      "parent_id": null,
+      "priority": "high",
+      "status": "accepted",
+      "system": "masterplan",
+      "task_id": "masterplan:source-intelligence-si9",
+      "title": "Implement one deterministic replay/recovery path for the Source Intelligence pipeline.",
+      "workstream": "masterplan"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:palaver-ui-proof:production-proof"
+      ],
+      "completion_condition": "The active App.tsx path builds, starts and completes one critical Palaver workflow.",
+      "dependencies": [],
+      "depth": 1,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": null,
+      "priority": "high",
+      "status": "accepted",
+      "system": "palaver",
+      "task_id": "completion:palaver-ui-proof",
+      "title": "Close Palaver next-generation UI proof",
+      "workstream": "webui-nextgen"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:living-governance-proof:operator-proof"
+      ],
+      "completion_condition": "Typed policy composition, temporal behavior, arbitration, lifecycle, packets and Coda receipt integration have focused operational proof.",
+      "dependencies": [],
+      "depth": 1,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": null,
+      "priority": "high",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-governance-proof",
+      "title": "Close second-generation Living Governance proof",
+      "workstream": "living-governance"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:carbon-oriel-proof:closure-proof:task-1",
+        "completion:carbon-oriel-proof:closure-proof:task-2",
+        "completion:carbon-oriel-proof:closure-proof:task-3",
+        "completion:carbon-oriel-proof:closure-proof:task-4"
+      ],
+      "completion_condition": "Prove Oriel closure is complete with required focused evidence.",
+      "dependencies": [],
+      "depth": 2,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:carbon-oriel-proof",
+      "priority": "high",
+      "status": "accepted",
+      "system": "carbon",
+      "task_id": "completion:carbon-oriel-proof:closure-proof",
+      "title": "Prove Oriel closure",
+      "workstream": "oriel"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:palaver-ui-proof:production-proof:task-1",
+        "completion:palaver-ui-proof:production-proof:task-2",
+        "completion:palaver-ui-proof:production-proof:task-3",
+        "completion:palaver-ui-proof:production-proof:task-4"
+      ],
+      "completion_condition": "Prove production UI is complete with required focused evidence.",
+      "dependencies": [],
+      "depth": 2,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:palaver-ui-proof",
+      "priority": "high",
+      "status": "accepted",
+      "system": "palaver",
+      "task_id": "completion:palaver-ui-proof:production-proof",
+      "title": "Prove production UI",
+      "workstream": "webui-nextgen"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:living-governance-proof:operator-proof:task-1",
+        "completion:living-governance-proof:operator-proof:task-2",
+        "completion:living-governance-proof:operator-proof:task-3",
+        "completion:living-governance-proof:operator-proof:task-4"
+      ],
+      "completion_condition": "Prove governance operators is complete with required focused evidence.",
+      "dependencies": [],
+      "depth": 2,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:living-governance-proof",
+      "priority": "high",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-governance-proof:operator-proof",
+      "title": "Prove governance operators",
+      "workstream": "living-governance"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:carbon-oriel-proof:closure-proof:task-1:action-1"
+      ],
+      "completion_condition": "compile closure surfaces is implemented or explicitly resolved with evidence.",
+      "dependencies": [],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:carbon-oriel-proof:closure-proof",
+      "priority": "high",
+      "status": "accepted",
+      "system": "carbon",
+      "task_id": "completion:carbon-oriel-proof:closure-proof:task-1",
+      "title": "compile closure surfaces",
+      "workstream": "oriel"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:carbon-oriel-proof:closure-proof:task-2:action-1"
+      ],
+      "completion_condition": "run focused Oriel integration is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:carbon-oriel-proof:closure-proof:task-1"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:carbon-oriel-proof:closure-proof",
+      "priority": "high",
+      "status": "accepted",
+      "system": "carbon",
+      "task_id": "completion:carbon-oriel-proof:closure-proof:task-2",
+      "title": "run focused Oriel integration",
+      "workstream": "oriel"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:carbon-oriel-proof:closure-proof:task-3:action-1"
+      ],
+      "completion_condition": "run final closure operator is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:carbon-oriel-proof:closure-proof:task-2"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:carbon-oriel-proof:closure-proof",
+      "priority": "high",
+      "status": "accepted",
+      "system": "carbon",
+      "task_id": "completion:carbon-oriel-proof:closure-proof:task-3",
+      "title": "run final closure operator",
+      "workstream": "oriel"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:carbon-oriel-proof:closure-proof:task-4:action-1"
+      ],
+      "completion_condition": "record closure evidence is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:carbon-oriel-proof:closure-proof:task-3"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:carbon-oriel-proof:closure-proof",
+      "priority": "high",
+      "status": "accepted",
+      "system": "carbon",
+      "task_id": "completion:carbon-oriel-proof:closure-proof:task-4",
+      "title": "record closure evidence",
+      "workstream": "oriel"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:palaver-ui-proof:production-proof:task-1:action-1"
+      ],
+      "completion_condition": "build active webui-nextgen entry path is implemented or explicitly resolved with evidence.",
+      "dependencies": [],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:palaver-ui-proof:production-proof",
+      "priority": "high",
+      "status": "accepted",
+      "system": "palaver",
+      "task_id": "completion:palaver-ui-proof:production-proof:task-1",
+      "title": "build active webui-nextgen entry path",
+      "workstream": "webui-nextgen"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:palaver-ui-proof:production-proof:task-2:action-1"
+      ],
+      "completion_condition": "start Palaver with built frontend is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:palaver-ui-proof:production-proof:task-1"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:palaver-ui-proof:production-proof",
+      "priority": "high",
+      "status": "accepted",
+      "system": "palaver",
+      "task_id": "completion:palaver-ui-proof:production-proof:task-2",
+      "title": "start Palaver with built frontend",
+      "workstream": "webui-nextgen"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:palaver-ui-proof:production-proof:task-3:action-1"
+      ],
+      "completion_condition": "exercise one critical workflow is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:palaver-ui-proof:production-proof:task-2"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:palaver-ui-proof:production-proof",
+      "priority": "high",
+      "status": "accepted",
+      "system": "palaver",
+      "task_id": "completion:palaver-ui-proof:production-proof:task-3",
+      "title": "exercise one critical workflow",
+      "workstream": "webui-nextgen"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:palaver-ui-proof:production-proof:task-4:action-1"
+      ],
+      "completion_condition": "record focused evidence is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:palaver-ui-proof:production-proof:task-3"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:palaver-ui-proof:production-proof",
+      "priority": "high",
+      "status": "accepted",
+      "system": "palaver",
+      "task_id": "completion:palaver-ui-proof:production-proof:task-4",
+      "title": "record focused evidence",
+      "workstream": "webui-nextgen"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:living-governance-proof:operator-proof:task-1:action-1"
+      ],
+      "completion_condition": "compile current governance surfaces is implemented or explicitly resolved with evidence.",
+      "dependencies": [],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:living-governance-proof:operator-proof",
+      "priority": "high",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-governance-proof:operator-proof:task-1",
+      "title": "compile current governance surfaces",
+      "workstream": "living-governance"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:living-governance-proof:operator-proof:task-2:action-1"
+      ],
+      "completion_condition": "run focused policy pipeline case is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:living-governance-proof:operator-proof:task-1"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:living-governance-proof:operator-proof",
+      "priority": "high",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-governance-proof:operator-proof:task-2",
+      "title": "run focused policy pipeline case",
+      "workstream": "living-governance"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:living-governance-proof:operator-proof:task-3:action-1"
+      ],
+      "completion_condition": "run temporal replay case is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:living-governance-proof:operator-proof:task-2"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:living-governance-proof:operator-proof",
+      "priority": "high",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-governance-proof:operator-proof:task-3",
+      "title": "run temporal replay case",
+      "workstream": "living-governance"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:living-governance-proof:operator-proof:task-4:action-1"
+      ],
+      "completion_condition": "verify consumer packet and receipt is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:living-governance-proof:operator-proof:task-3"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:living-governance-proof:operator-proof",
+      "priority": "high",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-governance-proof:operator-proof:task-4",
+      "title": "verify consumer packet and receipt",
+      "workstream": "living-governance"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:carbon-oriel-proof:closure-proof:task-1",
+      "priority": "high",
+      "status": "accepted",
+      "system": "carbon",
+      "task_id": "completion:carbon-oriel-proof:closure-proof:task-1:action-1",
+      "title": "Execute: compile closure surfaces",
+      "workstream": "oriel"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:carbon-oriel-proof:closure-proof:task-2",
+      "priority": "high",
+      "status": "accepted",
+      "system": "carbon",
+      "task_id": "completion:carbon-oriel-proof:closure-proof:task-2:action-1",
+      "title": "Execute: run focused Oriel integration",
+      "workstream": "oriel"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:carbon-oriel-proof:closure-proof:task-3",
+      "priority": "high",
+      "status": "accepted",
+      "system": "carbon",
+      "task_id": "completion:carbon-oriel-proof:closure-proof:task-3:action-1",
+      "title": "Execute: run final closure operator",
+      "workstream": "oriel"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:carbon-oriel-proof:closure-proof:task-4",
+      "priority": "high",
+      "status": "accepted",
+      "system": "carbon",
+      "task_id": "completion:carbon-oriel-proof:closure-proof:task-4:action-1",
+      "title": "Execute: record closure evidence",
+      "workstream": "oriel"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:palaver-ui-proof:production-proof:task-1",
+      "priority": "high",
+      "status": "accepted",
+      "system": "palaver",
+      "task_id": "completion:palaver-ui-proof:production-proof:task-1:action-1",
+      "title": "Execute: build active webui-nextgen entry path",
+      "workstream": "webui-nextgen"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:palaver-ui-proof:production-proof:task-2",
+      "priority": "high",
+      "status": "accepted",
+      "system": "palaver",
+      "task_id": "completion:palaver-ui-proof:production-proof:task-2:action-1",
+      "title": "Execute: start Palaver with built frontend",
+      "workstream": "webui-nextgen"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:palaver-ui-proof:production-proof:task-3",
+      "priority": "high",
+      "status": "accepted",
+      "system": "palaver",
+      "task_id": "completion:palaver-ui-proof:production-proof:task-3:action-1",
+      "title": "Execute: exercise one critical workflow",
+      "workstream": "webui-nextgen"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:palaver-ui-proof:production-proof:task-4",
+      "priority": "high",
+      "status": "accepted",
+      "system": "palaver",
+      "task_id": "completion:palaver-ui-proof:production-proof:task-4:action-1",
+      "title": "Execute: record focused evidence",
+      "workstream": "webui-nextgen"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:living-governance-proof:operator-proof:task-1",
+      "priority": "high",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-governance-proof:operator-proof:task-1:action-1",
+      "title": "Execute: compile current governance surfaces",
+      "workstream": "living-governance"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:living-governance-proof:operator-proof:task-2",
+      "priority": "high",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-governance-proof:operator-proof:task-2:action-1",
+      "title": "Execute: run focused policy pipeline case",
+      "workstream": "living-governance"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:living-governance-proof:operator-proof:task-3",
+      "priority": "high",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-governance-proof:operator-proof:task-3:action-1",
+      "title": "Execute: run temporal replay case",
+      "workstream": "living-governance"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:living-governance-proof:operator-proof:task-4",
+      "priority": "high",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:living-governance-proof:operator-proof:task-4:action-1",
+      "title": "Execute: verify consumer packet and receipt",
+      "workstream": "living-governance"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "Required Cypher integration works without transferring semantic ownership or authority through translation.",
+      "dependencies": [
+        "masterplan:urge-generalization"
+      ],
+      "depth": 1,
+      "evidence_receipts": [],
+      "horizon": "backlog",
+      "parent_id": null,
+      "priority": "normal",
+      "status": "accepted",
+      "system": "masterplan",
+      "task_id": "masterplan:cypher-integration",
+      "title": "Continue Cypher translation, normalization, serialization, adapter, and compatibility integration as a bounded task.",
+      "workstream": "masterplan"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "Required Dryve execution mechanics are reusable while Niche retains task identity, priority, dependencies, transitions, scheduling, and completion authority.",
+      "dependencies": [
+        "masterplan:urge-generalization"
+      ],
+      "depth": 1,
+      "evidence_receipts": [],
+      "horizon": "backlog",
+      "parent_id": null,
+      "priority": "normal",
+      "status": "accepted",
+      "system": "masterplan",
+      "task_id": "masterplan:dryve-integration",
+      "title": "Continue Dryve reusable execution-lifecycle integration without transferring task governance from Niche.",
+      "workstream": "masterplan"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "Authority is explicit and queryable; canon remains singular and history-preserving; memory has no duplicate authority; source evidence preserves provenance; projections are reproducible; Vault supports custody/replay/recovery; durable mutations remain Coda-owned; and Masterplan remains Niche-owned.",
+      "dependencies": [
+        "masterplan:cypher-integration",
+        "masterplan:dryve-integration",
+        "masterplan:splyce-integration",
+        "masterplan:spyral-integration"
+      ],
+      "depth": 1,
+      "evidence_receipts": [],
+      "horizon": "backlog",
+      "parent_id": null,
+      "priority": "normal",
+      "status": "accepted",
+      "system": "masterplan",
+      "task_id": "masterplan:enterprise-completion",
+      "title": "Verify the current Masterplan enterprise completion conditions after the bounded implementation sequence is complete.",
+      "workstream": "masterplan"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "Required interface projections operate without displayed state becoming independent authority.",
+      "dependencies": [
+        "masterplan:urge-generalization"
+      ],
+      "depth": 1,
+      "evidence_receipts": [],
+      "horizon": "backlog",
+      "parent_id": null,
+      "priority": "normal",
+      "status": "accepted",
+      "system": "masterplan",
+      "task_id": "masterplan:splyce-integration",
+      "title": "Continue Splyce interface and interaction integration as a separate bounded task.",
+      "workstream": "masterplan"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "Required migration/version transitions are modeled while durable mutation authorization remains outside Spyral.",
+      "dependencies": [
+        "masterplan:urge-generalization"
+      ],
+      "depth": 1,
+      "evidence_receipts": [],
+      "horizon": "backlog",
+      "parent_id": null,
+      "priority": "normal",
+      "status": "accepted",
+      "system": "masterplan",
+      "task_id": "masterplan:spyral-integration",
+      "title": "Continue Spyral migration and version-transition integration as a separate bounded task.",
+      "workstream": "masterplan"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "Urge can perform generalized candidate refinement while preserving immutable lineage, explicit deltas, and prohibition against automatic authority promotion.",
+      "dependencies": [
+        "masterplan:source-intelligence-si9"
+      ],
+      "depth": 1,
+      "evidence_receipts": [],
+      "horizon": "backlog",
+      "parent_id": null,
+      "priority": "normal",
+      "status": "accepted",
+      "system": "masterplan",
+      "task_id": "masterplan:urge-generalization",
+      "title": "Generalize Urge iteration only after Source Intelligence has a stable evidence and projection contract.",
+      "workstream": "masterplan"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:extr-closure:reconciliation"
+      ],
+      "completion_condition": "The former blocker is reconciled and extr either passes its focused enterprise status path or retains an explicit current blocker.",
+      "dependencies": [],
+      "depth": 1,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": null,
+      "priority": "normal",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:extr-closure",
+      "title": "Reconcile and close extr enterprise",
+      "workstream": "extr"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:extr-closure:reconciliation:task-1",
+        "completion:extr-closure:reconciliation:task-2",
+        "completion:extr-closure:reconciliation:task-3",
+        "completion:extr-closure:reconciliation:task-4"
+      ],
+      "completion_condition": "Reconcile extr current state is complete with required focused evidence.",
+      "dependencies": [],
+      "depth": 2,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:extr-closure",
+      "priority": "normal",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:extr-closure:reconciliation",
+      "title": "Reconcile extr current state",
+      "workstream": "extr"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:extr-closure:reconciliation:task-1:action-1"
+      ],
+      "completion_condition": "confirm current boundary implementation is implemented or explicitly resolved with evidence.",
+      "dependencies": [],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:extr-closure:reconciliation",
+      "priority": "normal",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:extr-closure:reconciliation:task-1",
+      "title": "confirm current boundary implementation",
+      "workstream": "extr"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:extr-closure:reconciliation:task-2:action-1"
+      ],
+      "completion_condition": "run focused extr status path is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:extr-closure:reconciliation:task-1"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:extr-closure:reconciliation",
+      "priority": "normal",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:extr-closure:reconciliation:task-2",
+      "title": "run focused extr status path",
+      "workstream": "extr"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:extr-closure:reconciliation:task-3:action-1"
+      ],
+      "completion_condition": "classify any remaining blocker is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:extr-closure:reconciliation:task-2"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:extr-closure:reconciliation",
+      "priority": "normal",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:extr-closure:reconciliation:task-3",
+      "title": "classify any remaining blocker",
+      "workstream": "extr"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:extr-closure:reconciliation:task-4:action-1"
+      ],
+      "completion_condition": "record completion or blocker evidence is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:extr-closure:reconciliation:task-3"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:extr-closure:reconciliation",
+      "priority": "normal",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:extr-closure:reconciliation:task-4",
+      "title": "record completion or blocker evidence",
+      "workstream": "extr"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:extr-closure:reconciliation:task-1",
+      "priority": "normal",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:extr-closure:reconciliation:task-1:action-1",
+      "title": "Execute: confirm current boundary implementation",
+      "workstream": "extr"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:extr-closure:reconciliation:task-2",
+      "priority": "normal",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:extr-closure:reconciliation:task-2:action-1",
+      "title": "Execute: run focused extr status path",
+      "workstream": "extr"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:extr-closure:reconciliation:task-3",
+      "priority": "normal",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:extr-closure:reconciliation:task-3:action-1",
+      "title": "Execute: classify any remaining blocker",
+      "workstream": "extr"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "next",
+      "parent_id": "completion:extr-closure:reconciliation:task-4",
+      "priority": "normal",
+      "status": "accepted",
+      "system": "savant",
+      "task_id": "completion:extr-closure:reconciliation:task-4:action-1",
+      "title": "Execute: record completion or blocker evidence",
+      "workstream": "extr"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:opus-provider-universal:external-prerequisite"
+      ],
+      "completion_condition": "An actionable provider prerequisite exists and the bounded provider continuation is proven.",
+      "dependencies": [],
+      "depth": 1,
+      "evidence_receipts": [],
+      "horizon": "later",
+      "parent_id": null,
+      "priority": "deferred",
+      "status": "deferred",
+      "system": "opus",
+      "task_id": "completion:opus-provider-universal",
+      "title": "Resume provider-universal Opus when actionable",
+      "workstream": "provider-universal"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:opus-provider-universal:external-prerequisite:task-1",
+        "completion:opus-provider-universal:external-prerequisite:task-2",
+        "completion:opus-provider-universal:external-prerequisite:task-3",
+        "completion:opus-provider-universal:external-prerequisite:task-4"
+      ],
+      "completion_condition": "Resolve actionable provider prerequisite is complete with required focused evidence.",
+      "dependencies": [],
+      "depth": 2,
+      "evidence_receipts": [],
+      "horizon": "later",
+      "parent_id": "completion:opus-provider-universal",
+      "priority": "deferred",
+      "status": "deferred",
+      "system": "opus",
+      "task_id": "completion:opus-provider-universal:external-prerequisite",
+      "title": "Resolve actionable provider prerequisite",
+      "workstream": "provider-universal"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:opus-provider-universal:external-prerequisite:task-1:action-1"
+      ],
+      "completion_condition": "obtain valid provider access or defect evidence is implemented or explicitly resolved with evidence.",
+      "dependencies": [],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "later",
+      "parent_id": "completion:opus-provider-universal:external-prerequisite",
+      "priority": "deferred",
+      "status": "deferred",
+      "system": "opus",
+      "task_id": "completion:opus-provider-universal:external-prerequisite:task-1",
+      "title": "obtain valid provider access or defect evidence",
+      "workstream": "provider-universal"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:opus-provider-universal:external-prerequisite:task-2:action-1"
+      ],
+      "completion_condition": "classify external versus internal failure is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:opus-provider-universal:external-prerequisite:task-1"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "later",
+      "parent_id": "completion:opus-provider-universal:external-prerequisite",
+      "priority": "deferred",
+      "status": "deferred",
+      "system": "opus",
+      "task_id": "completion:opus-provider-universal:external-prerequisite:task-2",
+      "title": "classify external versus internal failure",
+      "workstream": "provider-universal"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:opus-provider-universal:external-prerequisite:task-3:action-1"
+      ],
+      "completion_condition": "resume only the affected integration is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:opus-provider-universal:external-prerequisite:task-2"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "later",
+      "parent_id": "completion:opus-provider-universal:external-prerequisite",
+      "priority": "deferred",
+      "status": "deferred",
+      "system": "opus",
+      "task_id": "completion:opus-provider-universal:external-prerequisite:task-3",
+      "title": "resume only the affected integration",
+      "workstream": "provider-universal"
+    },
+    {
+      "blockers": [],
+      "children": [
+        "completion:opus-provider-universal:external-prerequisite:task-4:action-1"
+      ],
+      "completion_condition": "record provider integration evidence is implemented or explicitly resolved with evidence.",
+      "dependencies": [
+        "completion:opus-provider-universal:external-prerequisite:task-3"
+      ],
+      "depth": 3,
+      "evidence_receipts": [],
+      "horizon": "later",
+      "parent_id": "completion:opus-provider-universal:external-prerequisite",
+      "priority": "deferred",
+      "status": "deferred",
+      "system": "opus",
+      "task_id": "completion:opus-provider-universal:external-prerequisite:task-4",
+      "title": "record provider integration evidence",
+      "workstream": "provider-universal"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "later",
+      "parent_id": "completion:opus-provider-universal:external-prerequisite:task-1",
+      "priority": "deferred",
+      "status": "deferred",
+      "system": "opus",
+      "task_id": "completion:opus-provider-universal:external-prerequisite:task-1:action-1",
+      "title": "Execute: obtain valid provider access or defect evidence",
+      "workstream": "provider-universal"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "later",
+      "parent_id": "completion:opus-provider-universal:external-prerequisite:task-2",
+      "priority": "deferred",
+      "status": "deferred",
+      "system": "opus",
+      "task_id": "completion:opus-provider-universal:external-prerequisite:task-2:action-1",
+      "title": "Execute: classify external versus internal failure",
+      "workstream": "provider-universal"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "later",
+      "parent_id": "completion:opus-provider-universal:external-prerequisite:task-3",
+      "priority": "deferred",
+      "status": "deferred",
+      "system": "opus",
+      "task_id": "completion:opus-provider-universal:external-prerequisite:task-3:action-1",
+      "title": "Execute: resume only the affected integration",
+      "workstream": "provider-universal"
+    },
+    {
+      "blockers": [],
+      "children": [],
+      "completion_condition": "The executable action has an evidence receipt or explicit blocker.",
+      "dependencies": [],
+      "depth": 4,
+      "evidence_receipts": [],
+      "horizon": "later",
+      "parent_id": "completion:opus-provider-universal:external-prerequisite:task-4",
+      "priority": "deferred",
+      "status": "deferred",
+      "system": "opus",
+      "task_id": "completion:opus-provider-universal:external-prerequisite:task-4:action-1",
+      "title": "Execute: record provider integration evidence",
+      "workstream": "provider-universal"
+    }
+  ]
+}

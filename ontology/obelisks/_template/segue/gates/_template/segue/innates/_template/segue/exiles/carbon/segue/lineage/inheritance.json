@@ -1,0 +1,64 @@
+{
+  "id": "carbon.segue.inheritance",
+  "owner": "carbon",
+  "type": "lineage_projection",
+  "status": "active",
+  "conceptual_lineage": {
+    "ancestor": "oriel",
+    "descendant": "carbon",
+    "relationship": "evolved_into"
+  },
+  "current_specialization": {
+    "id": "carbon.oriel",
+    "graph_id": "exile:carbon/specialization:oriel",
+    "owner": "carbon",
+    "relationship": "carbon_specialization_named_for_ancestor",
+    "historical_ancestor_reactivated": false
+  },
+  "inheritance": {
+    "simulation_mechanics": {
+      "owner": "carbon",
+      "inherited_by_consumers": false
+    },
+    "simulation_state": {
+      "owner": "carbon",
+      "inherited_by_sources": false,
+      "inherited_by_consumers": false
+    },
+    "quantum_simulation": {
+      "owner": "carbon",
+      "inherited_by_oriel_specialization": false
+    },
+    "causal_simulation": {
+      "owner": "carbon",
+      "inherited_by_oriel_specialization": false
+    },
+    "oriel_chronology_logistics": {
+      "owner": "carbon",
+      "projectable_by_reference": true,
+      "ownership_transfer": false
+    },
+    "source_authority": {
+      "owner": "source",
+      "inherited_by_carbon": false
+    },
+    "external_reality": {
+      "owner": "external_source",
+      "inherited_by_carbon": false,
+      "inherited_by_oriel_specialization": false
+    }
+  },
+  "branch_rules": {
+    "child_preserves_parent_reference": true,
+    "child_overwrites_parent": false,
+    "branch_ancestry_immutable": true,
+    "oriel_quantum_collapse_promotes_canon": false
+  },
+  "identity_rules": {
+    "historical_oriel_identity_preserved": true,
+    "historical_oriel_is_current_specialization": false,
+    "standalone_oriel_restored": false,
+    "carbon_remains_general_simulation_owner": true
+  },
+  "rule": "Simulation composition, execution, branching, replay, comparison, interrogation, Oriel specialization projection, and capability projection preserve ownership boundaries and do not imply authority inheritance."
+}

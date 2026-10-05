@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="/root/savant-runtime"
+VENV="${ROOT}/.venv_extract"
+PYTHON="${VENV}/bin/python"
+SCRIPT="${ROOT}/bin/extract_savant_jsonl.py"
+LAUNCHER="${ROOT}/bin/extract_savant_jsonl"
+GLOBAL_LINK="/usr/local/bin/extract_savant_jsonl"
+
+if [ ! -f "${SCRIPT}" ]; then
+    printf '[ERROR] Missing extractor: %s\n' "${SCRIPT}" >&2
+    exit 1
+fi
+
+python3 -m venv "${VENV}"
+
+"${PYTHON}" -m pip install --upgrade pip
+
+"${PYTHON}" -m pip install \
+    'ijson>=3.4,<4' \
+    'orjson>=3.10,<4' \
+    'rapidfuzz>=3,<4'
+
+chmod 755 \
+    "${SCRIPT}" \
+    "${LAUNCHER}"
+
+ln -sfn \
+    "${LAUNCHER}" \
+    "${GLOBAL_LINK}"
+
+python3 -m py_compile \
+    "${SCRIPT}"
+
+"${LAUNCHER}" \
+    --self-test
+
+"${LAUNCHER}" \
+    --dependencies
+
+"${GLOBAL_LINK}" \
+    --version

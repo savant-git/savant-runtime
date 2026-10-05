@@ -1,0 +1,15 @@
+/*
+ * savant / niche
+ * load finalizer
+ * authority_effect: none
+ */
+
+html[data-niche-modules="degraded"]
+    .brand-mark {
+    opacity: .42;
+}
+
+html[data-niche-modules="loaded"]
+    .brand-mark {
+    opacity: 1;
+}

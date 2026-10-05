@@ -1,0 +1,137 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "c06a1d82e376c6cf5d70a52390fcac0f487cfc281d80839acaf8e8082624dbc7",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "namespace": "preview.kindred",
+  "node": "runtime/services",
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationships": [
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.5044f945d53b2f19ad42",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "runtime/services",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:runtime/services",
+        "canonical_target": "fs:runtime/services/palaver-systemd.env",
+        "continuation": "projecting",
+        "id": "lineage.composition.5044f945d53b2f19ad42",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/runtime/services/palaver-systemd.env"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "runtime/services",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "runtime/services/palaver-systemd.env",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "runtime/services/palaver-systemd.env"
+    },
+    {
+      "child_profile": "daughter",
+      "domain": "filesystem",
+      "id": "lineage.composition.6914dd58fff9b200760f",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "runtime",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:runtime",
+        "canonical_target": "fs:runtime/services",
+        "continuation": "preserving",
+        "id": "lineage.composition.6914dd58fff9b200760f",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/runtime/services"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "runtime",
+        "status": "active",
+        "symbolic_child_alias": "daughter",
+        "symbolic_parent_alias": "parent",
+        "target": "runtime/services",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "runtime/services"
+    }
+  ],
+  "schema": "savant.kindred.preview.relationship_projection.v2"
+}

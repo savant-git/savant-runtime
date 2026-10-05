@@ -1,0 +1,25 @@
+{
+  "schema": "savant.extr.boundary-policy.v1",
+  "projection_only": true,
+  "authority_effect": "none",
+  "segmentation": {
+    "minimum_fragment_characters": 80,
+    "target_fragment_characters": 1400,
+    "maximum_fragment_characters": 4000,
+    "context_overlap_sentences": 1
+  },
+  "classification": {
+    "minimum_signals": 1,
+    "minimum_confidence": 0.5,
+    "switch_margin": 0.2,
+    "sticky_context": true,
+    "ambiguous_bucket": "ambiguous",
+    "unclassified_bucket": "unclassified"
+  },
+  "reconstruction": {
+    "merge_adjacent_same_project": true,
+    "bridge_short_unclassified_fragments": true,
+    "maximum_bridge_characters": 240,
+    "preserve_original_rows": true
+  }
+}

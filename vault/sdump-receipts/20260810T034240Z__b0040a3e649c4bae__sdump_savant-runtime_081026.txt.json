@@ -1,0 +1,42 @@
+{
+  "artifact": {
+    "local_deleted": true,
+    "local_path": "/root/savant-runtime/source/sdump-20260810T034221Z/sdump_savant-runtime_081026.txt",
+    "name": "sdump_savant-runtime_081026.txt",
+    "sha256": "b0040a3e649c4bae74b4cfad72c06b6e986799bd671d91e633286e8c8589d6c8",
+    "size": 25035578
+  },
+  "completed_at": "2026-08-10T03:42:40Z",
+  "counts": {
+    "candidates": 3404,
+    "directories_seen": 3031,
+    "duplicate_bytes_avoided": 14282358,
+    "duplicate_files": 483,
+    "failures": 0,
+    "files_seen": 3612,
+    "included_files": 3404,
+    "redactions": 20,
+    "rendered_bytes": 20248998,
+    "skipped": 375,
+    "source_bytes": 34531342,
+    "symlinks_seen": 6,
+    "unique_contents": 2921
+  },
+  "deterministic_hash": "da72a3323177b119e94896e53ecb747e0b8f013859465b69b49d08247ed7ff39",
+  "profile": "compact",
+  "remote": {
+    "bucket": "savant-ai-cluster",
+    "etag": "\"807dc57883fd44a02111497b53b0ba76-3\"",
+    "key": "sdump_savant-runtime_081026.txt",
+    "reason": "remote size and sha256 metadata verified",
+    "sha256": "b0040a3e649c4bae74b4cfad72c06b6e986799bd671d91e633286e8c8589d6c8",
+    "size": 25035578,
+    "uploaded": true,
+    "uri": "s3://savant-ai-cluster/sdump_savant-runtime_081026.txt",
+    "verified": true,
+    "version_id": "orrGia5_XHF8t72AEZF7LSh9fi_IMDbO"
+  },
+  "schema": "savant.sdump.receipt.v3",
+  "snapshot_hash": "a6b75aa5db5e1a712b80c11a4afb89828a98b671761e4a93ec3b1b189fe5b253",
+  "tool": "sdump-enterprise"
+}

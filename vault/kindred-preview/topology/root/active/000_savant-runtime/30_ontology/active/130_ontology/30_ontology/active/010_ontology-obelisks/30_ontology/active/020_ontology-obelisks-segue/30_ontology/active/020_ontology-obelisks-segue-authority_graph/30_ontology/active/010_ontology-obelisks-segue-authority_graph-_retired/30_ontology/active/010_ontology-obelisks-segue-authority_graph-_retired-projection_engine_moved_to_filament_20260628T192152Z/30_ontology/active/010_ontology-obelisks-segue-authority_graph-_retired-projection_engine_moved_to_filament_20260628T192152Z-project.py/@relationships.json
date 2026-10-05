@@ -1,0 +1,76 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "12b5d2353911bdb906b53f0f86bca4c6468089b9850eb887120a79ed50be5dc4",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "namespace": "preview.kindred",
+  "node": "ontology/obelisks/segue/authority_graph/_retired/projection_engine_moved_to_filament_20260628T192152Z/project.py",
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationships": [
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.31418affea0268526c25",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "ontology/obelisks/segue/authority_graph/_retired/projection_engine_moved_to_filament_20260628T192152Z",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:ontology/obelisks/segue/authority_graph/_retired/projection_engine_moved_to_filament_20260628T192152Z",
+        "canonical_target": "fs:ontology/obelisks/segue/authority_graph/_retired/projection_engine_moved_to_filament_20260628T192152Z/project.py",
+        "continuation": "projecting",
+        "id": "lineage.composition.31418affea0268526c25",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/ontology/obelisks/segue/authority_graph/_retired/projection_engine_moved_to_filament_20260628T192152Z/project.py"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "ontology/obelisks/segue/authority_graph/_retired/projection_engine_moved_to_filament_20260628T192152Z",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "ontology/obelisks/segue/authority_graph/_retired/projection_engine_moved_to_filament_20260628T192152Z/project.py",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "ontology/obelisks/segue/authority_graph/_retired/projection_engine_moved_to_filament_20260628T192152Z/project.py"
+    }
+  ],
+  "schema": "savant.kindred.preview.relationship_projection.v2"
+}

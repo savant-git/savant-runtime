@@ -1,0 +1,361 @@
+schema: SAVANT_LEXEME_SCHEMA
+version: 2
+
+required:
+  - id
+  - canonical
+  - concept
+  - layer
+  - status
+  - lineage
+  - provenance
+
+fields:
+
+  id:
+    type: string
+    required: true
+    immutable: true
+    unique: true
+
+  canonical:
+    type: string
+    required: true
+    immutable: true
+    unique: true
+
+  concept:
+    type: string
+    required: true
+    immutable: true
+
+  description:
+    type: string
+    required: false
+
+  layer:
+    required: true
+    enum:
+      - shard00
+      - shard0
+      - shard1
+      - shard2
+      - shard3
+      - shard4
+      - shard5
+      - shard6
+      - shard7
+
+  status:
+    required: true
+    enum:
+      - active
+      - deprecated
+      - superseded
+      - reserved
+
+  aliases:
+    type: list
+    required: false
+    unique: true
+    unique_casefold: true
+    items:
+      type: string
+
+  reserved_spellings:
+    type: list
+    required: false
+    unique: true
+    unique_casefold: true
+    items:
+      type: string
+
+  parents:
+    type: list
+    required: false
+    unique: true
+    items:
+      type: string
+
+  children:
+    type: list
+    required: false
+    unique: true
+    items:
+      type: string
+
+  dependencies:
+    type: list
+    required: false
+    unique: true
+    items:
+      type: string
+
+  depended_by:
+    type: list
+    required: false
+    unique: true
+    items:
+      type: string
+
+  projections:
+    type: list
+    required: false
+    unique: true
+    items:
+      type: string
+
+  validators:
+    type: list
+    required: false
+    unique: true
+    items:
+      type: string
+
+  ontology:
+    type: list
+    required: false
+    unique: true
+
+  relationships:
+    type: list
+    required: false
+
+  lineage:
+    required: true
+
+    accepted_forms:
+      - object
+
+    object_fields:
+
+      introduced:
+        required: false
+        type: object
+
+        fields:
+
+          authority:
+            type: string
+            required: false
+
+          revision:
+            type: string
+            required: false
+
+          timestamp:
+            type: string
+            required: false
+
+      supersedes:
+        type: list
+        required: true
+        unique: true
+        unique_casefold: true
+        items:
+          type: string
+
+      superseded_by:
+        required: true
+        type:
+          - string
+          - list
+          - "null"
+
+      history:
+        type: list
+        required: false
+
+    invariants:
+      supersedes_always_explicit: true
+      superseded_by_always_explicit: true
+      immutable: true
+      destructive_rewrite: false
+
+  provenance:
+    required: true
+
+    accepted_forms:
+      - list
+      - object
+
+    list_form:
+      minimum_items: 1
+      unique: true
+      items:
+        type: string
+
+    object_form:
+
+      fields:
+
+        source:
+          type: string
+          required: false
+
+        sources:
+          type: list
+          required: false
+          unique: true
+          items:
+            type: string
+
+        evidence:
+          type: list
+          required: false
+
+        confidence:
+          required: false
+          enum:
+            - confirmed
+            - inferred
+            - projected
+
+        authority:
+          type: string
+          required: false
+
+        revision:
+          type: string
+          required: false
+
+        timestamp:
+          type: string
+          required: false
+
+    invariants:
+      nonempty: true
+      immutable_history: true
+
+  metadata:
+    type: object
+    required: false
+
+rules:
+
+  canonical_unique: true
+
+  concept_unique_for_active_lexemes: true
+
+  aliases_unique: true
+
+  alias_cannot_equal_canonical: true
+
+  alias_cannot_claim_other_canonical: true
+
+  reserved_spelling_cannot_equal_other_canonical: true
+
+  canonical_never_changes: true
+
+  identity_never_reused: true
+
+  superseded_never_deleted: true
+
+  superseded_never_reactivated_without_new_authority: true
+
+  reserved_never_reused: true
+
+  projection_only_from_authority: true
+
+  authority_before_inference: true
+
+  authority_before_projection: true
+
+  lineage_required: true
+
+  provenance_required: true
+
+  lineage_immutable: true
+
+  provenance_preserved: true
+
+  supersession_acyclic: true
+
+  historical_aliases_non_authoritative: true
+
+  canonical_writes_only: true
+
+  fail_closed_on_ambiguity: true
+
+status_contracts:
+
+  active:
+    superseded_by_must_be_null: true
+
+  superseded:
+    superseded_by_required: true
+    canonical_permanently_reserved: true
+
+  reserved:
+    canonical_permanently_reserved: true
+
+  deprecated:
+    canonical_remains_reserved: true
+
+special_cases:
+
+  shard:
+    canonical: Shard
+    globally_active: true
+
+    identity_tier_2_alias:
+      historical: Shard
+      current: Mote
+      scope: identity-tier-only
+
+    global_supersession_forbidden: true
+
+  lineage:
+    canonical: Lineage
+    not_equivalent_to:
+      - Kindred
+
+  mutation:
+    canonical: Mutation
+    not_equivalent_to:
+      - Arc
+      - Convex
+
+  evidence:
+    canonical: Evidence
+    not_equivalent_to:
+      - Attestation
+
+  convex:
+    canonical: Convex
+    supersedes:
+      - Arc
+
+  tomb:
+    canonical: Tomb
+    supersedes:
+      - Vault
+
+  cyphor:
+    canonical: Cyphor
+    supersedes:
+      - Cypher
+
+  riot:
+    canonical: Riot
+    supersedes:
+      - Entity
+      - Form
+      - Swarm
+
+  centra:
+    canonical: Centra
+    supersedes:
+      - Focal
+      - Central
+
+  wyrmhole:
+    canonical: Wyrmhole
+    supersedes:
+      - Gate
+      - Portal
+
+  ink:
+    canonical: Ink
+    supersedes:
+      - Trait

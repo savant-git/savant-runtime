@@ -1,0 +1,1133 @@
+:root {
+  --palaver-pointer-x: 50%;
+  --palaver-pointer-y: 50%;
+  --palaver-pointer-xn: 0;
+  --palaver-pointer-yn: 0;
+  --palaver-phase: 0%;
+
+  --palaver-violet:
+    126, 78, 255;
+
+  --palaver-cyan:
+    92, 224, 255;
+
+  --palaver-magenta:
+    255, 72, 151;
+
+  --palaver-gold:
+    231, 187, 99;
+}
+
+
+.palaver-cinematic-runtime {
+  position: relative;
+
+  isolation: isolate;
+
+  background:
+    #020308;
+}
+
+
+.palaver-cinematic-runtime::before {
+  position: fixed;
+
+  z-index: 10000;
+
+  top:
+    var(--palaver-pointer-y);
+
+  left:
+    var(--palaver-pointer-x);
+
+  width:
+    min(
+      70vw,
+      850px
+    );
+
+  height:
+    min(
+      70vw,
+      850px
+    );
+
+  content: "";
+
+  pointer-events: none;
+
+  border-radius:
+    50%;
+
+  opacity:
+    .16;
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    );
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(
+        var(--palaver-cyan),
+        .18
+      )
+      0%,
+
+      rgba(
+        var(--palaver-violet),
+        .085
+      )
+      24%,
+
+      rgba(
+        var(--palaver-magenta),
+        .025
+      )
+      47%,
+
+      transparent
+      72%
+    );
+
+  filter:
+    blur(28px);
+
+  mix-blend-mode:
+    screen;
+}
+
+
+.palaver-cinematic-runtime::after {
+  position: fixed;
+
+  z-index: -1;
+
+  inset: -16%;
+
+  content: "";
+
+  pointer-events:
+    none;
+
+  opacity:
+    .55;
+
+  background:
+    radial-gradient(
+      ellipse
+      at
+      calc(
+        18%
+        + var(--palaver-phase)
+        * .08
+      )
+      13%,
+
+      rgba(
+        var(--palaver-violet),
+        .12
+      ),
+
+      transparent
+      36%
+    ),
+
+    radial-gradient(
+      ellipse
+      at
+      78%
+      calc(
+        74%
+        - var(--palaver-phase)
+        * .05
+      ),
+
+      rgba(
+        var(--palaver-cyan),
+        .07
+      ),
+
+      transparent
+      32%
+    ),
+
+    radial-gradient(
+      ellipse
+      at
+      54%
+      48%,
+
+      rgba(
+        var(--palaver-magenta),
+        .035
+      ),
+
+      transparent
+      43%
+    );
+
+  filter:
+    blur(38px);
+}
+
+
+/* ---------------------------------------------------------
+   cinematic optical grain
+--------------------------------------------------------- */
+
+.palaver-cinematic-runtime
+.workstation-shell::after {
+  position: absolute;
+
+  z-index: 900;
+
+  inset: 0;
+
+  content: "";
+
+  pointer-events:
+    none;
+
+  opacity:
+    .045;
+
+  background-image:
+    url(
+      "data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E"
+    );
+
+  mix-blend-mode:
+    soft-light;
+}
+
+
+/* ---------------------------------------------------------
+   panel energy surface
+--------------------------------------------------------- */
+
+.memory-capsule article,
+.forest-columns article,
+.work-cards article,
+.system-friendly-grid article,
+.kindred-relations > article,
+.search-results article,
+.upload-row {
+  position: relative;
+
+  transform-style:
+    preserve-3d;
+
+  will-change:
+    transform;
+}
+
+
+.memory-capsule article::before,
+.forest-columns article::before,
+.work-cards article::before,
+.system-friendly-grid article::before,
+.kindred-relations > article::before,
+.search-results article::before,
+.upload-row::before {
+  position: absolute;
+
+  z-index: 0;
+
+  inset: 0;
+
+  content: "";
+
+  pointer-events:
+    none;
+
+  border-radius:
+    inherit;
+
+  opacity: 0;
+
+  background:
+    radial-gradient(
+      circle
+      at
+      var(
+        --panel-light-x,
+        50%
+      )
+      var(
+        --panel-light-y,
+        50%
+      ),
+
+      rgba(
+        var(--palaver-cyan),
+        .11
+      ),
+
+      rgba(
+        var(--palaver-violet),
+        .045
+      )
+      27%,
+
+      transparent
+      58%
+    );
+
+  transition:
+    opacity
+    .3s ease;
+}
+
+
+.memory-capsule article:hover::before,
+.forest-columns article:hover::before,
+.work-cards article:hover::before,
+.system-friendly-grid article:hover::before,
+.kindred-relations > article:hover::before,
+.search-results article:hover::before,
+.upload-row:hover::before {
+  opacity: 1;
+}
+
+
+.memory-capsule article > *,
+.forest-columns article > *,
+.work-cards article > *,
+.system-friendly-grid article > *,
+.kindred-relations > article > *,
+.search-results article > *,
+.upload-row > * {
+  position: relative;
+
+  z-index: 1;
+}
+
+
+/* ---------------------------------------------------------
+   rail signal trail
+--------------------------------------------------------- */
+
+.rail-item {
+  --rail-signal: 0%;
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+
+.rail-item::before {
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+  left: 0;
+
+  width:
+    1px;
+
+  content: "";
+
+  opacity:
+    .8;
+
+  transform:
+    scaleY(
+      calc(
+        var(--rail-signal)
+        / 100
+      )
+    );
+
+  transform-origin:
+    center;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent,
+      rgba(
+        var(--palaver-cyan),
+        .8
+      ),
+      rgba(
+        var(--palaver-violet),
+        .9
+      ),
+      transparent
+    );
+
+  box-shadow:
+    0 0 13px
+    rgba(
+      var(--palaver-cyan),
+      .45
+    );
+}
+
+
+.rail-item.active::before {
+  height: 74%;
+
+  top: 13%;
+
+  bottom: auto;
+
+  transform:
+    scaleY(1);
+}
+
+
+/* ---------------------------------------------------------
+   active signal trace
+--------------------------------------------------------- */
+
+.palaver-traced {
+  position: relative;
+}
+
+
+.palaver-traced::after {
+  position: absolute;
+
+  z-index: 9;
+
+  inset: -1px;
+
+  content: "";
+
+  pointer-events:
+    none;
+
+  border-radius:
+    inherit;
+
+  padding:
+    1px;
+
+  opacity:
+    .65;
+
+  background:
+    conic-gradient(
+      from
+      var(
+        --palaver-trace-angle,
+        0deg
+      ),
+
+      transparent
+      0deg,
+
+      rgba(
+        var(--palaver-cyan),
+        .15
+      )
+      45deg,
+
+      rgba(
+        var(--palaver-cyan),
+        .82
+      )
+      70deg,
+
+      rgba(
+        var(--palaver-violet),
+        .55
+      )
+      90deg,
+
+      transparent
+      125deg,
+
+      transparent
+      360deg
+    );
+
+  -webkit-mask:
+    linear-gradient(
+      #000 0 0
+    )
+    content-box,
+
+    linear-gradient(
+      #000 0 0
+    );
+
+  -webkit-mask-composite:
+    xor;
+
+  mask-composite:
+    exclude;
+
+  animation:
+    palaver-trace
+    4.8s linear infinite;
+}
+
+
+@keyframes palaver-trace {
+  to {
+    --palaver-trace-angle:
+      360deg;
+  }
+}
+
+
+@property --palaver-trace-angle {
+  syntax:
+    "<angle>";
+
+  initial-value:
+    0deg;
+
+  inherits:
+    false;
+}
+
+
+/* ---------------------------------------------------------
+   energy click response
+--------------------------------------------------------- */
+
+.palaver-pulse-host {
+  position: relative;
+
+  overflow: hidden;
+}
+
+
+.palaver-energy-pulse {
+  position: absolute;
+
+  z-index: 100;
+
+  width: 12px;
+  height: 12px;
+
+  pointer-events:
+    none;
+
+  border-radius:
+    50%;
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    );
+
+  background:
+    radial-gradient(
+      circle,
+
+      rgba(
+        var(--palaver-cyan),
+        .75
+      ),
+
+      rgba(
+        var(--palaver-violet),
+        .28
+      )
+      35%,
+
+      transparent
+      72%
+    );
+
+  box-shadow:
+    0 0 18px
+    rgba(
+      var(--palaver-cyan),
+      .25
+    );
+}
+
+
+/* ---------------------------------------------------------
+   luminous module headers
+--------------------------------------------------------- */
+
+.contextarium-header,
+.source-header,
+.kindred-hero,
+.uploads-module > header,
+.module-hero {
+  position: relative;
+
+  overflow: hidden;
+}
+
+
+.contextarium-header::after,
+.source-header::after,
+.kindred-hero::after,
+.uploads-module > header::after,
+.module-hero::after {
+  position: absolute;
+
+  right:
+    -12%;
+
+  bottom:
+    -1px;
+
+  left:
+    28%;
+
+  height:
+    1px;
+
+  content: "";
+
+  pointer-events:
+    none;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+
+      rgba(
+        var(--palaver-violet),
+        .22
+      ),
+
+      rgba(
+        var(--palaver-cyan),
+        .72
+      ),
+
+      rgba(
+        var(--palaver-gold),
+        .2
+      ),
+
+      transparent
+    );
+
+  filter:
+    drop-shadow(
+      0 0 8px
+      rgba(
+        var(--palaver-cyan),
+        .32
+      )
+    );
+}
+
+
+/* ---------------------------------------------------------
+   intelligent hover typography
+--------------------------------------------------------- */
+
+.rail-item span,
+.kindred-elements button span,
+.memory-cell strong,
+.search-result-main strong {
+  transition:
+    letter-spacing
+    .3s cubic-bezier(
+      .22,
+      1,
+      .36,
+      1
+    ),
+    color
+    .3s ease;
+}
+
+
+.rail-item:hover span {
+  letter-spacing:
+    .025em;
+}
+
+
+.memory-cell:hover strong,
+.kindred-elements button:hover span {
+  letter-spacing:
+    .018em;
+}
+
+
+/* ---------------------------------------------------------
+   precise glass depth rather than blanket glassmorphism
+--------------------------------------------------------- */
+
+.command-center,
+.contextarium-controls label,
+.kindred-controls > label,
+.universal-search-box {
+  box-shadow:
+    inset
+    0 1px
+    rgba(
+      255,
+      255,
+      255,
+      .035
+    ),
+
+    0 18px 70px
+    rgba(
+      0,
+      0,
+      0,
+      .2
+    );
+}
+
+
+/* ---------------------------------------------------------
+   memory signal topology
+--------------------------------------------------------- */
+
+.memory-cell {
+  position: relative;
+}
+
+
+.memory-cell::before {
+  position: absolute;
+
+  top: 50%;
+  left: 0;
+
+  width:
+    10px;
+
+  height:
+    1px;
+
+  content: "";
+
+  opacity: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+
+      rgba(
+        var(--palaver-cyan),
+        .85
+      ),
+
+      transparent
+    );
+
+  transform:
+    translateY(
+      -50%
+    );
+
+  transition:
+    opacity
+      .2s ease,
+    width
+      .35s
+      cubic-bezier(
+        .22,
+        1,
+        .36,
+        1
+      );
+}
+
+
+.memory-cell:hover::before,
+.memory-cell.selected::before {
+  width:
+    24px;
+
+  opacity: .65;
+}
+
+
+/* ---------------------------------------------------------
+   kindred relationship signal path
+--------------------------------------------------------- */
+
+.kindred-relation-main > div {
+  position: relative;
+
+  overflow: visible;
+}
+
+
+.kindred-relation-main > div::before {
+  position: absolute;
+
+  z-index: -1;
+
+  top: 50%;
+  right: -8px;
+  left: -8px;
+
+  height: 1px;
+
+  content: "";
+
+  opacity: .32;
+
+  background:
+    linear-gradient(
+      90deg,
+
+      transparent,
+
+      rgba(
+        var(--palaver-violet),
+        .8
+      ),
+
+      rgba(
+        var(--palaver-cyan),
+        .9
+      ),
+
+      transparent
+    );
+
+  background-size:
+    180% 100%;
+
+  animation:
+    kindred-signal
+    2.8s linear infinite;
+}
+
+
+@keyframes kindred-signal {
+  to {
+    background-position:
+      -180% 0;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   upload state choreography
+--------------------------------------------------------- */
+
+.upload-drop {
+  position: relative;
+
+  overflow: hidden;
+}
+
+
+.upload-drop::before {
+  position: absolute;
+
+  inset:
+    -45%;
+
+  content: "";
+
+  pointer-events:
+    none;
+
+  opacity: .28;
+
+  background:
+    conic-gradient(
+      from 0deg,
+
+      transparent,
+
+      rgba(
+        var(--palaver-cyan),
+        .14
+      ),
+
+      transparent
+      22%,
+
+      transparent
+      74%,
+
+      rgba(
+        var(--palaver-violet),
+        .13
+      ),
+
+      transparent
+    );
+
+  animation:
+    upload-field
+    14s linear infinite;
+}
+
+
+@keyframes upload-field {
+  to {
+    transform:
+      rotate(360deg);
+  }
+}
+
+
+.upload-drop > * {
+  position: relative;
+
+  z-index: 1;
+}
+
+
+/* ---------------------------------------------------------
+   command palette entrance architecture
+--------------------------------------------------------- */
+
+.command-backdrop {
+  backdrop-filter:
+    blur(14px)
+    saturate(.7);
+}
+
+
+.command-center {
+  position: relative;
+
+  overflow: hidden;
+}
+
+
+.command-center::before {
+  position: absolute;
+
+  top: 0;
+  right: 0;
+  left: 0;
+
+  height:
+    1px;
+
+  content: "";
+
+  background:
+    linear-gradient(
+      90deg,
+
+      transparent,
+
+      rgba(
+        var(--palaver-violet),
+        .65
+      ),
+
+      rgba(
+        var(--palaver-cyan),
+        .95
+      ),
+
+      transparent
+    );
+
+  box-shadow:
+    0 0 18px
+    rgba(
+      var(--palaver-cyan),
+      .28
+    );
+}
+
+
+/* ---------------------------------------------------------
+   loading / active operational pulse
+--------------------------------------------------------- */
+
+.source-loading,
+.system-refreshing {
+  position: relative;
+
+  overflow: hidden;
+}
+
+
+.source-loading::before,
+.system-refreshing::before {
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+  left: -40%;
+
+  width: 35%;
+
+  content: "";
+
+  pointer-events:
+    none;
+
+  background:
+    linear-gradient(
+      90deg,
+
+      transparent,
+
+      rgba(
+        var(--palaver-cyan),
+        .16
+      ),
+
+      transparent
+    );
+
+  animation:
+    palaver-scan
+    1.6s ease-in-out infinite;
+}
+
+
+@keyframes palaver-scan {
+  to {
+    left:
+      115%;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   scrollbar treatment
+--------------------------------------------------------- */
+
+.palaver-cinematic-runtime
+* {
+  scrollbar-width:
+    thin;
+
+  scrollbar-color:
+    rgba(
+      var(--palaver-violet),
+      .28
+    )
+    transparent;
+}
+
+
+.palaver-cinematic-runtime
+*::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+
+.palaver-cinematic-runtime
+*::-webkit-scrollbar-track {
+  background:
+    transparent;
+}
+
+
+.palaver-cinematic-runtime
+*::-webkit-scrollbar-thumb {
+  border-radius:
+    999px;
+
+  background:
+    linear-gradient(
+      180deg,
+
+      rgba(
+        var(--palaver-violet),
+        .4
+      ),
+
+      rgba(
+        var(--palaver-cyan),
+        .22
+      )
+    );
+}
+
+
+/* ---------------------------------------------------------
+   mobile retains cinematic identity without pointer effects
+--------------------------------------------------------- */
+
+@media (
+  pointer: coarse
+) {
+  .palaver-cinematic-runtime::before {
+    display: none;
+  }
+
+
+  .memory-capsule article,
+  .forest-columns article,
+  .work-cards article,
+  .system-friendly-grid article,
+  .kindred-relations > article,
+  .search-results article,
+  .upload-row {
+    transform: none !important;
+  }
+
+
+  .rail-item {
+    min-height:
+      42px;
+  }
+}
+
+
+@media (
+  max-width: 760px
+) {
+  .palaver-cinematic-runtime::after {
+    inset:
+      -8%;
+
+    opacity:
+      .4;
+  }
+
+
+  .kindred-relation-main
+  > div::before {
+    display: none;
+  }
+
+
+  .palaver-traced::after {
+    opacity:
+      .42;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   accessibility
+--------------------------------------------------------- */
+
+@media (
+  prefers-reduced-motion:
+  reduce
+) {
+  .palaver-cinematic-runtime::after,
+  .palaver-traced::after,
+  .kindred-relation-main
+  > div::before,
+  .upload-drop::before,
+  .source-loading::before,
+  .system-refreshing::before {
+    animation: none !important;
+  }
+
+
+  .palaver-cinematic-runtime
+  * {
+    scroll-behavior:
+      auto !important;
+
+    transition-duration:
+      .01ms !important;
+  }
+}

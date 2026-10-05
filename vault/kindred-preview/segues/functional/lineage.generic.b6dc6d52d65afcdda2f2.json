@@ -1,0 +1,70 @@
+{
+  "authoritative": false,
+  "child_profile": "child",
+  "deterministic_hash": "a690a214bddcb9654a64b76c02d71c57d017eeda08127baf0823e59b478c59eb",
+  "domain": "global",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "lineage.generic.b6dc6d52d65afcdda2f2",
+  "impeti": [],
+  "namespace": "preview.kindred",
+  "parent_profile": "parent",
+  "plane": "functional",
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "role": "generic",
+  "schema": "savant.kindred.preview.functional_segue.v2",
+  "source": "foundation:dynamic-canon",
+  "source_record": {
+    "axis": "unspecified",
+    "canonical_source": "foundation:dynamic-canon",
+    "canonical_target": "edifice:projection",
+    "continuation": "neutral",
+    "id": "lineage.generic.b6dc6d52d65afcdda2f2",
+    "inheritance": {
+      "conflict_policy": "child_wins",
+      "exclude": [],
+      "fields": [],
+      "mode": "reference"
+    },
+    "inverse": "generic_child",
+    "kind": "generic",
+    "metadata": {
+      "adapter": "authority",
+      "source_field": "lineage.parents",
+      "source_path": "/root/savant-runtime/canon-system/authority/edifices/projection.yaml"
+    },
+    "order": 0,
+    "propagation": {
+      "channels": [
+        "validation",
+        "projection",
+        "regeneration"
+      ],
+      "enabled": true
+    },
+    "provenance": {
+      "created_by": "authority_adapter",
+      "created_from": [
+        "/root/savant-runtime/canon-system/authority/edifices/projection.yaml"
+      ],
+      "source_files": [
+        "/root/savant-runtime/canon-system/authority/edifices/projection.yaml"
+      ]
+    },
+    "role": "generic",
+    "scope": "global",
+    "source": "foundation:dynamic-canon",
+    "status": "active",
+    "symbolic_child_alias": "child",
+    "symbolic_parent_alias": "parent",
+    "target": "edifice:projection",
+    "weight": 1
+  },
+  "state": "active",
+  "synthetic": false,
+  "target": "edifice:projection"
+}

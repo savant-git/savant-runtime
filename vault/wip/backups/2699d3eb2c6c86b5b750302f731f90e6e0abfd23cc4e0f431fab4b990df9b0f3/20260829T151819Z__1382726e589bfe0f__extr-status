@@ -1,0 +1,201 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import importlib.util
+import json
+from pathlib import Path
+
+
+extr_root = Path(
+    "/root/savant-runtime/tools/extr-enterprise"
+)
+
+runtime_root = (
+    extr_root
+    / "runtime"
+)
+
+config_root = (
+    extr_root
+    / "config"
+)
+
+required_files = {
+    "router":
+        runtime_root
+        / "extr.py",
+    "universal":
+        runtime_root
+        / "universal.py",
+    "corpus":
+        runtime_root
+        / "corpus.py",
+    "boundary":
+        runtime_root
+        / "boundary.py",
+    "coherence":
+        runtime_root
+        / "coherence.py",
+    "pipeline":
+        runtime_root
+        / "pipeline.py",
+    "policy":
+        config_root
+        / "policy.json",
+    "corpus_policy":
+        config_root
+        / "corpus-policy.json",
+    "boundary_policy":
+        config_root
+        / "boundary-policy.json",
+    "projects":
+        config_root
+        / "projects.json",
+    "verified_chatgpt_extractor":
+        Path(
+            "/root/savant-runtime/bin/extract_savant_jsonl.py"
+        ),
+    "public_entrypoint":
+        Path(
+            "/usr/local/bin/extr"
+        ),
+}
+
+optional_dependencies = {
+    "charset_normalizer":
+        "encoding inference",
+    "ftfy":
+        "unicode and mojibake repair",
+    "ijson":
+        "bounded-memory json streaming",
+    "json5":
+        "non-strict json parsing",
+    "orjson":
+        "accelerated json serialization",
+    "rapidfuzz":
+        "fuzzy similarity augmentation",
+}
+
+
+def dependency_state() -> dict:
+    return {
+        name: {
+            "available":
+                (
+                    importlib.util.find_spec(
+                        name
+                    )
+                    is not None
+                ),
+            "required":
+                False,
+            "purpose":
+                purpose,
+        }
+        for name, purpose
+        in optional_dependencies.items()
+    }
+
+
+def main() -> int:
+    files = {
+        name:
+            path.is_file()
+        for name, path
+        in required_files.items()
+    }
+
+    healthy = all(
+        files.values()
+    )
+
+    payload = {
+        "schema":
+            "savant.extr.status.v4",
+        "projection_only":
+            True,
+        "authority_effect":
+            "none",
+        "healthy":
+            healthy,
+        "runtime": {
+            "python":
+                "/usr/bin/python3",
+            "external_dependencies_required":
+                False,
+            "pep668_conflict":
+                False,
+            "venv_required":
+                False,
+        },
+        "files":
+            files,
+        "optional_accelerators":
+            dependency_state(),
+        "pipeline": [
+            "format-detection",
+            "encoding-detection",
+            "unicode-normalization",
+            "structural-extraction",
+            "json-recovery",
+            "debris-suppression",
+            "exact-deduplication",
+            "near-deduplication",
+            "boilerplate-suppression",
+            "project-classification",
+            "mixed-document-boundary-inference",
+            "fragment-reconstruction",
+            "ambiguity-preservation",
+            "corruption-quarantine",
+            "topic-coherence",
+            "version-lineage",
+            "contradiction-surfacing",
+            "provenance-projection"
+        ],
+        "fallbacks": {
+            "json":
+                "stdlib json",
+            "encoding":
+                "utf-8/utf-16/utf-32 plus replacement fallback",
+            "unicode_repair":
+                "unicodedata normalization",
+            "similarity":
+                "simhash",
+            "serialization":
+                "stdlib json",
+        },
+        "semantics": {
+            "source_mutation":
+                False,
+            "authority_effect":
+                "none",
+            "verified_chatgpt_extractor_preserved":
+                True,
+            "optional_dependency_failure_is_nonfatal":
+                True,
+            "rebuildable_projection":
+                True,
+        },
+    }
+
+    print(
+        json.dumps(
+            payload,
+            ensure_ascii=False,
+            sort_keys=True,
+            indent=2,
+        )
+    )
+
+    return (
+        0
+        if healthy
+        else 1
+    )
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

@@ -1,0 +1,67 @@
+{
+  "authority_mutation_performed": false,
+  "evidence": [
+    {
+      "authority_class": "authority",
+      "candidate_id": "exile:notary",
+      "candidate_role": "implementation-owner",
+      "candidate_tier": "exile",
+      "evidence_kind": "explicit-relationship",
+      "path": "/root/savant-runtime/canon-system/authority/constitution/catalog.json",
+      "relation": "implemented_through",
+      "sha256": "58fd0612894306ed9cc0a81aab94104fe56e1450b18cc26fd35097822e5593e3",
+      "target": "service:authority"
+    },
+    {
+      "authority_class": "verified-implementation",
+      "candidate_id": null,
+      "candidate_role": "non-owner-reference",
+      "candidate_tier": null,
+      "evidence_kind": "target-reference-only",
+      "path": "/root/savant-runtime/runtime/fluid_canon/model.py",
+      "relation": null,
+      "sha256": "07589097b805f9f7b641ae61c27e2b542ffec8654aa5c70623e9c1c05b56f382",
+      "target": "service:authority"
+    },
+    {
+      "authority_class": "authority",
+      "candidate_id": null,
+      "candidate_role": "non-owner-reference",
+      "candidate_tier": null,
+      "evidence_kind": "target-reference-only",
+      "path": "/root/savant-runtime/runtime/palaver/authority/constitutional.py",
+      "relation": null,
+      "sha256": "19925c02f0e3a4c8f476f4d2284de12506eae7d120a1622d0da5f942f3d660c1",
+      "target": "service:authority"
+    }
+  ],
+  "explicit_governance_evidence_count": 0,
+  "explicit_implementation_evidence_count": 1,
+  "files_scanned": 2650,
+  "governance_owner_candidates": [],
+  "governance_owner_is_distinct": true,
+  "implementation_owner_candidates": [
+    {
+      "authority_classes": [
+        "authority"
+      ],
+      "candidate_id": "exile:notary",
+      "candidate_tier": "exile",
+      "evidence_count": 1,
+      "highest_authority_weight": 500,
+      "relations": [
+        "implemented_through"
+      ]
+    }
+  ],
+  "inference_used": false,
+  "owner_basis": "explicit implementation identity",
+  "physical_mutation_performed": false,
+  "reference_count": 3,
+  "resolution": "explicit-owner-found",
+  "schema": "savant://assurance/scyon-owner-resolution/1.1.0",
+  "scyon_owner_id": "exile:notary",
+  "scyon_owner_tier": "exile",
+  "semantic_similarity_used": false,
+  "target": "service:authority"
+}

@@ -1,0 +1,132 @@
+registry_id: registry:runtime:core
+version: 1.0.0
+authority: lexicon:constitution
+
+runtime:
+  id: runtime:savant:lexicon
+  canonical: Savant Lexicon Runtime
+  description: >
+    Composes authoritative lexicon, ontology, kindred, instance, segue,
+    projection, and constitution subsystems into one deterministic runtime.
+  status: active
+  version: 1.0.0
+  authority: lexicon:constitution
+
+  execution_order:
+    - lexicon
+    - ontology
+    - kindred
+    - instance
+    - segue
+    - projection
+    - constitution
+
+  subsystems:
+
+    lexicon:
+      id: runtime:subsystem:lexicon
+      controller: bin/lexiconctl
+      required: true
+      actions:
+        validate: validate
+        compile: compile
+        integrity: integrity
+
+    ontology:
+      id: runtime:subsystem:ontology
+      controller: bin/ontologyctl
+      required: true
+      actions:
+        validate: validate
+        compile: compile
+        integrity: integrity
+
+    kindred:
+      id: runtime:subsystem:kindred
+      controller: bin/kindredctl
+      required: true
+      actions:
+        validate: validate
+        compile: compile
+        integrity: integrity
+
+    instance:
+      id: runtime:subsystem:instance
+      controller: bin/instancectl
+      required: true
+      actions:
+        validate: validate
+        compile: compile
+        integrity: integrity
+
+    segue:
+      id: runtime:subsystem:segue
+      controller: bin/seguectl
+      required: true
+      actions:
+        validate: validate
+        compile: compile
+        integrity: integrity
+
+    projection:
+      id: runtime:subsystem:projection
+      controller: bin/projectionctl
+      required: true
+      actions:
+        validate: validate
+        compile: compile
+        integrity: integrity
+
+    constitution:
+      id: runtime:subsystem:constitution
+      controller: bin/constitutionctl
+      required: true
+      actions:
+        validate: validate
+        compile: compile
+        integrity: integrity
+
+  outputs:
+    root: runtime/compiled
+    manifest: runtime_manifest.json
+    snapshot: runtime_snapshot.json
+    graph: runtime_graph.json
+    provenance: runtime_provenance.json
+    lineage: runtime_lineage.json
+    dependencies: runtime_dependencies.json
+
+  dependencies:
+    - registry:lexicon:core
+    - registry:ontology:core
+    - registry:kindred:core
+    - registry:instance:core
+    - registry:segue:core
+    - registry:projection:core
+    - registry:constitution:core
+
+  provenance:
+    source: runtime_registry.yaml
+    confidence: confirmed
+    evidence:
+      - bin/lexiconctl
+      - bin/ontologyctl
+      - bin/kindredctl
+      - bin/instancectl
+      - bin/seguectl
+      - bin/projectionctl
+      - bin/constitutionctl
+
+  lineage:
+    derived_from:
+      - lexicon:constitution
+      - registry:lexicon:core
+      - registry:ontology:core
+      - registry:kindred:core
+      - registry:instance:core
+      - registry:segue:core
+      - registry:projection:core
+      - registry:constitution:core
+    supersedes: []
+    history:
+      - version: 1.0.0
+        change: Initial composed runtime registry

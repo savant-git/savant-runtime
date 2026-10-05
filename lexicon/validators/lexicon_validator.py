@@ -1,0 +1,3769 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import os
+import re
+import sys
+import unicodedata
+from collections import defaultdict
+from dataclasses import dataclass, field as dataclass_field
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Iterable, Mapping, Sequence
+
+try:
+    import yaml
+except ImportError as exc:
+    raise SystemExit(
+        "Missing dependency: PyYAML\n"
+        "Install with: python3 -m pip install pyyaml"
+    ) from exc
+
+
+LEXICON_ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_REGISTRY_PATH = LEXICON_ROOT / "registry.yaml"
+DEFAULT_VALIDATOR_REGISTRY_PATH = (
+    LEXICON_ROOT
+    / "validators"
+    / "validator_registry.yaml"
+)
+DEFAULT_REPORT_ROOT = LEXICON_ROOT / "reports"
+
+LEXEME_ID_PATTERN = re.compile(
+    r"^lex:[a-z][a-z0-9_-]*:[a-z][a-z0-9_-]*$"
+)
+
+VALID_STATUSES = {
+    "active",
+    "deprecated",
+    "superseded",
+    "reserved",
+}
+
+VALID_LAYERS = {
+    "shard00",
+    "shard0",
+    "shard1",
+    "shard2",
+    "shard3",
+    "shard4",
+    "shard5",
+    "shard6",
+    "shard7",
+}
+
+VALID_CONFIDENCE_VALUES = {
+    "confirmed",
+    "inferred",
+    "projected",
+}
+
+FORBIDDEN_TERMS = {
+    "kinship",
+}
+
+REFERENCE_FIELDS = {
+    "parents",
+    "children",
+    "dependencies",
+    "depended_by",
+    "ontology",
+}
+
+GRAPH_FIELDS = {
+    "dependency": "dependencies",
+    "inheritance": "parents",
+    "ontology": "ontology",
+}
+
+TEXT_FILE_SUFFIXES = {
+    ".md",
+    ".txt",
+    ".yaml",
+    ".yml",
+    ".json",
+    ".py",
+    ".sh",
+    ".toml",
+    ".ini",
+    ".cfg",
+}
+
+SCAN_EXCLUDED_DIRECTORIES = {
+    ".git",
+    ".hg",
+    ".svn",
+    ".mypy_cache",
+    ".pytest_cache",
+    "__pycache__",
+    "node_modules",
+    "vendor",
+    "dist",
+    "build",
+    "reports",
+    "runtime",
+}
+
+SCAN_EXCLUDED_FILENAMES = {
+    "lexicon_validator.py",
+}
+
+
+class ValidatorRuntimeError(Exception):
+    pass
+
+
+@dataclass(frozen=True)
+class Issue:
+    code: str
+    severity: str
+    validator: str
+    message: str
+    lexeme_id: str | None = None
+    field: str | None = None
+    value: Any = None
+    path: str | None = None
+    line: int | None = None
+    metadata: Mapping[str, Any] = dataclass_field(
+        default_factory=dict
+    )
+
+    def to_dict(self) -> dict[str, Any]:
+        result = {
+            "code": self.code,
+            "severity": self.severity,
+            "validator": self.validator,
+            "message": self.message,
+            "lexeme_id": self.lexeme_id,
+            "field": self.field,
+            "value": self.value,
+            "path": self.path,
+            "line": self.line,
+            "metadata": dict(self.metadata),
+        }
+
+        return {
+            key: value
+            for key, value in result.items()
+            if value not in (
+                None,
+                "",
+                [],
+                {},
+            )
+        }
+
+
+@dataclass
+class ValidationReport:
+    registry_path: Path
+    validator_registry_path: Path
+    started_at: str
+    completed_at: str | None = None
+    issues: list[Issue] = dataclass_field(default_factory=list)
+    statistics: dict[str, Any] = dataclass_field(
+        default_factory=dict
+    )
+    validator_results: dict[str, Any] = dataclass_field(
+        default_factory=dict
+    )
+
+    def add(
+        self,
+        code: str,
+        severity: str,
+        validator: str,
+        message: str,
+        lexeme_id: str | None = None,
+        field: str | None = None,
+        value: Any = None,
+        path: str | None = None,
+        line: int | None = None,
+        metadata: Mapping[str, Any] | None = None,
+    ) -> None:
+        self.issues.append(
+            Issue(
+                code=code,
+                severity=severity,
+                validator=validator,
+                message=message,
+                lexeme_id=lexeme_id,
+                field=field,
+                value=value,
+                path=path,
+                line=line,
+                metadata=metadata or {},
+            )
+        )
+
+    @property
+    def errors(self) -> list[Issue]:
+        return [
+            issue
+            for issue in self.issues
+            if issue.severity == "error"
+        ]
+
+    @property
+    def warnings(self) -> list[Issue]:
+        return [
+            issue
+            for issue in self.issues
+            if issue.severity == "warning"
+        ]
+
+    @property
+    def valid(self) -> bool:
+        return not self.errors
+
+    def finish(self) -> None:
+        self.completed_at = utc_now()
+
+        counts_by_validator: dict[str, int] = (
+            defaultdict(int)
+        )
+
+        counts_by_code: dict[str, int] = defaultdict(
+            int
+        )
+
+        for issue in self.issues:
+            counts_by_validator[
+                issue.validator
+            ] += 1
+
+            counts_by_code[issue.code] += 1
+
+        self.statistics.update(
+            {
+                "valid": self.valid,
+                "issue_count": len(self.issues),
+                "error_count": len(self.errors),
+                "warning_count": len(self.warnings),
+                "counts_by_validator": dict(
+                    sorted(
+                        counts_by_validator.items()
+                    )
+                ),
+                "counts_by_code": dict(
+                    sorted(counts_by_code.items())
+                ),
+            }
+        )
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "registry_path": str(
+                self.registry_path
+            ),
+            "validator_registry_path": str(
+                self.validator_registry_path
+            ),
+            "started_at": self.started_at,
+            "completed_at": self.completed_at,
+            "valid": self.valid,
+            "statistics": self.statistics,
+            "validator_results": (
+                self.validator_results
+            ),
+            "issues": [
+                issue.to_dict()
+                for issue in self.issues
+            ],
+        }
+
+
+class ValidationContext:
+    def __init__(
+        self,
+        registry_path: Path,
+        validator_registry_path: Path,
+        scan_root: Path | None,
+    ) -> None:
+        self.registry_path = registry_path
+        self.validator_registry_path = (
+            validator_registry_path
+        )
+        self.scan_root = scan_root
+
+        self.registry = load_yaml(
+            self.registry_path
+        )
+
+        self.validator_registry = load_yaml(
+            self.validator_registry_path
+        )
+
+        self.lexemes: list[dict[str, Any]] = []
+        self.lexemes_by_id: dict[
+            str,
+            dict[str, Any],
+        ] = {}
+
+        self.canonical_owners: dict[
+            str,
+            list[str],
+        ] = defaultdict(list)
+
+        self.alias_owners: dict[
+            str,
+            list[str],
+        ] = defaultdict(list)
+
+        self.reserved_owners: dict[
+            str,
+            list[dict[str, Any]],
+        ] = defaultdict(list)
+
+        self.concept_owners: dict[
+            str,
+            list[str],
+        ] = defaultdict(list)
+
+        self.projection_names: set[str] = set()
+        self.validator_names: set[str] = set()
+
+        self._index_registry()
+        self._index_projection_registry()
+        self._index_validator_registry()
+
+    def _index_registry(self) -> None:
+        if not isinstance(self.registry, Mapping):
+            return
+
+        raw_lexemes = self.registry.get("lexemes")
+
+        if not isinstance(raw_lexemes, list):
+            return
+
+        for index, raw_lexeme in enumerate(
+            raw_lexemes
+        ):
+            if not isinstance(
+                raw_lexeme,
+                Mapping,
+            ):
+                continue
+
+            lexeme = dict(raw_lexeme)
+            lexeme["_index"] = index
+
+            self.lexemes.append(lexeme)
+
+            lexeme_id = optional_string(
+                lexeme.get("id")
+            )
+
+            if lexeme_id:
+                self.lexemes_by_id[
+                    lexeme_id
+                ] = lexeme
+
+            canonical = optional_string(
+                lexeme.get("canonical")
+            )
+
+            if canonical:
+                self.canonical_owners[
+                    normalize_term(canonical)
+                ].append(
+                    lexeme_id
+                    or f"index:{index}"
+                )
+
+                self._reserve(
+                    canonical,
+                    lexeme_id,
+                    "canonical",
+                )
+
+            concept = optional_string(
+                lexeme.get("concept")
+            )
+
+            if concept:
+                self.concept_owners[
+                    normalize_concept(concept)
+                ].append(
+                    lexeme_id
+                    or f"index:{index}"
+                )
+
+            for alias in string_list(
+                lexeme.get("aliases")
+            ):
+                self.alias_owners[
+                    normalize_term(alias)
+                ].append(
+                    lexeme_id
+                    or f"index:{index}"
+                )
+
+                self._reserve(
+                    alias,
+                    lexeme_id,
+                    "alias",
+                )
+
+            for spelling in string_list(
+                lexeme.get(
+                    "reserved_spellings"
+                )
+            ):
+                self._reserve(
+                    spelling,
+                    lexeme_id,
+                    "lexeme_reserved",
+                )
+
+            status = optional_string(
+                lexeme.get("status")
+            )
+
+            if status in {
+                "reserved",
+                "superseded",
+            }:
+                if canonical:
+                    self._reserve(
+                        canonical,
+                        lexeme_id,
+                        status,
+                    )
+
+                for alias in string_list(
+                    lexeme.get("aliases")
+                ):
+                    self._reserve(
+                        alias,
+                        lexeme_id,
+                        status,
+                    )
+
+        for spelling in string_list(
+            self.registry.get("reserved")
+        ):
+            self._reserve(
+                spelling,
+                None,
+                "registry_reserved",
+            )
+
+    def _reserve(
+        self,
+        spelling: str,
+        owner: str | None,
+        reason: str,
+    ) -> None:
+        self.reserved_owners[
+            normalize_term(spelling)
+        ].append(
+            {
+                "spelling": spelling,
+                "owner": owner,
+                "reason": reason,
+            }
+        )
+
+    def _index_projection_registry(
+        self,
+    ) -> None:
+        projection_registry_path = (
+            self.registry_path.parent
+            / "projections"
+            / "projection_registry.yaml"
+        )
+
+        if not projection_registry_path.exists():
+            return
+
+        data = load_yaml(
+            projection_registry_path
+        )
+
+        if not isinstance(data, Mapping):
+            return
+
+        projections = data.get("projections")
+
+        if isinstance(projections, Mapping):
+            self.projection_names.update(
+                str(name)
+                for name in projections
+            )
+
+    def _index_validator_registry(
+        self,
+    ) -> None:
+        if not isinstance(
+            self.validator_registry,
+            Mapping,
+        ):
+            return
+
+        validators = self.validator_registry.get(
+            "validators"
+        )
+
+        if not isinstance(validators, list):
+            return
+
+        for validator in validators:
+            if not isinstance(
+                validator,
+                Mapping,
+            ):
+                continue
+
+            validator_id = optional_string(
+                validator.get("id")
+            )
+
+            if validator_id:
+                self.validator_names.add(
+                    validator_id
+                )
+
+    def lexeme_identity(
+        self,
+        lexeme: Mapping[str, Any],
+    ) -> str:
+        return (
+            optional_string(lexeme.get("id"))
+            or f"index:{lexeme.get('_index')}"
+        )
+
+
+class LexiconValidator:
+    def __init__(
+        self,
+        registry_path: Path | str = (
+            DEFAULT_REGISTRY_PATH
+        ),
+        validator_registry_path: Path | str = (
+            DEFAULT_VALIDATOR_REGISTRY_PATH
+        ),
+        report_root: Path | str = (
+            DEFAULT_REPORT_ROOT
+        ),
+        scan_root: Path | str | None = None,
+    ) -> None:
+        self.registry_path = Path(
+            registry_path
+        ).expanduser().resolve()
+
+        self.validator_registry_path = Path(
+            validator_registry_path
+        ).expanduser().resolve()
+
+        self.report_root = Path(
+            report_root
+        ).expanduser().resolve()
+
+        self.scan_root = (
+            Path(scan_root).expanduser().resolve()
+            if scan_root
+            else self.registry_path.parent
+        )
+
+        self.report = ValidationReport(
+            registry_path=self.registry_path,
+            validator_registry_path=(
+                self.validator_registry_path
+            ),
+            started_at=utc_now(),
+        )
+
+        self.context: ValidationContext | None = None
+
+    def validate(self) -> ValidationReport:
+        try:
+            self.context = ValidationContext(
+                registry_path=self.registry_path,
+                validator_registry_path=(
+                    self.validator_registry_path
+                ),
+                scan_root=self.scan_root,
+            )
+        except ValidatorRuntimeError as exc:
+            self.report.add(
+                code="runtime.load_failed",
+                severity="error",
+                validator="structure",
+                message=str(exc),
+            )
+
+            self.report.finish()
+            return self.report
+
+        validators = self._ordered_validators()
+
+        for validator_spec in validators:
+            validator_id = validator_spec["id"]
+            method = getattr(
+                self,
+                f"validate_{validator_id}",
+                None,
+            )
+
+            before_count = len(
+                self.report.issues
+            )
+
+            if method is None:
+                self.report.add(
+                    code=(
+                        "validator."
+                        "implementation_missing"
+                    ),
+                    severity="error",
+                    validator=validator_id,
+                    message=(
+                        "Validator is registered but "
+                        "has no implementation."
+                    ),
+                )
+            else:
+                try:
+                    method()
+                except Exception as exc:
+                    self.report.add(
+                        code="validator.crashed",
+                        severity="error",
+                        validator=validator_id,
+                        message=(
+                            f"Validator crashed: {exc}"
+                        ),
+                        metadata={
+                            "exception_type": (
+                                type(exc).__name__
+                            )
+                        },
+                    )
+
+            after_count = len(
+                self.report.issues
+            )
+
+            validator_issues = (
+                self.report.issues[
+                    before_count:after_count
+                ]
+            )
+
+            self.report.validator_results[
+                validator_id
+            ] = {
+                "priority": validator_spec.get(
+                    "priority"
+                ),
+                "fatal": validator_spec.get(
+                    "fatal",
+                    False,
+                ),
+                "issue_count": len(
+                    validator_issues
+                ),
+                "error_count": sum(
+                    issue.severity == "error"
+                    for issue in validator_issues
+                ),
+                "warning_count": sum(
+                    issue.severity == "warning"
+                    for issue in validator_issues
+                ),
+            }
+
+        self.report.statistics.update(
+            {
+                "registry_sha256": (
+                    sha256_file(
+                        self.registry_path
+                    )
+                    if self.registry_path.exists()
+                    else None
+                ),
+                "lexeme_count": len(
+                    self.context.lexemes
+                ),
+                "identity_count": len(
+                    self.context.lexemes_by_id
+                ),
+                "canonical_count": len(
+                    self.context.canonical_owners
+                ),
+                "alias_count": len(
+                    self.context.alias_owners
+                ),
+                "reserved_count": len(
+                    self.context.reserved_owners
+                ),
+                "concept_count": len(
+                    self.context.concept_owners
+                ),
+            }
+        )
+
+        self.report.finish()
+        return self.report
+
+    def _ordered_validators(
+        self,
+    ) -> list[dict[str, Any]]:
+        context = require_context(self.context)
+
+        registry = context.validator_registry
+
+        if not isinstance(registry, Mapping):
+            return self._default_validators()
+
+        raw_validators = registry.get(
+            "validators"
+        )
+
+        if not isinstance(raw_validators, list):
+            return self._default_validators()
+
+        validators: list[dict[str, Any]] = []
+
+        for raw in raw_validators:
+            if not isinstance(raw, Mapping):
+                continue
+
+            validator_id = optional_string(
+                raw.get("id")
+            )
+
+            if not validator_id:
+                continue
+
+            validators.append(
+                {
+                    "id": validator_id,
+                    "priority": integer_or_default(
+                        raw.get("priority"),
+                        1000,
+                    ),
+                    "fatal": bool(
+                        raw.get("fatal", False)
+                    ),
+                }
+            )
+
+        validators.sort(
+            key=lambda item: (
+                item["priority"],
+                item["id"],
+            )
+        )
+
+        return validators
+
+    def _default_validators(
+        self,
+    ) -> list[dict[str, Any]]:
+        names = [
+            "structure",
+            "schema",
+            "identity",
+            "canonical",
+            "aliases",
+            "reserved",
+            "dependency_graph",
+            "inheritance_graph",
+            "ontology_graph",
+            "relationship_graph",
+            "supersession",
+            "projections",
+            "semantic_collision",
+            "terminology",
+        ]
+
+        return [
+            {
+                "id": name,
+                "priority": index * 10,
+                "fatal": True,
+            }
+            for index, name in enumerate(
+                names,
+                start=1,
+            )
+        ]
+
+    def validate_structure(self) -> None:
+        context = require_context(self.context)
+
+        registry = context.registry
+
+        if not isinstance(registry, Mapping):
+            self.report.add(
+                code="structure.registry_not_object",
+                severity="error",
+                validator="structure",
+                message=(
+                    "Registry root must be an object."
+                ),
+            )
+            return
+
+        required_registry_fields = {
+            "registry_id",
+            "version",
+            "authority",
+            "constitution",
+            "schema",
+            "lexemes",
+        }
+
+        for field_name in sorted(
+            required_registry_fields
+        ):
+            if registry.get(field_name) in (
+                None,
+                "",
+            ):
+                self.report.add(
+                    code=(
+                        "structure."
+                        "missing_registry_field"
+                    ),
+                    severity="error",
+                    validator="structure",
+                    message=(
+                        "Required registry field "
+                        f"is missing: {field_name}"
+                    ),
+                    field=field_name,
+                )
+
+        lexemes = registry.get("lexemes")
+
+        if not isinstance(lexemes, list):
+            self.report.add(
+                code="structure.lexemes_not_list",
+                severity="error",
+                validator="structure",
+                message=(
+                    "Registry lexemes must be a list."
+                ),
+                field="lexemes",
+            )
+            return
+
+        if not lexemes:
+            self.report.add(
+                code="structure.lexemes_empty",
+                severity="error",
+                validator="structure",
+                message=(
+                    "Registry must contain at least "
+                    "one lexeme."
+                ),
+                field="lexemes",
+            )
+
+        for index, lexeme in enumerate(lexemes):
+            if not isinstance(lexeme, Mapping):
+                self.report.add(
+                    code=(
+                        "structure."
+                        "lexeme_not_object"
+                    ),
+                    severity="error",
+                    validator="structure",
+                    message=(
+                        "Every lexeme must be an "
+                        "object."
+                    ),
+                    value=lexeme,
+                    metadata={"index": index},
+                )
+
+        authority = registry.get("authority")
+
+        if not isinstance(authority, Mapping):
+            self.report.add(
+                code=(
+                    "structure."
+                    "authority_not_object"
+                ),
+                severity="error",
+                validator="structure",
+                message=(
+                    "Registry authority must be "
+                    "an object."
+                ),
+                field="authority",
+            )
+        else:
+            for field_name in (
+                "source",
+                "revision",
+                "timestamp",
+            ):
+                if authority.get(field_name) in (
+                    None,
+                    "",
+                ):
+                    self.report.add(
+                        code=(
+                            "structure."
+                            "authority_field_missing"
+                        ),
+                        severity="error",
+                        validator="structure",
+                        message=(
+                            "Authority field is "
+                            f"missing: {field_name}"
+                        ),
+                        field=(
+                            f"authority."
+                            f"{field_name}"
+                        ),
+                    )
+
+        self._validate_declared_paths()
+
+    def _validate_declared_paths(self) -> None:
+        context = require_context(self.context)
+        registry = context.registry
+
+        if not isinstance(registry, Mapping):
+            return
+
+        single_paths = {
+            "constitution": registry.get(
+                "constitution"
+            ),
+            "schema": registry.get("schema"),
+        }
+
+        list_paths = {
+            "policies": registry.get("policies"),
+            "validators": registry.get(
+                "validators"
+            ),
+            "projections": registry.get(
+                "projections"
+            ),
+        }
+
+        for field_name, value in single_paths.items():
+            path = optional_string(value)
+
+            if not path:
+                continue
+
+            resolved = safe_resolve_relative(
+                self.registry_path.parent,
+                path,
+            )
+
+            if resolved is None:
+                self.report.add(
+                    code="structure.path_escape",
+                    severity="error",
+                    validator="structure",
+                    message=(
+                        "Declared path escapes "
+                        "lexicon root."
+                    ),
+                    field=field_name,
+                    value=path,
+                )
+                continue
+
+            if not resolved.exists():
+                self.report.add(
+                    code="structure.path_missing",
+                    severity="error",
+                    validator="structure",
+                    message=(
+                        "Declared file does not "
+                        "exist."
+                    ),
+                    field=field_name,
+                    value=path,
+                    path=str(resolved),
+                )
+
+        for field_name, values in list_paths.items():
+            for path in string_list(values):
+                resolved = safe_resolve_relative(
+                    self.registry_path.parent,
+                    path,
+                )
+
+                if resolved is None:
+                    self.report.add(
+                        code=(
+                            "structure.path_escape"
+                        ),
+                        severity="error",
+                        validator="structure",
+                        message=(
+                            "Declared path escapes "
+                            "lexicon root."
+                        ),
+                        field=field_name,
+                        value=path,
+                    )
+                    continue
+
+                if not resolved.exists():
+                    self.report.add(
+                        code=(
+                            "structure.path_missing"
+                        ),
+                        severity="error",
+                        validator="structure",
+                        message=(
+                            "Declared file does not "
+                            "exist."
+                        ),
+                        field=field_name,
+                        value=path,
+                        path=str(resolved),
+                    )
+
+    def validate_schema(self) -> None:
+        context = require_context(self.context)
+
+        required_fields = {
+            "id",
+            "canonical",
+            "concept",
+            "layer",
+            "status",
+        }
+
+        list_fields = {
+            "aliases",
+            "reserved_spellings",
+            "parents",
+            "children",
+            "dependencies",
+            "depended_by",
+            "projections",
+            "validators",
+            "ontology",
+            "relationships",
+        }
+
+        for lexeme in context.lexemes:
+            lexeme_id = context.lexeme_identity(
+                lexeme
+            )
+
+            for field_name in sorted(
+                required_fields
+            ):
+                if lexeme.get(field_name) in (
+                    None,
+                    "",
+                ):
+                    self.report.add(
+                        code=(
+                            "schema."
+                            "required_field_missing"
+                        ),
+                        severity="error",
+                        validator="schema",
+                        message=(
+                            "Required lexeme field "
+                            f"is missing: {field_name}"
+                        ),
+                        lexeme_id=lexeme_id,
+                        field=field_name,
+                    )
+
+            for field_name in sorted(list_fields):
+                if field_name not in lexeme:
+                    continue
+
+                value = lexeme.get(field_name)
+
+                if not isinstance(value, list):
+                    self.report.add(
+                        code=(
+                            "schema."
+                            "field_not_list"
+                        ),
+                        severity="error",
+                        validator="schema",
+                        message=(
+                            "Lexeme field must be "
+                            f"a list: {field_name}"
+                        ),
+                        lexeme_id=lexeme_id,
+                        field=field_name,
+                        value=value,
+                    )
+
+            status = optional_string(
+                lexeme.get("status")
+            )
+
+            if (
+                status
+                and status not in VALID_STATUSES
+            ):
+                self.report.add(
+                    code="schema.invalid_status",
+                    severity="error",
+                    validator="schema",
+                    message=(
+                        f"Invalid lexeme status: "
+                        f"{status}"
+                    ),
+                    lexeme_id=lexeme_id,
+                    field="status",
+                    value=status,
+                )
+
+            layer = optional_string(
+                lexeme.get("layer")
+            )
+
+            if (
+                layer
+                and layer not in VALID_LAYERS
+            ):
+                self.report.add(
+                    code="schema.invalid_layer",
+                    severity="error",
+                    validator="schema",
+                    message=(
+                        f"Invalid lexeme layer: "
+                        f"{layer}"
+                    ),
+                    lexeme_id=lexeme_id,
+                    field="layer",
+                    value=layer,
+                )
+
+            self._validate_lineage_schema(
+                lexeme,
+                lexeme_id,
+            )
+
+            self._validate_provenance_schema(
+                lexeme,
+                lexeme_id,
+            )
+
+            self._validate_relationship_schema(
+                lexeme,
+                lexeme_id,
+            )
+
+    def _validate_lineage_schema(
+        self,
+        lexeme: Mapping[str, Any],
+        lexeme_id: str,
+    ) -> None:
+        if "lineage" not in lexeme:
+            self.report.add(
+                code="schema.lineage_missing",
+                severity="warning",
+                validator="schema",
+                message=(
+                    "Lexeme does not expose "
+                    "lineage."
+                ),
+                lexeme_id=lexeme_id,
+                field="lineage",
+            )
+            return
+
+        lineage = lexeme.get("lineage")
+
+        if not isinstance(lineage, Mapping):
+            self.report.add(
+                code=(
+                    "schema.lineage_not_object"
+                ),
+                severity="error",
+                validator="schema",
+                message=(
+                    "Lexeme lineage must be an "
+                    "object."
+                ),
+                lexeme_id=lexeme_id,
+                field="lineage",
+                value=lineage,
+            )
+            return
+
+        if "supersedes" in lineage and not isinstance(
+            lineage.get("supersedes"),
+            list,
+        ):
+            self.report.add(
+                code=(
+                    "schema."
+                    "lineage_supersedes_not_list"
+                ),
+                severity="error",
+                validator="schema",
+                message=(
+                    "lineage.supersedes must be "
+                    "a list."
+                ),
+                lexeme_id=lexeme_id,
+                field="lineage.supersedes",
+            )
+
+        if "history" in lineage and not isinstance(
+            lineage.get("history"),
+            list,
+        ):
+            self.report.add(
+                code=(
+                    "schema."
+                    "lineage_history_not_list"
+                ),
+                severity="error",
+                validator="schema",
+                message=(
+                    "lineage.history must be a "
+                    "list."
+                ),
+                lexeme_id=lexeme_id,
+                field="lineage.history",
+            )
+
+    def _validate_provenance_schema(
+        self,
+        lexeme: Mapping[str, Any],
+        lexeme_id: str,
+    ) -> None:
+        if "provenance" not in lexeme:
+            self.report.add(
+                code="schema.provenance_missing",
+                severity="warning",
+                validator="schema",
+                message=(
+                    "Lexeme does not expose "
+                    "provenance."
+                ),
+                lexeme_id=lexeme_id,
+                field="provenance",
+            )
+            return
+
+        provenance = lexeme.get("provenance")
+
+        if not isinstance(provenance, Mapping):
+            self.report.add(
+                code=(
+                    "schema."
+                    "provenance_not_object"
+                ),
+                severity="error",
+                validator="schema",
+                message=(
+                    "Lexeme provenance must be "
+                    "an object."
+                ),
+                lexeme_id=lexeme_id,
+                field="provenance",
+            )
+            return
+
+        confidence = optional_string(
+            provenance.get("confidence")
+        )
+
+        if (
+            confidence
+            and confidence
+            not in VALID_CONFIDENCE_VALUES
+        ):
+            self.report.add(
+                code=(
+                    "schema."
+                    "invalid_confidence"
+                ),
+                severity="error",
+                validator="schema",
+                message=(
+                    "Invalid provenance "
+                    f"confidence: {confidence}"
+                ),
+                lexeme_id=lexeme_id,
+                field=(
+                    "provenance.confidence"
+                ),
+                value=confidence,
+            )
+
+        if "evidence" in provenance and not isinstance(
+            provenance.get("evidence"),
+            list,
+        ):
+            self.report.add(
+                code=(
+                    "schema."
+                    "evidence_not_list"
+                ),
+                severity="error",
+                validator="schema",
+                message=(
+                    "provenance.evidence must be "
+                    "a list."
+                ),
+                lexeme_id=lexeme_id,
+                field=(
+                    "provenance.evidence"
+                ),
+            )
+
+    def _validate_relationship_schema(
+        self,
+        lexeme: Mapping[str, Any],
+        lexeme_id: str,
+    ) -> None:
+        relationships = lexeme.get(
+            "relationships",
+            [],
+        )
+
+        if not isinstance(relationships, list):
+            return
+
+        for index, relationship in enumerate(
+            relationships
+        ):
+            if isinstance(relationship, str):
+                continue
+
+            if not isinstance(
+                relationship,
+                Mapping,
+            ):
+                self.report.add(
+                    code=(
+                        "schema."
+                        "relationship_invalid"
+                    ),
+                    severity="error",
+                    validator="schema",
+                    message=(
+                        "Relationship must be a "
+                        "string or object."
+                    ),
+                    lexeme_id=lexeme_id,
+                    field=(
+                        "relationships"
+                        f"[{index}]"
+                    ),
+                    value=relationship,
+                )
+                continue
+
+            for required_field in (
+                "type",
+                "target",
+            ):
+                if relationship.get(
+                    required_field
+                ) in (
+                    None,
+                    "",
+                ):
+                    self.report.add(
+                        code=(
+                            "schema."
+                            "relationship_field_missing"
+                        ),
+                        severity="error",
+                        validator="schema",
+                        message=(
+                            "Relationship field is "
+                            "missing: "
+                            f"{required_field}"
+                        ),
+                        lexeme_id=lexeme_id,
+                        field=(
+                            "relationships"
+                            f"[{index}]."
+                            f"{required_field}"
+                        ),
+                    )
+
+    def validate_identity(self) -> None:
+        context = require_context(self.context)
+        owners: dict[str, list[str]] = (
+            defaultdict(list)
+        )
+
+        for lexeme in context.lexemes:
+            lexeme_id = optional_string(
+                lexeme.get("id")
+            )
+
+            identity = context.lexeme_identity(
+                lexeme
+            )
+
+            if not lexeme_id:
+                continue
+
+            owners[lexeme_id].append(identity)
+
+            if not LEXEME_ID_PATTERN.fullmatch(
+                lexeme_id
+            ):
+                self.report.add(
+                    code=(
+                        "identity.invalid_format"
+                    ),
+                    severity="error",
+                    validator="identity",
+                    message=(
+                        "Lexeme identity does not "
+                        "match constitutional "
+                        "format."
+                    ),
+                    lexeme_id=identity,
+                    field="id",
+                    value=lexeme_id,
+                )
+
+            if lexeme_id != lexeme_id.strip():
+                self.report.add(
+                    code=(
+                        "identity.outer_whitespace"
+                    ),
+                    severity="error",
+                    validator="identity",
+                    message=(
+                        "Lexeme identity contains "
+                        "outer whitespace."
+                    ),
+                    lexeme_id=identity,
+                    field="id",
+                    value=lexeme_id,
+                )
+
+        for lexeme_id, identities in sorted(
+            owners.items()
+        ):
+            if len(identities) > 1:
+                self.report.add(
+                    code="identity.duplicate",
+                    severity="error",
+                    validator="identity",
+                    message=(
+                        "Lexeme identity is used "
+                        "more than once."
+                    ),
+                    lexeme_id=lexeme_id,
+                    field="id",
+                    value=lexeme_id,
+                    metadata={
+                        "occurrences": len(
+                            identities
+                        )
+                    },
+                )
+
+    def validate_canonical(self) -> None:
+        context = require_context(self.context)
+
+        for normalized, owners in sorted(
+            context.canonical_owners.items()
+        ):
+            if len(owners) > 1:
+                self.report.add(
+                    code=(
+                        "canonical."
+                        "normalized_duplicate"
+                    ),
+                    severity="error",
+                    validator="canonical",
+                    message=(
+                        "Canonical lexeme collides "
+                        "after normalization."
+                    ),
+                    field="canonical",
+                    value=normalized,
+                    metadata={
+                        "owners": sorted(owners)
+                    },
+                )
+
+        for lexeme in context.lexemes:
+            lexeme_id = context.lexeme_identity(
+                lexeme
+            )
+
+            canonical = optional_string(
+                lexeme.get("canonical")
+            )
+
+            if not canonical:
+                continue
+
+            if canonical != canonical.strip():
+                self.report.add(
+                    code=(
+                        "canonical."
+                        "outer_whitespace"
+                    ),
+                    severity="error",
+                    validator="canonical",
+                    message=(
+                        "Canonical lexeme contains "
+                        "outer whitespace."
+                    ),
+                    lexeme_id=lexeme_id,
+                    field="canonical",
+                    value=canonical,
+                )
+
+            normalized = normalize_term(canonical)
+
+            alias_owners = (
+                context.alias_owners.get(
+                    normalized,
+                    [],
+                )
+            )
+
+            conflicting_alias_owners = [
+                owner
+                for owner in alias_owners
+                if owner != lexeme_id
+            ]
+
+            if conflicting_alias_owners:
+                self.report.add(
+                    code=(
+                        "canonical."
+                        "collides_with_alias"
+                    ),
+                    severity="error",
+                    validator="canonical",
+                    message=(
+                        "Canonical lexeme collides "
+                        "with an alias owned by "
+                        "another lexeme."
+                    ),
+                    lexeme_id=lexeme_id,
+                    field="canonical",
+                    value=canonical,
+                    metadata={
+                        "alias_owners": sorted(
+                            conflicting_alias_owners
+                        )
+                    },
+                )
+
+    def validate_aliases(self) -> None:
+        context = require_context(self.context)
+
+        for normalized, owners in sorted(
+            context.alias_owners.items()
+        ):
+            unique_owners = sorted(set(owners))
+
+            if len(unique_owners) > 1:
+                self.report.add(
+                    code="aliases.global_collision",
+                    severity="error",
+                    validator="aliases",
+                    message=(
+                        "Alias resolves to more "
+                        "than one lexeme."
+                    ),
+                    field="aliases",
+                    value=normalized,
+                    metadata={
+                        "owners": unique_owners
+                    },
+                )
+
+        for lexeme in context.lexemes:
+            lexeme_id = context.lexeme_identity(
+                lexeme
+            )
+
+            aliases = string_list(
+                lexeme.get("aliases")
+            )
+
+            normalized_aliases: dict[
+                str,
+                list[str],
+            ] = defaultdict(list)
+
+            canonical = optional_string(
+                lexeme.get("canonical")
+            )
+
+            normalized_canonical = (
+                normalize_term(canonical)
+                if canonical
+                else None
+            )
+
+            for alias in aliases:
+                normalized = normalize_term(alias)
+                normalized_aliases[
+                    normalized
+                ].append(alias)
+
+                if (
+                    normalized_canonical
+                    and normalized
+                    == normalized_canonical
+                ):
+                    self.report.add(
+                        code=(
+                            "aliases."
+                            "equals_canonical"
+                        ),
+                        severity="error",
+                        validator="aliases",
+                        message=(
+                            "Alias cannot equal its "
+                            "canonical lexeme."
+                        ),
+                        lexeme_id=lexeme_id,
+                        field="aliases",
+                        value=alias,
+                    )
+
+                canonical_owners = (
+                    context.canonical_owners.get(
+                        normalized,
+                        [],
+                    )
+                )
+
+                conflicting_owners = [
+                    owner
+                    for owner
+                    in canonical_owners
+                    if owner != lexeme_id
+                ]
+
+                if conflicting_owners:
+                    self.report.add(
+                        code=(
+                            "aliases."
+                            "collides_with_canonical"
+                        ),
+                        severity="error",
+                        validator="aliases",
+                        message=(
+                            "Alias collides with a "
+                            "canonical lexeme."
+                        ),
+                        lexeme_id=lexeme_id,
+                        field="aliases",
+                        value=alias,
+                        metadata={
+                            "canonical_owners": (
+                                sorted(
+                                    conflicting_owners
+                                )
+                            )
+                        },
+                    )
+
+            for normalized, spellings in sorted(
+                normalized_aliases.items()
+            ):
+                if len(spellings) > 1:
+                    self.report.add(
+                        code=(
+                            "aliases."
+                            "duplicate_within_lexeme"
+                        ),
+                        severity="error",
+                        validator="aliases",
+                        message=(
+                            "Lexeme contains "
+                            "duplicate aliases after "
+                            "normalization."
+                        ),
+                        lexeme_id=lexeme_id,
+                        field="aliases",
+                        value=normalized,
+                        metadata={
+                            "spellings": spellings
+                        },
+                    )
+
+    def validate_reserved(self) -> None:
+        context = require_context(self.context)
+
+        for normalized, records in sorted(
+            context.reserved_owners.items()
+        ):
+            owners = {
+                record.get("owner")
+                for record in records
+                if record.get("owner")
+            }
+
+            reasons = {
+                record.get("reason")
+                for record in records
+            }
+
+            canonical_owners = set(
+                context.canonical_owners.get(
+                    normalized,
+                    [],
+                )
+            )
+
+            alias_owners = set(
+                context.alias_owners.get(
+                    normalized,
+                    [],
+                )
+            )
+
+            authorized_owners = owners
+
+            unauthorized_canonical = (
+                canonical_owners
+                - authorized_owners
+            )
+
+            unauthorized_alias = (
+                alias_owners
+                - authorized_owners
+            )
+
+            if unauthorized_canonical:
+                self.report.add(
+                    code=(
+                        "reserved."
+                        "canonical_reassignment"
+                    ),
+                    severity="error",
+                    validator="reserved",
+                    message=(
+                        "Reserved spelling was "
+                        "reassigned as canonical."
+                    ),
+                    field="canonical",
+                    value=normalized,
+                    metadata={
+                        "reserved_owners": sorted(
+                            authorized_owners
+                        ),
+                        "new_owners": sorted(
+                            unauthorized_canonical
+                        ),
+                        "reasons": sorted(
+                            reason
+                            for reason in reasons
+                            if reason
+                        ),
+                    },
+                )
+
+            if unauthorized_alias:
+                self.report.add(
+                    code=(
+                        "reserved."
+                        "alias_reassignment"
+                    ),
+                    severity="error",
+                    validator="reserved",
+                    message=(
+                        "Reserved spelling was "
+                        "reassigned as an alias."
+                    ),
+                    field="aliases",
+                    value=normalized,
+                    metadata={
+                        "reserved_owners": sorted(
+                            authorized_owners
+                        ),
+                        "new_owners": sorted(
+                            unauthorized_alias
+                        ),
+                        "reasons": sorted(
+                            reason
+                            for reason in reasons
+                            if reason
+                        ),
+                    },
+                )
+
+    def validate_dependency_graph(self) -> None:
+        self._validate_reference_field(
+            validator="dependency_graph",
+            field_name="dependencies",
+        )
+
+        self._validate_reference_field(
+            validator="dependency_graph",
+            field_name="depended_by",
+        )
+
+        context = require_context(self.context)
+
+        graph = build_graph(
+            context.lexemes,
+            source_field="dependencies",
+        )
+
+        self._report_cycle(
+            validator="dependency_graph",
+            graph=graph,
+            code="dependency_graph.cycle",
+            message=(
+                "Dependency graph contains a "
+                "cycle."
+            ),
+        )
+
+        for lexeme in context.lexemes:
+            source = context.lexeme_identity(
+                lexeme
+            )
+
+            for dependency in string_list(
+                lexeme.get("dependencies")
+            ):
+                target = (
+                    context.lexemes_by_id.get(
+                        dependency
+                    )
+                )
+
+                if not target:
+                    continue
+
+                reverse_declarations = string_list(
+                    target.get("depended_by")
+                )
+
+                if (
+                    reverse_declarations
+                    and source
+                    not in reverse_declarations
+                ):
+                    self.report.add(
+                        code=(
+                            "dependency_graph."
+                            "reverse_mismatch"
+                        ),
+                        severity="warning",
+                        validator=(
+                            "dependency_graph"
+                        ),
+                        message=(
+                            "Dependency reverse "
+                            "declaration is "
+                            "incomplete."
+                        ),
+                        lexeme_id=source,
+                        field="dependencies",
+                        value=dependency,
+                    )
+
+    def validate_inheritance_graph(self) -> None:
+        self._validate_reference_field(
+            validator="inheritance_graph",
+            field_name="parents",
+        )
+
+        self._validate_reference_field(
+            validator="inheritance_graph",
+            field_name="children",
+        )
+
+        context = require_context(self.context)
+
+        graph = build_graph(
+            context.lexemes,
+            source_field="parents",
+        )
+
+        self._report_cycle(
+            validator="inheritance_graph",
+            graph=graph,
+            code="inheritance_graph.cycle",
+            message=(
+                "Inheritance graph contains a "
+                "cycle."
+            ),
+        )
+
+        for lexeme in context.lexemes:
+            source = context.lexeme_identity(
+                lexeme
+            )
+
+            for parent_id in string_list(
+                lexeme.get("parents")
+            ):
+                parent = (
+                    context.lexemes_by_id.get(
+                        parent_id
+                    )
+                )
+
+                if not parent:
+                    continue
+
+                declared_children = string_list(
+                    parent.get("children")
+                )
+
+                if (
+                    declared_children
+                    and source
+                    not in declared_children
+                ):
+                    self.report.add(
+                        code=(
+                            "inheritance_graph."
+                            "parent_child_mismatch"
+                        ),
+                        severity="warning",
+                        validator=(
+                            "inheritance_graph"
+                        ),
+                        message=(
+                            "Parent does not declare "
+                            "the lexeme as a child."
+                        ),
+                        lexeme_id=source,
+                        field="parents",
+                        value=parent_id,
+                    )
+
+            for child_id in string_list(
+                lexeme.get("children")
+            ):
+                child = (
+                    context.lexemes_by_id.get(
+                        child_id
+                    )
+                )
+
+                if not child:
+                    continue
+
+                declared_parents = string_list(
+                    child.get("parents")
+                )
+
+                if (
+                    declared_parents
+                    and source
+                    not in declared_parents
+                ):
+                    self.report.add(
+                        code=(
+                            "inheritance_graph."
+                            "child_parent_mismatch"
+                        ),
+                        severity="warning",
+                        validator=(
+                            "inheritance_graph"
+                        ),
+                        message=(
+                            "Child does not declare "
+                            "the lexeme as a parent."
+                        ),
+                        lexeme_id=source,
+                        field="children",
+                        value=child_id,
+                    )
+
+    def validate_ontology_graph(self) -> None:
+        self._validate_reference_field(
+            validator="ontology_graph",
+            field_name="ontology",
+        )
+
+        context = require_context(self.context)
+
+        graph = build_graph(
+            context.lexemes,
+            source_field="ontology",
+        )
+
+        cycle = find_cycle(graph)
+
+        if cycle:
+            self.report.add(
+                code="ontology_graph.cycle",
+                severity="warning",
+                validator="ontology_graph",
+                message=(
+                    "Ontology graph contains a "
+                    "cycle. Verify that the cycle "
+                    "is intentional."
+                ),
+                metadata={"cycle": cycle},
+            )
+
+    def validate_relationship_graph(self) -> None:
+        context = require_context(self.context)
+
+        for lexeme in context.lexemes:
+            lexeme_id = context.lexeme_identity(
+                lexeme
+            )
+
+            relationships = lexeme.get(
+                "relationships",
+                [],
+            )
+
+            if not isinstance(relationships, list):
+                continue
+
+            seen: set[tuple[str, str]] = set()
+
+            for index, relationship in enumerate(
+                relationships
+            ):
+                if isinstance(relationship, str):
+                    relation_type = "related_to"
+                    target = relationship
+                elif isinstance(
+                    relationship,
+                    Mapping,
+                ):
+                    relation_type = (
+                        optional_string(
+                            relationship.get("type")
+                        )
+                        or ""
+                    )
+
+                    target = (
+                        optional_string(
+                            relationship.get(
+                                "target"
+                            )
+                        )
+                        or ""
+                    )
+                else:
+                    continue
+
+                if target not in context.lexemes_by_id:
+                    self.report.add(
+                        code=(
+                            "relationship_graph."
+                            "unresolved_target"
+                        ),
+                        severity="error",
+                        validator=(
+                            "relationship_graph"
+                        ),
+                        message=(
+                            "Relationship target "
+                            "does not resolve."
+                        ),
+                        lexeme_id=lexeme_id,
+                        field=(
+                            "relationships"
+                            f"[{index}].target"
+                        ),
+                        value=target,
+                    )
+
+                key = (
+                    normalize_term(relation_type),
+                    target,
+                )
+
+                if key in seen:
+                    self.report.add(
+                        code=(
+                            "relationship_graph."
+                            "duplicate_edge"
+                        ),
+                        severity="warning",
+                        validator=(
+                            "relationship_graph"
+                        ),
+                        message=(
+                            "Duplicate relationship "
+                            "edge."
+                        ),
+                        lexeme_id=lexeme_id,
+                        field="relationships",
+                        value={
+                            "type": relation_type,
+                            "target": target,
+                        },
+                    )
+
+                seen.add(key)
+
+    def validate_supersession(self) -> None:
+        context = require_context(self.context)
+
+        graph: dict[str, set[str]] = {
+            lexeme_id: set()
+            for lexeme_id
+            in context.lexemes_by_id
+        }
+
+        for lexeme in context.lexemes:
+            lexeme_id = context.lexeme_identity(
+                lexeme
+            )
+
+            lineage = lexeme.get("lineage")
+
+            if not isinstance(lineage, Mapping):
+                continue
+
+            supersedes = string_list(
+                lineage.get("supersedes")
+            )
+
+            superseded_by = optional_string(
+                lineage.get("superseded_by")
+            )
+
+            for predecessor in supersedes:
+                if (
+                    predecessor
+                    not in context.lexemes_by_id
+                ):
+                    self.report.add(
+                        code=(
+                            "supersession."
+                            "unresolved_predecessor"
+                        ),
+                        severity="error",
+                        validator="supersession",
+                        message=(
+                            "Superseded predecessor "
+                            "does not resolve."
+                        ),
+                        lexeme_id=lexeme_id,
+                        field=(
+                            "lineage.supersedes"
+                        ),
+                        value=predecessor,
+                    )
+                    continue
+
+                graph.setdefault(
+                    lexeme_id,
+                    set(),
+                ).add(predecessor)
+
+                predecessor_record = (
+                    context.lexemes_by_id[
+                        predecessor
+                    ]
+                )
+
+                predecessor_lineage = (
+                    predecessor_record.get(
+                        "lineage"
+                    )
+                )
+
+                predecessor_successor = None
+
+                if isinstance(
+                    predecessor_lineage,
+                    Mapping,
+                ):
+                    predecessor_successor = (
+                        optional_string(
+                            predecessor_lineage.get(
+                                "superseded_by"
+                            )
+                        )
+                    )
+
+                if (
+                    predecessor_successor
+                    and predecessor_successor
+                    != lexeme_id
+                ):
+                    self.report.add(
+                        code=(
+                            "supersession."
+                            "bidirectional_mismatch"
+                        ),
+                        severity="error",
+                        validator="supersession",
+                        message=(
+                            "Supersession declarations "
+                            "disagree."
+                        ),
+                        lexeme_id=lexeme_id,
+                        value=predecessor,
+                        metadata={
+                            "declared_successor": (
+                                predecessor_successor
+                            )
+                        },
+                    )
+
+                predecessor_status = (
+                    optional_string(
+                        predecessor_record.get(
+                            "status"
+                        )
+                    )
+                )
+
+                if predecessor_status != "superseded":
+                    self.report.add(
+                        code=(
+                            "supersession."
+                            "predecessor_status"
+                        ),
+                        severity="error",
+                        validator="supersession",
+                        message=(
+                            "Superseded predecessor "
+                            "must have status "
+                            "'superseded'."
+                        ),
+                        lexeme_id=predecessor,
+                        field="status",
+                        value=predecessor_status,
+                    )
+
+            if superseded_by:
+                if (
+                    superseded_by
+                    not in context.lexemes_by_id
+                ):
+                    self.report.add(
+                        code=(
+                            "supersession."
+                            "unresolved_successor"
+                        ),
+                        severity="error",
+                        validator="supersession",
+                        message=(
+                            "Supersession successor "
+                            "does not resolve."
+                        ),
+                        lexeme_id=lexeme_id,
+                        field=(
+                            "lineage.superseded_by"
+                        ),
+                        value=superseded_by,
+                    )
+                else:
+                    graph.setdefault(
+                        superseded_by,
+                        set(),
+                    ).add(lexeme_id)
+
+                status = optional_string(
+                    lexeme.get("status")
+                )
+
+                if status != "superseded":
+                    self.report.add(
+                        code=(
+                            "supersession."
+                            "status_mismatch"
+                        ),
+                        severity="error",
+                        validator="supersession",
+                        message=(
+                            "Lexeme with "
+                            "lineage.superseded_by "
+                            "must have status "
+                            "'superseded'."
+                        ),
+                        lexeme_id=lexeme_id,
+                        field="status",
+                        value=status,
+                    )
+
+            if (
+                supersedes
+                or superseded_by
+            ):
+                history = lineage.get("history")
+
+                if not isinstance(history, list):
+                    self.report.add(
+                        code=(
+                            "supersession."
+                            "history_missing"
+                        ),
+                        severity="error",
+                        validator="supersession",
+                        message=(
+                            "Supersession requires "
+                            "lineage history."
+                        ),
+                        lexeme_id=lexeme_id,
+                        field="lineage.history",
+                    )
+
+        self._report_cycle(
+            validator="supersession",
+            graph=graph,
+            code="supersession.cycle",
+            message=(
+                "Supersession graph contains a "
+                "cycle."
+            ),
+        )
+
+    def validate_projections(self) -> None:
+        context = require_context(self.context)
+
+        if not context.projection_names:
+            self.report.add(
+                code=(
+                    "projections."
+                    "registry_unavailable"
+                ),
+                severity="error",
+                validator="projections",
+                message=(
+                    "Projection registry contains "
+                    "no projections."
+                ),
+            )
+
+        if not context.validator_names:
+            self.report.add(
+                code=(
+                    "projections."
+                    "validator_registry_empty"
+                ),
+                severity="error",
+                validator="projections",
+                message=(
+                    "Validator registry contains "
+                    "no validators."
+                ),
+            )
+
+        for lexeme in context.lexemes:
+            lexeme_id = context.lexeme_identity(
+                lexeme
+            )
+
+            for projection in string_list(
+                lexeme.get("projections")
+            ):
+                if (
+                    projection
+                    not in context.projection_names
+                ):
+                    self.report.add(
+                        code=(
+                            "projections."
+                            "unknown_projection"
+                        ),
+                        severity="error",
+                        validator="projections",
+                        message=(
+                            "Lexeme references an "
+                            "unknown projection."
+                        ),
+                        lexeme_id=lexeme_id,
+                        field="projections",
+                        value=projection,
+                    )
+
+            for validator in string_list(
+                lexeme.get("validators")
+            ):
+                if (
+                    validator
+                    not in context.validator_names
+                ):
+                    self.report.add(
+                        code=(
+                            "projections."
+                            "unknown_validator"
+                        ),
+                        severity="error",
+                        validator="projections",
+                        message=(
+                            "Lexeme references an "
+                            "unknown validator."
+                        ),
+                        lexeme_id=lexeme_id,
+                        field="validators",
+                        value=validator,
+                    )
+
+    def validate_semantic_collision(self) -> None:
+        context = require_context(self.context)
+
+        for normalized, owners in sorted(
+            context.concept_owners.items()
+        ):
+            unique_owners = sorted(set(owners))
+
+            if len(unique_owners) > 1:
+                self.report.add(
+                    code=(
+                        "semantic_collision."
+                        "duplicate_concept"
+                    ),
+                    severity="error",
+                    validator=(
+                        "semantic_collision"
+                    ),
+                    message=(
+                        "Multiple canonical lexemes "
+                        "claim the same normalized "
+                        "concept."
+                    ),
+                    field="concept",
+                    value=normalized,
+                    metadata={
+                        "owners": unique_owners
+                    },
+                )
+
+        lexemes = context.lexemes
+
+        for index, left in enumerate(lexemes):
+            left_id = context.lexeme_identity(left)
+            left_terms = semantic_term_set(left)
+
+            for right in lexemes[index + 1 :]:
+                right_id = context.lexeme_identity(
+                    right
+                )
+                right_terms = semantic_term_set(
+                    right
+                )
+
+                if not left_terms or not right_terms:
+                    continue
+
+                intersection = (
+                    left_terms & right_terms
+                )
+
+                union = left_terms | right_terms
+
+                similarity = (
+                    len(intersection) / len(union)
+                    if union
+                    else 0.0
+                )
+
+                if similarity < 0.85:
+                    continue
+
+                left_concept = normalize_concept(
+                    optional_string(
+                        left.get("concept")
+                    )
+                    or ""
+                )
+
+                right_concept = normalize_concept(
+                    optional_string(
+                        right.get("concept")
+                    )
+                    or ""
+                )
+
+                if left_concept == right_concept:
+                    continue
+
+                self.report.add(
+                    code=(
+                        "semantic_collision."
+                        "high_term_overlap"
+                    ),
+                    severity="warning",
+                    validator=(
+                        "semantic_collision"
+                    ),
+                    message=(
+                        "Lexemes have unusually "
+                        "high semantic term "
+                        "overlap."
+                    ),
+                    lexeme_id=left_id,
+                    metadata={
+                        "other_lexeme": right_id,
+                        "similarity": round(
+                            similarity,
+                            4,
+                        ),
+                        "shared_terms": sorted(
+                            intersection
+                        ),
+                    },
+                )
+
+
+
+    def validate_terminology(self) -> None:
+        context = require_context(
+            self.context
+        )
+
+        active_kindred = []
+        active_kinship = []
+
+        for lexeme in context.lexemes:
+            canonical = optional_string(
+                lexeme.get(
+                    "canonical"
+                )
+            )
+
+            status = optional_string(
+                lexeme.get(
+                    "status"
+                )
+            )
+
+            normalized = (
+                normalize_term(
+                    canonical
+                )
+                if canonical
+                else ""
+            )
+
+            if (
+                status == "active"
+                and normalized
+                == "kindred"
+            ):
+                active_kindred.append(
+                    lexeme
+                )
+
+            if (
+                status == "active"
+                and normalized
+                == "kinship"
+            ):
+                active_kinship.append(
+                    lexeme
+                )
+
+        if len(active_kindred) != 1:
+            self.report.add(
+                code=(
+                    "terminology."
+                    "kindred_cardinality"
+                ),
+                severity="error",
+                validator="terminology",
+                message=(
+                    "Exactly one active "
+                    "Kindred lexeme is "
+                    "required."
+                ),
+                metadata={
+                    "count": len(
+                        active_kindred
+                    )
+                },
+            )
+
+        if len(active_kinship) != 1:
+            self.report.add(
+                code=(
+                    "terminology."
+                    "kinship_cardinality"
+                ),
+                severity="error",
+                validator="terminology",
+                message=(
+                    "Exactly one active "
+                    "Kinship service lexeme "
+                    "is required."
+                ),
+                metadata={
+                    "count": len(
+                        active_kinship
+                    )
+                },
+            )
+
+        if (
+            len(active_kindred) == 1
+            and len(active_kinship) == 1
+        ):
+            kindred_id = (
+                context.lexeme_identity(
+                    active_kindred[0]
+                )
+            )
+
+            kinship = (
+                active_kinship[0]
+            )
+
+            kinship_id = (
+                context.lexeme_identity(
+                    kinship
+                )
+            )
+
+            dependencies = (
+                kinship.get(
+                    "dependencies"
+                )
+            )
+
+            if not isinstance(
+                dependencies,
+                list,
+            ):
+                dependencies = []
+
+            if (
+                kindred_id
+                not in dependencies
+            ):
+                self.report.add(
+                    code=(
+                        "terminology."
+                        "kinship_kindred_"
+                        "dependency_missing"
+                    ),
+                    severity="error",
+                    validator=(
+                        "terminology"
+                    ),
+                    message=(
+                        "Kinship must depend "
+                        "on Kindred."
+                    ),
+                    lexeme_id=kinship_id,
+                    field="dependencies",
+                    value=kindred_id,
+                )
+
+        for lexeme in context.lexemes:
+            status = optional_string(
+                lexeme.get(
+                    "status"
+                )
+            )
+
+            if status in {
+                "superseded",
+                "reserved",
+                "deprecated",
+            }:
+                continue
+
+            lexeme_id = (
+                context.lexeme_identity(
+                    lexeme
+                )
+            )
+
+            self._scan_value_for_forbidden_terms(
+                value=lexeme,
+                validator="terminology",
+                lexeme_id=lexeme_id,
+                field_path="lexeme",
+            )
+
+        self._scan_repository_terminology()
+
+
+    def _scan_value_for_forbidden_terms(
+        self,
+        value: Any,
+        validator: str,
+        lexeme_id: str | None,
+        field_path: str,
+    ) -> None:
+        historical_fields = (
+            "lexeme.lineage",
+            "lexeme.aliases",
+            "lexeme.reserved_spellings",
+            "lexeme.provenance",
+        )
+
+        if any(
+            field_path.startswith(
+                prefix
+            )
+            for prefix
+            in historical_fields
+        ):
+            return
+
+        if isinstance(
+            value,
+            str,
+        ):
+            normalized_value = (
+                normalize_term(
+                    value
+                )
+            )
+
+            if (
+                lexeme_id
+                == "lex:service:kinship"
+                and contains_term(
+                    value,
+                    "kinship",
+                )
+            ):
+                return
+
+            for forbidden in (
+                FORBIDDEN_TERMS
+            ):
+                if (
+                    forbidden
+                    == "kinship"
+                ):
+                    continue
+
+                if contains_term(
+                    value,
+                    forbidden,
+                ):
+                    self.report.add(
+                        code=(
+                            "terminology."
+                            "forbidden_term"
+                        ),
+                        severity="error",
+                        validator=validator,
+                        message=(
+                            "Forbidden "
+                            "terminology detected."
+                        ),
+                        lexeme_id=lexeme_id,
+                        field=field_path,
+                        value=forbidden,
+                    )
+
+            return
+
+        if isinstance(
+            value,
+            Mapping,
+        ):
+            for key, item in (
+                value.items()
+            ):
+                self._scan_value_for_forbidden_terms(
+                    value=item,
+                    validator=validator,
+                    lexeme_id=lexeme_id,
+                    field_path=(
+                        f"{field_path}.{key}"
+                    ),
+                )
+
+            return
+
+        if isinstance(
+            value,
+            list,
+        ):
+            for index, item in (
+                enumerate(value)
+            ):
+                self._scan_value_for_forbidden_terms(
+                    value=item,
+                    validator=validator,
+                    lexeme_id=lexeme_id,
+                    field_path=(
+                        f"{field_path}"
+                        f"[{index}]"
+                    ),
+                )
+
+
+    def _scan_repository_terminology(
+        self,
+    ) -> None:
+        if self.scan_root is None:
+            return
+
+        historical_or_authority_files = {
+            "registry.yaml",
+            "TERMINOLOGY_EVOLUTION.yaml",
+            "registry.schema.yaml",
+            "lexeme.schema.yaml",
+            "constitution_registry.yaml",
+            "LEXICON_CONSTITUTION.md",
+        }
+
+        for path in iter_text_files(
+            self.scan_root
+        ):
+            if path.name in (
+                SCAN_EXCLUDED_FILENAMES
+            ):
+                continue
+
+            try:
+                relative = (
+                    path.resolve()
+                    .relative_to(
+                        self.scan_root.resolve()
+                    )
+                )
+            except ValueError:
+                continue
+
+            if "backups" in (
+                relative.parts
+            ):
+                continue
+
+            if path.name in (
+                historical_or_authority_files
+            ):
+                continue
+
+            try:
+                text = path.read_text(
+                    encoding="utf-8",
+                    errors="replace",
+                )
+            except OSError as exc:
+                self.report.add(
+                    code=(
+                        "terminology."
+                        "scan_read_failed"
+                    ),
+                    severity="warning",
+                    validator="terminology",
+                    message=(
+                        "Unable to scan "
+                        "repository file."
+                    ),
+                    path=str(path),
+                    metadata={
+                        "error": str(exc)
+                    },
+                )
+
+                continue
+
+            for line_number, line in (
+                enumerate(
+                    text.splitlines(),
+                    start=1,
+                )
+            ):
+                for forbidden in (
+                    FORBIDDEN_TERMS
+                ):
+                    if (
+                        forbidden
+                        == "kinship"
+                    ):
+                        continue
+
+                    if not contains_term(
+                        line,
+                        forbidden,
+                    ):
+                        continue
+
+                    self.report.add(
+                        code=(
+                            "terminology."
+                            "forbidden_term_in_file"
+                        ),
+                        severity="error",
+                        validator="terminology",
+                        message=(
+                            "Forbidden terminology "
+                            "detected in current "
+                            "repository content."
+                        ),
+                        value=forbidden,
+                        path=str(path),
+                        line=line_number,
+                    )
+
+    def _validate_reference_field(
+        self,
+        validator: str,
+        field_name: str,
+    ) -> None:
+        context = require_context(self.context)
+
+        for lexeme in context.lexemes:
+            lexeme_id = context.lexeme_identity(
+                lexeme
+            )
+
+            references = string_list(
+                lexeme.get(field_name)
+            )
+
+            seen: set[str] = set()
+
+            for reference in references:
+                if reference == lexeme_id:
+                    self.report.add(
+                        code=(
+                            f"{validator}."
+                            "self_reference"
+                        ),
+                        severity="error",
+                        validator=validator,
+                        message=(
+                            "Lexeme cannot reference "
+                            "itself in this graph."
+                        ),
+                        lexeme_id=lexeme_id,
+                        field=field_name,
+                        value=reference,
+                    )
+
+                if (
+                    reference
+                    not in context.lexemes_by_id
+                ):
+                    self.report.add(
+                        code=(
+                            f"{validator}."
+                            "unresolved_reference"
+                        ),
+                        severity="error",
+                        validator=validator,
+                        message=(
+                            "Lexeme reference does "
+                            "not resolve by identity."
+                        ),
+                        lexeme_id=lexeme_id,
+                        field=field_name,
+                        value=reference,
+                    )
+
+                if reference in seen:
+                    self.report.add(
+                        code=(
+                            f"{validator}."
+                            "duplicate_reference"
+                        ),
+                        severity="warning",
+                        validator=validator,
+                        message=(
+                            "Duplicate graph "
+                            "reference."
+                        ),
+                        lexeme_id=lexeme_id,
+                        field=field_name,
+                        value=reference,
+                    )
+
+                seen.add(reference)
+
+    def _report_cycle(
+        self,
+        validator: str,
+        graph: Mapping[str, set[str]],
+        code: str,
+        message: str,
+    ) -> None:
+        cycle = find_cycle(graph)
+
+        if not cycle:
+            return
+
+        self.report.add(
+            code=code,
+            severity="error",
+            validator=validator,
+            message=message,
+            metadata={"cycle": cycle},
+        )
+
+    def write_reports(self) -> dict[str, Path]:
+        self.report_root.mkdir(
+            parents=True,
+            exist_ok=True,
+        )
+
+        full_report = self.report.to_dict()
+
+        errors_payload = {
+            "valid": self.report.valid,
+            "count": len(self.report.errors),
+            "issues": [
+                issue.to_dict()
+                for issue in self.report.errors
+            ],
+        }
+
+        warnings_payload = {
+            "valid": self.report.valid,
+            "count": len(self.report.warnings),
+            "issues": [
+                issue.to_dict()
+                for issue in self.report.warnings
+            ],
+        }
+
+        summary_payload = {
+            "valid": self.report.valid,
+            "started_at": (
+                self.report.started_at
+            ),
+            "completed_at": (
+                self.report.completed_at
+            ),
+            "statistics": (
+                self.report.statistics
+            ),
+            "validator_results": (
+                self.report.validator_results
+            ),
+        }
+
+        graph_payload = self._graph_report()
+
+        outputs = {
+            "full": (
+                self.report_root
+                / "validation_report.json"
+            ),
+            "errors": (
+                self.report_root
+                / "errors.json"
+            ),
+            "warnings": (
+                self.report_root
+                / "warnings.json"
+            ),
+            "summary": (
+                self.report_root
+                / "summary.json"
+            ),
+            "graph": (
+                self.report_root
+                / "graph.json"
+            ),
+        }
+
+        write_json_atomic(
+            outputs["full"],
+            full_report,
+        )
+
+        write_json_atomic(
+            outputs["errors"],
+            errors_payload,
+        )
+
+        write_json_atomic(
+            outputs["warnings"],
+            warnings_payload,
+        )
+
+        write_json_atomic(
+            outputs["summary"],
+            summary_payload,
+        )
+
+        write_json_atomic(
+            outputs["graph"],
+            graph_payload,
+        )
+
+        manifest = {
+            "generated_at": utc_now(),
+            "registry_path": str(
+                self.registry_path
+            ),
+            "registry_sha256": (
+                sha256_file(
+                    self.registry_path
+                )
+                if self.registry_path.exists()
+                else None
+            ),
+            "files": {
+                name: {
+                    "path": str(path),
+                    "sha256": sha256_file(path),
+                    "bytes": path.stat().st_size,
+                }
+                for name, path
+                in sorted(outputs.items())
+            },
+        }
+
+        manifest["digest"] = digest_payload(
+            manifest
+        )
+
+        manifest_path = (
+            self.report_root
+            / "manifest.json"
+        )
+
+        write_json_atomic(
+            manifest_path,
+            manifest,
+        )
+
+        outputs["manifest"] = manifest_path
+
+        return outputs
+
+    def _graph_report(self) -> dict[str, Any]:
+        context = require_context(self.context)
+
+        graphs = {
+            "dependency": build_graph(
+                context.lexemes,
+                source_field="dependencies",
+            ),
+            "inheritance": build_graph(
+                context.lexemes,
+                source_field="parents",
+            ),
+            "ontology": build_graph(
+                context.lexemes,
+                source_field="ontology",
+            ),
+            "supersession": (
+                build_supersession_graph(
+                    context.lexemes
+                )
+            ),
+            "relationship": (
+                build_relationship_graph(
+                    context.lexemes
+                )
+            ),
+        }
+
+        data: dict[str, Any] = {}
+
+        for name, graph in sorted(
+            graphs.items()
+        ):
+            edges = sorted(
+                {
+                    (source, target)
+                    for source, targets
+                    in graph.items()
+                    for target in targets
+                }
+            )
+
+            data[name] = {
+                "nodes": sorted(graph),
+                "edges": [
+                    {
+                        "source": source,
+                        "target": target,
+                    }
+                    for source, target in edges
+                ],
+                "cycle": find_cycle(graph),
+                "digest": digest_payload(
+                    {
+                        "nodes": sorted(graph),
+                        "edges": edges,
+                    }
+                ),
+            }
+
+        return {
+            "registry_path": str(
+                self.registry_path
+            ),
+            "generated_at": utc_now(),
+            "graphs": data,
+        }
+
+
+def load_yaml(path: Path) -> Any:
+    if not path.exists():
+        raise ValidatorRuntimeError(
+            f"File not found: {path}"
+        )
+
+    try:
+        with path.open(
+            "r",
+            encoding="utf-8",
+        ) as handle:
+            return yaml.safe_load(handle)
+    except yaml.YAMLError as exc:
+        raise ValidatorRuntimeError(
+            f"Invalid YAML in {path}: {exc}"
+        ) from exc
+    except OSError as exc:
+        raise ValidatorRuntimeError(
+            f"Unable to read {path}: {exc}"
+        ) from exc
+
+
+def build_graph(
+    lexemes: Iterable[Mapping[str, Any]],
+    source_field: str,
+) -> dict[str, set[str]]:
+    graph: dict[str, set[str]] = {}
+
+    for lexeme in lexemes:
+        lexeme_id = optional_string(
+            lexeme.get("id")
+        )
+
+        if not lexeme_id:
+            continue
+
+        graph.setdefault(lexeme_id, set())
+
+        for target in string_list(
+            lexeme.get(source_field)
+        ):
+            graph.setdefault(target, set())
+            graph[lexeme_id].add(target)
+
+    return graph
+
+
+def build_supersession_graph(
+    lexemes: Iterable[Mapping[str, Any]],
+) -> dict[str, set[str]]:
+    graph: dict[str, set[str]] = {}
+
+    for lexeme in lexemes:
+        lexeme_id = optional_string(
+            lexeme.get("id")
+        )
+
+        if not lexeme_id:
+            continue
+
+        graph.setdefault(lexeme_id, set())
+
+        lineage = lexeme.get("lineage")
+
+        if not isinstance(lineage, Mapping):
+            continue
+
+        for predecessor in string_list(
+            lineage.get("supersedes")
+        ):
+            graph.setdefault(predecessor, set())
+            graph[lexeme_id].add(predecessor)
+
+        successor = optional_string(
+            lineage.get("superseded_by")
+        )
+
+        if successor:
+            graph.setdefault(successor, set())
+            graph[successor].add(lexeme_id)
+
+    return graph
+
+
+def build_relationship_graph(
+    lexemes: Iterable[Mapping[str, Any]],
+) -> dict[str, set[str]]:
+    graph: dict[str, set[str]] = {}
+
+    for lexeme in lexemes:
+        lexeme_id = optional_string(
+            lexeme.get("id")
+        )
+
+        if not lexeme_id:
+            continue
+
+        graph.setdefault(lexeme_id, set())
+
+        relationships = lexeme.get(
+            "relationships"
+        )
+
+        if not isinstance(relationships, list):
+            continue
+
+        for relationship in relationships:
+            if isinstance(relationship, str):
+                target = relationship
+            elif isinstance(
+                relationship,
+                Mapping,
+            ):
+                target = optional_string(
+                    relationship.get("target")
+                )
+            else:
+                target = None
+
+            if not target:
+                continue
+
+            graph.setdefault(target, set())
+            graph[lexeme_id].add(target)
+
+    return graph
+
+
+def find_cycle(
+    graph: Mapping[str, set[str]],
+) -> list[str] | None:
+    state: dict[str, int] = {}
+    stack: list[str] = []
+    stack_positions: dict[str, int] = {}
+
+    def visit(node: str) -> list[str] | None:
+        state[node] = 1
+        stack_positions[node] = len(stack)
+        stack.append(node)
+
+        for target in sorted(
+            graph.get(node, set())
+        ):
+            target_state = state.get(target, 0)
+
+            if target_state == 0:
+                cycle = visit(target)
+
+                if cycle:
+                    return cycle
+
+            elif target_state == 1:
+                start = stack_positions[target]
+
+                return [
+                    *stack[start:],
+                    target,
+                ]
+
+        stack.pop()
+        stack_positions.pop(node, None)
+        state[node] = 2
+
+        return None
+
+    for node in sorted(graph):
+        if state.get(node, 0) != 0:
+            continue
+
+        cycle = visit(node)
+
+        if cycle:
+            return cycle
+
+    return None
+
+
+def semantic_term_set(
+    lexeme: Mapping[str, Any],
+) -> set[str]:
+    values = [
+        optional_string(
+            lexeme.get("canonical")
+        )
+        or "",
+        optional_string(
+            lexeme.get("concept")
+        )
+        or "",
+        optional_string(
+            lexeme.get("description")
+        )
+        or "",
+        *string_list(lexeme.get("aliases")),
+    ]
+
+    terms: set[str] = set()
+
+    for value in values:
+        normalized = normalize_concept(value)
+
+        for term in normalized.split():
+            if len(term) < 3:
+                continue
+
+            terms.add(term)
+
+    return terms
+
+
+def normalize_term(value: str) -> str:
+    normalized = unicodedata.normalize(
+        "NFKC",
+        str(value),
+    )
+
+    translations = {
+        ord("‐"): "-",
+        ord("-"): "-",
+        ord("‒"): "-",
+        ord("–"): "-",
+        ord("—"): "-",
+        ord("―"): "-",
+        ord("‘"): "'",
+        ord("’"): "'",
+        ord("‚"): "'",
+        ord("‛"): "'",
+        ord("“"): '"',
+        ord("”"): '"',
+        ord("„"): '"',
+        ord("‟"): '"',
+    }
+
+    normalized = normalized.translate(
+        translations
+    )
+
+    normalized = collapse_whitespace(
+        normalized
+    )
+
+    return normalized.casefold()
+
+
+def normalize_concept(value: str) -> str:
+    normalized = normalize_term(value)
+
+    normalized = re.sub(
+        r"[^\w\s-]",
+        " ",
+        normalized,
+    )
+
+    return collapse_whitespace(normalized)
+
+
+def contains_term(
+    text: str,
+    term: str,
+) -> bool:
+    pattern = re.compile(
+        rf"(?<![A-Za-z0-9_])"
+        rf"{re.escape(term)}"
+        rf"(?![A-Za-z0-9_])",
+        re.IGNORECASE,
+    )
+
+    return bool(pattern.search(text))
+
+
+def collapse_whitespace(value: str) -> str:
+    return " ".join(
+        str(value).strip().split()
+    )
+
+
+def optional_string(
+    value: Any,
+) -> str | None:
+    if value is None:
+        return None
+
+    text = str(value).strip()
+
+    return text or None
+
+
+def string_list(value: Any) -> list[str]:
+    if value is None:
+        return []
+
+    if isinstance(value, str):
+        text = value.strip()
+        return [text] if text else []
+
+    if isinstance(value, Sequence):
+        result: list[str] = []
+
+        for item in value:
+            if item is None:
+                continue
+
+            text = str(item).strip()
+
+            if text:
+                result.append(text)
+
+        return result
+
+    return [str(value).strip()]
+
+
+def integer_or_default(
+    value: Any,
+    default: int,
+) -> int:
+    try:
+        return int(value)
+    except (
+        TypeError,
+        ValueError,
+    ):
+        return default
+
+
+def safe_resolve_relative(
+    root: Path,
+    relative: str,
+) -> Path | None:
+    root_resolved = root.resolve()
+
+    candidate = (
+        root_resolved / relative
+    ).expanduser().resolve()
+
+    try:
+        candidate.relative_to(root_resolved)
+    except ValueError:
+        return None
+
+    return candidate
+
+
+def iter_text_files(
+    root: Path,
+) -> Iterable[Path]:
+    for current_root, directories, files in os.walk(
+        root
+    ):
+        directories[:] = sorted(
+            directory
+            for directory in directories
+            if directory
+            not in SCAN_EXCLUDED_DIRECTORIES
+        )
+
+        for filename in sorted(files):
+            path = Path(current_root) / filename
+
+            if (
+                path.suffix.casefold()
+                not in TEXT_FILE_SUFFIXES
+            ):
+                continue
+
+            yield path
+
+
+def utc_now() -> str:
+    return datetime.now(
+        timezone.utc
+    ).isoformat()
+
+
+def canonical_json(value: Any) -> bytes:
+    return json.dumps(
+        value,
+        sort_keys=True,
+        ensure_ascii=False,
+        separators=(",", ":"),
+    ).encode("utf-8")
+
+
+def digest_payload(value: Any) -> str:
+    return hashlib.sha256(
+        canonical_json(value)
+    ).hexdigest()
+
+
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+
+    with path.open("rb") as handle:
+        for chunk in iter(
+            lambda: handle.read(1024 * 1024),
+            b"",
+        ):
+            digest.update(chunk)
+
+    return digest.hexdigest()
+
+
+def write_json_atomic(
+    path: Path,
+    payload: Any,
+) -> None:
+    path.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    temporary = path.with_name(
+        f".{path.name}.tmp.{os.getpid()}"
+    )
+
+    serialized = json.dumps(
+        payload,
+        indent=2,
+        sort_keys=True,
+        ensure_ascii=False,
+    ) + "\n"
+
+    temporary.write_text(
+        serialized,
+        encoding="utf-8",
+    )
+
+    os.replace(
+        temporary,
+        path,
+    )
+
+
+def require_context(
+    context: ValidationContext | None,
+) -> ValidationContext:
+    if context is None:
+        raise ValidatorRuntimeError(
+            "Validation context is unavailable."
+        )
+
+    return context
+
+
+def print_json(value: Any) -> None:
+    json.dump(
+        value,
+        sys.stdout,
+        indent=2,
+        sort_keys=True,
+        ensure_ascii=False,
+    )
+
+    sys.stdout.write("\n")
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="lexicon-validator",
+        description=(
+            "Validate the Savant constitutional "
+            "lexicon."
+        ),
+    )
+
+    parser.add_argument(
+        "--registry",
+        default=str(DEFAULT_REGISTRY_PATH),
+    )
+
+    parser.add_argument(
+        "--validator-registry",
+        default=str(
+            DEFAULT_VALIDATOR_REGISTRY_PATH
+        ),
+    )
+
+    parser.add_argument(
+        "--report-root",
+        default=str(DEFAULT_REPORT_ROOT),
+    )
+
+    parser.add_argument(
+        "--scan-root",
+        default=str(LEXICON_ROOT),
+    )
+
+    parser.add_argument(
+        "--no-write",
+        action="store_true",
+    )
+
+    parser.add_argument(
+        "--quiet",
+        action="store_true",
+    )
+
+    parser.add_argument(
+        "--warnings-as-errors",
+        action="store_true",
+    )
+
+    return parser
+
+
+def main(
+    argv: Sequence[str] | None = None,
+) -> int:
+    args = build_parser().parse_args(argv)
+
+    validator = LexiconValidator(
+        registry_path=args.registry,
+        validator_registry_path=(
+            args.validator_registry
+        ),
+        report_root=args.report_root,
+        scan_root=args.scan_root,
+    )
+
+    report = validator.validate()
+
+    outputs: dict[str, Path] = {}
+
+    if not args.no_write:
+        outputs = validator.write_reports()
+
+    if not args.quiet:
+        print_json(
+            {
+                "valid": report.valid,
+                "error_count": len(
+                    report.errors
+                ),
+                "warning_count": len(
+                    report.warnings
+                ),
+                "statistics": report.statistics,
+                "reports": {
+                    name: str(path)
+                    for name, path
+                    in outputs.items()
+                },
+                "issues": [
+                    issue.to_dict()
+                    for issue in report.issues
+                ],
+            }
+        )
+
+    if report.errors:
+        return 1
+
+    if (
+        args.warnings_as_errors
+        and report.warnings
+    ):
+        return 2
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

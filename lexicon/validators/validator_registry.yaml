@@ -1,0 +1,92 @@
+registry: SAVANT_LEXICON_VALIDATORS
+version: 1
+
+validators:
+
+  - id: structure
+    priority: 10
+    fatal: true
+    description: Validate registry structure.
+
+  - id: schema
+    priority: 20
+    fatal: true
+    description: Validate lexeme schema.
+
+  - id: identity
+    priority: 30
+    fatal: true
+    description: Validate immutable identities.
+
+  - id: canonical
+    priority: 40
+    fatal: true
+    description: Validate canonical uniqueness.
+
+  - id: aliases
+    priority: 50
+    fatal: true
+    description: Validate alias uniqueness.
+
+  - id: reserved
+    priority: 60
+    fatal: true
+    description: Validate reserved spellings.
+
+  - id: dependency_graph
+    priority: 70
+    fatal: true
+    description: Validate dependency graph.
+
+  - id: inheritance_graph
+    priority: 80
+    fatal: true
+    description: Validate inheritance graph.
+
+  - id: ontology_graph
+    priority: 90
+    fatal: true
+    description: Validate ontology graph.
+
+  - id: relationship_graph
+    priority: 100
+    fatal: true
+    description: Validate relationship graph.
+
+  - id: supersession
+    priority: 110
+    fatal: true
+    description: Validate supersession graph.
+
+  - id: projections
+    priority: 120
+    fatal: true
+    description: Validate projection targets.
+
+  - id: semantic_collision
+    priority: 130
+    fatal: true
+    description: Detect duplicate concepts.
+
+  - id: terminology
+    priority: 140
+    fatal: true
+    description: Enforce constitutional terminology.
+
+execution:
+
+  fail_fast: false
+
+  deterministic: true
+
+  stable_order: true
+
+reports:
+
+  errors: reports/errors.json
+
+  warnings: reports/warnings.json
+
+  graph: reports/graph.json
+
+  summary: reports/summary.json

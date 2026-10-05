@@ -1,0 +1,97 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/registry/events",
+  "deterministic_hash": "32cd361ba0e5455909dc7d23f8b4d1dce8db47a44be178c430af2fad7e217075",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/registry/events",
+  "kind": "directory",
+  "label": "events",
+  "namespace": "preview.kindred",
+  "path": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/registry/events",
+  "placement": {
+    "domain": "filesystem",
+    "node": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/registry/events",
+    "parent": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/registry",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.6e63a6739f8704cd5734",
+    "rank": 40,
+    "slot": "30_ontology",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.6e63a6739f8704cd5734",
+    "lineage.composition.ccd35736e4171f8975a4"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/registry/events",
+    "children": [
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/registry/events/event_types.json"
+    ],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/registry/events",
+    "kind": "directory",
+    "label": "events",
+    "legacy_id": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/registry/events",
+    "lineage": [
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/registry"
+    ],
+    "metadata": {
+      "canonical_id": "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/registry/events",
+      "child_modes": {
+        "projecting": [
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/registry/events/event_types.json"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/registry/events/event_types.json"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/registry"
+        ]
+      },
+      "projected_id": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/registry/events",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/registry"
+    ],
+    "path": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/registry/events",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/registry/events",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.6e63a6739f8704cd5734",
+      "lineage.composition.ccd35736e4171f8975a4"
+    ],
+    "size": 12,
+    "sons": [
+      "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/opus/registry/events/event_types.json"
+    ]
+  },
+  "state": "active",
+  "synthetic": false
+}

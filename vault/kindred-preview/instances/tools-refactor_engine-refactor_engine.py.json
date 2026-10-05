@@ -1,0 +1,83 @@
+{
+  "authoritative": false,
+  "authority_tier": "delegated",
+  "canonical_id": "fs:tools/refactor_engine/refactor_engine.py",
+  "deterministic_hash": "0521828f1f0f38a353da1e1d3cef8f352a309595ec8d650cda92b6464807700e",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "tools/refactor_engine/refactor_engine.py",
+  "kind": "file",
+  "label": "refactor_engine.py",
+  "namespace": "preview.kindred",
+  "path": "tools/refactor_engine/refactor_engine.py",
+  "placement": {
+    "domain": "filesystem",
+    "node": "tools/refactor_engine/refactor_engine.py",
+    "parent": "tools/refactor_engine",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.ac4c8581e7c9329a0ace",
+    "rank": 30,
+    "slot": "60_tools",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.ac4c8581e7c9329a0ace"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "record",
+  "source_record": {
+    "authority": false,
+    "canonical_id": "fs:tools/refactor_engine/refactor_engine.py",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "tools/refactor_engine/refactor_engine.py",
+    "kind": "file",
+    "label": "refactor_engine.py",
+    "legacy_id": "tools/refactor_engine/refactor_engine.py",
+    "lineage": [
+      "tools/refactor_engine"
+    ],
+    "metadata": {
+      "canonical_id": "fs:tools/refactor_engine/refactor_engine.py",
+      "child_modes": {},
+      "child_roles": {},
+      "is_directory": false,
+      "is_file": true,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:tools/refactor_engine"
+        ]
+      },
+      "projected_id": "tools/refactor_engine/refactor_engine.py",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "tools/refactor_engine"
+    ],
+    "path": "tools/refactor_engine/refactor_engine.py",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "tools/refactor_engine/refactor_engine.py",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.ac4c8581e7c9329a0ace"
+    ],
+    "size": 7,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

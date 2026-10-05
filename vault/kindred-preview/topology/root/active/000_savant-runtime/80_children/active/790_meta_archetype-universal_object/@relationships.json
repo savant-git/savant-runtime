@@ -1,0 +1,87 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "e35f62f4b1cb5a2480cd0f8f16e9585be6d1ab78c450a4b485a48823a85101c2",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "namespace": "preview.kindred",
+  "node": "meta_archetype:universal_object",
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationships": [
+    {
+      "child_profile": "daughter",
+      "domain": "global",
+      "id": "lineage.pattern.6015342b4c6bb53ba443",
+      "impeti": [],
+      "parent_profile": "father",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "pattern",
+      "source": "meta_archetype:universal_object",
+      "source_record": {
+        "axis": "form",
+        "canonical_source": "meta_archetype:universal_object",
+        "canonical_target": "archetype:universal_instance",
+        "continuation": "preserving",
+        "id": "lineage.pattern.6015342b4c6bb53ba443",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [
+            "schema",
+            "structure",
+            "interfaces",
+            "policies",
+            "constraints",
+            "metadata"
+          ],
+          "mode": "merge"
+        },
+        "inverse": "realization",
+        "kind": "pattern",
+        "metadata": {
+          "adapter": "authority",
+          "source_field": "meta_archetype",
+          "source_path": "/root/savant-runtime/authority_graph/archetypes/universal_instance.json"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "authority_adapter",
+          "created_from": [
+            "/root/savant-runtime/authority_graph/archetypes/universal_instance.json"
+          ],
+          "source_files": [
+            "/root/savant-runtime/authority_graph/archetypes/universal_instance.json"
+          ]
+        },
+        "role": "pattern",
+        "scope": "global",
+        "source": "meta_archetype:universal_object",
+        "status": "active",
+        "symbolic_child_alias": "daughter",
+        "symbolic_parent_alias": "father",
+        "target": "archetype:universal_instance",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "archetype:universal_instance"
+    }
+  ],
+  "schema": "savant.kindred.preview.relationship_projection.v2"
+}

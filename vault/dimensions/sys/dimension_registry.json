@@ -1,0 +1,121 @@
+{
+  "$schema": "savant://vault/dimensions/registry/1.3.0",
+  "version": "1.3.0",
+  "dimensions_root": "/root/savant-runtime/vault/dimensions",
+  "system_root": "/root/savant-runtime/vault/dimensions/sys",
+  "dimension_count": 9,
+  "global_lexeme_uniqueness_required": true,
+  "dimensions": [
+    {
+      "key": "canon",
+      "name": "Canon",
+      "ordinal": 1,
+      "question": "What is accepted as true about this object?",
+      "authority_class": "authoritative",
+      "generated": false,
+      "definition": "Accepted authoritative substance belonging to the object."
+    },
+    {
+      "key": "context",
+      "name": "Context",
+      "ordinal": 2,
+      "question": "What surrounds this object in its current state?",
+      "authority_class": "mixed",
+      "generated": true,
+      "definition": "Current circumstances, active state, environment, constraints, participants, and immediately relevant conditions."
+    },
+    {
+      "key": "motive",
+      "name": "Motive",
+      "ordinal": 3,
+      "question": "Why does this object exist?",
+      "authority_class": "mixed",
+      "generated": true,
+      "definition": "Originating and continuing purpose, objective, need, intended effect, and reason for existence."
+    },
+    {
+      "key": "proof",
+      "name": "Proof",
+      "ordinal": 4,
+      "question": "What substantiates claims about this object?",
+      "authority_class": "evidentiary",
+      "generated": true,
+      "definition": "Evidence, validation, tests, receipts, measurements, benchmarks, replay results, and attestations supporting claims."
+    },
+    {
+      "key": "seed",
+      "name": "Seed",
+      "ordinal": 5,
+      "question": "Where did this object come from?",
+      "authority_class": "historical",
+      "generated": true,
+      "definition": "Origin, ancestry, first appearance, source material, initial conditions, succession, and historical genesis."
+    },
+    {
+      "key": "sense",
+      "name": "Sense",
+      "ordinal": 6,
+      "question": "How should this object be understood?",
+      "authority_class": "interpretive",
+      "generated": true,
+      "definition": "Meaning, rationale, reasoning, implications, assumptions, distinctions, tradeoffs, and unresolved interpretations."
+    },
+    {
+      "key": "signal",
+      "name": "Signal",
+      "ordinal": 7,
+      "question": "What has been observed about this object?",
+      "authority_class": "observational",
+      "generated": true,
+      "definition": "Incoming observations, events, anomalies, discoveries, telemetry, notices, and unadmitted information."
+    },
+    {
+      "key": "trajectory",
+      "name": "Trajectory",
+      "ordinal": 8,
+      "question": "Where is this object expected or intended to go?",
+      "authority_class": "prospective",
+      "generated": true,
+      "definition": "Plans, proposals, forecasts, queued work, expected succession, risks, opportunities, and projected future states."
+    },
+    {
+      "key": "affinity",
+      "name": "Affinity",
+      "ordinal": 9,
+      "question": "How is this object connected to other objects?",
+      "authority_class": "relational",
+      "generated": true,
+      "definition": "Dependencies, composition, attachment, ownership, compatibility, contradiction, succession, provenance, lineage, and typed relationships."
+    }
+  ],
+  "system_directories": [
+    "schemas",
+    "tests"
+  ],
+  "forbidden_top_level_dimension_paths": [
+    "/root/savant-runtime/canon",
+    "/root/savant-runtime/context",
+    "/root/savant-runtime/motive",
+    "/root/savant-runtime/proof",
+    "/root/savant-runtime/seed",
+    "/root/savant-runtime/sense",
+    "/root/savant-runtime/signal",
+    "/root/savant-runtime/trajectory",
+    "/root/savant-runtime/affinity",
+    "/root/savant-runtime/dimensions"
+  ],
+  "legacy_compatibility_aliases": {
+    "kinship": "kindred"
+  },
+  "laws": [
+    "All nine dimensions are structurally equal.",
+    "Canon is authoritative by function rather than privileged filesystem placement.",
+    "Sys governs the dimension subsystem but is not itself a data dimension.",
+    "Every supported canon object has one corresponding record in every generated dimension.",
+    "Generated records never manufacture authority.",
+    "Existing non-generated dimensional records are never silently overwritten.",
+    "Stale generated records require explicit refresh.",
+    "Every generated record binds to one exact canon SHA-256 digest.",
+    "No dimension may retain a competing top-level physical path."
+  ]
+}

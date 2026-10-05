@@ -1,0 +1,249 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+
+ROOT = Path(
+    "/root/savant-runtime"
+)
+
+if str(ROOT) not in sys.path:
+    sys.path.insert(
+        0,
+        str(ROOT),
+    )
+
+
+from runtime.dryve import (  # noqa: E402
+    Activity,
+    Dryve,
+    RetryPolicy,
+)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Dryve — Savant living "
+            "execution-lifecycle substrate"
+        )
+    )
+
+    commands = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    commands.add_parser(
+        "profile"
+    )
+
+    commands.add_parser(
+        "validate"
+    )
+
+    commands.add_parser(
+        "health"
+    )
+
+    commands.add_parser(
+        "self-test"
+    )
+
+    arguments = (
+        parser.parse_args()
+    )
+
+    dryve = Dryve()
+
+    if (
+        arguments.command
+        == "profile"
+    ):
+        result = dryve.profile()
+
+    elif (
+        arguments.command
+        == "validate"
+    ):
+        result = dryve.validate()
+
+    elif (
+        arguments.command
+        == "health"
+    ):
+        result = dryve.health()
+
+    elif (
+        arguments.command
+        == "self-test"
+    ):
+        compensated: list[
+            str
+        ] = []
+
+        def first(
+            value: object,
+        ) -> dict[str, object]:
+            return {
+                "input": value,
+                "stage": 1,
+            }
+
+        def undo_first(
+            value: object,
+        ) -> bool:
+            compensated.append(
+                "first"
+            )
+
+            return bool(
+                value is not None
+            )
+
+        def second(
+            value: object,
+        ) -> dict[str, object]:
+            return {
+                "input": value,
+                "stage": 2,
+            }
+
+        dryve.register(
+            Activity(
+                activity_id=(
+                    "dryve:test:first"
+                ),
+                executor=first,
+                compensation=(
+                    undo_first
+                ),
+                retry=RetryPolicy(
+                    max_attempts=3,
+                    base_delay_seconds=0,
+                    multiplier=2,
+                    max_delay_seconds=0,
+                ),
+                idempotency_key=(
+                    "dryve-test-first"
+                ),
+            )
+        )
+
+        dryve.register(
+            Activity(
+                activity_id=(
+                    "dryve:test:second"
+                ),
+                executor=second,
+                retry=RetryPolicy(
+                    max_attempts=3,
+                    base_delay_seconds=0,
+                    multiplier=2,
+                    max_delay_seconds=0,
+                ),
+                idempotency_key=(
+                    "dryve-test-second"
+                ),
+            )
+        )
+
+        plan = dryve.plan(
+            intent={
+                "owner":
+                    "exile:niche",
+                "purpose":
+                    "focused Dryve test",
+            },
+            activity_ids=(
+                "dryve:test:first",
+                "dryve:test:second",
+            ),
+            dependencies=(
+                "niche:test-authority",
+            ),
+            commit_allowed=False,
+        )
+
+        receipt = dryve.execute(
+            plan,
+            initial={
+                "value":
+                    "test"
+            },
+            owner_commit_authorized=False,
+        )
+
+        replay = dryve.replay(
+            receipt
+        )
+
+        result = {
+            "plan":
+                plan.projection(),
+            "receipt":
+                receipt,
+            "replay":
+                replay,
+            "valid": (
+                receipt[
+                    "status"
+                ]
+                == "passed"
+                and replay[
+                    "diverged"
+                ]
+                is False
+                and receipt[
+                    "task_authority"
+                ]
+                is False
+                and receipt[
+                    "ai_execution_authority"
+                ]
+                is False
+                and receipt[
+                    "durable_commit_authority"
+                ]
+                is False
+            ),
+        }
+
+    else:
+        raise RuntimeError(
+            "unsupported command"
+        )
+
+    print(
+        json.dumps(
+            result,
+            indent=2,
+            sort_keys=True,
+            default=str,
+        )
+    )
+
+    if (
+        arguments.command
+        in (
+            "validate",
+            "self-test",
+        )
+        and not result[
+            "valid"
+        ]
+    ):
+        return 1
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

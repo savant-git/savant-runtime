@@ -1,0 +1,115 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:ontology/obelisks/segue/authority_graph/instances/content",
+  "deterministic_hash": "77e76d9ac1acad08060961bb3c8cdf2397a31783f49c44b3a1710898fc7df261",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "ontology/obelisks/segue/authority_graph/instances/content",
+  "kind": "directory",
+  "label": "content",
+  "namespace": "preview.kindred",
+  "path": "ontology/obelisks/segue/authority_graph/instances/content",
+  "placement": {
+    "domain": "filesystem",
+    "node": "ontology/obelisks/segue/authority_graph/instances/content",
+    "parent": "ontology/obelisks/segue/authority_graph/instances",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.c9c94751b15c7b0bc1a2",
+    "rank": 30,
+    "slot": "30_ontology",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.53d1bd6c05761ec10d0d",
+    "lineage.composition.6440539cef3acc981923",
+    "lineage.composition.73e2084793a0916a8339",
+    "lineage.composition.88840739d9e4b4b63974",
+    "lineage.composition.c9c94751b15c7b0bc1a2"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:ontology/obelisks/segue/authority_graph/instances/content",
+    "children": [
+      "ontology/obelisks/segue/authority_graph/instances/content/lines",
+      "ontology/obelisks/segue/authority_graph/instances/content/characters",
+      "ontology/obelisks/segue/authority_graph/instances/content/scripts",
+      "ontology/obelisks/segue/authority_graph/instances/content/snippets"
+    ],
+    "daughters": [
+      "ontology/obelisks/segue/authority_graph/instances/content/lines",
+      "ontology/obelisks/segue/authority_graph/instances/content/characters",
+      "ontology/obelisks/segue/authority_graph/instances/content/scripts",
+      "ontology/obelisks/segue/authority_graph/instances/content/snippets"
+    ],
+    "dependencies": [],
+    "fathers": [],
+    "id": "ontology/obelisks/segue/authority_graph/instances/content",
+    "kind": "directory",
+    "label": "content",
+    "legacy_id": "ontology/obelisks/segue/authority_graph/instances/content",
+    "lineage": [
+      "ontology/obelisks/segue/authority_graph/instances"
+    ],
+    "metadata": {
+      "canonical_id": "fs:ontology/obelisks/segue/authority_graph/instances/content",
+      "child_modes": {
+        "preserving": [
+          "fs:ontology/obelisks/segue/authority_graph/instances/content/lines",
+          "fs:ontology/obelisks/segue/authority_graph/instances/content/characters",
+          "fs:ontology/obelisks/segue/authority_graph/instances/content/scripts",
+          "fs:ontology/obelisks/segue/authority_graph/instances/content/snippets"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:ontology/obelisks/segue/authority_graph/instances/content/lines",
+          "fs:ontology/obelisks/segue/authority_graph/instances/content/characters",
+          "fs:ontology/obelisks/segue/authority_graph/instances/content/scripts",
+          "fs:ontology/obelisks/segue/authority_graph/instances/content/snippets"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:ontology/obelisks/segue/authority_graph/instances"
+        ]
+      },
+      "projected_id": "ontology/obelisks/segue/authority_graph/instances/content",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "ontology/obelisks/segue/authority_graph/instances"
+    ],
+    "path": "ontology/obelisks/segue/authority_graph/instances/content",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "ontology/obelisks/segue/authority_graph/instances/content",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.53d1bd6c05761ec10d0d",
+      "lineage.composition.6440539cef3acc981923",
+      "lineage.composition.73e2084793a0916a8339",
+      "lineage.composition.88840739d9e4b4b63974",
+      "lineage.composition.c9c94751b15c7b0bc1a2"
+    ],
+    "size": 12,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

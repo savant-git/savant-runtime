@@ -1,0 +1,227 @@
+.cinematic-matte-stage {
+  --matte-x: 0%;
+  --matte-y: 0%;
+  --matte-scale: 1.09;
+
+  position: fixed;
+  inset: 0;
+  z-index: -4;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      #08101a 0%,
+      #02050a 48%,
+      #010204 100%
+    );
+  contain:
+    layout
+    paint
+    size;
+  isolation: isolate;
+}
+
+.cinematic-matte-stage__image {
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center center;
+  opacity: 0;
+  transform:
+    translate3d(
+      var(--matte-x),
+      var(--matte-y),
+      0
+    )
+    scale(
+      var(--matte-scale)
+    );
+  transform-origin: center;
+  transition:
+    opacity 900ms ease;
+  will-change: transform;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.cinematic-matte-stage.is-loaded
+  .cinematic-matte-stage__image {
+  opacity: 1;
+}
+
+.cinematic-matte-stage__stellar-field {
+  position: absolute;
+  inset: -12%;
+  background-repeat: repeat;
+  transform: translateZ(0);
+}
+
+.cinematic-matte-stage__stellar-field--far {
+  opacity: 0.32;
+  background-image:
+    radial-gradient(
+      circle,
+      rgba(
+        255,
+        255,
+        255,
+        0.75
+      ) 0 0.7px,
+      transparent 0.9px
+    );
+  background-size:
+    97px 103px;
+  background-position:
+    17px 31px;
+}
+
+.cinematic-matte-stage__stellar-field--mid {
+  opacity: 0.18;
+  background-image:
+    radial-gradient(
+      circle,
+      rgba(
+        172,
+        211,
+        255,
+        0.8
+      ) 0 0.8px,
+      transparent 1px
+    );
+  background-size:
+    173px 149px;
+  background-position:
+    83px 41px;
+}
+
+.cinematic-matte-stage__nebula {
+  position: absolute;
+  inset: -20%;
+  opacity: 0.22;
+  background:
+    radial-gradient(
+      ellipse at 18% 44%,
+      rgba(
+        34,
+        85,
+        137,
+        0.15
+      ),
+      transparent 31%
+    ),
+    radial-gradient(
+      ellipse at 77% 29%,
+      rgba(
+        69,
+        44,
+        100,
+        0.09
+      ),
+      transparent 27%
+    );
+  filter: blur(34px);
+  transform: translateZ(0);
+}
+
+.cinematic-matte-stage__solar-haze {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse at 44% 45%,
+      rgba(
+        255,
+        216,
+        170,
+        0.11
+      ) 0%,
+      rgba(
+        224,
+        164,
+        112,
+        0.045
+      ) 13%,
+      transparent 36%
+    );
+  mix-blend-mode: screen;
+}
+
+.cinematic-matte-stage__depth-vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse at center,
+      transparent 38%,
+      rgba(
+        0,
+        3,
+        8,
+        0.16
+      ) 70%,
+      rgba(
+        0,
+        2,
+        6,
+        0.48
+      ) 100%
+    );
+}
+
+.cinematic-matte-stage__grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.025;
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+  background-size:
+    160px 160px;
+  mix-blend-mode: soft-light;
+}
+
+.cinematic-matte-stage.is-efficient
+  .cinematic-matte-stage__nebula {
+  display: none;
+}
+
+.cinematic-matte-stage.is-efficient
+  .cinematic-matte-stage__grain {
+  display: none;
+}
+
+.cinematic-matte-stage.is-efficient
+  .cinematic-matte-stage__solar-haze {
+  opacity: 0.55;
+}
+
+@media (
+  max-width: 900px
+) {
+  .cinematic-matte-stage__image {
+    top: -6%;
+    left: -18%;
+    width: 136%;
+    height: 112%;
+    object-position:
+      48% center;
+  }
+
+  .cinematic-matte-stage__stellar-field--mid {
+    opacity: 0.11;
+  }
+}
+
+@media (
+  prefers-reduced-motion:
+    reduce
+) {
+  .cinematic-matte-stage__image {
+    will-change: auto;
+    transition: none;
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "83f47697eacb538b5f25407bcfe34a407cb99f4fc4674e429dac322f45174159",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "namespace": "preview.kindred",
+  "node": "canon-system/projections/md/exile/underscore.md",
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationships": [
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.b2e82c861cf61f4def14",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "canon-system/projections/md/exile",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:canon-system/projections/md/exile",
+        "canonical_target": "fs:canon-system/projections/md/exile/underscore.md",
+        "continuation": "projecting",
+        "id": "lineage.composition.b2e82c861cf61f4def14",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/canon-system/projections/md/exile/underscore.md"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "canon-system/projections/md/exile",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "canon-system/projections/md/exile/underscore.md",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "canon-system/projections/md/exile/underscore.md"
+    }
+  ],
+  "schema": "savant.kindred.preview.relationship_projection.v2"
+}

@@ -1,0 +1,60 @@
+{
+  "schema": "savant.extr.corpus-policy.v1",
+  "projection_only": true,
+  "authority_effect": "none",
+  "recursive": true,
+  "classification": {
+    "minimum_signals": 2,
+    "minimum_confidence": 0.55,
+    "ambiguous_margin": 0.15,
+    "unclassified_bucket": "unclassified",
+    "ambiguous_bucket": "ambiguous"
+  },
+  "deduplication": {
+    "exact_global": true,
+    "near_global": true,
+    "near_hamming_distance": 3,
+    "preserve_duplicate_lineage": true
+  },
+  "boilerplate": {
+    "enabled": true,
+    "minimum_files": 3,
+    "minimum_fraction": 0.35,
+    "preserve_suppressed_evidence": true
+  },
+  "lineage": {
+    "retain_all_versions": true,
+    "project_newest_version": true,
+    "never_delete_older_evidence": true
+  },
+  "contradictions": {
+    "detect": true,
+    "resolve_automatically": false,
+    "preserve_all_claims": true
+  },
+  "quarantine": {
+    "enabled": true,
+    "retain_failures": true
+  },
+  "ignored_directory_names": [
+    ".git",
+    "__pycache__",
+    "node_modules",
+    ".pytest_cache",
+    ".mypy_cache",
+    ".ruff_cache",
+    ".tox",
+    ".nox"
+  ],
+  "ignored_suffixes": [
+    ".pyc",
+    ".pyo",
+    ".so",
+    ".o",
+    ".a",
+    ".class",
+    ".jar",
+    ".exe",
+    ".dll"
+  ]
+}
