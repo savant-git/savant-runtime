@@ -1,0 +1,80 @@
+{
+  "dependencies": {
+    "records": [
+      {
+        "controller": "/root/savant-runtime/lexicon/bin/lexiconctl",
+        "executable": true,
+        "exists": true,
+        "id": "runtime:subsystem:lexicon",
+        "required": true,
+        "subsystem": "lexicon"
+      },
+      {
+        "controller": "/root/savant-runtime/lexicon/bin/ontologyctl",
+        "executable": true,
+        "exists": true,
+        "id": "runtime:subsystem:ontology",
+        "required": true,
+        "subsystem": "ontology"
+      },
+      {
+        "controller": "/root/savant-runtime/lexicon/bin/kindredctl",
+        "executable": true,
+        "exists": true,
+        "id": "runtime:subsystem:kindred",
+        "required": true,
+        "subsystem": "kindred"
+      },
+      {
+        "controller": "/root/savant-runtime/lexicon/bin/instancectl",
+        "executable": true,
+        "exists": true,
+        "id": "runtime:subsystem:instance",
+        "required": true,
+        "subsystem": "instance"
+      },
+      {
+        "controller": "/root/savant-runtime/lexicon/bin/seguectl",
+        "executable": true,
+        "exists": true,
+        "id": "runtime:subsystem:segue",
+        "required": true,
+        "subsystem": "segue"
+      },
+      {
+        "controller": "/root/savant-runtime/lexicon/bin/projectionctl",
+        "executable": true,
+        "exists": true,
+        "id": "runtime:subsystem:projection",
+        "required": true,
+        "subsystem": "projection"
+      },
+      {
+        "controller": "/root/savant-runtime/lexicon/bin/constitutionctl",
+        "executable": true,
+        "exists": true,
+        "id": "runtime:subsystem:constitution",
+        "required": true,
+        "subsystem": "constitution"
+      }
+    ],
+    "resolved": true,
+    "unresolved": []
+  },
+  "digest": "4a0b244de09fad9dc2fd618fe2385750326283fdc8ccab64e1b1edbfbb2c9e39",
+  "execution_order": [
+    "lexicon",
+    "ontology",
+    "kindred",
+    "instance",
+    "segue",
+    "projection",
+    "constitution"
+  ],
+  "graph_digest": "6a5ba79b935c9b3136829ba6ba1dc801e55a98a4ade7d0e2213144c75cd01ec2",
+  "lineage_digest": "fc6ec7628cc57745f7644856bca1a59d3577baab179f36431f0e963046dd99ac",
+  "provenance_digest": "255f5df1ed655cae18bae2001697fa4f35723b32ca52e77c1a2067b1780ff864",
+  "ready": true,
+  "runtime": "runtime:savant:lexicon",
+  "subsystem_count": 7
+}

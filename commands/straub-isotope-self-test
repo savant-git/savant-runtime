@@ -1,0 +1,239 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import json
+import sys
+import tempfile
+from pathlib import Path
+
+
+root = Path(
+    "/root/savant-runtime"
+)
+
+if str(root) not in sys.path:
+    sys.path.insert(
+        0,
+        str(root),
+    )
+
+
+from runtime.straub import (
+    Straub,
+    validate_isotope,
+)
+
+
+def main() -> int:
+    with tempfile.TemporaryDirectory(
+        prefix="straub-isotope-test-"
+    ) as directory:
+        path = (
+            Path(
+                directory
+            )
+            / "test.datrix"
+        )
+
+        datrix = Straub.create_datrix(
+            path
+        )
+
+        subject = (
+            datrix.registry.substantiate(
+                {
+                    "id":
+                        "instance:carbon:"
+                        "straub:"
+                        "isotope-self-test:"
+                        "subject",
+                    "kind":
+                        "instance",
+                    "payload": {
+                        "label":
+                            "isotope subject",
+                    },
+                    "provenance": {
+                        "source":
+                            "carbon:"
+                            "straub:"
+                            "isotope-self-test",
+                        "confidence":
+                            "confirmed",
+                    },
+                }
+            )
+        )
+
+        datrix.checkpoint()
+
+        projection = {
+            "subject_id":
+                subject[
+                    "id"
+                ],
+            "label":
+                subject[
+                    "payload"
+                ][
+                    "label"
+                ],
+        }
+
+        isotope_a = (
+            datrix.project_isotope(
+                projection=projection,
+                projection_type="subject-view",
+                source_ids=[
+                    subject[
+                        "id"
+                    ],
+                ],
+                provenance={
+                    "source":
+                        "straub:"
+                        "isotope-self-test",
+                },
+            )
+        )
+
+        isotope_b = (
+            datrix.project_isotope(
+                projection=projection,
+                projection_type="subject-view",
+                source_ids=[
+                    subject[
+                        "id"
+                    ],
+                ],
+                provenance={
+                    "source":
+                        "straub:"
+                        "isotope-self-test",
+                },
+            )
+        )
+
+        validated = validate_isotope(
+            isotope_a
+        )
+
+        materialized = (
+            datrix.materialized_isotope()
+        )
+
+        edifice = Straub.edifice()
+        health = datrix.health()
+
+        passed = bool(
+            isotope_a[
+                "digest"
+            ]
+            == isotope_b[
+                "digest"
+            ]
+            and isotope_a[
+                "id"
+            ]
+            == isotope_b[
+                "id"
+            ]
+            and validated[
+                "kind"
+            ]
+            == "isotope"
+            and validated[
+                "deterministic"
+            ]
+            is True
+            and validated[
+                "projection_only"
+            ]
+            is True
+            and validated[
+                "semantic_authority"
+            ]
+            is False
+            and materialized[
+                "kind"
+            ]
+            == "isotope"
+            and materialized[
+                "projection_type"
+            ]
+            == "materialized-index"
+            and edifice[
+                "projection_primitive"
+            ]
+            == "isotope"
+            and health[
+                "projection_primitive"
+            ]
+            == "isotope"
+            and health[
+                "components"
+            ][
+                "isotope_meaning"
+            ]
+            == "deterministic projection"
+        )
+
+        output = {
+            "schema":
+                "savant.carbon.straub."
+                "isotope-self-test.v1",
+            "passed":
+                passed,
+            "isotope_id":
+                isotope_a[
+                    "id"
+                ],
+            "isotope_digest":
+                isotope_a[
+                    "digest"
+                ],
+            "deterministic_repeat_digest":
+                isotope_b[
+                    "digest"
+                ],
+            "materialized_isotope_id":
+                materialized[
+                    "id"
+                ],
+            "materialized_isotope_digest":
+                materialized[
+                    "digest"
+                ],
+            "projection_primitive":
+                edifice[
+                    "projection_primitive"
+                ],
+            "isotope_semantics":
+                "deterministic projection",
+            "semantic_authority":
+                False,
+            "authority_effect":
+                "none",
+        }
+
+        print(
+            json.dumps(
+                output,
+                indent=2,
+                sort_keys=True,
+                ensure_ascii=False,
+            )
+        )
+
+        return (
+            0
+            if passed
+            else 1
+        )
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

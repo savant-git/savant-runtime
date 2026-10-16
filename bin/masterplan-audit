@@ -1,0 +1,196 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import subprocess
+import sys
+from pathlib import Path
+
+
+ROOT = Path("/root/savant-runtime")
+
+PYTHON = (
+    ROOT
+    / "bin"
+    / "identity-quality-python"
+)
+
+AUDITOR = (
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "audit_masterplan_integrity.py"
+)
+
+MASTERPLAN_BUILD = (
+    ROOT
+    / "bin"
+    / "masterplan-build"
+)
+
+MASTERPLAN_PROJECT = (
+    ROOT
+    / "bin"
+    / "masterplan-project"
+)
+
+MASTERPLAN_GATE = (
+    ROOT
+    / "bin"
+    / "masterplan-gate"
+)
+
+
+def execute(
+    command: list[str],
+) -> int:
+    return subprocess.run(
+        command,
+        cwd=str(ROOT),
+        check=False,
+    ).returncode
+
+
+def audit(
+    *,
+    strict: bool,
+    refresh: bool,
+) -> int:
+    if refresh:
+        stages = [
+            [
+                str(
+                    MASTERPLAN_BUILD
+                ),
+                "strict",
+            ],
+            [
+                str(
+                    MASTERPLAN_PROJECT
+                ),
+                "strict",
+            ],
+            [
+                str(
+                    MASTERPLAN_GATE
+                ),
+                "context",
+            ],
+        ]
+
+        for stage in stages:
+            status = execute(
+                stage
+            )
+
+            if status:
+                return status
+
+    command = [
+        str(PYTHON),
+        str(AUDITOR),
+    ]
+
+    if strict:
+        command.append(
+            "--strict"
+        )
+
+    return execute(
+        command
+    )
+
+
+def usage() -> int:
+    print(
+        """
+masterplan-audit audit
+masterplan-audit strict
+masterplan-audit refresh
+masterplan-audit refresh-strict
+masterplan-audit show
+"""
+    )
+
+    return 0
+
+
+def main() -> int:
+    arguments = sys.argv[1:]
+
+    if not arguments:
+        return usage()
+
+    command = arguments[0]
+
+    if command in {
+        "help",
+        "--help",
+        "-h",
+    }:
+        return usage()
+
+    if command == "audit":
+        return audit(
+            strict=False,
+            refresh=False,
+        )
+
+    if command == "strict":
+        return audit(
+            strict=True,
+            refresh=False,
+        )
+
+    if command == "refresh":
+        return audit(
+            strict=False,
+            refresh=True,
+        )
+
+    if command == "refresh-strict":
+        return audit(
+            strict=True,
+            refresh=True,
+        )
+
+    if command == "show":
+        path = (
+            ROOT
+            / "reports"
+            / "niche"
+            / "masterplan"
+            / "integrity"
+            / "latest.md"
+        )
+
+        if not path.is_file():
+            status = audit(
+                strict=False,
+                refresh=True,
+            )
+
+            if status:
+                return status
+
+        print(
+            path.read_text(
+                encoding="utf-8",
+            ),
+            end="",
+        )
+
+        return 0
+
+    print(
+        f"ERROR: unknown command: {command}",
+        file=sys.stderr,
+    )
+
+    return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

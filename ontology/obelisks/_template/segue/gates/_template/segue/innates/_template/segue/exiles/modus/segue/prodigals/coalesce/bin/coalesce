@@ -1,0 +1,259 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+from typing import Any
+
+
+ROOT = Path(
+    "/root/savant-runtime"
+).resolve()
+
+COALESCE_ROOT = (
+    ROOT
+    / "ontology/obelisks/_template/segue/gates/_template/segue/"
+    "innates/_template/segue/exiles/modus/segue/prodigals/coalesce"
+).resolve()
+
+RUNTIME_ROOT = (
+    COALESCE_ROOT
+    / "runtime"
+).resolve()
+
+for path in (
+    ROOT,
+    COALESCE_ROOT,
+    RUNTIME_ROOT,
+):
+    value = str(path)
+
+    if value not in sys.path:
+        sys.path.insert(
+            0,
+            value,
+        )
+
+
+from runtime.runtime_bridge import (
+    RuntimeBridgeError,
+    legacy_callables,
+    status,
+    v2_dispatch,
+)
+
+
+OWNER = "prodigal:modus:coalesce"
+
+
+def emit(
+    value: Any,
+) -> None:
+    print(
+        json.dumps(
+            value,
+            ensure_ascii=False,
+            sort_keys=True,
+            indent=2,
+            default=str,
+        )
+    )
+
+
+def load_payload(
+    value: str,
+) -> dict[str, Any]:
+    try:
+        payload = json.loads(
+            value
+        )
+    except json.JSONDecodeError as exc:
+        raise RuntimeBridgeError(
+            f"invalid JSON payload: {exc}"
+        ) from exc
+
+    if not isinstance(
+        payload,
+        dict,
+    ):
+        raise RuntimeBridgeError(
+            "payload must be a JSON object"
+        )
+
+    return payload
+
+
+def parser() -> argparse.ArgumentParser:
+    root = argparse.ArgumentParser(
+        prog="coalesce",
+        description=(
+            "Canonical Coalesce composition runtime."
+        ),
+    )
+
+    commands = root.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    commands.add_parser(
+        "status",
+        help=(
+            "Inspect canonical Coalesce runtime."
+        ),
+    )
+
+    commands.add_parser(
+        "capabilities",
+        help=(
+            "List available Coalesce capabilities."
+        ),
+    )
+
+    commands.add_parser(
+        "legacy-callables",
+        help=(
+            "List callable legacy runtime surfaces."
+        ),
+    )
+
+    auto = commands.add_parser(
+        "auto",
+        help=(
+            "Evaluate required functionality and "
+            "build up to three minimum-sufficient Alloys."
+        ),
+    )
+
+    auto.add_argument(
+        "prompt",
+        help=(
+            "Description of what functionality "
+            "the user needs."
+        ),
+    )
+
+    manual = commands.add_parser(
+        "manual",
+        help=(
+            "Build up to three Alloys from an "
+            "explicit functionality prompt."
+        ),
+    )
+
+    manual.add_argument(
+        "prompt",
+        help=(
+            "Detailed requested functionality. "
+            "More specificity improves selection accuracy."
+        ),
+    )
+
+    dispatch = commands.add_parser(
+        "dispatch",
+        help=(
+            "Dispatch a canonical Coalesce v2 operation."
+        ),
+    )
+
+    dispatch.add_argument(
+        "operation",
+        help=(
+            "Operation exposed by the canonical runtime."
+        ),
+    )
+
+    dispatch.add_argument(
+        "--payload",
+        default="{}",
+        help=(
+            "JSON object supplied to the operation."
+        ),
+    )
+
+    return root
+
+
+def main() -> int:
+    args = parser().parse_args()
+
+    try:
+        if args.command == "status":
+            result = status()
+
+        elif args.command == "capabilities":
+            result = v2_dispatch(
+                "capabilities",
+                {},
+            )
+
+        elif args.command == "legacy-callables":
+            result = {
+                "ok": True,
+                "owner": OWNER,
+                "callables": list(
+                    legacy_callables()
+                ),
+            }
+
+        elif args.command == "auto":
+            result = v2_dispatch(
+                "auto",
+                {
+                    "prompt": args.prompt,
+                },
+            )
+
+        elif args.command == "manual":
+            result = v2_dispatch(
+                "manual",
+                {
+                    "prompt": args.prompt,
+                },
+            )
+
+        elif args.command == "dispatch":
+            result = v2_dispatch(
+                args.operation,
+                load_payload(
+                    args.payload
+                ),
+            )
+
+        else:
+            raise RuntimeBridgeError(
+                f"unknown command: {args.command}"
+            )
+
+        emit(
+            result
+        )
+
+        return (
+            0
+            if result.get(
+                "ok",
+                True,
+            )
+            else 1
+        )
+
+    except RuntimeBridgeError as exc:
+        emit(
+            {
+                "ok": False,
+                "owner": OWNER,
+                "error": str(exc),
+            }
+        )
+
+        return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

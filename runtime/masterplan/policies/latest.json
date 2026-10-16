@@ -1,0 +1,139 @@
+{
+  "generated_at": "2026-08-25T19:46:56+00:00",
+  "operation": "build_masterplan_policy_registry",
+  "passed": true,
+  "path": "authority/task-graph/policies/registry.json",
+  "registry": {
+    "generated_at": "2026-08-25T19:46:56+00:00",
+    "policies": [
+      {
+        "authority": {
+          "accepted_at": "2026-08-01T22:03:54-04:00",
+          "accepted_by": "project-owner",
+          "authority_class": "project-owner-directed",
+          "confidence": 1.0,
+          "source": "docs/SAVANT_MASTER_TASKS.md",
+          "state": "accepted",
+          "tier": 1
+        },
+        "effect": "require",
+        "id": "policy.masterplan.task-authority-required",
+        "kind": "admission",
+        "path": "authority/task-graph/policies/policy__masterplan__task-authority-required.json",
+        "semantic_digest": "d0669c42aa13e74f073b11b246d87bce85d93adeff6a077d0e981c67561448de",
+        "title": "Accepted Task Authority Required",
+        "version": "1.0.0"
+      },
+      {
+        "authority": {
+          "accepted_at": "2026-08-01T22:03:54-04:00",
+          "accepted_by": "project-owner",
+          "authority_class": "project-owner-directed",
+          "confidence": 1.0,
+          "source": "docs/SAVANT_MASTER_TASKS.md",
+          "state": "accepted",
+          "tier": 1
+        },
+        "effect": "require",
+        "id": "policy.masterplan.completion-attestation-required",
+        "kind": "attestation",
+        "path": "authority/task-graph/policies/policy__masterplan__completion-attestation-required.json",
+        "semantic_digest": "a562f629a7d1a437998b48442657cb447921f7676ded4943ed63fc040cc47181",
+        "title": "Completion Attestation Required",
+        "version": "1.0.0"
+      },
+      {
+        "authority": {
+          "accepted_at": "2026-08-01T22:03:54-04:00",
+          "accepted_by": "project-owner",
+          "authority_class": "project-owner-directed",
+          "confidence": 1.0,
+          "source": "docs/SAVANT_MASTER_TASKS.md",
+          "state": "accepted",
+          "tier": 1
+        },
+        "effect": "require",
+        "id": "policy.masterplan.completion-evidence-required",
+        "kind": "completion",
+        "path": "authority/task-graph/policies/policy__masterplan__completion-evidence-required.json",
+        "semantic_digest": "fbbf44395bab602359489ddbf8b3261e6e70d84e1c0c32157f791b950532dbb0",
+        "title": "Completion Evidence Required",
+        "version": "1.0.0"
+      },
+      {
+        "authority": {
+          "accepted_at": "2026-08-01T22:03:54-04:00",
+          "accepted_by": "project-owner",
+          "authority_class": "project-owner-directed",
+          "confidence": 1.0,
+          "source": "docs/SAVANT_MASTER_TASKS.md",
+          "state": "accepted",
+          "tier": 1
+        },
+        "effect": "deny",
+        "id": "policy.masterplan.terminal-task-mutation-denied",
+        "kind": "mutation",
+        "path": "authority/task-graph/policies/policy__masterplan__terminal-task-mutation-denied.json",
+        "semantic_digest": "ecf287634cb0f71bae8e3618e4a97c1002f5be99d8c00057d451c0189b1e6d4a",
+        "title": "Terminal Task Mutation Denied",
+        "version": "1.0.0"
+      },
+      {
+        "authority": {
+          "accepted_at": "2026-08-01T22:03:54-04:00",
+          "accepted_by": "project-owner",
+          "authority_class": "project-owner-directed",
+          "confidence": 1.0,
+          "source": "docs/SAVANT_MASTER_TASKS.md",
+          "state": "accepted",
+          "tier": 1
+        },
+        "effect": "require",
+        "id": "policy.masterplan.graph-schema-required",
+        "kind": "security",
+        "path": "authority/task-graph/policies/policy__masterplan__graph-schema-required.json",
+        "semantic_digest": "ec21fec190913aa9ec284697442601ca9d7630389bcf0c5c64baa9df6aa44b4c",
+        "title": "Graph Schema Version Required",
+        "version": "1.0.0"
+      },
+      {
+        "authority": {
+          "accepted_at": "2026-08-01T22:03:54-04:00",
+          "accepted_by": "project-owner",
+          "authority_class": "project-owner-directed",
+          "confidence": 1.0,
+          "source": "docs/SAVANT_MASTER_TASKS.md",
+          "state": "accepted",
+          "tier": 1
+        },
+        "effect": "require",
+        "id": "policy.masterplan.dependencies-complete",
+        "kind": "selection",
+        "path": "authority/task-graph/policies/policy__masterplan__dependencies-complete.json",
+        "semantic_digest": "dfe7d18eb8c94c1d485038583e1f0a2f2283dfd1e4a9eb63b85ef48df9c0956a",
+        "title": "Dependencies Must Be Complete",
+        "version": "1.0.0"
+      }
+    ],
+    "registry_id": "registry.masterplan.policies",
+    "schema": "savant://niche/masterplan/policy-registry/1.0.0",
+    "semantic_digest": "58c886f9afcfaa61708bc0550c098a4711c44f5f98f74f0e801ce1fd2c254430",
+    "statistics": {
+      "kind_counts": {
+        "admission": 1,
+        "attestation": 1,
+        "completion": 1,
+        "migration": 0,
+        "mutation": 1,
+        "projection": 0,
+        "replay": 0,
+        "security": 1,
+        "selection": 1,
+        "transition": 0
+      },
+      "policy_count": 6
+    }
+  },
+  "semantic_digest": "de076dd8c5053093afc36f1482807d5be2e195f94c0c28c87f5f1894d3e25f05",
+  "sha256": "5fe055b3a6c90470976329afad8a16b488c177fa1ff4d6ae4e8578c18cd66995"
+}

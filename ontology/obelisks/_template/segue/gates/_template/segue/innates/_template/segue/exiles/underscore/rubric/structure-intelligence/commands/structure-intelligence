@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+IFS=$'\n\t'
+umask 027
+
+readonly SOURCE="/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/underscore/rubric/structure-intelligence/source/compile_structure_intelligence.py"
+
+test -s "${SOURCE}"
+
+exec python3 "${SOURCE}" "$@"

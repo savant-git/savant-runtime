@@ -1,0 +1,47 @@
+{
+  "id": "carbon.lineage.oriel",
+  "owner": "carbon",
+  "type": "conceptual_lineage",
+  "status": "active",
+  "ancestor": {
+    "id": "oriel",
+    "role": "originating simulation concept"
+  },
+  "descendant": {
+    "id": "carbon",
+    "graph_id": "exile:carbon",
+    "role": "generalized savant simulation exile"
+  },
+  "relationship": "evolved_into",
+  "evolution": {
+    "preserved": [
+      "simulation as a first-class capability",
+      "stateful modeled entities",
+      "interactive simulation",
+      "simulation-derived behavior"
+    ],
+    "expanded": [
+      "domain-independent simulation",
+      "composable simulation instances",
+      "branching",
+      "counterfactual execution",
+      "checkpointing",
+      "deterministic replay",
+      "scenario comparison",
+      "simulation interrogation",
+      "parameter sweeps",
+      "causal trace projection",
+      "uncertainty projection",
+      "simulation receipts",
+      "graph-addressable simulation state",
+      "reusable simulation composition"
+    ]
+  },
+  "lineage_rules": {
+    "ancestor_erased": false,
+    "historical_identity_preserved": true,
+    "descendant_duplicates_ancestor": false,
+    "carbon_supersedes_oriel_as_general_simulation_owner": true
+  },
+  "authority_effect": "none"
+}

@@ -1,0 +1,70 @@
+{
+  "authoritative": false,
+  "child_profile": "child",
+  "deterministic_hash": "5d6b1c8d78c6b3b379a7878d08698e53f35d0d36b17ae1636656204d9181b89c",
+  "domain": "global",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "lineage.generic.ac9176e8c0cef9e7f6cf",
+  "impeti": [],
+  "namespace": "preview.kindred",
+  "parent_profile": "parent",
+  "plane": "functional",
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "role": "generic",
+  "schema": "savant.kindred.preview.functional_segue.v2",
+  "source": "edifice:identity:4",
+  "source_record": {
+    "axis": "unspecified",
+    "canonical_source": "edifice:identity:4",
+    "canonical_target": "exile:pact",
+    "continuation": "neutral",
+    "id": "lineage.generic.ac9176e8c0cef9e7f6cf",
+    "inheritance": {
+      "conflict_policy": "child_wins",
+      "exclude": [],
+      "fields": [],
+      "mode": "reference"
+    },
+    "inverse": "generic_child",
+    "kind": "generic",
+    "metadata": {
+      "adapter": "authority",
+      "source_field": "lineage.parents",
+      "source_path": "/root/savant-runtime/canon-system/authority/exiles/pact.yaml"
+    },
+    "order": 0,
+    "propagation": {
+      "channels": [
+        "validation",
+        "projection",
+        "regeneration"
+      ],
+      "enabled": true
+    },
+    "provenance": {
+      "created_by": "authority_adapter",
+      "created_from": [
+        "/root/savant-runtime/canon-system/authority/exiles/pact.yaml"
+      ],
+      "source_files": [
+        "/root/savant-runtime/canon-system/authority/exiles/pact.yaml"
+      ]
+    },
+    "role": "generic",
+    "scope": "global",
+    "source": "edifice:identity:4",
+    "status": "active",
+    "symbolic_child_alias": "child",
+    "symbolic_parent_alias": "parent",
+    "target": "exile:pact",
+    "weight": 1
+  },
+  "state": "active",
+  "synthetic": false,
+  "target": "exile:pact"
+}

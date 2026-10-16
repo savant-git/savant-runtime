@@ -1,0 +1,140 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import subprocess
+import sys
+from pathlib import Path
+
+
+ROOT = Path("/root/savant-runtime")
+
+PYTHON = (
+    ROOT
+    / "bin"
+    / "identity-quality-python"
+)
+
+INSPECTOR = (
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "inspect_duplicate_segues.py"
+)
+
+PLANNER = (
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "plan_duplicate_segue_reconciliation.py"
+)
+
+APPLIER = (
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "apply_duplicate_segue_reconciliation.py"
+)
+
+
+def execute(
+    command: list[str],
+) -> int:
+    return subprocess.run(
+        command,
+        cwd=str(ROOT),
+        check=False,
+    ).returncode
+
+
+def usage() -> int:
+    print(
+        """
+masterplan-segue-reconcile inspect
+masterplan-segue-reconcile plan
+masterplan-segue-reconcile preview DECISION_ID
+masterplan-segue-reconcile apply DECISION_ID
+"""
+    )
+
+    return 0
+
+
+def main() -> int:
+    arguments = sys.argv[1:]
+
+    if not arguments:
+        return usage()
+
+    command = arguments[0]
+
+    if command in {
+        "help",
+        "--help",
+        "-h",
+    }:
+        return usage()
+
+    if command == "inspect":
+        if len(arguments) != 1:
+            return 2
+
+        return execute(
+            [
+                str(PYTHON),
+                str(INSPECTOR),
+            ]
+        )
+
+    if command == "plan":
+        if len(arguments) != 1:
+            return 2
+
+        return execute(
+            [
+                str(PYTHON),
+                str(PLANNER),
+            ]
+        )
+
+    if command in {
+        "preview",
+        "apply",
+    }:
+        if len(arguments) != 2:
+            print(
+                "ERROR: decision identifier is required.",
+                file=sys.stderr,
+            )
+
+            return 2
+
+        mapped = [
+            str(PYTHON),
+            str(APPLIER),
+            arguments[1],
+        ]
+
+        if command == "preview":
+            mapped.append(
+                "--plan"
+            )
+
+        return execute(
+            mapped
+        )
+
+    print(
+        f"ERROR: unknown command: {command}",
+        file=sys.stderr,
+    )
+
+    return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

@@ -1,0 +1,430 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+
+from pathlib import Path
+from typing import Any
+
+
+runtime_root = Path(
+    "/root/savant-runtime/"
+    "ontology/obelisks/_template/"
+    "segue/gates/_template/segue/"
+    "innates/_template/segue/"
+    "exiles/carbon/runtime"
+)
+
+if str(
+    runtime_root
+) not in sys.path:
+    sys.path.insert(
+        0,
+        str(
+            runtime_root
+        ),
+    )
+
+
+from oriel_quantum import (  # noqa: E402
+    engine,
+    oriel_quantum_error,
+    possibilities_from_sequence,
+    scenario_from_mapping,
+    selftest,
+    status,
+)
+
+
+def read_json(
+    path: str,
+) -> Any:
+    if path == "-":
+        return json.load(
+            sys.stdin
+        )
+
+    return json.loads(
+        Path(
+            path
+        ).read_text(
+            encoding="utf-8"
+        )
+    )
+
+
+def read_object(
+    path: str,
+) -> dict[str, Any]:
+    value = read_json(
+        path
+    )
+
+    if not isinstance(
+        value,
+        dict,
+    ):
+        raise ValueError(
+            (
+                "input must contain "
+                "a JSON object"
+            )
+        )
+
+    return value
+
+
+def read_list(
+    path: str,
+) -> list[Any]:
+    value = read_json(
+        path
+    )
+
+    if not isinstance(
+        value,
+        list,
+    ):
+        raise ValueError(
+            (
+                "input must contain "
+                "a JSON list"
+            )
+        )
+
+    return value
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="carbon-oriel-quantum",
+        description=(
+            "Carbon quantum branching with "
+            "Oriel chronology and logistics "
+            "feasibility gating"
+        ),
+    )
+
+    subparsers = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    subparsers.add_parser(
+        "status"
+    )
+
+    subparsers.add_parser(
+        "selftest"
+    )
+
+    superpose_parser = (
+        subparsers.add_parser(
+            "superpose"
+        )
+    )
+
+    superpose_parser.add_argument(
+        "--oriel",
+        required=True,
+    )
+
+    superpose_parser.add_argument(
+        "--scenario",
+        required=True,
+    )
+
+    superpose_parser.add_argument(
+        "--possibilities",
+        required=True,
+    )
+
+    superpose_parser.add_argument(
+        "--mode",
+        default="tour_bus",
+    )
+
+    frontier_parser = (
+        subparsers.add_parser(
+            "frontier"
+        )
+    )
+
+    frontier_parser.add_argument(
+        "lattice"
+    )
+
+    lineage_parser = (
+        subparsers.add_parser(
+            "lineage"
+        )
+    )
+
+    lineage_parser.add_argument(
+        "lattice"
+    )
+
+    compare_parser = (
+        subparsers.add_parser(
+            "compare"
+        )
+    )
+
+    compare_parser.add_argument(
+        "lattice"
+    )
+
+    compare_parser.add_argument(
+        "left"
+    )
+
+    compare_parser.add_argument(
+        "right"
+    )
+
+    counterfactual_parser = (
+        subparsers.add_parser(
+            "counterfactual"
+        )
+    )
+
+    counterfactual_parser.add_argument(
+        "lattice"
+    )
+
+    counterfactual_parser.add_argument(
+        "possibility"
+    )
+
+    counterfactual_parser.add_argument(
+        "--event-step",
+        type=int,
+    )
+
+    collapse_parser = (
+        subparsers.add_parser(
+            "collapse"
+        )
+    )
+
+    collapse_parser.add_argument(
+        "lattice"
+    )
+
+    collapse_parser.add_argument(
+        "possibility"
+    )
+
+    collapse_parser.add_argument(
+        "--allow-conditional",
+        action="store_true",
+    )
+
+    collapse_parser.add_argument(
+        "--allow-unresolved",
+        action="store_true",
+    )
+
+    return parser
+
+
+def branch_from_lattice(
+    lattice: dict[str, Any],
+    possibility_id: str,
+) -> dict[str, Any]:
+    branches = lattice.get(
+        "branches"
+    )
+
+    if not isinstance(
+        branches,
+        list,
+    ):
+        raise ValueError(
+            "lattice branches are missing"
+        )
+
+    for branch in branches:
+        if (
+            isinstance(
+                branch,
+                dict,
+            )
+            and str(
+                branch.get(
+                    "possibility_id",
+                    "",
+                )
+            )
+            == possibility_id
+        ):
+            return branch
+
+    raise ValueError(
+        (
+            "possibility not found: "
+            + possibility_id
+        )
+    )
+
+
+def main() -> int:
+    parser = build_parser()
+
+    args = parser.parse_args()
+
+    try:
+        if args.command == "status":
+            output = status()
+
+        elif args.command == "selftest":
+            output = selftest()
+
+        elif args.command == "superpose":
+            oriel_document = (
+                read_object(
+                    args.oriel
+                )
+            )
+
+            scenario = (
+                scenario_from_mapping(
+                    read_object(
+                        args.scenario
+                    )
+                )
+            )
+
+            possibilities = (
+                possibilities_from_sequence(
+                    read_list(
+                        args.possibilities
+                    )
+                )
+            )
+
+            output = engine.superpose(
+                oriel_document,
+                scenario,
+                possibilities,
+                mode=args.mode,
+            )
+
+        elif args.command == "frontier":
+            output = engine.frontier(
+                read_object(
+                    args.lattice
+                )
+            )
+
+        elif args.command == "lineage":
+            output = engine.lineage(
+                read_object(
+                    args.lattice
+                )
+            )
+
+        elif args.command == "compare":
+            output = engine.compare(
+                read_object(
+                    args.lattice
+                ),
+                args.left,
+                args.right,
+            )
+
+        elif args.command == "counterfactual":
+            lattice = read_object(
+                args.lattice
+            )
+
+            branch = branch_from_lattice(
+                lattice,
+                args.possibility,
+            )
+
+            output = (
+                engine.counterfactual_packet(
+                    branch,
+                    event_step=
+                        args.event_step,
+                )
+            )
+
+        elif args.command == "collapse":
+            output = engine.collapse(
+                read_object(
+                    args.lattice
+                ),
+                args.possibility,
+                allow_conditional=(
+                    args.allow_conditional
+                ),
+                allow_unresolved=(
+                    args.allow_unresolved
+                ),
+            )
+
+        else:
+            parser.error(
+                "unknown command"
+            )
+
+            return 2
+
+    except (
+        OSError,
+        ValueError,
+        json.JSONDecodeError,
+        oriel_error,
+        oriel_quantum_error,
+    ) as exc:
+        print(
+            json.dumps(
+                {
+                    "ok":
+                        False,
+
+                    "error":
+                        str(
+                            exc
+                        ),
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+
+        return 1
+
+    print(
+        json.dumps(
+            output,
+            indent=2,
+            ensure_ascii=False,
+            sort_keys=True,
+        )
+    )
+
+    if (
+        isinstance(
+            output,
+            dict,
+        )
+        and output.get(
+            "ok"
+        )
+        is False
+    ):
+        return 1
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

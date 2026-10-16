@@ -1,0 +1,28 @@
+{
+  "id": "envoy:opus_connection",
+  "type": "runtime_dependency",
+  "source": "exile:envoy",
+  "target": "exile:opus",
+  "relation": "delegates_provider_execution_to",
+  "authority": "runtime",
+  "routes": [
+    "text_inference_route",
+    "voice_tts_route"
+  ],
+  "envoy_authority": [
+    "persona_identity",
+    "voice_identity",
+    "voice_intent",
+    "result_projection"
+  ],
+  "opus_authority": [
+    "provider_selection",
+    "provider_routing",
+    "provider_credentials",
+    "provider_execution",
+    "provider_retry_policy",
+    "provider_fallback_policy"
+  ],
+  "authority_transfer": false,
+  "description": "Envoy owns persona and voice identity and delegates external provider execution to Opus without acquiring provider authority."
+}

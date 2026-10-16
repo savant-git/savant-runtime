@@ -1,0 +1,1012 @@
+<!doctype html>
+<html lang="en" data-niche-theme="nexus">
+<head>
+    <meta charset="utf-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, viewport-fit=cover"
+    >
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#070a0d">
+
+    <title>Savant / Niche</title>
+
+    <link rel="stylesheet" href="/assets/niche.css">
+    <link rel="stylesheet" href="/assets/responsive.css">
+    <link rel="stylesheet" href="/assets/niche-enhancements.css">
+    <link rel="stylesheet" href="/assets/niche-resilience.css">
+    <link rel="stylesheet" href="/assets/niche-continuity.css">
+    <link rel="stylesheet" href="/assets/niche-focus.css">
+    <link rel="stylesheet" href="/assets/niche-api-resilience.css">
+    <link rel="stylesheet" href="/assets/niche-recovery.css">
+    <link rel="stylesheet" href="/assets/niche-replay.css">
+    <link rel="stylesheet" href="/assets/niche-diagnostics.css">
+    <link rel="stylesheet" href="/assets/niche-bootstrap.css">
+    <link rel="stylesheet" href="/assets/niche-vnext.css">
+</head>
+
+<body>
+    <a class="skip" href="#main">Skip to workspace</a>
+
+    <header class="topbar">
+        <div class="brand" aria-label="Savant Niche">
+            <span class="brand-mark" aria-hidden="true"></span>
+            <div>
+                <span>SAVANT / NICHE</span>
+                <span>LIVING CAUSAL FIELD / EXECUTABLE FRONTIER</span>
+            </div>
+        </div>
+
+        <nav class="nav" aria-label="Niche surfaces">
+            <button type="button" class="active" data-view="execute" aria-current="page">
+                Execute
+            </button>
+            <button type="button" data-view="causal">
+                Causal Field
+            </button>
+            <button type="button" data-view="objectives">
+                Objectives
+            </button>
+            <button type="button" data-view="timeline">
+                Timeline
+            </button>
+            <button type="button" data-view="evidence">
+                Evidence
+            </button>
+            <button type="button" data-view="living">
+                Living
+            </button>
+            <button type="button" data-view="history">
+                History
+            </button>
+        </nav>
+
+        <div class="top-actions">
+            <label class="theme-control" for="niche-theme">
+                <span>VISUAL SYSTEM</span>
+                <select id="niche-theme" aria-label="Niche visual system">
+                    <option value="nexus">Nexus</option>
+                    <option value="phosphor">Phosphor</option>
+                    <option value="volt">Volt</option>
+                    <option value="ember">Ember</option>
+                    <option value="ultraviolet">Ultraviolet</option>
+                    <option value="monolith">Monolith</option>
+                    <option value="afterimage">Afterimage</option>
+                </select>
+            </label>
+
+            <button
+                id="refresh"
+                class="icon-button"
+                type="button"
+                title="Refresh Niche"
+                aria-label="Refresh Niche"
+            >
+                ↻
+            </button>
+
+            <button
+                id="open-palette"
+                class="key-button"
+                type="button"
+                aria-haspopup="dialog"
+                aria-controls="palette-shell"
+                title="Open command palette"
+            >
+                <span>Command</span>
+                <kbd>⌘K</kbd>
+            </button>
+        </div>
+    </header>
+
+    <div
+        id="statusrail"
+        class="statusrail"
+        role="status"
+        aria-live="polite"
+    >
+        <span>
+            <i id="api-status"></i>
+            <b>NICHE</b>
+            <span id="api-status-text">connecting</span>
+        </span>
+
+        <span>
+            <i id="task-status"></i>
+            TASKS
+            <span id="task-status-text">unknown</span>
+        </span>
+
+        <span>
+            <i id="fabric-status"></i>
+            LIVING FABRIC
+            <span id="fabric-status-text">unknown</span>
+        </span>
+
+        <span>
+            <i id="authority-status"></i>
+            AUTHORITY
+            <span id="authority-status-text">projection only</span>
+        </span>
+
+        <span id="projection-status">
+            projections loading
+        </span>
+    </div>
+
+    <main id="main" tabindex="-1">
+        <section
+            id="surface-execute"
+            class="surface active"
+            data-surface="execute"
+            aria-labelledby="execute-heading"
+        >
+            <div class="execute-grid">
+                <article class="execution-core">
+                    <div class="eyebrow">
+                        CURRENT EXECUTABLE FRONTIER
+                    </div>
+
+                    <div class="frontier-heading">
+                        <div>
+                            <h1 id="execute-heading">
+                                Determining next executable action
+                            </h1>
+
+                            <p id="execute-purpose">
+                                Niche is resolving the next legitimate action from available task state.
+                            </p>
+                        </div>
+
+                        <span
+                            id="execute-priority"
+                            class="priority"
+                        >
+                            PRIORITY UNKNOWN
+                        </span>
+                    </div>
+
+                    <div
+                        id="execute-ancestry"
+                        class="ancestry"
+                        aria-label="Task ancestry"
+                    ></div>
+
+                    <div class="execute-action">
+                        <button
+                            id="start-next"
+                            class="start-next"
+                            type="button"
+                        >
+                            <span
+                                class="start-symbol"
+                                aria-hidden="true"
+                            >
+                                ▶
+                            </span>
+
+                            <span>
+                                <strong id="start-next-label">
+                                    START NEXT
+                                </strong>
+
+                                <small id="start-next-detail">
+                                    Awaiting executable task state
+                                </small>
+                            </span>
+                        </button>
+
+                        <div
+                            class="execute-secondary"
+                            aria-label="Execution tools"
+                        >
+                            <button
+                                type="button"
+                                data-execute-action="why"
+                            >
+                                Why this
+                            </button>
+
+                            <button
+                                type="button"
+                                data-execute-action="dependencies"
+                            >
+                                Blocked by
+                            </button>
+
+                            <button
+                                type="button"
+                                data-execute-action="impact"
+                            >
+                                Unlocks
+                            </button>
+
+                            <button
+                                type="button"
+                                data-execute-action="evidence"
+                            >
+                                Evidence
+                            </button>
+                        </div>
+                    </div>
+
+                    <div
+                        class="frontier-map"
+                        aria-label="Executable frontier"
+                    >
+                        <div class="frontier-labels">
+                            <span>ESTABLISHED</span>
+                            <span>READY NOW</span>
+                            <span>DEPENDENT FUTURE</span>
+                        </div>
+
+                        <div
+                            id="frontier-track"
+                            class="frontier-track"
+                            aria-hidden="true"
+                        ></div>
+                    </div>
+                </article>
+
+                <aside
+                    id="priority-oracle"
+                    class="oracle"
+                    aria-labelledby="oracle-heading"
+                >
+                    <div class="panel-heading">
+                        <div>
+                            <div class="eyebrow">
+                                PRIORITY ORACLE
+                            </div>
+
+                            <h2 id="oracle-heading">
+                                Why this task now?
+                            </h2>
+                        </div>
+
+                        <span class="deterministic">
+                            DETERMINISTIC
+                        </span>
+                    </div>
+
+                    <div
+                        id="oracle-factors"
+                        class="oracle-factors"
+                    ></div>
+
+                    <div
+                        id="oracle-explanation"
+                        class="oracle-explanation"
+                    >
+                        Waiting for sufficient task data.
+                    </div>
+                </aside>
+
+                <div class="peripheral">
+                    <section class="metric-panel">
+                        <div class="eyebrow">
+                            EXECUTION TOPOLOGY
+                        </div>
+
+                        <div
+                            id="topology-metrics"
+                            class="metric-grid"
+                        ></div>
+                    </section>
+
+                    <section class="metric-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <div class="eyebrow">
+                                    BLOCKER RADAR
+                                </div>
+
+                                <h2>
+                                    Structural obstructions
+                                </h2>
+                            </div>
+                        </div>
+
+                        <div
+                            id="blocker-list"
+                            class="compact-list"
+                        ></div>
+                    </section>
+
+                    <section class="metric-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <div class="eyebrow">
+                                    RECENT CHANGE
+                                </div>
+
+                                <h2>
+                                    Execution movement
+                                </h2>
+                            </div>
+                        </div>
+
+                        <div
+                            id="recent-list"
+                            class="compact-list"
+                        ></div>
+                    </section>
+                </div>
+            </div>
+        </section>
+
+        <section
+            id="surface-causal"
+            class="surface"
+            data-surface="causal"
+            aria-labelledby="causal-heading"
+        >
+            <header class="surface-heading causal-heading">
+                <div>
+                    <div class="eyebrow">
+                        LIVING CAUSAL FIELD
+                    </div>
+
+                    <h1 id="causal-heading">
+                        Work topology
+                    </h1>
+                </div>
+
+                <div class="causal-toolbar">
+                    <div
+                        class="causal-modes"
+                        role="group"
+                        aria-label="Causal Field mode"
+                    >
+                        <button
+                            type="button"
+                            class="active"
+                            data-causal-mode="topology"
+                            aria-pressed="true"
+                        >
+                            Topology
+                        </button>
+
+                        <button
+                            type="button"
+                            data-causal-mode="flow"
+                            aria-pressed="false"
+                        >
+                            Flow
+                        </button>
+
+                        <button
+                            type="button"
+                            data-causal-mode="dependencies"
+                            aria-pressed="false"
+                        >
+                            Dependencies
+                        </button>
+
+                        <button
+                            type="button"
+                            data-causal-mode="impact"
+                            aria-pressed="false"
+                        >
+                            Impact
+                        </button>
+
+                        <button
+                            type="button"
+                            data-causal-mode="objective"
+                            aria-pressed="false"
+                        >
+                            Objective
+                        </button>
+
+                        <button
+                            type="button"
+                            data-causal-mode="critical"
+                            aria-pressed="false"
+                        >
+                            Critical Path
+                        </button>
+
+                        <button
+                            type="button"
+                            data-causal-mode="blockers"
+                            aria-pressed="false"
+                        >
+                            Blockers
+                        </button>
+
+                        <button
+                            type="button"
+                            data-causal-mode="authority"
+                            aria-pressed="false"
+                        >
+                            Authority
+                        </button>
+                    </div>
+
+                    <div
+                        id="constellation-summary"
+                        class="fabric-meta"
+                    >
+                        dependency projection
+                    </div>
+                </div>
+            </header>
+
+            <div
+                class="causal-workspace"
+                data-causal-active="topology"
+            >
+                <aside
+                    class="causal-rail"
+                    aria-label="Causal Field controls"
+                >
+                    <div class="causal-rail-section">
+                        <span class="eyebrow">
+                            FIELD MODE
+                        </span>
+
+                        <strong id="causal-mode-label">
+                            TOPOLOGY
+                        </strong>
+
+                        <p id="causal-mode-description">
+                            Structural dependency projection. Interface geometry is non-authoritative.
+                        </p>
+                    </div>
+
+                    <div class="causal-rail-section">
+                        <span class="eyebrow">
+                            SELECTION
+                        </span>
+
+                        <strong id="causal-selection">
+                            NO TASK SELECTED
+                        </strong>
+                    </div>
+
+                    <div class="causal-rail-section">
+                        <span class="eyebrow">
+                            VIEWPORT
+                        </span>
+
+                        <div class="viewport-controls">
+                            <button
+                                type="button"
+                                data-causal-viewport="zoom-in"
+                                aria-label="Zoom in"
+                            >
+                                +
+                            </button>
+
+                            <button
+                                type="button"
+                                data-causal-viewport="zoom-out"
+                                aria-label="Zoom out"
+                            >
+                                −
+                            </button>
+
+                            <button
+                                type="button"
+                                data-causal-viewport="reset"
+                            >
+                                Reset
+                            </button>
+                        </div>
+                    </div>
+                </aside>
+
+                <div class="causal-primary">
+                    <div
+                        id="graph-stage"
+                        class="graph-stage"
+                        tabindex="0"
+                        aria-label="Task causal field"
+                    >
+                        <svg
+                            id="graph-edges"
+                            aria-hidden="true"
+                            preserveAspectRatio="none"
+                        ></svg>
+
+                        <div
+                            id="graph-nodes"
+                            class="graph-nodes"
+                        ></div>
+
+                        <div
+                            class="causal-reticle"
+                            aria-hidden="true"
+                        ></div>
+                    </div>
+
+                    <section
+                        id="causal-flow"
+                        class="causal-flow"
+                        aria-labelledby="flow-heading"
+                        hidden
+                    >
+                        <header class="causal-subheading">
+                            <div>
+                                <div class="eyebrow">
+                                    EXECUTION FLOW
+                                </div>
+
+                                <h2 id="flow-heading">
+                                    Work state
+                                </h2>
+                            </div>
+
+                            <div
+                                id="flow-summary"
+                                class="fabric-meta"
+                            ></div>
+                        </header>
+
+                        <div
+                            id="flow-board"
+                            class="flow-board"
+                        ></div>
+                    </section>
+                </div>
+
+                <aside
+                    class="causal-companion"
+                    aria-labelledby="causal-companion-heading"
+                >
+                    <div class="eyebrow">
+                        TEXTUAL FIELD
+                    </div>
+
+                    <h2 id="causal-companion-heading">
+                        Selected neighborhood
+                    </h2>
+
+                    <div
+                        id="causal-companion-body"
+                        class="causal-companion-body"
+                    >
+                        Select a represented task to inspect its causal neighborhood.
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <section
+            id="surface-objectives"
+            class="surface"
+            data-surface="objectives"
+        >
+            <header class="surface-heading">
+                <div>
+                    <div class="eyebrow">
+                        STRUCTURAL NAVIGATION
+                    </div>
+
+                    <h1>
+                        Objectives
+                    </h1>
+                </div>
+
+                <div
+                    id="objective-summary"
+                    class="fabric-meta"
+                ></div>
+            </header>
+
+            <div class="objective-toolbar">
+                <label class="surface-search">
+                    <span class="sr-only">
+                        Search objectives
+                    </span>
+
+                    <input
+                        id="objective-search"
+                        type="search"
+                        autocomplete="off"
+                        placeholder="Search represented objectives and tasks"
+                    >
+                </label>
+
+                <div
+                    class="objective-modes"
+                    role="group"
+                    aria-label="Objective visibility"
+                >
+                    <button
+                        type="button"
+                        class="active"
+                        data-objective-filter="all"
+                    >
+                        All
+                    </button>
+
+                    <button
+                        type="button"
+                        data-objective-filter="ready"
+                    >
+                        Ready
+                    </button>
+
+                    <button
+                        type="button"
+                        data-objective-filter="blocked"
+                    >
+                        Blocked
+                    </button>
+
+                    <button
+                        type="button"
+                        data-objective-filter="active"
+                    >
+                        Active
+                    </button>
+
+                    <button
+                        type="button"
+                        data-objective-filter="complete"
+                    >
+                        Complete
+                    </button>
+                </div>
+            </div>
+
+            <div
+                id="objective-grid"
+                class="objective-grid"
+            ></div>
+        </section>
+
+        <section
+            id="surface-timeline"
+            class="surface"
+            data-surface="timeline"
+        >
+            <header class="surface-heading">
+                <div>
+                    <div class="eyebrow">
+                        TEMPORAL EXECUTION
+                    </div>
+
+                    <h1>
+                        Timeline
+                    </h1>
+                </div>
+
+                <div class="fabric-meta">
+                    immutable history projection
+                </div>
+            </header>
+
+            <div
+                id="timeline"
+                class="timeline"
+            ></div>
+        </section>
+
+        <section
+            id="surface-evidence"
+            class="surface"
+            data-surface="evidence"
+        >
+            <header class="surface-heading">
+                <div>
+                    <div class="eyebrow">
+                        EVIDENCE GATE
+                    </div>
+
+                    <h1>
+                        Completion evidence
+                    </h1>
+                </div>
+
+                <div
+                    id="evidence-summary"
+                    class="fabric-meta"
+                ></div>
+            </header>
+
+            <div
+                id="evidence-grid"
+                class="evidence-grid"
+            ></div>
+        </section>
+
+        <section
+            id="surface-living"
+            class="surface"
+            data-surface="living"
+        >
+            <header class="surface-heading">
+                <div>
+                    <div class="eyebrow">
+                        LIVING OBSERVATORY
+                    </div>
+
+                    <h1>
+                        Savant living fabric
+                    </h1>
+                </div>
+
+                <div
+                    id="fabric-identity"
+                    class="fabric-meta"
+                >
+                    projection status unknown
+                </div>
+            </header>
+
+            <div
+                id="living-summary"
+                class="living-summary"
+            ></div>
+
+            <div
+                id="living-grid"
+                class="living-grid"
+            ></div>
+        </section>
+
+        <section
+            id="surface-history"
+            class="surface"
+            data-surface="history"
+        >
+            <header class="surface-heading">
+                <div>
+                    <div class="eyebrow">
+                        EXECUTION REPLAY
+                    </div>
+
+                    <h1>
+                        History
+                    </h1>
+                </div>
+
+                <div class="fabric-meta">
+                    read-only historical projection
+                </div>
+            </header>
+
+            <div
+                id="history-list"
+                class="history-list"
+            ></div>
+        </section>
+    </main>
+
+    <aside
+        id="inspector"
+        class="inspector"
+        aria-labelledby="inspector-title"
+        aria-hidden="true"
+    >
+        <header class="inspector-head">
+            <div>
+                <div class="eyebrow">
+                    TASK INSPECTOR
+                </div>
+
+                <h2 id="inspector-title">
+                    No task selected
+                </h2>
+            </div>
+
+            <button
+                id="close-inspector"
+                class="icon-button"
+                type="button"
+                data-inspector-close
+                aria-label="Close task inspector"
+            >
+                ×
+            </button>
+        </header>
+
+        <div
+            id="inspector-body"
+            class="inspector-body"
+        ></div>
+    </aside>
+
+    <div
+        id="palette-shell"
+        class="palette-shell"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="palette-title"
+        hidden
+    >
+        <div class="palette">
+            <div class="palette-input">
+                <span aria-hidden="true">⌕</span>
+
+                <input
+                    id="palette-input"
+                    type="search"
+                    autocomplete="off"
+                    spellcheck="false"
+                    aria-label="Search Niche commands and tasks"
+                    placeholder="Command, task, objective, filter…"
+                >
+
+                <kbd>ESC</kbd>
+            </div>
+
+            <h2
+                id="palette-title"
+                class="sr-only"
+            >
+                Niche command palette
+            </h2>
+
+            <div
+                id="palette-results"
+                class="palette-results"
+                role="listbox"
+            ></div>
+
+            <footer class="palette-footer">
+                <span>↑↓ navigate</span>
+                <span>enter execute</span>
+                <span>esc close</span>
+            </footer>
+        </div>
+    </div>
+
+    <div
+        id="transition-shell"
+        class="dialog-shell"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="transition-title"
+        hidden
+    >
+        <form
+            id="transition-form"
+            class="dialog"
+        >
+            <div class="eyebrow">
+                EXPLICIT TASK TRANSITION
+            </div>
+
+            <h2 id="transition-title">
+                Transition task
+            </h2>
+
+            <p id="transition-description">
+                No transition selected.
+            </p>
+
+            <label>
+                Transition
+
+                <select
+                    id="transition-action"
+                    name="action"
+                >
+                    <option value="start">
+                        Start / continue
+                    </option>
+
+                    <option value="complete">
+                        Complete
+                    </option>
+
+                    <option value="block">
+                        Block
+                    </option>
+
+                    <option value="defer">
+                        Defer
+                    </option>
+                </select>
+            </label>
+
+            <label>
+                Reason
+
+                <textarea
+                    id="transition-reason"
+                    name="reason"
+                    rows="3"
+                    placeholder="Reason or transition context"
+                ></textarea>
+            </label>
+
+            <label>
+                Evidence / receipt reference
+
+                <textarea
+                    id="transition-evidence"
+                    name="evidence"
+                    rows="3"
+                    placeholder="Evidence required by the task, if applicable"
+                ></textarea>
+            </label>
+
+            <div
+                id="consequence-preview"
+                class="consequence-preview"
+            >
+                Deterministic consequence projection will appear here when supported.
+            </div>
+
+            <div class="dialog-actions">
+                <button
+                    id="transition-cancel"
+                    type="button"
+                    class="cancel"
+                    data-dialog-cancel
+                >
+                    Cancel
+                </button>
+
+                <button
+                    id="transition-confirm"
+                    type="submit"
+                    class="confirm"
+                >
+                    Confirm transition
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div
+        id="information-shell"
+        class="dialog-shell"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="information-title"
+        hidden
+    >
+        <div class="dialog">
+            <div class="eyebrow">
+                NICHE CONTEXT
+            </div>
+
+            <h2 id="information-title">
+                Context
+            </h2>
+
+            <div
+                id="information-body"
+                class="inspector-section"
+            ></div>
+
+            <div class="dialog-actions">
+                <button
+                    id="information-close"
+                    type="button"
+                    class="confirm"
+                    data-dialog-cancel
+                >
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div
+        id="toasts"
+        class="toasts"
+        aria-live="polite"
+        aria-atomic="false"
+    ></div>
+
+    <script src="/assets/niche-bootstrap.js" defer></script>
+    <script src="/assets/responsive.js" defer></script>
+    <script src="/assets/niche.js" defer></script>
+    <script src="/assets/niche-enhancements.js" defer></script>
+    <script src="/assets/niche-resilience.js" defer></script>
+    <script src="/assets/niche-continuity.js" defer></script>
+    <script src="/assets/niche-focus.js" defer></script>
+    <script src="/assets/niche-api-resilience.js" defer></script>
+    <script src="/assets/niche-recovery.js" defer></script>
+    <script src="/assets/niche-replay.js" defer></script>
+    <script src="/assets/niche-diagnostics.js" defer></script>
+    <script src="/assets/niche-vnext.js" defer></script>
+</body>
+</html>

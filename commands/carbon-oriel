@@ -1,0 +1,483 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+
+from pathlib import Path
+from typing import Any
+
+
+runtime_root = Path(
+    "/root/savant-runtime/"
+    "ontology/obelisks/_template/"
+    "segue/gates/_template/segue/"
+    "innates/_template/segue/"
+    "exiles/carbon/runtime"
+)
+
+if str(
+    runtime_root
+) not in sys.path:
+    sys.path.insert(
+        0,
+        str(
+            runtime_root
+        ),
+    )
+
+
+from oriel import (  # noqa: E402
+    capability_manifest,
+    oriel_engine,
+    oriel_error,
+    selftest,
+    status,
+)
+
+
+def load_document(
+    path: str,
+) -> dict[str, Any]:
+    if path == "-":
+        value = json.load(
+            sys.stdin
+        )
+
+    else:
+        value = json.loads(
+            Path(
+                path
+            ).read_text(
+                encoding="utf-8"
+            )
+        )
+
+    if not isinstance(
+        value,
+        dict,
+    ):
+        raise ValueError(
+            "Oriel input must be a JSON object"
+        )
+
+    return value
+
+
+def load_candidate(
+    path: str,
+) -> dict[str, Any]:
+    value = load_document(
+        path
+    )
+
+    if (
+        "events" in value
+        or "locations" in value
+    ):
+        raise ValueError(
+            (
+                "candidate must be one event object, "
+                "not an Oriel document"
+            )
+        )
+
+    return value
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="carbon-oriel",
+        description=(
+            "Carbon-owned chronology and "
+            "logistics simulation intelligence"
+        ),
+    )
+
+    subparsers = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    subparsers.add_parser(
+        "status"
+    )
+
+    subparsers.add_parser(
+        "capabilities"
+    )
+
+    subparsers.add_parser(
+        "selftest"
+    )
+
+    validate_parser = subparsers.add_parser(
+        "validate"
+    )
+
+    validate_parser.add_argument(
+        "document"
+    )
+
+    validate_parser.add_argument(
+        "--mode",
+        default="tour_bus",
+    )
+
+    route_parser = subparsers.add_parser(
+        "route"
+    )
+
+    route_parser.add_argument(
+        "document"
+    )
+
+    route_parser.add_argument(
+        "source"
+    )
+
+    route_parser.add_argument(
+        "target"
+    )
+
+    route_parser.add_argument(
+        "--mode",
+        default="tour_bus",
+    )
+
+    route_parser.add_argument(
+        "--no-estimate",
+        action="store_true",
+    )
+
+    alternatives_parser = (
+        subparsers.add_parser(
+            "alternatives"
+        )
+    )
+
+    alternatives_parser.add_argument(
+        "document"
+    )
+
+    alternatives_parser.add_argument(
+        "source"
+    )
+
+    alternatives_parser.add_argument(
+        "target"
+    )
+
+    alternatives_parser.add_argument(
+        "--mode",
+        default="tour_bus",
+    )
+
+    alternatives_parser.add_argument(
+        "--limit",
+        type=int,
+        default=3,
+    )
+
+    position_parser = subparsers.add_parser(
+        "position"
+    )
+
+    position_parser.add_argument(
+        "document"
+    )
+
+    position_parser.add_argument(
+        "entity"
+    )
+
+    position_parser.add_argument(
+        "timestamp"
+    )
+
+    position_parser.add_argument(
+        "--mode",
+        default="tour_bus",
+    )
+
+    encounter_parser = (
+        subparsers.add_parser(
+            "encounters"
+        )
+    )
+
+    encounter_parser.add_argument(
+        "document"
+    )
+
+    encounter_parser.add_argument(
+        "left_entity"
+    )
+
+    encounter_parser.add_argument(
+        "right_entity"
+    )
+
+    encounter_parser.add_argument(
+        "--radius-km",
+        type=float,
+        default=1.0,
+    )
+
+    windows_parser = subparsers.add_parser(
+        "windows"
+    )
+
+    windows_parser.add_argument(
+        "document"
+    )
+
+    windows_parser.add_argument(
+        "entity"
+    )
+
+    windows_parser.add_argument(
+        "location"
+    )
+
+    windows_parser.add_argument(
+        "range_start"
+    )
+
+    windows_parser.add_argument(
+        "range_end"
+    )
+
+    windows_parser.add_argument(
+        "--duration-minutes",
+        type=int,
+        required=True,
+    )
+
+    windows_parser.add_argument(
+        "--setup-minutes",
+        type=int,
+        default=0,
+    )
+
+    windows_parser.add_argument(
+        "--teardown-minutes",
+        type=int,
+        default=0,
+    )
+
+    windows_parser.add_argument(
+        "--recovery-minutes",
+        type=int,
+        default=0,
+    )
+
+    windows_parser.add_argument(
+        "--mode",
+        default="tour_bus",
+    )
+
+    solve_parser = subparsers.add_parser(
+        "solve"
+    )
+
+    solve_parser.add_argument(
+        "document"
+    )
+
+    solve_parser.add_argument(
+        "--mode",
+        default="tour_bus",
+    )
+
+    candidate_parser = subparsers.add_parser(
+        "candidate"
+    )
+
+    candidate_parser.add_argument(
+        "document"
+    )
+
+    candidate_parser.add_argument(
+        "candidate"
+    )
+
+    candidate_parser.add_argument(
+        "--mode",
+        default="tour_bus",
+    )
+
+    return parser
+
+
+def main() -> int:
+    parser = build_parser()
+
+    args = parser.parse_args()
+
+    try:
+        if args.command == "status":
+            output = status()
+
+        elif args.command == "capabilities":
+            output = capability_manifest()
+
+        elif args.command == "selftest":
+            output = selftest()
+
+        else:
+            document = load_document(
+                args.document
+            )
+
+            engine = (
+                oriel_engine.from_document(
+                    document
+                )
+            )
+
+            if args.command == "validate":
+                output = engine.validate(
+                    mode=args.mode
+                )
+
+            elif args.command == "route":
+                output = engine.travel(
+                    args.source,
+                    args.target,
+                    mode=args.mode,
+                    allow_estimate=(
+                        not args.no_estimate
+                    ),
+                )
+
+            elif args.command == "alternatives":
+                output = (
+                    engine.route_alternatives(
+                        args.source,
+                        args.target,
+                        mode=args.mode,
+                        limit=args.limit,
+                    )
+                )
+
+            elif args.command == "position":
+                output = engine.position_at(
+                    args.entity,
+                    args.timestamp,
+                    mode=args.mode,
+                )
+
+            elif args.command == "encounters":
+                output = (
+                    engine.encounter_windows(
+                        args.left_entity,
+                        args.right_entity,
+                        radius_km=
+                            args.radius_km,
+                    )
+                )
+
+            elif args.command == "windows":
+                output = (
+                    engine.candidate_windows(
+                        entity_id=
+                            args.entity,
+                        location_id=
+                            args.location,
+                        duration_minutes=
+                            args.duration_minutes,
+                        range_start=
+                            args.range_start,
+                        range_end=
+                            args.range_end,
+                        mode=args.mode,
+                        setup_minutes=
+                            args.setup_minutes,
+                        teardown_minutes=
+                            args.teardown_minutes,
+                        recovery_minutes=
+                            args.recovery_minutes,
+                    )
+                )
+
+            elif args.command == "solve":
+                output = (
+                    engine.solve_schedule(
+                        mode=args.mode
+                    )
+                )
+
+            elif args.command == "candidate":
+                output = (
+                    engine.evaluate_candidate(
+                        load_candidate(
+                            args.candidate
+                        ),
+                        mode=args.mode,
+                    )
+                )
+
+            else:
+                parser.error(
+                    "unknown command"
+                )
+
+                return 2
+
+    except (
+        OSError,
+        ValueError,
+        json.JSONDecodeError,
+        oriel_error,
+    ) as exc:
+        print(
+            json.dumps(
+                {
+                    "ok":
+                        False,
+
+                    "error":
+                        str(
+                            exc
+                        ),
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+
+        return 1
+
+    print(
+        json.dumps(
+            output,
+            indent=2,
+            ensure_ascii=False,
+            sort_keys=True,
+        )
+    )
+
+    if isinstance(
+        output,
+        dict,
+    ):
+        if output.get(
+            "outcome"
+        ) == "fail":
+            return 1
+
+        if output.get(
+            "ok"
+        ) is False:
+            return 1
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

@@ -1,0 +1,83 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:authority_graph/segues",
+  "deterministic_hash": "6768ed9d2ff9a4e36665424baea4c62382e17afc006aef7d577a883ca6a7c747",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "authority_graph/segues",
+  "kind": "directory",
+  "label": "segues",
+  "namespace": "preview.kindred",
+  "path": "authority_graph/segues",
+  "placement": {
+    "domain": "filesystem",
+    "node": "authority_graph/segues",
+    "parent": "authority_graph",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.3f02df5a1bd00a593c92",
+    "rank": 80,
+    "slot": "20_authority",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.3f02df5a1bd00a593c92"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:authority_graph/segues",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "authority_graph/segues",
+    "kind": "directory",
+    "label": "segues",
+    "legacy_id": "authority_graph/segues",
+    "lineage": [
+      "authority_graph"
+    ],
+    "metadata": {
+      "canonical_id": "fs:authority_graph/segues",
+      "child_modes": {},
+      "child_roles": {},
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:authority_graph"
+        ]
+      },
+      "projected_id": "authority_graph/segues",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "authority_graph"
+    ],
+    "path": "authority_graph/segues",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "authority_graph/segues",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.3f02df5a1bd00a593c92"
+    ],
+    "size": 12,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

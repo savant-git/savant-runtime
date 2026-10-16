@@ -1,0 +1,20 @@
+schema: boundary
+
+version: 1
+
+fields:
+
+  lexeme:
+    type: string
+
+  owner:
+    type: string
+
+  allowed_contexts:
+    type: array
+
+  forbidden_contexts:
+    type: array
+
+  notes:
+    type: string

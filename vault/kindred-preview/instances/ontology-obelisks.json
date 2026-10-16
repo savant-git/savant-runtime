@@ -1,0 +1,103 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:ontology/obelisks",
+  "deterministic_hash": "cb06cfc2998a013aac40e41df69aed908fd8320bd557b03c019e6181e8c1cd86",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "ontology/obelisks",
+  "kind": "directory",
+  "label": "obelisks",
+  "namespace": "preview.kindred",
+  "path": "ontology/obelisks",
+  "placement": {
+    "domain": "filesystem",
+    "node": "ontology/obelisks",
+    "parent": "ontology",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.7efd3ca96656f59ce2a9",
+    "rank": 10,
+    "slot": "30_ontology",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.327bef2868aa2e49f1c0",
+    "lineage.composition.722518338cfc379761e0",
+    "lineage.composition.7efd3ca96656f59ce2a9"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:ontology/obelisks",
+    "children": [
+      "ontology/obelisks/segue",
+      "ontology/obelisks/_template"
+    ],
+    "daughters": [
+      "ontology/obelisks/segue",
+      "ontology/obelisks/_template"
+    ],
+    "dependencies": [],
+    "fathers": [],
+    "id": "ontology/obelisks",
+    "kind": "directory",
+    "label": "obelisks",
+    "legacy_id": "ontology/obelisks",
+    "lineage": [
+      "ontology"
+    ],
+    "metadata": {
+      "canonical_id": "fs:ontology/obelisks",
+      "child_modes": {
+        "preserving": [
+          "fs:ontology/obelisks/segue",
+          "fs:ontology/obelisks/_template"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:ontology/obelisks/segue",
+          "fs:ontology/obelisks/_template"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:ontology"
+        ]
+      },
+      "projected_id": "ontology/obelisks",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "ontology"
+    ],
+    "path": "ontology/obelisks",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "ontology/obelisks",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.327bef2868aa2e49f1c0",
+      "lineage.composition.722518338cfc379761e0",
+      "lineage.composition.7efd3ca96656f59ce2a9"
+    ],
+    "size": 12,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

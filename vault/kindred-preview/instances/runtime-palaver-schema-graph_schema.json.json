@@ -1,0 +1,83 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:runtime/palaver/schema/graph_schema.json",
+  "deterministic_hash": "f9ca4fc76c2e8bf588ff424682fc8e49f23407f278bbcbd4ab512064edea1c4f",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "runtime/palaver/schema/graph_schema.json",
+  "kind": "file",
+  "label": "graph_schema.json",
+  "namespace": "preview.kindred",
+  "path": "runtime/palaver/schema/graph_schema.json",
+  "placement": {
+    "domain": "filesystem",
+    "node": "runtime/palaver/schema/graph_schema.json",
+    "parent": "runtime/palaver/schema",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.30a518401eb43bdec5f3",
+    "rank": 10,
+    "slot": "40_runtime",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.30a518401eb43bdec5f3"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "record",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:runtime/palaver/schema/graph_schema.json",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "runtime/palaver/schema/graph_schema.json",
+    "kind": "file",
+    "label": "graph_schema.json",
+    "legacy_id": "runtime/palaver/schema/graph_schema.json",
+    "lineage": [
+      "runtime/palaver/schema"
+    ],
+    "metadata": {
+      "canonical_id": "fs:runtime/palaver/schema/graph_schema.json",
+      "child_modes": {},
+      "child_roles": {},
+      "is_directory": false,
+      "is_file": true,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:runtime/palaver/schema"
+        ]
+      },
+      "projected_id": "runtime/palaver/schema/graph_schema.json",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "runtime/palaver/schema"
+    ],
+    "path": "runtime/palaver/schema/graph_schema.json",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "runtime/palaver/schema/graph_schema.json",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.30a518401eb43bdec5f3"
+    ],
+    "size": 7,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

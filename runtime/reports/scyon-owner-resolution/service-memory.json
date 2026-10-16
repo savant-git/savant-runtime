@@ -1,0 +1,54 @@
+{
+  "authority_mutation_performed": false,
+  "evidence": [
+    {
+      "authority_class": "verified-implementation",
+      "candidate_id": null,
+      "candidate_role": "non-owner-reference",
+      "candidate_tier": null,
+      "evidence_kind": "target-reference-only",
+      "path": "/root/savant-runtime/runtime/memory/engine.py",
+      "relation": null,
+      "sha256": "565ba255f681d2f29ebfe9d4f28adee29de840908cfdcd2b0a2dfb5a22af1099",
+      "target": "service:memory"
+    },
+    {
+      "authority_class": "verified-implementation",
+      "candidate_id": null,
+      "candidate_role": "non-owner-reference",
+      "candidate_tier": null,
+      "evidence_kind": "target-reference-only",
+      "path": "/root/savant-runtime/runtime/memory/model.py",
+      "relation": null,
+      "sha256": "10b10d0b311bd7a39adc6a9d024916558e0bdadd5ffca3252753b53f5ea64557",
+      "target": "service:memory"
+    },
+    {
+      "authority_class": "verified-implementation",
+      "candidate_id": null,
+      "candidate_role": "non-owner-reference",
+      "candidate_tier": null,
+      "evidence_kind": "target-reference-only",
+      "path": "/root/savant-runtime/runtime/reports/scyon-owner-resolution/service-memory.json",
+      "relation": null,
+      "sha256": "3aaac79f73cfee0ac980574b9c80094886a50870b7bddd777e8f81a3b1c85089",
+      "target": "service:memory"
+    }
+  ],
+  "explicit_governance_evidence_count": 0,
+  "explicit_implementation_evidence_count": 0,
+  "files_scanned": 2652,
+  "governance_owner_candidates": [],
+  "governance_owner_is_distinct": true,
+  "implementation_owner_candidates": [],
+  "inference_used": false,
+  "owner_basis": null,
+  "physical_mutation_performed": false,
+  "reference_count": 3,
+  "resolution": "unresolved",
+  "schema": "savant://assurance/scyon-owner-resolution/1.1.0",
+  "scyon_owner_id": null,
+  "scyon_owner_tier": null,
+  "semantic_similarity_used": false,
+  "target": "service:memory"
+}

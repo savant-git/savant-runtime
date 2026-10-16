@@ -1,0 +1,159 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import sys
+
+
+runtime_path = "/root/savant-runtime/runtime"
+sdump_path = "/root/savant-runtime/tools/sdump-enterprise"
+
+for path in (
+    sdump_path,
+    runtime_path,
+):
+    if path not in sys.path:
+        sys.path.insert(
+            0,
+            path,
+        )
+
+
+import sdump_enterprise.stream_dump as stream_dump
+
+from savant_terminal import terminal
+
+
+stream_dump.ui = terminal(
+    "sdump",
+    subtitle=(
+        "deterministic source projection "
+        "· verified publication"
+    ),
+)
+
+
+_original_write_file_record = (
+    stream_dump.write_file_record
+)
+
+
+def _write_file_record_with_live_admission(
+    handle,
+    candidate,
+    artifact_digest,
+):
+    rendered, source_bytes, source_sha = (
+        _original_write_file_record(
+            handle,
+            candidate,
+            artifact_digest,
+        )
+    )
+
+    candidate.size = source_bytes
+
+    return (
+        rendered,
+        source_bytes,
+        source_sha,
+    )
+
+
+_original_discover_source = (
+    stream_dump.discover_source
+)
+
+
+def _discover_source_with_live_total(
+    root,
+):
+    candidates, discovery = (
+        _original_discover_source(
+            root
+        )
+    )
+
+    class _LiveCandidateBytes(int):
+        def __new__(
+            cls,
+            initial,
+            admitted_candidates,
+        ):
+            instance = int.__new__(
+                cls,
+                initial,
+            )
+            instance._candidates = (
+                admitted_candidates
+            )
+            return instance
+
+        def _current(self):
+            return sum(
+                candidate.size
+                for candidate
+                in self._candidates
+            )
+
+        def __eq__(
+            self,
+            other,
+        ):
+            return (
+                self._current()
+                == int(other)
+            )
+
+        def __req__(
+            self,
+            other,
+        ):
+            return (
+                int(other)
+                == self._current()
+            )
+
+    discovery["candidate_bytes"] = (
+        _LiveCandidateBytes(
+            discovery[
+                "candidate_bytes"
+            ],
+            candidates,
+        )
+    )
+
+    return (
+        candidates,
+        discovery,
+    )
+
+
+stream_dump.write_file_record = (
+    _write_file_record_with_live_admission
+)
+
+stream_dump.discover_source = (
+    _discover_source_with_live_total
+)
+
+
+try:
+    raise SystemExit(
+        stream_dump.main()
+    )
+
+except (
+    stream_dump.StreamDumpError,
+    RuntimeError,
+    OSError,
+) as error:
+    stream_dump.ui.failure(
+        str(
+            error
+        )
+    )
+
+    raise SystemExit(
+        1
+    )

@@ -1,0 +1,69 @@
+{
+  "authority": {
+    "accepted_at": "2026-08-02T19:43:11+00:00",
+    "accepted_by": "project-owner",
+    "authority_class": "project-owner-directed",
+    "confidence": 1.0,
+    "source": "runtime/masterplan/decision-proposals/latest.json",
+    "state": "accepted",
+    "tier": 1
+  },
+  "event_type": "masterplan.segues.duplicates.reconciled",
+  "extensions": {
+    "decision_id": "decision-ed69063836d8817cb9bbb3b5",
+    "graph_digest_after": "b394c7d9ff60bc8593ba5888cdaef7040f98eebab364a82a334d650d7916d027",
+    "graph_digest_before": "3a8c20dd048509f633baddc3f85aef0a2a3117acc5bbdcc9b32d8a7e3ba2cd0a",
+    "plan_semantic_digest": "f8b85e8fba23fa0c90c2f79ee58f8149d8ffc32a87c7876f84d4e14ddf1baced",
+    "removal_ids": [
+      "segue-2bbd367d63a5db769a97f391",
+      "segue-2cc3a67e00284a8b262cc7ff",
+      "segue-4286124a65c9700a2de2eaff",
+      "segue-56cfac4130328c176baeac70",
+      "segue-76db978555f9160b2a10f551",
+      "segue-c71c5d7e9723174e5fd3e529",
+      "segue-ca15212d3a8d04af793bf49b",
+      "segue-ccb519d16167418306e4ecba",
+      "segue-d179bbfeaa3a6397423c4021",
+      "segue-d201bd4b426c66f34ae6c2dd",
+      "segue-d34e59d1115728e1c82e2314",
+      "segue-de6ba9b13b81e05a656b68f6",
+      "segue-e208bd5e30f67e7a0b74692d",
+      "segue-e8048c36070d86a7c0d8cdc7",
+      "segue-ecc3f308c87fc28d7f5838bf",
+      "segue-eff150dfaede95c713a7fce3",
+      "segue-f00689309e4ff387baae01c8",
+      "segue-f18a2a7e57572ed6b68aadd7",
+      "segue-f9105936eb8f8744d4854245",
+      "segue-fd5c2ada4bda9f274c966142",
+      "segue-fde2aede31a8c49f480ec8ee"
+    ]
+  },
+  "id": "event-e76abfee584208d9624dd42a",
+  "occurred_at": "2026-08-02T19:43:11+00:00",
+  "provenance": {
+    "contract_version": "1.0.0",
+    "generated_at": "2026-08-02T19:43:11+00:00",
+    "generated_by": "prodigal.niche.masterplan.apply_duplicate_segue_reconciliation",
+    "sources": [
+      {
+        "authority_state": "accepted",
+        "source_id": "decision-ed69063836d8817cb9bbb3b5",
+        "source_kind": "accepted-decision",
+        "source_path": "authority/task-graph/decisions/decision-ed69063836d8817cb9bbb3b5.json"
+      },
+      {
+        "authority_state": "proposed",
+        "source_id": "f8b85e8fba23fa0c90c2f79ee58f8149d8ffc32a87c7876f84d4e14ddf1baced",
+        "source_kind": "segue-reconciliation-plan",
+        "source_path": "reports/niche/masterplan/segue-reconciliation/latest.json"
+      }
+    ],
+    "transformations": [
+      "validate_plan_graph_digest",
+      "validate_decision_authority",
+      "validate_exact_plan_authorization",
+      "remove_authorized_duplicate_segues"
+    ]
+  },
+  "task_id": "SAV-P4A-003"
+}

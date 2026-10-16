@@ -1,0 +1,360 @@
+@import url("https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+/* palaver presentation projection: this file owns no execution state.
+ * Existing scroll, sidebar, split-pane and portal behavior remain upstream. */
+:root {
+  --savant-void: #080a0c;
+  --savant-gunmetal: #252c31;
+  --savant-steel: #39434c;
+  --savant-paper: #f1e5c7;
+  --savant-silver: #c9d3dc;
+  --savant-gold: #d6b45f;
+  --savant-pink: #ff2f9d;
+  --savant-edge: #485057;
+  --savant-muted: #a3aaad;
+  --savant-body: "Inter", "Roboto", "Segoe UI", system-ui, sans-serif;
+  --savant-display: "Bahnschrift", "Roboto Condensed", "Arial Narrow", sans-serif;
+  --savant-code: "Cascadia Code", "Roboto Mono", ui-monospace, monospace;
+}
+html .palaver-instrument.palaver-only {
+  --palaver-body: var(--savant-body);
+  --palaver-display: var(--savant-display);
+  --palaver-gold: var(--savant-gold);
+  --palaver-gunmetal: var(--savant-gunmetal);
+  color-scheme: dark;
+  color: var(--savant-paper);
+  background: var(--savant-void) !important;
+  font-family: var(--savant-body) !important;
+  -webkit-font-smoothing: antialiased;
+}
+html .palaver-instrument.palaver-only ::selection {
+  color: #fff6e1; background: #705538;
+}
+html .palaver-instrument.palaver-only :is(h1, h2, h3, .topbar-brand strong, .chat-hero-title) {
+  font-family: var(--savant-display) !important;
+  font-weight: 600; letter-spacing: .045em;
+}
+html .palaver-instrument.palaver-only :is(.chat-hero h1, .chat-hero h2) {
+  color: var(--savant-paper); text-shadow: 0 2px 18px #0008;
+}
+html .palaver-instrument.palaver-only .workstation-topbar {
+  background: var(--savant-gunmetal) !important;
+  background-image:
+    linear-gradient(112deg, #ffffff07, transparent 45%, #00000035),
+    repeating-linear-gradient(90deg, #ffffff02 0 1px, transparent 1px 7px) !important;
+  border-bottom: 1px solid var(--savant-edge) !important;
+  box-shadow: 0 6px 28px #0005, inset 0 1px #e6edf20b;
+}
+html .palaver-instrument.palaver-only .topbar-brand strong {
+  color: var(--savant-paper); text-transform: uppercase; letter-spacing: .22em;
+}
+html .palaver-instrument.palaver-only :is(.topbar-brand span, .topbar-location, .chat-hero-eyebrow) {
+  color: var(--savant-muted); letter-spacing: .13em;
+}
+html .palaver-instrument.palaver-only :is(.chat-hero, .terminal-hero, .terminal-header) {
+  background: linear-gradient(115deg, #192127, #0e1317);
+  border-bottom: 1px solid #3d464a;
+  box-shadow: inset 0 1px #ffffff05;
+}
+html .palaver-instrument.palaver-only .chat-thread {
+  background:
+    radial-gradient(ellipse at 80% 0, #d6b45f04, transparent 60%),
+    linear-gradient(#0c1013, #080a0c);
+  scrollbar-width: thin; scrollbar-color: #687074 #11171b;
+}
+html .palaver-instrument.palaver-only :is(.chat-thread, pre, .chat-trace, textarea)::-webkit-scrollbar {
+  width: 7px; height: 7px;
+}
+html .palaver-instrument.palaver-only :is(.chat-thread, pre, .chat-trace, textarea)::-webkit-scrollbar-thumb {
+  border: 2px solid #12191d; border-radius: 5px; background: #687074;
+}
+html .palaver-instrument.palaver-only .chat-message {
+  position: relative; border: 0 !important; border-radius: 7px !important;
+  box-shadow: inset 0 1px #f1e5c707, 0 7px 20px #0002 !important;
+}
+html .palaver-instrument.palaver-only .chat-message-assistant {
+  background: linear-gradient(125deg, #2d363c, #252c31 65%, #21282e) !important;
+  color: #ece9df;
+}
+html .palaver-instrument.palaver-only .chat-message-user {
+  background: linear-gradient(125deg, #12191e, #101417) !important;
+  color: #d7dee0;
+}
+html .palaver-instrument.palaver-only .chat-message-header {
+  color: var(--savant-muted); border-bottom: 0 !important;
+}
+html .palaver-instrument.palaver-only :is(.chat-message-author, .chat-message-header strong) {
+  color: var(--savant-paper); letter-spacing: .09em; text-transform: uppercase;
+  font-size: 10px;
+}
+html .palaver-instrument.palaver-only :is(.chat-message-content, .chat-message-body, .markdown-body) {
+  line-height: 1.72; overflow-wrap: anywhere;
+}
+html .palaver-instrument.palaver-only :is(a, .markdown-body a) {
+  color: #ead49b; text-decoration-color: #82704c; text-underline-offset: 3px;
+}
+html .palaver-instrument.palaver-only blockquote {
+  margin-left: 0; padding-left: 14px; border-left: 2px solid var(--savant-gold);
+  color: #c3c9cb; background: #080a0c20;
+}
+html .palaver-instrument.palaver-only :is(pre, code, kbd, .chat-trace pre, .xterm, .xterm span) {
+  font-family: var(--savant-code) !important;
+}
+html .palaver-instrument.palaver-only pre {
+  padding: 14px; border: 1px solid #475055; border-radius: 6px;
+  background: #10161b; color: #d7e1e7; overflow: auto; max-width: 100%;
+  line-height: 1.6; box-shadow: inset 0 1px #ffffff06;
+}
+html .palaver-instrument.palaver-only :not(pre) > code {
+  color: #eed6a2; background: #080a0c55; padding: .12em .3em; border-radius: 3px;
+}
+html .palaver-instrument.palaver-only :is(.chat-message-content table, .markdown-body table) {
+  border-collapse: collapse; max-width: 100%;
+}
+html .palaver-instrument.palaver-only :is(th, td) {
+  padding: 7px 10px; border: 1px solid #4a5255;
+}
+html .palaver-instrument.palaver-only th { background: #172027; color: #dfc994; }
+html .palaver-instrument.palaver-only :is(button, select, input, textarea, summary) {
+  accent-color: var(--savant-gold);
+}
+html .palaver-instrument.palaver-only button:not(.savant-mark__drag),
+.palaver-urge-panel button {
+  border-color: #4c5354 !important; border-radius: 6px !important;
+  background: linear-gradient(145deg, #283138, #171f25) !important;
+  color: #dcc794 !important;
+  box-shadow: inset 0 1px #f1e5c70a, 0 2px 7px #0003;
+  transition: color 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+@media (hover: hover) {
+  html .palaver-instrument.palaver-only button:not(:disabled):not(.savant-mark__drag):hover,
+  .palaver-urge-panel button:not(:disabled):hover {
+    color: #f2e5c7 !important; border-color: #ae9150 !important;
+    box-shadow: inset 0 1px #f1e5c710, 0 0 14px #d6b45f0c;
+  }
+}
+html .palaver-instrument.palaver-only :is(button.active, button[aria-pressed="true"], button[aria-expanded="true"]),
+.palaver-urge-panel button[aria-pressed="true"] {
+  background: linear-gradient(145deg, #3e3728, #262921) !important;
+  border-color: #b2975b !important; color: #f1dfb4 !important;
+}
+html .palaver-instrument.palaver-only button:disabled {
+  opacity: .48; box-shadow: none; cursor: not-allowed;
+}
+html .palaver-instrument.palaver-only :is(button, select, input, textarea, summary):focus-visible,
+.palaver-urge-panel :is(button, select, input):focus-visible {
+  outline: 2px solid var(--savant-gold) !important; outline-offset: 3px;
+}
+html .palaver-instrument.palaver-only :is(.composer-persona, select, input) {
+  border-color: #4f585b !important; background: #172027 !important;
+  color: var(--savant-paper) !important; border-radius: 6px;
+}
+html .palaver-instrument.palaver-only option { background: #172027; color: #f1e5c7; }
+html .palaver-instrument.palaver-only .chat-composer {
+  background: linear-gradient(125deg, #1b242a, #11181d) !important;
+  border: 1px solid #555448 !important; border-radius: 9px !important;
+  box-shadow: inset 0 1px #f1e5c70c, 0 -9px 35px #0004;
+}
+html .palaver-instrument.palaver-only .chat-composer::before {
+  background: linear-gradient(transparent, var(--savant-void) 85%);
+  border-bottom-color: #9b8350;
+}
+html .palaver-instrument.palaver-only textarea {
+  background: transparent; color: #e4e5de !important; caret-color: var(--savant-gold);
+  font-size: 14px !important;
+}
+html .palaver-instrument.palaver-only textarea::placeholder { color: #a7b0b2; opacity: .8; }
+html .palaver-instrument.palaver-only :is(.composer-hints, .composer-meta, .chat-message-meta) {
+  color: #a0a8aa; font-size: 10px; letter-spacing: .035em;
+}
+html .palaver-instrument.palaver-only :is(.chat-trace, .execution-lineage, details) {
+  border: 0 !important; color: #bcc3c6;
+}
+html .palaver-instrument.palaver-only summary {
+  padding: 8px 0; color: #c8b789; font-size: 10px; letter-spacing: .09em;
+  text-transform: uppercase; cursor: pointer;
+}
+html .palaver-instrument.palaver-only details[open] > summary { color: #f0d9a4; }
+html .palaver-instrument.palaver-only :is(.terminal-observatory, .terminal-stage, .terminal-shell) {
+  background: #0d1318; color: #d4dedf;
+}
+html .palaver-instrument.palaver-only :is(.terminal-toolbar, .terminal-controls, .terminal-tabs) {
+  background: #19232a; border-color: #465157; color: #d6c494;
+}
+html .palaver-instrument.palaver-only :is(.xterm-viewport, .xterm-screen) {
+  scrollbar-width: thin; scrollbar-color: #687074 #11171b;
+}
+html .palaver-instrument.palaver-only .savant-resize-handle {
+  background: linear-gradient(#62543b, #a68b50, #62543b) !important;
+  box-shadow: 0 0 8px #d6b45f12;
+}
+html .palaver-instrument.palaver-only .workstation-statusbar {
+  color: #a8b2b6; background: #0e151a; border-top: 1px solid #344047;
+  letter-spacing: .09em; font-size: 9px;
+}
+html .palaver-instrument.palaver-only :is(.status-dot, .connection-dot) {
+  box-shadow: 0 0 7px currentColor;
+}
+html .palaver-instrument.palaver-only :is([role="dialog"], .command-palette, .help-panel) {
+  color: var(--savant-paper); background: #202930; border-color: #69614b;
+  border-radius: 8px; box-shadow: 0 20px 80px #000a, inset 0 1px #ffffff08;
+}
+.palaver-urge-panel, .palaver-help-tooltip {
+  color: var(--savant-paper); background: linear-gradient(135deg, #29333b, #192129);
+  border-color: #9a824b; border-radius: 8px;
+  font-family: var(--savant-body); box-shadow: 0 20px 80px #000b, inset 0 1px #ffffff09;
+}
+.palaver-urge-panel :is(select, input) {
+  background: #121a20; color: var(--savant-paper); border: 1px solid #62665b;
+  border-radius: 5px; padding: 5px 7px;
+}
+.palaver-help-tooltip { font-size: 12px; line-height: 1.6; }
+
+.savant-mark__material-control select {
+  background: linear-gradient(145deg, #263139, #141d24);
+  border-color: #786b4a; color: var(--savant-paper);
+}
+.savant-mark__gleam {
+  background:
+    radial-gradient(ellipse at 42% 35%, #e0eaf227, #d6b45f0d 34%, #ff2f9d06 52%, transparent 75%);
+}
+@media (prefers-reduced-motion: reduce) {
+  html .palaver-instrument.palaver-only *,
+  .palaver-urge-panel *, .savant-mark__material-control * {
+    transition: none !important; animation: none !important; scroll-behavior: auto !important;
+  }
+}
+@media (forced-colors: active) {
+  html .palaver-instrument.palaver-only :is(button, select, textarea, input),
+  .palaver-urge-panel { border: 1px solid ButtonText !important; }
+}
+/* Derived visual projection for the copper/titanium identity. */
+:root {
+  --savant-void: #071013;
+  --savant-gunmetal: #1a3035;
+  --savant-steel: #42666b;
+  --savant-paper: #dce9e6;
+  --savant-silver: #a9c7c7;
+  --savant-gold: #b79b6b;
+  --savant-pink: #80c9b8;
+  --savant-edge: #365a60;
+  --savant-muted: #92aaa9;
+  --savant-body: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --savant-display: "Oxanium", "Arial Narrow", sans-serif;
+}
+html .palaver-instrument,
+html .palaver-industrial {
+  font-family: var(--savant-body);
+}
+html .palaver-instrument h1,
+html .palaver-instrument h2,
+html .palaver-instrument h3,
+html .palaver-industrial h1,
+html .palaver-industrial h2,
+html .palaver-industrial h3 {
+  font-family: var(--savant-display);
+  letter-spacing: .035em;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html .palaver-industrial button,
+  html .palaver-industrial a {
+    transition: color 180ms ease, border-color 180ms ease,
+      background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+  }
+  html .palaver-industrial button:hover:not(:disabled) {
+    transform: translateY(-1px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html .palaver-industrial *,
+  html .palaver-instrument * {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Palaver surface projection: interaction is conveyed by edge illumination,
+   without changing semantic structure or reserving new layout space. */
+html .palaver-instrument.palaver-only {
+  --palaver-oxide: #5e9d8b;
+  --palaver-titanium: #b4c9ce;
+  --palaver-copper: #a87a53;
+  --palaver-focus: #b3f1de;
+  --palaver-inset: #0b171b;
+  --palaver-seam: color-mix(in srgb, var(--palaver-oxide) 35%, transparent);
+  accent-color: var(--palaver-oxide);
+}
+html .palaver-instrument.palaver-only :is(button,a,[role="tab"],[role="menuitem"],input,textarea,select):focus-visible {
+  outline: 2px solid var(--palaver-focus) !important;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 5px #0b171b, 0 0 0 6px #8cd8c344 !important;
+}
+html .palaver-instrument.palaver-only :is(button,[role="tab"],[role="menuitem"]) {
+  position: relative;
+  isolation: isolate;
+}
+html .palaver-instrument.palaver-only :is(button,[role="tab"],[role="menuitem"]):not(:disabled):is(:hover,:focus-visible) {
+  border-color: var(--palaver-oxide);
+  box-shadow: inset 0 1px 0 #c2e7dd24, 0 0 22px #76cdb41b;
+}
+html .palaver-instrument.palaver-only :is([role="dialog"],[role="tabpanel"],.palaver-panel,.observatory-panel) {
+  background-image: linear-gradient(145deg,#b3d5d509,transparent 42%,#a77d4910);
+  background-clip: padding-box;
+}
+html .palaver-instrument.palaver-only :is([role="dialog"],.palaver-panel,.observatory-panel):focus-within {
+  border-color: var(--palaver-seam);
+}
+html .palaver-instrument.palaver-only :is(input,textarea,select) {
+  min-width: 0;
+  max-width: 100%;
+  font-family: var(--savant-body);
+}
+html .palaver-instrument.palaver-only :is(button,[role="tab"],[role="menuitem"]) {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+html .palaver-instrument.palaver-only :is(h1,h2,h3) {
+  text-wrap: balance;
+}
+html .palaver-instrument.palaver-only :is(p,li) {
+  overflow-wrap: break-word;
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference) {
+  html .palaver-instrument.palaver-only :is(button,[role="tab"],[role="menuitem"]):not(:disabled) {
+    transition: border-color 220ms ease, box-shadow 260ms ease, background-color 220ms ease, color 220ms ease;
+  }
+}
+@media (max-width:640px) {
+  html .palaver-instrument.palaver-only :is([role="dialog"],.palaver-panel,.observatory-panel) {
+    max-width: min(100%,100vw);
+  }
+  html .palaver-instrument.palaver-only :is(button,[role="tab"],[role="menuitem"]) {
+    min-height: 40px;
+  }
+}
+@media (prefers-reduced-motion:reduce) {
+  html .palaver-instrument.palaver-only :is(button,[role="tab"],[role="menuitem"]) {
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Shared industrial surfaces, scoped to Palaver. A single material grammar
+   serves navigation, panels and messages without creating duplicate state. */
+html .palaver-instrument.palaver-only :is(.workstation-topbar,.chat-hero,.terminal-hero,.terminal-header) {
+  border-image: linear-gradient(90deg,#58877e44,#bb8b6040,#85c3b25c) 1;
+}
+html .palaver-instrument.palaver-only :is(.chat-message,.palaver-panel,.observatory-panel,[role="dialog"]) {
+  background-blend-mode: screen,normal;
+  box-shadow: inset 0 1px #c7ede311, inset 1px 0 #8bc7b30a, 0 12px 34px #0006;
+}
+html .palaver-instrument.palaver-only :is(.chat-message,.palaver-panel,.observatory-panel,[role="dialog"]):focus-within {
+  box-shadow: inset 0 1px #c7ede31c, 0 0 0 1px #71ae9d44, 0 12px 34px #0006;
+}
+html .palaver-instrument.palaver-only :is(.topbar-brand,.chat-hero-title,.terminal-hero h1) {
+  text-shadow: 0 1px 0 #000, 0 0 18px #7ab5a221;
+}
+@media (prefers-reduced-motion:reduce) {
+  html .palaver-instrument.palaver-only :is(.chat-message,.palaver-panel,.observatory-panel,[role="dialog"]) {
+    transition: none !important;
+  }
+}

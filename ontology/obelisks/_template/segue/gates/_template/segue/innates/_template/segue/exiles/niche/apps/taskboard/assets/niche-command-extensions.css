@@ -1,0 +1,32 @@
+/*
+ * savant / niche
+ * command environment extensions
+ * authority_effect: none
+ */
+
+html[data-niche-task-authority="unavailable"]
+    [data-view="living"],
+html[data-niche-task-authority="unavailable"]
+    [data-view="history"] {
+    opacity: 1;
+}
+
+html[data-niche-task-authority="unavailable"]
+    [data-view="execute"],
+html[data-niche-task-authority="unavailable"]
+    [data-view="flow"],
+html[data-niche-task-authority="unavailable"]
+    [data-view="constellation"],
+html[data-niche-task-authority="unavailable"]
+    [data-view="objectives"],
+html[data-niche-task-authority="unavailable"]
+    [data-view="evidence"] {
+    opacity: .58;
+}
+
+html[data-niche-task-authority="unavailable"]
+    [data-view="execute"].active,
+html[data-niche-task-authority="unavailable"]
+    [data-view="execute"][aria-current="page"] {
+    opacity: 1;
+}

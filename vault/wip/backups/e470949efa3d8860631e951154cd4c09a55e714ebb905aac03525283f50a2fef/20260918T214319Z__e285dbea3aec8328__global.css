@@ -1,0 +1,670 @@
+/* artemis interface evolution layer */
+
+:root {
+  --pointer-x: 50%;
+  --pointer-y: 50%;
+  --hud: rgba(221, 232, 238, 0.58);
+  --hud-dim: rgba(221, 232, 238, 0.18);
+  --hud-faint: rgba(221, 232, 238, 0.075);
+  --glass: rgba(5, 9, 12, 0.52);
+  --glass-heavy: rgba(5, 9, 12, 0.82);
+}
+
+.pointer-light {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      700px circle at var(--pointer-x) var(--pointer-y),
+      rgba(130, 182, 215, 0.055),
+      transparent 48%
+    );
+}
+
+.hero {
+  isolation: isolate;
+  perspective: 1600px;
+}
+
+.hero-depth-grid {
+  position: absolute;
+  z-index: -1;
+  left: -15%;
+  right: -15%;
+  bottom: -15vh;
+  height: 68vh;
+  opacity: 0.15;
+  pointer-events: none;
+  transform:
+    rotateX(72deg)
+    translateZ(-140px);
+  transform-origin: 50% 100%;
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,.12) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.12) 1px,
+      transparent 1px
+    );
+  background-size: 74px 74px;
+  mask-image:
+    linear-gradient(
+      to top,
+      black,
+      transparent 92%
+    );
+}
+
+.hero-title-mask {
+  display: block;
+  overflow: hidden;
+  perspective: 900px;
+}
+
+.hero-title-line {
+  display: block;
+  transform-origin: 0 100%;
+}
+
+.hero-narrative {
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+  max-width: 660px;
+}
+
+.hero-narrative-index {
+  padding-top: 7px;
+  color: var(--hud);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 8px;
+  letter-spacing: .18em;
+}
+
+.hero-orbit-ui {
+  transform-style: preserve-3d;
+}
+
+.orbit-axis {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  opacity: .24;
+  background: var(--hud);
+}
+
+.axis-x {
+  width: 130%;
+  height: 1px;
+  transform: translate(-50%, -50%);
+}
+
+.axis-y {
+  width: 1px;
+  height: 130%;
+  transform: translate(-50%, -50%);
+}
+
+.ring-three {
+  width: 71%;
+  height: 71%;
+  left: 14.5%;
+  top: 14.5%;
+  opacity: .18;
+  border-style: dotted;
+  animation:
+    artemis-orbit-spin 35s linear infinite reverse;
+}
+
+.orbit-body {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 8px;
+  letter-spacing: .2em;
+  color: var(--hud);
+}
+
+.orbit-body i {
+  display: block;
+  width: 7px;
+  height: 7px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 4px rgba(255,255,255,.025),
+    0 0 18px rgba(130,182,215,.3);
+}
+
+.earth-body {
+  left: 8%;
+  bottom: 18%;
+}
+
+.moon-body {
+  right: 7%;
+  top: 21%;
+}
+
+.coordinate-a {
+  left: 4%;
+  top: 47%;
+}
+
+.coordinate-b {
+  right: 2%;
+  bottom: 36%;
+  writing-mode: vertical-rl;
+}
+
+.flight-console {
+  position: absolute;
+  z-index: 8;
+  right: 3.2vw;
+  top: 22vh;
+  width: clamp(230px, 18vw, 330px);
+  border:
+    1px solid var(--hud-dim);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(7,11,14,.72),
+      rgba(7,11,14,.25)
+    );
+  backdrop-filter:
+    blur(18px)
+    saturate(115%);
+  box-shadow:
+    0 28px 80px rgba(0,0,0,.28);
+}
+
+.flight-console::before,
+.flight-console::after {
+  content: "";
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  pointer-events: none;
+}
+
+.flight-console::before {
+  left: -1px;
+  top: -1px;
+  border-left: 1px solid var(--text);
+  border-top: 1px solid var(--text);
+}
+
+.flight-console::after {
+  right: -1px;
+  bottom: -1px;
+  border-right: 1px solid var(--text);
+  border-bottom: 1px solid var(--text);
+}
+
+.flight-console header {
+  height: 45px;
+  padding: 0 14px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 11px;
+  border-bottom:
+    1px solid var(--hud-dim);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 7px;
+  letter-spacing: .16em;
+}
+
+.flight-console header i {
+  height: 1px;
+  background: var(--hud-dim);
+}
+
+.flight-console header strong {
+  color: #a7d6b4;
+  font-weight: 500;
+}
+
+.console-row {
+  min-height: 44px;
+  padding: 0 14px;
+  display: grid;
+  grid-template-columns:
+    24px 1fr auto;
+  align-items: center;
+  border-bottom:
+    1px solid var(--hud-faint);
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.console-row > span {
+  color: rgba(255,255,255,.25);
+  font-size: 7px;
+}
+
+.console-row small {
+  color: var(--muted);
+  font-size: 7px;
+  letter-spacing: .15em;
+}
+
+.console-row strong {
+  font-size: 8px;
+  letter-spacing: .12em;
+  font-weight: 500;
+}
+
+.console-vector {
+  position: relative;
+  height: 90px;
+  overflow: hidden;
+}
+
+.console-vector > i {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  height: 1px;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--hud-dim),
+      transparent
+    );
+}
+
+.console-vector > i:nth-child(1) {
+  top: 20%;
+}
+
+.console-vector > i:nth-child(2) {
+  top: 40%;
+}
+
+.console-vector > i:nth-child(3) {
+  top: 60%;
+}
+
+.console-vector > i:nth-child(4) {
+  top: 80%;
+}
+
+.console-vector span {
+  position: absolute;
+  inset: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 7px;
+  letter-spacing: .15em;
+}
+
+.console-vector b {
+  position: relative;
+  flex: 1;
+  height: 1px;
+  margin: 0 12px;
+  background:
+    linear-gradient(
+      90deg,
+      var(--blue),
+      rgba(255,255,255,.15)
+    );
+}
+
+.console-vector b::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -2px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--text);
+  box-shadow:
+    0 0 12px var(--blue);
+}
+
+.chapter-rail {
+  position: fixed;
+  z-index: 91;
+  left: 22px;
+  top: 50%;
+  display: flex;
+  gap: 13px;
+  transform: translateY(-50%);
+}
+
+.chapter-progress {
+  position: relative;
+  width: 1px;
+  height: 218px;
+  background:
+    rgba(255,255,255,.11);
+}
+
+.chapter-progress i {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  min-height: 3px;
+  background: var(--text);
+}
+
+.chapter-list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.chapter-list button {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  align-items: center;
+  gap: 7px;
+  padding: 2px 0;
+  background: none;
+  cursor: pointer;
+  color: rgba(255,255,255,.28);
+  text-align: left;
+  transition:
+    color .25s ease,
+    transform .25s ease;
+}
+
+.chapter-list button span,
+.chapter-list button strong {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 6px;
+  letter-spacing: .14em;
+}
+
+.chapter-list button strong {
+  opacity: 0;
+  transform: translateX(-6px);
+  transition:
+    opacity .25s ease,
+    transform .25s ease;
+}
+
+.chapter-list button.active {
+  color: var(--text);
+  transform: translateX(3px);
+}
+
+.chapter-list button.active strong,
+.chapter-list button:hover strong {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.global-telemetry {
+  position: fixed;
+  z-index: 90;
+  right: 19px;
+  bottom: 18px;
+  display: flex;
+  align-items: stretch;
+  border:
+    1px solid rgba(255,255,255,.09);
+  background:
+    rgba(3,5,7,.44);
+  backdrop-filter: blur(12px);
+}
+
+.global-telemetry > div {
+  min-width: 96px;
+  padding: 9px 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-right:
+    1px solid rgba(255,255,255,.07);
+}
+
+.global-telemetry > div:last-child {
+  border-right: 0;
+}
+
+.global-telemetry small,
+.global-telemetry strong {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 6px;
+  letter-spacing: .14em;
+}
+
+.global-telemetry small {
+  color: var(--muted);
+}
+
+.global-telemetry strong {
+  font-size: 7px;
+  font-weight: 500;
+}
+
+.section-number {
+  position: absolute;
+  right: 3vw;
+  top: 2vw;
+  pointer-events: none;
+  color: rgba(255,255,255,.025);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(130px, 25vw, 420px);
+  line-height: .75;
+  letter-spacing: -.09em;
+}
+
+.content-section {
+  overflow: hidden;
+}
+
+.trajectory-section {
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.trajectory-backplane {
+  position: absolute;
+  inset: -35%;
+  z-index: -1;
+  opacity: .14;
+  transform: perspective(900px) rotateX(65deg);
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,.12) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.12) 1px,
+      transparent 1px
+    );
+  background-size: 55px 55px;
+  mask-image:
+    radial-gradient(
+      circle,
+      black,
+      transparent 68%
+    );
+}
+
+.horizon-scan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 45%;
+  height: 1px;
+  opacity: .6;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(130,182,215,.8),
+      transparent
+    );
+  box-shadow:
+    0 0 30px rgba(130,182,215,.4);
+  animation:
+    artemis-horizon-scan
+    5s ease-in-out infinite;
+}
+
+.gateway-object {
+  transform-style: preserve-3d;
+}
+
+.gateway-halo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border:
+    1px solid rgba(130,182,215,.14);
+  border-radius: 50%;
+  transform:
+    translate(-50%, -50%)
+    rotateX(66deg);
+}
+
+.halo-a {
+  width: 78%;
+  aspect-ratio: 1;
+  animation:
+    artemis-orbit-spin
+    30s linear infinite;
+}
+
+.halo-b {
+  width: 112%;
+  aspect-ratio: 1;
+  border-style: dashed;
+  animation:
+    artemis-orbit-spin
+    55s linear infinite reverse;
+}
+
+.future-section {
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.future-coordinate {
+  position: absolute;
+  right: 3vw;
+  top: 50%;
+  color: rgba(255,255,255,.22);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 7px;
+  letter-spacing: .28em;
+  writing-mode: vertical-rl;
+}
+
+.future-rings i:nth-child(4) {
+  width: 130%;
+  height: 130%;
+  opacity: .08;
+  border-style: dotted;
+}
+
+@keyframes artemis-orbit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes artemis-horizon-scan {
+  0%,
+  100% {
+    transform:
+      translateY(-100px)
+      scaleX(.7);
+    opacity: 0;
+  }
+
+  20%,
+  80% {
+    opacity: .55;
+  }
+
+  50% {
+    transform:
+      translateY(100px)
+      scaleX(1);
+  }
+}
+
+@media (max-width: 1180px) {
+  .flight-console {
+    right: 24px;
+    width: 245px;
+  }
+
+  .chapter-rail {
+    display: none;
+  }
+
+  .global-telemetry {
+    right: 12px;
+    bottom: 12px;
+  }
+}
+
+@media (max-width: 820px) {
+  .flight-console {
+    display: none;
+  }
+
+  .hero-narrative {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-narrative-index {
+    display: none;
+  }
+
+  .global-telemetry {
+    left: 12px;
+    right: 12px;
+    justify-content: stretch;
+  }
+
+  .global-telemetry > div {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .global-telemetry > div:nth-child(2) {
+    display: none;
+  }
+
+  .hero-depth-grid {
+    opacity: .09;
+  }
+
+  .section-number {
+    font-size: 42vw;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ring-three,
+  .horizon-scan,
+  .halo-a,
+  .halo-b {
+    animation: none;
+  }
+
+  .pointer-light {
+    display: none;
+  }
+}

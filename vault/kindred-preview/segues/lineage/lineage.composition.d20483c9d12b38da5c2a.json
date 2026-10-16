@@ -1,0 +1,66 @@
+{
+  "authoritative": false,
+  "child_profile": "daughter",
+  "deterministic_hash": "d99981a7acbea1261b955456f735ec1f9fbfac77f663ea42b858e00077e1a13e",
+  "domain": "filesystem",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "lineage.composition.d20483c9d12b38da5c2a",
+  "impeti": [],
+  "namespace": "preview.kindred",
+  "parent_profile": "parent",
+  "plane": "lineage",
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "role": "composition",
+  "schema": "savant.kindred.preview.lineage_segue.v2",
+  "source": "ontology/obelisks/segue/authority_graph/instances",
+  "source_record": {
+    "axis": "containment",
+    "canonical_source": "fs:ontology/obelisks/segue/authority_graph/instances",
+    "canonical_target": "fs:ontology/obelisks/segue/authority_graph/instances/script",
+    "continuation": "preserving",
+    "id": "lineage.composition.d20483c9d12b38da5c2a",
+    "inheritance": {
+      "conflict_policy": "child_wins",
+      "exclude": [],
+      "fields": [],
+      "mode": "reference"
+    },
+    "inverse": "component",
+    "kind": "contains",
+    "metadata": {
+      "legacy_edge_kind": "contains",
+      "projection": "filesystem_edifice"
+    },
+    "order": 0,
+    "propagation": {
+      "channels": [
+        "validation",
+        "projection",
+        "regeneration"
+      ],
+      "enabled": true
+    },
+    "provenance": {
+      "created_by": "filesystem_adapter",
+      "source_files": [
+        "/root/savant-runtime/ontology/obelisks/segue/authority_graph/instances/script"
+      ]
+    },
+    "role": "composition",
+    "scope": "filesystem",
+    "source": "ontology/obelisks/segue/authority_graph/instances",
+    "status": "active",
+    "symbolic_child_alias": "daughter",
+    "symbolic_parent_alias": "parent",
+    "target": "ontology/obelisks/segue/authority_graph/instances/script",
+    "weight": 2
+  },
+  "state": "active",
+  "synthetic": false,
+  "target": "ontology/obelisks/segue/authority_graph/instances/script"
+}

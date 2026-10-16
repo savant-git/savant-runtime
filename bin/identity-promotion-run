@@ -1,0 +1,454 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import json
+import subprocess
+import sys
+from pathlib import Path
+from typing import Any
+
+
+ROOT = Path("/root/savant-runtime")
+
+PYTHON = (
+    ROOT
+    / "bin"
+    / "identity-quality-python"
+)
+
+EXECUTION_CONTROLLER = (
+    ROOT
+    / "bin"
+    / "identity-promotion-execution"
+)
+
+RUNNER = (
+    ROOT
+    / "tools"
+    / "identity_quality"
+    / "promotion"
+    / "run_promotion_execution.py"
+)
+
+REPORT_ROOT = (
+    ROOT
+    / "reports"
+    / "identity_quality"
+    / "promotion"
+    / "runs"
+)
+
+
+def execute(
+    command: list[str],
+) -> int:
+    return subprocess.run(
+        command,
+        cwd=str(ROOT),
+        check=False,
+    ).returncode
+
+
+def latest_paths() -> list[Path]:
+    if not REPORT_ROOT.is_dir():
+        return []
+
+    return sorted(
+        (
+            path
+            for path in REPORT_ROOT.glob(
+                "*/latest.json"
+            )
+            if path.is_file()
+        ),
+        key=lambda path: (
+            path.stat().st_mtime_ns,
+            path.as_posix(),
+        ),
+        reverse=True,
+    )
+
+
+def latest_path() -> Path | None:
+    paths = latest_paths()
+
+    if not paths:
+        return None
+
+    return paths[0]
+
+
+def load_json(
+    path: Path,
+) -> dict[str, Any]:
+    value = json.loads(
+        path.read_text(
+            encoding="utf-8",
+        )
+    )
+
+    if not isinstance(value, dict):
+        raise ValueError(
+            f"Expected JSON object: {path}"
+        )
+
+    return value
+
+
+def print_file(
+    path: Path | None,
+) -> int:
+    if (
+        path is None
+        or not path.is_file()
+    ):
+        print(
+            "ERROR: no promotion run exists.",
+            file=sys.stderr,
+        )
+
+        return 1
+
+    print(
+        path.read_text(
+            encoding="utf-8",
+        ),
+        end="",
+    )
+
+    return 0
+
+
+def run(
+    *,
+    refresh_execution: bool,
+    apply: bool,
+    strict: bool,
+    remaining: list[str],
+) -> int:
+    if refresh_execution:
+        status = execute(
+            [
+                str(
+                    EXECUTION_CONTROLLER
+                ),
+                (
+                    "refresh-strict"
+                    if strict
+                    else "refresh"
+                ),
+            ]
+        )
+
+        if status:
+            return status
+
+    command = [
+        str(PYTHON),
+        str(RUNNER),
+    ]
+
+    if apply:
+        command.append(
+            "--apply"
+        )
+
+    if strict:
+        command.append(
+            "--strict"
+        )
+
+    command.extend(
+        remaining
+    )
+
+    return execute(
+        command
+    )
+
+
+def status() -> int:
+    path = latest_path()
+
+    result: dict[str, object] = {
+        "runner": str(RUNNER),
+        "runner_exists": (
+            RUNNER.is_file()
+        ),
+        "report_root": str(
+            REPORT_ROOT
+        ),
+        "report_root_exists": (
+            REPORT_ROOT.is_dir()
+        ),
+        "latest_run": (
+            str(path)
+            if path
+            else None
+        ),
+        "latest_run_exists": (
+            path.is_file()
+            if path
+            else False
+        ),
+    }
+
+    if (
+        path is not None
+        and path.is_file()
+    ):
+        try:
+            value = load_json(path)
+
+            result[
+                "generated_at"
+            ] = value.get(
+                "generated_at"
+            )
+
+            result[
+                "mode"
+            ] = value.get(
+                "mode"
+            )
+
+            result[
+                "passed"
+            ] = value.get(
+                "passed"
+            )
+
+            result[
+                "digest"
+            ] = value.get(
+                "digest"
+            )
+
+            result[
+                "subject"
+            ] = value.get(
+                "subject"
+            )
+
+            result[
+                "statistics"
+            ] = value.get(
+                "statistics"
+            )
+
+            result[
+                "transaction"
+            ] = value.get(
+                "transaction"
+            )
+
+            result[
+                "rollback"
+            ] = value.get(
+                "rollback"
+            )
+
+        except Exception as exc:
+            result[
+                "read_error"
+            ] = {
+                "type": type(
+                    exc
+                ).__name__,
+                "message": str(
+                    exc
+                ),
+            }
+
+    print(
+        json.dumps(
+            result,
+            ensure_ascii=False,
+            indent=2,
+            sort_keys=True,
+        )
+    )
+
+    return 0
+
+
+def stages() -> int:
+    path = latest_path()
+
+    if (
+        path is None
+        or not path.is_file()
+    ):
+        print(
+            "ERROR: no promotion run exists.",
+            file=sys.stderr,
+        )
+
+        return 1
+
+    value = load_json(path)
+
+    print(
+        json.dumps(
+            {
+                "subject": value.get(
+                    "subject"
+                ),
+                "mode": value.get(
+                    "mode"
+                ),
+                "passed": value.get(
+                    "passed"
+                ),
+                "stages": value.get(
+                    "stages"
+                ),
+                "rollback": value.get(
+                    "rollback"
+                ),
+            },
+            ensure_ascii=False,
+            indent=2,
+            sort_keys=True,
+        )
+    )
+
+    return 0
+
+
+def usage() -> int:
+    print(
+        """
+identity-promotion-run plan
+identity-promotion-run plan-strict
+identity-promotion-run refresh-plan
+identity-promotion-run refresh-plan-strict
+identity-promotion-run apply
+identity-promotion-run apply-strict
+identity-promotion-run refresh-apply
+identity-promotion-run refresh-apply-strict
+identity-promotion-run status
+identity-promotion-run stages
+identity-promotion-run json
+identity-promotion-run show
+"""
+    )
+
+    return 0
+
+
+def main() -> int:
+    arguments = sys.argv[1:]
+
+    if not arguments:
+        return usage()
+
+    command = arguments[0]
+    remaining = arguments[1:]
+
+    if command in {
+        "help",
+        "--help",
+        "-h",
+    }:
+        return usage()
+
+    if command == "plan":
+        return run(
+            refresh_execution=False,
+            apply=False,
+            strict=False,
+            remaining=remaining,
+        )
+
+    if command == "plan-strict":
+        return run(
+            refresh_execution=False,
+            apply=False,
+            strict=True,
+            remaining=remaining,
+        )
+
+    if command == "refresh-plan":
+        return run(
+            refresh_execution=True,
+            apply=False,
+            strict=False,
+            remaining=remaining,
+        )
+
+    if command == "refresh-plan-strict":
+        return run(
+            refresh_execution=True,
+            apply=False,
+            strict=True,
+            remaining=remaining,
+        )
+
+    if command == "apply":
+        return run(
+            refresh_execution=False,
+            apply=True,
+            strict=False,
+            remaining=remaining,
+        )
+
+    if command == "apply-strict":
+        return run(
+            refresh_execution=False,
+            apply=True,
+            strict=True,
+            remaining=remaining,
+        )
+
+    if command == "refresh-apply":
+        return run(
+            refresh_execution=True,
+            apply=True,
+            strict=False,
+            remaining=remaining,
+        )
+
+    if command == "refresh-apply-strict":
+        return run(
+            refresh_execution=True,
+            apply=True,
+            strict=True,
+            remaining=remaining,
+        )
+
+    if command == "status":
+        return status()
+
+    if command == "stages":
+        return stages()
+
+    if command == "json":
+        return print_file(
+            latest_path()
+        )
+
+    if command == "show":
+        path = latest_path()
+
+        if path is None:
+            return print_file(None)
+
+        return print_file(
+            path.with_name(
+                "latest.md"
+            )
+        )
+
+    print(
+        f"ERROR: unknown command: {command}",
+        file=sys.stderr,
+    )
+
+    return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

@@ -1,0 +1,17 @@
+schema: "savant://projection/identity/segue-instance/1.0.0"
+id: "segue:identity:exile:graffiti:prodigal"
+canonical: "lex:core:segue"
+kind: "segue"
+status: "active"
+authority_effect: "none"
+from: "exile:graffiti"
+to_kind: "prodigal"
+relation: "contains"
+direction: "directed"
+rules:
+  - "the segue transitions between the exile and its prodigals without duplicating endpoint substance"
+  - "shared transition-scope behavior belongs to the segue only when genuinely shared across the transition"
+  - "filesystem presence does not establish authority"
+provenance:
+  decision: "authority/accepted-decisions/ad-20261003-001-materialize-eighteen-exiles-and-segues.md"
+generated_by: "savant.identity-edifice-reconciler.v1"

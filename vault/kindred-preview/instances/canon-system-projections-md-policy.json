@@ -1,0 +1,109 @@
+{
+  "authoritative": false,
+  "authority_tier": "delegated",
+  "canonical_id": "fs:canon-system/projections/md/policy",
+  "deterministic_hash": "ffb2b9e4e0848d800aee09ff53cf4f704d0ac2cec51740bf15ee5098bb7fdaa5",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "canon-system/projections/md/policy",
+  "kind": "directory",
+  "label": "policy",
+  "namespace": "preview.kindred",
+  "path": "canon-system/projections/md/policy",
+  "placement": {
+    "domain": "filesystem",
+    "node": "canon-system/projections/md/policy",
+    "parent": "canon-system/projections/md",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.85b5ee71629d38ce9403",
+    "rank": 40,
+    "slot": "20_authority",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.173efb5f8df9d3bd06b1",
+    "lineage.composition.85b5ee71629d38ce9403",
+    "lineage.composition.9731e3553de389170a16",
+    "lineage.composition.a224e4cf62da1aaf99cc"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": false,
+    "canonical_id": "fs:canon-system/projections/md/policy",
+    "children": [
+      "canon-system/projections/md/policy/supersession.md",
+      "canon-system/projections/md/policy/unknowns.md",
+      "canon-system/projections/md/policy/projection.md"
+    ],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "canon-system/projections/md/policy",
+    "kind": "directory",
+    "label": "policy",
+    "legacy_id": "canon-system/projections/md/policy",
+    "lineage": [
+      "canon-system/projections/md"
+    ],
+    "metadata": {
+      "canonical_id": "fs:canon-system/projections/md/policy",
+      "child_modes": {
+        "projecting": [
+          "fs:canon-system/projections/md/policy/supersession.md",
+          "fs:canon-system/projections/md/policy/unknowns.md",
+          "fs:canon-system/projections/md/policy/projection.md"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:canon-system/projections/md/policy/supersession.md",
+          "fs:canon-system/projections/md/policy/unknowns.md",
+          "fs:canon-system/projections/md/policy/projection.md"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:canon-system/projections/md"
+        ]
+      },
+      "projected_id": "canon-system/projections/md/policy",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "canon-system/projections/md"
+    ],
+    "path": "canon-system/projections/md/policy",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "canon-system/projections/md/policy",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.173efb5f8df9d3bd06b1",
+      "lineage.composition.85b5ee71629d38ce9403",
+      "lineage.composition.9731e3553de389170a16",
+      "lineage.composition.a224e4cf62da1aaf99cc"
+    ],
+    "size": 12,
+    "sons": [
+      "canon-system/projections/md/policy/supersession.md",
+      "canon-system/projections/md/policy/unknowns.md",
+      "canon-system/projections/md/policy/projection.md"
+    ]
+  },
+  "state": "active",
+  "synthetic": false
+}

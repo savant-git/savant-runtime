@@ -1,0 +1,76 @@
+{
+  "authoritative": false,
+  "child_profile": "child",
+  "deterministic_hash": "5d86d531c7f6d6ce79bfbfa078e155f3ecb29f5e544bf52239b71dca9849ec5a",
+  "domain": "global",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "lineage.source.e12bbc104bd5e55202a6",
+  "impeti": [],
+  "namespace": "preview.kindred",
+  "parent_profile": "mother",
+  "plane": "lineage",
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "role": "source",
+  "schema": "savant.kindred.preview.lineage_segue.v2",
+  "source": "snippet.example.header",
+  "source_record": {
+    "axis": "substance",
+    "canonical_source": "snippet.example.header",
+    "canonical_target": "script.example",
+    "continuation": "neutral",
+    "id": "lineage.source.e12bbc104bd5e55202a6",
+    "inheritance": {
+      "conflict_policy": "child_wins",
+      "exclude": [],
+      "fields": [
+        "dna",
+        "content",
+        "data",
+        "capabilities",
+        "metadata"
+      ],
+      "mode": "merge"
+    },
+    "inverse": "derived",
+    "kind": "source",
+    "metadata": {
+      "adapter": "authority",
+      "source_field": "lineage.composed_from",
+      "source_path": "/root/savant-runtime/ontology/obelisks/segue/authority_graph/instances/content/scripts/example_script_instance.json"
+    },
+    "order": 0,
+    "propagation": {
+      "channels": [
+        "validation",
+        "projection",
+        "regeneration"
+      ],
+      "enabled": true
+    },
+    "provenance": {
+      "created_by": "authority_adapter",
+      "created_from": [
+        "/root/savant-runtime/ontology/obelisks/segue/authority_graph/instances/content/scripts/example_script_instance.json"
+      ],
+      "source_files": [
+        "/root/savant-runtime/ontology/obelisks/segue/authority_graph/instances/content/scripts/example_script_instance.json"
+      ]
+    },
+    "role": "source",
+    "scope": "global",
+    "source": "snippet.example.header",
+    "status": "active",
+    "symbolic_child_alias": "child",
+    "symbolic_parent_alias": "mother",
+    "target": "script.example",
+    "weight": 2
+  },
+  "state": "active",
+  "synthetic": false,
+  "target": "script.example"
+}

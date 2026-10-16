@@ -1,0 +1,547 @@
+:root {
+  --palaver-ease:
+    cubic-bezier(.22,.72,.18,1);
+  --palaver-fast: 150ms;
+  --palaver-medium: 320ms;
+  --palaver-slow: 680ms;
+}
+
+.palaver {
+  isolation: isolate;
+}
+
+.palaver::after {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      720px circle at
+      var(--palaver-x, 50vw)
+      var(--palaver-y, 50vh),
+      rgba(215,255,84,.025),
+      transparent 62%
+    );
+}
+
+.palaver-head {
+  transition:
+    background var(--palaver-medium)
+      var(--palaver-ease),
+    border-color var(--palaver-medium)
+      var(--palaver-ease),
+    backdrop-filter var(--palaver-medium)
+      var(--palaver-ease);
+}
+
+.palaver.is-thinking
+.palaver-head {
+  border-color:
+    rgba(215,255,84,.08);
+}
+
+.palaver-mark {
+  position: relative;
+  overflow: hidden;
+}
+
+.palaver-mark::after {
+  content: "";
+  position: absolute;
+  inset: -25%;
+  opacity: 0;
+  background:
+    radial-gradient(
+      circle,
+      rgba(215,255,84,.2),
+      transparent 62%
+    );
+  transform: scale(.45);
+  transition:
+    opacity var(--palaver-medium)
+      var(--palaver-ease),
+    transform var(--palaver-medium)
+      var(--palaver-ease);
+}
+
+.palaver-mark:hover::after,
+.palaver-mark:focus-visible::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.palaver-mark > span {
+  position: relative;
+  z-index: 1;
+}
+
+.palaver-identity strong {
+  text-wrap: balance;
+}
+
+.palaver-stage {
+  perspective: 1200px;
+}
+
+.conversation {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color:
+    rgba(255,255,255,.1)
+    transparent;
+}
+
+.conversation::-webkit-scrollbar {
+  width: 6px;
+}
+
+.conversation::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.conversation::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background:
+    rgba(255,255,255,.08);
+}
+
+.conversation::-webkit-scrollbar-thumb:hover {
+  background:
+    rgba(255,255,255,.16);
+}
+
+.message-column {
+  position: relative;
+}
+
+.palaver-message-anchor {
+  transform-origin: 50% 50%;
+}
+
+.palaver-message-anchor.active {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(215,255,84,.018),
+      transparent 25%
+    );
+}
+
+.palaver-message-anchor:focus-within {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(215,255,84,.028),
+      transparent 32%
+    );
+}
+
+.palaver-message-anchor
+button {
+  transition:
+    color var(--palaver-fast)
+      ease,
+    border-color var(--palaver-fast)
+      ease,
+    background var(--palaver-fast)
+      ease,
+    transform var(--palaver-fast)
+      ease;
+}
+
+.palaver-message-anchor
+button:active {
+  transform: scale(.96);
+}
+
+.thinking {
+  overflow: hidden;
+}
+
+.thinking::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      105deg,
+      transparent 20%,
+      rgba(215,255,84,.035) 48%,
+      transparent 76%
+    );
+  transform:
+    translateX(-110%);
+  animation:
+    palaver-thinking-scan
+    2.4s
+    var(--palaver-ease)
+    infinite;
+}
+
+@keyframes palaver-thinking-scan {
+  0% {
+    transform:
+      translateX(-110%);
+  }
+
+  60%,
+  100% {
+    transform:
+      translateX(110%);
+  }
+}
+
+.composer-zone {
+  position: relative;
+}
+
+.composer {
+  position: relative;
+  isolation: isolate;
+  transition:
+    border-color var(--palaver-medium)
+      var(--palaver-ease),
+    background var(--palaver-medium)
+      var(--palaver-ease),
+    box-shadow var(--palaver-medium)
+      var(--palaver-ease),
+    transform var(--palaver-medium)
+      var(--palaver-ease);
+}
+
+.composer::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -1px;
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      110deg,
+      rgba(215,255,84,.12),
+      transparent 32%,
+      rgba(122,106,255,.08) 66%,
+      transparent
+    );
+  filter: blur(12px);
+  transition:
+    opacity var(--palaver-medium)
+      var(--palaver-ease);
+}
+
+.composer:focus-within {
+  border-color:
+    rgba(215,255,84,.17);
+  background:
+    rgba(11,12,10,.94);
+  box-shadow:
+    0 22px 70px rgba(0,0,0,.32);
+  transform:
+    translateY(-2px);
+}
+
+.composer:focus-within::before {
+  opacity: 1;
+}
+
+.composer textarea {
+  caret-color: var(--signal);
+}
+
+.composer-send,
+.composer-tool,
+.composer-voice {
+  transition:
+    transform var(--palaver-fast)
+      var(--palaver-ease),
+    color var(--palaver-fast)
+      ease,
+    background var(--palaver-fast)
+      ease,
+    border-color var(--palaver-fast)
+      ease;
+}
+
+.composer-send:not(:disabled):hover,
+.composer-tool:hover,
+.composer-voice:hover {
+  transform:
+    translateY(-1px)
+    scale(1.025);
+}
+
+.composer-send:not(:disabled):active,
+.composer-tool:active,
+.composer-voice:active {
+  transform:
+    scale(.94);
+}
+
+.composer-send:not(:disabled) {
+  box-shadow:
+    0 0 0 1px
+      rgba(215,255,84,.03),
+    0 8px 30px
+      rgba(215,255,84,.06);
+}
+
+.tool-bloom {
+  transform-origin:
+    0 100%;
+}
+
+.tool-bloom button {
+  position: relative;
+  overflow: hidden;
+}
+
+.tool-bloom button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      110deg,
+      transparent,
+      rgba(255,255,255,.035),
+      transparent
+    );
+  transform:
+    translateX(-100%);
+}
+
+.tool-bloom button:hover::after {
+  opacity: 1;
+  transform:
+    translateX(100%);
+  transition:
+    transform 700ms
+      var(--palaver-ease),
+    opacity 150ms ease;
+}
+
+.jump-latest {
+  backdrop-filter:
+    blur(16px);
+}
+
+.palette {
+  box-shadow:
+    0 40px 120px
+      rgba(0,0,0,.5);
+}
+
+.palette-list button {
+  transition:
+    transform var(--palaver-fast)
+      var(--palaver-ease),
+    border-color var(--palaver-fast)
+      ease,
+    background var(--palaver-fast)
+      ease;
+}
+
+.palette-list button:hover {
+  transform:
+    translateX(3px);
+}
+
+.lens {
+  box-shadow:
+    -30px 0 120px
+      rgba(0,0,0,.5);
+}
+
+.lens::before {
+  content: "";
+  position: absolute;
+  top: 24px;
+  bottom: 24px;
+  left: 0;
+  width: 1px;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      transparent,
+      rgba(215,255,84,.22),
+      transparent
+    );
+}
+
+.palaver-focus-rail,
+.palaver-branches,
+.lens,
+.palette,
+.tool-bloom {
+  will-change:
+    transform,
+    opacity;
+}
+
+.arrival h1 {
+  max-width: 12ch;
+  text-wrap: balance;
+}
+
+.arrival-prompts button {
+  position: relative;
+  overflow: hidden;
+}
+
+.arrival-prompts button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 2px;
+  opacity: 0;
+  background:
+    var(--signal);
+  transform:
+    scaleY(.3);
+  transition:
+    opacity var(--palaver-fast)
+      ease,
+    transform var(--palaver-fast)
+      var(--palaver-ease);
+}
+
+.arrival-prompts button:hover::before,
+.arrival-prompts button:focus-visible::before {
+  opacity: .7;
+  transform:
+    scaleY(1);
+}
+
+.arrival-prompts button:hover {
+  transform:
+    translateX(4px);
+}
+
+.palaver-conversation-tools {
+  transform-origin:
+    50% 0;
+}
+
+.palaver-conversation-tools
+button {
+  transition:
+    transform var(--palaver-fast)
+      var(--palaver-ease),
+    opacity var(--palaver-fast)
+      ease,
+    color var(--palaver-fast)
+      ease,
+    border-color var(--palaver-fast)
+      ease,
+    background var(--palaver-fast)
+      ease;
+}
+
+.palaver-conversation-tools
+button:not(:disabled):active {
+  transform:
+    scale(.95);
+}
+
+.icon-action,
+.palaver-health {
+  transition:
+    transform var(--palaver-fast)
+      var(--palaver-ease),
+    background var(--palaver-fast)
+      ease,
+    border-color var(--palaver-fast)
+      ease,
+    color var(--palaver-fast)
+      ease;
+}
+
+.icon-action:hover,
+.palaver-health:hover {
+  transform:
+    translateY(-1px);
+}
+
+.icon-action:active,
+.palaver-health:active {
+  transform:
+    scale(.95);
+}
+
+button:focus-visible,
+textarea:focus-visible,
+input:focus-visible {
+  outline:
+    2px solid
+    rgba(215,255,84,.65);
+  outline-offset: 3px;
+}
+
+::selection {
+  color: #0c0d0b;
+  background:
+    rgba(215,255,84,.82);
+}
+
+@media (hover: none) {
+  .palaver-message-anchor.active {
+    background: transparent;
+  }
+
+  .arrival-prompts button:hover,
+  .palette-list button:hover,
+  .icon-action:hover,
+  .palaver-health:hover,
+  .composer-send:not(:disabled):hover,
+  .composer-tool:hover,
+  .composer-voice:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .palaver-head {
+    backdrop-filter:
+      blur(18px);
+  }
+
+  .palaver-head-actions
+  .keycap {
+    display: none;
+  }
+
+  .composer:focus-within {
+    transform: none;
+  }
+
+  .palaver-conversation-tools {
+    margin-inline: 4px;
+  }
+
+  .arrival h1 {
+    max-width: 9ch;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration:
+      .001ms !important;
+    animation-iteration-count:
+      1 !important;
+    transition-duration:
+      .001ms !important;
+  }
+}

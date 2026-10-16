@@ -1,0 +1,573 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+
+from pathlib import Path
+from typing import Any, Mapping
+
+
+runtime_root = Path(
+    "/root/savant-runtime/"
+    "ontology/obelisks/_template/"
+    "segue/gates/_template/segue/"
+    "innates/_template/segue/"
+    "exiles/carbon/runtime"
+)
+
+if str(
+    runtime_root
+) not in sys.path:
+    sys.path.insert(
+        0,
+        str(
+            runtime_root
+        ),
+    )
+
+
+from oriel import (  # noqa: E402
+    oriel_error,
+)
+
+from oriel_inverse import (  # noqa: E402
+    capability_manifest,
+    engine,
+    oriel_inverse_error,
+    status,
+)
+
+
+def read_json(
+    path: str,
+) -> Any:
+    if path == "-":
+        return json.load(
+            sys.stdin
+        )
+
+    return json.loads(
+        Path(
+            path
+        ).read_text(
+            encoding="utf-8"
+        )
+    )
+
+
+def read_object(
+    path: str,
+) -> dict[str, Any]:
+    value = read_json(
+        path
+    )
+
+    if not isinstance(
+        value,
+        dict,
+    ):
+        raise ValueError(
+            "input must be a JSON object"
+        )
+
+    return value
+
+
+def csv_values(
+    value: str | None,
+) -> list[str]:
+    if value is None:
+        return []
+
+    return [
+        item.strip()
+        for item
+        in value.split(
+            ","
+        )
+        if item.strip()
+    ]
+
+
+def focused_selftest() -> dict[str, Any]:
+    document = {
+        "locations": [
+            {
+                "id":
+                    "alpha",
+
+                "name":
+                    "alpha",
+
+                "latitude":
+                    40.0,
+
+                "longitude":
+                    -75.0,
+
+                "timezone":
+                    "America/New_York",
+
+                "source_class":
+                    "verified_external",
+            },
+            {
+                "id":
+                    "beta",
+
+                "name":
+                    "beta",
+
+                "latitude":
+                    41.0,
+
+                "longitude":
+                    -74.0,
+
+                "timezone":
+                    "America/New_York",
+
+                "source_class":
+                    "verified_external",
+            },
+        ],
+
+        "routes": [
+            {
+                "source":
+                    "alpha",
+
+                "target":
+                    "beta",
+
+                "mode":
+                    "tour_bus",
+
+                "distance_km":
+                    180,
+
+                "minimum_minutes":
+                    150,
+
+                "maximum_minutes":
+                    210,
+
+                "source_class":
+                    "verified_external",
+            },
+        ],
+
+        "events": [
+            {
+                "id":
+                    "earlier-scene",
+
+                "kind":
+                    "scene",
+
+                "entities": [
+                    "band"
+                ],
+
+                "location_id":
+                    "alpha",
+
+                "start":
+                    (
+                        "2026-01-01"
+                        "T15:00:00-05:00"
+                    ),
+
+                "duration_minutes":
+                    120,
+
+                "teardown_minutes":
+                    30,
+
+                "source_class":
+                    "simulation",
+            },
+        ],
+    }
+
+    desired = {
+        "id":
+            "desired-scene",
+
+        "kind":
+            "scene",
+
+        "entities": [
+            "band"
+        ],
+
+        "location_id":
+            "beta",
+
+        "start":
+            (
+                "2026-01-01"
+                "T18:00:00-05:00"
+            ),
+
+        "duration_minutes":
+            60,
+
+        "source_class":
+            "simulation",
+    }
+
+    result = engine.search(
+        document,
+        desired,
+        mode="tour_bus",
+        policy={
+            "resolution_minutes":
+                30,
+
+            "maximum_candidate_shift_minutes":
+                240,
+
+            "maximum_existing_shift_minutes":
+                240,
+
+            "maximum_depth":
+                4,
+
+            "maximum_states":
+                200,
+
+            "solution_limit":
+                4,
+        },
+    )
+
+    nearest = result.get(
+        "nearest_solution"
+    )
+
+    if not isinstance(
+        nearest,
+        Mapping,
+    ):
+        raise oriel_inverse_error(
+            (
+                "focused inverse test "
+                "produced no solution"
+            )
+        )
+
+    nearest_classification = str(
+        nearest.get(
+            "classification",
+            "",
+        )
+    )
+
+    if (
+        nearest_classification
+        not in {
+            "viable",
+            "conditional",
+        }
+    ):
+        raise oriel_inverse_error(
+            (
+                "focused inverse test "
+                "did not find a feasible repair"
+            )
+        )
+
+    if result.get(
+        "historical_anchors_moved"
+    ):
+        raise oriel_inverse_error(
+            (
+                "focused inverse test "
+                "moved historical anchors"
+            )
+        )
+
+    if result.get(
+        "source_state_mutated"
+    ):
+        raise oriel_inverse_error(
+            (
+                "focused inverse test "
+                "mutated source state"
+            )
+        )
+
+    if result.get(
+        "canon_effect"
+    ) != "none":
+        raise oriel_inverse_error(
+            (
+                "focused inverse test "
+                "created canon effect"
+            )
+        )
+
+    return {
+        "schema":
+            (
+                "savant.carbon.oriel-inverse."
+                "focused-selftest.v1"
+            ),
+
+        "owner":
+            "carbon",
+
+        "component":
+            "oriel-inverse",
+
+        "authority_effect":
+            "none",
+
+        "ok":
+            True,
+
+        "evaluated_state_count":
+            result.get(
+                "evaluated_state_count"
+            ),
+
+        "visited_state_count":
+            result.get(
+                "visited_state_count"
+            ),
+
+        "viable_count":
+            result.get(
+                "viable_count"
+            ),
+
+        "conditional_count":
+            result.get(
+                "conditional_count"
+            ),
+
+        "unresolved_count":
+            result.get(
+                "unresolved_count"
+            ),
+
+        "nearest_classification":
+            nearest_classification,
+
+        "nearest_edit_count":
+            nearest.get(
+                "edit_count"
+            ),
+
+        "nearest_cost":
+            nearest.get(
+                "cost"
+            ),
+
+        "candidate_only":
+            nearest.get(
+                "candidate_only"
+            ),
+
+        "minimum_prior_intervention":
+            nearest.get(
+                "minimum_prior_intervention"
+            ),
+
+        "historical_anchors_moved":
+            False,
+
+        "source_state_mutated":
+            False,
+
+        "canon_effect":
+            "none",
+    }
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="carbon-oriel-inverse",
+        description=(
+            "Carbon-owned inverse chronology "
+            "and logistics search"
+        ),
+    )
+
+    subparsers = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    subparsers.add_parser(
+        "status"
+    )
+
+    subparsers.add_parser(
+        "capabilities"
+    )
+
+    subparsers.add_parser(
+        "selftest"
+    )
+
+    search_parser = (
+        subparsers.add_parser(
+            "search"
+        )
+    )
+
+    search_parser.add_argument(
+        "--oriel",
+        required=True,
+    )
+
+    search_parser.add_argument(
+        "--desired-event",
+        required=True,
+    )
+
+    search_parser.add_argument(
+        "--mode",
+        default="tour_bus",
+    )
+
+    search_parser.add_argument(
+        "--candidate-locations"
+    )
+
+    search_parser.add_argument(
+        "--transport-modes"
+    )
+
+    search_parser.add_argument(
+        "--policy"
+    )
+
+    explain_parser = (
+        subparsers.add_parser(
+            "explain"
+        )
+    )
+
+    explain_parser.add_argument(
+        "result"
+    )
+
+    return parser
+
+
+def main() -> int:
+    parser = build_parser()
+
+    args = parser.parse_args()
+
+    try:
+        if args.command == "status":
+            output = status()
+
+        elif args.command == "capabilities":
+            output = capability_manifest()
+
+        elif args.command == "selftest":
+            output = focused_selftest()
+
+        elif args.command == "search":
+            policy = (
+                read_object(
+                    args.policy
+                )
+                if args.policy
+                else None
+            )
+
+            output = engine.search(
+                read_object(
+                    args.oriel
+                ),
+                read_object(
+                    args.desired_event
+                ),
+                mode=args.mode,
+                candidate_locations=
+                    csv_values(
+                        args.candidate_locations
+                    ),
+                transport_modes=
+                    csv_values(
+                        args.transport_modes
+                    ),
+                policy=policy,
+            )
+
+        elif args.command == "explain":
+            output = engine.explain(
+                read_object(
+                    args.result
+                )
+            )
+
+        else:
+            parser.error(
+                "unknown command"
+            )
+
+            return 2
+
+    except (
+        OSError,
+        ValueError,
+        json.JSONDecodeError,
+        oriel_error,
+        oriel_inverse_error,
+    ) as exc:
+        print(
+            json.dumps(
+                {
+                    "ok":
+                        False,
+
+                    "error":
+                        str(
+                            exc
+                        ),
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+
+        return 1
+
+    print(
+        json.dumps(
+            output,
+            indent=2,
+            ensure_ascii=False,
+            sort_keys=True,
+        )
+    )
+
+    if (
+        isinstance(
+            output,
+            dict,
+        )
+        and output.get(
+            "ok"
+        )
+        is False
+    ):
+        return 1
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

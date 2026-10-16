@@ -1,0 +1,70 @@
+{
+  "authoritative": false,
+  "child_profile": "child",
+  "deterministic_hash": "051120d495513b752b88b4139761d0ae6a86662f6cf505c628e8c8cfa7ca3127",
+  "domain": "global",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "lineage.generic.4eac84135f1b6d119872",
+  "impeti": [],
+  "namespace": "preview.kindred",
+  "parent_profile": "parent",
+  "plane": "functional",
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "role": "generic",
+  "schema": "savant.kindred.preview.functional_segue.v2",
+  "source": "edifice:identity:4",
+  "source_record": {
+    "axis": "unspecified",
+    "canonical_source": "edifice:identity:4",
+    "canonical_target": "exile:coda",
+    "continuation": "neutral",
+    "id": "lineage.generic.4eac84135f1b6d119872",
+    "inheritance": {
+      "conflict_policy": "child_wins",
+      "exclude": [],
+      "fields": [],
+      "mode": "reference"
+    },
+    "inverse": "generic_child",
+    "kind": "generic",
+    "metadata": {
+      "adapter": "authority",
+      "source_field": "lineage.parents",
+      "source_path": "/root/savant-runtime/canon-system/authority/exiles/coda.yaml"
+    },
+    "order": 0,
+    "propagation": {
+      "channels": [
+        "validation",
+        "projection",
+        "regeneration"
+      ],
+      "enabled": true
+    },
+    "provenance": {
+      "created_by": "authority_adapter",
+      "created_from": [
+        "/root/savant-runtime/canon-system/authority/exiles/coda.yaml"
+      ],
+      "source_files": [
+        "/root/savant-runtime/canon-system/authority/exiles/coda.yaml"
+      ]
+    },
+    "role": "generic",
+    "scope": "global",
+    "source": "edifice:identity:4",
+    "status": "active",
+    "symbolic_child_alias": "child",
+    "symbolic_parent_alias": "parent",
+    "target": "exile:coda",
+    "weight": 1
+  },
+  "state": "active",
+  "synthetic": false,
+  "target": "exile:coda"
+}

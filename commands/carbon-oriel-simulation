@@ -1,0 +1,489 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+
+from pathlib import Path
+from typing import Any
+
+
+runtime_root = Path(
+    "/root/savant-runtime/"
+    "ontology/obelisks/_template/"
+    "segue/gates/_template/segue/"
+    "innates/_template/segue/"
+    "exiles/carbon/runtime"
+)
+
+if str(
+    runtime_root
+) not in sys.path:
+    sys.path.insert(
+        0,
+        str(
+            runtime_root
+        ),
+    )
+
+
+from oriel import oriel_error  # noqa: E402
+from oriel_inverse import oriel_inverse_error  # noqa: E402
+from oriel_quantum import oriel_quantum_error  # noqa: E402
+from oriel_reality import oriel_reality_error  # noqa: E402
+from oriel_simulation import (  # noqa: E402
+    capability_manifest,
+    engine,
+    oriel_simulation_error,
+    selftest,
+    status,
+)
+
+
+def read_json(
+    path: str,
+) -> Any:
+    if path == "-":
+        return json.load(
+            sys.stdin
+        )
+
+    return json.loads(
+        Path(
+            path
+        ).read_text(
+            encoding="utf-8"
+        )
+    )
+
+
+def read_object(
+    path: str,
+) -> dict[str, Any]:
+    value = read_json(
+        path
+    )
+
+    if not isinstance(
+        value,
+        dict,
+    ):
+        raise ValueError(
+            "input must be a JSON object"
+        )
+
+    return value
+
+
+def read_list(
+    path: str,
+) -> list[Any]:
+    value = read_json(
+        path
+    )
+
+    if not isinstance(
+        value,
+        list,
+    ):
+        raise ValueError(
+            "input must be a JSON list"
+        )
+
+    return value
+
+
+def csv_values(
+    value: str | None,
+) -> list[str]:
+    if value is None:
+        return []
+
+    return [
+        item.strip()
+        for item
+        in value.split(
+            ","
+        )
+        if item.strip()
+    ]
+
+
+def add_world_inputs(
+    parser: argparse.ArgumentParser,
+) -> None:
+    parser.add_argument(
+        "--oriel",
+        required=True,
+    )
+
+    parser.add_argument(
+        "--facts",
+        required=True,
+    )
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="carbon-oriel-simulation",
+        description=(
+            "Reality-bound Carbon Oriel chronology, "
+            "logistics, quantum and inverse simulation"
+        ),
+    )
+
+    subparsers = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    subparsers.add_parser(
+        "status"
+    )
+
+    subparsers.add_parser(
+        "capabilities"
+    )
+
+    subparsers.add_parser(
+        "selftest"
+    )
+
+    compile_parser = (
+        subparsers.add_parser(
+            "compile"
+        )
+    )
+
+    add_world_inputs(
+        compile_parser
+    )
+
+    validate_parser = (
+        subparsers.add_parser(
+            "validate"
+        )
+    )
+
+    add_world_inputs(
+        validate_parser
+    )
+
+    validate_parser.add_argument(
+        "--mode",
+        default="tour_bus",
+    )
+
+    superpose_parser = (
+        subparsers.add_parser(
+            "superpose"
+        )
+    )
+
+    add_world_inputs(
+        superpose_parser
+    )
+
+    superpose_parser.add_argument(
+        "--scenario",
+        required=True,
+    )
+
+    superpose_parser.add_argument(
+        "--possibilities",
+        required=True,
+    )
+
+    superpose_parser.add_argument(
+        "--mode",
+        default="tour_bus",
+    )
+
+    inverse_parser = (
+        subparsers.add_parser(
+            "inverse"
+        )
+    )
+
+    add_world_inputs(
+        inverse_parser
+    )
+
+    inverse_parser.add_argument(
+        "--desired-event",
+        required=True,
+    )
+
+    inverse_parser.add_argument(
+        "--mode",
+        default="tour_bus",
+    )
+
+    inverse_parser.add_argument(
+        "--candidate-locations"
+    )
+
+    inverse_parser.add_argument(
+        "--transport-modes"
+    )
+
+    inverse_parser.add_argument(
+        "--policy"
+    )
+
+    position_parser = (
+        subparsers.add_parser(
+            "position"
+        )
+    )
+
+    add_world_inputs(
+        position_parser
+    )
+
+    position_parser.add_argument(
+        "--entity",
+        required=True,
+    )
+
+    position_parser.add_argument(
+        "--timestamp",
+        required=True,
+    )
+
+    position_parser.add_argument(
+        "--mode",
+        default="tour_bus",
+    )
+
+    availability_parser = (
+        subparsers.add_parser(
+            "availability"
+        )
+    )
+
+    add_world_inputs(
+        availability_parser
+    )
+
+    availability_parser.add_argument(
+        "--location",
+        required=True,
+    )
+
+    availability_parser.add_argument(
+        "--start",
+        required=True,
+    )
+
+    availability_parser.add_argument(
+        "--end",
+        required=True,
+    )
+
+    encounters_parser = (
+        subparsers.add_parser(
+            "encounters"
+        )
+    )
+
+    add_world_inputs(
+        encounters_parser
+    )
+
+    encounters_parser.add_argument(
+        "--fictional-entity",
+        required=True,
+    )
+
+    encounters_parser.add_argument(
+        "--historical-entity",
+        required=True,
+    )
+
+    encounters_parser.add_argument(
+        "--radius-km",
+        type=float,
+        default=5.0,
+    )
+
+    return parser
+
+
+def main() -> int:
+    parser = build_parser()
+    args = parser.parse_args()
+
+    try:
+        if args.command == "status":
+            output = status()
+
+        elif args.command == "capabilities":
+            output = capability_manifest()
+
+        elif args.command == "selftest":
+            output = selftest()
+
+        else:
+            document = read_object(
+                args.oriel
+            )
+
+            facts = read_list(
+                args.facts
+            )
+
+            if args.command == "compile":
+                output = engine.compile_world(
+                    document,
+                    facts,
+                )
+
+            elif args.command == "validate":
+                output = engine.validate_world(
+                    document,
+                    facts,
+                    mode=args.mode,
+                )
+
+            elif args.command == "superpose":
+                output = engine.superpose(
+                    document,
+                    facts,
+                    read_object(
+                        args.scenario
+                    ),
+                    read_list(
+                        args.possibilities
+                    ),
+                    mode=args.mode,
+                )
+
+            elif args.command == "inverse":
+                policy = (
+                    read_object(
+                        args.policy
+                    )
+                    if args.policy
+                    else None
+                )
+
+                output = engine.inverse(
+                    document,
+                    facts,
+                    read_object(
+                        args.desired_event
+                    ),
+                    mode=args.mode,
+                    candidate_locations=
+                        csv_values(
+                            args.candidate_locations
+                        ),
+                    transport_modes=
+                        csv_values(
+                            args.transport_modes
+                        ),
+                    policy=policy,
+                )
+
+            elif args.command == "position":
+                output = engine.position(
+                    document,
+                    facts,
+                    entity=args.entity,
+                    timestamp=
+                        args.timestamp,
+                    mode=args.mode,
+                )
+
+            elif args.command == "availability":
+                output = engine.availability(
+                    document,
+                    facts,
+                    location_id=
+                        args.location,
+                    start=args.start,
+                    end=args.end,
+                )
+
+            elif args.command == "encounters":
+                output = engine.encounters(
+                    document,
+                    facts,
+                    fictional_entity=
+                        args.fictional_entity,
+                    historical_entity=
+                        args.historical_entity,
+                    radius_km=
+                        args.radius_km,
+                )
+
+            else:
+                parser.error(
+                    "unknown command"
+                )
+
+                return 2
+
+    except (
+        OSError,
+        ValueError,
+        json.JSONDecodeError,
+        oriel_error,
+        oriel_inverse_error,
+        oriel_quantum_error,
+        oriel_reality_error,
+        oriel_simulation_error,
+    ) as exc:
+        print(
+            json.dumps(
+                {
+                    "ok":
+                        False,
+
+                    "error":
+                        str(
+                            exc
+                        ),
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+
+        return 1
+
+    print(
+        json.dumps(
+            output,
+            indent=2,
+            ensure_ascii=False,
+            sort_keys=True,
+        )
+    )
+
+    if isinstance(
+        output,
+        dict,
+    ):
+        if (
+            output.get(
+                "ok"
+            )
+            is False
+            or output.get(
+                "outcome"
+            )
+            == "fail"
+        ):
+            return 1
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

@@ -1,0 +1,47 @@
+{
+  "id": "envoy.health",
+  "owner": "envoy",
+  "status": "ready",
+  "checks": [
+    {
+      "id": "persona_registry",
+      "owner": "envoy",
+      "required": true,
+      "status": "ready"
+    },
+    {
+      "id": "voice_registry",
+      "owner": "envoy",
+      "required": true,
+      "status": "ready"
+    },
+    {
+      "id": "opus_text_bridge",
+      "owner": "envoy",
+      "execution_owner": "opus",
+      "route": "text_inference_route",
+      "required": true,
+      "status": "ready"
+    },
+    {
+      "id": "opus_voice_bridge",
+      "owner": "envoy",
+      "execution_owner": "opus",
+      "route": "voice_tts_route",
+      "required": true,
+      "status": "ready"
+    },
+    {
+      "id": "audio_format_projection",
+      "owner": "envoy",
+      "required": true,
+      "status": "ready"
+    },
+    {
+      "id": "direct_provider_execution",
+      "owner": "envoy",
+      "expected": false,
+      "status": "ready"
+    }
+  ]
+}

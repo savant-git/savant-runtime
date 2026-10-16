@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+PALAVER_ROOT="/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver"
+SAVANT_ENV="/root/savant-runtime/.env"
+ROOT_ENV="/root/.env"
+
+if [ -f "$ROOT_ENV" ]; then
+  set -a
+  # shellcheck disable=SC1091
+  source "$ROOT_ENV"
+  set +a
+fi
+
+if [ -f "$SAVANT_ENV" ]; then
+  set -a
+  # shellcheck disable=SC1091
+  source "$SAVANT_ENV"
+  set +a
+fi
+
+exec python3 \
+  "$PALAVER_ROOT/runtime/deployment.py" \
+  "${@:-serve}"

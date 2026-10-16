@@ -1,0 +1,38 @@
+{
+  "baseline": {
+    "live_runtime_hash_validated": false,
+    "source_dump": "/root/s3_downloads/sdump_savant-runtime_080526.txt"
+  },
+  "dry_run": {
+    "exit_code": 3,
+    "meaning": "Deterministic blockers were found. The proposed changes must not be applied.",
+    "verdict": "unsafe"
+  },
+  "mutation": {
+    "migration_authorized": false,
+    "migration_proposal_applied": false,
+    "runtime_implementation_modified": false,
+    "tooling_installed": true
+  },
+  "operation": "install-savant-upgrade-packet",
+  "outputs": {
+    "audit": "/root/savant-runtime/audit/structural-intelligence/20260805T123537Z",
+    "dry_run": "/root/savant-runtime/audit/dry-run/20260805T123537Z"
+  },
+  "packet": {
+    "installed_path": "/root/savant-runtime/migrations/packages/savant-upgrade-packet/v1.1.0",
+    "path": "/root/s3_downloads/savant_upgrade_packet_v1.1.0_dry_run.zip",
+    "sha256": "20160c32720f8edeb4b4a7e4aa1cb69231142d3229de3a8b7f85119e9e82e83f",
+    "version": "1.1.0"
+  },
+  "schema": "savant://migration/install-receipt/1.0.0",
+  "timestamp": "20260805T123537Z",
+  "validation": {
+    "archive_paths": "passed",
+    "audit_passes": 50,
+    "focused_tests": "passed",
+    "json_validation": "passed",
+    "packet_digest": "passed",
+    "python_compile": "passed"
+  }
+}

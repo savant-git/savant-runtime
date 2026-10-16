@@ -1,0 +1,13 @@
+{
+  "id": "openai_tts",
+  "type": "tts_provider",
+  "status": "active",
+  "owner": "opus",
+  "env_key": "OPENAI_API_KEY",
+  "model_default": "gpt-4o-mini-tts",
+  "voice_default": "alloy",
+  "capabilities": [
+    "text_to_speech",
+    "mp3_output"
+  ]
+}

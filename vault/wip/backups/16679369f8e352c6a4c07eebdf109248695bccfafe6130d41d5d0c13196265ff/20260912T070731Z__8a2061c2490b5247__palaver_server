@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+runtime="/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/runtime/compat_gateway.py"
+
+host="${PALAVER_BIND_HOST:-127.0.0.1}"
+port="${PALAVER_BIND_PORT:-8787}"
+
+exec python3 \
+    "${runtime}" \
+    --host "${host}" \
+    --port "${port}"

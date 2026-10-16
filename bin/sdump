@@ -1,0 +1,205 @@
+
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import os
+from pathlib import Path
+import shutil
+import sys
+import tempfile
+from types import SimpleNamespace
+
+runtime_root = Path("/root/savant-runtime")
+runtime_path = runtime_root / "runtime"
+sdump_path = runtime_root / "tools/sdump-enterprise"
+
+for path in (sdump_path, runtime_path):
+    value = str(path)
+    if value not in sys.path:
+        sys.path.insert(0, value)
+
+import sdump_enterprise.stream_dump as stream_dump
+from savant_terminal import terminal
+
+
+stream_dump.ui = terminal(
+    "sdump",
+    subtitle="deterministic source projection · verified publication",
+)
+
+
+class snapshot_error(stream_dump.StreamDumpError):
+    pass
+
+
+def same_revision(before, after):
+    return (
+        before.st_dev == after.st_dev
+        and before.st_ino == after.st_ino
+        and before.st_size == after.st_size
+        and before.st_mtime_ns == after.st_mtime_ns
+    )
+
+
+def capture_file(source, destination):
+    destination.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    last_error = "source did not stabilize"
+
+    for attempt in range(3):
+        temporary = destination.with_name(
+            f".{destination.name}.sdump-{os.getpid()}-{attempt}"
+        )
+
+        try:
+            before = source.stat()
+
+            if not source.is_file() or source.is_symlink():
+                raise snapshot_error(
+                    f"source is no longer a regular file: {source}"
+                )
+
+            with source.open("rb") as reader:
+                with temporary.open("xb") as writer:
+                    shutil.copyfileobj(
+                        reader,
+                        writer,
+                        length=stream_dump.chunk_size,
+                    )
+                    writer.flush()
+                    os.fsync(writer.fileno())
+
+            after = source.stat()
+            copied = temporary.stat()
+
+            if (
+                same_revision(before, after)
+                and copied.st_size == before.st_size
+            ):
+                shutil.copystat(
+                    source,
+                    temporary,
+                    follow_symlinks=False,
+                )
+                temporary.replace(destination)
+                return before.st_size
+
+            last_error = "source changed during capture"
+
+        except OSError as error:
+            last_error = str(error)
+
+        finally:
+            temporary.unlink(missing_ok=True)
+
+    raise snapshot_error(
+        f"unable to capture stable source: {source}: {last_error}"
+    )
+
+
+def snapshot_discovery(original_discover, workspace):
+    def discover(root):
+        candidates, discovery = original_discover(root)
+
+        snapshot_root = workspace / "source"
+        snapshot_root.mkdir(
+            parents=True,
+            exist_ok=True,
+        )
+
+        captured = []
+        total_bytes = 0
+
+        ui = stream_dump.ui
+        ui.phase(
+            "stabilize",
+            "capturing consistent source revisions",
+        )
+
+        for index, candidate in enumerate(candidates, 1):
+            relative = Path(candidate.relative_path)
+
+            if (
+                relative.is_absolute()
+                or ".." in relative.parts
+            ):
+                raise snapshot_error(
+                    f"unsafe source path: {candidate.relative_path}"
+                )
+
+            destination = snapshot_root / relative
+
+            size = capture_file(
+                candidate.absolute_path,
+                destination,
+            )
+
+            captured.append(
+                SimpleNamespace(
+                    absolute_path=destination,
+                    relative_path=candidate.relative_path,
+                    size=size,
+                )
+            )
+
+            total_bytes += size
+
+            ui.progress(
+                label="snapshot",
+                current=index,
+                total=len(candidates),
+                bytes_done=total_bytes,
+                bytes_total=discovery["candidate_bytes"],
+                force=index == len(candidates),
+            )
+
+        ui.clear_progress()
+
+        discovery = dict(discovery)
+        discovery["candidate_count"] = len(captured)
+        discovery["candidate_bytes"] = total_bytes
+        discovery["snapshot_complete"] = (
+            len(captured) == len(candidates)
+        )
+
+        if not discovery["snapshot_complete"]:
+            raise snapshot_error(
+                "source snapshot incomplete"
+            )
+
+        return captured, discovery
+
+    return discover
+
+
+def main():
+    with tempfile.TemporaryDirectory(
+        prefix="savant-sdump-source-"
+    ) as directory:
+        original_discover = stream_dump.discover_source
+
+        stream_dump.discover_source = snapshot_discovery(
+            original_discover,
+            Path(directory),
+        )
+
+        try:
+            return stream_dump.main()
+        finally:
+            stream_dump.discover_source = original_discover
+
+
+if __name__ == "__main__":
+    try:
+        raise SystemExit(main())
+    except (
+        stream_dump.StreamDumpError,
+        RuntimeError,
+        OSError,
+    ) as error:
+        stream_dump.ui.failure(str(error))
+        raise SystemExit(1)

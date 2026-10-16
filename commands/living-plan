@@ -1,0 +1,929 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+
+from collections import defaultdict, deque
+from pathlib import Path
+from typing import Any
+
+
+root = Path(
+    "/root/savant-runtime"
+)
+
+if str(root) not in sys.path:
+    sys.path.insert(
+        0,
+        str(root),
+    )
+
+
+from runtime.living_governance import (  # noqa: E402
+    assert_record,
+    history,
+    project,
+    stream_records,
+)
+
+
+stream = "masterplan"
+
+open_statuses = {
+    "active",
+    "planned",
+    "ready",
+    "in_progress",
+}
+
+complete_statuses = {
+    "complete",
+    "completed",
+    "done",
+}
+
+blocked_statuses = {
+    "blocked",
+    "waiting",
+}
+
+
+def records() -> list[dict[str, Any]]:
+    return [
+        dict(record)
+        for record
+        in stream_records(
+            stream
+        )
+    ]
+
+
+def by_id() -> dict[str, dict[str, Any]]:
+    return {
+        str(record["id"]):
+            record
+        for record
+        in records()
+    }
+
+
+def reverse_dependencies(
+    values: list[dict[str, Any]],
+) -> dict[str, list[str]]:
+    reverse = defaultdict(
+        list
+    )
+
+    for record in values:
+        source = str(
+            record["id"]
+        )
+
+        for dependency in record.get(
+            "dependencies",
+            [],
+        ):
+            reverse[
+                str(dependency)
+            ].append(
+                source
+            )
+
+    return {
+        key:
+            sorted(
+                set(
+                    dependents
+                )
+            )
+        for key, dependents
+        in sorted(
+            reverse.items()
+        )
+    }
+
+
+def completion_state(
+    record: dict[str, Any],
+) -> str:
+    return str(
+        record.get(
+            "status",
+            "active",
+        )
+    ).strip().lower()
+
+
+def progress() -> dict[str, Any]:
+    values = records()
+
+    totals = defaultdict(
+        int
+    )
+
+    for record in values:
+        totals[
+            completion_state(
+                record
+            )
+        ] += 1
+
+    total = len(
+        values
+    )
+
+    completed = sum(
+        count
+        for status, count
+        in totals.items()
+        if status
+        in complete_statuses
+    )
+
+    blocked = sum(
+        count
+        for status, count
+        in totals.items()
+        if status
+        in blocked_statuses
+    )
+
+    open_count = (
+        total
+        - completed
+    )
+
+    percent = (
+        round(
+            (
+                completed
+                / total
+            )
+            * 100,
+            2,
+        )
+        if total
+        else 100.0
+    )
+
+    return {
+        "stream":
+            stream,
+
+        "total":
+            total,
+
+        "completed":
+            completed,
+
+        "open":
+            open_count,
+
+        "blocked":
+            blocked,
+
+        "completion_percent":
+            percent,
+
+        "status_counts":
+            dict(
+                sorted(
+                    totals.items()
+                )
+            ),
+    }
+
+
+def ready_records() -> list[dict[str, Any]]:
+    values = records()
+
+    index = {
+        str(record["id"]):
+            record
+        for record
+        in values
+    }
+
+    ready = []
+
+    for record in values:
+        status = completion_state(
+            record
+        )
+
+        if status not in open_statuses:
+            continue
+
+        dependencies = [
+            str(value)
+            for value
+            in record.get(
+                "dependencies",
+                []
+            )
+        ]
+
+        dependency_states = []
+
+        unresolved = []
+
+        for dependency in dependencies:
+            dependency_record = index.get(
+                dependency
+            )
+
+            if dependency_record is None:
+                unresolved.append(
+                    dependency
+                )
+
+                continue
+
+            dependency_states.append(
+                completion_state(
+                    dependency_record
+                )
+            )
+
+        if unresolved:
+            continue
+
+        if all(
+            state
+            in complete_statuses
+            for state
+            in dependency_states
+        ):
+            ready.append(
+                record
+            )
+
+    return sorted(
+        ready,
+        key=lambda item: (
+            int(
+                item.get(
+                    "priority",
+                    1000,
+                )
+            ),
+            str(
+                item.get(
+                    "id",
+                    "",
+                )
+            ),
+        ),
+    )
+
+
+def impact(
+    semantic_id: str,
+) -> dict[str, Any]:
+    values = records()
+
+    index = {
+        str(record["id"]):
+            record
+        for record
+        in values
+    }
+
+    if semantic_id not in index:
+        raise KeyError(
+            semantic_id
+        )
+
+    reverse = reverse_dependencies(
+        values
+    )
+
+    queue = deque(
+        [
+            (
+                semantic_id,
+                0,
+            )
+        ]
+    )
+
+    visited = {
+        semantic_id
+    }
+
+    affected = []
+
+    while queue:
+        current, depth = (
+            queue.popleft()
+        )
+
+        for dependent in reverse.get(
+            current,
+            [],
+        ):
+            if dependent in visited:
+                continue
+
+            visited.add(
+                dependent
+            )
+
+            affected.append(
+                {
+                    "id":
+                        dependent,
+
+                    "depth":
+                        depth + 1,
+
+                    "status":
+                        completion_state(
+                            index[
+                                dependent
+                            ]
+                        ),
+
+                    "text":
+                        index[
+                            dependent
+                        ][
+                            "text"
+                        ],
+                }
+            )
+
+            queue.append(
+                (
+                    dependent,
+                    depth + 1,
+                )
+            )
+
+    return {
+        "id":
+            semantic_id,
+
+        "direct_dependents":
+            reverse.get(
+                semantic_id,
+                [],
+            ),
+
+        "affected":
+            sorted(
+                affected,
+                key=lambda item: (
+                    int(
+                        item[
+                            "depth"
+                        ]
+                    ),
+                    str(
+                        item[
+                            "id"
+                        ]
+                    ),
+                ),
+            ),
+
+        "affected_count":
+            len(
+                affected
+            ),
+    }
+
+
+def show(
+    semantic_id: str | None,
+) -> dict[str, Any]:
+    values = records()
+
+    if semantic_id is None:
+        return {
+            "stream":
+                stream,
+
+            "records":
+                values,
+
+            "progress":
+                progress(),
+
+            "ready":
+                [
+                    record[
+                        "id"
+                    ]
+                    for record
+                    in ready_records()
+                ],
+        }
+
+    index = {
+        str(record["id"]):
+            record
+        for record
+        in values
+    }
+
+    if semantic_id not in index:
+        raise KeyError(
+            semantic_id
+        )
+
+    return {
+        "record":
+            index[
+                semantic_id
+            ],
+
+        "history":
+            history(
+                stream=stream,
+                semantic_id=semantic_id,
+            ),
+
+        "impact":
+            impact(
+                semantic_id
+            ),
+    }
+
+
+def current_or_error(
+    semantic_id: str,
+) -> dict[str, Any]:
+    index = by_id()
+
+    if semantic_id not in index:
+        raise KeyError(
+            semantic_id
+        )
+
+    return index[
+        semantic_id
+    ]
+
+
+def update_status(
+    semantic_id: str,
+    status: str,
+    *,
+    source: list[str],
+) -> dict[str, Any]:
+    current = current_or_error(
+        semantic_id
+    )
+
+    event = assert_record(
+        stream=stream,
+        semantic_id=semantic_id,
+        text=str(
+            current[
+                "text"
+            ]
+        ),
+        authority=
+            "current_user_directive",
+        priority=int(
+            current.get(
+                "priority",
+                1000,
+            )
+        ),
+        status=status,
+        supersedes=[
+            semantic_id
+        ],
+        dependencies=[
+            str(value)
+            for value
+            in current.get(
+                "dependencies",
+                []
+            )
+        ],
+        relationships=[
+            {
+                "kind":
+                    str(
+                        relationship[
+                            "kind"
+                        ]
+                    ),
+
+                "target":
+                    str(
+                        relationship[
+                            "target"
+                        ]
+                    ),
+            }
+            for relationship
+            in current.get(
+                "relationships",
+                []
+            )
+        ],
+        asserted_by="user",
+        source=source,
+    )
+
+    return {
+        "updated":
+            semantic_id,
+
+        "status":
+            status,
+
+        "event":
+            event,
+
+        "progress":
+            progress(),
+    }
+
+
+def update_text(
+    semantic_id: str,
+    text: str,
+    *,
+    source: list[str],
+) -> dict[str, Any]:
+    current = current_or_error(
+        semantic_id
+    )
+
+    event = assert_record(
+        stream=stream,
+        semantic_id=semantic_id,
+        text=text,
+        authority=
+            "current_user_directive",
+        priority=int(
+            current.get(
+                "priority",
+                1000,
+            )
+        ),
+        status=str(
+            current.get(
+                "status",
+                "active",
+            )
+        ),
+        supersedes=[
+            semantic_id
+        ],
+        dependencies=[
+            str(value)
+            for value
+            in current.get(
+                "dependencies",
+                []
+            )
+        ],
+        relationships=[
+            {
+                "kind":
+                    str(
+                        relationship[
+                            "kind"
+                        ]
+                    ),
+
+                "target":
+                    str(
+                        relationship[
+                            "target"
+                        ]
+                    ),
+            }
+            for relationship
+            in current.get(
+                "relationships",
+                []
+            )
+        ],
+        asserted_by="user",
+        source=source,
+    )
+
+    return {
+        "updated":
+            semantic_id,
+
+        "event":
+            event,
+    }
+
+
+def add(
+    semantic_id: str,
+    text: str,
+    status: str,
+    priority: int,
+    dependencies: list[str],
+    *,
+    source: list[str],
+) -> dict[str, Any]:
+    if semantic_id in by_id():
+        raise ValueError(
+            (
+                "masterplan record already "
+                "exists: "
+                + semantic_id
+            )
+        )
+
+    event = assert_record(
+        stream=stream,
+        semantic_id=semantic_id,
+        text=text,
+        authority=
+            "current_user_directive",
+        priority=priority,
+        status=status,
+        supersedes=[],
+        dependencies=dependencies,
+        relationships=[],
+        asserted_by="user",
+        source=source,
+    )
+
+    return {
+        "added":
+            semantic_id,
+
+        "event":
+            event,
+
+        "progress":
+            progress(),
+    }
+
+
+def export() -> dict[str, Any]:
+    projection_status = project()
+
+    values = records()
+
+    reverse = reverse_dependencies(
+        values
+    )
+
+    return {
+        "schema":
+            "savant.living-plan.export.v1",
+
+        "stream":
+            stream,
+
+        "progress":
+            progress(),
+
+        "ready":
+            [
+                record[
+                    "id"
+                ]
+                for record
+                in ready_records()
+            ],
+
+        "records":
+            values,
+
+        "reverse_dependencies":
+            reverse,
+
+        "governance":
+            projection_status,
+    }
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="living-plan",
+        description=(
+            "operational interface over the "
+            "authoritative living masterplan stream"
+        ),
+    )
+
+    subparsers = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    show_parser = subparsers.add_parser(
+        "show"
+    )
+
+    show_parser.add_argument(
+        "id",
+        nargs="?",
+    )
+
+    subparsers.add_parser(
+        "progress"
+    )
+
+    subparsers.add_parser(
+        "ready"
+    )
+
+    impact_parser = subparsers.add_parser(
+        "impact"
+    )
+
+    impact_parser.add_argument(
+        "id"
+    )
+
+    status_parser = subparsers.add_parser(
+        "status"
+    )
+
+    status_parser.add_argument(
+        "id"
+    )
+
+    status_parser.add_argument(
+        "status"
+    )
+
+    status_parser.add_argument(
+        "--source",
+        action="append",
+        default=[
+            "living-plan-cli"
+        ],
+    )
+
+    text_parser = subparsers.add_parser(
+        "update"
+    )
+
+    text_parser.add_argument(
+        "id"
+    )
+
+    text_parser.add_argument(
+        "text"
+    )
+
+    text_parser.add_argument(
+        "--source",
+        action="append",
+        default=[
+            "living-plan-cli"
+        ],
+    )
+
+    add_parser = subparsers.add_parser(
+        "add"
+    )
+
+    add_parser.add_argument(
+        "id"
+    )
+
+    add_parser.add_argument(
+        "text"
+    )
+
+    add_parser.add_argument(
+        "--status",
+        default="planned"
+    )
+
+    add_parser.add_argument(
+        "--priority",
+        type=int,
+        default=1000,
+    )
+
+    add_parser.add_argument(
+        "--dependency",
+        action="append",
+        default=[],
+    )
+
+    add_parser.add_argument(
+        "--source",
+        action="append",
+        default=[
+            "living-plan-cli"
+        ],
+    )
+
+    subparsers.add_parser(
+        "export"
+    )
+
+    return parser
+
+
+def main() -> int:
+    parser = build_parser()
+
+    args = parser.parse_args()
+
+    try:
+        if args.command == "show":
+            output = show(
+                args.id
+            )
+
+        elif args.command == "progress":
+            output = progress()
+
+        elif args.command == "ready":
+            output = {
+                "ready":
+                    ready_records()
+            }
+
+        elif args.command == "impact":
+            output = impact(
+                args.id
+            )
+
+        elif args.command == "status":
+            output = update_status(
+                args.id,
+                args.status,
+                source=args.source,
+            )
+
+        elif args.command == "update":
+            output = update_text(
+                args.id,
+                args.text,
+                source=args.source,
+            )
+
+        elif args.command == "add":
+            output = add(
+                args.id,
+                args.text,
+                args.status,
+                args.priority,
+                args.dependency,
+                source=args.source,
+            )
+
+        elif args.command == "export":
+            output = export()
+
+        else:
+            parser.error(
+                "unknown command"
+            )
+
+            return 2
+
+    except (
+        KeyError,
+        ValueError,
+    ) as exc:
+        print(
+            json.dumps(
+                {
+                    "ok":
+                        False,
+
+                    "error":
+                        str(
+                            exc
+                        ),
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+
+        return 1
+
+    print(
+        json.dumps(
+            output,
+            indent=2,
+            ensure_ascii=False,
+            sort_keys=True,
+            default=list,
+        )
+    )
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

@@ -1,0 +1,66 @@
+{
+  "authoritative": false,
+  "child_profile": "son",
+  "deterministic_hash": "8c030d284152fc69c7c000e5d4449371cc6eb81b126d850a20374d0690ecefef",
+  "domain": "filesystem",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "lineage.composition.8f50d036d4d493e543dd",
+  "impeti": [],
+  "namespace": "preview.kindred",
+  "parent_profile": "parent",
+  "plane": "lineage",
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "role": "composition",
+  "schema": "savant.kindred.preview.lineage_segue.v2",
+  "source": "runtime/palaver/authority",
+  "source_record": {
+    "axis": "containment",
+    "canonical_source": "fs:runtime/palaver/authority",
+    "canonical_target": "fs:runtime/palaver/authority/authority_engine.py",
+    "continuation": "projecting",
+    "id": "lineage.composition.8f50d036d4d493e543dd",
+    "inheritance": {
+      "conflict_policy": "child_wins",
+      "exclude": [],
+      "fields": [],
+      "mode": "reference"
+    },
+    "inverse": "component",
+    "kind": "contains",
+    "metadata": {
+      "legacy_edge_kind": "contains",
+      "projection": "filesystem_edifice"
+    },
+    "order": 0,
+    "propagation": {
+      "channels": [
+        "validation",
+        "projection",
+        "regeneration"
+      ],
+      "enabled": true
+    },
+    "provenance": {
+      "created_by": "filesystem_adapter",
+      "source_files": [
+        "/root/savant-runtime/runtime/palaver/authority/authority_engine.py"
+      ]
+    },
+    "role": "composition",
+    "scope": "filesystem",
+    "source": "runtime/palaver/authority",
+    "status": "active",
+    "symbolic_child_alias": "son",
+    "symbolic_parent_alias": "parent",
+    "target": "runtime/palaver/authority/authority_engine.py",
+    "weight": 2
+  },
+  "state": "active",
+  "synthetic": false,
+  "target": "runtime/palaver/authority/authority_engine.py"
+}

@@ -1,0 +1,21 @@
+{
+  "findings": [
+    {
+      "action": "Restore the accepted authority primitive; do not create a parallel authority.",
+      "domain": "authority",
+      "evidence": "required canonical modular authority surface is missing",
+      "key": "missing_authority_surface",
+      "path": "/root/savant-runtime/authority_graph/registries/modular_moods.json",
+      "severity": "error"
+    },
+    {
+      "action": "Restore the accepted authority primitive; do not create a parallel authority.",
+      "domain": "authority",
+      "evidence": "required canonical modular authority surface is missing",
+      "key": "missing_authority_surface",
+      "path": "/root/savant-runtime/authority_graph/registries/attachment_slots.json",
+      "severity": "error"
+    }
+  ],
+  "schema": "savant://vault/dimensions/modular-conformance/findings/2.2.0"
+}

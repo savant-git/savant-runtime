@@ -1,0 +1,142 @@
+{
+  "authority_state": "projection",
+  "checkpoint": {
+    "counts": {
+      "ability": 7,
+      "branch": 0,
+      "event": 6,
+      "metadata": 5
+    },
+    "engine_id": "living-structure-engine",
+    "enhancement_count": 36,
+    "focal_id": "focal:living-structure",
+    "latest_event": {
+      "digest": "e2ee06f7e85f0a1ebb3fc830ae8ca73dfeceb654aa2cca0e5db1cfca906bbae7",
+      "event_id": "evt_4bbb755c626d445fa1b02c4af51141ef",
+      "event_type": "living.observation.structure-intelligence",
+      "recorded_at": "2026-08-09T15:57:32.224774+00:00"
+    },
+    "policy": {
+      "deduplicate_identical_observations": true,
+      "destructive_mutation": false,
+      "fail_closed_on_invalid_report": true,
+      "history": "append-only",
+      "physical_migration": false,
+      "projection_authority": "none",
+      "scanner_authority": "preserve"
+    },
+    "schema": "savant://runtime/scyon/living-checkpoint/1.0.0",
+    "scyon": {
+      "archetype": "living-structure-engine",
+      "authority_state": "accepted",
+      "composition": {
+        "direct_constituent_count": 0,
+        "direct_constituents": [],
+        "direct_dependent_count": 0,
+        "direct_dependents": []
+      },
+      "digest": "e4836d65fd5acff7f4137a2de3d72fbbd76d4590a8f582bdff08eec7351681cb",
+      "equalizer": {
+        "adaptivity": {
+          "authority_state": "accepted",
+          "value": 0.85
+        },
+        "authority_strictness": {
+          "authority_state": "accepted",
+          "value": 1.0
+        },
+        "automation": {
+          "authority_state": "accepted",
+          "value": 0.7
+        },
+        "causal_depth": {
+          "authority_state": "accepted",
+          "value": 0.85
+        },
+        "composition_depth": {
+          "authority_state": "accepted",
+          "value": 1.0
+        },
+        "confidence_threshold": {
+          "authority_state": "accepted",
+          "value": 0.9
+        },
+        "exploration": {
+          "authority_state": "accepted",
+          "value": 0.35
+        },
+        "metadata_influence": {
+          "authority_state": "accepted",
+          "value": 0.8
+        },
+        "projection_detail": {
+          "authority_state": "accepted",
+          "value": 0.9
+        },
+        "simulation_breadth": {
+          "authority_state": "accepted",
+          "value": 0.55
+        },
+        "temporal_depth": {
+          "authority_state": "accepted",
+          "value": 0.95
+        },
+        "validation_rigor": {
+          "authority_state": "accepted",
+          "value": 1.0
+        }
+      },
+      "focal_id": "focal:living-structure",
+      "owner_id": "exile:underscore",
+      "owner_tier": "exile",
+      "scyon_id": "scyon:exile:underscore:living-structure",
+      "tier_rank": 4
+    },
+    "validation": {
+      "composition_edge_count": 0,
+      "composition_errors": [],
+      "database": "/root/savant-runtime/runtime/scyon/state/living-structure.sqlite3",
+      "event_chain_errors": [],
+      "foreign_key_errors": 0,
+      "integrity": "ok",
+      "kernel_substantiated_once": true,
+      "mutation_authorized": false,
+      "physical_migration_authorized": false,
+      "recursive_composition": true,
+      "valid": true
+    }
+  },
+  "engine_id": "living-structure-engine",
+  "migration_authorized": false,
+  "mutation_performed": false,
+  "next_action": "reconcile ownership blockers before any migration",
+  "observation": {
+    "changed": true,
+    "event_id": "evt_4bbb755c626d445fa1b02c4af51141ef",
+    "fingerprint": "fa85913ade0ed899ad8e887da430c5eb04ca61baff25ff9dd8daabd20e3a0874",
+    "previous_event_digest": null
+  },
+  "rebuildable": true,
+  "schema": "savant://projection/living-structure/1.0.0",
+  "scyon_id": "scyon:exile:underscore:living-structure",
+  "source_report": {
+    "path": "/root/savant-runtime/assurance/structure-intelligence/20260807T220308Z/structure-intelligence.json",
+    "sha256": "fc34a3652630f6485529b43f6afa7a05eb0295c1ab0984cdd43fabdbc20c431d"
+  },
+  "summary": {
+    "cabal_candidate_count": 0,
+    "cross_owner_duplicate_group_count": 4,
+    "dependency_edge_count": 36312,
+    "duplicate_group_count": 166,
+    "file_count": 22026,
+    "instance_candidate_count": 45,
+    "migration_candidate_count": 0,
+    "ownership_conflict_count": 847,
+    "parse_error_count": 44,
+    "probable_multi_owner_cabal_count": 0,
+    "rubric_candidate_count": 5,
+    "source_count": 1029,
+    "structured_record_count": 20754,
+    "unresolved_source_owner_count": 843
+  }
+}

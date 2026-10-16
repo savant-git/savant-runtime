@@ -1,0 +1,142 @@
+{
+  "authoritative": false,
+  "authority_tier": "delegated",
+  "canonical_id": "fs:.",
+  "deterministic_hash": "be039c23b8f261ffbfd25d2cbc35b93658fe6efe526c17f2b9d8fbd0d8d8ab39",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "savant-runtime",
+  "kind": "directory",
+  "label": "savant-runtime",
+  "namespace": "preview.kindred",
+  "path": ".",
+  "placement": {
+    "domain": "system",
+    "node": "savant-runtime",
+    "parent": null,
+    "placement_basis": "root",
+    "primary_relationship_id": null,
+    "rank": 0,
+    "slot": "root",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.1078f94352df494f5a0c",
+    "lineage.composition.442ac0687b87cf74d35f",
+    "lineage.composition.47a6ef04fd0746f132b8",
+    "lineage.composition.7910c905bc927f325c16",
+    "lineage.composition.7e3bee30abbdd56b0e4f",
+    "lineage.composition.83611de0ef377f8c78e4",
+    "lineage.composition.8788138c1be85201168d",
+    "lineage.composition.9b8bcd44bdca0961eafa",
+    "lineage.composition.b4207abdcd71104cbf65",
+    "lineage.composition.c6bd9c88fee033c93062",
+    "preview.synthetic.lineage.demo"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": false,
+    "canonical_id": "fs:.",
+    "children": [
+      "runtime",
+      "canon",
+      "canon-system",
+      "tests",
+      "ontology",
+      "webui_ultra",
+      "tools",
+      "vault",
+      "bin",
+      "authority_graph"
+    ],
+    "daughters": [
+      "runtime",
+      "canon",
+      "canon-system",
+      "tests",
+      "ontology",
+      "webui_ultra",
+      "tools",
+      "vault",
+      "bin",
+      "authority_graph"
+    ],
+    "dependencies": [],
+    "fathers": [],
+    "id": "savant-runtime",
+    "kind": "directory",
+    "label": "savant-runtime",
+    "legacy_id": "savant-runtime",
+    "lineage": [],
+    "metadata": {
+      "canonical_id": "fs:.",
+      "child_modes": {
+        "preserving": [
+          "fs:runtime",
+          "fs:canon",
+          "fs:canon-system",
+          "fs:tests",
+          "fs:ontology",
+          "fs:webui_ultra",
+          "fs:tools",
+          "fs:vault",
+          "fs:bin",
+          "fs:authority_graph"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:runtime",
+          "fs:canon",
+          "fs:canon-system",
+          "fs:tests",
+          "fs:ontology",
+          "fs:webui_ultra",
+          "fs:tools",
+          "fs:vault",
+          "fs:bin",
+          "fs:authority_graph"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {},
+      "projected_id": "savant-runtime",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [],
+    "path": ".",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": ".",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.1078f94352df494f5a0c",
+      "lineage.composition.442ac0687b87cf74d35f",
+      "lineage.composition.47a6ef04fd0746f132b8",
+      "lineage.composition.7910c905bc927f325c16",
+      "lineage.composition.7e3bee30abbdd56b0e4f",
+      "lineage.composition.83611de0ef377f8c78e4",
+      "lineage.composition.8788138c1be85201168d",
+      "lineage.composition.9b8bcd44bdca0961eafa",
+      "lineage.composition.b4207abdcd71104cbf65",
+      "lineage.composition.c6bd9c88fee033c93062"
+    ],
+    "size": 12,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

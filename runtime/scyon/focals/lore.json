@@ -1,0 +1,316 @@
+{
+  "schema": "savant://runtime/scyon/focal/lore/1.0.0",
+  "engine_id": "living-canon-engine",
+  "focal_id": "focal:lore",
+  "focal_kind": "lore",
+  "scyon_id": "scyon:exile:lore",
+  "owner_id": "exile:lore",
+  "owner_tier": "exile",
+  "archetype": "knowledge-canon-jurisdiction",
+  "authority_state": "provisional",
+  "abilities": [
+    {
+      "name": "canonical-truth",
+      "minimum_tier": "exile",
+      "authority_state": "provisional",
+      "contract": {
+        "mutating": false,
+        "projection": true
+      }
+    },
+    {
+      "name": "historical-truth",
+      "minimum_tier": "exile",
+      "authority_state": "provisional",
+      "contract": {
+        "mutating": false,
+        "temporal": true
+      }
+    },
+    {
+      "name": "temporal-truth",
+      "minimum_tier": "exile",
+      "authority_state": "provisional",
+      "contract": {
+        "mutating": false,
+        "temporal": true
+      }
+    },
+    {
+      "name": "context-hydration",
+      "minimum_tier": "exile",
+      "authority_state": "provisional",
+      "contract": {
+        "mutating": false,
+        "projection": true
+      }
+    },
+    {
+      "name": "semantic-background",
+      "minimum_tier": "exile",
+      "authority_state": "provisional",
+      "contract": {
+        "mutating": false,
+        "projection": true
+      }
+    },
+    {
+      "name": "relevance-resolution",
+      "minimum_tier": "exile",
+      "authority_state": "provisional",
+      "contract": {
+        "mutating": false,
+        "projection": true
+      }
+    },
+    {
+      "name": "supersession",
+      "minimum_tier": "exile",
+      "authority_state": "provisional",
+      "contract": {
+        "mutating": false,
+        "history": "immutable"
+      }
+    },
+    {
+      "name": "canon-diff",
+      "minimum_tier": "exile",
+      "authority_state": "provisional",
+      "contract": {
+        "mutating": false,
+        "deterministic": true
+      }
+    },
+    {
+      "name": "canon-replay",
+      "minimum_tier": "exile",
+      "authority_state": "provisional",
+      "contract": {
+        "mutating": false,
+        "deterministic": true
+      }
+    },
+    {
+      "name": "evidence-closure",
+      "minimum_tier": "exile",
+      "authority_state": "provisional",
+      "contract": {
+        "mutating": false,
+        "notary_authority": "preserve"
+      }
+    },
+    {
+      "name": "conflict-topology",
+      "minimum_tier": "exile",
+      "authority_state": "provisional",
+      "contract": {
+        "mutating": false,
+        "conflict_preservation": true
+      }
+    },
+    {
+      "name": "resolution-topology",
+      "minimum_tier": "exile",
+      "authority_state": "provisional",
+      "contract": {
+        "mutating": false,
+        "notary_authority": "preserve"
+      }
+    },
+    {
+      "name": "dependency-traversal",
+      "minimum_tier": "exile",
+      "authority_state": "provisional",
+      "contract": {
+        "mutating": false,
+        "recursive": true
+      }
+    },
+    {
+      "name": "lineage-traversal",
+      "minimum_tier": "exile",
+      "authority_state": "provisional",
+      "contract": {
+        "mutating": false,
+        "recursive": true
+      }
+    },
+    {
+      "name": "provenance-traversal",
+      "minimum_tier": "exile",
+      "authority_state": "provisional",
+      "contract": {
+        "mutating": false,
+        "recursive": true
+      }
+    },
+    {
+      "name": "canon-feed",
+      "minimum_tier": "exile",
+      "authority_state": "provisional",
+      "contract": {
+        "mutating": false,
+        "rebuildable": true
+      }
+    },
+    {
+      "name": "explanatory-projection",
+      "minimum_tier": "exile",
+      "authority_state": "provisional",
+      "contract": {
+        "mutating": false,
+        "rebuildable": true
+      }
+    },
+    {
+      "name": "context-projection",
+      "minimum_tier": "exile",
+      "authority_state": "provisional",
+      "contract": {
+        "mutating": false,
+        "rebuildable": true
+      }
+    }
+  ],
+  "equalizer": {
+    "adaptivity": 0.8,
+    "authority_strictness": 1.0,
+    "causal_depth": 1.0,
+    "composition_depth": 0.9,
+    "confidence_threshold": 0.9,
+    "metadata_influence": 0.8,
+    "projection_detail": 1.0,
+    "temporal_depth": 1.0,
+    "validation_rigor": 1.0
+  },
+  "metadata": {
+    "purpose": "Knowledge context, historical truth, semantic background, and living canonical projection.",
+    "domain": "knowledge-canon",
+    "semantic_owner": "exile:lore",
+    "authority_substrate": "ConstitutionalRegistry",
+    "domain_engine": "FluidCanonEngine",
+    "living_runtime": "LivingCanonEngine",
+    "history_model": "immutable-supersession",
+    "cardinality_model": "triadic",
+    "pipeline_stage_count": 18,
+    "pipeline": [
+      "admission",
+      "identity_resolution",
+      "authority_resolution",
+      "policy_resolution",
+      "schema_validation",
+      "provenance_resolution",
+      "dependency_resolution",
+      "temporal_resolution",
+      "evidence_resolution",
+      "conflict_analysis",
+      "supersession_analysis",
+      "execution_planning",
+      "constitutional_contribution",
+      "canon_state_derivation",
+      "change_detection",
+      "projection",
+      "observability",
+      "attestation"
+    ]
+  },
+  "policy": {
+    "destructive_mutation": false,
+    "physical_migration": false,
+    "history": "immutable",
+    "projection_authority": "none",
+    "canonical_store": "constitutional-registry",
+    "duplicate_canon_store": false,
+    "conflict_preservation": true,
+    "notary_authority": "preserve",
+    "fail_closed": true
+  },
+  "integrations": {
+    "fluid_canon_engine": "/root/savant-runtime/runtime/fluid_canon/engine.py",
+    "living_template": "/root/savant-runtime/runtime/scyon/living_engine.py",
+    "scyon_kernel": "/root/savant-runtime/runtime/scyon/scyon_kernel.py",
+    "lore_capabilities": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/lore/interface/capabilities/capabilities.json",
+    "lore_contracts": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/lore/interface/contracts/contracts.json",
+    "projection": "/root/savant-runtime/runtime/scyon/projections/living-canon/latest.json",
+    "state": "/root/savant-runtime/runtime/scyon/state/living-canon.sqlite3",
+    "canon_service": "service:fluid-canon"
+  },
+  "enhancements": [
+    "Scyon living integration",
+    "Lore Focal specialization",
+    "immutable Fluid Canon preservation",
+    "constitutional authority preservation",
+    "snapshot fingerprinting",
+    "canon-state fingerprinting",
+    "incremental canon diffing",
+    "living change observation",
+    "temporal replay",
+    "replay digest verification",
+    "truth lineage projection",
+    "reverse supersession topology",
+    "conflict closure",
+    "resolution closure",
+    "evidence closure",
+    "authority envelope projection",
+    "Notary attestation boundary",
+    "admission-state preservation",
+    "completion-contract readiness",
+    "temporal validity projection",
+    "confidence-envelope readiness",
+    "risk-envelope readiness",
+    "dependency impact analysis",
+    "staleness detection",
+    "orphan detection",
+    "relationship integrity validation",
+    "contradiction-preserving topology",
+    "counterfactual branch readiness",
+    "shared priority readiness",
+    "shared horizon readiness",
+    "context hydration",
+    "living canon feed",
+    "query explainability",
+    "projection freshness",
+    "nine-dimensional health",
+    "finite-operation discipline"
+  ],
+  "registration": {
+    "aliases": [
+      "living-canon"
+    ],
+    "runtime": "/root/savant-runtime/runtime/scyon/living_canon_engine.py",
+    "state": "/root/savant-runtime/runtime/scyon/state/living-canon.sqlite3",
+    "projection": "/root/savant-runtime/runtime/scyon/projections/living-canon/latest.json",
+    "status": "provisional-implementation",
+    "command_surface": {
+      "default_runtime": "/root/savant-runtime/runtime/scyon/living_canon_engine.py",
+      "passthrough_commands": [
+        "status",
+        "self-test",
+        "observe",
+        "project",
+        "current",
+        "historical",
+        "explain",
+        "validate",
+        "checkpoint"
+      ],
+      "routes": {}
+    },
+    "composes": {
+      "scyon_kernel": "/root/savant-runtime/runtime/scyon/scyon_kernel.py",
+      "living_template": "/root/savant-runtime/runtime/scyon/living_engine.py",
+      "fluid_canon_engine": "/root/savant-runtime/runtime/fluid_canon/engine.py"
+    },
+    "mutation": {
+      "filesystem_move": false,
+      "filesystem_delete": false,
+      "authority_rewrite": false,
+      "historical_rewrite": false,
+      "canonical_contribution": false,
+      "observation": true,
+      "projection": true,
+      "simulation": true,
+      "checkpoint": true
+    }
+  }
+}

@@ -1,0 +1,26 @@
+schema: "savant://projection/identity/exile-instance/1.0.0"
+id: "exile:graffiti"
+kind: "exile"
+name: "graffiti"
+status: "accepted"
+authority_effect: "none"
+authority_ref: "canon-system/authority/exiles/graffiti.yaml"
+authority_sha256: "da87b675c4ce74c54d38cd7328034cadba6bae460d14c3250239eb8f69b52851"
+purpose_projection:
+  source: "canon-system/authority/exiles/graffiti.yaml"
+  current:
+    - "branding"
+    - "visual identity"
+    - "lexicon ownership"
+composition:
+  parent_edifice: "identity"
+  child_level: "prodigal"
+  transition: "segue"
+invariants:
+  filesystem_presence_establishes_authority: false
+  canonical_substance_duplicated: false
+  child_substance_by_reference: true
+  projections_are_authority: false
+lineage:
+  decision: "authority/accepted-decisions/ad-20261003-001-materialize-eighteen-exiles-and-segues.md"
+generated_by: "savant.identity-edifice-reconciler.v1"

@@ -1,0 +1,370 @@
+{
+  "$schema": "savant://schema/identity/prodigal/1.0.0",
+  "id": "prodigal.niche.masterplan",
+  "kind": "prodigal",
+  "name": "masterplan",
+  "title": "Masterplan",
+  "version": "1.0.0",
+  "status": "proposed",
+  "authority": {
+    "state": "proposed",
+    "class": "project-owner-directed",
+    "tier": 2,
+    "confidence": 1.0,
+    "owner": "exile.niche",
+    "source": "/root/savant-runtime/docs/SAVANT_MASTER_TASKS.md",
+    "precedence": [
+      "accepted project-owner decision",
+      "accepted constitutional canon",
+      "authoritative task graph",
+      "accepted implementation evidence",
+      "generated roadmap projection"
+    ],
+    "constraints": [
+      "The Markdown roadmap is a projection and cannot silently become authority.",
+      "No task may be marked complete without accepted evidence.",
+      "No lower-priority work may supersede a higher-priority active task without an explicit override decision.",
+      "Task priority is resolved from authority, dependency state, blocking impact, risk, and accepted project-owner direction.",
+      "Existing working implementation is extended rather than replaced."
+    ]
+  },
+  "purpose": {
+    "statement": "Own Savant project planning as an authoritative, graph-addressable, dependency-aware, evidence-governed capability.",
+    "domain": [
+      "task discovery",
+      "capability decomposition",
+      "priority resolution",
+      "dependency resolution",
+      "execution selection",
+      "completion validation",
+      "impact analysis",
+      "roadmap projection",
+      "promotion tracking",
+      "release planning",
+      "project history"
+    ]
+  },
+  "responsibilities": [
+    "Represent every project capability, onus, task, subtask, and microstep as an authoritative task record.",
+    "Represent all task dependencies, blockers, sequencing, ownership, authority, provenance, lineage, relationships, outputs, evidence, tests, rollback, and acceptance criteria.",
+    "Select the highest-priority executable task deterministically.",
+    "Prevent unauthorized task drift.",
+    "Preserve unresolved contradictions instead of silently choosing.",
+    "Record every status transition as an immutable event.",
+    "Generate disposable roadmap, queue, dashboard, dependency, bottleneck, and release projections.",
+    "Integrate identity promotion work without allowing it to supersede the active constitutional foundation sequence.",
+    "Expose stable interfaces for Codex and other execution agents.",
+    "Maintain full lineage from source roadmap text to graph records and generated projections."
+  ],
+  "capabilities": [
+    {
+      "id": "capability.masterplan.ingest",
+      "name": "roadmap_ingestion",
+      "description": "Ingest legacy and current roadmap sources into proposed graph records without silently granting authority."
+    },
+    {
+      "id": "capability.masterplan.reconcile",
+      "name": "task_reconciliation",
+      "description": "Reconcile duplicate, conflicting, superseded, missing, and partially implemented tasks."
+    },
+    {
+      "id": "capability.masterplan.resolve",
+      "name": "priority_resolution",
+      "description": "Resolve the highest-priority executable task from authority, dependencies, blockers, risk, and impact."
+    },
+    {
+      "id": "capability.masterplan.sequence",
+      "name": "execution_sequencing",
+      "description": "Generate deterministic task execution order while preserving explicit overrides."
+    },
+    {
+      "id": "capability.masterplan.validate",
+      "name": "completion_validation",
+      "description": "Validate completion against accepted criteria and attached evidence."
+    },
+    {
+      "id": "capability.masterplan.project",
+      "name": "roadmap_projection",
+      "description": "Generate Markdown, JSON, queue, dependency, bottleneck, release, observatory, and agent-context projections."
+    },
+    {
+      "id": "capability.masterplan.observe",
+      "name": "project_observation",
+      "description": "Observe implementation evidence and propose task-state changes without silently promoting them."
+    },
+    {
+      "id": "capability.masterplan.promote",
+      "name": "task_state_promotion",
+      "description": "Promote proposed task-state changes through explicit authority and evidence gates."
+    },
+    {
+      "id": "capability.masterplan.replay",
+      "name": "deterministic_replay",
+      "description": "Rebuild task state and projections from authoritative primitives and immutable events."
+    },
+    {
+      "id": "capability.masterplan.audit",
+      "name": "roadmap_audit",
+      "description": "Detect drift, orphan work, invalid completion, missing evidence, dependency violations, and unauthorized priority changes."
+    }
+  ],
+  "composition": {
+    "parent": "exile.niche",
+    "quirks": [
+      "quirk.masterplan.ingest",
+      "quirk.masterplan.reconcile",
+      "quirk.masterplan.resolve",
+      "quirk.masterplan.sequence",
+      "quirk.masterplan.validate",
+      "quirk.masterplan.project",
+      "quirk.masterplan.observe",
+      "quirk.masterplan.promote",
+      "quirk.masterplan.replay",
+      "quirk.masterplan.audit"
+    ],
+    "rules": [
+      "Each quirk owns one bounded capability.",
+      "Shared behavior is composed through explicit contracts and segues.",
+      "No quirk stores duplicated authoritative task state.",
+      "All projections derive from the same authoritative graph."
+    ]
+  },
+  "contracts": {
+    "module": "contracts/masterplan_contracts.py",
+    "version": "1.0.0",
+    "strict": true,
+    "models": [
+      "TaskRecord",
+      "CapabilityRecord",
+      "TaskSegue",
+      "TaskEvent",
+      "TaskDecision",
+      "TaskEvidence",
+      "TaskReceipt",
+      "TaskAttestation",
+      "TaskQuery",
+      "TaskSelection",
+      "TaskProjection"
+    ]
+  },
+  "runtime": {
+    "implementation": "proposed",
+    "entrypoints": [
+      "runtime/masterplan_runtime.py"
+    ],
+    "commands": [
+      "/root/savant-runtime/bin/masterplanctl"
+    ],
+    "deterministic": true,
+    "side_effects": [
+      "append_authoritative_task_record",
+      "append_task_segue",
+      "append_task_event",
+      "append_task_decision",
+      "write_generated_projection"
+    ],
+    "authority_boundary": "Writes to authoritative task primitives require explicit admission. Projections never mutate authority."
+  },
+  "dependencies": {
+    "required": [
+      "SAV-P0-001",
+      "SAV-P0-002",
+      "SAV-P0-003",
+      "SAV-P0-004",
+      "SAV-P1-002",
+      "SAV-P2-001",
+      "SAV-P2-002",
+      "SAV-P2-003"
+    ],
+    "optional": [
+      "exile.notary",
+      "exile.opus",
+      "exile.cataxis",
+      "exile.envoy",
+      "exile.palaver"
+    ],
+    "runtime": [
+      "python.pydantic",
+      "python.networkx"
+    ],
+    "external": []
+  },
+  "relationships": [
+    {
+      "type": "belongs_to",
+      "target": "exile.niche",
+      "authority_transfer": false,
+      "reversible": true
+    },
+    {
+      "type": "projects",
+      "target": "/root/savant-runtime/docs/SAVANT_MASTER_TASKS.md",
+      "authority_transfer": false,
+      "reversible": true
+    },
+    {
+      "type": "governs",
+      "target": "savant.project.execution-order",
+      "authority_transfer": false,
+      "reversible": true
+    },
+    {
+      "type": "integrates",
+      "target": "savant.identity-promotion.pipeline",
+      "authority_transfer": false,
+      "reversible": true
+    }
+  ],
+  "lineage": {
+    "parents": [
+      {
+        "id": "exile.niche",
+        "role": "composition"
+      },
+      {
+        "id": "/root/savant-runtime/docs/SAVANT_MASTER_TASKS.md",
+        "role": "source"
+      }
+    ],
+    "supersedes": [],
+    "superseded_by": []
+  },
+  "provenance": {
+    "created_at": "2026-08-01T18:43:45-04:00",
+    "created_by": "project-owner-directed implementation",
+    "sources": [
+      "/root/savant-runtime/docs/SAVANT_MASTER_TASKS.md",
+      "project conversation: identity promotion implementation",
+      "canon/foundation/006_AUTHORITY_GRAPH_CANON.md",
+      "canon/foundation/007_PROJECTION_CANON.md",
+      "canon/foundation/008_FUNCTIONAL_LINEAGE_CANON.md",
+      "canon/foundation/011_UNIVERSAL_GRAMMAR_CANON.md"
+    ],
+    "source_hashes": {},
+    "transformations": [
+      "roadmap_to_authoritative_task_graph_design",
+      "identity_promotion_workstream_integration",
+      "niche_prodigal_composition"
+    ]
+  },
+  "security": {
+    "boundary": "No agent may change accepted priority, status, completion, or authority without an admitted decision and evidence.",
+    "permissions": [
+      "read_authority",
+      "read_evidence",
+      "propose_task",
+      "propose_transition",
+      "generate_projection"
+    ],
+    "denied_by_default": [
+      "accept_task",
+      "complete_task",
+      "cancel_task",
+      "override_priority",
+      "delete_history",
+      "rewrite_evidence"
+    ],
+    "network_policy": "deny_by_default",
+    "sandbox": true
+  },
+  "observability": {
+    "metrics": [
+      "task_count",
+      "executable_task_count",
+      "blocked_task_count",
+      "orphan_task_count",
+      "invalid_completion_count",
+      "missing_evidence_count",
+      "dependency_cycle_count",
+      "priority_override_count",
+      "projection_drift_count"
+    ],
+    "events": [
+      "masterplan.task.proposed",
+      "masterplan.task.accepted",
+      "masterplan.task.started",
+      "masterplan.task.blocked",
+      "masterplan.task.completed",
+      "masterplan.task.reopened",
+      "masterplan.task.superseded",
+      "masterplan.priority.overridden",
+      "masterplan.projection.generated",
+      "masterplan.drift.detected"
+    ],
+    "health": [
+      "authority_graph_loadable",
+      "dependency_graph_acyclic_or_explicitly_exempt",
+      "active_task_resolvable",
+      "projection_reproducible"
+    ],
+    "audit": true
+  },
+  "validation": {
+    "unit_tests": [
+      "tests/test_masterplan_runtime.py"
+    ],
+    "integration_tests": [
+      "tests/test_masterplan_projection.py",
+      "tests/test_masterplan_agent_gate.py"
+    ],
+    "property_tests": [
+      "equal_authority_produces_equal_projection",
+      "task_selection_is_deterministic",
+      "projection_deletion_does_not_delete_authority",
+      "status_cannot_advance_without_valid_transition",
+      "completion_cannot_pass_without_evidence"
+    ],
+    "security_tests": [
+      "agent_cannot_override_priority_without_decision",
+      "projection_cannot_mutate_authority",
+      "untrusted_observation_cannot_become_accepted_task",
+      "history_cannot_be_silently_rewritten"
+    ],
+    "acceptance": [
+      "Every roadmap task exists as a stable graph-addressable record.",
+      "Every dependency exists as one typed segue.",
+      "Every status change exists as one immutable event.",
+      "The current active task is resolved deterministically.",
+      "The Markdown roadmap is reproducible from graph authority.",
+      "Codex can obtain the active task and governing context through one command.",
+      "Identity promotion work is represented without displacing SAV-P0-001.",
+      "No task can be silently marked complete."
+    ]
+  },
+  "lifecycle": {
+    "semantic_state": "proposed",
+    "runtime_state": "unimplemented",
+    "legal_transitions": [
+      "proposed->accepted",
+      "accepted->active",
+      "active->blocked",
+      "blocked->active",
+      "active->completed",
+      "completed->reopened",
+      "accepted->superseded",
+      "proposed->rejected"
+    ]
+  },
+  "apertures": [
+    {
+      "id": "prodigal.niche.masterplan.executor",
+      "purpose": "Attach execution agents without granting authority to select unauthorized work."
+    },
+    {
+      "id": "prodigal.niche.masterplan.observatory",
+      "purpose": "Attach visual and diagnostic projections."
+    },
+    {
+      "id": "prodigal.niche.masterplan.release",
+      "purpose": "Attach release planning and readiness projections."
+    },
+    {
+      "id": "prodigal.niche.masterplan.consensus",
+      "purpose": "Attach multi-source task-state consensus."
+    },
+    {
+      "id": "prodigal.niche.masterplan.migration",
+      "purpose": "Attach future task schema migrations without replacing current authority."
+    }
+  ]
+}

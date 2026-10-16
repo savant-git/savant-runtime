@@ -1,0 +1,104 @@
+/*
+ * palaver mobile interaction projection
+ *
+ * presentation-only compatibility layer.
+ * does not own routing, workspace state, authority,
+ * terminal behavior, or cinematic behavior.
+ */
+
+@media (hover: none), (pointer: coarse) {
+  .palaver-workstation {
+    touch-action: manipulation;
+  }
+
+  .cinematic-grid,
+  .cinematic-vignette,
+  .ambient-environment,
+  .palaver-energy-pulse,
+  .palaver-cinematic-runtime::before,
+  .palaver-cinematic-runtime::after,
+  .palaver-cinematic-runtime .workstation-shell::after {
+    pointer-events: none !important;
+  }
+
+  .workstation-topbar {
+    position: relative;
+    z-index: 100;
+    pointer-events: auto !important;
+  }
+
+  .palaver-layout {
+    position: relative;
+    z-index: 80;
+    pointer-events: auto !important;
+  }
+
+  .workstation-statusbar {
+    position: relative;
+    z-index: 80;
+    pointer-events: auto !important;
+  }
+
+  .palaver-left,
+  .palaver-center,
+  .palaver-right,
+  .workspace-surface,
+  .workstation-rail,
+  .rail-nav,
+  .rail-file-section,
+  .rail-file-list,
+  .topbar-actions {
+    pointer-events: auto !important;
+  }
+
+  .palaver-workstation button,
+  .palaver-workstation a,
+  .palaver-workstation input,
+  .palaver-workstation textarea,
+  .palaver-workstation select,
+  .palaver-workstation [role="button"],
+  .palaver-workstation [cmdk-item] {
+    pointer-events: auto !important;
+    touch-action: manipulation;
+  }
+
+  .rail-item,
+  .command-trigger,
+  .rail-file-list button,
+  .topbar-actions button {
+    position: relative;
+    z-index: 10;
+    min-height: 42px;
+    pointer-events: auto !important;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color:
+      rgba(240, 200, 121, 0.14);
+  }
+
+  .rail-item *,
+  .command-trigger *,
+  .topbar-actions button * {
+    pointer-events: none;
+  }
+
+  .rail-item::before,
+  .rail-item::after,
+  .command-trigger::before,
+  .command-trigger::after,
+  .topbar-actions button::before,
+  .topbar-actions button::after {
+    pointer-events: none !important;
+  }
+
+  .command-backdrop {
+    z-index: 2000;
+    pointer-events: auto !important;
+  }
+
+  .command-center,
+  .command-center *,
+  .command-center [cmdk-list],
+  .command-center [cmdk-item] {
+    pointer-events: auto;
+  }
+}

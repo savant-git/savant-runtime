@@ -1,0 +1,43 @@
+{
+  "id": "envoy",
+  "graph_id": "exile:envoy",
+  "type": "exile",
+  "status": "active",
+  "composition_level": "exile",
+  "path": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/envoy",
+  "authority": {
+    "persona_owner": "envoy",
+    "voice_owner": "envoy",
+    "conversation_owner": "palaver",
+    "provider_selection_owner": "opus",
+    "provider_routing_owner": "opus",
+    "provider_credentials_owner": "opus",
+    "provider_execution_owner": "opus",
+    "provider_retry_policy_owner": "opus",
+    "provider_fallback_policy_owner": "opus"
+  },
+  "capabilities": [
+    "persona_registry",
+    "persona_resolution",
+    "persona_selection",
+    "persona_projection",
+    "voice_registry",
+    "voice_resolution",
+    "voice_intent",
+    "voice_synthesis",
+    "voice_metadata_projection",
+    "text_inference_bridge",
+    "audio_format_projection"
+  ],
+  "routes": [
+    "text_inference_route",
+    "voice_tts_route"
+  ],
+  "dependencies": [
+    "opus"
+  ],
+  "dependents": [
+    "palaver"
+  ],
+  "authority_transfer": false
+}

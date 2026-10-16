@@ -1,0 +1,26 @@
+schema: "savant://projection/identity/exile-instance/1.0.0"
+id: "exile:lore"
+kind: "exile"
+name: "lore"
+status: "accepted"
+authority_effect: "none"
+authority_ref: "canon-system/authority/exiles/lore.yaml"
+authority_sha256: "c7351a830b7c68f0002238b450552c5fe364502d632eab720f294e68c88b73cf"
+purpose_projection:
+  source: "canon-system/authority/exiles/lore.yaml"
+  current:
+    - "knowledge context"
+    - "historical memory"
+    - "semantic background"
+composition:
+  parent_edifice: "identity"
+  child_level: "prodigal"
+  transition: "segue"
+invariants:
+  filesystem_presence_establishes_authority: false
+  canonical_substance_duplicated: false
+  child_substance_by_reference: true
+  projections_are_authority: false
+lineage:
+  decision: "authority/accepted-decisions/ad-20261003-001-materialize-eighteen-exiles-and-segues.md"
+generated_by: "savant.identity-edifice-reconciler.v1"

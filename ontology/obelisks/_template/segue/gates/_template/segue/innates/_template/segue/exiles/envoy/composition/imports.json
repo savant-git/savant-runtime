@@ -1,0 +1,33 @@
+{
+  "id": "envoy.imports",
+  "owner": "envoy",
+  "status": "active",
+  "imports": [
+    {
+      "id": "opus.text_execution",
+      "provider": "opus",
+      "runtime": "runtime/router.py",
+      "symbol": "execute_text_request",
+      "route": "text_inference_route",
+      "required": true,
+      "authority": "opus"
+    },
+    {
+      "id": "opus.voice_execution",
+      "provider": "opus",
+      "runtime": "runtime/voice_orchestrator.py",
+      "symbol": "synthesize",
+      "route": "voice_tts_route",
+      "required": true,
+      "authority": "opus"
+    }
+  ],
+  "authority_constraints": {
+    "provider_selection_owner": "opus",
+    "provider_routing_owner": "opus",
+    "provider_credentials_owner": "opus",
+    "provider_execution_owner": "opus",
+    "provider_retry_policy_owner": "opus",
+    "provider_fallback_policy_owner": "opus"
+  }
+}

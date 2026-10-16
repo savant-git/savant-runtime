@@ -1,0 +1,457 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "savant://canon/identity-tier-criteria/1.0.0",
+  "status": "authority-candidate",
+  "authority_basis": [
+    "current user directive 2026-08-06",
+    "AD-20260806-002 accepted canonical recursive runtime structure",
+    "AD-20260805-001 portal supersedes gate as identity level eight"
+  ],
+  "mutation_authorized": false,
+  "edifice": [
+    "iota",
+    "mote",
+    "trait",
+    "quirk",
+    "prodigal",
+    "exile",
+    "innate",
+    "portal",
+    "obelisk"
+  ],
+  "composition_law": {
+    "stable_parent_minimum_distinct_active_children": 2,
+    "child_relationship": "direct composition by stable identity reference",
+    "canonical_substance_rule": "canonical child substance exists once and is never copied into the parent",
+    "emergence_rule": "a parent qualifies only when the composition produces the tier-specific emergent property absent from every child alone",
+    "promotion_rule": "size, file count, path depth, age, popularity, and anticipated reuse never establish tier",
+    "incomplete_rule": "an element with fewer than two qualifying children may exist only as template, proposal, compatibility surface, or incomplete candidate and must not claim substantiated tier status",
+    "succession_rule": "replacement creates a successor with lineage; accepted identity is not silently rewritten"
+  },
+  "universal_instance_criteria": [
+    "stable identity independent of path",
+    "one archetype binding",
+    "direct child references with no duplicated substance",
+    "declared authority state",
+    "lineage and provenance",
+    "dependencies and dependents",
+    "compatibility and succession",
+    "extension and attachment support",
+    "deterministic projection and validation receipts"
+  ],
+  "tiers": [
+    {
+      "rank": 1,
+      "name": "iota",
+      "plural": "iotas",
+      "child": null,
+      "parent": "mote",
+      "essence": "The smallest identity-bearing canonical unit whose removal or division changes meaning.",
+      "emergence": "Identity",
+      "scope": "One indivisible semantic assertion, datum, tokenized rule, reference, parameter, or operation.",
+      "must": [
+        "possess a stable identity independent of path",
+        "carry one authoritative semantic responsibility",
+        "be indivisible without semantic loss or authority ambiguity",
+        "declare type, value or operation, authority state, lineage, provenance, and compatibility",
+        "be independently referenceable and reusable",
+        "contain no lower identity-tier instances",
+        "expose deterministic serialization or canonical representation",
+        "fail closed when its meaning, authority, or type is unresolved",
+        "remain immutable in identity; changes supersede rather than silently mutate meaning"
+      ],
+      "must_not": [
+        "bundle multiple independently meaningful responsibilities",
+        "own an orchestration workflow",
+        "pretend a file, field, byte, character, or AST node is automatically an iota",
+        "derive authority from physical placement"
+      ],
+      "proof": "A reviewer can state its complete meaning in one unambiguous sentence and cannot split it into two independently reusable identity-bearing units without changing that meaning."
+    },
+    {
+      "rank": 2,
+      "name": "mote",
+      "plural": "motes",
+      "child": "iota",
+      "parent": "trait",
+      "essence": "The smallest coherent micro-capability, formed from multiple iotas whose interaction produces one usable effect.",
+      "emergence": "Coherence",
+      "scope": "One bounded micro-function, predicate, transform, binding, invariant, or typed relation.",
+      "must": [
+        "compose at least two distinct active iota instances",
+        "produce one coherent effect not supplied by any constituent iota alone",
+        "define input, output, preconditions, postconditions, and failure semantics where executable",
+        "preserve direct references to constituent iotas rather than copying their substance",
+        "expose deterministic composition order or explicitly commutative composition",
+        "remain independently testable and reusable",
+        "declare internal dependency direction and reject cycles unless a higher authority explicitly permits a fixed point",
+        "emit or support evidence sufficient to prove its micro-capability",
+        "remain narrower than an observable enduring property"
+      ],
+      "must_not": [
+        "be a renamed iota",
+        "contain unrelated effects",
+        "claim a stable behavioral characteristic that belongs at trait level",
+        "duplicate constituent iotas"
+      ],
+      "proof": "Removing any required iota breaks the micro-capability, while the remaining composition still cannot be reclassified as the same mote."
+    },
+    {
+      "rank": 3,
+      "name": "trait",
+      "plural": "traits",
+      "child": "mote",
+      "parent": "quirk",
+      "essence": "A stable, observable property produced by multiple motes and consistently expressed across applicable contexts.",
+      "emergence": "Disposition",
+      "scope": "One durable quality, guarantee, tendency, constraint, interface property, or measurable characteristic.",
+      "must": [
+        "compose at least two distinct active mote instances",
+        "express one stable property observable through a declared surface",
+        "define the contexts in which the property is guaranteed and those in which it is inapplicable",
+        "include measurable acceptance conditions",
+        "remain stable across repeated executions with equivalent inputs and authority state",
+        "declare conflicts and precedence among constituent motes",
+        "preserve constituent identity and provenance",
+        "support property-level validation rather than example-only validation",
+        "remain non-orchestrating and narrower than a conditional behavioral pattern"
+      ],
+      "must_not": [
+        "be merely descriptive metadata",
+        "encode a multi-stage workflow",
+        "depend on undeclared ambient state",
+        "collapse multiple unrelated properties into one trait"
+      ],
+      "proof": "The property is observable and testable across more than one valid context, and no single mote alone guarantees it."
+    },
+    {
+      "rank": 4,
+      "name": "quirk",
+      "plural": "quirks",
+      "child": "trait",
+      "parent": "prodigal",
+      "essence": "A bounded conditional behavioral pattern formed from multiple traits, distinctive in when or how it manifests.",
+      "emergence": "Behavior",
+      "scope": "One trigger-governed behavior, strategy, policy reaction, adaptation, exception pattern, or specialized mode of response.",
+      "must": [
+        "compose at least two distinct active trait instances",
+        "declare trigger, guard, context, behavior, termination, and fallback",
+        "produce a behavior distinguishable from each constituent trait",
+        "remain bounded to one behavioral concern",
+        "declare state requirements and side-effect boundaries",
+        "be replayable or explicitly classify irreproducible external effects",
+        "expose deterministic precedence when multiple quirks are simultaneously eligible",
+        "preserve the traits as reusable references",
+        "support focused behavioral tests including non-trigger cases"
+      ],
+      "must_not": [
+        "be an entire autonomous capability",
+        "silently override sibling quirks",
+        "own unrelated persistence, scheduling, and communication concerns",
+        "treat novelty alone as qualification"
+      ],
+      "proof": "Given the same authoritative context and trigger, the quirk selects and executes the same bounded behavior, while disabling it leaves the parent capability otherwise structurally intact."
+    },
+    {
+      "rank": 5,
+      "name": "prodigal",
+      "plural": "prodigals",
+      "child": "quirk",
+      "parent": "exile",
+      "essence": "An autonomous reusable capability assembled from multiple quirks and governed by a stable public contract.",
+      "emergence": "Capability",
+      "scope": "One independently invocable job, engine, subsystem capability, workflow, processor, planner, compiler, resolver, or service-like function.",
+      "must": [
+        "compose at least two distinct active quirk instances",
+        "own one coherent capability contract with declared inputs, outputs, errors, and compatibility",
+        "coordinate its quirks without absorbing their independent identity",
+        "be independently invocable, testable, replaceable by compatible succession, and reusable",
+        "declare operational state, resources, dependencies, and failure containment",
+        "own its Rubric when it has executable implementation",
+        "emit receipts for durable actions",
+        "expose extension points through slots, attachments, moods, adapters, or typed Segues",
+        "remain subordinate to exactly one primary Exile semantic owner while permitting Kindred relations elsewhere"
+      ],
+      "must_not": [
+        "claim broad domain authority",
+        "span unrelated capabilities",
+        "hide consumer-specific coupling behind a generic name",
+        "be promoted solely because it has many files"
+      ],
+      "proof": "It can be invoked through its contract as a complete capability, and its removal disables one capability without erasing the parent Exile's identity or all of its responsibilities."
+    },
+    {
+      "rank": 6,
+      "name": "exile",
+      "plural": "exiles",
+      "child": "prodigal",
+      "parent": "innate",
+      "essence": "A domain-responsible semantic owner composed of multiple Prodigals and accountable for one enduring operational concern.",
+      "emergence": "Agency",
+      "scope": "One named owner of a durable concern such as orchestration, evidence, mutation, contracts, composition, normalization, decomposition, conversation, or communication.",
+      "must": [
+        "compose at least two distinct active prodigal instances",
+        "own one durable semantic jurisdiction that remains meaningful independent of implementation",
+        "define explicit boundaries, responsibilities, non-responsibilities, and collaboration contracts",
+        "possess stable identity, authority, lineage, provenance, dependencies, dependents, and compatibility",
+        "own all Rubrics whose primary meaning belongs to its jurisdiction",
+        "consume Cabals only where shared qualification is proven",
+        "coordinate Prodigals without duplicating their capability substance",
+        "participate in Kindred through typed relations rather than informal coupling",
+        "remain composable into an Innate without becoming a global root or universal utility"
+      ],
+      "must_not": [
+        "be a folder, namespace, team label, or arbitrary collection",
+        "own unrelated domains",
+        "contain generic shared code merely for convenience",
+        "derive ownership from filename or path"
+      ],
+      "proof": "Its jurisdiction can be stated as one enduring responsibility; every owned Prodigal materially serves that responsibility; moving a Prodigal elsewhere requires an explicit authority and dependency rationale."
+    },
+    {
+      "rank": 7,
+      "name": "innate",
+      "plural": "innates",
+      "child": "exile",
+      "parent": "portal",
+      "essence": "A constitutional faculty composed of multiple Exiles whose coordinated jurisdictions provide one intrinsic system ability.",
+      "emergence": "Faculty",
+      "scope": "One fundamental capability family that the containing Portal inherently possesses.",
+      "must": [
+        "compose at least two distinct active exile instances",
+        "express one intrinsic faculty broader than any constituent Exile jurisdiction",
+        "define the constitutional guarantees the faculty provides to its Portal",
+        "govern collaboration and conflict resolution among member Exiles",
+        "declare admission criteria for Exiles and reject merely adjacent concerns",
+        "expose a stable faculty contract to the enclosing Portal",
+        "preserve Exile autonomy and ownership",
+        "provide fault-containment boundaries preventing one Exile failure from silently corrupting siblings",
+        "remain independent of any one external entry channel"
+      ],
+      "must_not": [
+        "be a miscellaneous category",
+        "directly absorb Prodigals except through an explicitly modeled compatibility bridge",
+        "represent an external boundary or entry surface",
+        "duplicate Exile Rubrics"
+      ],
+      "proof": "The faculty remains conceptually valid when any one Exile is replaced by a compatible successor, but ceases to be substantiated if it lacks plural complementary jurisdictions."
+    },
+    {
+      "rank": 8,
+      "name": "portal",
+      "plural": "portals",
+      "child": "innate",
+      "parent": "obelisk",
+      "essence": "A governed interaction boundary composed of multiple Innates, through which capabilities are admitted, exposed, translated, or traversed.",
+      "emergence": "Access",
+      "scope": "One coherent ingress, egress, mediation, protocol, audience, environment, or interaction boundary.",
+      "must": [
+        "compose at least two distinct active innate instances",
+        "define who or what may cross, in which direction, under which authority, contract, and policy",
+        "mediate rather than duplicate the faculties of its Innates",
+        "declare protocols, adapters, security boundaries, compatibility, rate or capacity constraints, and failure behavior",
+        "provide typed Segues inward to Innates and outward to the Obelisk environment",
+        "preserve end-to-end lineage and provenance for traversing payloads",
+        "support denial by default at controlled capability boundaries",
+        "remain independently observable and testable as a boundary",
+        "avoid becoming a programming gate; historical identity Gate paths remain compatibility surfaces only"
+      ],
+      "must_not": [
+        "be a generic directory named gateway or interface",
+        "own intrinsic faculty substance",
+        "permit untyped traversal",
+        "erase source identity during translation"
+      ],
+      "proof": "A traversal can be validated from admission through mediation to result, with authority and provenance intact, and the Portal remains a boundary rather than a capability owner."
+    },
+    {
+      "rank": 9,
+      "name": "obelisk",
+      "plural": "obelisks",
+      "child": "portal",
+      "parent": null,
+      "essence": "A sovereign fundamental Savant system composed of multiple Portals and responsible for one complete, durable, top-level purpose.",
+      "emergence": "Sovereignty",
+      "scope": "One major foundational system with its own constitutional purpose, governed boundaries, lifecycle, assurance, and evolution.",
+      "must": [
+        "compose at least two distinct active portal instances",
+        "declare one complete top-level purpose that cannot be reduced to a single Portal",
+        "govern its Portals through explicit authority, constitutional invariants, and compatibility law",
+        "expose stable identity, lifecycle, lineage, provenance, dependencies, dependents, and recovery model",
+        "contain all lower identity tiers through recursive composition without duplicating their substance",
+        "provide system-level assurance, observability, replay, migration, and succession criteria",
+        "remain independently extensible through new Portals and typed Segues",
+        "coordinate with other Obelisks through explicit Kindred, Cabal, contract, or Portal relations",
+        "avoid claiming Savant-wide authority unless explicitly established by higher constitutional authority"
+      ],
+      "must_not": [
+        "be a monolith",
+        "flatten lower tiers",
+        "serve as a dumping ground for unrelated systems",
+        "be created because a project is large"
+      ],
+      "proof": "Its purpose, boundaries, Portals, invariants, and failure/recovery model form a coherent sovereign system; removing one Portal degrades access but does not erase the Obelisk's identity."
+    }
+  ],
+  "criterion_mood_pipeline": [
+    {
+      "mood": "anima",
+      "function": "activates identity and verifies that an element is a real instance rather than a path, file, projection, or placeholder"
+    },
+    {
+      "mood": "weld",
+      "function": "binds distinct child instances into a parent composition while preserving their identities and references"
+    },
+    {
+      "mood": "kiln",
+      "function": "hardens the composition through invariants, validation, replay, regression, and failure testing"
+    },
+    {
+      "mood": "graft",
+      "function": "attaches optional capabilities, slots, adapters, and extensions without copying or replacing canonical substance"
+    },
+    {
+      "mood": "aria",
+      "function": "projects and expresses the element through human, machine, diagnostic, and runtime views without creating authority"
+    },
+    {
+      "mood": "mantle",
+      "function": "applies jurisdiction, authority, policy, security, custody, and responsibility boundaries"
+    },
+    {
+      "mood": "fulcrum",
+      "function": "balances cardinality, cohesion, coupling, symmetry, capacity, and dependency direction"
+    },
+    {
+      "mood": "echelon",
+      "function": "proves that emergence has crossed the threshold into the next distinct tier and prevents false promotion"
+    },
+    {
+      "mood": "ascent",
+      "function": "compiles validated lower-tier composition into higher-order operation and, at runtime, prepares it for deferred shardization"
+    }
+  ],
+  "scaffolding": {
+    "name": "recursive identity scaffold",
+    "nodes": "stable instances",
+    "vertical_members": "direct composition edges between adjacent tiers",
+    "horizontal_members": "typed Kindred, dependency, authority, provenance, compatibility, and Cabal relations",
+    "roads": "Segues",
+    "travel_unit": "typed transit envelope",
+    "transit_envelope_fields": [
+      "id",
+      "source",
+      "destination",
+      "payload_reference",
+      "contract",
+      "authority_witness",
+      "lineage",
+      "provenance",
+      "dependency_context",
+      "compatibility_context",
+      "mood_bindings",
+      "slot_bindings",
+      "valid_from",
+      "expires_at",
+      "receipt_policy"
+    ],
+    "runtime_shardization": {
+      "status": "semantics-deferred",
+      "established_now": [
+        "runtime shards are not the superseded second identity level",
+        "canonical instances remain authoritative and are not replaced by shards",
+        "shards are runtime projections or execution units derived deterministically from canonical instances",
+        "every shard must retain source identity, digest, lineage, provenance, authority witness, and replay information",
+        "shard format, granularity, lifecycle, routing, recombination, and persistence remain unresolved pending a later accepted decision"
+      ]
+    }
+  },
+  "audit_matrix": {
+    "passes": 50,
+    "note": "Fifty named audit lenses; this records scope, not a claim of mathematical proof.",
+    "lenses": [
+      "authority precedence",
+      "accepted-decision consistency",
+      "constitutional consistency",
+      "terminology uniqueness",
+      "tier adjacency",
+      "direct-child cardinality",
+      "emergent-property distinctness",
+      "anti-flattening",
+      "anti-duplication",
+      "stable identity",
+      "path independence",
+      "lineage continuity",
+      "provenance completeness",
+      "dependency transparency",
+      "dependent transparency",
+      "compatibility preservation",
+      "succession semantics",
+      "extension without replacement",
+      "attachment legality",
+      "slot separation",
+      "mood separation",
+      "Segue correctness",
+      "Kindred typing",
+      "Rubric ownership",
+      "Cabal qualification",
+      "projection non-authority",
+      "receipt sufficiency",
+      "deterministic derivation",
+      "replayability",
+      "recovery",
+      "fault containment",
+      "security boundaries",
+      "authority witness",
+      "schema completeness",
+      "type consistency",
+      "property invariants",
+      "graph acyclicity",
+      "integration boundaries",
+      "regression resistance",
+      "migration reversibility",
+      "collision safety",
+      "template non-substantiation",
+      "historical preservation",
+      "runtime/canon separation",
+      "shard ambiguity",
+      "symmetry",
+      "mathematical rank consistency",
+      "human intuitiveness",
+      "machine addressability",
+      "dependency admission"
+    ]
+  },
+  "dependency_decision": {
+    "required_now": [],
+    "recommended_optional": [
+      {
+        "name": "CUE",
+        "role": "authoritative constraint and unification validation",
+        "admission": "recommended after current JSON criteria are accepted"
+      },
+      {
+        "name": "JSON Schema 2020-12",
+        "role": "portable interchange validation",
+        "admission": "recommended projection, not primary authority"
+      },
+      {
+        "name": "Hypothesis",
+        "role": "property-based invariant testing",
+        "admission": "recommended for validator test Rubric"
+      },
+      {
+        "name": "NetworkX",
+        "role": "diagnostic graph algorithms and cycle/topology analysis",
+        "admission": "optional; do not make core semantics dependent on it"
+      }
+    ],
+    "rejected_as_unnecessary": [
+      "a new database",
+      "a graph server",
+      "an ontology framework",
+      "a workflow engine",
+      "a runtime orchestration dependency"
+    ]
+  }
+}

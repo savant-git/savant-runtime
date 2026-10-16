@@ -1,0 +1,50 @@
+{
+  "admission_rule": "Source markers are evidence only. No candidate becomes authoritative without explicit Niche admission.",
+  "authority_effect": "none",
+  "candidate_count": 2,
+  "candidates": [
+    {
+      "candidate_id": "completion-candidate:6878555a7b94dc6d9926",
+      "confidence": "low",
+      "disposition": "rejected",
+      "duplicate_task_ids": [],
+      "excerpt": "if re.search(r\"\\b(?:TODO|FIXME|NotImplementedError|pass\\s*(?:#.*)?$|stub)\\b\", entry.content, re.I | re.M):",
+      "line": 618,
+      "marker": "todo",
+      "reasons": [
+        "marker-definition"
+      ],
+      "source_path": "migrations/packages/savant-upgrade-packet/v1.1.0.previous-20260805T123537Z/rubric/structural_intelligence/source/savant_structural_intelligence.py",
+      "system": "migrations",
+      "workstream": "packages"
+    },
+    {
+      "candidate_id": "completion-candidate:a4ae31e04c0edd0c1497",
+      "confidence": "low",
+      "disposition": "rejected",
+      "duplicate_task_ids": [],
+      "excerpt": "if re.search(r\"\\b(?:TODO|FIXME|NotImplementedError|pass\\s*(?:#.*)?$|stub)\\b\", entry.content, re.I | re.M):",
+      "line": 618,
+      "marker": "todo",
+      "reasons": [
+        "marker-definition"
+      ],
+      "source_path": "migrations/packages/savant-upgrade-packet/v1.1.0/rubric/structural_intelligence/source/savant_structural_intelligence.py",
+      "system": "migrations",
+      "workstream": "packages"
+    }
+  ],
+  "confidence_counts": {
+    "low": 2
+  },
+  "disposition_counts": {
+    "rejected": 2
+  },
+  "generated_at": "2026-09-03T09:11:39.371315+00:00",
+  "owner": "exile:niche",
+  "schema": "savant://runtime/niche/completion-reconciler/1.1.0",
+  "source_root": "/root/savant-runtime",
+  "system_counts": {},
+  "task_count": 184,
+  "task_store": "/root/savant-runtime/runtime/niche/tasks.sqlite3"
+}

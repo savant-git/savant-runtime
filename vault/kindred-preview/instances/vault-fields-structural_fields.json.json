@@ -1,0 +1,83 @@
+{
+  "authoritative": false,
+  "authority_tier": "delegated",
+  "canonical_id": "fs:vault/fields/structural_fields.json",
+  "deterministic_hash": "8e4a5ef0baaaea935688f5451651169073eda80d10d01bc4c88d02a75f598827",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "vault/fields/structural_fields.json",
+  "kind": "file",
+  "label": "structural_fields.json",
+  "namespace": "preview.kindred",
+  "path": "vault/fields/structural_fields.json",
+  "placement": {
+    "domain": "filesystem",
+    "node": "vault/fields/structural_fields.json",
+    "parent": "vault/fields",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.3fcd0fe8ba988b0c9215",
+    "rank": 10,
+    "slot": "50_projections",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.3fcd0fe8ba988b0c9215"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "record",
+  "source_record": {
+    "authority": false,
+    "canonical_id": "fs:vault/fields/structural_fields.json",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "vault/fields/structural_fields.json",
+    "kind": "file",
+    "label": "structural_fields.json",
+    "legacy_id": "vault/fields/structural_fields.json",
+    "lineage": [
+      "vault/fields"
+    ],
+    "metadata": {
+      "canonical_id": "fs:vault/fields/structural_fields.json",
+      "child_modes": {},
+      "child_roles": {},
+      "is_directory": false,
+      "is_file": true,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:vault/fields"
+        ]
+      },
+      "projected_id": "vault/fields/structural_fields.json",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "vault/fields"
+    ],
+    "path": "vault/fields/structural_fields.json",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "vault/fields/structural_fields.json",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.3fcd0fe8ba988b0c9215"
+    ],
+    "size": 7,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

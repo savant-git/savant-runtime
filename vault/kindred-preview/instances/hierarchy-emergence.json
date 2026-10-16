@@ -1,0 +1,94 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "edifice:emergence",
+  "deterministic_hash": "931f327f2865b83982cf151098b22dec5bb7eb945eab887279a1a7b556f49d4e",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "edifice:emergence",
+  "kind": "edifice",
+  "label": "edifice:emergence",
+  "namespace": "preview.kindred",
+  "path": null,
+  "placement": {
+    "domain": "unclassified",
+    "node": "edifice:emergence",
+    "parent": "savant-runtime",
+    "placement_basis": "orphan_attachment",
+    "primary_relationship_id": null,
+    "rank": 630,
+    "slot": "80_children",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.dependency.348ecb267f459d4e40a1",
+    "lineage.generic.ad7049f5d10bdddd2ed5"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "edifice:emergence",
+    "children": [],
+    "daughters": [],
+    "dependencies": [
+      "foundation:dynamic-canon"
+    ],
+    "fathers": [],
+    "id": "edifice:emergence",
+    "kind": "edifice",
+    "label": "edifice:emergence",
+    "legacy_id": null,
+    "lineage": [
+      "foundation:dynamic-canon"
+    ],
+    "metadata": {
+      "authority_source_path": "/root/savant-runtime/canon-system/authority/edifices/emergence.yaml",
+      "canonical_id": "edifice:emergence",
+      "child_modes": {},
+      "child_roles": {},
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "dependency": [
+          "foundation:dynamic-canon"
+        ],
+        "generic": [
+          "foundation:dynamic-canon"
+        ]
+      },
+      "projected_id": "edifice:emergence"
+    },
+    "mothers": [],
+    "parents": [
+      "foundation:dynamic-canon"
+    ],
+    "path": null,
+    "provenance": {
+      "adapter": "authority_document",
+      "created_at": "2026-07-11T00:00:00Z",
+      "created_by": "canon_bootstrap",
+      "source_files": [
+        "/root/savant-runtime/canon-system/authority/edifices/emergence.yaml"
+      ],
+      "sources": [
+        "SHARDISM_REFRACTALISM_MIGRATION_CONTEXT.txt",
+        "project conversation"
+      ]
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.dependency.348ecb267f459d4e40a1",
+      "lineage.generic.ad7049f5d10bdddd2ed5"
+    ],
+    "size": 7,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

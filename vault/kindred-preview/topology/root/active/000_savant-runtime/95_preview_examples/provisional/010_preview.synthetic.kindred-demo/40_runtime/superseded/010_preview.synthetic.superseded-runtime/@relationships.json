@@ -1,0 +1,50 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "4c63f927e53d9aa6156646147a3e6b1e645818173835fdfbce76f132aeb62ee9",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "namespace": "preview.kindred",
+  "node": "preview.synthetic.superseded-runtime",
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationships": [
+    {
+      "child_profile": "disinherited_child",
+      "domain": "preview",
+      "id": "preview.synthetic.lineage.superseded",
+      "impeti": [
+        {
+          "direction": "structural",
+          "epistemic_status": "declared_by_projection",
+          "phase": "sustaining",
+          "provenance": {
+            "projection_namespace": "preview.kindred",
+            "reason": "isolated synthetic state demonstration",
+            "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+            "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+          },
+          "strength": 1.0,
+          "type": "legacy"
+        }
+      ],
+      "parent_profile": "custodian",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "reason": "isolated synthetic state demonstration",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "preview.synthetic.kindred-demo",
+      "source_record": {},
+      "state": "active",
+      "synthetic": true,
+      "target": "preview.synthetic.superseded-runtime"
+    }
+  ],
+  "schema": "savant.kindred.preview.relationship_projection.v2"
+}

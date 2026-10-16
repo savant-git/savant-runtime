@@ -1,0 +1,930 @@
+/*
+ * savant / niche
+ * browser resilience layer
+ * authority_effect: none
+ */
+
+:root {
+    --niche-safe-width: 100vw;
+    --niche-safe-height: 100vh;
+}
+
+html {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+
+    overflow-x: hidden;
+
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+
+    overflow-x: hidden;
+}
+
+body.niche-safe-area {
+    padding-left:
+        env(safe-area-inset-left);
+    padding-right:
+        env(safe-area-inset-right);
+}
+
+.topbar,
+.statusrail,
+.niche-filter-bar,
+main,
+.surface,
+.execute-grid,
+.execution-core,
+.oracle,
+.peripheral,
+.flow-board,
+.graph-stage,
+.objective-grid,
+.evidence-grid,
+.living-grid,
+.timeline,
+.history-list {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.topbar {
+    width: 100%;
+
+    padding-left:
+        max(
+            10px,
+            env(safe-area-inset-left)
+        );
+
+    padding-right:
+        max(
+            10px,
+            env(safe-area-inset-right)
+        );
+}
+
+.brand {
+    min-width: 0;
+}
+
+.brand > div {
+    min-width: 0;
+}
+
+.brand span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.nav {
+    min-width: 0;
+    max-width: 100%;
+
+    scrollbar-width: none;
+}
+
+.nav::-webkit-scrollbar {
+    display: none;
+}
+
+.top-actions {
+    min-width: 0;
+}
+
+.statusrail {
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scrollbar-width: none;
+
+    -webkit-overflow-scrolling:
+        touch;
+}
+
+.statusrail::-webkit-scrollbar {
+    display: none;
+}
+
+.statusrail > span {
+    flex: 0 0 auto;
+}
+
+main {
+    width: 100%;
+
+    overflow-x: clip;
+}
+
+.execute-grid {
+    width: 100%;
+}
+
+.execution-core,
+.oracle,
+.metric-panel {
+    width: 100%;
+}
+
+.frontier-heading {
+    min-width: 0;
+}
+
+.frontier-heading > div {
+    min-width: 0;
+}
+
+.frontier-heading h1,
+.frontier-heading p,
+.oracle h2,
+.metric-panel h2,
+.surface-heading h1 {
+    max-width: 100%;
+
+    overflow-wrap: anywhere;
+}
+
+.execute-action {
+    min-width: 0;
+}
+
+.start-next {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.start-next > span:last-child {
+    min-width: 0;
+}
+
+.start-next strong,
+.start-next small {
+    overflow-wrap: anywhere;
+}
+
+.execute-secondary {
+    min-width: 0;
+}
+
+.execute-secondary button {
+    min-width: 0;
+
+    overflow-wrap: anywhere;
+}
+
+.frontier-map {
+    width: 100%;
+    min-width: 0;
+
+    overflow: hidden;
+}
+
+.frontier-labels {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr)
+        minmax(0, 1fr);
+
+    gap: 6px;
+}
+
+.frontier-labels span {
+    min-width: 0;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.flow-board {
+    width: 100%;
+
+    overscroll-behavior-x:
+        contain;
+
+    scroll-padding-inline:
+        10px;
+}
+
+.lane {
+    min-width: 0;
+}
+
+.task-card {
+    min-width: 0;
+    max-width: 100%;
+
+    contain:
+        layout paint;
+}
+
+.task-card h3,
+.task-id,
+.task-meta {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.task-id {
+    overflow-wrap: anywhere;
+}
+
+.task-card[aria-current="true"] {
+    outline:
+        2px solid
+        currentColor;
+
+    outline-offset:
+        -2px;
+}
+
+.task-card.niche-touch-active,
+.living-surface.niche-touch-active,
+.compact-item.niche-touch-active,
+button.niche-touch-active {
+    transform:
+        scale(.985);
+}
+
+.graph-stage {
+    width: 100%;
+
+    contain:
+        layout paint;
+
+    touch-action:
+        pan-x pan-y;
+}
+
+#graph-nodes {
+    max-width: 100%;
+}
+
+.graph-node {
+    max-width:
+        min(
+            220px,
+            34vw
+        );
+
+    overflow: hidden;
+}
+
+.graph-node strong,
+.graph-node small {
+    display: block;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.objective,
+.evidence-card,
+.living-surface {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.objective h2,
+.evidence-card h3,
+.living-surface h3 {
+    overflow-wrap: anywhere;
+}
+
+.inspector {
+    width:
+        min(
+            var(
+                --niche-inspector-max,
+                520px
+            ),
+            calc(
+                100vw -
+                env(safe-area-inset-left) -
+                env(safe-area-inset-right)
+            )
+        );
+
+    max-width: 100%;
+
+    padding-bottom:
+        max(
+            12px,
+            env(safe-area-inset-bottom)
+        );
+
+    overscroll-behavior:
+        contain;
+}
+
+.inspector-body {
+    min-width: 0;
+}
+
+.inspector-section {
+    min-width: 0;
+}
+
+.inspector-section p,
+.inspector-section dd {
+    max-width: 100%;
+
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+}
+
+.palette-shell,
+.dialog-shell {
+    box-sizing: border-box;
+
+    width: 100vw;
+    height:
+        var(
+            --niche-safe-height,
+            100dvh
+        );
+
+    max-width: 100vw;
+    max-height:
+        var(
+            --niche-safe-height,
+            100dvh
+        );
+
+    padding:
+        max(
+            10px,
+            env(safe-area-inset-top)
+        )
+        max(
+            10px,
+            env(safe-area-inset-right)
+        )
+        max(
+            10px,
+            env(safe-area-inset-bottom)
+        )
+        max(
+            10px,
+            env(safe-area-inset-left)
+        );
+
+    overflow: auto;
+
+    overscroll-behavior:
+        contain;
+}
+
+.palette,
+.dialog {
+    box-sizing: border-box;
+
+    width: 100%;
+    max-width:
+        calc(
+            100vw -
+            20px -
+            env(safe-area-inset-left) -
+            env(safe-area-inset-right)
+        );
+
+    max-height:
+        calc(
+            var(
+                --niche-safe-height,
+                100dvh
+            ) -
+            20px -
+            env(safe-area-inset-top) -
+            env(safe-area-inset-bottom)
+        );
+
+    overflow: auto;
+}
+
+.palette-input {
+    min-width: 0;
+}
+
+.palette-input input {
+    min-width: 0;
+    width: 100%;
+}
+
+.dialog textarea,
+.dialog select,
+.dialog input {
+    box-sizing: border-box;
+
+    width: 100%;
+    max-width: 100%;
+}
+
+body.niche-modal-open {
+    overflow: hidden;
+}
+
+body.niche-modal-open
+    .inspector {
+    pointer-events: none;
+}
+
+.toasts {
+    max-width:
+        min(
+            420px,
+            calc(
+                100vw -
+                20px -
+                env(safe-area-inset-left) -
+                env(safe-area-inset-right)
+            )
+        );
+
+    right:
+        max(
+            10px,
+            env(safe-area-inset-right)
+        );
+
+    bottom:
+        max(
+            10px,
+            env(safe-area-inset-bottom)
+        );
+}
+
+.toast {
+    max-width: 100%;
+
+    overflow-wrap: anywhere;
+}
+
+body.niche-compact
+    .execute-grid {
+    grid-template-columns:
+        minmax(0, 1.5fr)
+        minmax(280px, .75fr);
+}
+
+body.niche-compact
+    .peripheral {
+    grid-column:
+        1 / -1;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0, 1fr)
+        );
+}
+
+body.niche-compact
+    .objective-grid,
+body.niche-compact
+    .evidence-grid,
+body.niche-compact
+    .living-grid {
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(
+                min(
+                    260px,
+                    100%
+                ),
+                1fr
+            )
+        );
+}
+
+body.niche-narrow
+    .execute-grid {
+    display: flex;
+    flex-direction: column;
+}
+
+body.niche-narrow
+    .execution-core {
+    order: 0;
+}
+
+body.niche-narrow
+    .oracle {
+    order: 1;
+}
+
+body.niche-narrow
+    .peripheral {
+    order: 2;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr);
+}
+
+body.niche-narrow
+    .frontier-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+body.niche-narrow
+    .execute-action {
+    display: flex;
+    flex-direction: column;
+}
+
+body.niche-narrow
+    .start-next {
+    width: 100%;
+}
+
+body.niche-narrow
+    .execute-secondary {
+    display: grid;
+
+    width: 100%;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+}
+
+body.niche-narrow
+    .flow-board {
+    display: grid;
+
+    grid-auto-flow: column;
+    grid-auto-columns:
+        minmax(
+            min(
+                84vw,
+                360px
+            ),
+            1fr
+        );
+
+    gap: 10px;
+
+    overflow-x: auto;
+    overflow-y: visible;
+
+    scroll-snap-type:
+        x proximity;
+}
+
+body.niche-narrow
+    .lane {
+    width: auto;
+
+    scroll-snap-align:
+        center;
+}
+
+body.niche-narrow
+    .objective-grid,
+body.niche-narrow
+    .evidence-grid,
+body.niche-narrow
+    .living-grid {
+    grid-template-columns:
+        minmax(0, 1fr);
+}
+
+body.niche-narrow
+    .surface-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 8px;
+}
+
+body.niche-narrow
+    .graph-node {
+    max-width:
+        min(
+            180px,
+            46vw
+        );
+}
+
+body.niche-narrow
+    .inspector {
+    top: auto;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    max-width: 100%;
+
+    height:
+        min(
+            82dvh,
+            var(
+                --niche-safe-height,
+                82vh
+            )
+        );
+
+    border-left: 0;
+
+    border-top:
+        1px solid
+        var(
+            --line,
+            rgba(
+                255,
+                255,
+                255,
+                .1
+            )
+        );
+
+    transform:
+        translateY(
+            105%
+        );
+}
+
+body.niche-narrow
+    .inspector.open {
+    transform:
+        translateY(0);
+}
+
+body.niche-narrow
+    .palette-shell,
+body.niche-narrow
+    .dialog-shell {
+    place-items:
+        end center;
+}
+
+body.niche-narrow
+    .palette,
+body.niche-narrow
+    .dialog {
+    max-width: 100%;
+
+    border-bottom-left-radius:
+        0;
+    border-bottom-right-radius:
+        0;
+}
+
+body.niche-narrow
+    .dialog-actions {
+    position: sticky;
+    bottom: 0;
+
+    padding-top: 8px;
+
+    background:
+        inherit;
+}
+
+body.niche-short
+    .topbar {
+    position: relative;
+}
+
+body.niche-short
+    .statusrail {
+    position: relative;
+}
+
+body.niche-short
+    .niche-filter-bar {
+    position: relative;
+    top: auto;
+}
+
+body.niche-short
+    .execution-core {
+    min-height: 0;
+}
+
+body.niche-landscape.niche-narrow
+    .execute-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.4fr)
+        minmax(220px, .6fr);
+}
+
+body.niche-landscape.niche-narrow
+    .peripheral {
+    grid-column:
+        1 / -1;
+}
+
+body.niche-landscape.niche-narrow
+    .execution-core {
+    min-height:
+        calc(
+            var(
+                --niche-safe-height,
+                100vh
+            ) -
+            20px
+        );
+}
+
+@media (max-width: 480px) {
+    .brand > div > span:last-child {
+        display: none;
+    }
+
+    .key-button span {
+        display: none;
+    }
+
+    .frontier-labels {
+        font-size: 8px;
+    }
+
+    .execute-secondary {
+        gap: 5px;
+    }
+
+    .execute-secondary button {
+        min-height: 42px;
+    }
+
+    .metric-grid {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+    }
+
+    .dialog-actions {
+        grid-template-columns:
+            minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 350px) {
+    .execute-secondary {
+        grid-template-columns:
+            minmax(0, 1fr);
+    }
+
+    .frontier-labels span:first-child,
+    .frontier-labels span:last-child {
+        display: none;
+    }
+
+    .frontier-labels {
+        grid-template-columns:
+            minmax(0, 1fr);
+
+        text-align: center;
+    }
+
+    .statusrail {
+        font-size: 9px;
+    }
+}
+
+@media (min-width: 1800px) {
+    main {
+        width: 100%;
+
+        padding-inline:
+            clamp(
+                18px,
+                2vw,
+                44px
+            );
+    }
+
+    .execute-grid {
+        grid-template-columns:
+            minmax(0, 1.65fr)
+            minmax(340px, .65fr);
+    }
+
+    .peripheral {
+        display: grid;
+
+        grid-template-columns:
+            repeat(
+                3,
+                minmax(0, 1fr)
+            );
+
+        grid-column:
+            1 / -1;
+    }
+
+    .frontier-heading h1 {
+        font-size:
+            clamp(
+                42px,
+                3.4vw,
+                76px
+            );
+    }
+}
+
+@media (min-width: 2560px) {
+    main {
+        padding-inline:
+            clamp(
+                28px,
+                4vw,
+                120px
+            );
+    }
+
+    .execute-grid {
+        max-width:
+            2400px;
+
+        margin-inline:
+            auto;
+    }
+
+    .surface-heading,
+    .flow-board,
+    .graph-stage,
+    .objective-grid,
+    .evidence-grid,
+    .living-summary,
+    .living-grid,
+    .timeline,
+    .history-list {
+        max-width:
+            2400px;
+
+        margin-inline:
+            auto;
+    }
+}
+
+@media (pointer: coarse) {
+    button,
+    .task-card,
+    .living-surface,
+    .compact-item {
+        min-height: 44px;
+    }
+
+    .task-card,
+    .living-surface {
+        cursor: default;
+    }
+}
+
+@media (hover: none) {
+    .task-card:hover,
+    .living-surface:hover,
+    .compact-item:hover {
+        transform: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .inspector,
+    .task-card,
+    .living-surface,
+    .compact-item,
+    button {
+        scroll-behavior: auto;
+        transition-duration: .001ms !important;
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
+
+@supports not (height: 100dvh) {
+    .palette-shell,
+    .dialog-shell {
+        height:
+            var(
+                --niche-safe-height,
+                100vh
+            );
+    }
+}

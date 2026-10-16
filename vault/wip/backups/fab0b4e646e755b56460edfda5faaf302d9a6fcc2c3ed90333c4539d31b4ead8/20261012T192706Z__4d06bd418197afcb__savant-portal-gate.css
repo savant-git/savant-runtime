@@ -1,0 +1,11 @@
+#savant-independent-gate{position:relative;z-index:2147483647}
+.savant-gate-app[data-open="false"]{visibility:hidden!important;pointer-events:none!important;user-select:none!important}
+.savant-gate-layer{position:fixed;inset:0;z-index:2147483647;pointer-events:none}
+.savant-gate-background{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 43%,#1b2b32,#080e15 62%,#05080d);opacity:1;transition:opacity .7s ease;pointer-events:auto}
+.savant-gate-layer[data-open="true"] .savant-gate-background{opacity:0;pointer-events:none}
+.savant-gate-logo{position:fixed;left:calc(50vw - 124px);top:calc(50dvh - 124px);width:248px;height:248px;transform-origin:top left;pointer-events:auto;will-change:transform}
+.savant-gate-logo .savant-mark,.savant-gate-logo .savant-mark__viewport{width:100%;height:100%}
+.savant-gate-action{position:fixed;left:0;right:0;bottom:max(7vh,32px);display:flex;justify-content:center;pointer-events:auto;color:#c3e8e8;font:500 12px/1.4 system-ui;letter-spacing:.19em;text-transform:uppercase}
+.savant-gate-action button{cursor:pointer;background:rgba(15,34,41,.85);border:1px solid #69d9dc;border-radius:4px;color:#d4ffff;padding:15px 32px;font:inherit;letter-spacing:inherit;text-transform:uppercase;box-shadow:0 0 24px #46dce044}
+.savant-gate-action button:focus-visible{outline:2px solid white;outline-offset:4px}
+@media(max-width:500px){.savant-gate-logo{left:calc(50vw - 90px);top:calc(50dvh - 90px);width:180px;height:180px}}

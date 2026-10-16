@@ -1,0 +1,42 @@
+{
+  "id": "policy.functional_lineage",
+  "kind": "policy",
+  "status": "active",
+  "authority": "FOUNDATION-008",
+  "version": "1.0.0",
+  "rule": "Every edifice is projected from first-class role-bearing lineage segues.",
+  "storage": {
+    "authoritative_primitive": "lineage_segue",
+    "parent_lists_are": "projection",
+    "child_lists_are": "projection",
+    "duplicate_inverse_storage": false
+  },
+  "cardinality": {
+    "parents_per_child": {
+      "minimum": 0,
+      "maximum": null
+    },
+    "children_per_parent": {
+      "minimum": 0,
+      "maximum": null
+    }
+  },
+  "requirements": {
+    "stable_ids": true,
+    "functional_roles": true,
+    "semantic_axes": true,
+    "provenance": true,
+    "deterministic_projection": true,
+    "cycle_validation": true,
+    "selective_invalidation": true,
+    "future_role_attachment": true
+  },
+  "compatibility": {
+    "legacy_parent_fields": "project_or_migrate",
+    "legacy_child_fields": "project_or_migrate",
+    "legacy_contains_edges": "project_or_migrate",
+    "destructive_replacement_required": false
+  },
+  "extensions": {},
+  "future_extensions": {}
+}

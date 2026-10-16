@@ -1,0 +1,2097 @@
+{
+  "ai": {
+    "available": true,
+    "capabilities": [],
+    "mode": "native",
+    "providers": {
+      "anthropic": {
+        "capabilities": [
+          "analyze",
+          "classify",
+          "critique",
+          "generate",
+          "infer",
+          "plan",
+          "summarize",
+          "transform"
+        ],
+        "configured": false,
+        "reason": "credential-absent",
+        "usable": false
+      },
+      "deepseek": {
+        "capabilities": [
+          "analyze",
+          "critique",
+          "generate",
+          "infer",
+          "plan"
+        ],
+        "configured": false,
+        "reason": "credential-absent",
+        "usable": false
+      },
+      "google": {
+        "capabilities": [
+          "analyze",
+          "classify",
+          "critique",
+          "generate",
+          "infer",
+          "multimodal",
+          "plan",
+          "summarize",
+          "transform"
+        ],
+        "configured": false,
+        "reason": "credential-absent",
+        "usable": false
+      },
+      "groq": {
+        "capabilities": [
+          "classify",
+          "generate",
+          "transform"
+        ],
+        "configured": false,
+        "reason": "credential-absent",
+        "usable": false
+      },
+      "openai": {
+        "capabilities": [
+          "analyze",
+          "classify",
+          "critique",
+          "generate",
+          "infer",
+          "plan",
+          "summarize",
+          "transform"
+        ],
+        "configured": false,
+        "reason": "credential-absent",
+        "usable": false
+      },
+      "perplexity": {
+        "capabilities": [
+          "analyze",
+          "generate",
+          "research",
+          "summarize"
+        ],
+        "configured": false,
+        "reason": "credential-absent",
+        "usable": false
+      }
+    },
+    "usable_providers": []
+  },
+  "authority_kinds": {
+    "exile": 18,
+    "foundation": 1,
+    "edifice": 9,
+    "policy": 3
+  },
+  "authority_records": [
+    {
+      "authority": {
+        "confidence": 0.9,
+        "state": "accepted",
+        "tier": 2
+      },
+      "dependencies": [],
+      "id": "exile:carbon",
+      "kind": "exile",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "path": "canon-system/authority/exiles/carbon.yaml",
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "relationships": [],
+      "status": "accepted",
+      "title": "carbon"
+    },
+    {
+      "authority": {
+        "confidence": 0.9,
+        "state": "accepted",
+        "tier": 2
+      },
+      "dependencies": [],
+      "id": "exile:cataxis",
+      "kind": "exile",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "path": "canon-system/authority/exiles/cataxis.yaml",
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "relationships": [],
+      "status": "accepted",
+      "title": "cataxis"
+    },
+    {
+      "authority": {
+        "confidence": 0.9,
+        "state": "accepted",
+        "tier": 2
+      },
+      "dependencies": [],
+      "id": "exile:coda",
+      "kind": "exile",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "path": "canon-system/authority/exiles/coda.yaml",
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "relationships": [],
+      "status": "accepted",
+      "title": "coda"
+    },
+    {
+      "authority": {
+        "confidence": 0.9,
+        "state": "accepted",
+        "tier": 2
+      },
+      "dependencies": [],
+      "id": "exile:envoy",
+      "kind": "exile",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "path": "canon-system/authority/exiles/envoy.yaml",
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "relationships": [],
+      "status": "accepted",
+      "title": "envoy"
+    },
+    {
+      "authority": {
+        "confidence": 0.9,
+        "state": "accepted",
+        "tier": 2
+      },
+      "dependencies": [],
+      "id": "exile:filament",
+      "kind": "exile",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "path": "canon-system/authority/exiles/filament.yaml",
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "relationships": [],
+      "status": "accepted",
+      "title": "filament"
+    },
+    {
+      "authority": {
+        "confidence": 0.9,
+        "state": "accepted",
+        "tier": 2
+      },
+      "dependencies": [],
+      "id": "exile:graffiti",
+      "kind": "exile",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "path": "canon-system/authority/exiles/graffiti.yaml",
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "relationships": [],
+      "status": "accepted",
+      "title": "graffiti"
+    },
+    {
+      "authority": {
+        "confidence": 0.55,
+        "state": "provisional",
+        "tier": 2
+      },
+      "dependencies": [],
+      "id": "exile:lore",
+      "kind": "exile",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "path": "canon-system/authority/exiles/lore.yaml",
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "relationships": [],
+      "status": "provisional",
+      "title": "lore"
+    },
+    {
+      "authority": {
+        "confidence": 0.55,
+        "state": "provisional",
+        "tier": 2
+      },
+      "dependencies": [],
+      "id": "exile:mobius",
+      "kind": "exile",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "path": "canon-system/authority/exiles/mobius.yaml",
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "relationships": [],
+      "status": "provisional",
+      "title": "mobius"
+    },
+    {
+      "authority": {
+        "confidence": 0.9,
+        "state": "accepted",
+        "tier": 2
+      },
+      "dependencies": [],
+      "id": "exile:modus",
+      "kind": "exile",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "path": "canon-system/authority/exiles/modus.yaml",
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation",
+          "user-directive:2026-08-09:coalesce"
+        ]
+      },
+      "relationships": [],
+      "status": "accepted",
+      "title": "modus"
+    },
+    {
+      "authority": {
+        "confidence": 0.9,
+        "state": "accepted",
+        "tier": 2
+      },
+      "dependencies": [],
+      "id": "exile:niche",
+      "kind": "exile",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "path": "canon-system/authority/exiles/niche.yaml",
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "relationships": [],
+      "status": "accepted",
+      "title": "niche"
+    },
+    {
+      "authority": {
+        "confidence": 0.55,
+        "state": "provisional",
+        "tier": 2
+      },
+      "dependencies": [],
+      "id": "exile:notary",
+      "kind": "exile",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "path": "canon-system/authority/exiles/notary.yaml",
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "relationships": [],
+      "status": "provisional",
+      "title": "notary"
+    },
+    {
+      "authority": {
+        "confidence": 0.9,
+        "state": "accepted",
+        "tier": 2
+      },
+      "dependencies": [],
+      "id": "exile:opus",
+      "kind": "exile",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "path": "canon-system/authority/exiles/opus.yaml",
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "relationships": [],
+      "status": "accepted",
+      "title": "opus"
+    },
+    {
+      "authority": {
+        "confidence": 0.55,
+        "state": "provisional",
+        "tier": 2
+      },
+      "dependencies": [],
+      "id": "exile:pact",
+      "kind": "exile",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "path": "canon-system/authority/exiles/pact.yaml",
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "relationships": [],
+      "status": "provisional",
+      "title": "pact"
+    },
+    {
+      "authority": {
+        "confidence": 0.55,
+        "state": "provisional",
+        "tier": 2
+      },
+      "dependencies": [],
+      "id": "exile:palaver",
+      "kind": "exile",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "path": "canon-system/authority/exiles/palaver.yaml",
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "relationships": [],
+      "status": "provisional",
+      "title": "palaver"
+    },
+    {
+      "authority": {
+        "confidence": 0.55,
+        "state": "provisional",
+        "tier": 2
+      },
+      "dependencies": [],
+      "id": "exile:shatter",
+      "kind": "exile",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "path": "canon-system/authority/exiles/shatter.yaml",
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "relationships": [],
+      "status": "provisional",
+      "title": "shatter"
+    },
+    {
+      "authority": {
+        "confidence": 0.9,
+        "state": "accepted",
+        "tier": 2
+      },
+      "dependencies": [],
+      "id": "exile:underscore",
+      "kind": "exile",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "path": "canon-system/authority/exiles/underscore.yaml",
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "relationships": [],
+      "status": "accepted",
+      "title": "underscore"
+    },
+    {
+      "authority": {
+        "confidence": 0.9,
+        "state": "accepted",
+        "tier": 2
+      },
+      "dependencies": [],
+      "id": "exile:urge",
+      "kind": "exile",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "path": "canon-system/authority/exiles/urge.yaml",
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "relationships": [],
+      "status": "accepted",
+      "title": "urge"
+    },
+    {
+      "authority": {
+        "confidence": 0.9,
+        "state": "accepted",
+        "tier": 2
+      },
+      "dependencies": [],
+      "id": "exile:zero",
+      "kind": "exile",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "path": "canon-system/authority/exiles/zero.yaml",
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "relationships": [],
+      "status": "accepted",
+      "title": "zero"
+    },
+    {
+      "authority": {
+        "confidence": 1.0,
+        "state": "canonical",
+        "tier": 0
+      },
+      "dependencies": [],
+      "id": "foundation:dynamic-canon",
+      "kind": "foundation",
+      "lineage": {
+        "parents": [],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "path": "canon-system/authority/foundation/dynamic_canon.yaml",
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "source_type": "user_directive_and_project_sources",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "VISCERA NOVEL - Savant Extraction Architecture (4).mht",
+          "SHARDISM_REFRACTALISM_MIGRATION_CONTEXT.txt"
+        ]
+      },
+      "relationships": [],
+      "status": "canonical",
+      "title": "dynamic canon foundation"
+    },
+    {
+      "authority": {
+        "confidence": 0.72,
+        "state": "provisional",
+        "tier": 1
+      },
+      "dependencies": [
+        "foundation:dynamic-canon"
+      ],
+      "id": "edifice:abstraction",
+      "kind": "edifice",
+      "lineage": {
+        "parents": [
+          "foundation:dynamic-canon"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "path": "canon-system/authority/edifices/abstraction.yaml",
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "SHARDISM_REFRACTALISM_MIGRATION_CONTEXT.txt",
+          "project conversation"
+        ]
+      },
+      "relationships": [],
+      "status": "provisional",
+      "title": "abstraction edifice"
+    },
+    {
+      "authority": {
+        "confidence": 0.72,
+        "state": "provisional",
+        "tier": 1
+      },
+      "dependencies": [
+        "foundation:dynamic-canon"
+      ],
+      "id": "edifice:authority",
+      "kind": "edifice",
+      "lineage": {
+        "parents": [
+          "foundation:dynamic-canon"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "path": "canon-system/authority/edifices/authority.yaml",
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "SHARDISM_REFRACTALISM_MIGRATION_CONTEXT.txt",
+          "project conversation"
+        ]
+      },
+      "relationships": [],
+      "status": "provisional",
+      "title": "authority edifice"
+    },
+    {
+      "authority": {
+        "confidence": 1.0,
+        "state": "canonical",
+        "tier": 1
+      },
+      "dependencies": [
+        "foundation:dynamic-canon"
+      ],
+      "id": "edifice:content",
+      "kind": "edifice",
+      "lineage": {
+        "parents": [
+          "foundation:dynamic-canon"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "path": "canon-system/authority/edifices/content.yaml",
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "SHARDISM_REFRACTALISM_MIGRATION_CONTEXT.txt",
+          "project conversation"
+        ]
+      },
+      "relationships": [],
+      "status": "canonical",
+      "title": "content edifice"
+    },
+    {
+      "authority": {
+        "confidence": 0.72,
+        "state": "provisional",
+        "tier": 1
+      },
+      "dependencies": [
+        "foundation:dynamic-canon"
+      ],
+      "id": "edifice:emergence",
+      "kind": "edifice",
+      "lineage": {
+        "parents": [
+          "foundation:dynamic-canon"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "path": "canon-system/authority/edifices/emergence.yaml",
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "SHARDISM_REFRACTALISM_MIGRATION_CONTEXT.txt",
+          "project conversation"
+        ]
+      },
+      "relationships": [],
+      "status": "provisional",
+      "title": "emergence edifice"
+    },
+    {
+      "authority": {
+        "confidence": 1.0,
+        "state": "canonical",
+        "tier": 1
+      },
+      "dependencies": [
+        "foundation:dynamic-canon"
+      ],
+      "id": "edifice:identity",
+      "kind": "edifice",
+      "lineage": {
+        "parents": [
+          "foundation:dynamic-canon"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "path": "canon-system/authority/edifices/identity.yaml",
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "SHARDISM_REFRACTALISM_MIGRATION_CONTEXT.txt",
+          "project conversation"
+        ]
+      },
+      "relationships": [],
+      "status": "canonical",
+      "title": "identity edifice"
+    },
+    {
+      "authority": {
+        "confidence": 0.72,
+        "state": "provisional",
+        "tier": 1
+      },
+      "dependencies": [
+        "foundation:dynamic-canon"
+      ],
+      "id": "edifice:projection",
+      "kind": "edifice",
+      "lineage": {
+        "parents": [
+          "foundation:dynamic-canon"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "path": "canon-system/authority/edifices/projection.yaml",
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "SHARDISM_REFRACTALISM_MIGRATION_CONTEXT.txt",
+          "project conversation"
+        ]
+      },
+      "relationships": [],
+      "status": "provisional",
+      "title": "projection edifice"
+    },
+    {
+      "authority": {
+        "confidence": 1.0,
+        "state": "canonical",
+        "tier": 1
+      },
+      "dependencies": [
+        "foundation:dynamic-canon"
+      ],
+      "id": "edifice:scale",
+      "kind": "edifice",
+      "lineage": {
+        "parents": [
+          "foundation:dynamic-canon"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "path": "canon-system/authority/edifices/scale.yaml",
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "SHARDISM_REFRACTALISM_MIGRATION_CONTEXT.txt",
+          "project conversation"
+        ]
+      },
+      "relationships": [],
+      "status": "canonical",
+      "title": "scale edifice"
+    },
+    {
+      "authority": {
+        "confidence": 0.72,
+        "state": "provisional",
+        "tier": 1
+      },
+      "dependencies": [
+        "foundation:dynamic-canon"
+      ],
+      "id": "edifice:segue",
+      "kind": "edifice",
+      "lineage": {
+        "parents": [
+          "foundation:dynamic-canon"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "path": "canon-system/authority/edifices/segue.yaml",
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "SHARDISM_REFRACTALISM_MIGRATION_CONTEXT.txt",
+          "project conversation"
+        ]
+      },
+      "relationships": [],
+      "status": "provisional",
+      "title": "segue edifice"
+    },
+    {
+      "authority": {
+        "confidence": 0.72,
+        "state": "provisional",
+        "tier": 1
+      },
+      "dependencies": [
+        "foundation:dynamic-canon"
+      ],
+      "id": "edifice:temporal",
+      "kind": "edifice",
+      "lineage": {
+        "parents": [
+          "foundation:dynamic-canon"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "path": "canon-system/authority/edifices/temporal.yaml",
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "SHARDISM_REFRACTALISM_MIGRATION_CONTEXT.txt",
+          "project conversation"
+        ]
+      },
+      "relationships": [],
+      "status": "provisional",
+      "title": "temporal edifice"
+    },
+    {
+      "authority": {
+        "confidence": 1.0,
+        "state": "canonical",
+        "tier": 0
+      },
+      "dependencies": [
+        "foundation:dynamic-canon"
+      ],
+      "id": "policy:projection",
+      "kind": "policy",
+      "lineage": {
+        "parents": [
+          "foundation:dynamic-canon"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "path": "canon-system/authority/policies/projection.yaml",
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "user directive"
+        ]
+      },
+      "relationships": [],
+      "status": "canonical",
+      "title": null
+    },
+    {
+      "authority": {
+        "confidence": 1.0,
+        "state": "canonical",
+        "tier": 0
+      },
+      "dependencies": [
+        "foundation:dynamic-canon"
+      ],
+      "id": "policy:supersession",
+      "kind": "policy",
+      "lineage": {
+        "parents": [
+          "foundation:dynamic-canon"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "path": "canon-system/authority/policies/supersession.yaml",
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "user directive"
+        ]
+      },
+      "relationships": [],
+      "status": "canonical",
+      "title": null
+    },
+    {
+      "authority": {
+        "confidence": 1.0,
+        "state": "canonical",
+        "tier": 0
+      },
+      "dependencies": [
+        "foundation:dynamic-canon"
+      ],
+      "id": "policy:unknowns",
+      "kind": "policy",
+      "lineage": {
+        "parents": [
+          "foundation:dynamic-canon"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "path": "canon-system/authority/policies/unknowns.yaml",
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "user directive"
+        ]
+      },
+      "relationships": [],
+      "status": "canonical",
+      "title": null
+    }
+  ],
+  "authority_statuses": {
+    "accepted": 12,
+    "canonical": 7,
+    "provisional": 12
+  },
+  "constitutional_relationships": [
+    {
+      "description": "Recursively contains a constitutional object.",
+      "id": "contains"
+    },
+    {
+      "description": "Implements a semantic capability.",
+      "id": "implements"
+    },
+    {
+      "description": "Declares a direct dependency.",
+      "id": "depends_on"
+    },
+    {
+      "description": "Extends an existing definition.",
+      "id": "extends"
+    },
+    {
+      "description": "Narrows a semantic definition.",
+      "id": "specializes"
+    },
+    {
+      "description": "Creates a concrete realization.",
+      "id": "instantiates"
+    },
+    {
+      "description": "Projects authority to a disposable target.",
+      "id": "projects_to"
+    },
+    {
+      "description": "Applies constitutional authority.",
+      "id": "governs"
+    },
+    {
+      "description": "Declares semantic ownership.",
+      "id": "owns"
+    },
+    {
+      "description": "References another object without ownership.",
+      "id": "references"
+    },
+    {
+      "description": "Declares authoritative derivation source.",
+      "id": "derived_from"
+    },
+    {
+      "description": "Revises an earlier object.",
+      "id": "supersedes"
+    },
+    {
+      "description": "Inverse revision reference.",
+      "id": "superseded_by"
+    },
+    {
+      "description": "Compatibility alias for ownership.",
+      "id": "owned_by"
+    },
+    {
+      "description": "Compatibility implementation dimension.",
+      "id": "implemented_through"
+    },
+    {
+      "description": "Compatibility realization relationship.",
+      "id": "realizes"
+    },
+    {
+      "description": "Compatibility projection relationship.",
+      "id": "projects"
+    }
+  ],
+  "exiles": [
+    {
+      "authority_state": "accepted",
+      "chain_alias": "ca",
+      "confidence": 0.9,
+      "dependencies": [],
+      "id": "exile:carbon",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "name": "carbon",
+      "opus_ready": true,
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "purpose": [
+        "simulation",
+        "counterfactual modeling",
+        "world-state projection"
+      ],
+      "relationships": [],
+      "status": "accepted",
+      "title": "carbon"
+    },
+    {
+      "authority_state": "accepted",
+      "chain_alias": "ca",
+      "confidence": 0.9,
+      "dependencies": [],
+      "id": "exile:cataxis",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "name": "cataxis",
+      "opus_ready": true,
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "purpose": [
+        "time modeling",
+        "physics modeling",
+        "temporal constraints"
+      ],
+      "relationships": [],
+      "status": "accepted",
+      "title": "cataxis"
+    },
+    {
+      "authority_state": "accepted",
+      "chain_alias": "co",
+      "confidence": 0.9,
+      "dependencies": [],
+      "id": "exile:coda",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "name": "coda",
+      "opus_ready": true,
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "purpose": [
+        "filesystem changes",
+        "file creation",
+        "controlled execution of approved changes"
+      ],
+      "relationships": [],
+      "status": "accepted",
+      "title": "coda"
+    },
+    {
+      "authority_state": "accepted",
+      "chain_alias": "en",
+      "confidence": 0.9,
+      "dependencies": [],
+      "id": "exile:envoy",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "name": "envoy",
+      "opus_ready": true,
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "purpose": [
+        "personas",
+        "voice and presentation identity",
+        "persona routing"
+      ],
+      "relationships": [],
+      "status": "accepted",
+      "title": "envoy"
+    },
+    {
+      "authority_state": "accepted",
+      "chain_alias": "fi",
+      "confidence": 0.9,
+      "dependencies": [],
+      "id": "exile:filament",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "name": "filament",
+      "opus_ready": true,
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "purpose": [
+        "projection execution",
+        "projection runtime",
+        "projection workers"
+      ],
+      "relationships": [],
+      "status": "accepted",
+      "title": "filament"
+    },
+    {
+      "authority_state": "accepted",
+      "chain_alias": "gr",
+      "confidence": 0.9,
+      "dependencies": [],
+      "id": "exile:graffiti",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "name": "graffiti",
+      "opus_ready": true,
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "purpose": [
+        "branding",
+        "visual identity",
+        "lexicon ownership"
+      ],
+      "relationships": [],
+      "status": "accepted",
+      "title": "graffiti"
+    },
+    {
+      "authority_state": "provisional",
+      "chain_alias": "lo",
+      "confidence": 0.55,
+      "dependencies": [],
+      "id": "exile:lore",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "name": "lore",
+      "opus_ready": true,
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "purpose": [
+        "knowledge context",
+        "historical memory",
+        "semantic background"
+      ],
+      "relationships": [],
+      "status": "provisional",
+      "title": "lore"
+    },
+    {
+      "authority_state": "provisional",
+      "chain_alias": "mo",
+      "confidence": 0.55,
+      "dependencies": [],
+      "id": "exile:mobius",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "name": "mobius",
+      "opus_ready": true,
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "purpose": [
+        "recursion",
+        "feedback loops",
+        "self-reference"
+      ],
+      "relationships": [],
+      "status": "provisional",
+      "title": "mobius"
+    },
+    {
+      "authority_state": "accepted",
+      "chain_alias": "mo",
+      "confidence": 0.9,
+      "dependencies": [],
+      "id": "exile:modus",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "name": "modus",
+      "opus_ready": true,
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation",
+          "user-directive:2026-08-09:coalesce"
+        ]
+      },
+      "purpose": [
+        "modularity",
+        "composition modes",
+        "module boundaries"
+      ],
+      "relationships": [],
+      "status": "accepted",
+      "title": "modus"
+    },
+    {
+      "authority_state": "accepted",
+      "chain_alias": "ni",
+      "confidence": 0.9,
+      "dependencies": [],
+      "id": "exile:niche",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "name": "niche",
+      "opus_ready": true,
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "purpose": [
+        "task discovery",
+        "job decomposition",
+        "work planning"
+      ],
+      "relationships": [],
+      "status": "accepted",
+      "title": "niche"
+    },
+    {
+      "authority_state": "provisional",
+      "chain_alias": "no",
+      "confidence": 0.55,
+      "dependencies": [],
+      "id": "exile:notary",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "name": "notary",
+      "opus_ready": true,
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "purpose": [
+        "verification",
+        "attestation",
+        "records and evidence"
+      ],
+      "relationships": [],
+      "status": "provisional",
+      "title": "notary"
+    },
+    {
+      "authority_state": "accepted",
+      "chain_alias": "op",
+      "confidence": 0.9,
+      "dependencies": [],
+      "id": "exile:opus",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "name": "opus",
+      "opus_ready": true,
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "purpose": [
+        "ai orchestration",
+        "provider routing",
+        "multi-agent execution"
+      ],
+      "relationships": [],
+      "status": "accepted",
+      "title": "opus"
+    },
+    {
+      "authority_state": "provisional",
+      "chain_alias": "pa",
+      "confidence": 0.55,
+      "dependencies": [],
+      "id": "exile:pact",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "name": "pact",
+      "opus_ready": true,
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "purpose": [
+        "contracts",
+        "constraints",
+        "permissions and agreements"
+      ],
+      "relationships": [],
+      "status": "provisional",
+      "title": "pact"
+    },
+    {
+      "authority_state": "provisional",
+      "chain_alias": "pa",
+      "confidence": 0.55,
+      "dependencies": [],
+      "id": "exile:palaver",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "name": "palaver",
+      "opus_ready": true,
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "purpose": [
+        "dialogue",
+        "collaborative reasoning",
+        "interaction mediation"
+      ],
+      "relationships": [],
+      "status": "provisional",
+      "title": "palaver"
+    },
+    {
+      "authority_state": "provisional",
+      "chain_alias": "sh",
+      "confidence": 0.55,
+      "dependencies": [],
+      "id": "exile:shatter",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "name": "shatter",
+      "opus_ready": true,
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "purpose": [
+        "decomposition",
+        "fault isolation",
+        "controlled fragmentation"
+      ],
+      "relationships": [],
+      "status": "provisional",
+      "title": "shatter"
+    },
+    {
+      "authority_state": "accepted",
+      "chain_alias": "un",
+      "confidence": 0.9,
+      "dependencies": [],
+      "id": "exile:underscore",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "name": "underscore",
+      "opus_ready": true,
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "purpose": [
+        "structure",
+        "hidden support",
+        "normalization and alignment"
+      ],
+      "relationships": [],
+      "status": "accepted",
+      "title": "underscore"
+    },
+    {
+      "authority_state": "accepted",
+      "chain_alias": "ur",
+      "confidence": 0.9,
+      "dependencies": [],
+      "id": "exile:urge",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "name": "urge",
+      "opus_ready": true,
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "purpose": [
+        "iteration",
+        "improvement cycles",
+        "revision pressure"
+      ],
+      "relationships": [],
+      "status": "accepted",
+      "title": "urge"
+    },
+    {
+      "authority_state": "accepted",
+      "chain_alias": "ze",
+      "confidence": 0.9,
+      "dependencies": [],
+      "id": "exile:zero",
+      "lineage": {
+        "parents": [
+          "edifice:identity:4"
+        ],
+        "superseded_by": [],
+        "supersedes": []
+      },
+      "name": "zero",
+      "opus_ready": true,
+      "provenance": {
+        "created_at": "2026-07-11T00:00:00Z",
+        "created_by": "canon_bootstrap",
+        "sources": [
+          "sdump_savant-runtime_071026.txt",
+          "project conversation"
+        ]
+      },
+      "purpose": [
+        "mathematics",
+        "formal calculation",
+        "quantitative invariants"
+      ],
+      "relationships": [],
+      "status": "accepted",
+      "title": "zero"
+    }
+  ],
+  "extensions": {
+    ".0": 1,
+    ".1": 4,
+    ".12": 8,
+    ".20260727t095731z": 2,
+    ".20260727t095744z": 2,
+    ".a99": 2,
+    ".apache": 10,
+    ".applescript": 1,
+    ".b99": 2,
+    ".before": 9,
+    ".before-command-projection-20260727t082847z": 1,
+    ".before-deadlock-fix-20260727t053009z": 1,
+    ".before-determinism-fix-20260731t224639z": 1,
+    ".before-determinism-fix-20260731t233602z": 1,
+    ".before-discovery-extension-20260801t002506z": 1,
+    ".before-reference-queue-fix-20260801t002434z": 1,
+    ".before_api_debug_20260624t223930z": 1,
+    ".before_authority_force_20260607_203051": 1,
+    ".before_authority_routes_20260607_192742": 1,
+    ".before_authority_routes_20260607_192840": 1,
+    ".before_authority_routes_v2_20260607_202703": 1,
+    ".before_backend_repair_20260612_032320": 1,
+    ".before_boot_order_fix_20260613_080017": 1,
+    ".before_bootstrap_fix_20260612_041547": 1,
+    ".before_clean_observatory_api_20260612_154630": 1,
+    ".before_clean_observatory_api_20260612_160058": 1,
+    ".before_clean_observatory_api_20260612_161644": 1,
+    ".before_cognitive_shell_20260610_022232": 4,
+    ".before_component_extraction": 1,
+    ".before_dotenv_direct_load_20260608_044329": 1,
+    ".before_envoy_connection_20260626t074531z": 1,
+    ".before_final_boot_repair_20260613_084647": 1,
+    ".before_final_repair_20260703t014338z": 1,
+    ".before_missing_personality_prompt_20260612_034814": 1,
+    ".before_observatory_api_suite_20260612_153657": 1,
+    ".before_panel_export_fix_20260611_204304": 1,
+    ".before_personality_api_20260608_055143": 1,
+    ".before_personality_api_final_20260608_111318": 1,
+    ".before_personality_api_phase_2_20260608_070716": 1,
+    ".before_personality_api_phase_2_20260608_070723": 1,
+    ".before_personality_prompt_injection_20260608_055307": 1,
+    ".before_personality_prompt_injection_20260608_055320": 1,
+    ".before_personality_ui_graph_20260608_093027": 2,
+    ".before_personality_ui_graph_20260608_093227": 2,
+    ".before_personality_ui_panel_20260608_063035": 2,
+    ".before_personality_ui_panel_20260608_063123": 2,
+    ".before_phase09": 1,
+    ".before_rail_20260610_021822": 1,
+    ".before_rich_graph_api_20260612_052006": 1,
+    ".before_root_resolution_20260612_162230": 1,
+    ".before_router_20260610_021811": 1,
+    ".before_runtime_graph_20260612_025744": 1,
+    ".before_runtime_graph_20260612_025756": 1,
+    ".before_runtime_repair": 1,
+    ".before_structural_fields_api_20260612_211548": 1,
+    ".before_syntax_fix_20260703t003815z": 1,
+    ".before_system_prompt_fix_20260612_030021": 1,
+    ".before_visual_phase_2_20260607_214651": 2,
+    ".before_visual_phase_3_20260607_221240": 2,
+    ".before_visual_phase_4_20260607_225529": 2,
+    ".before_visual_phase_5_20260607_230309": 2,
+    ".before_visual_phase_5_20260607_230616": 2,
+    ".before_visual_phase_5_20260608_021307": 2,
+    ".before_visual_phase_6_20260608_041910": 2,
+    ".before_visual_phase_7_20260608_043309": 2,
+    ".before_visual_reconstruction_20260607_212734": 2,
+    ".before_visual_reconstruction_20260607_213058": 2,
+    ".bnf": 2,
+    ".broken_20260607_030219": 1,
+    ".bsd": 12,
+    ".bz2": 4,
+    ".c": 1,
+    ".cfg": 4,
+    ".cjs": 1006,
+    ".csh": 4,
+    ".css": 129,
+    ".cts": 386,
+    ".def": 5,
+    ".dot": 3,
+    ".drc": 2,
+    ".env": 1,
+    ".example": 1,
+    ".exe": 32,
+    ".fish": 4,
+    ".flow": 42,
+    ".glsl": 18,
+    ".go": 1,
+    ".gz": 922,
+    ".html": 17,
+    ".iml": 1,
+    ".js": 15660,
+    ".json": 22297,
+    ".jsonl": 11,
+    ".jst": 25,
+    ".jsx": 27,
+    ".lock": 9,
+    ".log": 17,
+    ".map": 7411,
+    ".markdown": 2,
+    ".markdown-it": 1,
+    ".md": 1205,
+    ".mjs": 3019,
+    ".mmd": 3,
+    ".mts": 205,
+    ".node": 9,
+    ".pem": 5,
+    ".php": 1,
+    ".png": 10,
+    ".pre-persona-ui": 2,
+    ".ps1": 4,
+    ".pth": 1,
+    ".py": 4632,
+    ".pyc": 4713,
+    ".pyi": 49,
+    ".real": 1,
+    ".rst": 6,
+    ".save": 11,
+    ".sh": 242,
+    ".so": 21,
+    ".sqlite": 2,
+    ".sqlite3": 6,
+    ".svg": 2,
+    ".swp": 2,
+    ".tag": 1,
+    ".test": 1,
+    ".tmp": 2,
+    ".tmpl": 2,
+    ".toml": 2,
+    ".ts": 6207,
+    ".tsbuildinfo": 2,
+    ".tsv": 2,
+    ".tsx": 99,
+    ".ttf": 5,
+    ".txt": 3550,
+    ".typed": 103,
+    ".wasm": 30,
+    ".xml": 6,
+    ".yaml": 124,
+    ".yml": 19,
+    ".zip": 2,
+    "[none]": 1173
+  },
+  "generated_at": "2026-08-18T03:01:47.552395+00:00",
+  "identity_edifice": [
+    "obelisk",
+    "gate",
+    "innate",
+    "exile",
+    "prodigal",
+    "quirk",
+    "facet",
+    "nuance",
+    "trait"
+  ],
+  "kindred_disciplines": [
+    {
+      "canonical": "Containment",
+      "id": "discipline:containment",
+      "purpose": "edifice and containment relationships",
+      "relations": [
+        "relation:contains",
+        "relation:contained_by"
+      ],
+      "steward": "Kindred"
+    },
+    {
+      "canonical": "Dependency",
+      "id": "discipline:dependency",
+      "purpose": "prerequisite and dependency relationships",
+      "relations": [
+        "relation:depends_on",
+        "relation:required_by"
+      ],
+      "steward": "Kindred"
+    },
+    {
+      "canonical": "Provenance",
+      "id": "discipline:provenance",
+      "purpose": "source and provenance relationships",
+      "relations": [
+        "relation:sourced_from",
+        "relation:source_of"
+      ],
+      "steward": "Notary"
+    },
+    {
+      "canonical": "Lineage",
+      "id": "discipline:lineage",
+      "purpose": "origin and descent relationships",
+      "relations": [
+        "relation:derived_from",
+        "relation:origin_of"
+      ],
+      "steward": "Kindred"
+    },
+    {
+      "canonical": "Revision",
+      "id": "discipline:revision",
+      "purpose": "revision and supersession relationships",
+      "relations": [
+        "relation:supersedes",
+        "relation:superseded_by"
+      ],
+      "steward": "Spyral"
+    },
+    {
+      "canonical": "Affinity",
+      "id": "discipline:affinity",
+      "purpose": "affinity alliance opposition and general relatedness",
+      "relations": [
+        "relation:related_to",
+        "relation:allied_with",
+        "relation:opposes"
+      ],
+      "steward": "Kindred"
+    },
+    {
+      "canonical": "Composition",
+      "id": "discipline:composition",
+      "purpose": "composition and membership relationships",
+      "relations": [
+        "relation:composes",
+        "relation:constituent_of"
+      ],
+      "steward": "Modus"
+    },
+    {
+      "canonical": "Attachment",
+      "id": "discipline:attachment",
+      "purpose": "attachment relationships",
+      "relations": [
+        "relation:attaches",
+        "relation:attached_to"
+      ],
+      "steward": "Slot"
+    },
+    {
+      "canonical": "Compatibility",
+      "id": "discipline:compatibility",
+      "purpose": "compatibility and interoperability relationships",
+      "relations": [
+        "relation:compatible_with",
+        "relation:incompatible_with"
+      ],
+      "steward": "Cypher"
+    },
+    {
+      "canonical": "Tasking",
+      "id": "discipline:tasking",
+      "purpose": "task blocking and task dependency relationships",
+      "relations": [
+        "relation:blocks",
+        "relation:blocked_by"
+      ],
+      "steward": "Niche"
+    },
+    {
+      "canonical": "Evidence",
+      "id": "discipline:evidence",
+      "purpose": "evidentiary support contradiction and corroboration",
+      "relations": [
+        "relation:supports",
+        "relation:contradicts",
+        "relation:corroborates"
+      ],
+      "steward": "Notary"
+    },
+    {
+      "canonical": "Capability",
+      "id": "discipline:capability",
+      "purpose": "provider and capability association",
+      "relations": [
+        "relation:provides",
+        "relation:provided_by",
+        "relation:capable_of"
+      ],
+      "steward": "Opus"
+    },
+    {
+      "canonical": "Persona",
+      "id": "discipline:persona",
+      "purpose": "persona and trait association",
+      "relations": [
+        "relation:expresses",
+        "relation:expressed_by"
+      ],
+      "steward": "Envoy"
+    },
+    {
+      "canonical": "Projection",
+      "id": "discipline:projection",
+      "purpose": "projection and projection-source relationships",
+      "relations": [
+        "relation:projects",
+        "relation:projected_from"
+      ],
+      "steward": "Filament"
+    },
+    {
+      "canonical": "Implementation",
+      "id": "discipline:implementation",
+      "purpose": "specification and implementation relationships",
+      "relations": [
+        "relation:implements",
+        "relation:implemented_by"
+      ],
+      "steward": "Scyon"
+    },
+    {
+      "canonical": "Temporal",
+      "id": "discipline:temporal",
+      "purpose": "temporal ordering and temporal association",
+      "relations": [
+        "relation:precedes",
+        "relation:follows",
+        "relation:concurrent_with"
+      ],
+      "steward": "Cataxis"
+    },
+    {
+      "canonical": "Simulation",
+      "id": "discipline:simulation",
+      "purpose": "simulation ancestry branching and divergence",
+      "relations": [
+        "relation:branched_from",
+        "relation:branches_to"
+      ],
+      "steward": "Carbon"
+    },
+    {
+      "canonical": "Authority",
+      "id": "discipline:authority",
+      "purpose": "authority governance jurisdiction and delegation",
+      "relations": [
+        "relation:governs",
+        "relation:governed_by",
+        "relation:authorizes",
+        "relation:delegates_to"
+      ],
+      "steward": "Pryme"
+    }
+  ],
+  "living_substrates": [
+    {
+      "id": "scyon",
+      "purpose": "living structural implementation"
+    },
+    {
+      "id": "splyce",
+      "purpose": "living interface and interaction"
+    },
+    {
+      "id": "scrybe",
+      "purpose": "context and memory projection"
+    },
+    {
+      "id": "pryme",
+      "purpose": "authority and precedence interpretation"
+    },
+    {
+      "id": "cypher",
+      "purpose": "translation and normalization"
+    },
+    {
+      "id": "thryce",
+      "purpose": "validation and assurance"
+    },
+    {
+      "id": "spyral",
+      "purpose": "evolution and migration compatibility"
+    },
+    {
+      "id": "lythe",
+      "purpose": "deterministic derivation specification"
+    },
+    {
+      "id": "dryve",
+      "purpose": "execution lifecycle mechanics"
+    }
+  ],
+  "metrics": {
+    "authority_records": 31,
+    "constitutional_relationships": 17,
+    "directories": 30501,
+    "exiles": 18,
+    "files": 73654,
+    "kindred_disciplines": 18,
+    "test_files": 27,
+    "test_functions": 142
+  },
+  "ownership": {
+    "carbon": "simulation",
+    "coalesce": "application composition",
+    "coda": "durable mutation orchestration",
+    "envoy": "persona and outward communication",
+    "filament": "projection execution",
+    "lore": "fluid canon",
+    "modus": "modularity and composition",
+    "niche": "planning and task governance",
+    "notary": "evidence and verification",
+    "opus": "AI and provider orchestration",
+    "orobouros": "canonical default persona",
+    "palaver": "conversation and development workstation",
+    "scrybe": "context and recall projection"
+  },
+  "presentation": {
+    "date": "August 2026",
+    "dedication": "For Mom.",
+    "edition": "Founder's Demonstration",
+    "subtitle": "A recursively composable intelligence architecture",
+    "title": "SAVANT",
+    "why": [
+      "To build complex intelligent software that can preserve where its knowledge came from.",
+      "To let a system evolve without destroying its history.",
+      "To make relationships, dependencies, authority, lineage and provenance visible.",
+      "To remain useful without an external AI provider while becoming more capable when providers are available.",
+      "To make an ambitious system composable instead of brittle."
+    ]
+  },
+  "presentation_root": "/root/savant-runtime/present",
+  "read_only": true,
+  "schema": "savant.observatory.snapshot.v1",
+  "snapshot_sha256": "c5430357b2296797c20afe9b3a714166d66c64221f438301f66e9d1c542d517d",
+  "source_root": "/root/savant-runtime"
+}

@@ -1,0 +1,501 @@
+/*
+savant niche execution tunnel
+projection-only interface layer
+authority_effect: none
+*/
+
+:root {
+  --niche-tunnel-edge:
+    color-mix(
+      in srgb,
+      var(--savant-primary, #7fe7ff) 38%,
+      transparent
+    );
+
+  --niche-tunnel-ready:
+    var(--savant-ready, #8fffb0);
+
+  --niche-tunnel-blocked:
+    var(--savant-blocked, #ff785f);
+
+  --niche-tunnel-unknown:
+    var(--savant-unknown, #9aa6aa);
+}
+
+.niche-execution-tunnel {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  overflow: hidden;
+  background:
+    linear-gradient(
+      90deg,
+      rgb(0 0 0 / 0.34),
+      transparent 18%,
+      transparent 82%,
+      rgb(0 0 0 / 0.34)
+    ),
+    var(--savant-background, #050708);
+}
+
+.niche-execution-tunnel[hidden] {
+  display: none !important;
+}
+
+.niche-execution-tunnel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  background-image:
+    linear-gradient(
+      rgb(255 255 255 / 0.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgb(255 255 255 / 0.025) 1px,
+      transparent 1px
+    );
+  background-size: 24px 24px;
+}
+
+.niche-tunnel-head {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto;
+  gap: 1rem;
+  align-items: center;
+  min-block-size: 4rem;
+  padding:
+    max(0.7rem, env(safe-area-inset-top))
+    max(0.85rem, env(safe-area-inset-right))
+    0.7rem
+    max(0.85rem, env(safe-area-inset-left));
+  border-block-end:
+    1px solid
+    var(--niche-tunnel-edge);
+  background:
+    color-mix(
+      in srgb,
+      var(--savant-surface, #0b1113) 94%,
+      transparent
+    );
+}
+
+.niche-tunnel-kicker,
+.niche-tunnel-label,
+.niche-tunnel-badge,
+.niche-tunnel-close,
+.niche-tunnel-context-action {
+  font-family:
+    ui-monospace,
+    "SFMono-Regular",
+    Consolas,
+    monospace;
+}
+
+.niche-tunnel-kicker {
+  margin: 0 0 0.2rem;
+  color:
+    var(--savant-primary, #7fe7ff);
+  font-size: 0.58rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.niche-tunnel-title {
+  margin: 0;
+  overflow: hidden;
+  color:
+    var(--savant-text, #eef7f8);
+  font:
+    750
+    clamp(1rem, 2.2vw, 1.5rem) /
+    1.05
+    system-ui,
+    sans-serif;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.niche-tunnel-close {
+  min-inline-size: 2.75rem;
+  min-block-size: 2.75rem;
+  border:
+    1px solid
+    var(--niche-tunnel-edge);
+  border-radius: 1px;
+  color:
+    var(--savant-text, #eef7f8);
+  background:
+    var(--savant-background, #050708);
+  cursor: pointer;
+}
+
+.niche-tunnel-close:focus-visible,
+.niche-tunnel-close:hover {
+  outline: none;
+  border-color:
+    var(--savant-primary, #7fe7ff);
+}
+
+.niche-tunnel-body {
+  position: relative;
+  z-index: 1;
+  min-block-size: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding:
+    clamp(0.8rem, 2vw, 1.6rem)
+    max(
+      clamp(0.8rem, 4vw, 4rem),
+      env(safe-area-inset-right)
+    )
+    max(
+      clamp(1rem, 4vw, 3rem),
+      env(safe-area-inset-bottom)
+    )
+    max(
+      clamp(0.8rem, 4vw, 4rem),
+      env(safe-area-inset-left)
+    );
+}
+
+.niche-tunnel-grid {
+  inline-size:
+    min(100%, 92rem);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1.6fr)
+    minmax(16rem, 0.75fr);
+  gap:
+    clamp(0.75rem, 2vw, 1.5rem);
+  align-items: start;
+}
+
+.niche-tunnel-primary,
+.niche-tunnel-secondary {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.niche-tunnel-task {
+  position: relative;
+  padding:
+    clamp(0.9rem, 2vw, 1.5rem);
+  border:
+    1px solid
+    var(--niche-tunnel-edge);
+  background:
+    color-mix(
+      in srgb,
+      var(--savant-surface, #0b1113) 84%,
+      transparent
+    );
+}
+
+.niche-tunnel-task::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: 3px;
+  background:
+    var(--niche-tunnel-unknown);
+}
+
+.niche-tunnel-task[data-state="ready"]::before {
+  background:
+    var(--niche-tunnel-ready);
+}
+
+.niche-tunnel-task[data-state="blocked"]::before {
+  background:
+    var(--niche-tunnel-blocked);
+}
+
+.niche-tunnel-label {
+  display: block;
+  margin-block-end: 0.42rem;
+  color:
+    var(--savant-text-muted, #879397);
+  font-size: 0.57rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.niche-tunnel-task-id {
+  margin: 0 0 0.35rem;
+  color:
+    var(--savant-primary, #7fe7ff);
+  font:
+    650
+    clamp(0.68rem, 1.3vw, 0.82rem) /
+    1.3
+    ui-monospace,
+    monospace;
+  overflow-wrap: anywhere;
+}
+
+.niche-tunnel-task-title {
+  margin: 0;
+  color:
+    var(--savant-text, #eef7f8);
+  font:
+    760
+    clamp(1.25rem, 3.4vw, 2.8rem) /
+    0.98
+    system-ui,
+    sans-serif;
+  letter-spacing: -0.025em;
+}
+
+.niche-tunnel-purpose {
+  max-inline-size: 68ch;
+  margin:
+    clamp(0.8rem, 2vw, 1.3rem)
+    0
+    0;
+  color:
+    var(--savant-text-muted, #a2adb0);
+  font:
+    400
+    clamp(0.85rem, 1.4vw, 1rem) /
+    1.6
+    system-ui,
+    sans-serif;
+}
+
+.niche-tunnel-status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-block-start: 1rem;
+}
+
+.niche-tunnel-badge {
+  padding: 0.34rem 0.46rem;
+  border:
+    1px solid
+    var(--niche-tunnel-edge);
+  color:
+    var(--savant-text-muted, #879397);
+  font-size: 0.56rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.niche-tunnel-panel {
+  padding: 0.8rem;
+  border-block-start:
+    1px solid
+    var(--niche-tunnel-edge);
+}
+
+.niche-tunnel-panel h3 {
+  margin: 0 0 0.55rem;
+  color:
+    var(--savant-text-muted, #879397);
+  font:
+    700
+    0.61rem /
+    1.2
+    ui-monospace,
+    monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.niche-tunnel-panel p {
+  margin: 0;
+  color:
+    var(--savant-text, #eef7f8);
+  font:
+    0.78rem /
+    1.55
+    system-ui,
+    sans-serif;
+  overflow-wrap: anywhere;
+}
+
+.niche-tunnel-list {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.niche-tunnel-list li {
+  padding: 0.5rem 0.55rem;
+  border-inline-start:
+    2px solid
+    var(--niche-tunnel-edge);
+  background:
+    color-mix(
+      in srgb,
+      var(--savant-surface, #0b1113) 72%,
+      transparent
+    );
+  color:
+    var(--savant-text, #eef7f8);
+  font:
+    0.68rem /
+    1.4
+    ui-monospace,
+    monospace;
+  overflow-wrap: anywhere;
+}
+
+.niche-tunnel-controls {
+  position: sticky;
+  inset-block-end: 0;
+  display: grid;
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(8.5rem, 1fr)
+    );
+  gap: 0.5rem;
+  padding-block-start: 0.75rem;
+  background:
+    linear-gradient(
+      to bottom,
+      transparent,
+      var(--savant-background, #050708)
+      28%
+    );
+}
+
+.niche-tunnel-context-action {
+  min-block-size: 3rem;
+  padding: 0.65rem 0.75rem;
+  border:
+    1px solid
+    var(--niche-tunnel-edge);
+  border-radius: 1px;
+  color:
+    var(--savant-text, #eef7f8);
+  background:
+    var(--savant-surface, #0b1113);
+  cursor: pointer;
+  font-size: 0.64rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.niche-tunnel-context-action:hover,
+.niche-tunnel-context-action:focus-visible {
+  outline: none;
+  border-color:
+    var(--savant-primary, #7fe7ff);
+}
+
+.niche-tunnel-context-action[data-primary="true"] {
+  border-color:
+    var(--niche-tunnel-ready);
+  color:
+    var(--niche-tunnel-ready);
+  background:
+    color-mix(
+      in srgb,
+      var(--niche-tunnel-ready) 8%,
+      var(--savant-background, #050708)
+    );
+}
+
+.niche-tunnel-empty {
+  padding: 1rem;
+  border:
+    1px dashed
+    var(--niche-tunnel-edge);
+  color:
+    var(--savant-text-muted, #879397);
+  font:
+    0.72rem /
+    1.55
+    ui-monospace,
+    monospace;
+}
+
+body.niche-execution-tunnel-open {
+  overflow: hidden;
+}
+
+@media (max-width: 820px) {
+  .niche-tunnel-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .niche-tunnel-secondary {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+  }
+}
+
+@media (max-width: 520px) {
+  .niche-tunnel-head {
+    min-block-size: 3.5rem;
+  }
+
+  .niche-tunnel-body {
+    padding:
+      0.65rem
+      max(
+        0.65rem,
+        env(safe-area-inset-right)
+      )
+      max(
+        0.8rem,
+        env(safe-area-inset-bottom)
+      )
+      max(
+        0.65rem,
+        env(safe-area-inset-left)
+      );
+  }
+
+  .niche-tunnel-secondary {
+    grid-template-columns: 1fr;
+  }
+
+  .niche-tunnel-task-title {
+    font-size:
+      clamp(1.2rem, 8vw, 2rem);
+  }
+
+  .niche-tunnel-controls {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .niche-execution-tunnel *,
+  .niche-execution-tunnel *::before,
+  .niche-execution-tunnel *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0s !important;
+    transition-duration: 0s !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .niche-execution-tunnel,
+  .niche-tunnel-task,
+  .niche-tunnel-panel,
+  .niche-tunnel-context-action,
+  .niche-tunnel-close {
+    border-color: CanvasText;
+  }
+}

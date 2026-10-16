@@ -1,0 +1,17 @@
+{
+  "id": "coda.segue.contracts",
+  "owner": "coda",
+  "type": "segue_contract_registry",
+  "status": "active",
+  "contracts": [
+    {
+      "id": "palaver_mutation_contract",
+      "path": "../../api/palaver_mutation_contract.json",
+      "source": "exile:palaver",
+      "target": "exile:coda",
+      "relation": "delegates_filesystem_mutation_to",
+      "status": "active",
+      "authority_transfer": false
+    }
+  ]
+}

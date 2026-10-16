@@ -1,0 +1,63 @@
+.page{
+
+    min-height:100vh;
+
+}
+
+.container{
+
+    width:min(1800px,calc(100vw - 64px));
+
+    margin-inline:auto;
+
+}
+
+.stack{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--space-5);
+
+}
+
+.row{
+
+    display:flex;
+
+    gap:var(--space-5);
+
+}
+
+.grid{
+
+    display:grid;
+
+    gap:var(--space-5);
+
+}
+
+.grid.two{
+
+    grid-template-columns:repeat(2,1fr);
+
+}
+
+.grid.three{
+
+    grid-template-columns:repeat(3,1fr);
+
+}
+
+.grid.four{
+
+    grid-template-columns:repeat(4,1fr);
+
+}
+
+.fill{
+
+    flex:1;
+
+}

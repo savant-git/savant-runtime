@@ -1,0 +1,40 @@
+{
+  "authority": "USER_DIRECTIVE",
+  "composition": {
+    "children": [
+      {
+        "authority": "USER_DIRECTIVE",
+        "edge_type": "reads",
+        "id": "authority_db.savant",
+        "metadata": {},
+        "ordinal": 20
+      }
+    ]
+  },
+  "extensions": {},
+  "future_extensions": {},
+  "id": "runtime.filament.projection_engine",
+  "kind": "instance",
+  "level": "runtime",
+  "metadata": {
+    "owner": "exile.filament",
+    "path": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/runtime/projection_engine/project.py",
+    "purpose": "Generate file projections from SQLite authority."
+  },
+  "projection": {
+    "authoritative": false,
+    "database": "/root/savant-runtime/ontology/obelisks/segue/authority_db/savant_authority.sqlite",
+    "engine": "filament.runtime.projection_engine",
+    "owner": "filament",
+    "rebuildable": true,
+    "source": "sqlite.authority_db"
+  },
+  "provenance": {
+    "created_at": "2026-06-29 05:20:31",
+    "updated_at": "2026-06-29 05:20:31"
+  },
+  "relationships": [],
+  "status": "active",
+  "type": "runtime",
+  "version": "1.0.0"
+}

@@ -1,0 +1,148 @@
+{
+  "id": "urge.ui",
+  "owner": "exile:urge",
+  "type": "ui_projection_contract",
+  "status": "active",
+  "version": "1.0.0",
+  "brand": {
+    "system": "savant",
+    "surface": "urge",
+    "case": "lowercase",
+    "character": [
+      "precise",
+      "structural",
+      "cinematic",
+      "restrained",
+      "information-dense",
+      "non-cliche"
+    ]
+  },
+  "shell": {
+    "layout": "adaptive-workbench",
+    "regions": [
+      "command",
+      "candidate-field",
+      "pressure-map",
+      "lineage",
+      "criteria",
+      "comparison",
+      "convergence",
+      "provenance",
+      "runtime"
+    ],
+    "primary_region": "candidate-field",
+    "navigation": "contextual",
+    "density": "adaptive"
+  },
+  "views": [
+    {
+      "id": "iterate",
+      "purpose": "operate an urge iteration job",
+      "panels": [
+        "objective",
+        "constraints",
+        "candidate",
+        "revision-pressure",
+        "criteria",
+        "run-controls"
+      ]
+    },
+    {
+      "id": "compare",
+      "purpose": "compare candidate branches without hiding lineage",
+      "panels": [
+        "candidate-matrix",
+        "criterion-delta",
+        "semantic-delta",
+        "lineage-delta",
+        "provenance-delta"
+      ]
+    },
+    {
+      "id": "lineage",
+      "purpose": "inspect candidate ancestry and iteration history",
+      "panels": [
+        "graph",
+        "cycle-history",
+        "branch-history",
+        "selection-history"
+      ]
+    },
+    {
+      "id": "pressure",
+      "purpose": "inspect unresolved improvement pressure",
+      "panels": [
+        "criterion-gaps",
+        "required-gaps",
+        "findings",
+        "constraints",
+        "convergence"
+      ]
+    },
+    {
+      "id": "logo-design",
+      "purpose": "operate the logo-design specialization",
+      "panels": [
+        "brief",
+        "concept-families",
+        "candidate-field",
+        "silhouette",
+        "monochrome",
+        "micro-scale",
+        "geometry",
+        "negative-space",
+        "identity-system",
+        "motion-potential",
+        "anti-cliche",
+        "comparison"
+      ]
+    }
+  ],
+  "interaction": {
+    "candidate_selection": "non-destructive",
+    "branching": "explicit",
+    "comparison": "side-by-side-and-delta",
+    "history": "immutable-projection",
+    "keyboard_operation": true,
+    "reduced_motion": true,
+    "screen_reader_semantics": true,
+    "focus_visibility": true,
+    "responsive": true
+  },
+  "visual_language": {
+    "background": "near-black-neutral",
+    "foreground": "high-contrast-neutral",
+    "accent": "savant-accent-token",
+    "surfaces": "depth-by-luminance-not-decoration",
+    "borders": "low-noise-structural",
+    "typography": {
+      "display": "savant-display-token",
+      "body": "savant-body-token",
+      "mono": "savant-mono-token"
+    },
+    "motion": {
+      "purpose": "state-and-lineage-communication",
+      "decorative_motion": false,
+      "spatial_continuity": true
+    }
+  },
+  "data_bindings": {
+    "job": "urge.iteration.job",
+    "result": "urge.iteration.composition",
+    "logo_design": "urge.logo-design",
+    "lineage": "result.iteration.lineage",
+    "criteria": "result.iteration.job.criteria",
+    "pressure": "result.iteration.best.assessment.gaps",
+    "alternates": "result.iteration.alternates",
+    "convergence": "result.convergence",
+    "runtime": "result.iteration.metrics"
+  },
+  "boundaries": {
+    "authoritative": false,
+    "projection_only": true,
+    "mutates_canon": false,
+    "creates_authority": false,
+    "executes_model": false,
+    "selects_provider": false
+  }
+}

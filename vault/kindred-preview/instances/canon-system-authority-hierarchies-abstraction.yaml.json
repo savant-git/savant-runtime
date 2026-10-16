@@ -1,0 +1,83 @@
+{
+  "authoritative": false,
+  "authority_tier": "delegated",
+  "canonical_id": "fs:canon-system/authority/edifices/abstraction.yaml",
+  "deterministic_hash": "f2da08eccf16d3178834cfdd21281da0b4ffc881a0b8e5958c358b5130c03f59",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "canon-system/authority/edifices/abstraction.yaml",
+  "kind": "file",
+  "label": "abstraction.yaml",
+  "namespace": "preview.kindred",
+  "path": "canon-system/authority/edifices/abstraction.yaml",
+  "placement": {
+    "domain": "filesystem",
+    "node": "canon-system/authority/edifices/abstraction.yaml",
+    "parent": "canon-system/authority/edifices",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.ee072e9f6bee95fadf49",
+    "rank": 10,
+    "slot": "20_authority",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.ee072e9f6bee95fadf49"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "record",
+  "source_record": {
+    "authority": false,
+    "canonical_id": "fs:canon-system/authority/edifices/abstraction.yaml",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "canon-system/authority/edifices/abstraction.yaml",
+    "kind": "file",
+    "label": "abstraction.yaml",
+    "legacy_id": "canon-system/authority/edifices/abstraction.yaml",
+    "lineage": [
+      "canon-system/authority/edifices"
+    ],
+    "metadata": {
+      "canonical_id": "fs:canon-system/authority/edifices/abstraction.yaml",
+      "child_modes": {},
+      "child_roles": {},
+      "is_directory": false,
+      "is_file": true,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:canon-system/authority/edifices"
+        ]
+      },
+      "projected_id": "canon-system/authority/edifices/abstraction.yaml",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "canon-system/authority/edifices"
+    ],
+    "path": "canon-system/authority/edifices/abstraction.yaml",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "canon-system/authority/edifices/abstraction.yaml",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.ee072e9f6bee95fadf49"
+    ],
+    "size": 7,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

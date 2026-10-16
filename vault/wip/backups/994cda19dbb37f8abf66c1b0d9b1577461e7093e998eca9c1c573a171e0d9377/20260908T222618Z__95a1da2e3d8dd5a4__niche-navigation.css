@@ -1,0 +1,83 @@
+/* savant atlas modular css entrypoint | build: atlas-r13.4-entry-activation | authority_effect: none | projection_only: true */
+@layer atlas.global, atlas.tokens, atlas.shell, atlas.world, atlas.responsive;
+
+@import url("/assets/atlas/tokens.css?v=atlas-r13.4-entry-activation") layer(atlas.tokens);
+@import url("/assets/atlas/shell.css?v=atlas-r13.4-entry-activation") layer(atlas.shell);
+@import url("/assets/atlas/world.css?v=atlas-r13.4-entry-activation") layer(atlas.world);
+@import url("/assets/atlas/responsive.css?v=atlas-r13.4-entry-activation") layer(atlas.responsive);
+
+@layer atlas.global {
+  :where(html){
+    min-width:0;
+    max-width:100%;
+    min-height:100%;
+    overflow-x:hidden;
+    overflow-y:auto;
+  }
+
+  :where(body){
+    min-width:0;
+    max-width:100%;
+    min-height:100%;
+    height:auto;
+    overflow-x:hidden;
+    overflow-y:auto !important;
+    overscroll-behavior:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  :where(.nav){
+    position:sticky;
+    top:0;
+    z-index:1000;
+    max-width:100%;
+  }
+
+  :where(.surfaces,main){
+    min-width:0;
+    max-width:100%;
+    overflow:visible;
+  }
+
+  :where(.surface){
+    min-width:0;
+    max-width:100%;
+    overflow-x:auto;
+    overflow-y:auto;
+    overscroll-behavior:auto;
+    scrollbar-gutter:stable;
+    -webkit-overflow-scrolling:touch;
+    touch-action:pan-x pan-y;
+  }
+
+  :where(.surface > *){
+    min-width:0;
+    max-width:100%;
+  }
+
+  :where(.surface button,.surface input,.surface select,.surface textarea,.surface a){
+    max-width:100%;
+  }
+
+  :where(.atlas-viewport){
+    touch-action:pan-x pan-y;
+    overscroll-behavior:auto;
+  }
+
+  @media (max-width:760px){
+    :where(.nav){
+      position:sticky;
+      top:0;
+      z-index:1000;
+      overflow-x:auto;
+      overflow-y:hidden;
+      overscroll-behavior-x:auto;
+      scrollbar-width:thin;
+      -webkit-overflow-scrolling:touch;
+    }
+
+    :where(.surface){
+      scrollbar-gutter:auto;
+    }
+  }
+}

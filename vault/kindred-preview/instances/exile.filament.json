@@ -1,0 +1,92 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "exile.filament",
+  "deterministic_hash": "8d2aa2072bc3bb47aa32e17a21323ad33e3561c9b12667927527772ca4f5b8f7",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "exile.filament",
+  "kind": "instance",
+  "label": "exile.filament",
+  "namespace": "preview.kindred",
+  "path": null,
+  "placement": {
+    "domain": "unclassified",
+    "node": "exile.filament",
+    "parent": "savant-runtime",
+    "placement_basis": "orphan_attachment",
+    "primary_relationship_id": null,
+    "rank": 390,
+    "slot": "80_children",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.fe303272946030de2d10"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "exile.filament",
+    "children": [
+      "runtime.filament.projection_engine"
+    ],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "exile.filament",
+    "kind": "instance",
+    "label": "exile.filament",
+    "legacy_id": null,
+    "lineage": [],
+    "metadata": {
+      "authority_source_path": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/projections/json/exile__filament.json",
+      "canonical_id": "exile.filament",
+      "child_modes": {
+        "neutral": [
+          "runtime.filament.projection_engine"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "runtime.filament.projection_engine"
+        ]
+      },
+      "function": "projection",
+      "lineage_placeholder": false,
+      "owns": [
+        "projection_engine",
+        "projection_runtime",
+        "projection_workers",
+        "generated_file_emission"
+      ],
+      "parent_roles": {},
+      "projected_id": "exile.filament"
+    },
+    "mothers": [],
+    "parents": [],
+    "path": null,
+    "provenance": {
+      "adapter": "authority_document",
+      "created_at": "2026-06-29 05:20:31",
+      "source_files": [
+        "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/filament/projections/json/exile__filament.json"
+      ],
+      "updated_at": "2026-06-29 05:20:31"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.fe303272946030de2d10"
+    ],
+    "size": 7,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

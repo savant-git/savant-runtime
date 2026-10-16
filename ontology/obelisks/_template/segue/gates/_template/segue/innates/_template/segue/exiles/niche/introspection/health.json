@@ -1,0 +1,24 @@
+{
+  "id": "niche.health",
+  "owner": "niche",
+  "status": "active",
+  "runtime_probe": "runtime/living_task.py health",
+  "checks": [
+    "history_chain_valid",
+    "cycle_free",
+    "authoritative_task_store",
+    "task_governance_owner",
+    "task_transition_owner",
+    "dryve_may_govern_tasks",
+    "dryve_may_transition_tasks"
+  ],
+  "healthy_when": {
+    "history_chain_valid": true,
+    "cycle_free": true,
+    "authoritative_task_store": true,
+    "task_governance_owner": "exile:niche",
+    "task_transition_owner": "exile:niche",
+    "dryve_may_govern_tasks": false,
+    "dryve_may_transition_tasks": false
+  }
+}

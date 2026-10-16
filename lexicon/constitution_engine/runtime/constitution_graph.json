@@ -1,0 +1,542 @@
+{
+  "edges": [
+    {
+      "from": "constitution:auditability",
+      "relation": "depends_on",
+      "to": "constitution:lineage-exposed"
+    },
+    {
+      "from": "constitution:auditability",
+      "relation": "depends_on",
+      "to": "constitution:provenance-exposed"
+    },
+    {
+      "from": "constitution:auditability",
+      "relation": "governs",
+      "to": "constitution:auditability"
+    },
+    {
+      "from": "constitution:authoritative-primitives-only",
+      "relation": "depends_on",
+      "to": "constitution:authority-before-inference"
+    },
+    {
+      "from": "constitution:authoritative-primitives-only",
+      "relation": "depends_on",
+      "to": "constitution:projection-before-storage"
+    },
+    {
+      "from": "constitution:authoritative-primitives-only",
+      "relation": "governs",
+      "to": "constitution:authoritative-primitives-only"
+    },
+    {
+      "from": "constitution:authority-before-inference",
+      "relation": "governs",
+      "to": "constitution:authority-before-inference"
+    },
+    {
+      "from": "constitution:authority-before-projection",
+      "relation": "depends_on",
+      "to": "constitution:authority-before-inference"
+    },
+    {
+      "from": "constitution:authority-before-projection",
+      "relation": "governs",
+      "to": "constitution:authority-before-projection"
+    },
+    {
+      "from": "constitution:composability",
+      "relation": "depends_on",
+      "to": "constitution:recursive-composition"
+    },
+    {
+      "from": "constitution:composability",
+      "relation": "governs",
+      "to": "constitution:composability"
+    },
+    {
+      "from": "constitution:composition-before-duplication",
+      "relation": "depends_on",
+      "to": "constitution:authority-before-inference"
+    },
+    {
+      "from": "constitution:composition-before-duplication",
+      "relation": "governs",
+      "to": "constitution:composition-before-duplication"
+    },
+    {
+      "from": "constitution:dependencies-exposed",
+      "relation": "depends_on",
+      "to": "constitution:lineage-exposed"
+    },
+    {
+      "from": "constitution:dependencies-exposed",
+      "relation": "depends_on",
+      "to": "constitution:provenance-exposed"
+    },
+    {
+      "from": "constitution:dependencies-exposed",
+      "relation": "governs",
+      "to": "constitution:dependencies-exposed"
+    },
+    {
+      "from": "constitution:determinism",
+      "relation": "depends_on",
+      "to": "constitution:deterministic-projection"
+    },
+    {
+      "from": "constitution:determinism",
+      "relation": "governs",
+      "to": "constitution:determinism"
+    },
+    {
+      "from": "constitution:deterministic-projection",
+      "relation": "depends_on",
+      "to": "constitution:authoritative-primitives-only"
+    },
+    {
+      "from": "constitution:deterministic-projection",
+      "relation": "governs",
+      "to": "constitution:deterministic-projection"
+    },
+    {
+      "from": "constitution:emergence-before-hardcoding",
+      "relation": "depends_on",
+      "to": "constitution:projection-before-storage"
+    },
+    {
+      "from": "constitution:emergence-before-hardcoding",
+      "relation": "governs",
+      "to": "constitution:emergence-before-hardcoding"
+    },
+    {
+      "from": "constitution:extensibility",
+      "relation": "depends_on",
+      "to": "constitution:future-extension"
+    },
+    {
+      "from": "constitution:extensibility",
+      "relation": "governs",
+      "to": "constitution:extensibility"
+    },
+    {
+      "from": "constitution:future-attachment",
+      "relation": "depends_on",
+      "to": "constitution:future-extension"
+    },
+    {
+      "from": "constitution:future-attachment",
+      "relation": "governs",
+      "to": "constitution:future-attachment"
+    },
+    {
+      "from": "constitution:future-extension",
+      "relation": "depends_on",
+      "to": "constitution:composition-before-duplication"
+    },
+    {
+      "from": "constitution:future-extension",
+      "relation": "governs",
+      "to": "constitution:future-extension"
+    },
+    {
+      "from": "constitution:future-optionality",
+      "relation": "depends_on",
+      "to": "constitution:future-attachment"
+    },
+    {
+      "from": "constitution:future-optionality",
+      "relation": "depends_on",
+      "to": "constitution:future-extension"
+    },
+    {
+      "from": "constitution:future-optionality",
+      "relation": "governs",
+      "to": "constitution:future-optionality"
+    },
+    {
+      "from": "constitution:graph-addressability",
+      "relation": "depends_on",
+      "to": "constitution:dependencies-exposed"
+    },
+    {
+      "from": "constitution:graph-addressability",
+      "relation": "depends_on",
+      "to": "constitution:lineage-exposed"
+    },
+    {
+      "from": "constitution:graph-addressability",
+      "relation": "depends_on",
+      "to": "constitution:provenance-exposed"
+    },
+    {
+      "from": "constitution:graph-addressability",
+      "relation": "depends_on",
+      "to": "constitution:relationships-exposed"
+    },
+    {
+      "from": "constitution:graph-addressability",
+      "relation": "governs",
+      "to": "constitution:graph-addressability"
+    },
+    {
+      "from": "constitution:instances-primary",
+      "relation": "depends_on",
+      "to": "constitution:composition-before-duplication"
+    },
+    {
+      "from": "constitution:instances-primary",
+      "relation": "governs",
+      "to": "constitution:instances-primary"
+    },
+    {
+      "from": "constitution:kindred-canonical",
+      "relation": "depends_on",
+      "to": "constitution:relationships-exposed"
+    },
+    {
+      "from": "constitution:kindred-canonical",
+      "relation": "governs",
+      "to": "constitution:kindred-canonical"
+    },
+    {
+      "from": "constitution:kindred-forbidden",
+      "relation": "depends_on",
+      "to": "constitution:kindred-canonical"
+    },
+    {
+      "from": "constitution:kindred-forbidden",
+      "relation": "governs",
+      "to": "constitution:kindred-forbidden"
+    },
+    {
+      "from": "constitution:lineage-exposed",
+      "relation": "depends_on",
+      "to": "constitution:authoritative-primitives-only"
+    },
+    {
+      "from": "constitution:lineage-exposed",
+      "relation": "governs",
+      "to": "constitution:lineage-exposed"
+    },
+    {
+      "from": "constitution:no-dead-end",
+      "relation": "depends_on",
+      "to": "constitution:future-attachment"
+    },
+    {
+      "from": "constitution:no-dead-end",
+      "relation": "depends_on",
+      "to": "constitution:future-extension"
+    },
+    {
+      "from": "constitution:no-dead-end",
+      "relation": "depends_on",
+      "to": "constitution:graph-addressability"
+    },
+    {
+      "from": "constitution:no-dead-end",
+      "relation": "depends_on",
+      "to": "constitution:recursive-composition"
+    },
+    {
+      "from": "constitution:no-dead-end",
+      "relation": "governs",
+      "to": "constitution:no-dead-end"
+    },
+    {
+      "from": "constitution:no-replacement-to-extend",
+      "relation": "depends_on",
+      "to": "constitution:no-dead-end"
+    },
+    {
+      "from": "constitution:no-replacement-to-extend",
+      "relation": "governs",
+      "to": "constitution:no-replacement-to-extend"
+    },
+    {
+      "from": "constitution:projection-before-storage",
+      "relation": "depends_on",
+      "to": "constitution:authority-before-projection"
+    },
+    {
+      "from": "constitution:projection-before-storage",
+      "relation": "governs",
+      "to": "constitution:projection-before-storage"
+    },
+    {
+      "from": "constitution:provenance-exposed",
+      "relation": "depends_on",
+      "to": "constitution:authoritative-primitives-only"
+    },
+    {
+      "from": "constitution:provenance-exposed",
+      "relation": "governs",
+      "to": "constitution:provenance-exposed"
+    },
+    {
+      "from": "constitution:recoverability",
+      "relation": "depends_on",
+      "to": "constitution:auditability"
+    },
+    {
+      "from": "constitution:recoverability",
+      "relation": "governs",
+      "to": "constitution:recoverability"
+    },
+    {
+      "from": "constitution:recursive-composition",
+      "relation": "depends_on",
+      "to": "constitution:composition-before-duplication"
+    },
+    {
+      "from": "constitution:recursive-composition",
+      "relation": "depends_on",
+      "to": "constitution:relationships-exposed"
+    },
+    {
+      "from": "constitution:recursive-composition",
+      "relation": "governs",
+      "to": "constitution:recursive-composition"
+    },
+    {
+      "from": "constitution:relationships-exposed",
+      "relation": "depends_on",
+      "to": "constitution:dependencies-exposed"
+    },
+    {
+      "from": "constitution:relationships-exposed",
+      "relation": "governs",
+      "to": "constitution:relationships-exposed"
+    },
+    {
+      "from": "constitution:segues-primary",
+      "relation": "depends_on",
+      "to": "constitution:instances-primary"
+    },
+    {
+      "from": "constitution:segues-primary",
+      "relation": "governs",
+      "to": "constitution:segues-primary"
+    }
+  ],
+  "nodes": [
+    {
+      "canonical": "Optimize for auditability.",
+      "id": "constitution:auditability",
+      "scope": "constitution",
+      "severity": "error",
+      "status": "active",
+      "type": "constitution"
+    },
+    {
+      "canonical": "Store only authoritative primitives.",
+      "id": "constitution:authoritative-primitives-only",
+      "scope": "constitution",
+      "severity": "error",
+      "status": "active",
+      "type": "constitution"
+    },
+    {
+      "canonical": "Authority before inference.",
+      "id": "constitution:authority-before-inference",
+      "scope": "constitution",
+      "severity": "error",
+      "status": "active",
+      "type": "constitution"
+    },
+    {
+      "canonical": "Authority before projection.",
+      "id": "constitution:authority-before-projection",
+      "scope": "constitution",
+      "severity": "error",
+      "status": "active",
+      "type": "constitution"
+    },
+    {
+      "canonical": "Optimize for composability.",
+      "id": "constitution:composability",
+      "scope": "constitution",
+      "severity": "error",
+      "status": "active",
+      "type": "constitution"
+    },
+    {
+      "canonical": "Prefer composition over duplication.",
+      "id": "constitution:composition-before-duplication",
+      "scope": "constitution",
+      "severity": "error",
+      "status": "active",
+      "type": "constitution"
+    },
+    {
+      "canonical": "Everything must expose dependencies.",
+      "id": "constitution:dependencies-exposed",
+      "scope": "constitution",
+      "severity": "error",
+      "status": "active",
+      "type": "constitution"
+    },
+    {
+      "canonical": "Optimize for determinism.",
+      "id": "constitution:determinism",
+      "scope": "constitution",
+      "severity": "error",
+      "status": "active",
+      "type": "constitution"
+    },
+    {
+      "canonical": "Generate everything else through deterministic projection.",
+      "id": "constitution:deterministic-projection",
+      "scope": "constitution",
+      "severity": "error",
+      "status": "active",
+      "type": "constitution"
+    },
+    {
+      "canonical": "Prefer emergence over hardcoding.",
+      "id": "constitution:emergence-before-hardcoding",
+      "scope": "constitution",
+      "severity": "error",
+      "status": "active",
+      "type": "constitution"
+    },
+    {
+      "canonical": "Optimize for extensibility.",
+      "id": "constitution:extensibility",
+      "scope": "constitution",
+      "severity": "error",
+      "status": "active",
+      "type": "constitution"
+    },
+    {
+      "canonical": "Everything must support future attachment.",
+      "id": "constitution:future-attachment",
+      "scope": "constitution",
+      "severity": "error",
+      "status": "active",
+      "type": "constitution"
+    },
+    {
+      "canonical": "Everything must support future extension.",
+      "id": "constitution:future-extension",
+      "scope": "constitution",
+      "severity": "error",
+      "status": "active",
+      "type": "constitution"
+    },
+    {
+      "canonical": "Optimize for future optionality.",
+      "id": "constitution:future-optionality",
+      "scope": "constitution",
+      "severity": "error",
+      "status": "active",
+      "type": "constitution"
+    },
+    {
+      "canonical": "Everything must be graph-addressable.",
+      "id": "constitution:graph-addressability",
+      "scope": "constitution",
+      "severity": "error",
+      "status": "active",
+      "type": "constitution"
+    },
+    {
+      "canonical": "Use instances as primary architectural primitives.",
+      "id": "constitution:instances-primary",
+      "scope": "constitution",
+      "severity": "error",
+      "status": "active",
+      "type": "constitution"
+    },
+    {
+      "canonical": "Kindred is the canonical relationship methodology term.",
+      "id": "constitution:kindred-canonical",
+      "scope": "constitution",
+      "severity": "error",
+      "status": "active",
+      "type": "constitution"
+    },
+    {
+      "canonical": "The term kindred is forbidden where kindred is intended.",
+      "id": "constitution:kindred-forbidden",
+      "scope": "constitution",
+      "severity": "error",
+      "status": "active",
+      "type": "constitution"
+    },
+    {
+      "canonical": "Everything must expose lineage.",
+      "id": "constitution:lineage-exposed",
+      "scope": "constitution",
+      "severity": "error",
+      "status": "active",
+      "type": "constitution"
+    },
+    {
+      "canonical": "No subsystem may become a dead end.",
+      "id": "constitution:no-dead-end",
+      "scope": "constitution",
+      "severity": "error",
+      "status": "active",
+      "type": "constitution"
+    },
+    {
+      "canonical": "No subsystem may require architectural replacement to extend.",
+      "id": "constitution:no-replacement-to-extend",
+      "scope": "constitution",
+      "severity": "error",
+      "status": "active",
+      "type": "constitution"
+    },
+    {
+      "canonical": "Prefer projection over storage.",
+      "id": "constitution:projection-before-storage",
+      "scope": "constitution",
+      "severity": "error",
+      "status": "active",
+      "type": "constitution"
+    },
+    {
+      "canonical": "Everything must expose provenance.",
+      "id": "constitution:provenance-exposed",
+      "scope": "constitution",
+      "severity": "error",
+      "status": "active",
+      "type": "constitution"
+    },
+    {
+      "canonical": "Optimize for recoverability.",
+      "id": "constitution:recoverability",
+      "scope": "constitution",
+      "severity": "error",
+      "status": "active",
+      "type": "constitution"
+    },
+    {
+      "canonical": "Everything must be recursively composable.",
+      "id": "constitution:recursive-composition",
+      "scope": "constitution",
+      "severity": "error",
+      "status": "active",
+      "type": "constitution"
+    },
+    {
+      "canonical": "Everything must expose relationships.",
+      "id": "constitution:relationships-exposed",
+      "scope": "constitution",
+      "severity": "error",
+      "status": "active",
+      "type": "constitution"
+    },
+    {
+      "canonical": "Use segues as primary architectural primitives.",
+      "id": "constitution:segues-primary",
+      "scope": "constitution",
+      "severity": "error",
+      "status": "active",
+      "type": "constitution"
+    }
+  ]
+}

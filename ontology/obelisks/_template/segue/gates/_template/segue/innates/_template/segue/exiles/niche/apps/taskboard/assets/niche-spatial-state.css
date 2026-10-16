@@ -1,0 +1,25 @@
+/*
+ * savant / niche
+ * spatial continuity
+ * authority_effect: none
+ */
+
+.surface {
+    overflow-anchor: none;
+}
+
+#graph-stage,
+.flow-board,
+.timeline,
+.history-list,
+.living-grid {
+    overscroll-behavior: contain;
+}
+
+@media (pointer: coarse) {
+    #graph-stage,
+    .flow-board {
+        -webkit-overflow-scrolling:
+            touch;
+    }
+}

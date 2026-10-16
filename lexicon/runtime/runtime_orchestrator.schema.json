@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schema:runtime:orchestration:run",
+  "title": "Savant Runtime Orchestration Run",
+  "type": "object",
+  "required": [
+    "run_id",
+    "sequence",
+    "mode",
+    "passed",
+    "started_at",
+    "finished_at",
+    "planned_step_count",
+    "executed_step_count",
+    "failed_required_count",
+    "steps",
+    "artifacts",
+    "dependencies",
+    "provenance",
+    "lineage",
+    "digest"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string",
+      "pattern": "^runtime-orchestration-[0-9]{12}$"
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "validate",
+        "compile",
+        "integrity",
+        "full"
+      ]
+    },
+    "passed": {
+      "type": "boolean"
+    },
+    "started_at": {
+      "type": "string"
+    },
+    "finished_at": {
+      "type": "string"
+    },
+    "stop_on_failure": {
+      "type": "boolean"
+    },
+    "planned_step_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "executed_step_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "failed_required_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "controller",
+          "controller_path",
+          "required",
+          "passed",
+          "skipped",
+          "digest"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "controller": {
+            "type": "string"
+          },
+          "controller_path": {
+            "type": "string"
+          },
+          "controller_sha256": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "passed": {
+            "type": "boolean"
+          },
+          "skipped": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "digest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "artifacts": {
+      "type": "object"
+    },
+    "dependencies": {
+      "type": "object"
+    },
+    "provenance": {
+      "type": "object"
+    },
+    "lineage": {
+      "type": "object"
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  },
+  "additionalProperties": true
+}

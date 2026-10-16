@@ -1,0 +1,57 @@
+.observatory {
+
+    display:grid;
+
+    gap:var(--space-5);
+
+}
+
+.metric {
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:1rem 1.2rem;
+
+    border-radius:var(--radius-md);
+
+    border:1px solid var(--color-border-0);
+
+    background:rgba(255,255,255,.03);
+
+}
+
+.metric-name{
+
+    color:var(--color-text-1);
+
+}
+
+.metric-value{
+
+    font-family:var(--font-mono);
+
+    color:var(--color-cyan);
+
+}
+
+.metric-ok{
+
+    color:var(--color-green);
+
+}
+
+.metric-warning{
+
+    color:var(--color-gold);
+
+}
+
+.metric-error{
+
+    color:var(--color-red);
+
+}

@@ -1,0 +1,122 @@
+{
+  "schema": "savant.command-registry.v1",
+  "projection_only": true,
+  "authority_effect": "none",
+  "command_length": 3,
+  "collision_policy": "reject",
+  "case_policy": "lowercase",
+  "commands": {
+    "svr": {
+      "kind": "jump",
+      "target": "/root/savant-runtime",
+      "description": "savant runtime root"
+    },
+    "xil": {
+      "kind": "jump",
+      "target": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles",
+      "description": "exiles"
+    },
+    "ont": {
+      "kind": "jump",
+      "target": "/root/savant-runtime/ontology",
+      "description": "ontology"
+    },
+    "liv": {
+      "kind": "jump",
+      "target": "/root/savant-runtime/runtime/living-state",
+      "description": "living state"
+    },
+    "sdp": {
+      "kind": "jump",
+      "target": "/root/savant-runtime/tools/sdump-enterprise",
+      "description": "sdump enterprise"
+    },
+    "src": {
+      "kind": "jump",
+      "target": "/root/savant-runtime/source",
+      "description": "source"
+    },
+    "vlt": {
+      "kind": "jump",
+      "target": "/root/savant-runtime/vault",
+      "description": "vault"
+    },
+    "pal": {
+      "kind": "jump",
+      "target": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver",
+      "description": "palaver"
+    },
+    "mod": {
+      "kind": "jump",
+      "target": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus",
+      "description": "modus"
+    },
+    "can": {
+      "kind": "jump",
+      "target": "/root/savant-runtime/canon",
+      "description": "canon"
+    },
+    "too": {
+      "kind": "jump",
+      "target": "/root/savant-runtime/tools",
+      "description": "tools"
+    },
+    "rpt": {
+      "kind": "jump",
+      "target": "/root/savant-runtime/runtime/reports",
+      "description": "runtime reports"
+    },
+    "upp": {
+      "kind": "navigation",
+      "description": "parent directory"
+    },
+    "prv": {
+      "kind": "navigation",
+      "description": "previous directory"
+    },
+    "lst": {
+      "kind": "filesystem",
+      "description": "enhanced directory listing"
+    },
+    "tre": {
+      "kind": "filesystem",
+      "description": "bounded directory tree"
+    },
+    "fnd": {
+      "kind": "filesystem",
+      "description": "find files by name"
+    },
+    "drf": {
+      "kind": "filesystem",
+      "description": "find directories by name"
+    },
+    "gre": {
+      "kind": "filesystem",
+      "description": "recursive content search"
+    },
+    "sta": {
+      "kind": "state",
+      "description": "concise living state status"
+    },
+    "sqs": {
+      "kind": "state",
+      "description": "full living state status"
+    },
+    "chg": {
+      "kind": "state",
+      "description": "latest living state delta"
+    },
+    "his": {
+      "kind": "wip",
+      "description": "wip backup history"
+    },
+    "rst": {
+      "kind": "wip",
+      "description": "restore latest wip backup"
+    },
+    "cmd": {
+      "kind": "discovery",
+      "description": "command index"
+    }
+  }
+}

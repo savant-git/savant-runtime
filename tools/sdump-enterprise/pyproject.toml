@@ -1,0 +1,8 @@
+[project]
+name = "savant-sdump-enterprise"
+version = "4.0.0"
+description = "Deterministic, deduplicated, secret-safe Savant source projection with provenance-preserving audit evidence."
+requires-python = ">=3.10"
+
+[project.scripts]
+sdump = "sdump_enterprise.cli:entrypoint"

@@ -1,0 +1,432 @@
+.savant-mark {
+  --savant-mark-gold: #b08b45;
+  --savant-mark-hot: #d8b66f;
+  --savant-mark-glow: rgba(176, 139, 69, 0.22);
+
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  overflow: visible;
+  contain: layout style;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.savant-mark--header {
+  width: 46px;
+  height: 46px;
+}
+
+.savant-mark--preloader {
+  width: min(42vw, 290px);
+  aspect-ratio: 1;
+}
+
+.savant-mark__viewport {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  overflow: visible;
+  transform: translateZ(0);
+}
+
+.savant-mark__viewport canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  outline: none;
+  filter:
+    drop-shadow(0 7px 11px rgba(0, 0, 0, 0.72))
+    drop-shadow(0 0 9px rgba(176, 139, 69, 0.08));
+}
+
+.savant-mark__aura {
+  position: absolute;
+  z-index: 0;
+  inset: 13%;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.42;
+  background:
+    radial-gradient(
+      circle,
+      var(--savant-mark-glow) 0%,
+      rgba(176, 139, 69, 0.055) 36%,
+      transparent 72%
+    );
+  filter: blur(11px);
+  transform: scaleX(0.88);
+  animation:
+    savant-mark-aura
+    4.8s
+    cubic-bezier(.45, 0, .55, 1)
+    infinite alternate;
+}
+
+.savant-mark--preloader
+.savant-mark__aura {
+  inset: 7%;
+  opacity: 0.64;
+  filter: blur(24px);
+}
+
+.savant-mark__edge {
+  position: absolute;
+  z-index: 1;
+  inset: 5%;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.36;
+  background:
+    conic-gradient(
+      from 215deg,
+      transparent 0deg,
+      rgba(216, 182, 111, 0.04) 35deg,
+      rgba(216, 182, 111, 0.34) 82deg,
+      transparent 118deg,
+      transparent 235deg,
+      rgba(176, 139, 69, 0.18) 286deg,
+      transparent 330deg
+    );
+  filter: blur(8px);
+  animation:
+    savant-mark-edge
+    7.2s linear infinite;
+}
+
+.savant-mark--preloader
+.savant-mark__edge {
+  inset: 1%;
+  filter: blur(16px);
+}
+
+.savant-mark__specular {
+  position: absolute;
+  z-index: 5;
+  inset: 8%;
+  pointer-events: none;
+  opacity: 0;
+  mix-blend-mode: screen;
+  background:
+    linear-gradient(
+      104deg,
+      transparent 30%,
+      rgba(255, 241, 204, 0.02) 42%,
+      rgba(255, 228, 166, 0.48) 49%,
+      rgba(255, 250, 229, 0.68) 50%,
+      rgba(205, 159, 77, 0.2) 52%,
+      transparent 65%
+    );
+  transform:
+    translateX(-110%)
+    skewX(-10deg);
+  animation:
+    savant-mark-specular
+    6.4s
+    cubic-bezier(.2, .72, .2, 1)
+    infinite;
+}
+
+.savant-mark--thinking
+.savant-mark__specular,
+.savant-mark--tool
+.savant-mark__specular,
+.savant-mark--preloader
+.savant-mark__specular {
+  animation-duration: 3.2s;
+}
+
+.savant-mark__scan {
+  position: absolute;
+  z-index: 6;
+  left: 8%;
+  right: 8%;
+  top: 50%;
+  height: 1px;
+  pointer-events: none;
+  opacity: 0.18;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(214, 178, 105, 0.56),
+      rgba(255, 245, 219, 0.7),
+      rgba(214, 178, 105, 0.42),
+      transparent
+    );
+  box-shadow:
+    0 0 7px rgba(176, 139, 69, 0.28);
+  transform:
+    translateY(-50%)
+    scaleX(0.2);
+  transform-origin: center;
+  animation:
+    savant-mark-scan
+    5.7s
+    cubic-bezier(.76, 0, .24, 1)
+    infinite;
+}
+
+.savant-mark--preloader
+.savant-mark__scan {
+  opacity: 0.24;
+}
+
+.savant-mark__fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--savant-mark-gold);
+  font-family:
+    "Arial Narrow",
+    "Roboto Condensed",
+    sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1;
+  text-transform: lowercase;
+  text-shadow:
+    0 0 14px rgba(176, 139, 69, 0.18);
+}
+
+.savant-mark__fallback--preloader {
+  font-size:
+    clamp(82px, 18vw, 150px);
+}
+
+.savant-mark__preloader-copy {
+  position: absolute;
+  z-index: 8;
+  top: calc(100% + 14px);
+  left: 50%;
+  width: min(78vw, 330px);
+  transform:
+    translateX(-50%);
+  display: grid;
+  grid-template-columns:
+    1fr auto;
+  gap: 5px 18px;
+  color:
+    rgba(229, 223, 210, 0.9);
+  font-family:
+    "Arial Narrow",
+    "Roboto Condensed",
+    sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.19em;
+  text-transform: uppercase;
+}
+
+.savant-mark__preloader-state {
+  color:
+    var(--savant-mark-gold);
+  font-size: 8px;
+  letter-spacing: 0.14em;
+}
+
+.savant-mark__progress {
+  grid-column: 1 / -1;
+  position: relative;
+  height: 1px;
+  overflow: hidden;
+  background:
+    rgba(255, 255, 255, 0.055);
+}
+
+.savant-mark__progress::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.25;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.42),
+      transparent
+    );
+  transform:
+    translateX(-100%);
+  animation:
+    savant-mark-progress-scan
+    2.2s linear infinite;
+}
+
+.savant-mark__progress > i {
+  position: absolute;
+  inset: 0;
+  display: block;
+  transform-origin:
+    left center;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(118, 91, 43, 0.52),
+      var(--savant-mark-gold),
+      var(--savant-mark-hot)
+    );
+  box-shadow:
+    0 0 8px
+    rgba(176, 139, 69, 0.32);
+  transition:
+    transform
+    180ms
+    cubic-bezier(.2, .75, .25, 1);
+}
+
+.savant-mark--complete {
+  --savant-mark-glow:
+    rgba(185, 164, 111, 0.22);
+}
+
+.savant-mark--degraded {
+  --savant-mark-gold: #a87842;
+  --savant-mark-hot: #c69257;
+  --savant-mark-glow:
+    rgba(168, 120, 66, 0.18);
+}
+
+.savant-mark--failure {
+  --savant-mark-gold: #98594d;
+  --savant-mark-hot: #bd7566;
+  --savant-mark-glow:
+    rgba(152, 89, 77, 0.2);
+}
+
+.savant-mark--failure
+.savant-mark__viewport {
+  filter:
+    saturate(0.62);
+}
+
+.savant-mark.is-resting
+.savant-mark__aura {
+  animation-play-state:
+    paused;
+  opacity: 0.22;
+}
+
+@keyframes savant-mark-aura {
+  0% {
+    transform:
+      scaleX(0.82)
+      scaleY(0.9);
+    opacity: 0.28;
+  }
+
+  100% {
+    transform:
+      scaleX(1.06)
+      scaleY(1.02);
+    opacity: 0.54;
+  }
+}
+
+@keyframes savant-mark-edge {
+  to {
+    transform:
+      rotate(360deg);
+  }
+}
+
+@keyframes savant-mark-specular {
+  0%,
+  55% {
+    opacity: 0;
+    transform:
+      translateX(-120%)
+      skewX(-10deg);
+  }
+
+  63% {
+    opacity: 0.08;
+  }
+
+  70% {
+    opacity: 0.62;
+  }
+
+  76% {
+    opacity: 0.06;
+  }
+
+  82%,
+  100% {
+    opacity: 0;
+    transform:
+      translateX(120%)
+      skewX(-10deg);
+  }
+}
+
+@keyframes savant-mark-scan {
+  0%,
+  68% {
+    opacity: 0;
+    transform:
+      translateY(-50%)
+      scaleX(0.16);
+  }
+
+  73% {
+    opacity: 0.34;
+  }
+
+  83% {
+    opacity: 0.08;
+    transform:
+      translateY(-50%)
+      scaleX(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translateY(-50%)
+      scaleX(0.2);
+  }
+}
+
+@keyframes savant-mark-progress-scan {
+  to {
+    transform:
+      translateX(100%);
+  }
+}
+
+@media (
+  prefers-reduced-motion:
+  reduce
+) {
+  .savant-mark__aura,
+  .savant-mark__edge,
+  .savant-mark__specular,
+  .savant-mark__scan,
+  .savant-mark__progress::after {
+    animation:
+      none !important;
+  }
+
+  .savant-mark__aura {
+    opacity: 0.26;
+  }
+}
+
+@media (
+  max-width: 640px
+) {
+  .savant-mark--header {
+    width: 40px;
+    height: 40px;
+  }
+
+  .savant-mark--preloader {
+    width:
+      min(58vw, 240px);
+  }
+}

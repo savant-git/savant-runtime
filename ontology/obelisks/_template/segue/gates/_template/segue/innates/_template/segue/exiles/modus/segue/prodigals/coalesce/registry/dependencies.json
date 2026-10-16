@@ -1,0 +1,28 @@
+{
+  "dependencies": [
+    {
+      "attachment_mood": "graft",
+      "fallback": "native relevance search",
+      "id": "js:fuse",
+      "purpose": "fuzzy-search acceleration",
+      "required": false
+    },
+    {
+      "attachment_mood": "graft",
+      "fallback": "native relationship projection",
+      "id": "js:cytoscape",
+      "purpose": "interactive gridd projection",
+      "required": false
+    },
+    {
+      "attachment_mood": "graft",
+      "fallback": "native chronology projection",
+      "id": "js:vis-timeline",
+      "purpose": "interactive temporal projection",
+      "required": false
+    }
+  ],
+  "dependency_count": 3,
+  "id": "coalesce.dependencies",
+  "owner": "prodigal:modus:coalesce"
+}

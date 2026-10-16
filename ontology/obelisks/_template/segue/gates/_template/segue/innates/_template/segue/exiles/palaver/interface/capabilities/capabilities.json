@@ -1,0 +1,97 @@
+{
+  "id": "palaver.capabilities",
+  "owner": "palaver",
+  "type": "capability_manifest",
+  "status": "active",
+  "authority_effect": "none",
+  "capabilities": [
+    {
+      "id": "palaver.conversation",
+      "status": "active",
+      "purpose": "Mediate persistent human-facing dialogue and collaborative interaction.",
+      "mutation_effect": "none"
+    },
+    {
+      "id": "palaver.repository_inspection",
+      "status": "active",
+      "purpose": "Inspect repository directories, files, and bounded repository projections.",
+      "mutation_effect": "none"
+    },
+    {
+      "id": "palaver.file_read",
+      "status": "active",
+      "purpose": "Read bounded text and structured files from the permitted Savant runtime.",
+      "mutation_effect": "none"
+    },
+    {
+      "id": "palaver.repository_search",
+      "status": "active",
+      "purpose": "Locate relevant files and source material within the permitted Savant runtime.",
+      "mutation_effect": "none"
+    },
+    {
+      "id": "palaver.diff_projection",
+      "status": "active",
+      "purpose": "Project proposed content against current filesystem content as a diff.",
+      "mutation_effect": "none"
+    },
+    {
+      "id": "palaver.workspace_state",
+      "status": "active",
+      "purpose": "Load and preserve Palaver-local workspace interaction state.",
+      "mutation_effect": "runtime_state"
+    },
+    {
+      "id": "palaver.runtime_projection",
+      "status": "active",
+      "purpose": "Expose bounded runtime and repository state for the Palaver workstation.",
+      "mutation_effect": "none"
+    },
+    {
+      "id": "palaver.patch_review",
+      "status": "active",
+      "purpose": "Create, inspect, accept, or reject proposed patch-review records through the existing workflow.",
+      "mutation_effect": "delegated_or_compatibility"
+    },
+    {
+      "id": "palaver.command_mediation",
+      "status": "active",
+      "purpose": "Interpret supported Palaver workstation commands and route them to appropriate runtime behavior.",
+      "mutation_effect": "operation_dependent"
+    }
+  ],
+  "excluded_ownership": [
+    {
+      "owner": "opus",
+      "concern": "AI provider selection, provider APIs, model orchestration, inference execution"
+    },
+    {
+      "owner": "coda",
+      "concern": "Canonical durable filesystem mutation and controlled execution"
+    },
+    {
+      "owner": "niche",
+      "concern": "Task discovery, planning, readiness, priority, blockers, and task-state authority"
+    },
+    {
+      "owner": "envoy",
+      "concern": "Persona, voice identity, pronunciation, accent, and presentation identity"
+    },
+    {
+      "owner": "filament",
+      "concern": "Canonical projection execution where established"
+    },
+    {
+      "owner": "notary",
+      "concern": "Evidence verification and attestation where established"
+    }
+  ],
+  "invariants": [
+    "Palaver is the human-facing dialogue and development-control interface.",
+    "Palaver does not gain authority over data merely by displaying or discussing it.",
+    "Provider-specific AI execution is not a canonical Palaver capability.",
+    "Canonical durable mutation is not a Palaver-owned capability.",
+    "Task authority is not a Palaver-owned capability.",
+    "External owner capabilities remain externally owned when Palaver mediates them."
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "id": "palaver.contracts",
+  "owner": "palaver",
+  "type": "interface_contract_manifest",
+  "status": "active",
+  "authority_effect": "none",
+  "contracts": [
+    {
+      "id": "palaver.conversation.v1",
+      "direction": "inbound_outbound",
+      "purpose": "Accept a human interaction turn and return a Palaver-mediated response.",
+      "input": {
+        "required": [
+          "message"
+        ],
+        "optional": [
+          "session_id",
+          "task_id",
+          "context_refs",
+          "mode"
+        ]
+      },
+      "output": {
+        "required": [
+          "response"
+        ],
+        "optional": [
+          "session_id",
+          "trace",
+          "receipts",
+          "blocker"
+        ]
+      }
+    },
+    {
+      "id": "palaver.read.v1",
+      "direction": "inbound_outbound",
+      "purpose": "Read permitted repository content without changing authoritative state.",
+      "input": {
+        "required": [
+          "path"
+        ],
+        "optional": [
+          "limit",
+          "format"
+        ]
+      },
+      "output": {
+        "required": [
+          "path",
+          "content"
+        ]
+      }
+    },
+    {
+      "id": "palaver.search.v1",
+      "direction": "inbound_outbound",
+      "purpose": "Search permitted Savant runtime content and return source-addressable matches.",
+      "input": {
+        "required": [
+          "query"
+        ],
+        "optional": [
+          "root",
+          "limit",
+          "filters"
+        ]
+      },
+      "output": {
+        "required": [
+          "matches"
+        ]
+      }
+    },
+    {
+      "id": "palaver.diff.v1",
+      "direction": "inbound_outbound",
+      "purpose": "Derive a non-authoritative diff between current and proposed content.",
+      "input": {
+        "required": [
+          "path",
+          "proposed"
+        ]
+      },
+      "output": {
+        "required": [
+          "path",
+          "diff"
+        ]
+      }
+    },
+    {
+      "id": "palaver.workspace.v1",
+      "direction": "inbound_outbound",
+      "purpose": "Persist and recover Palaver-local workstation state without promoting it to Savant canon.",
+      "input": {
+        "required": [
+          "workspace"
+        ]
+      },
+      "output": {
+        "required": [
+          "workspace"
+        ]
+      }
+    },
+    {
+      "id": "palaver.patch_review.v1",
+      "direction": "inbound_outbound",
+      "purpose": "Mediate the existing patch-review lifecycle while preserving mutation ownership boundaries.",
+      "operations": [
+        "create",
+        "inspect",
+        "accept",
+        "reject"
+      ]
+    },
+    {
+      "id": "palaver.opus_inference.v1",
+      "direction": "outbound",
+      "owner": "opus",
+      "purpose": "Request provider-neutral AI inference from Opus.",
+      "status": "target",
+      "invariant": "Palaver must not require direct provider-specific execution after migration."
+    },
+    {
+      "id": "palaver.coda_mutation.v1",
+      "direction": "outbound",
+      "owner": "coda",
+      "purpose": "Request an authorized durable filesystem mutation from Coda.",
+      "status": "target",
+      "invariant": "Palaver must not become the canonical durable mutation owner."
+    },
+    {
+      "id": "palaver.niche_task.v1",
+      "direction": "outbound",
+      "owner": "niche",
+      "purpose": "Resolve task identity, priority, readiness, blockers, and continuation through Niche.",
+      "status": "target"
+    }
+  ],
+  "invariants": [
+    "Contracts describe interaction boundaries and do not transfer ownership.",
+    "A target contract is not evidence that its integration is already implemented.",
+    "Palaver-local workspace state is not canonical Savant authority.",
+    "Read and projection contracts have no authority-changing effect.",
+    "Durable mutation must converge on Coda ownership.",
+    "AI provider execution must converge on Opus ownership."
+  ]
+}

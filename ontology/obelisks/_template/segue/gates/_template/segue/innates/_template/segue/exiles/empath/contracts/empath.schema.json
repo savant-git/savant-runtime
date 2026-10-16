@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "savant://empath/contracts/projection/v1",
+  "title": "Savant Empath Projection",
+  "type": "object",
+  "required": [
+    "schema",
+    "projection_id",
+    "authority_effect",
+    "projection_only",
+    "input",
+    "signals",
+    "interaction",
+    "response_calibration",
+    "epistemics",
+    "provenance"
+  ],
+  "properties": {
+    "schema": {
+      "const": "savant.empath.projection.v1"
+    },
+    "projection_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "authority_effect": {
+      "const": "none"
+    },
+    "projection_only": {
+      "const": true
+    },
+    "input": {
+      "type": "object",
+      "required": [
+        "sha256",
+        "characters",
+        "tokens",
+        "sentences"
+      ],
+      "properties": {
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "characters": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sentences": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "language_support": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "signals": {
+      "type": "object"
+    },
+    "interaction": {
+      "type": "object"
+    },
+    "response_calibration": {
+      "type": "object"
+    },
+    "epistemics": {
+      "type": "object"
+    },
+    "provenance": {
+      "type": "object"
+    },
+    "history": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": true
+}

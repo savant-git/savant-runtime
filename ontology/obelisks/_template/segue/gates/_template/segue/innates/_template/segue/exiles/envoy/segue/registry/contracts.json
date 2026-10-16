@@ -1,0 +1,53 @@
+{
+  "id": "envoy.segue.contracts",
+  "owner": "envoy",
+  "type": "segue_contract_registry",
+  "status": "active",
+  "contracts": [
+    {
+      "id": "palaver_voice_contract",
+      "path": "../../api/palaver_voice_contract.json",
+      "source": "exile:palaver",
+      "target": "exile:envoy",
+      "relation": "delegates_persona_voice_resolution_to",
+      "authority_transfer": false,
+      "status": "active"
+    },
+    {
+      "id": "opus_voice_orchestration_contract",
+      "path": "../../registry/contracts/opus_voice_orchestration_contract.json",
+      "source": "exile:envoy",
+      "target": "exile:opus",
+      "relation": "delegates_provider_execution_to",
+      "routes": [
+        "voice_tts_route"
+      ],
+      "authority_transfer": false,
+      "status": "active"
+    },
+    {
+      "id": "opus_voice_request_contract",
+      "path": "../../registry/contracts/opus_voice_request_contract.json",
+      "source": "exile:envoy",
+      "target": "exile:opus",
+      "relation": "emits_voice_intent_to",
+      "routes": [
+        "voice_tts_route"
+      ],
+      "authority_transfer": false,
+      "status": "active"
+    }
+  ],
+  "authority": {
+    "conversation_owner": "palaver",
+    "persona_owner": "envoy",
+    "voice_owner": "envoy",
+    "provider_selection_owner": "opus",
+    "provider_routing_owner": "opus",
+    "provider_credentials_owner": "opus",
+    "provider_execution_owner": "opus",
+    "provider_retry_policy_owner": "opus",
+    "provider_fallback_policy_owner": "opus"
+  },
+  "rule": "Segue contracts compose Palaver, Envoy, and Opus without transferring ownership authority."
+}

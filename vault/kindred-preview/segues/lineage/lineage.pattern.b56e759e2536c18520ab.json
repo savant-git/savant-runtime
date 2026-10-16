@@ -1,0 +1,77 @@
+{
+  "authoritative": false,
+  "child_profile": "daughter",
+  "deterministic_hash": "0ddc690b3a830407703c144df439ddb865a41c95eab90762df78a2f3f49e1a6f",
+  "domain": "global",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "lineage.pattern.b56e759e2536c18520ab",
+  "impeti": [],
+  "namespace": "preview.kindred",
+  "parent_profile": "father",
+  "plane": "lineage",
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "role": "pattern",
+  "schema": "savant.kindred.preview.lineage_segue.v2",
+  "source": "template.snippet_instance",
+  "source_record": {
+    "axis": "form",
+    "canonical_source": "template.snippet_instance",
+    "canonical_target": "snippet.example.header",
+    "continuation": "preserving",
+    "id": "lineage.pattern.b56e759e2536c18520ab",
+    "inheritance": {
+      "conflict_policy": "child_wins",
+      "exclude": [],
+      "fields": [
+        "schema",
+        "structure",
+        "interfaces",
+        "policies",
+        "constraints",
+        "metadata"
+      ],
+      "mode": "merge"
+    },
+    "inverse": "realization",
+    "kind": "pattern",
+    "metadata": {
+      "adapter": "authority",
+      "source_field": "template",
+      "source_path": "/root/savant-runtime/ontology/obelisks/segue/authority_graph/instances/content/snippets/example_header.json"
+    },
+    "order": 0,
+    "propagation": {
+      "channels": [
+        "validation",
+        "projection",
+        "regeneration"
+      ],
+      "enabled": true
+    },
+    "provenance": {
+      "created_by": "authority_adapter",
+      "created_from": [
+        "/root/savant-runtime/ontology/obelisks/segue/authority_graph/instances/content/snippets/example_header.json"
+      ],
+      "source_files": [
+        "/root/savant-runtime/ontology/obelisks/segue/authority_graph/instances/content/snippets/example_header.json"
+      ]
+    },
+    "role": "pattern",
+    "scope": "global",
+    "source": "template.snippet_instance",
+    "status": "active",
+    "symbolic_child_alias": "daughter",
+    "symbolic_parent_alias": "father",
+    "target": "snippet.example.header",
+    "weight": 2
+  },
+  "state": "active",
+  "synthetic": false,
+  "target": "snippet.example.header"
+}

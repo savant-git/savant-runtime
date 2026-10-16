@@ -1,0 +1,375 @@
+/*
+savant niche blocker radar
+projection-only blocker topology
+authority_effect: none
+*/
+
+:root {
+  --niche-radar-edge:
+    color-mix(
+      in srgb,
+      var(--savant-primary, #7fe7ff) 30%,
+      transparent
+    );
+
+  --niche-radar-blocked:
+    var(--savant-blocked, #ff785f);
+
+  --niche-radar-ready:
+    var(--savant-ready, #8fffb0);
+
+  --niche-radar-unknown:
+    var(--savant-unknown, #9aa6aa);
+}
+
+.niche-blocker-radar {
+  position: fixed;
+  inset-inline-start:
+    max(
+      0.75rem,
+      env(safe-area-inset-left)
+    );
+  inset-block-end:
+    max(
+      0.75rem,
+      env(safe-area-inset-bottom)
+    );
+  z-index: 55;
+  inline-size:
+    min(
+      32rem,
+      calc(100vw - 1.5rem)
+    );
+  max-block-size:
+    min(72dvh, 44rem);
+  display: grid;
+  grid-template-rows:
+    auto
+    minmax(0, 1fr);
+  overflow: hidden;
+  border:
+    1px solid
+    var(--niche-radar-edge);
+  background:
+    color-mix(
+      in srgb,
+      var(--savant-background, #050708) 97%,
+      transparent
+    );
+  box-shadow:
+    0 1.5rem 4rem
+    rgb(0 0 0 / 0.4);
+}
+
+.niche-blocker-radar[hidden] {
+  display: none !important;
+}
+
+.niche-radar-head {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.72rem;
+  border-block-end:
+    1px solid
+    var(--niche-radar-edge);
+}
+
+.niche-radar-kicker,
+.niche-radar-close,
+.niche-radar-chip,
+.niche-radar-label,
+.niche-radar-task {
+  font-family:
+    ui-monospace,
+    "SFMono-Regular",
+    Consolas,
+    monospace;
+}
+
+.niche-radar-kicker {
+  margin: 0 0 0.2rem;
+  color:
+    var(--savant-primary, #7fe7ff);
+  font-size: 0.55rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.niche-radar-title {
+  margin: 0;
+  color:
+    var(--savant-text, #eef7f8);
+  font:
+    730 0.95rem/1.1
+    system-ui,
+    sans-serif;
+}
+
+.niche-radar-close {
+  min-inline-size: 2.75rem;
+  min-block-size: 2.75rem;
+  border:
+    1px solid
+    var(--niche-radar-edge);
+  color:
+    var(--savant-text, #eef7f8);
+  background: transparent;
+  cursor: pointer;
+}
+
+.niche-radar-close:hover,
+.niche-radar-close:focus-visible {
+  outline: none;
+  border-color:
+    var(--savant-primary, #7fe7ff);
+}
+
+.niche-radar-body {
+  min-block-size: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 0.75rem;
+}
+
+.niche-radar-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-block-end: 0.75rem;
+}
+
+.niche-radar-chip {
+  padding: 0.3rem 0.42rem;
+  border:
+    1px solid
+    var(--niche-radar-edge);
+  color:
+    var(--savant-text-muted, #879397);
+  font-size: 0.53rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.niche-radar-field {
+  position: relative;
+  min-block-size: 14rem;
+  margin-block-end: 0.8rem;
+  border:
+    1px solid
+    var(--niche-radar-edge);
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at center,
+      transparent 0 17%,
+      var(--niche-radar-edge) 17.3% 17.7%,
+      transparent 18% 35%,
+      var(--niche-radar-edge) 35.3% 35.7%,
+      transparent 36% 53%,
+      var(--niche-radar-edge) 53.3% 53.7%,
+      transparent 54%
+    );
+}
+
+.niche-radar-field::before,
+.niche-radar-field::after {
+  content: "";
+  position: absolute;
+  background:
+    var(--niche-radar-edge);
+  opacity: 0.7;
+}
+
+.niche-radar-field::before {
+  inset-block: 0;
+  inset-inline-start: 50%;
+  inline-size: 1px;
+}
+
+.niche-radar-field::after {
+  inset-inline: 0;
+  inset-block-start: 50%;
+  block-size: 1px;
+}
+
+.niche-radar-origin {
+  position: absolute;
+  inset-inline-start: 50%;
+  inset-block-start: 50%;
+  z-index: 2;
+  max-inline-size: 9rem;
+  padding: 0.35rem 0.45rem;
+  border:
+    1px solid
+    var(--savant-primary, #7fe7ff);
+  background:
+    var(--savant-background, #050708);
+  color:
+    var(--savant-text, #eef7f8);
+  font:
+    0.55rem/1.35
+    ui-monospace,
+    monospace;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transform:
+    translate(-50%, -50%);
+}
+
+.niche-radar-contact {
+  position: absolute;
+  z-index: 3;
+  inline-size: 0.72rem;
+  block-size: 0.72rem;
+  border:
+    1px solid
+    var(--niche-radar-blocked);
+  background:
+    color-mix(
+      in srgb,
+      var(--niche-radar-blocked) 22%,
+      var(--savant-background, #050708)
+    );
+  transform:
+    translate(-50%, -50%)
+    rotate(45deg);
+}
+
+.niche-radar-contact[data-kind="dependency"] {
+  border-color:
+    var(--niche-radar-unknown);
+  background:
+    var(--savant-background, #050708);
+}
+
+.niche-radar-sections {
+  display: grid;
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0, 1fr)
+    );
+  gap: 0.65rem;
+}
+
+.niche-radar-section {
+  min-inline-size: 0;
+  padding: 0.65rem;
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--savant-border, #263237) 78%,
+      transparent
+    );
+}
+
+.niche-radar-label {
+  display: block;
+  margin-block-end: 0.5rem;
+  color:
+    var(--savant-text-muted, #879397);
+  font-size: 0.55rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.niche-radar-list {
+  display: grid;
+  gap: 0.34rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.niche-radar-task {
+  inline-size: 100%;
+  min-block-size: 2.5rem;
+  padding: 0.48rem 0.55rem;
+  border:
+    1px solid
+    var(--niche-radar-edge);
+  color:
+    var(--savant-text, #eef7f8);
+  background:
+    var(--savant-background, #050708);
+  text-align: start;
+  font-size: 0.62rem;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+.niche-radar-task[data-kind="blocker"] {
+  border-inline-start:
+    3px solid
+    var(--niche-radar-blocked);
+}
+
+.niche-radar-task:hover,
+.niche-radar-task:focus-visible {
+  outline: none;
+  border-color:
+    var(--savant-primary, #7fe7ff);
+}
+
+.niche-radar-empty,
+.niche-radar-boundary {
+  padding: 0.6rem;
+  border:
+    1px dashed
+    var(--niche-radar-edge);
+  color:
+    var(--savant-text-muted, #879397);
+  font:
+    0.62rem/1.5
+    ui-monospace,
+    monospace;
+}
+
+.niche-radar-boundary {
+  margin-block-start: 0.75rem;
+}
+
+@media (max-width: 700px) {
+  .niche-blocker-radar {
+    inset-inline:
+      max(
+        0.45rem,
+        env(safe-area-inset-left)
+      )
+      max(
+        0.45rem,
+        env(safe-area-inset-right)
+      );
+    inline-size: auto;
+    max-block-size: 70dvh;
+  }
+
+  .niche-radar-field {
+    min-block-size: 12rem;
+  }
+}
+
+@media (max-width: 430px) {
+  .niche-radar-sections {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (forced-colors: active) {
+  .niche-blocker-radar,
+  .niche-radar-close,
+  .niche-radar-field,
+  .niche-radar-origin,
+  .niche-radar-contact,
+  .niche-radar-section,
+  .niche-radar-task {
+    border-color: CanvasText;
+  }
+}

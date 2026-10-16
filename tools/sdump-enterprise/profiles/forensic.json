@@ -1,0 +1,47 @@
+{
+  "id": "forensic",
+  "description": "Exhaustive text-source projection with only unsafe, binary, cache, dependency, and output branches excluded.",
+  "include_extensions": [
+    ".py", ".pyi", ".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx", ".mts", ".cts",
+    ".go", ".rs", ".java", ".kt", ".kts", ".c", ".cc", ".cpp", ".cxx", ".h", ".hh",
+    ".hpp", ".hxx", ".cs", ".rb", ".php", ".lua", ".pl", ".r", ".sh", ".bash", ".zsh",
+    ".fish", ".ps1", ".sql", ".graphql", ".gql", ".json", ".jsonl", ".yaml", ".yml",
+    ".toml", ".ini", ".cfg", ".conf", ".md", ".markdown", ".txt", ".rst", ".html", ".htm",
+    ".css", ".scss", ".sass", ".less", ".vue", ".svelte", ".xml", ".xsd", ".tf", ".tfvars",
+    ".gradle", ".properties", ".csv", ".tsv"
+  ],
+  "include_filenames": [
+    "dockerfile", "containerfile", "makefile", "procfile", "rakefile", "gemfile", "pipfile",
+    "justfile", "compose.yaml", "compose.yml", "docker-compose.yaml", "docker-compose.yml",
+    "pyproject.toml", "requirements.txt", "package.json", "cargo.toml", "go.mod", "pom.xml",
+    "build.gradle", "settings.gradle", "composer.json", "deno.json", "bunfig.toml"
+  ],
+  "canon_path_names": ["canon", "lexicon", "ontology", "registry", "memory", "corpus", "shards", "prompts", "personas"],
+  "exclude_dir_names": [
+    ".git", ".hg", ".svn", "__pycache__", ".pytest_cache", ".mypy_cache", ".ruff_cache", ".tox",
+    ".nox", ".cache", ".next", ".nuxt", ".svelte-kit", ".turbo", ".vercel", ".parcel-cache",
+    ".vite", "node_modules", "vendor", "dist", "build", "coverage", "target", "out", "obj", "venv",
+    ".venv", "env", "tmp", "temp"
+  ],
+  "exclude_file_names": ["credentials.json", "id_rsa", "id_ed25519"],
+  "exclude_extensions": [
+    ".zip", ".tar", ".gz", ".tgz", ".bz2", ".xz", ".7z", ".rar", ".zst", ".db", ".sqlite",
+    ".sqlite3", ".png", ".jpg", ".jpeg", ".gif", ".webp", ".ico", ".bmp", ".tiff", ".mp3",
+    ".wav", ".flac", ".ogg", ".m4a", ".mp4", ".mov", ".webm", ".avi", ".mkv", ".ttf",
+    ".otf", ".woff", ".woff2", ".eot", ".pyc", ".pyo", ".class", ".o", ".obj", ".so",
+    ".dll", ".dylib", ".exe", ".pem", ".key", ".crt", ".cer", ".p12", ".pfx", ".pdf",
+    ".mht", ".mhtml"
+  ],
+  "exclude_patterns": ["source/**", "**/sdump-*/*", "**/sdump_*.txt"],
+  "secret_file_patterns": [
+    ".env", ".env.*", "*.pem", "*.key", "credentials.json", "secrets.*", "*secret*", "id_rsa", "id_ed25519"
+  ],
+  "max_file_bytes": 4194304,
+  "max_total_content_bytes": 536870912,
+  "max_files": 250000,
+  "include_tree": true,
+  "include_inventory": true,
+  "respect_gitignore": false,
+  "redact_secrets": true,
+  "follow_symlinks": false
+}

@@ -1,0 +1,49 @@
+{
+  "application": {
+    "attempted": false,
+    "blocker": "application not requested",
+    "passed": false
+  },
+  "apply_requested": false,
+  "authority_effect": "none",
+  "executed_stage_count": 2,
+  "first_blocker": "plan: stage returned 1; accepted=(0, 2)",
+  "implementation_mutation_performed": false,
+  "operation": "run_modular_pipeline",
+  "passed": false,
+  "schema": "savant://vault/dimensions/modular-pipeline-run/1.0.0",
+  "stage_count": 9,
+  "stages": [
+    {
+      "blocker": null,
+      "key": "audit",
+      "operation": "audit",
+      "ordinal": 1,
+      "output": "/root/savant-runtime/vault/dimensions/sys/reports/modular-conformance/latest.json",
+      "output_exists_after": true,
+      "output_exists_before": true,
+      "passed": true,
+      "return_code": 1,
+      "script": "/root/savant-runtime/vault/dimensions/sys/audit_modular_conformance.py",
+      "script_exists": true,
+      "stderr": "",
+      "stdout": "{\n  \"authority_effect\": \"none\",\n  \"conformance\": {\n    \"composition_reference_reuse\": {\n      \"finding_count\": 0,\n      \"principle\": \"Higher structures compose existing substance rather than duplicating it.\"\n    },\n    \"mood_transformation\": {\n      \"finding_count\": 0,\n      \"principle\": \"Behavioral transformation uses canonical Moods or two-Mood fusion.\"\n    },\n    \"rut_sidecar_attachment\": {\n      \"finding_count\": 0,\n      \"principle\": \"Ruts attach independently removable Sidecar capability.\"\n    },\n    \"shade_identity\": {\n      \"finding_count\": 0,\n      \"principle\": \"Canonical substance is substantiated once and reused through stable Shade identity.\"\n    }\n  },\n  \"latest\": \"/root/savant-runtime/vault/dimensions/sys/reports/modular-conformance/latest.json\",\n  \"mutation_performed\": false,\n  \"operation\": \"audit_modular_conformance\",\n  \"passed\": false,\n  \"scan_mode\": \"targeted-authority-surfaces\",\n  \"summary\": {\n    \"domains\": {\n      \"authority\": 2\n    },\n    \"error_count\": 2,\n    \"finding_count\": 2,\n    \"finding_keys\": {\n      \"missing_authority_surface\": 2\n    },\n    \"notice_count\": 0,\n    \"surface_count\": 40,\n    \"warning_count\": 0\n  }\n}\n"
+    },
+    {
+      "blocker": "stage returned 1; accepted=(0, 2)",
+      "key": "plan",
+      "operation": "plan",
+      "ordinal": 2,
+      "output": "/root/savant-runtime/vault/dimensions/sys/reports/modular-migration/latest.json",
+      "output_exists_after": true,
+      "output_exists_before": true,
+      "passed": false,
+      "return_code": 1,
+      "script": "/root/savant-runtime/vault/dimensions/sys/plan_modular_migration.py",
+      "script_exists": true,
+      "stderr": "",
+      "stdout": "{\n  \"action_counts\": {\n    \"classify\": 0,\n    \"extend\": 0,\n    \"instance\": 0,\n    \"migrate\": 0,\n    \"preserve\": 0,\n    \"project\": 0,\n    \"refuse\": 2,\n    \"supersede\": 0,\n    \"verify\": 0\n  },\n  \"authority_effect\": \"none\",\n  \"blocked_count\": 2,\n  \"candidate_count\": 2,\n  \"mutation_performed\": false,\n  \"operation\": \"plan_modular_migration\",\n  \"passed\": false,\n  \"paths\": {\n    \"candidates\": \"/root/savant-runtime/vault/dimensions/sys/reports/modular-migration/20260809T163456Z/candidates.json\",\n    \"latest\": \"/root/savant-runtime/vault/dimensions/sys/reports/modular-migration/latest.json\",\n    \"manifest\": \"/root/savant-runtime/vault/dimensions/sys/reports/modular-migration/20260809T163456Z/manifest.json\",\n    \"plan\": \"/root/savant-runtime/vault/dimensions/sys/reports/modular-migration/20260809T163456Z/plan.json\"\n  },\n  \"phase_counts\": {\n    \"authority\": 2,\n    \"dependencies\": 0,\n    \"duplication\": 0,\n    \"instances\": 0,\n    \"lexicon\": 0,\n    \"moods\": 0,\n    \"projections\": 0,\n    \"slots\": 0,\n    \"verification\": 0\n  },\n  \"plan_id\": \"migration-plan:182195e0a9795076b9c53776\",\n  \"status\": \"blocked\"\n}\n"
+    }
+  ],
+  "timestamp": "20260809T163456Z"
+}

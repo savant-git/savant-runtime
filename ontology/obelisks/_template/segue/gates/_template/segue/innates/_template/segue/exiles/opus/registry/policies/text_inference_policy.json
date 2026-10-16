@@ -1,0 +1,40 @@
+{
+  "id": "text_inference_policy",
+  "type": "orchestration_policy",
+  "status": "active",
+  "owner": "opus",
+  "domain": "text_inference",
+  "latency_priority": "medium",
+  "cost_priority": "medium",
+  "quality_priority": "high",
+  "retry_attempts": 1,
+  "timeout_seconds": 300,
+  "cache_enabled": false,
+  "lineage_required": true,
+  "fallback_required": false,
+  "behavior_policy_ref": "inference_freedom_policy",
+  "inference_latitude": "maximum_provider_permitted",
+  "provider_content_filtering": "provider_native",
+  "opus_content_sanitization": false,
+  "preserve_user_intensity": true,
+  "preserve_source_language": true,
+  "preserve_fictional_language": true,
+  "preserve_historical_language": true,
+  "preserve_controversial_subject_matter": true,
+  "preserve_profane_language": true,
+  "preserve_graphic_language": true,
+  "preserve_adult_themes": true,
+  "preferred_provider_profiles": [
+    "venice_uncensored",
+    "venice"
+  ],
+  "separation_of_concerns": {
+    "inference_content_latitude": "opus",
+    "authority_enforcement": "unchanged",
+    "credential_protection": "unchanged",
+    "mutation_control": "unchanged",
+    "lineage_and_provenance": "unchanged",
+    "execution_safety": "unchanged"
+  },
+  "authority_effect": "none"
+}

@@ -1,0 +1,97 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:runtime/services",
+  "deterministic_hash": "570fdf7246b5349a64a8297919ec361da0aea4c8bd401575537741c7d2eb2815",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "runtime/services",
+  "kind": "directory",
+  "label": "services",
+  "namespace": "preview.kindred",
+  "path": "runtime/services",
+  "placement": {
+    "domain": "filesystem",
+    "node": "runtime/services",
+    "parent": "runtime",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.6914dd58fff9b200760f",
+    "rank": 60,
+    "slot": "40_runtime",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.5044f945d53b2f19ad42",
+    "lineage.composition.6914dd58fff9b200760f"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:runtime/services",
+    "children": [
+      "runtime/services/palaver-systemd.env"
+    ],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "runtime/services",
+    "kind": "directory",
+    "label": "services",
+    "legacy_id": "runtime/services",
+    "lineage": [
+      "runtime"
+    ],
+    "metadata": {
+      "canonical_id": "fs:runtime/services",
+      "child_modes": {
+        "projecting": [
+          "fs:runtime/services/palaver-systemd.env"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:runtime/services/palaver-systemd.env"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:runtime"
+        ]
+      },
+      "projected_id": "runtime/services",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "runtime"
+    ],
+    "path": "runtime/services",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "runtime/services",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.5044f945d53b2f19ad42",
+      "lineage.composition.6914dd58fff9b200760f"
+    ],
+    "size": 12,
+    "sons": [
+      "runtime/services/palaver-systemd.env"
+    ]
+  },
+  "state": "active",
+  "synthetic": false
+}

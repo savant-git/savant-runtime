@@ -1,0 +1,73 @@
+graphs:
+
+  canonical:
+
+    directed: false
+
+    node: lexeme
+
+    edge: canonical
+
+  aliases:
+
+    directed: false
+
+    node: lexeme
+
+    edge: alias
+
+  dependencies:
+
+    directed: true
+
+    node: lexeme
+
+    edge: depends_on
+
+  inheritance:
+
+    directed: true
+
+    node: lexeme
+
+    edge: inherits
+
+  ontology:
+
+    directed: true
+
+    node: concept
+
+    edge: relation
+
+  relationships:
+
+    directed: true
+
+    node: lexeme
+
+    edge: relationship
+
+  supersession:
+
+    directed: true
+
+    node: lexeme
+
+    edge: supersedes
+
+  provenance:
+
+    directed: true
+
+    node: authority
+
+    edge: originated
+
+  lineage:
+
+    directed: true
+
+    node: revision
+
+    edge: evolved_to

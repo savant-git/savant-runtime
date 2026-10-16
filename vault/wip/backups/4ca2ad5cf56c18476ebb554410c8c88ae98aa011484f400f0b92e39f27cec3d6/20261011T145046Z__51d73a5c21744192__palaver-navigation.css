@@ -1,0 +1,153 @@
+/* Palaver navigation: one layout authority for the header. */
+.palaver-instrument.palaver-only header.workstation-topbar:has(.savant-mark--header) {
+  --palaver-logo-size: 174px;
+  --palaver-action-size: 30px;
+  --palaver-action-gap: 4px;
+  position: relative !important;
+  display: grid !important;
+  grid-template-columns: var(--palaver-logo-size) minmax(0,1fr) !important;
+  grid-template-rows: 1fr !important;
+  align-items: start !important;
+  gap: 8px !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: calc(var(--palaver-logo-size) + 20px) !important;
+  min-height: 0 !important;
+  padding: 10px !important;
+  overflow: visible !important;
+  isolation: isolate;
+}
+.palaver-instrument.palaver-only header.workstation-topbar .topbar-brand {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  position: relative !important;
+  display: block !important;
+  width: var(--palaver-logo-size) !important;
+  height: var(--palaver-logo-size) !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+}
+.palaver-instrument.palaver-only header.workstation-topbar .topbar-brand > div:not(.savant-mark),
+.palaver-instrument.palaver-only header.workstation-topbar .topbar-command-strip {display:none !important;}
+.palaver-instrument.palaver-only .savant-mark--header {
+  position: relative !important;
+  inset: auto !important;
+  display: block !important;
+  width: var(--palaver-logo-size) !important;
+  height: var(--palaver-logo-size) !important;
+  margin: 0 !important;
+}
+.palaver-instrument.palaver-only .savant-mark--header .savant-mark__viewport {inset:0 !important;}
+.palaver-instrument.palaver-only header.workstation-topbar .palaver-header-controls {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  display: flex !important;
+  flex-flow: row nowrap !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+  gap: var(--palaver-action-gap) !important;
+  min-width: 0 !important;
+  width: 100% !important;
+  position: relative !important;
+  z-index: 5;
+}
+.palaver-instrument.palaver-only header.workstation-topbar .palaver-aperture-nav,
+.palaver-instrument.palaver-only header.workstation-topbar .topbar-actions {
+  position: static !important;
+  display: flex !important;
+  flex-flow: row nowrap !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: var(--palaver-action-gap) !important;
+  height: var(--palaver-action-size) !important;
+  width: auto !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.palaver-instrument.palaver-only header.workstation-topbar .palaver-aperture-nav button,
+.palaver-instrument.palaver-only header.workstation-topbar .topbar-actions button {
+  position: relative !important;
+  box-sizing: border-box !important;
+  display: inline-flex !important;
+  flex: 0 0 var(--palaver-action-size) !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: var(--palaver-action-size) !important;
+  min-width: var(--palaver-action-size) !important;
+  max-width: var(--palaver-action-size) !important;
+  height: var(--palaver-action-size) !important;
+  min-height: var(--palaver-action-size) !important;
+  padding: 0 !important;
+  border-radius: 7px !important;
+  border: 1px solid rgba(154,191,193,.24) !important;
+  background: rgba(12,23,27,.7) !important;
+  color: inherit;
+  cursor: pointer;
+  overflow: hidden;
+  transition: border-color .24s ease, background .24s ease, transform .35s cubic-bezier(.2,.8,.2,1);
+}
+.palaver-instrument.palaver-only header.workstation-topbar .palaver-aperture-nav .aperture-label {display:none !important;}
+.palaver-instrument.palaver-only header.workstation-topbar .palaver-aperture-nav .aperture-ring {
+  position:absolute; inset: 3px; border:1px dashed rgba(155,203,201,.55); border-radius:50%;
+  opacity:.28; pointer-events:none; transition:transform .65s ease,opacity .2s ease;
+}
+.palaver-instrument.palaver-only header.workstation-topbar .palaver-aperture-nav button:hover .aperture-ring,
+.palaver-instrument.palaver-only header.workstation-topbar .palaver-aperture-nav button:focus-visible .aperture-ring {transform:rotate(105deg);opacity:.9;}
+.palaver-instrument.palaver-only header.workstation-topbar button:focus-visible,
+.palaver-instrument.palaver-only header.workstation-topbar select:focus-visible {outline:2px solid #b9e9e4 !important;outline-offset:2px !important;}
+.palaver-instrument.palaver-only header.workstation-topbar .savant-mark__material-control {
+  position: absolute !important;
+  top: calc(10px + var(--palaver-action-size) + 8px) !important;
+  left: calc(10px + var(--palaver-logo-size) + 8px) !important;
+  right: 10px !important;
+  width: auto !important;
+  max-width: none !important;
+  height: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 3px !important;
+  padding: 4px !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  border: 1px solid rgba(146,190,180,.23) !important;
+  border-radius: 7px !important;
+  background: rgba(11,23,27,.9) !important;
+  z-index: 6 !important;
+}
+.palaver-instrument.palaver-only header.workstation-topbar .savant-mark__material-control select {
+  box-sizing:border-box !important; width:100% !important; min-width:0 !important; max-width:100% !important;
+  font-size:clamp(11px,2.7vw,14px) !important;
+}
+.palaver-instrument.palaver-only .savant-mark--header .savant-mark__gleam {
+  inset:6% !important; transform:none !important; opacity:.5 !important;
+  filter:blur(10px) !important; animation:palaver-cloud-breathe 5.8s ease-in-out infinite alternate !important;
+}
+.palaver-instrument.palaver-only .savant-mark--header .savant-mark__gleam::before {
+  background:radial-gradient(ellipse at 40% 45%,rgba(139,209,200,.17),transparent 53%),radial-gradient(ellipse at 64% 56%,rgba(183,146,103,.1),transparent 48%) !important;
+  animation:palaver-cloud-ripple 4.7s ease-in-out infinite alternate !important;
+}
+.palaver-instrument.palaver-only .savant-mark--header .savant-mark__gleam::after {
+  background:radial-gradient(ellipse at 53% 50%,transparent 28%,rgba(128,183,179,.13) 47%,transparent 69%) !important;
+  animation:palaver-cloud-ripple 7.1s ease-in-out infinite alternate-reverse !important;
+}
+@keyframes palaver-cloud-breathe {from{opacity:.35;filter:blur(13px)}to{opacity:.62;filter:blur(8px)}}
+@keyframes palaver-cloud-ripple {from{transform:scale(.86,1.06) rotate(-7deg);opacity:.32}to{transform:scale(1.13,.93) rotate(9deg);opacity:.78}}
+@media(max-width:640px) {
+  .palaver-instrument.palaver-only header.workstation-topbar:has(.savant-mark--header) {
+    --palaver-action-size: clamp(18px,5.5vw,23px);
+    --palaver-action-gap:2px;
+  }
+  .palaver-instrument.palaver-only header.workstation-topbar .palaver-header-controls svg {width:13px;height:13px;}
+}
+@media(max-width:370px) {
+  .palaver-instrument.palaver-only header.workstation-topbar:has(.savant-mark--header) {--palaver-logo-size:146px;}
+}
+@media(prefers-reduced-motion:reduce) {
+  .palaver-instrument.palaver-only header.workstation-topbar button,
+  .palaver-instrument.palaver-only header.workstation-topbar .aperture-ring,
+  .palaver-instrument.palaver-only .savant-mark--header .savant-mark__gleam,
+  .palaver-instrument.palaver-only .savant-mark--header .savant-mark__gleam::before,
+  .palaver-instrument.palaver-only .savant-mark--header .savant-mark__gleam::after {animation:none !important;transition:none !important;}
+}

@@ -1,0 +1,73 @@
+{
+  "id": "carbon.validation.oriel",
+  "owner": "carbon",
+  "type": "focused_integration_validation",
+  "status": "active",
+  "specialization": "carbon.oriel",
+  "authority_effect": "none",
+  "validation_budget": {
+    "syntax": true,
+    "focused_functional": true,
+    "integration": true,
+    "broad_suite": false
+  },
+  "required_json": [
+    "registry/manifests/oriel.json",
+    "registry/capabilities/oriel.json",
+    "graph/oriel.json",
+    "lineage/oriel_specialization.json",
+    "canon/oriel.json",
+    "authority/authority.json",
+    "composition/exports.json",
+    "composition/imports.json",
+    "interface/capabilities/capabilities.json",
+    "interface/contracts/contracts.json",
+    "observatory/carbon_projection.json"
+  ],
+  "focused_functional_check": {
+    "provider": "runtime/oriel_simulation.py",
+    "operation": "selftest",
+    "purpose": "prove the integrated reality-bound chronology and logistics simulation path remains executable"
+  },
+  "boundary_checks": [
+    {
+      "provider": "runtime/oriel_boundary.py",
+      "operation": "selftest"
+    },
+    {
+      "provider": "runtime/oriel_canon.py",
+      "operation": "selftest"
+    }
+  ],
+  "closure_check": {
+    "provider": "runtime/oriel_observatory.py",
+    "operation": "status",
+    "allowed_states": [
+      "healthy",
+      "degraded"
+    ],
+    "blocked_allowed": false
+  },
+  "capability_check": {
+    "provider": "runtime/oriel_capabilities.py",
+    "operation": "collect",
+    "unavailable_modules_allowed": false,
+    "unmanifested_modules_allowed": false,
+    "provider_errors_allowed": false
+  },
+  "completion_conditions": {
+    "reality_bound_simulation_operational": true,
+    "authority_boundary_valid": true,
+    "canon_boundary_valid": true,
+    "oriel_graph_addressable": true,
+    "oriel_observable": true,
+    "capability_surface_resolved": true,
+    "historical_oriel_not_restored": true,
+    "carbon_remains_general_simulation_owner": true,
+    "quantum_remains_carbon_owned": true,
+    "causal_simulation_remains_carbon_owned": true,
+    "historical_reality_remains_external": true,
+    "source_state_mutated": false,
+    "authority_transfer": false
+  }
+}

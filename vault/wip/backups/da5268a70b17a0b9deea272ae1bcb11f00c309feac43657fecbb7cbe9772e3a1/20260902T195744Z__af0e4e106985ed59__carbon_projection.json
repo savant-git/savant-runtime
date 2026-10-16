@@ -1,0 +1,39 @@
+{
+  "id": "carbon.observatory.projection",
+  "owner": "carbon",
+  "type": "observatory_projection",
+  "status": "active",
+  "authority_effect": "none",
+  "authoritative": false,
+  "rebuildable": true,
+  "surfaces": {
+    "identity": "entity.json",
+    "authority": "authority/authority.json",
+    "lineage": "lineage/lineage.json",
+    "graph_node": "graph/node.json",
+    "embodiment_pipeline": "graph/embodiment_pipeline.json",
+    "capabilities": "interface/capabilities/capabilities.json",
+    "contracts": "interface/contracts/contracts.json",
+    "exports": "composition/exports.json",
+    "imports": "composition/imports.json",
+    "dependencies": "introspection/dependencies.json",
+    "health": "introspection/health.json",
+    "avatar_forge": "registry/manifests/avatar_forge.json"
+  },
+  "projected_state": {
+    "singular_purpose": "Turn consented source material into stable, composable embodiment.",
+    "consent_gated": true,
+    "source_identity_authority_preserved": true,
+    "composition_by_reference": true,
+    "backend_replaceable": true,
+    "lineage_preserved": true,
+    "provenance_preserved": true,
+    "authority_transfer": false
+  },
+  "rules": {
+    "projection_may_create_authority": false,
+    "projection_may_mutate_authority": false,
+    "projection_may_supersede_source": false,
+    "projection_may_hide_degraded_state": false
+  }
+}

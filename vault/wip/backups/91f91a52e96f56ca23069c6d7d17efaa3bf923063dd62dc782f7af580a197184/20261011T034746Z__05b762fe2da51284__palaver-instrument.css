@@ -1,0 +1,259 @@
+/* palaver-owned projection; no semantic or provider ownership */
+.palaver-instrument.palaver-only {
+  --palaver-display: ui-monospace, "Cascadia Mono", "Roboto Mono", monospace;
+  --palaver-body: ui-monospace, "Cascadia Mono", "Roboto Mono", monospace;
+  --palaver-gold: #b08b45;
+  --palaver-gunmetal: #252c31;
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100dvh !important;
+  min-height: 0 !important;
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr) auto !important;
+  overflow: hidden !important;
+  background: #080a0c !important;
+  color: #e3dfd5;
+  font-family: var(--palaver-body) !important;
+}
+.palaver-instrument.palaver-only :is(button, select, textarea, input, summary, strong, p, span) {
+  font-family: var(--palaver-body) !important;
+}
+.palaver-instrument.palaver-only :is(.palaver-left, .observatory-rail) { display: none !important; }
+.palaver-instrument.palaver-only .palaver-layout {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  grid-template-rows: minmax(0, 1fr) !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+}
+.palaver-instrument.palaver-only :is(.palaver-center, .workspace-surface, .split-pane, .chat-terminal-split) {
+  min-width: 0 !important;
+  min-height: 0 !important;
+  height: 100% !important;
+  overflow: hidden !important;
+}
+.palaver-instrument.palaver-only .chat-observatory {
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 0 !important;
+  height: 100% !important;
+  overflow: hidden !important;
+  position: relative;
+}
+.palaver-instrument.palaver-only .chat-hero { flex: 0 0 auto !important; height: auto !important; min-height: 0 !important; overflow: visible !important; }
+.palaver-instrument.palaver-only .chat-stage {
+  flex: 1 1 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+.palaver-instrument.palaver-only .chat-thread {
+  flex: 1 1 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  overscroll-behavior-y: contain;
+  touch-action: pan-y !important;
+  scrollbar-gutter: stable;
+  padding: 14px 12px 24px !important;
+}
+.palaver-instrument.palaver-only .chat-message {
+  border: 0 !important;
+  border-radius: 8px !important;
+  margin: 0 0 14px !important;
+  padding: 14px !important;
+  box-shadow: none !important;
+}
+.palaver-instrument.palaver-only .chat-message-assistant {
+  background: var(--palaver-gunmetal) !important;
+}
+.palaver-instrument.palaver-only .chat-message-user { background: #101417 !important; }
+.palaver-instrument.palaver-only .chat-message-header { border-bottom: 0 !important; }
+.palaver-instrument.palaver-only .chat-trace {
+  border: 0 !important;
+  margin-top: 10px !important;
+  font-size: 10px;
+}
+.palaver-instrument.palaver-only .chat-trace pre {
+  max-height: 180px;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.palaver-instrument.palaver-only .chat-composer {
+  position: relative !important;
+  inset: auto !important;
+  flex: 0 0 auto !important;
+  margin: 0 8px 8px !important;
+  padding: 12px !important;
+  border: 1px solid #35352e !important;
+  border-radius: 10px !important;
+  background: #101416 !important;
+}
+.palaver-instrument.palaver-only .chat-composer::before {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  left: -8px;
+  right: -8px;
+  top: -24px;
+  height: 24px;
+  background: linear-gradient(transparent, #080a0c 85%);
+  border-bottom: 1px solid #655337;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 65% 100%, 64% 94%, 36% 94%, 35% 100%, 0 100%);
+}
+.palaver-instrument.palaver-only .composer-core { align-items: flex-end !important; }
+.palaver-instrument.palaver-only textarea {
+  resize: vertical !important;
+  min-height: 70px !important;
+  max-height: min(38dvh, 280px) !important;
+  overflow-y: auto !important;
+  font-size: 13px !important;
+  line-height: 1.6 !important;
+}
+.palaver-instrument.palaver-only :is(.topbar-actions button, .composer-voice-muted, .composer-persona, .urge-trigger, .chat-message-actions button) {
+  min-height: 32px !important;
+  border: 1px solid #3a3d39 !important;
+  border-radius: 6px !important;
+  background: #191e21 !important;
+  color: #bfa16a !important;
+}
+.palaver-instrument.palaver-only button:disabled { opacity: .5; cursor: default; }
+.palaver-instrument.palaver-only :is(button, select, textarea, summary):focus-visible {
+  outline: 2px solid #b08b45;
+  outline-offset: 3px;
+}
+.palaver-instrument.palaver-only .composer-persona select {
+  appearance: none;
+  color: #d8c39b;
+  background: #191e21;
+  border: 0;
+  font-size: 11px !important;
+  padding: 6px 18px 6px 4px;
+  cursor: pointer;
+}
+.palaver-instrument.palaver-only .composer-persona::after { content: "⌄"; pointer-events: none; }
+.palaver-instrument.palaver-only .workstation-topbar {
+  flex-wrap: wrap;
+  min-height: 56px;
+  background: #0d1012 !important;
+  padding: 6px 10px !important;
+}
+.palaver-instrument.palaver-only .topbar-actions { flex-wrap: wrap; gap: 5px !important; }
+.palaver-instrument.palaver-only .topbar-command-strip { display: none !important; }
+.palaver-instrument.help-mode button:not([data-palaver-help-toggle])::after {
+  content: "?";
+  color: #d8b66f;
+  padding-left: 4px;
+  font-size: 10px;
+}
+.palaver-help-tooltip {
+  position: fixed;
+  z-index: 2147483640;
+  max-width: min(290px, calc(100vw - 16px));
+  box-sizing: border-box;
+  padding: 12px;
+  background: #22292e;
+  border: 1px solid #b08b45;
+  border-radius: 7px;
+  color: #e6dfcf;
+  font: 12px/1.6 ui-monospace, monospace;
+  pointer-events: none;
+}
+.palaver-instrument.palaver-only .chat-jump-latest {
+  position: absolute;
+  bottom: 180px;
+  right: 20px;
+  z-index: 20;
+  padding: 8px 12px;
+  border: 1px solid #b08b45;
+  border-radius: 20px;
+  background: #181e22;
+  color: #d8c39b;
+}
+.palaver-instrument.palaver-only .savant-resize-handle {
+  background: #5c503a !important;
+  touch-action: none;
+}
+@media (max-width: 560px) {
+  .palaver-instrument.palaver-only .topbar-brand span,
+  .palaver-instrument.palaver-only .topbar-action-label { display: none !important; }
+  .palaver-instrument.palaver-only .workstation-statusbar { font-size: 8px; }
+  .palaver-instrument.palaver-only .status-shortcuts { display: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .palaver-instrument.palaver-only * {
+    scroll-behavior: auto !important;
+    animation-duration: .001ms !important;
+    transition-duration: .001ms !important;
+  }
+}
+
+.palaver-urge-layer {
+  position: fixed; inset: 0; z-index: 2147483000;
+  display: grid; place-items: center; padding: 12px;
+  box-sizing: border-box; pointer-events: none;
+}
+.palaver-urge-panel {
+  width: min(290px, 100%); max-height: calc(100dvh - 24px);
+  overflow-y: auto; box-sizing: border-box; pointer-events: auto;
+  padding: 12px; border: 1px solid #82704c; border-radius: 9px;
+  background: #20272c; color: #e6dfd1;
+  box-shadow: 0 20px 80px #000b; font: 11px/1.5 ui-monospace, monospace;
+}
+.palaver-urge-panel :is(header, footer, label, label > span) {
+  display: flex; align-items: center; gap: 6px;
+}
+.palaver-urge-panel :is(header, footer, label) {
+  justify-content: space-between; margin-bottom: 9px;
+}
+.palaver-urge-panel header span { font-size: 9px; color: #bfa16a; }
+.palaver-urge-panel :is(button, select) {
+  min-height: 28px; padding: 4px 8px; border: 1px solid #565547;
+  border-radius: 5px; color: #dac394; background: #171c20;
+  font: inherit; cursor: pointer;
+}
+.palaver-urge-panel button[aria-pressed="true"] { border-color: #b08b45; background: #373024; }
+.palaver-urge-selection { display: flex; gap: 6px; margin-bottom: 9px; }
+
+/* Material seams follow existing environment layers, without new DOM controls. */
+.palaver-instrument.palaver-only .savant-material-seam{
+ position:absolute;inset:0;pointer-events:none;opacity:.24;
+ background:linear-gradient(117deg,transparent 23%,rgba(141,208,190,.17) 23.15%,transparent 23.3%,transparent 72%,rgba(178,124,78,.12) 72.12%,transparent 72.25%);
+ mix-blend-mode:screen;
+}
+@media(prefers-reduced-motion:reduce){
+ .palaver-instrument.palaver-only .savant-material-seam{animation:none!important;transition:none!important}
+}
+
+/* Derived optical strata and coherent environment lighting. */
+.savant-environment .savant-oxide-field,
+.savant-environment .savant-titanium-caustic {
+ position:absolute;inset:0;pointer-events:none;contain:paint;
+}
+.savant-environment .savant-oxide-field {
+ background:radial-gradient(ellipse 54% 44% at 18% 68%,#2e7c6e1c,transparent 76%),
+ radial-gradient(ellipse 38% 32% at 84% 21%,#a67b4914,transparent 80%);
+ opacity:.85;
+}
+.savant-environment .savant-titanium-caustic {
+ background:conic-gradient(from 35deg at 56% 38%,transparent 0 18%,#c6f1e50b 23%,transparent 29% 61%,#c9b08d0a 68%,transparent 74%);
+ mix-blend-mode:screen;
+ animation:savant-caustic-drift 22s ease-in-out infinite alternate;
+}
+@keyframes savant-caustic-drift {
+ from{transform:translate3d(-1%,.6%,0) rotate(-2deg);opacity:.36}
+ to{transform:translate3d(1%,-.6%,0) rotate(3deg);opacity:.75}
+}
+.savant-topology-field{width:100%;height:100%;min-width:0;min-height:0;pointer-events:none}
+@media(prefers-reduced-motion:reduce){
+ .savant-environment .savant-titanium-caustic{animation:none;transform:none}
+}
+@media(prefers-contrast:more){
+ .savant-environment .savant-oxide-field,.savant-environment .savant-titanium-caustic{opacity:.12}
+}

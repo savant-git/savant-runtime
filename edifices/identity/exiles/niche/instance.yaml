@@ -1,0 +1,26 @@
+schema: "savant://projection/identity/exile-instance/1.0.0"
+id: "exile:niche"
+kind: "exile"
+name: "niche"
+status: "accepted"
+authority_effect: "none"
+authority_ref: "canon-system/authority/exiles/niche.yaml"
+authority_sha256: "91a7969dd4611720f5ff0315ae78007dee961f7e0ebc02af25c70f5aff2baf5b"
+purpose_projection:
+  source: "canon-system/authority/exiles/niche.yaml"
+  current:
+    - "task discovery"
+    - "job decomposition"
+    - "work planning"
+composition:
+  parent_edifice: "identity"
+  child_level: "prodigal"
+  transition: "segue"
+invariants:
+  filesystem_presence_establishes_authority: false
+  canonical_substance_duplicated: false
+  child_substance_by_reference: true
+  projections_are_authority: false
+lineage:
+  decision: "authority/accepted-decisions/ad-20261003-001-materialize-eighteen-exiles-and-segues.md"
+generated_by: "savant.identity-edifice-reconciler.v1"

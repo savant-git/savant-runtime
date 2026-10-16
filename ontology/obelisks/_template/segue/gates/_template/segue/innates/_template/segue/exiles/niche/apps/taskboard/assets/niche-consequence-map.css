@@ -1,0 +1,270 @@
+/*
+savant niche consequence map
+bounded downstream causal projection
+authority_effect: none
+*/
+
+:root {
+  --niche-consequence-edge:
+    color-mix(
+      in srgb,
+      var(--savant-primary, #7fe7ff) 28%,
+      transparent
+    );
+  --niche-consequence-direct:
+    var(--savant-ready, #8fffb0);
+  --niche-consequence-second:
+    var(--savant-primary, #7fe7ff);
+  --niche-consequence-unknown:
+    var(--savant-unknown, #9aa6aa);
+}
+
+.niche-consequence-map {
+  position: fixed;
+  inset-inline-end:
+    max(0.75rem, env(safe-area-inset-right));
+  inset-block-end:
+    max(0.75rem, env(safe-area-inset-bottom));
+  z-index: 58;
+  inline-size:
+    min(35rem, calc(100vw - 1.5rem));
+  max-block-size:
+    min(76dvh, 48rem);
+  display: grid;
+  grid-template-rows:
+    auto minmax(0, 1fr);
+  overflow: hidden;
+  border:
+    1px solid var(--niche-consequence-edge);
+  background:
+    color-mix(
+      in srgb,
+      var(--savant-background, #050708) 97%,
+      transparent
+    );
+  box-shadow:
+    0 1.5rem 4.5rem rgb(0 0 0 / 0.44);
+}
+
+.niche-consequence-map[hidden] {
+  display: none !important;
+}
+
+.niche-consequence-map-head {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr) auto;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.72rem;
+  border-block-end:
+    1px solid var(--niche-consequence-edge);
+}
+
+.niche-consequence-map-kicker,
+.niche-consequence-map-close,
+.niche-consequence-map-chip,
+.niche-consequence-map-level-head,
+.niche-consequence-map-node,
+.niche-consequence-map-boundary {
+  font-family:
+    ui-monospace,
+    "SFMono-Regular",
+    Consolas,
+    monospace;
+}
+
+.niche-consequence-map-kicker {
+  margin: 0 0 0.2rem;
+  color:
+    var(--savant-primary, #7fe7ff);
+  font-size: 0.54rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.niche-consequence-map-title {
+  margin: 0;
+  color:
+    var(--savant-text, #eef7f8);
+  font:
+    730 0.95rem/1.1
+    system-ui,
+    sans-serif;
+}
+
+.niche-consequence-map-close {
+  min-inline-size: 2.75rem;
+  min-block-size: 2.75rem;
+  border:
+    1px solid var(--niche-consequence-edge);
+  color:
+    var(--savant-text, #eef7f8);
+  background: transparent;
+  cursor: pointer;
+}
+
+.niche-consequence-map-close:hover,
+.niche-consequence-map-close:focus-visible {
+  outline: none;
+  border-color:
+    var(--savant-primary, #7fe7ff);
+}
+
+.niche-consequence-map-body {
+  min-block-size: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 0.75rem;
+}
+
+.niche-consequence-map-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-block-end: 0.7rem;
+}
+
+.niche-consequence-map-chip {
+  padding: 0.3rem 0.42rem;
+  border:
+    1px solid var(--niche-consequence-edge);
+  color:
+    var(--savant-text-muted, #879397);
+  font-size: 0.52rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.niche-consequence-map-levels {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.niche-consequence-map-level {
+  border:
+    1px solid var(--niche-consequence-edge);
+  background:
+    color-mix(
+      in srgb,
+      var(--savant-surface, #0b1113) 78%,
+      transparent
+    );
+}
+
+.niche-consequence-map-level[data-level="direct"] {
+  box-shadow:
+    inset 2px 0
+    var(--niche-consequence-direct);
+}
+
+.niche-consequence-map-level[data-level="second"] {
+  box-shadow:
+    inset 2px 0
+    var(--niche-consequence-second);
+}
+
+.niche-consequence-map-level[data-level="boundary"] {
+  box-shadow:
+    inset 2px 0
+    var(--niche-consequence-unknown);
+}
+
+.niche-consequence-map-level-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.5rem 0.55rem;
+  border-block-end:
+    1px solid var(--niche-consequence-edge);
+  color:
+    var(--savant-text-muted, #879397);
+  font-size: 0.51rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.niche-consequence-map-list {
+  display: grid;
+  gap: 0.38rem;
+  padding: 0.5rem;
+}
+
+.niche-consequence-map-node {
+  display: grid;
+  gap: 0.15rem;
+  inline-size: 100%;
+  min-block-size: 3rem;
+  padding: 0.48rem 0.52rem;
+  border:
+    1px solid var(--niche-consequence-edge);
+  color:
+    var(--savant-text, #eef7f8);
+  background:
+    var(--savant-background, #050708);
+  text-align: start;
+  cursor: pointer;
+}
+
+.niche-consequence-map-node:hover,
+.niche-consequence-map-node:focus-visible {
+  outline: none;
+  border-color:
+    var(--savant-primary, #7fe7ff);
+}
+
+.niche-consequence-map-node-id {
+  color:
+    var(--savant-primary, #7fe7ff);
+  font-size: 0.54rem;
+  overflow-wrap: anywhere;
+}
+
+.niche-consequence-map-node-title {
+  color:
+    var(--savant-text-muted, #879397);
+  font-size: 0.58rem;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.niche-consequence-map-empty,
+.niche-consequence-map-boundary {
+  padding: 0.65rem;
+  border:
+    1px dashed var(--niche-consequence-edge);
+  color:
+    var(--savant-text-muted, #879397);
+  font:
+    0.6rem/1.55
+    ui-monospace,
+    monospace;
+}
+
+.niche-consequence-map-boundary {
+  margin-block-start: 0.7rem;
+}
+
+@media (max-width: 700px) {
+  .niche-consequence-map {
+    inset-inline:
+      max(0.45rem, env(safe-area-inset-left))
+      max(0.45rem, env(safe-area-inset-right));
+    inset-block-end:
+      max(0.45rem, env(safe-area-inset-bottom));
+    inline-size: auto;
+    max-block-size: 74dvh;
+  }
+}
+
+@media (forced-colors: active) {
+  .niche-consequence-map,
+  .niche-consequence-map-close,
+  .niche-consequence-map-chip,
+  .niche-consequence-map-level,
+  .niche-consequence-map-node,
+  .niche-consequence-map-empty,
+  .niche-consequence-map-boundary {
+    border-color: CanvasText;
+  }
+}

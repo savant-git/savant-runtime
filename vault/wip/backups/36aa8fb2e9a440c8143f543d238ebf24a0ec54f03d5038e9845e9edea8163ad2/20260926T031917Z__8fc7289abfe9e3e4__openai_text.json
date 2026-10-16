@@ -1,0 +1,16 @@
+{
+  "id": "openai_text",
+  "type": "text_inference_provider",
+  "status": "active",
+  "owner": "opus",
+  "env_key": "OPENAI_API_KEY",
+  "model_env": "SAVANT_MODEL",
+  "model_default": "gpt-5",
+  "capabilities": [
+    "text_inference",
+    "system_instructions",
+    "context",
+    "structured_response",
+    "usage_reporting"
+  ]
+}

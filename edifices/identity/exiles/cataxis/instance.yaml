@@ -1,0 +1,26 @@
+schema: "savant://projection/identity/exile-instance/1.0.0"
+id: "exile:cataxis"
+kind: "exile"
+name: "cataxis"
+status: "accepted"
+authority_effect: "none"
+authority_ref: "canon-system/authority/exiles/cataxis.yaml"
+authority_sha256: "0991006315310b84454b53506037fdb720ce4e87ebf03135e86039e389ab6820"
+purpose_projection:
+  source: "canon-system/authority/exiles/cataxis.yaml"
+  current:
+    - "time modeling"
+    - "physics modeling"
+    - "temporal constraints"
+composition:
+  parent_edifice: "identity"
+  child_level: "prodigal"
+  transition: "segue"
+invariants:
+  filesystem_presence_establishes_authority: false
+  canonical_substance_duplicated: false
+  child_substance_by_reference: true
+  projections_are_authority: false
+lineage:
+  decision: "authority/accepted-decisions/ad-20261003-001-materialize-eighteen-exiles-and-segues.md"
+generated_by: "savant.identity-edifice-reconciler.v1"

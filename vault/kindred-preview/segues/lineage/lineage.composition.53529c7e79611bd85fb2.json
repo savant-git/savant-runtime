@@ -1,0 +1,66 @@
+{
+  "authoritative": false,
+  "child_profile": "son",
+  "deterministic_hash": "c7e426cee11daf551617fc112092b31900f55defabd9f4c48ff508bc6b760035",
+  "domain": "filesystem",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "lineage.composition.53529c7e79611bd85fb2",
+  "impeti": [],
+  "namespace": "preview.kindred",
+  "parent_profile": "parent",
+  "plane": "lineage",
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "role": "composition",
+  "schema": "savant.kindred.preview.lineage_segue.v2",
+  "source": "tools/refactor_engine",
+  "source_record": {
+    "axis": "containment",
+    "canonical_source": "fs:tools/refactor_engine",
+    "canonical_target": "fs:tools/refactor_engine/report_rewrite_plan.py",
+    "continuation": "projecting",
+    "id": "lineage.composition.53529c7e79611bd85fb2",
+    "inheritance": {
+      "conflict_policy": "child_wins",
+      "exclude": [],
+      "fields": [],
+      "mode": "reference"
+    },
+    "inverse": "component",
+    "kind": "contains",
+    "metadata": {
+      "legacy_edge_kind": "contains",
+      "projection": "filesystem_edifice"
+    },
+    "order": 0,
+    "propagation": {
+      "channels": [
+        "validation",
+        "projection",
+        "regeneration"
+      ],
+      "enabled": true
+    },
+    "provenance": {
+      "created_by": "filesystem_adapter",
+      "source_files": [
+        "/root/savant-runtime/tools/refactor_engine/report_rewrite_plan.py"
+      ]
+    },
+    "role": "composition",
+    "scope": "filesystem",
+    "source": "tools/refactor_engine",
+    "status": "active",
+    "symbolic_child_alias": "son",
+    "symbolic_parent_alias": "parent",
+    "target": "tools/refactor_engine/report_rewrite_plan.py",
+    "weight": 2
+  },
+  "state": "active",
+  "synthetic": false,
+  "target": "tools/refactor_engine/report_rewrite_plan.py"
+}

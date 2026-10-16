@@ -1,0 +1,97 @@
+{
+  "authoritative": false,
+  "authority_tier": "delegated",
+  "canonical_id": "fs:tools/ownership_graph",
+  "deterministic_hash": "dcecdad0309f71da4871880c3d09b4d3747b80693caedda6ae89b9328225da7d",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "tools/ownership_graph",
+  "kind": "directory",
+  "label": "ownership_graph",
+  "namespace": "preview.kindred",
+  "path": "tools/ownership_graph",
+  "placement": {
+    "domain": "filesystem",
+    "node": "tools/ownership_graph",
+    "parent": "tools",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.51bc1a68a73ad4bb0156",
+    "rank": 30,
+    "slot": "60_tools",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.51bc1a68a73ad4bb0156",
+    "lineage.composition.c0576ba86f55440b12c6"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": false,
+    "canonical_id": "fs:tools/ownership_graph",
+    "children": [
+      "tools/ownership_graph/compile_canonical_ownership_graph.py"
+    ],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "tools/ownership_graph",
+    "kind": "directory",
+    "label": "ownership_graph",
+    "legacy_id": "tools/ownership_graph",
+    "lineage": [
+      "tools"
+    ],
+    "metadata": {
+      "canonical_id": "fs:tools/ownership_graph",
+      "child_modes": {
+        "projecting": [
+          "fs:tools/ownership_graph/compile_canonical_ownership_graph.py"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:tools/ownership_graph/compile_canonical_ownership_graph.py"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:tools"
+        ]
+      },
+      "projected_id": "tools/ownership_graph",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "tools"
+    ],
+    "path": "tools/ownership_graph",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "tools/ownership_graph",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.51bc1a68a73ad4bb0156",
+      "lineage.composition.c0576ba86f55440b12c6"
+    ],
+    "size": 12,
+    "sons": [
+      "tools/ownership_graph/compile_canonical_ownership_graph.py"
+    ]
+  },
+  "state": "active",
+  "synthetic": false
+}

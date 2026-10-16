@@ -1,0 +1,97 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:runtime/palaver/health",
+  "deterministic_hash": "24372f62315a2d3b988fee0d201f6125a9a4f8017488da2886f7600a184f25b1",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "runtime/palaver/health",
+  "kind": "directory",
+  "label": "health",
+  "namespace": "preview.kindred",
+  "path": "runtime/palaver/health",
+  "placement": {
+    "domain": "filesystem",
+    "node": "runtime/palaver/health",
+    "parent": "runtime/palaver",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.27ee18502e5a31835bec",
+    "rank": 50,
+    "slot": "40_runtime",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.27ee18502e5a31835bec",
+    "lineage.composition.56795908ba3f361873f5"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:runtime/palaver/health",
+    "children": [
+      "runtime/palaver/health/health_snapshot.py"
+    ],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "runtime/palaver/health",
+    "kind": "directory",
+    "label": "health",
+    "legacy_id": "runtime/palaver/health",
+    "lineage": [
+      "runtime/palaver"
+    ],
+    "metadata": {
+      "canonical_id": "fs:runtime/palaver/health",
+      "child_modes": {
+        "projecting": [
+          "fs:runtime/palaver/health/health_snapshot.py"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:runtime/palaver/health/health_snapshot.py"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:runtime/palaver"
+        ]
+      },
+      "projected_id": "runtime/palaver/health",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "runtime/palaver"
+    ],
+    "path": "runtime/palaver/health",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "runtime/palaver/health",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.27ee18502e5a31835bec",
+      "lineage.composition.56795908ba3f361873f5"
+    ],
+    "size": 12,
+    "sons": [
+      "runtime/palaver/health/health_snapshot.py"
+    ]
+  },
+  "state": "active",
+  "synthetic": false
+}

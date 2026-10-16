@@ -1,0 +1,427 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import argparse
+import importlib.util
+import json
+import sys
+import tempfile
+from pathlib import Path
+
+
+ROOT = Path("/root/savant-runtime")
+
+NEXUS = (
+    ROOT
+    / "ontology"
+    / "obelisks"
+    / "_template"
+    / "segue"
+    / "gates"
+    / "_template"
+    / "segue"
+    / "innates"
+    / "_template"
+    / "segue"
+    / "exiles"
+    / "modus"
+    / "segue"
+    / "prodigals"
+    / "nexus"
+)
+
+ADAPTER_PATH = (
+    NEXUS
+    / "runtime"
+    / "legacy_dataset_adapter.py"
+)
+
+DEFAULT_OUTPUT_ROOT = (
+    ROOT
+    / "runtime"
+    / "nexus"
+    / "imports"
+)
+
+
+def load_adapter():
+    if not ADAPTER_PATH.is_file():
+        raise RuntimeError(
+            "missing nexus adapter: "
+            + str(ADAPTER_PATH)
+        )
+
+    spec = importlib.util.spec_from_file_location(
+        "nexus_legacy_dataset_adapter",
+        ADAPTER_PATH
+    )
+
+    if spec is None or spec.loader is None:
+        raise RuntimeError(
+            "unable to load nexus adapter"
+        )
+
+    module = importlib.util.module_from_spec(
+        spec
+    )
+
+    sys.modules[spec.name] = module
+
+    spec.loader.exec_module(module)
+
+    return module
+
+
+adapter_module = load_adapter()
+
+
+def ensure_inside_runtime(
+    path: Path
+) -> Path:
+    resolved = path.resolve()
+
+    if (
+        resolved != ROOT
+        and ROOT not in resolved.parents
+    ):
+        raise RuntimeError(
+            "output must remain under "
+            "/root/savant-runtime"
+        )
+
+    return resolved
+
+
+def atomic_json_write(
+    path: Path,
+    payload: dict
+) -> None:
+    path.parent.mkdir(
+        parents=True,
+        exist_ok=True
+    )
+
+    temp = path.with_suffix(
+        path.suffix + ".tmp"
+    )
+
+    temp.write_text(
+        json.dumps(
+            payload,
+            ensure_ascii=False,
+            sort_keys=True,
+            indent=2
+        )
+        + "\n",
+        encoding="utf-8"
+    )
+
+    json.loads(
+        temp.read_text(
+            encoding="utf-8"
+        )
+    )
+
+    temp.replace(path)
+
+
+def run_import(
+    source: Path,
+    output_root: Path
+) -> dict:
+    adapter = (
+        adapter_module.LegacyDatasetAdapter(
+            source
+        )
+    )
+
+    projection = adapter.projection()
+    receipt = adapter.receipt()
+
+    import_id = (
+        "legacy-"
+        + adapter.source_sha256[:16]
+    )
+
+    destination = ensure_inside_runtime(
+        output_root / import_id
+    )
+
+    normalized_path = (
+        destination
+        / "normalized-dataset.json"
+    )
+
+    receipt_path = (
+        destination
+        / "migration-receipt.json"
+    )
+
+    atomic_json_write(
+        normalized_path,
+        projection
+    )
+
+    atomic_json_write(
+        receipt_path,
+        receipt
+    )
+
+    loaded_projection = json.loads(
+        normalized_path.read_text(
+            encoding="utf-8"
+        )
+    )
+
+    loaded_receipt = json.loads(
+        receipt_path.read_text(
+            encoding="utf-8"
+        )
+    )
+
+    if (
+        loaded_projection[
+            "source"
+        ]["data_sha256"]
+        != loaded_receipt[
+            "source_data_sha256"
+        ]
+    ):
+        raise RuntimeError(
+            "written projection/receipt source "
+            "digest mismatch"
+        )
+
+    if not loaded_projection[
+        "reconstruction"
+    ]["matches_source_data"]:
+        raise RuntimeError(
+            "written nexus projection is not lossless"
+        )
+
+    return {
+        "ok": True,
+        "authority_effect": "none",
+        "mutation_authorized": False,
+        "import_id": import_id,
+        "source": str(source.resolve()),
+        "source_sha256": (
+            adapter.source_sha256
+        ),
+        "data_sha256": (
+            adapter.data_sha256
+        ),
+        "record_count": len(
+            adapter.records
+        ),
+        "section_counts": (
+            adapter.section_counts()
+        ),
+        "normalized_dataset": str(
+            normalized_path
+        ),
+        "migration_receipt": str(
+            receipt_path
+        ),
+        "lossless_reconstruction": True
+    }
+
+
+def selftest() -> dict:
+    test_data = {
+        "events": [
+            {
+                "id": "EVT-001",
+                "status": "user-reported",
+                "title": "reported event"
+            },
+            {
+                "id": "EVT-002",
+                "status": "primary government document",
+                "title": "documented event"
+            }
+        ],
+        "claims": [
+            {
+                "id": "CLM-001",
+                "status": "disputed"
+            }
+        ],
+        "case_metadata": {
+            "case_id": "TEST-001",
+            "data_status": "test"
+        }
+    }
+
+    html = (
+        "<!doctype html><html><body><script>"
+        "const DATA="
+        + json.dumps(
+            test_data,
+            ensure_ascii=False,
+            separators=(",", ":")
+        )
+        + ";</script></body></html>"
+    )
+
+    with tempfile.TemporaryDirectory() as tmp:
+        source = (
+            Path(tmp)
+            / "legacy.html"
+        )
+
+        source.write_text(
+            html,
+            encoding="utf-8"
+        )
+
+        adapter = (
+            adapter_module.LegacyDatasetAdapter(
+                source
+            )
+        )
+
+        projection = adapter.projection()
+
+        states = {
+            record[
+                "external_id"
+            ]: record[
+                "evidentiary_state_candidate"
+            ]
+            for record in projection["records"]
+            if record["external_id"]
+        }
+
+        errors = []
+
+        if adapter.reconstruct() != test_data:
+            errors.append(
+                "lossless reconstruction failed"
+            )
+
+        if states.get(
+            "EVT-001"
+        ) != "reported":
+            errors.append(
+                "reported state mapping failed"
+            )
+
+        if states.get(
+            "EVT-002"
+        ) != "corroborated":
+            errors.append(
+                "corroborated state mapping failed"
+            )
+
+        if states.get(
+            "CLM-001"
+        ) != "disputed":
+            errors.append(
+                "disputed state mapping failed"
+            )
+
+        if projection[
+            "authority_effect"
+        ] != "none":
+            errors.append(
+                "adapter acquired authority effect"
+            )
+
+        return {
+            "ok": not errors,
+            "errors": errors,
+            "record_count": (
+                projection[
+                    "record_count"
+                ]
+            ),
+            "section_counts": (
+                projection[
+                    "section_counts"
+                ]
+            ),
+            "lossless_reconstruction": (
+                projection[
+                    "reconstruction"
+                ][
+                    "matches_source_data"
+                ]
+            ),
+            "authority_effect": (
+                projection[
+                    "authority_effect"
+                ]
+            )
+        }
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "losslessly adapt a legacy embedded "
+            "nexus DATA dataset into a savant-native "
+            "candidate projection"
+        )
+    )
+
+    parser.add_argument(
+        "--source"
+    )
+
+    parser.add_argument(
+        "--output-root",
+        default=str(
+            DEFAULT_OUTPUT_ROOT
+        )
+    )
+
+    parser.add_argument(
+        "--selftest",
+        action="store_true"
+    )
+
+    args = parser.parse_args()
+
+    if args.selftest:
+        result = selftest()
+
+        print(
+            json.dumps(
+                result,
+                indent=2,
+                sort_keys=True
+            )
+        )
+
+        return (
+            0
+            if result["ok"]
+            else 1
+        )
+
+    if not args.source:
+        parser.error(
+            "--source is required unless "
+            "--selftest is used"
+        )
+
+    result = run_import(
+        Path(args.source),
+        Path(args.output_root)
+    )
+
+    print(
+        json.dumps(
+            result,
+            indent=2,
+            sort_keys=True
+        )
+    )
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

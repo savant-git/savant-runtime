@@ -1,0 +1,552 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import json
+import subprocess
+import sys
+from pathlib import Path
+from typing import Any
+
+
+ROOT = Path(
+    "/root/savant-runtime"
+)
+
+PYTHON = (
+    ROOT
+    / "bin"
+    / "identity-quality-python"
+)
+
+QUEUE_CONTROLLER = (
+    ROOT
+    / "bin"
+    / "identity-promotionctl"
+)
+
+PACKET_BUILDER = (
+    ROOT
+    / "tools"
+    / "identity_quality"
+    / "promotion"
+    / "build_next_promotion_packet.py"
+)
+
+REPORT_ROOT = (
+    ROOT
+    / "reports"
+    / "identity_quality"
+    / "promotion"
+    / "subjects"
+)
+
+
+def execute(
+    command: list[str],
+) -> int:
+    return subprocess.run(
+        command,
+        cwd=str(
+            ROOT
+        ),
+        check=False,
+    ).returncode
+
+
+def latest_packets() -> list[Path]:
+    if not REPORT_ROOT.is_dir():
+        return []
+
+    packets = [
+        path
+        for path in REPORT_ROOT.glob(
+            "*/latest.json"
+        )
+        if path.is_file()
+    ]
+
+    return sorted(
+        packets,
+        key=lambda path: (
+            path.stat().st_mtime_ns,
+            path.as_posix(),
+        ),
+        reverse=True,
+    )
+
+
+def latest_packet() -> Path | None:
+    packets = latest_packets()
+
+    if not packets:
+        return None
+
+    return packets[0]
+
+
+def load_json(
+    path: Path,
+) -> dict[str, Any]:
+    value = json.loads(
+        path.read_text(
+            encoding="utf-8",
+        )
+    )
+
+    if not isinstance(
+        value,
+        dict,
+    ):
+        raise ValueError(
+            f"Expected JSON object: {path}"
+        )
+
+    return value
+
+
+def print_file(
+    path: Path | None,
+) -> int:
+    if (
+        path is None
+        or not path.is_file()
+    ):
+        print(
+            "ERROR: no promotion packet exists.",
+            file=sys.stderr,
+        )
+
+        return 1
+
+    print(
+        path.read_text(
+            encoding="utf-8",
+        ),
+        end="",
+    )
+
+    return 0
+
+
+def build_packet(
+    *,
+    refresh_queue: bool,
+    strict: bool,
+    remaining: list[str],
+) -> int:
+    if refresh_queue:
+        queue_command = [
+            str(
+                QUEUE_CONTROLLER
+            ),
+            (
+                "strict"
+                if strict
+                else "build"
+            ),
+        ]
+
+        queue_status = execute(
+            queue_command
+        )
+
+        if queue_status:
+            return queue_status
+
+    packet_command = [
+        str(
+            PYTHON
+        ),
+        str(
+            PACKET_BUILDER
+        ),
+    ]
+
+    if strict:
+        packet_command.append(
+            "--strict"
+        )
+
+    packet_command.extend(
+        remaining
+    )
+
+    return execute(
+        packet_command
+    )
+
+
+def status() -> int:
+    packet_path = latest_packet()
+
+    result: dict[str, object] = {
+        "root": str(
+            ROOT
+        ),
+        "queue_controller": str(
+            QUEUE_CONTROLLER
+        ),
+        "queue_controller_exists": (
+            QUEUE_CONTROLLER.is_file()
+        ),
+        "packet_builder": str(
+            PACKET_BUILDER
+        ),
+        "packet_builder_exists": (
+            PACKET_BUILDER.is_file()
+        ),
+        "report_root": str(
+            REPORT_ROOT
+        ),
+        "report_root_exists": (
+            REPORT_ROOT.is_dir()
+        ),
+        "latest_packet": (
+            str(
+                packet_path
+            )
+            if packet_path
+            else None
+        ),
+        "latest_packet_exists": (
+            packet_path.is_file()
+            if packet_path
+            else False
+        ),
+    }
+
+    if (
+        packet_path is not None
+        and packet_path.is_file()
+    ):
+        try:
+            value = load_json(
+                packet_path
+            )
+
+            result[
+                "generated_at"
+            ] = value.get(
+                "generated_at"
+            )
+
+            result[
+                "digest"
+            ] = value.get(
+                "digest"
+            )
+
+            result[
+                "subject"
+            ] = value.get(
+                "subject"
+            )
+
+            result[
+                "target_layout"
+            ] = value.get(
+                "target_layout"
+            )
+
+            result[
+                "execution_order"
+            ] = value.get(
+                "execution_order"
+            )
+
+            result[
+                "existing_layout"
+            ] = (
+                value.get(
+                    "existing",
+                    {},
+                ).get(
+                    "layout"
+                )
+                if isinstance(
+                    value.get(
+                        "existing"
+                    ),
+                    dict,
+                )
+                else None
+            )
+
+        except Exception as exc:
+            result[
+                "read_error"
+            ] = {
+                "type": type(
+                    exc
+                ).__name__,
+                "message": str(
+                    exc
+                ),
+            }
+
+    print(
+        json.dumps(
+            result,
+            ensure_ascii=False,
+            indent=2,
+            sort_keys=True,
+        )
+    )
+
+    return 0
+
+
+def subject() -> int:
+    packet_path = latest_packet()
+
+    if (
+        packet_path is None
+        or not packet_path.is_file()
+    ):
+        print(
+            json.dumps(
+                {
+                    "subject": None,
+                    "packet": None,
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+
+        return 1
+
+    value = load_json(
+        packet_path
+    )
+
+    print(
+        json.dumps(
+            {
+                "packet": str(
+                    packet_path
+                ),
+                "subject": value.get(
+                    "subject"
+                ),
+                "authority": value.get(
+                    "authority"
+                ),
+                "target_layout": value.get(
+                    "target_layout"
+                ),
+            },
+            ensure_ascii=False,
+            indent=2,
+            sort_keys=True,
+        )
+    )
+
+    return 0
+
+
+def files() -> int:
+    packet_path = latest_packet()
+
+    if (
+        packet_path is None
+        or not packet_path.is_file()
+    ):
+        print(
+            "ERROR: no promotion packet exists.",
+            file=sys.stderr,
+        )
+
+        return 1
+
+    value = load_json(
+        packet_path
+    )
+
+    existing = value.get(
+        "existing"
+    )
+
+    target_layout = value.get(
+        "target_layout"
+    )
+
+    output = {
+        "packet": str(
+            packet_path
+        ),
+        "target_layout": (
+            target_layout
+            if isinstance(
+                target_layout,
+                dict,
+            )
+            else {}
+        ),
+        "existing_layout": (
+            existing.get(
+                "layout",
+                {},
+            )
+            if isinstance(
+                existing,
+                dict,
+            )
+            else {}
+        ),
+        "subtree": (
+            existing.get(
+                "subtree",
+                [],
+            )
+            if isinstance(
+                existing,
+                dict,
+            )
+            else []
+        ),
+        "mentions": (
+            existing.get(
+                "mentions",
+                [],
+            )
+            if isinstance(
+                existing,
+                dict,
+            )
+            else []
+        ),
+        "forbidden_terms": (
+            existing.get(
+                "forbidden_terms",
+                [],
+            )
+            if isinstance(
+                existing,
+                dict,
+            )
+            else []
+        ),
+    }
+
+    print(
+        json.dumps(
+            output,
+            ensure_ascii=False,
+            indent=2,
+            sort_keys=True,
+        )
+    )
+
+    return 0
+
+
+def usage() -> int:
+    print(
+        """
+identity-promote-next build
+identity-promote-next strict
+identity-promote-next refresh
+identity-promote-next refresh-strict
+identity-promote-next status
+identity-promote-next subject
+identity-promote-next files
+identity-promote-next json
+identity-promote-next show
+"""
+    )
+
+    return 0
+
+
+def main() -> int:
+    arguments = sys.argv[
+        1:
+    ]
+
+    if not arguments:
+        return usage()
+
+    command = arguments[
+        0
+    ]
+
+    remaining = arguments[
+        1:
+    ]
+
+    if command in {
+        "help",
+        "--help",
+        "-h",
+    }:
+        return usage()
+
+    if command == "build":
+        return build_packet(
+            refresh_queue=False,
+            strict=False,
+            remaining=remaining,
+        )
+
+    if command == "strict":
+        return build_packet(
+            refresh_queue=False,
+            strict=True,
+            remaining=remaining,
+        )
+
+    if command == "refresh":
+        return build_packet(
+            refresh_queue=True,
+            strict=False,
+            remaining=remaining,
+        )
+
+    if command == "refresh-strict":
+        return build_packet(
+            refresh_queue=True,
+            strict=True,
+            remaining=remaining,
+        )
+
+    if command == "status":
+        return status()
+
+    if command == "subject":
+        return subject()
+
+    if command == "files":
+        return files()
+
+    if command == "json":
+        return print_file(
+            latest_packet()
+        )
+
+    if command == "show":
+        packet = latest_packet()
+
+        if packet is None:
+            return print_file(
+                None
+            )
+
+        return print_file(
+            packet.with_name(
+                "latest.md"
+            )
+        )
+
+    print(
+        f"ERROR: unknown command: {command}",
+        file=sys.stderr,
+    )
+
+    return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

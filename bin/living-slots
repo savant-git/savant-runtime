@@ -1,0 +1,312 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+
+ROOT = Path(
+    "/root/savant-runtime"
+)
+
+if str(ROOT) not in sys.path:
+    sys.path.insert(
+        0,
+        str(ROOT),
+    )
+
+
+from runtime.living_substrates import (  # noqa: E402
+    SLOT_TO_SUBSTRATE,
+    LivingBinding,
+    LivingSlotFabric,
+)
+
+
+def print_json(
+    value: object,
+) -> None:
+    print(
+        json.dumps(
+            value,
+            indent=2,
+            sort_keys=True,
+            default=str,
+        )
+    )
+
+
+def build_parser(
+) -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Savant universal living "
+            "substrate slot fabric"
+        )
+    )
+
+    parser.add_argument(
+        "--manifest",
+        type=Path,
+    )
+
+    commands = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    commands.add_parser(
+        "registry"
+    )
+
+    commands.add_parser(
+        "validate"
+    )
+
+    commands.add_parser(
+        "health"
+    )
+
+    owner = commands.add_parser(
+        "owner"
+    )
+
+    owner.add_argument(
+        "owner_id"
+    )
+
+    substrate = commands.add_parser(
+        "substrate"
+    )
+
+    substrate.add_argument(
+        "substrate"
+    )
+
+    template = commands.add_parser(
+        "template"
+    )
+
+    template.add_argument(
+        "--owner",
+        required=True,
+    )
+
+    template.add_argument(
+        "--slot",
+        choices=tuple(
+            SLOT_TO_SUBSTRATE
+        ),
+        required=True,
+    )
+
+    template.add_argument(
+        "--instance",
+        required=True,
+    )
+
+    template.add_argument(
+        "--authority-state",
+        choices=(
+            "observed",
+            "proposed",
+            "provisional",
+            "accepted",
+            "superseded",
+            "rejected",
+        ),
+        default="proposed",
+    )
+
+    return parser
+
+
+def load_fabric(
+    manifest: Path | None,
+) -> LivingSlotFabric:
+    if manifest is None:
+        return LivingSlotFabric()
+
+    if not manifest.is_absolute():
+        raise SystemExit(
+            "--manifest must be absolute"
+        )
+
+    return (
+        LivingSlotFabric
+        .from_manifest(
+            manifest
+        )
+    )
+
+
+def main() -> int:
+    arguments = (
+        build_parser()
+        .parse_args()
+    )
+
+    fabric = load_fabric(
+        arguments.manifest
+    )
+
+    if (
+        arguments.command
+        == "registry"
+    ):
+        result = fabric.registry
+
+    elif (
+        arguments.command
+        == "validate"
+    ):
+        result = (
+            fabric.validate()
+        )
+
+    elif (
+        arguments.command
+        == "health"
+    ):
+        result = (
+            fabric.health()
+        )
+
+    elif (
+        arguments.command
+        == "owner"
+    ):
+        result = (
+            fabric.owner_projection(
+                arguments.owner_id
+            )
+        )
+
+    elif (
+        arguments.command
+        == "substrate"
+    ):
+        result = (
+            fabric
+            .substrate_projection(
+                arguments.substrate
+            )
+        )
+
+    elif (
+        arguments.command
+        == "template"
+    ):
+        substrate = (
+            SLOT_TO_SUBSTRATE[
+                arguments.slot
+            ]
+        )
+
+        binding = LivingBinding(
+            binding_id=(
+                "binding:"
+                + arguments.owner
+                + ":"
+                + arguments.slot
+                + ":"
+                + arguments.instance
+            ),
+            owner_id=(
+                arguments.owner
+            ),
+            slot=(
+                arguments.slot
+            ),
+            substrate=(
+                substrate
+            ),
+            substrate_instance=(
+                arguments.instance
+            ),
+            authority_state=(
+                arguments
+                .authority_state
+            ),
+            enabled=False,
+            version="1.0.0",
+            specialization={
+                "focal": None,
+                "overlay": None,
+                "mask": None,
+                "policy": None,
+            },
+            parameters={},
+            dependencies=(),
+            lineage={
+                "supersedes": [],
+                "superseded_by": [],
+            },
+            provenance={
+                "generated_by":
+                    "living-slots template",
+                "authority":
+                    "proposal-only",
+            },
+            compatibility={
+                "minimum_substrate_version":
+                    None,
+                "adapter":
+                    None,
+                "reversible":
+                    True,
+            },
+        )
+
+        result = {
+            "schema": (
+                "savant://runtime/"
+                "living-slot-template/1.0.0"
+            ),
+            "binding":
+                binding.projection(),
+            "proposal_only":
+                True,
+            "enabled":
+                False,
+            "mutation_performed":
+                False,
+        }
+
+    else:
+        raise RuntimeError(
+            "unsupported command"
+        )
+
+    print_json(
+        result
+    )
+
+    if (
+        arguments.command
+        == "validate"
+        and not result[
+            "valid"
+        ]
+    ):
+        return 1
+
+    if (
+        arguments.command
+        == "health"
+        and not result[
+            "healthy"
+        ]
+    ):
+        return 1
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

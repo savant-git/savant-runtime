@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+runtime_root="/root/savant-runtime"
+
+underscore_root="${runtime_root}/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/underscore"
+
+python_bin="${underscore_root}/runtime/vessel/venv/bin/python"
+engine="${underscore_root}/rubric/vessel/source/production_stable.py"
+
+if [[ ! -x "${python_bin}" ]]; then
+    printf '%s\n' \
+        "underscore vessel python is unavailable: ${python_bin}" \
+        >&2
+    exit 1
+fi
+
+if [[ ! -f "${engine}" ]]; then
+    printf '%s\n' \
+        "underscore stable production pipeline is unavailable: ${engine}" \
+        >&2
+    exit 1
+fi
+
+exec "${python_bin}" "${engine}" "$@"

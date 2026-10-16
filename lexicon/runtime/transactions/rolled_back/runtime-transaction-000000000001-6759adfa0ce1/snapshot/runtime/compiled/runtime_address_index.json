@@ -1,0 +1,413 @@
+{
+  "alias_count": 24,
+  "aliases": {
+    "constitution": "runtime:subsystem:constitution",
+    "instance": "runtime:subsystem:instance",
+    "kindred": "runtime:subsystem:kindred",
+    "lexicon": "runtime:subsystem:lexicon",
+    "ontology": "runtime:subsystem:ontology",
+    "projection": "runtime:subsystem:projection",
+    "runtime": "runtime:savant:lexicon",
+    "runtime:constitution": "runtime:subsystem:constitution",
+    "runtime:instance": "runtime:subsystem:instance",
+    "runtime:kindred": "runtime:subsystem:kindred",
+    "runtime:lexicon": "runtime:subsystem:lexicon",
+    "runtime:ontology": "runtime:subsystem:ontology",
+    "runtime:projection": "runtime:subsystem:projection",
+    "runtime:root": "runtime:savant:lexicon",
+    "runtime:segue": "runtime:subsystem:segue",
+    "savant:runtime": "runtime:savant:lexicon",
+    "segue": "runtime:subsystem:segue",
+    "subsystem:constitution": "runtime:subsystem:constitution",
+    "subsystem:instance": "runtime:subsystem:instance",
+    "subsystem:kindred": "runtime:subsystem:kindred",
+    "subsystem:lexicon": "runtime:subsystem:lexicon",
+    "subsystem:ontology": "runtime:subsystem:ontology",
+    "subsystem:projection": "runtime:subsystem:projection",
+    "subsystem:segue": "runtime:subsystem:segue"
+  },
+  "digest": "87f3f8817a8d32af3d8585ecdc2c82c2fc9df7e70927e38ab07d5837567e9cc0",
+  "index_id": "runtime:index:address",
+  "lineage": {
+    "derived_from": [
+      "runtime:savant:lexicon",
+      "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml"
+    ]
+  },
+  "provenance": {
+    "generator": "/root/savant-runtime/lexicon/runtime/runtime_address.py",
+    "source": "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml"
+  },
+  "record_count": 15,
+  "records": {
+    "registry:constitution:core": {
+      "address": "registry:constitution:core",
+      "aliases": [],
+      "canonical": "registry:constitution:core",
+      "digest": "3c408edb951a94590b3bf156c09590c4919e315cc7cb39a9adf2b15e894f8941",
+      "relationships": {
+        "required_by": [
+          "runtime:savant:lexicon"
+        ]
+      },
+      "source": "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml",
+      "type": "external_dependency"
+    },
+    "registry:instance:core": {
+      "address": "registry:instance:core",
+      "aliases": [],
+      "canonical": "registry:instance:core",
+      "digest": "53ec50336acde4ac21d3cc062f33a9c12800433611bc866801850d789a013887",
+      "relationships": {
+        "required_by": [
+          "runtime:savant:lexicon"
+        ]
+      },
+      "source": "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml",
+      "type": "external_dependency"
+    },
+    "registry:kindred:core": {
+      "address": "registry:kindred:core",
+      "aliases": [],
+      "canonical": "registry:kindred:core",
+      "digest": "8abdee0ff3aec9665a5662ccbc0e086af9b8a4b550d06113a3a2be98d199f94f",
+      "relationships": {
+        "required_by": [
+          "runtime:savant:lexicon"
+        ]
+      },
+      "source": "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml",
+      "type": "external_dependency"
+    },
+    "registry:lexicon:core": {
+      "address": "registry:lexicon:core",
+      "aliases": [],
+      "canonical": "registry:lexicon:core",
+      "digest": "ae09694ffb0f63d3f70b01e4a8b3a8a4fe21e815a57f68aa1133432d8a85586f",
+      "relationships": {
+        "required_by": [
+          "runtime:savant:lexicon"
+        ]
+      },
+      "source": "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml",
+      "type": "external_dependency"
+    },
+    "registry:ontology:core": {
+      "address": "registry:ontology:core",
+      "aliases": [],
+      "canonical": "registry:ontology:core",
+      "digest": "aa19c1036330f013982d8ca84140bfac20f825f13557a2318513392caeaa352c",
+      "relationships": {
+        "required_by": [
+          "runtime:savant:lexicon"
+        ]
+      },
+      "source": "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml",
+      "type": "external_dependency"
+    },
+    "registry:projection:core": {
+      "address": "registry:projection:core",
+      "aliases": [],
+      "canonical": "registry:projection:core",
+      "digest": "4742792c9febd7b80e57e6f03fe4b8a240bccc2657324946130314c3184b4fc3",
+      "relationships": {
+        "required_by": [
+          "runtime:savant:lexicon"
+        ]
+      },
+      "source": "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml",
+      "type": "external_dependency"
+    },
+    "registry:segue:core": {
+      "address": "registry:segue:core",
+      "aliases": [],
+      "canonical": "registry:segue:core",
+      "digest": "78bd6c698fa9fc4e7bbfcd943501d9928b0e1b822193c70121d4b0e38d493d01",
+      "relationships": {
+        "required_by": [
+          "runtime:savant:lexicon"
+        ]
+      },
+      "source": "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml",
+      "type": "external_dependency"
+    },
+    "runtime:savant:lexicon": {
+      "address": "runtime:savant:lexicon",
+      "aliases": [
+        "runtime",
+        "runtime:root",
+        "savant:runtime"
+      ],
+      "authority": "lexicon:constitution",
+      "canonical": "Savant Lexicon Runtime",
+      "digest": "3b3f0d280c005d219e4a8ac49c81119cf14afb830e33a7f768b3af14c360ae32",
+      "relationships": {
+        "contains": [
+          "runtime:subsystem:constitution",
+          "runtime:subsystem:instance",
+          "runtime:subsystem:kindred",
+          "runtime:subsystem:lexicon",
+          "runtime:subsystem:ontology",
+          "runtime:subsystem:projection",
+          "runtime:subsystem:segue"
+        ],
+        "depends_on": [
+          "registry:constitution:core",
+          "registry:instance:core",
+          "registry:kindred:core",
+          "registry:lexicon:core",
+          "registry:ontology:core",
+          "registry:projection:core",
+          "registry:segue:core"
+        ]
+      },
+      "source": "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml",
+      "status": "active",
+      "type": "runtime",
+      "version": "1.0.0"
+    },
+    "runtime:subsystem:constitution": {
+      "actions": {
+        "compile": "compile",
+        "integrity": "integrity",
+        "validate": "validate"
+      },
+      "address": "runtime:subsystem:constitution",
+      "aliases": [
+        "constitution",
+        "subsystem:constitution",
+        "runtime:constitution"
+      ],
+      "canonical": "constitution",
+      "controller": "bin/constitutionctl",
+      "controller_executable": true,
+      "controller_exists": true,
+      "controller_path": "/root/savant-runtime/lexicon/bin/constitutionctl",
+      "digest": "27c28180e206a0ec8c064c982627bdac4cc91ddaaf88fbf1cfbfed6f45600b4c",
+      "position": 6,
+      "relationships": {
+        "contained_by": [
+          "runtime:savant:lexicon"
+        ],
+        "depends_on": [],
+        "follows": [
+          "runtime:subsystem:projection"
+        ],
+        "precedes": []
+      },
+      "required": true,
+      "source": "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml",
+      "type": "runtime_subsystem"
+    },
+    "runtime:subsystem:instance": {
+      "actions": {
+        "compile": "compile",
+        "integrity": "integrity",
+        "validate": "validate"
+      },
+      "address": "runtime:subsystem:instance",
+      "aliases": [
+        "instance",
+        "subsystem:instance",
+        "runtime:instance"
+      ],
+      "canonical": "instance",
+      "controller": "bin/instancectl",
+      "controller_executable": true,
+      "controller_exists": true,
+      "controller_path": "/root/savant-runtime/lexicon/bin/instancectl",
+      "digest": "443411425c4789de0e7d068071d135a8cdbcfd04745d67f73996413c30988e4e",
+      "position": 3,
+      "relationships": {
+        "contained_by": [
+          "runtime:savant:lexicon"
+        ],
+        "depends_on": [],
+        "follows": [
+          "runtime:subsystem:kindred"
+        ],
+        "precedes": [
+          "runtime:subsystem:segue"
+        ]
+      },
+      "required": true,
+      "source": "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml",
+      "type": "runtime_subsystem"
+    },
+    "runtime:subsystem:kindred": {
+      "actions": {
+        "compile": "compile",
+        "integrity": "integrity",
+        "validate": "validate"
+      },
+      "address": "runtime:subsystem:kindred",
+      "aliases": [
+        "kindred",
+        "subsystem:kindred",
+        "runtime:kindred"
+      ],
+      "canonical": "kindred",
+      "controller": "bin/kindredctl",
+      "controller_executable": true,
+      "controller_exists": true,
+      "controller_path": "/root/savant-runtime/lexicon/bin/kindredctl",
+      "digest": "141df8215de807c1153d9a9a6afa113a8829ecf389943af2d2c19f20c44c71af",
+      "position": 2,
+      "relationships": {
+        "contained_by": [
+          "runtime:savant:lexicon"
+        ],
+        "depends_on": [],
+        "follows": [
+          "runtime:subsystem:ontology"
+        ],
+        "precedes": [
+          "runtime:subsystem:instance"
+        ]
+      },
+      "required": true,
+      "source": "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml",
+      "type": "runtime_subsystem"
+    },
+    "runtime:subsystem:lexicon": {
+      "actions": {
+        "compile": "compile",
+        "integrity": "integrity",
+        "validate": "validate"
+      },
+      "address": "runtime:subsystem:lexicon",
+      "aliases": [
+        "lexicon",
+        "subsystem:lexicon",
+        "runtime:lexicon"
+      ],
+      "canonical": "lexicon",
+      "controller": "bin/lexiconctl",
+      "controller_executable": true,
+      "controller_exists": true,
+      "controller_path": "/root/savant-runtime/lexicon/bin/lexiconctl",
+      "digest": "53290abbe2d2061c17596ae646559c33619c9348f44bf3bcba16e767dde3caf3",
+      "position": 0,
+      "relationships": {
+        "contained_by": [
+          "runtime:savant:lexicon"
+        ],
+        "depends_on": [],
+        "follows": [],
+        "precedes": [
+          "runtime:subsystem:ontology"
+        ]
+      },
+      "required": true,
+      "source": "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml",
+      "type": "runtime_subsystem"
+    },
+    "runtime:subsystem:ontology": {
+      "actions": {
+        "compile": "compile",
+        "integrity": "integrity",
+        "validate": "validate"
+      },
+      "address": "runtime:subsystem:ontology",
+      "aliases": [
+        "ontology",
+        "subsystem:ontology",
+        "runtime:ontology"
+      ],
+      "canonical": "ontology",
+      "controller": "bin/ontologyctl",
+      "controller_executable": true,
+      "controller_exists": true,
+      "controller_path": "/root/savant-runtime/lexicon/bin/ontologyctl",
+      "digest": "71dc425d7e157271ef8c61e6b44c64102be56278751cc6c67bcde4628562fa1d",
+      "position": 1,
+      "relationships": {
+        "contained_by": [
+          "runtime:savant:lexicon"
+        ],
+        "depends_on": [],
+        "follows": [
+          "runtime:subsystem:lexicon"
+        ],
+        "precedes": [
+          "runtime:subsystem:kindred"
+        ]
+      },
+      "required": true,
+      "source": "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml",
+      "type": "runtime_subsystem"
+    },
+    "runtime:subsystem:projection": {
+      "actions": {
+        "compile": "compile",
+        "integrity": "integrity",
+        "validate": "validate"
+      },
+      "address": "runtime:subsystem:projection",
+      "aliases": [
+        "projection",
+        "subsystem:projection",
+        "runtime:projection"
+      ],
+      "canonical": "projection",
+      "controller": "bin/projectionctl",
+      "controller_executable": true,
+      "controller_exists": true,
+      "controller_path": "/root/savant-runtime/lexicon/bin/projectionctl",
+      "digest": "dbb1499f76290a7639dbfd2f5d86173e5a0f48ba53081d9706c9d8d7399ad066",
+      "position": 5,
+      "relationships": {
+        "contained_by": [
+          "runtime:savant:lexicon"
+        ],
+        "depends_on": [],
+        "follows": [
+          "runtime:subsystem:segue"
+        ],
+        "precedes": [
+          "runtime:subsystem:constitution"
+        ]
+      },
+      "required": true,
+      "source": "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml",
+      "type": "runtime_subsystem"
+    },
+    "runtime:subsystem:segue": {
+      "actions": {
+        "compile": "compile",
+        "integrity": "integrity",
+        "validate": "validate"
+      },
+      "address": "runtime:subsystem:segue",
+      "aliases": [
+        "segue",
+        "subsystem:segue",
+        "runtime:segue"
+      ],
+      "canonical": "segue",
+      "controller": "bin/seguectl",
+      "controller_executable": true,
+      "controller_exists": true,
+      "controller_path": "/root/savant-runtime/lexicon/bin/seguectl",
+      "digest": "071f505a670b680b3c8c850ecbda8ef80d9547ac81380193fd5077cef1ce0bd9",
+      "position": 4,
+      "relationships": {
+        "contained_by": [
+          "runtime:savant:lexicon"
+        ],
+        "depends_on": [],
+        "follows": [
+          "runtime:subsystem:instance"
+        ],
+        "precedes": [
+          "runtime:subsystem:projection"
+        ]
+      },
+      "required": true,
+      "source": "/root/savant-runtime/lexicon/runtime/runtime_registry.yaml",
+      "type": "runtime_subsystem"
+    }
+  },
+  "runtime": "runtime:savant:lexicon",
+  "version": "1.0.0"
+}

@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>savant / urge / identity studio</title>
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#0b1013;--panel:#151d22;--panel2:#1b262b;
+  --line:#304047;--ink:#edf2ef;--muted:#91a2a7;
+  --mint:#94d4c5;--gold:#d1b58d;--red:#e39c98;
+  --radius:15px
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,sans-serif}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+button:disabled{opacity:.4;cursor:not-allowed}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid var(--mint);outline-offset:3px}
+a{color:var(--mint)}
+.shell{display:grid;grid-template-columns:225px minmax(0,1fr);min-height:100vh}
+aside{padding:27px 15px;background:#10171b;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:22px}
+.brand{font-size:26px;font-weight:650;letter-spacing:-1.5px;color:var(--ink);text-decoration:none}
+.brand span{display:block;font-size:9px;letter-spacing:2px;color:var(--muted);font-weight:500}
+nav{display:grid;gap:7px}
+nav a{display:flex;align-items:center;gap:12px;padding:12px;border-radius:9px;text-decoration:none;color:var(--muted)}
+nav a.active{background:#254139;color:var(--mint)}
+nav svg,.icon svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.aside-note{margin-top:auto;border:1px solid var(--line);border-radius:10px;padding:13px;color:var(--muted);font-size:11px}
+.aside-note strong{display:block;color:var(--mint);margin-bottom:5px}
+main{min-width:0;padding:28px clamp(16px,3vw,48px)}
+header{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:26px}
+.kicker{color:var(--mint);font-size:10px;font-weight:750;letter-spacing:2px;text-transform:uppercase}
+h1{font-size:clamp(28px,3vw,43px);letter-spacing:-1.8px;font-weight:600;line-height:1.1;margin:8px 0}
+h2{font-size:17px;font-weight:600;letter-spacing:-.5px;margin:0}
+p{color:var(--muted);margin:7px 0}
+.badge{border:1px solid #4a675f;color:var(--mint);border-radius:99px;padding:7px 12px;font-size:11px;white-space:nowrap}
+.grid{display:grid;grid-template-columns:minmax(300px,365px) minmax(0,1fr);gap:18px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;min-width:0}
+.panel-title{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+.field{display:grid;gap:8px;margin-bottom:17px}
+label{font-size:12px;font-weight:600;color:#c4d0cf}
+input,textarea,select{width:100%;border:1px solid #3c4c52;background:#0c1418;color:var(--ink);border-radius:9px;padding:11px}
+textarea{min-height:112px;resize:vertical}
+small,.hint{color:var(--muted);font-size:11px}
+.mode{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:18px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:1px solid #3d5157;border-radius:9px;padding:11px 14px;background:#223037;color:var(--ink);font-size:12px;font-weight:650}
+.btn.primary{background:var(--mint);color:#10211d;border-color:var(--mint)}
+.btn.active{background:#28463d;border-color:#669c8e;color:var(--mint)}
+.btn.danger{color:var(--red)}
+.btn:hover:not(:disabled){filter:brightness(1.12)}
+.actions{display:flex;flex-wrap:wrap;gap:8px}
+.upload{border:1px dashed #56766e;padding:14px;border-radius:10px;text-align:center;margin-bottom:16px}
+.upload input{margin-top:8px;font-size:11px}
+.upload[hidden]{display:none}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.control-range{display:grid;gap:7px;margin-bottom:16px}
+.control-range input{padding:0;accent-color:var(--mint)}
+.preview-panel{display:grid;gap:16px}
+.viewer{position:relative;min-height:460px;display:grid;place-items:center;overflow:hidden;border:1px solid #3c5354;border-radius:13px;background:
+ radial-gradient(circle at 50% 48%,#2a47405e,transparent 47%),
+ linear-gradient(45deg,#111b20,#1a262a)}
+.viewer:before{content:"";position:absolute;inset:0;opacity:.25;pointer-events:none;background-image:linear-gradient(#ffffff14 1px,transparent 1px),linear-gradient(90deg,#ffffff14 1px,transparent 1px);background-size:28px 28px}
+.artboard{width:min(74%,440px);aspect-ratio:1;display:grid;place-items:center;z-index:1;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.artboard svg,.artboard img{display:block;width:100%;height:100%;object-fit:contain}
+.viewer-label{position:absolute;top:17px;left:17px;font-size:11px;color:#b9d4ce;z-index:2}
+.viewer-score{position:absolute;right:17px;top:17px;border:1px solid #59776e;background:#10231fd9;padding:8px 12px;border-radius:8px;color:var(--mint);font-size:12px;z-index:2}
+.viewer-footer{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stat{border:1px solid var(--line);background:#10191e;border-radius:10px;padding:13px;min-width:0}
+.stat small{display:block;font-size:10px}
+.stat strong{display:block;margin-top:5px;font-size:19px;font-weight:600}
+.history{grid-column:1/-1}
+.timeline{display:flex;gap:12px;overflow-x:auto;padding:4px 1px 13px}
+.thumb{flex:0 0 152px;border:1px solid var(--line);background:#0f181d;border-radius:11px;padding:9px;text-align:left;color:var(--ink)}
+.thumb.active{border-color:var(--mint);background:#1b342e}
+.thumb-art{height:115px;border-radius:8px;background:#1a282b;display:grid;place-items:center;overflow:hidden}
+.thumb-art svg,.thumb-art img{height:95%;width:95%;object-fit:contain}
+.thumb strong,.thumb small{display:block;margin-top:5px}
+.thumb small{font-size:10px}
+.details{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+.log{height:190px;overflow:auto;font-size:12px;color:var(--muted)}
+.log div{padding:8px 0;border-bottom:1px solid var(--line)}
+.criteria{display:grid;gap:12px}
+.criterion{display:grid;grid-template-columns:110px 1fr 40px;gap:9px;align-items:center;font-size:11px}
+.bar{height:5px;background:#2a3b3e;border-radius:8px;overflow:hidden}
+.bar span{display:block;height:100%;background:var(--mint)}
+footer{margin-top:20px;color:var(--muted);font-size:11px}
+@media(max-width:1080px){.grid{grid-template-columns:1fr}.viewer{min-height:380px}}
+@media(max-width:720px){
+.shell{display:block}aside{padding:14px;gap:12px}
+nav{display:flex;overflow:auto}nav a{white-space:nowrap}
+.aside-note{display:none}main{padding:20px 13px}
+header{align-items:flex-start}.badge{font-size:9px}
+.details{grid-template-columns:1fr}.stat-row{grid-template-columns:repeat(2,1fr)}
+.viewer{min-height:330px}.artboard{width:80%}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside>
+<a class="brand" href="./urge-demo.html">savant<span>INTELLIGENCE COMPOSITION</span></a>
+<nav aria-label="Navigation">
+<a href="./urge-demo.html"><span class="icon" data-icon="grid"></span>Overview</a>
+<a class="active" href="./urge-logo-studio.html" aria-current="page"><span class="icon" data-icon="spark"></span>Identity studio</a>
+<a href="./urge-demo.html#view-evolution"><span class="icon" data-icon="branch"></span>Urge demo</a>
+</nav>
+<div class="aside-note">
+<strong>Local creative simulation</strong>
+Logo candidates are generated in this browser. Opus provider execution and production Urge sessions are not connected.
+</div>
+</aside>
+<main>
+<header>
+<div>
+<div class="kicker">urge / creative iteration</div>
+<h1>Identity evolution studio.</h1>
+<p>Begin with a mark or a blank canvas. Shape the direction, inspect every result, and retain your lineage.</p>
+</div>
+<span class="badge" id="state">READY · LOCAL</span>
+</header>
+
+<div class="grid">
+<section class="panel" aria-labelledby="brief-title">
+<div class="panel-title"><h2 id="brief-title">01 / Creative brief</h2><span class="kicker">Input</span></div>
+<div class="mode">
+<button class="btn active" id="from-scratch" aria-pressed="true">Create from scratch</button>
+<button class="btn" id="from-file" aria-pressed="false">Import baseline</button>
+</div>
+<div class="upload" id="upload-area" hidden>
+<label for="baseline-file">Import SVG, PNG, JPEG, or WebP</label>
+<input type="file" id="baseline-file" accept=".svg,.png,.jpg,.jpeg,.webp,image/svg+xml,image/png,image/jpeg,image/webp">
+<div class="hint">Maximum 5 MB. Imported images remain local.</div>
+</div>
+<div class="field">
+<label for="name">Brand or project name</label>
+<input id="name" maxlength="64" value="savant" autocomplete="off">
+</div>
+<div class="field">
+<label for="prompt">Iteration direction</label>
+<textarea id="prompt" maxlength="2000" spellcheck="true">Develop a distinctive, architecturally precise symbol. Explore stronger negative space, compositional intelligence, and refined proportions without losing recognizability.</textarea>
+<div class="hint">Describe what should change, what must survive, or which concepts to explore.</div>
+</div>
+<div class="controls">
+<div class="field">
+<label for="concept">Visual grammar</label>
+<select id="concept">
+<option value="monogram">Monogram</option>
+<option value="orbit">Orbital geometry</option>
+<option value="fold">Folded structure</option>
+<option value="lattice">Modular lattice</option>
+<option value="signal">Signal topology</option>
+</select>
+</div>
+<div class="field">
+<label for="palette">Color system</label>
+<select id="palette">
+<option value="mineral">Mineral / jade</option>
+<option value="copper">Oxidized copper</option>
+<option value="mono">Monochrome</option>
+<option value="indigo">Indigo / platinum</option>
+<option value="ember">Warm graphite</option>
+</select>
+</div>
+</div>
+<div class="control-range">
+<label for="complexity">Geometric complexity: <output id="complexity-value">5</output></label>
+<input id="complexity" type="range" min="1" max="10" value="5">
+</div>
+<div class="control-range">
+<label for="boldness">Visual weight: <output id="boldness-value">6</output></label>
+<input id="boldness" type="range" min="1" max="10" value="6">
+</div>
+<div class="field">
+<label for="steps">Iteration count</label>
+<select id="steps">
+<option value="4">4 candidates</option>
+<option value="8" selected>8 candidates</option>
+<option value="12">12 candidates</option>
+</select>
+</div>
+<div class="actions">
+<button class="btn primary" id="start">Begin iteration</button>
+<button class="btn" id="pause" disabled>Pause</button>
+<button class="btn danger" id="cancel" disabled>Cancel</button>
+<button class="btn" id="reset">Reset</button>
+</div>
+<p class="hint" id="feedback" role="status" aria-live="polite">Ready to create.</p>
+</section>
+
+<section class="panel preview-panel" aria-labelledby="viewer-title">
+<div class="panel-title">
+<h2 id="viewer-title">02 / Live candidate viewer</h2>
+<span class="kicker">Visual output</span>
+</div>
+<div class="viewer">
+<div class="viewer-label" id="viewer-label">BASELINE / 00</div>
+<div class="viewer-score" id="viewer-score">NOT EVALUATED</div>
+<div class="artboard" id="artboard" aria-label="Current logo candidate"></div>
+</div>
+<div class="viewer-footer">
+<div class="actions">
+<button class="btn" id="previous" disabled>Previous</button>
+<button class="btn" id="next" disabled>Next</button>
+<button class="btn" id="select" disabled>Select candidate</button>
+</div>
+<div class="actions">
+<button class="btn" id="export" disabled>Export SVG</button>
+<button class="btn" id="export-session">Export session JSON</button>
+</div>
+</div>
+<div class="stat-row">
+<div class="stat"><small>ITERATION</small><strong id="stat-iteration">0 / 8</strong></div>
+<div class="stat"><small>CANDIDATES</small><strong id="stat-candidates">0</strong></div>
+<div class="stat"><small>BEST SCORE</small><strong id="stat-best">—</strong></div>
+<div class="stat"><small>SELECTED</small><strong id="stat-selected">—</strong></div>
+</div>
+</section>
+
+<section class="panel history" aria-labelledby="history-title">
+<div class="panel-title">
+<h2 id="history-title">03 / Candidate lineage</h2>
+<span class="hint">Select any thumbnail to inspect it</span>
+</div>
+<div class="timeline" id="timeline" aria-label="Candidate history"></div>
+</section>
+</div>
+
+<div class="details">
+<section class="panel">
+<div class="panel-title"><h2>Evaluation projection</h2><span class="kicker">Illustrative</span></div>
+<div class="criteria" id="criteria"></div>
+</section>
+<section class="panel">
+<div class="panel-title"><h2>Session events</h2><span class="kicker">Local history</span></div>
+<div class="log" id="log" role="log" aria-live="polite"></div>
+</section>
+</div>
+<footer>Illustrative procedural graphics and deterministic local scoring. No AI model, Opus provider, or production Urge backend is invoked.</footer>
+</main>
+</div>
+<script>
+"use strict";
+(()=>{
+const $=id=>document.getElementById(id);
+const icons={
+grid:'<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>',
+spark:'<path d="m12 2 2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5z"/>',
+branch:'<circle cx="6" cy="4" r="2"/><circle cx="6" cy="20" r="2"/><circle cx="18" cy="7" r="2"/><path d="M6 6v12M6 13c0-5 12 0 12-4"/>'
+};
+document.querySelectorAll("[data-icon]").forEach(n=>{
+n.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true">'+icons[n.dataset.icon]+'</svg>';
+});
+const palettes={
+mineral:["#93d2c2","#294b46","#d4c5a7"],
+copper:["#c39c79","#4d706b","#e1d0b3"],
+mono:["#e9efed","#617076","#b7c1c3"],
+indigo:["#a5afd7","#46567d","#d6d9e3"],
+ember:["#d8aa82","#76584b","#e8d7be"]
+};
+const scenario={mode:"scratch",imported:null,importName:null,candidates:[],selected:null,view:-1,status:"ready",timer:null,events:[],config:null,seed:0};
+const safe=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt=n=>Number(n).toFixed(2);
+function hash(s){
+let h=2166136261;
+for(const c of s){h^=c.charCodeAt(0);h=Math.imul(h,16777619);}
+return h>>>0;
+}
+function rand(seed,index){let x=(seed+Math.imul(index+1,0x9e3779b1))>>>0;x^=x>>>16;x=Math.imul(x,0x7feb352d);x^=x>>>15;x=Math.imul(x,0x846ca68b);return ((x^(x>>>16))>>>0)/4294967296;}
+function config(){
+return {
+name:$("name").value.trim()||"untitled",
+prompt:$("prompt").value.trim(),
+concept:$("concept").value,
+palette:$("palette").value,
+complexity:Number($("complexity").value),
+boldness:Number($("boldness").value),
+steps:Number($("steps").value),
+mode:scenario.mode
+};
+}
+function geometry(c,i,seed){
+const [a,b,d]=palettes[c.palette],k=c.complexity,w=4+c.boldness*1.8;
+const rot=Math.round((rand(seed,2)*22-11)+(i*7));
+const center=256,angle=2*Math.PI/(4+Math.floor(k/2));
+let paths="";
+if(c.concept==="monogram"){
+const letter=[...c.name][0]||"s";
+paths='<text x="256" y="332" text-anchor="middle" font-size="'+(260+k*4)+'" font-weight="'+(500+c.boldness*35)+'" font-family="Arial,sans-serif" fill="'+a+'">'+safe(letter.toUpperCase())+'</text>';
+paths+='<path d="M 125 360 L 386 150" stroke="'+d+'" stroke-width="'+w+'" opacity=".55"/>';
+}else if(c.concept==="orbit"){
+for(let j=0;j<3+Math.floor(k/3);j++){
+let r=95+j*20+i*2;
+paths+='<ellipse cx="256" cy="256" rx="'+r+'" ry="'+(r*.48)+'" fill="none" stroke="'+(j%2?a:d)+'" stroke-width="'+(w*.55)+'" transform="rotate('+(rot+j*31)+' 256 256)" opacity="'+(.5+j*.06)+'"/>';
+}
+paths+='<circle cx="256" cy="256" r="'+(45+i*3)+'" fill="'+a+'" opacity=".85"/>';
+}else if(c.concept==="fold"){
+const shift=(i%5)*13;
+paths='<path d="M 110 340 L 240 '+(90+shift)+' L 404 340 L 318 340 L 240 225 L 195 340 Z" fill="'+a+'"/>';
+paths+='<path d="M 240 '+(90+shift)+' L 318 340 L 404 340 Z" fill="'+b+'"/>';
+paths+='<path d="M 110 340 L 240 225 L 318 340" fill="none" stroke="'+d+'" stroke-width="'+w+'"/>';
+}else if(c.concept==="lattice"){
+const n=3+Math.floor(k/2),step=260/(n-1);
+for(let y=0;y<n;y++)for(let x=0;x<n;x++){
+const px=126+x*step,py=126+y*step;
+if((x+y+i)%3===0)paths+='<rect x="'+(px-11)+'" y="'+(py-11)+'" width="22" height="22" rx="3" fill="'+a+'" transform="rotate('+(rot+x*5)+' '+px+' '+py+')"/>';
+if(x<n-1)paths+='<path d="M '+px+' '+py+' H '+(px+step)+'" stroke="'+b+'" stroke-width="'+(w*.5)+'"/>';
+if(y<n-1)paths+='<path d="M '+px+' '+py+' V '+(py+step)+'" stroke="'+d+'" stroke-width="'+(w*.5)+'"/>';
+}
+}else{
+const n=5+Math.floor(k/2);
+for(let j=0;j<n;j++){
+const theta=j*angle+i*.12,r=75+rand(seed,j+5)*105;
+const x=center+Math.cos(theta)*r,y=center+Math.sin(theta)*r;
+paths+='<path d="M 256 256 L '+x+' '+y+'" stroke="'+(j%2?a:d)+'" stroke-width="'+w+'" opacity=".75"/>';
+paths+='<circle cx="'+x+'" cy="'+y+'" r="'+(8+c.boldness)+'" fill="'+(j%2?b:a)+'"/>';
+}
+paths+='<circle cx="256" cy="256" r="26" fill="'+d+'"/>';
+}
+return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Procedural logo iteration '+i+'"><rect width="512" height="512" fill="#111b1e"/><circle cx="256" cy="256" r="207" fill="none" stroke="'+b+'" stroke-width="1" opacity=".5"/><g transform="rotate('+rot+' 256 256)">'+paths+'</g></svg>';
+}
+function event(text){
+scenario.events.unshift(text);
+scenario.events=scenario.events.slice(0,80);
+renderLog();
+}
+function renderLog(){
+$("log").replaceChildren();
+for(const text of scenario.events){
+const div=document.createElement("div");div.textContent=text;$("log").append(div);
+}
+}
+function scoreFor(seed,i){
+const values=[
+.44+.45*rand(seed,i*7+10),
+.4+.5*rand(seed,i*7+11),
+.46+.44*rand(seed,i*7+12),
+.4+.48*rand(seed,i*7+13)
+].map(v=>Math.min(.98,v));
+const composite=values.reduce((a,b)=>a+b,0)/values.length;
+return {values,composite};
+}
+function makeCandidate(i){
+const c=scenario.config,seed=scenario.seed;
+const s=scoreFor(seed,i);
+return {
+id:"candidate-"+String(i+1).padStart(2,"0"),
+parent:i===0?(scenario.imported?"imported-baseline":"initial-objective"):"candidate-"+String(i).padStart(2,"0"),
+index:i+1,svg:geometry(c,i,seed+i*101),score:s.composite,values:s.values,
+prompt:c.prompt,mode:c.mode,origin:scenario.importName||"generated",
+kind:"procedural",seed:seed+i*101
+};
+}
+function best(){
+return scenario.candidates.reduce((a,c)=>!a||c.score>a.score?c:a,null);
+}
+function current(){return scenario.candidates[scenario.view]||null;}
+function show(index){
+if(index<-1||index>=scenario.candidates.length)return;
+scenario.view=index;render();
+}
+function render(){
+const item=current(),total=scenario.config?.steps||Number($("steps").value);
+$("state").textContent=scenario.status.toUpperCase()+" · LOCAL";
+$("stat-iteration").textContent=scenario.candidates.length+" / "+total;
+$("stat-candidates").textContent=scenario.candidates.length;
+$("stat-best").textContent=best()?fmt(best().score):"—";
+$("stat-selected").textContent=scenario.selected===null?"—":scenario.selected+1;
+$("viewer-label").textContent=item?"CANDIDATE / "+String(item.index).padStart(2,"0"):"BASELINE / 00";
+$("viewer-score").textContent=item?"ILLUSTRATIVE "+fmt(item.score):"NOT EVALUATED";
+$("artboard").replaceChildren();
+if(item){
+$("artboard").innerHTML=item.svg;
+}else if(scenario.imported){
+const img=document.createElement("img");img.src=scenario.imported;img.alt="Imported baseline";$("artboard").append(img);
+}else{
+$("artboard").innerHTML=geometry(config(),0,hash($("name").value+"baseline"));
+}
+$("previous").disabled=scenario.view<=-1;
+$("next").disabled=scenario.view>=scenario.candidates.length-1;
+$("select").disabled=!item;
+$("export").disabled=!item;
+$("start").disabled=scenario.status==="running"||scenario.status==="paused";
+$("pause").disabled=scenario.status!=="running"&&scenario.status!=="paused";
+$("cancel").disabled=scenario.status!=="running"&&scenario.status!=="paused";
+$("pause").textContent=scenario.status==="paused"?"Resume":"Pause";
+$("feedback").textContent=scenario.status==="running"?"Generating local candidates…":scenario.status==="completed"?"Sequence complete. Select and export a candidate.":scenario.status==="paused"?"Paused.":"Ready to create.";
+$("timeline").replaceChildren();
+const base=document.createElement("button");base.className="thumb"+(scenario.view===-1?" active":"");
+const baseArt=document.createElement("div");baseArt.className="thumb-art";
+if(scenario.imported){const im=document.createElement("img");im.src=scenario.imported;im.alt="Imported baseline";baseArt.append(im);}
+else baseArt.innerHTML=geometry(scenario.config||config(),0,hash("baseline"+$("name").value));
+const bt=document.createElement("strong");bt.textContent="Baseline";
+const bs=document.createElement("small");bs.textContent=scenario.imported?"Imported artwork":"Procedural origin";
+base.append(baseArt,bt,bs);base.onclick=()=>show(-1);$("timeline").append(base);
+scenario.candidates.forEach((c,i)=>{
+const b=document.createElement("button");b.className="thumb"+(i===scenario.view?" active":"");
+const art=document.createElement("div");art.className="thumb-art";art.innerHTML=c.svg;
+const title=document.createElement("strong");title.textContent="Iteration "+c.index;
+const sub=document.createElement("small");sub.textContent=fmt(c.score)+(scenario.selected===i?" · SELECTED":"");
+b.append(art,title,sub);b.onclick=()=>show(i);$("timeline").append(b);
+});
+$("criteria").replaceChildren();
+const names=["Form balance","Distinctiveness","Visual clarity","Scalability"];
+names.forEach((name,i)=>{
+const row=document.createElement("div");row.className="criterion";
+const title=document.createElement("span");title.textContent=name;
+const bar=document.createElement("div");bar.className="bar";
+const fill=document.createElement("span");fill.style.width=(item?item.values[i]*100:0)+"%";bar.append(fill);
+const value=document.createElement("span");value.textContent=item?fmt(item.values[i]):"—";
+row.append(title,bar,value);$("criteria").append(row);
+});
+}
+function stopTimer(){if(scenario.timer!==null){clearInterval(scenario.timer);scenario.timer=null;}}
+function step(){
+if(scenario.status!=="running")return;
+const i=scenario.candidates.length;
+if(i>=scenario.config.steps){finish();return;}
+const candidate=makeCandidate(i);
+scenario.candidates.push(candidate);
+scenario.view=i;
+event("Iteration "+candidate.index+" generated from "+candidate.parent+" · score "+fmt(candidate.score));
+if(scenario.candidates.length>=scenario.config.steps)finish();
+render();
+}
+function finish(){
+stopTimer();scenario.status="completed";
+const winner=best();scenario.selected=scenario.candidates.indexOf(winner);
+event("Sequence complete · best illustrative score "+fmt(winner.score));
+}
+function start(){
+stopTimer();scenario.config=config();
+scenario.seed=hash(JSON.stringify(scenario.config)+(scenario.importName||""));
+scenario.candidates=[];scenario.selected=null;scenario.view=-1;scenario.status="running";scenario.events=[];
+event("Session started · "+scenario.config.mode+" · "+scenario.config.concept);
+render();scenario.timer=setInterval(step,800);
+}
+function reset(){
+stopTimer();scenario.status="ready";scenario.config=null;scenario.candidates=[];scenario.selected=null;scenario.view=-1;scenario.events=[];
+render();
+}
+function download(name,content,type){
+const blob=new Blob([content],{type}),url=URL.createObjectURL(blob);
+const a=document.createElement("a");a.href=url;a.download=name;a.click();
+setTimeout(()=>URL.revokeObjectURL(url),1500);
+}
+$("from-scratch").onclick=()=>{
+if(scenario.status==="running"||scenario.status==="paused")return;
+scenario.mode="scratch";scenario.imported=null;scenario.importName=null;
+$("upload-area").hidden=true;$("from-scratch").classList.add("active");$("from-file").classList.remove("active");
+$("from-scratch").setAttribute("aria-pressed","true");$("from-file").setAttribute("aria-pressed","false");reset();
+};
+$("from-file").onclick=()=>{
+if(scenario.status==="running"||scenario.status==="paused")return;
+scenario.mode="import";$("upload-area").hidden=false;
+$("from-file").classList.add("active");$("from-scratch").classList.remove("active");
+$("from-file").setAttribute("aria-pressed","true");$("from-scratch").setAttribute("aria-pressed","false");reset();
+};
+$("baseline-file").onchange=async e=>{
+const file=e.target.files?.[0];if(!file)return;
+const types=["image/png","image/jpeg","image/webp","image/svg+xml"];
+if(!types.includes(file.type)||file.size>5*1024*1024){alert("Choose a supported image under 5 MB.");e.target.value="";return;}
+try{
+const data=await new Promise((resolve,reject)=>{
+const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=()=>reject(new Error("Read failed"));r.readAsDataURL(file);
+});
+if(file.type==="image/svg+xml"){
+const xml=atob(String(data).split(",")[1]);
+const doc=new DOMParser().parseFromString(xml,"image/svg+xml");
+if(doc.querySelector("parsererror")||doc.documentElement.localName!=="svg"){throw new Error("Invalid SVG");}
+}
+scenario.imported=data;scenario.importName=file.name;
+event("Baseline imported · "+file.name);
+render();
+}catch{alert("Unable to read the baseline.");}
+};
+$("complexity").oninput=e=>$("complexity-value").textContent=e.target.value;
+$("boldness").oninput=e=>$("boldness-value").textContent=e.target.value;
+$("start").onclick=()=>{
+if(scenario.mode==="import"&&!scenario.imported){alert("Import a baseline image first.");return;}
+start();
+};
+$("pause").onclick=()=>{
+if(scenario.status==="running"){stopTimer();scenario.status="paused";event("Session paused");}
+else if(scenario.status==="paused"){scenario.status="running";scenario.timer=setInterval(step,800);event("Session resumed");}
+render();
+};
+$("cancel").onclick=()=>{stopTimer();scenario.status="cancelled";event("Session cancelled");render();};
+$("reset").onclick=reset;
+$("previous").onclick=()=>show(scenario.view-1);
+$("next").onclick=()=>show(scenario.view+1);
+$("select").onclick=()=>{
+if(!current())return;scenario.selected=scenario.view;
+event("Selected "+current().id);render();
+};
+$("export").onclick=()=>{
+const c=current();if(!c)return;
+download("savant-"+c.id+".svg",c.svg,"image/svg+xml");
+};
+$("export-session").onclick=()=>{
+const record={
+schema:1,kind:"savant-urge-local-identity-demonstration",
+execution:"procedural-local",
+config:scenario.config||config(),
+importedBaselineName:scenario.importName,
+baselineImageExcluded:true,
+status:scenario.status,
+selected:scenario.selected===null?null:scenario.candidates[scenario.selected]?.id,
+candidates:scenario.candidates.map(({id,parent,index,score,values,prompt,mode,origin,kind,seed})=>({id,parent,index,score,values,prompt,mode,origin,kind,seed}))
+};
+download("savant-urge-session.json",JSON.stringify(record,null,2),"application/json");
+};
+render();
+})();
+</script>
+</body>
+</html>

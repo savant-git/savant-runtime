@@ -1,0 +1,66 @@
+{
+  "authoritative": false,
+  "child_profile": "son",
+  "deterministic_hash": "d0def2e904e24b9b7c923bff5616e8b5b7e993cd2d18395c20711aac795cf8da",
+  "domain": "filesystem",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "lineage.composition.39336d08c5b91c99b460",
+  "impeti": [],
+  "namespace": "preview.kindred",
+  "parent_profile": "parent",
+  "plane": "lineage",
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "role": "composition",
+  "schema": "savant.kindred.preview.lineage_segue.v2",
+  "source": "canon-system/projections/md/exile",
+  "source_record": {
+    "axis": "containment",
+    "canonical_source": "fs:canon-system/projections/md/exile",
+    "canonical_target": "fs:canon-system/projections/md/exile/niche.md",
+    "continuation": "projecting",
+    "id": "lineage.composition.39336d08c5b91c99b460",
+    "inheritance": {
+      "conflict_policy": "child_wins",
+      "exclude": [],
+      "fields": [],
+      "mode": "reference"
+    },
+    "inverse": "component",
+    "kind": "contains",
+    "metadata": {
+      "legacy_edge_kind": "contains",
+      "projection": "filesystem_edifice"
+    },
+    "order": 0,
+    "propagation": {
+      "channels": [
+        "validation",
+        "projection",
+        "regeneration"
+      ],
+      "enabled": true
+    },
+    "provenance": {
+      "created_by": "filesystem_adapter",
+      "source_files": [
+        "/root/savant-runtime/canon-system/projections/md/exile/niche.md"
+      ]
+    },
+    "role": "composition",
+    "scope": "filesystem",
+    "source": "canon-system/projections/md/exile",
+    "status": "active",
+    "symbolic_child_alias": "son",
+    "symbolic_parent_alias": "parent",
+    "target": "canon-system/projections/md/exile/niche.md",
+    "weight": 2
+  },
+  "state": "active",
+  "synthetic": false,
+  "target": "canon-system/projections/md/exile/niche.md"
+}

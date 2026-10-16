@@ -1,0 +1,187 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import subprocess
+import sys
+from pathlib import Path
+
+
+ROOT = Path("/root/savant-runtime")
+
+PYTHON = (
+    ROOT
+    / "bin"
+    / "identity-quality-python"
+)
+
+MASTERPLAN_BUILD = (
+    ROOT
+    / "bin"
+    / "masterplan-build"
+)
+
+MASTERPLAN_PROJECT = (
+    ROOT
+    / "bin"
+    / "masterplan-project"
+)
+
+TRANSITION = (
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "apply_masterplan_transition.py"
+)
+
+
+def execute(
+    command: list[str],
+) -> int:
+    return subprocess.run(
+        command,
+        cwd=str(ROOT),
+        check=False,
+    ).returncode
+
+
+def refresh() -> int:
+    return execute(
+        [
+            str(MASTERPLAN_BUILD),
+            "strict",
+        ]
+    )
+
+
+def transition(
+    arguments: list[str],
+    *,
+    rebuild: bool,
+    project: bool,
+) -> int:
+    if rebuild:
+        status = refresh()
+
+        if status:
+            return status
+
+    status = execute(
+        [
+            str(PYTHON),
+            str(TRANSITION),
+            *arguments,
+        ]
+    )
+
+    if status:
+        return status
+
+    if project:
+        return execute(
+            [
+                str(MASTERPLAN_PROJECT),
+                "strict",
+            ]
+        )
+
+    return 0
+
+
+def usage() -> int:
+    print(
+        """
+masterplan-transition plan TASK_ID NEXT_STATE --actor ACTOR --rationale TEXT [--decision-id ID]
+masterplan-transition apply TASK_ID NEXT_STATE --actor ACTOR --rationale TEXT [--decision-id ID]
+masterplan-transition apply-strict TASK_ID NEXT_STATE --actor ACTOR --rationale TEXT [--decision-id ID]
+masterplan-transition refresh-plan TASK_ID NEXT_STATE --actor ACTOR --rationale TEXT [--decision-id ID]
+masterplan-transition refresh-apply TASK_ID NEXT_STATE --actor ACTOR --rationale TEXT [--decision-id ID]
+masterplan-transition refresh-apply-strict TASK_ID NEXT_STATE --actor ACTOR --rationale TEXT [--decision-id ID]
+"""
+    )
+
+    return 0
+
+
+def main() -> int:
+    arguments = sys.argv[1:]
+
+    if not arguments:
+        return usage()
+
+    command = arguments[0]
+    remaining = arguments[1:]
+
+    if command in {
+        "help",
+        "--help",
+        "-h",
+    }:
+        return usage()
+
+    if command == "plan":
+        return transition(
+            [
+                *remaining,
+                "--plan",
+            ],
+            rebuild=False,
+            project=False,
+        )
+
+    if command == "apply":
+        return transition(
+            remaining,
+            rebuild=False,
+            project=True,
+        )
+
+    if command == "apply-strict":
+        return transition(
+            [
+                *remaining,
+                "--strict",
+            ],
+            rebuild=False,
+            project=True,
+        )
+
+    if command == "refresh-plan":
+        return transition(
+            [
+                *remaining,
+                "--plan",
+            ],
+            rebuild=True,
+            project=False,
+        )
+
+    if command == "refresh-apply":
+        return transition(
+            remaining,
+            rebuild=True,
+            project=True,
+        )
+
+    if command == "refresh-apply-strict":
+        return transition(
+            [
+                *remaining,
+                "--strict",
+            ],
+            rebuild=True,
+            project=True,
+        )
+
+    print(
+        f"ERROR: unknown command: {command}",
+        file=sys.stderr,
+    )
+
+    return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

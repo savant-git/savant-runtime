@@ -1,0 +1,475 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema": "savant://canon/structure/canonical-runtime/1.0.0",
+  "status": "accepted-authority",
+  "authority": {
+    "scope": "/root/savant-runtime",
+    "mutation_authorized": false,
+    "filesystem_presence_establishes_authority": false,
+    "historical_paths_are_compatibility_evidence": true,
+    "precedence": [
+      "current-user-directive",
+      "accepted-authoritative-graph",
+      "accepted-decisions",
+      "constitutional-canon",
+      "verified-implementation",
+      "admitted-evidence",
+      "deterministic-projection",
+      "historical-implementation",
+      "historical-documents",
+      "inference",
+      "speculation"
+    ]
+  },
+  "principles": {
+    "authoritative_substance": "instances",
+    "filesystem_role": "operational-projection",
+    "substantiate_once": true,
+    "compose_instead_of_duplicate": true,
+    "project_instead_of_duplicate_storage": true,
+    "extend_instead_of_replace": true,
+    "relationships_instead_of_duplicate_containment": true,
+    "empty_scaffolding_required": false,
+    "destructive_normalization_forbidden": true,
+    "unresolved_artifacts_remain_in_place": true
+  },
+  "runtime_domains": [
+    {
+      "name": "authority",
+      "role": "authority graph, accepted decisions, precedence and bindings"
+    },
+    {
+      "name": "canon",
+      "role": "constitutional and domain canon"
+    },
+    {
+      "name": "context",
+      "role": "active and durable context projections"
+    },
+    {
+      "name": "lexicon",
+      "role": "canonical terminology"
+    },
+    {
+      "name": "ontology",
+      "role": "substantiated recursive modular edifice"
+    },
+    {
+      "name": "runtime",
+      "role": "active execution state and runtime projections"
+    },
+    {
+      "name": "vault",
+      "role": "durable primitives, retained evidence and protected history"
+    },
+    {
+      "name": "assurance",
+      "role": "validation, verification and reports"
+    },
+    {
+      "name": "evolution",
+      "role": "migration, succession, supersession and history"
+    }
+  ],
+  "identity_edifice": {
+    "ascending": [
+      "iota",
+      "mote",
+      "trait",
+      "quirk",
+      "prodigal",
+      "exile",
+      "innate",
+      "portal",
+      "obelisk"
+    ],
+    "descending": [
+      "obelisk",
+      "portal",
+      "innate",
+      "exile",
+      "prodigal",
+      "quirk",
+      "trait",
+      "mote",
+      "iota"
+    ],
+    "containers": {
+      "obelisks": "obelisk",
+      "portals": "portal",
+      "innates": "innate",
+      "exiles": "exile",
+      "prodigals": "prodigal",
+      "quirks": "quirk",
+      "traits": "trait",
+      "motes": "mote",
+      "iotas": "iota"
+    },
+    "owner_inference": {
+      "container_child_may_identify_instance": true,
+      "template_names_are_not_owners": true,
+      "reserved_nonowners": [
+        "_template",
+        "template",
+        "segue",
+        "rubric",
+        "cabal",
+        "kindred",
+        "moods",
+        "slots",
+        "attachments",
+        "projections",
+        "tasks",
+        "receipts"
+      ]
+    }
+  },
+  "compatibility_identity": {
+    "gates": {
+      "canonical_successor": "portals",
+      "automatic_rename_authorized": false,
+      "classification": "historical-or-compatibility-layer",
+      "required_resolution": [
+        "dependency-analysis",
+        "reverse-dependency-analysis",
+        "lineage-preservation",
+        "provenance-preservation",
+        "replay-validation",
+        "compatibility-validation"
+      ]
+    },
+    "shards": {
+      "canonical_successor": "iotas",
+      "automatic_rename_authorized": false,
+      "classification": "historical-or-context-specific-term"
+    }
+  },
+  "content_edifice": {
+    "ascending": [
+      "character",
+      "line",
+      "snippet",
+      "script",
+      "module",
+      "service",
+      "application",
+      "suite",
+      "estate"
+    ],
+    "descending": [
+      "estate",
+      "suite",
+      "application",
+      "service",
+      "module",
+      "script",
+      "snippet",
+      "line",
+      "character"
+    ],
+    "collections": {
+      "characters": "character",
+      "lines": "line",
+      "snippets": "snippet",
+      "scripts": "script",
+      "modules": "module",
+      "services": "service",
+      "applications": "application",
+      "apps": "application",
+      "suites": "suite",
+      "estates": "estate"
+    },
+    "rules": {
+      "collection_child_is_not_automatically_owner": true,
+      "filename_is_never_owner_by_position_alone": true,
+      "literal_directory_for_every_level_required": false,
+      "framework_native_structure_is_preserved": true,
+      "content_edifice_is_compositional": true
+    }
+  },
+  "element_capsule": {
+    "descriptor": "instance.cue",
+    "legal_facilities": [
+      "authority",
+      "composition",
+      "segue",
+      "rubric",
+      "cabal",
+      "kindred",
+      "moods",
+      "slots",
+      "attachments",
+      "projections",
+      "tasks",
+      "receipts"
+    ],
+    "materialize_only_when_needed": true
+  },
+  "rubric": {
+    "definition": "complete executable implementation set owned by one element",
+    "descriptor": "rubric.cue",
+    "facilities": [
+      "source",
+      "contracts",
+      "schemas",
+      "adapters",
+      "commands",
+      "tests",
+      "migrations",
+      "tasks",
+      "receipts"
+    ],
+    "facility_roles": {
+      "source": "implementation substance",
+      "contracts": "externally meaningful obligations and interfaces",
+      "schemas": "structural definitions and validation shapes",
+      "adapters": "compatibility and translation boundaries",
+      "commands": "executable entry points",
+      "tests": "focused verification",
+      "migrations": "reversible structural or data transitions",
+      "tasks": "owned operational task definitions",
+      "receipts": "execution and validation evidence"
+    },
+    "rules": {
+      "every_source_directory_is_rubric": false,
+      "every_application_subdirectory_is_rubric": false,
+      "tests_remain_in_tests": true,
+      "commands_remain_in_commands": true,
+      "schemas_remain_in_schemas": true,
+      "physical_movement_required_for_ownership": false,
+      "ownership_may_be_declared_by_descriptor": true
+    }
+  },
+  "cabal": {
+    "definition": "implementation genuinely shared by independently owned elements at their narrowest common scope",
+    "descriptor": "cabal.cue",
+    "laws": [
+      "chorus",
+      "commons",
+      "covenant",
+      "equinox",
+      "gauntlet",
+      "distillate",
+      "severance",
+      "cascade",
+      "bridge"
+    ],
+    "facilities": [
+      "members",
+      "contracts",
+      "schemas",
+      "adapters",
+      "tests",
+      "compatibility",
+      "lineage",
+      "tasks"
+    ],
+    "rules": {
+      "proven_reuse_required": true,
+      "hypothetical_reuse_is_insufficient": true,
+      "filename_similarity_is_insufficient": true,
+      "narrowest_common_scope_required": true,
+      "owned_substance_is_not_duplicated": true
+    }
+  },
+  "kindred": {
+    "definition": "typed relationship system connecting independently substantiated instances",
+    "trees": [
+      "structural",
+      "semantic",
+      "rubric",
+      "authority",
+      "composition",
+      "dependency",
+      "provenance",
+      "succession",
+      "compatibility"
+    ],
+    "families": [
+      "Descent",
+      "Fraternity",
+      "Collateral",
+      "Union",
+      "Guardianship",
+      "Adoption",
+      "Composition",
+      "Succession",
+      "Affinity"
+    ],
+    "coordinates": [
+      "generation",
+      "collateral",
+      "affinity",
+      "authority",
+      "dependency",
+      "composition",
+      "temporal",
+      "provenance",
+      "compatibility"
+    ],
+    "canonical_coordinate": "K(generation, collateral, affinity, authority, dependency, composition, temporal, provenance, compatibility)",
+    "relationships_replace_duplicate_containment": true
+  },
+  "moods": [
+    "anima",
+    "weld",
+    "kiln",
+    "graft",
+    "aria",
+    "mantle",
+    "fulcrum",
+    "echelon",
+    "ascent"
+  ],
+  "scope_placement": {
+    "rule": "place an authoritative primitive at the narrowest scope whose authority, behavior, implementation or state it affects",
+    "global_masterplan": [
+      "/root/savant-runtime/MASTERPLAN.md",
+      "/root/savant-runtime/masterplan.json"
+    ],
+    "global_masterplan_role": "projection of recursively owned tasks",
+    "global_masterplan_owns_tasks": false,
+    "global_authority": "/root/savant-runtime/authority",
+    "global_canon": "/root/savant-runtime/canon",
+    "runtime_projections": "/root/savant-runtime/runtime",
+    "assurance_outputs": "/root/savant-runtime/assurance",
+    "migration_history": "/root/savant-runtime/evolution",
+    "local_authority": "<element>/authority",
+    "local_tasks": "<element>/tasks",
+    "rubric_tasks": "<element>/rubric/<rubric>/tasks",
+    "transition_tasks": "<element>/segue/tasks"
+  },
+  "operational_ownership": {
+    "niche": [
+      "task-discovery",
+      "task-decomposition",
+      "priority",
+      "scheduling",
+      "task-state"
+    ],
+    "opus": [
+      "ai-provider-routing",
+      "ai-orchestration",
+      "ai-execution"
+    ],
+    "notary": [
+      "verification",
+      "evidence-admission",
+      "attestation"
+    ],
+    "coda": [
+      "authorized-durable-mutation"
+    ],
+    "pact": [
+      "contracts",
+      "constraints",
+      "permissions",
+      "agreements"
+    ],
+    "modus": [
+      "modular-composition-rules"
+    ],
+    "underscore": [
+      "structural-normalization",
+      "hidden-support"
+    ],
+    "shatter": [
+      "controlled-decomposition",
+      "fault-isolation"
+    ],
+    "palaver": [
+      "conversational-surfaces"
+    ],
+    "envoy": [
+      "outward-communication"
+    ]
+  },
+  "classification_precedence": [
+    "explicit-accepted-authority",
+    "explicit-owner-declaration",
+    "rubric-or-cabal-descriptor-binding",
+    "stable-instance-address",
+    "package-or-framework-manifest",
+    "dependency-and-reverse-dependency-evidence",
+    "deterministic-structural-inference",
+    "unresolved"
+  ],
+  "framework_boundaries": {
+    "preserve_native_package_structure": true,
+    "recognized_manifests": [
+      "pyproject.toml",
+      "setup.py",
+      "setup.cfg",
+      "package.json",
+      "Cargo.toml",
+      "go.mod",
+      "pom.xml",
+      "build.gradle",
+      "build.gradle.kts",
+      "composer.json",
+      "Gemfile"
+    ],
+    "package_initializers_are_distinct_by_package": true,
+    "same_filename_does_not_imply_same_identity": true
+  },
+  "forbidden_inferences": [
+    "infer-owner-from-filename-after-content-collection",
+    "infer-rubric-from-arbitrary-source-directory",
+    "infer-cabal-from-filename-similarity",
+    "collapse-package-initializers",
+    "move-tests-into-source",
+    "insert-source-beneath-every-code-directory",
+    "replace-framework-native-organization-with-rubric-facilities",
+    "rename-historical-compatibility-paths-without-authorization",
+    "move-unresolved-artifacts",
+    "execute-colliding-destinations"
+  ],
+  "migration_requirements": {
+    "default_action": "remain",
+    "proposal_is_not_authorization": true,
+    "authorization_required": true,
+    "collision_action": "block",
+    "parse_error_action": "block",
+    "unresolved_owner_action": "remain",
+    "low_confidence_action": "remain",
+    "required_evidence": [
+      "source-digest",
+      "destination-absence-or-authoritative-resolution",
+      "stable-owner",
+      "lineage",
+      "provenance",
+      "dependencies",
+      "dependents",
+      "syntax-or-compilation",
+      "focused-functional-verification",
+      "startup-compatibility-or-integration-check",
+      "rollback",
+      "receipt"
+    ]
+  },
+  "flow": [
+    "authoritative-primitive",
+    "instance-composition",
+    "typed-kindred-relationships",
+    "segue-transition",
+    "owned-rubric-execution",
+    "optional-cabal-consumption",
+    "runtime-effect",
+    "observation",
+    "validation",
+    "receipt",
+    "admitted-evidence",
+    "deterministic-projection"
+  ],
+  "governing_formula": [
+    "Rubric owns.",
+    "Cabal shares.",
+    "Kindred relates.",
+    "Segue transitions.",
+    "Mood transforms.",
+    "Slot attaches.",
+    "Authority governs.",
+    "Projection reveals.",
+    "Receipt proves."
+  ]
+}

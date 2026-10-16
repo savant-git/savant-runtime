@@ -1,0 +1,41 @@
+{
+  "id": "carbon.capabilities.oriel",
+  "owner": "carbon",
+  "kind": "simulation_specialization",
+  "status": "active",
+  "specialization": "oriel",
+  "manifest": "registry/manifests/oriel.json",
+  "provider": "runtime/oriel_capabilities.py",
+  "resolution": "derived_at_runtime",
+  "derivation": "provider_capability_manifests",
+  "projection": {
+    "owner": "filament",
+    "transformation_owner": "modus",
+    "default_mode": "reference",
+    "ownership_transfer": false,
+    "authority_transfer": false
+  },
+  "properties": {
+    "chronometric": true,
+    "logistics_aware": true,
+    "reality_bound": true,
+    "quantum_feasibility": true,
+    "inverse_chronology": true,
+    "causal_logistics": true,
+    "consequence_projection": true,
+    "reachability_projection": true,
+    "worldline_projection": true,
+    "uncertainty_preserving": true,
+    "provenance_preserving": true,
+    "lineage_preserving": true,
+    "source_mutating": false
+  },
+  "invariants": {
+    "capability_details_are_derived_not_duplicated": true,
+    "carbon_remains_execution_owner": true,
+    "filament_remains_projection_owner": true,
+    "modus_remains_transformation_owner": true,
+    "authority_transfer": false
+  },
+  "authority_effect": "none"
+}

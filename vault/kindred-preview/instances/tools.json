@@ -1,0 +1,127 @@
+{
+  "authoritative": false,
+  "authority_tier": "delegated",
+  "canonical_id": "fs:tools",
+  "deterministic_hash": "4c8708711bbf0b53cd1b268e8739fa80a6d439b56c040f6bac4d5ccb5a819541",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "tools",
+  "kind": "directory",
+  "label": "tools",
+  "namespace": "preview.kindred",
+  "path": "tools",
+  "placement": {
+    "domain": "filesystem",
+    "node": "tools",
+    "parent": "savant-runtime",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.8788138c1be85201168d",
+    "rank": 10,
+    "slot": "60_tools",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.1ce997d2b35abec4d7c7",
+    "lineage.composition.28d50042806926c20417",
+    "lineage.composition.51bc1a68a73ad4bb0156",
+    "lineage.composition.555b0d7fe2f1e932a425",
+    "lineage.composition.7251d2d2f0977c724e81",
+    "lineage.composition.7bc0970fac97e354cccd",
+    "lineage.composition.8788138c1be85201168d"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": false,
+    "canonical_id": "fs:tools",
+    "children": [
+      "tools/semantic_graph",
+      "tools/authority_graph",
+      "tools/ownership_graph",
+      "tools/refactor_engine",
+      "tools/savant_accelerator",
+      "tools/foundation"
+    ],
+    "daughters": [
+      "tools/semantic_graph",
+      "tools/authority_graph",
+      "tools/ownership_graph",
+      "tools/refactor_engine",
+      "tools/savant_accelerator",
+      "tools/foundation"
+    ],
+    "dependencies": [],
+    "fathers": [],
+    "id": "tools",
+    "kind": "directory",
+    "label": "tools",
+    "legacy_id": "tools",
+    "lineage": [
+      "savant-runtime"
+    ],
+    "metadata": {
+      "canonical_id": "fs:tools",
+      "child_modes": {
+        "preserving": [
+          "fs:tools/semantic_graph",
+          "fs:tools/authority_graph",
+          "fs:tools/ownership_graph",
+          "fs:tools/refactor_engine",
+          "fs:tools/savant_accelerator",
+          "fs:tools/foundation"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:tools/semantic_graph",
+          "fs:tools/authority_graph",
+          "fs:tools/ownership_graph",
+          "fs:tools/refactor_engine",
+          "fs:tools/savant_accelerator",
+          "fs:tools/foundation"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:."
+        ]
+      },
+      "projected_id": "tools",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "savant-runtime"
+    ],
+    "path": "tools",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "tools",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.1ce997d2b35abec4d7c7",
+      "lineage.composition.28d50042806926c20417",
+      "lineage.composition.51bc1a68a73ad4bb0156",
+      "lineage.composition.555b0d7fe2f1e932a425",
+      "lineage.composition.7251d2d2f0977c724e81",
+      "lineage.composition.7bc0970fac97e354cccd",
+      "lineage.composition.8788138c1be85201168d"
+    ],
+    "size": 12,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

@@ -1,0 +1,118 @@
+{
+  "id": "carbon.graph.oriel",
+  "owner": "carbon",
+  "type": "simulation_specialization_projection",
+  "status": "active",
+  "nodes": [
+    {
+      "id": "exile:carbon",
+      "type": "exile"
+    },
+    {
+      "id": "carbon.simulation",
+      "type": "simulation_substrate"
+    },
+    {
+      "id": "exile:carbon/specialization:oriel",
+      "type": "simulation_specialization",
+      "identity": "carbon.oriel"
+    },
+    {
+      "id": "carbon.oriel.runtime",
+      "type": "runtime_surface",
+      "path": "runtime/oriel.py"
+    },
+    {
+      "id": "carbon.oriel.capabilities",
+      "type": "derived_capability_surface",
+      "path": "runtime/oriel_capabilities.py"
+    },
+    {
+      "id": "carbon.oriel.lineage",
+      "type": "lineage_projection",
+      "path": "lineage/oriel_specialization.json"
+    },
+    {
+      "id": "carbon.oriel.composition",
+      "type": "composition_boundary",
+      "path": "runtime/oriel_composition.py"
+    },
+    {
+      "id": "carbon.oriel.interface",
+      "type": "interface_surface",
+      "path": "runtime/oriel_interface.py"
+    },
+    {
+      "id": "carbon.oriel.introspection",
+      "type": "introspection_surface",
+      "path": "runtime/oriel_introspection.py"
+    }
+  ],
+  "edges": [
+    {
+      "source": "exile:carbon",
+      "target": "carbon.simulation",
+      "relation": "owns"
+    },
+    {
+      "source": "carbon.simulation",
+      "target": "exile:carbon/specialization:oriel",
+      "relation": "substantiates"
+    },
+    {
+      "source": "exile:carbon/specialization:oriel",
+      "target": "carbon.oriel.runtime",
+      "relation": "executes_through"
+    },
+    {
+      "source": "exile:carbon/specialization:oriel",
+      "target": "carbon.oriel.capabilities",
+      "relation": "projects_capabilities_through"
+    },
+    {
+      "source": "exile:carbon/specialization:oriel",
+      "target": "carbon.oriel.lineage",
+      "relation": "preserves_lineage_through"
+    },
+    {
+      "source": "exile:carbon/specialization:oriel",
+      "target": "carbon.oriel.composition",
+      "relation": "composes_through"
+    },
+    {
+      "source": "exile:carbon/specialization:oriel",
+      "target": "carbon.oriel.interface",
+      "relation": "exposes_through"
+    },
+    {
+      "source": "exile:carbon/specialization:oriel",
+      "target": "carbon.oriel.introspection",
+      "relation": "observes_through"
+    }
+  ],
+  "ownership": {
+    "simulation": "carbon",
+    "specialization": "carbon",
+    "runtime_execution": "carbon",
+    "capability_projection": "filament",
+    "capability_transformation": "modus",
+    "external_historical_reality": "external_source"
+  },
+  "invariants": {
+    "oriel_is_contained_by_carbon": true,
+    "oriel_does_not_define_carbon": true,
+    "oriel_is_not_a_peer_exile": true,
+    "standalone_historical_oriel_is_not_restored": true,
+    "carbon_remains_general_simulation_owner": true,
+    "carbon_remains_quantum_owner": true,
+    "carbon_remains_causal_simulation_owner": true,
+    "capability_surface_is_derived": true,
+    "composition_is_reference_first": true,
+    "source_authority_preserved": true,
+    "simulation_projection_is_derived": true,
+    "lineage_preserved": true,
+    "provenance_preserved": true,
+    "authority_transfer": false
+  },
+  "authority_effect": "none"
+}

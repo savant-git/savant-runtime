@@ -1,0 +1,6 @@
+{
+  "timestamp": "2026-10-08T15:18:23.764214+00:00",
+  "user": "If I give you a list of rules to follow will you adhere to them exactly and persistently?@",
+  "assistant": "Yes—with constraints.\n\nI will follow your rules exactly and consistently as long as they do not conflict with:\n- System/developer instructions that govern this environment\n- Platform safety policies or the law\n- Required operational constraints (e.g., no network, bounded FS)\n\nPersistence:\n- I will apply them throughout this conversation and any actions I take now.\n- To persist across future sessions/reboots, I can store them in the runtime as a policy file and treat them as a pre-action checklist. If you want that, I’ll propose a patch (no changes applied until approved).\n\nSend:\n- The ordered rules\n- Scope (all replies, only file ops, validations, etc.)\n- Conflict resolution (priority order or abort on conflict)\n- Persistence preference (path or I’ll suggest one)\n- Duration/expiry and who can amend them",
+  "trace": "memory empty\nopenai ok"
+}

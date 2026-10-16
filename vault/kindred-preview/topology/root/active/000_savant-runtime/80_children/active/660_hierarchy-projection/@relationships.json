@@ -1,0 +1,145 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "b03a6f5ed4cfe013a6b2a26f3cf779d317af7a624a78a2d2d049b2a3f5d01a74",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "namespace": "preview.kindred",
+  "node": "edifice:projection",
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationships": [
+    {
+      "child_profile": "child",
+      "domain": "global",
+      "id": "lineage.dependency.2c24557b7f38665805aa",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "dependency",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "dependency",
+      "source": "foundation:dynamic-canon",
+      "source_record": {
+        "axis": "prerequisite",
+        "canonical_source": "foundation:dynamic-canon",
+        "canonical_target": "edifice:projection",
+        "continuation": "neutral",
+        "id": "lineage.dependency.2c24557b7f38665805aa",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "dependent",
+        "kind": "dependency",
+        "metadata": {
+          "adapter": "authority",
+          "source_field": "dependencies",
+          "source_path": "/root/savant-runtime/canon-system/authority/edifices/projection.yaml"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "authority_adapter",
+          "created_from": [
+            "/root/savant-runtime/canon-system/authority/edifices/projection.yaml"
+          ],
+          "source_files": [
+            "/root/savant-runtime/canon-system/authority/edifices/projection.yaml"
+          ]
+        },
+        "role": "dependency",
+        "scope": "global",
+        "source": "foundation:dynamic-canon",
+        "status": "active",
+        "symbolic_child_alias": "child",
+        "symbolic_parent_alias": "parent",
+        "target": "edifice:projection",
+        "weight": 1
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "edifice:projection"
+    },
+    {
+      "child_profile": "child",
+      "domain": "global",
+      "id": "lineage.generic.b6dc6d52d65afcdda2f2",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "functional",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "generic",
+      "source": "foundation:dynamic-canon",
+      "source_record": {
+        "axis": "unspecified",
+        "canonical_source": "foundation:dynamic-canon",
+        "canonical_target": "edifice:projection",
+        "continuation": "neutral",
+        "id": "lineage.generic.b6dc6d52d65afcdda2f2",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "generic_child",
+        "kind": "generic",
+        "metadata": {
+          "adapter": "authority",
+          "source_field": "lineage.parents",
+          "source_path": "/root/savant-runtime/canon-system/authority/edifices/projection.yaml"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "authority_adapter",
+          "created_from": [
+            "/root/savant-runtime/canon-system/authority/edifices/projection.yaml"
+          ],
+          "source_files": [
+            "/root/savant-runtime/canon-system/authority/edifices/projection.yaml"
+          ]
+        },
+        "role": "generic",
+        "scope": "global",
+        "source": "foundation:dynamic-canon",
+        "status": "active",
+        "symbolic_child_alias": "child",
+        "symbolic_parent_alias": "parent",
+        "target": "edifice:projection",
+        "weight": 1
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "edifice:projection"
+    }
+  ],
+  "schema": "savant.kindred.preview.relationship_projection.v2"
+}

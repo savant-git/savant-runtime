@@ -1,0 +1,155 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import json
+import subprocess
+import sys
+from pathlib import Path
+
+
+ROOT = Path("/root/savant-runtime")
+
+PYTHON = (
+    ROOT
+    / "bin"
+    / "identity-quality-python"
+)
+
+PROPOSER = (
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "propose_duplicate_segue_reconciliation_decision.py"
+)
+
+ACCEPTER = (
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "accept_duplicate_segue_reconciliation_decision.py"
+)
+
+LATEST_PROPOSAL = (
+    ROOT
+    / "runtime"
+    / "masterplan"
+    / "decision-proposals"
+    / "latest.json"
+)
+
+
+def execute(
+    command: list[str],
+) -> int:
+    return subprocess.run(
+        command,
+        cwd=str(ROOT),
+        check=False,
+    ).returncode
+
+
+def usage() -> int:
+    print(
+        """
+masterplan-segue-decision propose
+masterplan-segue-decision show
+masterplan-segue-decision accept
+"""
+    )
+
+    return 0
+
+
+def show() -> int:
+    if not LATEST_PROPOSAL.is_file():
+        print(
+            "ERROR: no decision proposal exists.",
+            file=sys.stderr,
+        )
+
+        return 1
+
+    try:
+        value = json.loads(
+            LATEST_PROPOSAL.read_text(
+                encoding="utf-8",
+            )
+        )
+
+    except Exception as exc:
+        print(
+            f"ERROR: {exc}",
+            file=sys.stderr,
+        )
+
+        return 1
+
+    print(
+        json.dumps(
+            value,
+            ensure_ascii=False,
+            indent=2,
+            sort_keys=True,
+        )
+    )
+
+    return 0
+
+
+def main() -> int:
+    arguments = sys.argv[1:]
+
+    if not arguments:
+        return usage()
+
+    command = arguments[0]
+
+    if len(arguments) != 1:
+        print(
+            "ERROR: unexpected arguments.",
+            file=sys.stderr,
+        )
+
+        return 2
+
+    if command in {
+        "help",
+        "--help",
+        "-h",
+    }:
+        return usage()
+
+    if command == "propose":
+        return execute(
+            [
+                str(PYTHON),
+                str(PROPOSER),
+            ]
+        )
+
+    if command == "show":
+        return show()
+
+    if command == "accept":
+        return execute(
+            [
+                str(PYTHON),
+                str(ACCEPTER),
+                "--accept",
+            ]
+        )
+
+    print(
+        f"ERROR: unknown command: {command}",
+        file=sys.stderr,
+    )
+
+    return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

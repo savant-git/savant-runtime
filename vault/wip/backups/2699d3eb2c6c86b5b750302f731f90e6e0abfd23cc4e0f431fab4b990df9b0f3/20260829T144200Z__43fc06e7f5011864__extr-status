@@ -1,0 +1,142 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+import subprocess
+import sys
+
+
+runtime = Path(
+    "/root/savant-runtime/tools/extr-enterprise/runtime/extr.py"
+)
+
+policy = Path(
+    "/root/savant-runtime/tools/extr-enterprise/config/policy.json"
+)
+
+verified = Path(
+    "/root/savant-runtime/bin/extract_savant_jsonl.py"
+)
+
+public = Path(
+    "/usr/local/bin/extr"
+)
+
+
+def file_state(
+    path: Path,
+) -> str:
+    return (
+        "present"
+        if path.is_file()
+        else "missing"
+    )
+
+
+def dependency_projection() -> dict:
+    if not verified.is_file():
+        return {}
+
+    result = subprocess.run(
+        [
+            "/usr/bin/python3",
+            str(verified),
+            "--dependencies",
+        ],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        check=False,
+        timeout=10,
+    )
+
+    if result.returncode != 0:
+        return {
+            "available": False,
+            "error": result.stderr.strip(),
+        }
+
+    try:
+        return json.loads(
+            result.stdout
+        )
+    except json.JSONDecodeError:
+        return {
+            "available": False,
+            "error": "invalid dependency projection",
+        }
+
+
+def main() -> int:
+    required = {
+        "runtime": runtime.is_file(),
+        "policy": policy.is_file(),
+        "verified_entrypoint": verified.is_file(),
+        "public_entrypoint": public.is_file(),
+    }
+
+    payload = {
+        "schema":
+            "savant.extr.status.v1",
+        "projection_only":
+            True,
+        "authority_effect":
+            "none",
+        "healthy":
+            all(
+                required.values()
+            ),
+        "files": {
+            "runtime": {
+                "path": str(runtime),
+                "state": file_state(runtime),
+            },
+            "policy": {
+                "path": str(policy),
+                "state": file_state(policy),
+            },
+            "verified_entrypoint": {
+                "path": str(verified),
+                "state": file_state(verified),
+            },
+            "public_entrypoint": {
+                "path": str(public),
+                "state": file_state(public),
+            },
+        },
+        "dependencies":
+            dependency_projection(),
+        "semantics": {
+            "authority_effect":
+                "none",
+            "verified_implementation_preserved":
+                True,
+            "public_command":
+                "extr",
+            "modular_migration_in_progress":
+                True,
+        },
+    }
+
+    print(
+        json.dumps(
+            payload,
+            ensure_ascii=False,
+            sort_keys=True,
+            indent=2,
+        )
+    )
+
+    return (
+        0
+        if payload["healthy"]
+        else 1
+    )
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

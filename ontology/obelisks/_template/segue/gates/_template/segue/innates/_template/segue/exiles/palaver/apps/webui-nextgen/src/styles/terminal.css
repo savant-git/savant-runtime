@@ -1,0 +1,259 @@
+.terminal-observatory {
+  position: relative;
+  z-index: 4;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 70% 0%,
+      rgba(255, 255, 255, .045),
+      transparent 34%
+    ),
+    #050608;
+}
+
+.terminal-fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+}
+
+.terminal-toolbar {
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 12px;
+  border-bottom:
+    1px solid rgba(255, 255, 255, .09);
+  background:
+    rgba(5, 6, 8, .94);
+  backdrop-filter: blur(18px);
+}
+
+.terminal-identity {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 150px;
+}
+
+.terminal-identity div {
+  display: grid;
+  gap: 1px;
+}
+
+.terminal-identity strong {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.terminal-identity span {
+  font-size: 9px;
+  color: rgba(255, 255, 255, .42);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.terminal-session-meta {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  color: rgba(255, 255, 255, .42);
+  font-family:
+    "JetBrains Mono",
+    "SFMono-Regular",
+    Consolas,
+    monospace;
+  font-size: 10px;
+}
+
+.terminal-cwd {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.terminal-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: rgba(255, 255, 255, .62);
+}
+
+.terminal-status::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .32);
+}
+
+.terminal-status-connected::before {
+  background: #7dd3a7;
+  box-shadow:
+    0 0 10px rgba(125, 211, 167, .45);
+}
+
+.terminal-status-connecting::before {
+  background: #d7c67d;
+}
+
+.terminal-status-disconnected::before,
+.terminal-status-closed::before,
+.terminal-status-exited::before {
+  background: #d57b7b;
+}
+
+.terminal-actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.terminal-actions button {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border:
+    1px solid rgba(255, 255, 255, .09);
+  border-radius: 9px;
+  color: rgba(255, 255, 255, .62);
+  background: rgba(255, 255, 255, .035);
+}
+
+.terminal-actions button:hover {
+  color: white;
+  border-color:
+    rgba(255, 255, 255, .18);
+  background:
+    rgba(255, 255, 255, .07);
+}
+
+.terminal-search {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 132px;
+  padding: 0 8px;
+  border:
+    1px solid rgba(255, 255, 255, .08);
+  border-radius: 9px;
+  color: rgba(255, 255, 255, .38);
+  background:
+    rgba(255, 255, 255, .025);
+}
+
+.terminal-search input {
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  color: rgba(255, 255, 255, .75);
+  background: transparent;
+  font-size: 11px;
+}
+
+.terminal-host {
+  min-width: 0;
+  min-height: 0;
+  padding: 10px 8px 6px 12px;
+  overflow: hidden;
+}
+
+.terminal-host .xterm {
+  width: 100%;
+  height: 100%;
+}
+
+.terminal-host .xterm-viewport {
+  scrollbar-width: thin;
+  scrollbar-color:
+    rgba(255, 255, 255, .18)
+    transparent;
+}
+
+.terminal-footer {
+  min-height: 27px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 0 12px;
+  border-top:
+    1px solid rgba(255, 255, 255, .07);
+  color: rgba(255, 255, 255, .32);
+  background: rgba(0, 0, 0, .34);
+  font-size: 9px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .terminal-toolbar {
+    gap: 8px;
+  }
+
+  .terminal-session-meta {
+    display: none;
+  }
+
+  .terminal-search {
+    display: none;
+  }
+
+  .terminal-identity {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .terminal-footer {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 560px) {
+  .terminal-toolbar {
+    min-height: 48px;
+    padding: 6px 8px;
+  }
+
+  .terminal-host {
+    padding:
+      8px 4px 4px 7px;
+  }
+
+  .terminal-actions {
+    gap: 3px;
+  }
+
+  .terminal-actions button {
+    width: 30px;
+    height: 30px;
+  }
+
+  .terminal-footer {
+    gap: 12px;
+    padding: 0 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .terminal-status-connected::before {
+    box-shadow: none;
+  }
+}

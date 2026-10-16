@@ -1,0 +1,582 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "savant://schema/niche/masterplan/task-graph/1.0.0",
+  "title": "Savant Authoritative Task Graph",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "graph_id",
+    "authority",
+    "records",
+    "segues",
+    "events",
+    "decisions",
+    "receipts",
+    "attestations"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "graph_id": {
+      "type": "string",
+      "const": "savant.masterplan"
+    },
+    "authority": {
+      "$ref": "#/$defs/authority"
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/taskRecord"
+      }
+    },
+    "segues": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/taskSegue"
+      }
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/taskEvent"
+      }
+    },
+    "decisions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/taskDecision"
+      }
+    },
+    "receipts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/taskReceipt"
+      }
+    },
+    "attestations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/taskAttestation"
+      }
+    }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "authorityState": {
+      "type": "string",
+      "enum": [
+        "unknown",
+        "observed",
+        "proposed",
+        "accepted",
+        "authoritative",
+        "rejected",
+        "superseded"
+      ]
+    },
+    "taskStatus": {
+      "type": "string",
+      "enum": [
+        "unknown",
+        "proposed",
+        "accepted",
+        "ready",
+        "active",
+        "blocked",
+        "paused",
+        "completed",
+        "reopened",
+        "rejected",
+        "cancelled",
+        "superseded",
+        "archived"
+      ]
+    },
+    "taskKind": {
+      "type": "string",
+      "enum": [
+        "program",
+        "capability",
+        "onus",
+        "task",
+        "subtask",
+        "microstep",
+        "gate",
+        "milestone",
+        "decision",
+        "migration",
+        "audit",
+        "verification",
+        "attestation"
+      ]
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "class",
+        "tier",
+        "source",
+        "accepted_by"
+      ],
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/authorityState"
+        },
+        "class": {
+          "type": "string"
+        },
+        "tier": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "source": {
+          "type": "string"
+        },
+        "accepted_by": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "accepted_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "sourceReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_id",
+        "source_kind",
+        "authority_state"
+      ],
+      "properties": {
+        "source_id": {
+          "type": "string"
+        },
+        "source_kind": {
+          "type": "string"
+        },
+        "source_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_sha256": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/digest"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "authority_state": {
+          "$ref": "#/$defs/authorityState"
+        },
+        "captured_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "evidenceRequirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "required",
+        "acceptance"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "acceptance": {
+          "type": "string"
+        }
+      }
+    },
+    "taskRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "title",
+        "description",
+        "priority",
+        "status",
+        "authority",
+        "purpose",
+        "scope",
+        "acceptance",
+        "evidence_requirements",
+        "outputs",
+        "risks",
+        "security",
+        "lineage",
+        "provenance",
+        "extensions"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^SAV-[A-Z0-9][A-Z0-9._-]*$"
+        },
+        "kind": {
+          "$ref": "#/$defs/taskKind"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "priority": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "band",
+            "ordinal",
+            "authority_locked"
+          ],
+          "properties": {
+            "band": {
+              "type": "string",
+              "pattern": "^P[0-9]+[A-Z]*$"
+            },
+            "ordinal": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "authority_locked": {
+              "type": "boolean"
+            },
+            "rationale": {
+              "type": "string"
+            }
+          }
+        },
+        "status": {
+          "$ref": "#/$defs/taskStatus"
+        },
+        "authority": {
+          "$ref": "#/$defs/authority"
+        },
+        "purpose": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "object"
+        },
+        "acceptance": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "evidence_requirements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidenceRequirement"
+          }
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "risks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "security": {
+          "type": "object"
+        },
+        "lineage": {
+          "type": "object"
+        },
+        "provenance": {
+          "type": "object",
+          "required": [
+            "sources",
+            "created_at",
+            "created_by"
+          ],
+          "properties": {
+            "sources": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/sourceReference"
+              }
+            },
+            "created_at": {
+              "type": "string"
+            },
+            "created_by": {
+              "type": "string"
+            }
+          }
+        },
+        "extensions": {
+          "type": "object"
+        }
+      }
+    },
+    "taskSegue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "source",
+        "target",
+        "authority",
+        "provenance",
+        "validity"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "depends_on",
+            "blocks",
+            "contains",
+            "implements",
+            "validates",
+            "produces",
+            "consumes",
+            "supersedes",
+            "relates_to",
+            "promotes",
+            "migrates",
+            "observes",
+            "attests",
+            "rolls_back",
+            "unblocks"
+          ]
+        },
+        "source": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "authority": {
+          "$ref": "#/$defs/authority"
+        },
+        "provenance": {
+          "type": "object"
+        },
+        "validity": {
+          "type": "object"
+        },
+        "extensions": {
+          "type": "object"
+        }
+      }
+    },
+    "taskEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "task_id",
+        "event_type",
+        "previous_state",
+        "next_state",
+        "authority",
+        "occurred_at",
+        "provenance"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "task_id": {
+          "type": "string"
+        },
+        "event_type": {
+          "type": "string"
+        },
+        "previous_state": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "next_state": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "authority": {
+          "$ref": "#/$defs/authority"
+        },
+        "occurred_at": {
+          "type": "string"
+        },
+        "provenance": {
+          "type": "object"
+        }
+      }
+    },
+    "taskDecision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "subject",
+        "decision",
+        "authority",
+        "rationale",
+        "occurred_at",
+        "provenance"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string"
+        },
+        "decision": {
+          "type": "string"
+        },
+        "authority": {
+          "$ref": "#/$defs/authority"
+        },
+        "rationale": {
+          "type": "string"
+        },
+        "occurred_at": {
+          "type": "string"
+        },
+        "provenance": {
+          "type": "object"
+        }
+      }
+    },
+    "taskReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "task_id",
+        "operation",
+        "passed",
+        "outputs",
+        "evidence",
+        "occurred_at"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "task_id": {
+          "type": "string"
+        },
+        "operation": {
+          "type": "string"
+        },
+        "passed": {
+          "type": "boolean"
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "occurred_at": {
+          "type": "string"
+        }
+      }
+    },
+    "taskAttestation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "task_id",
+        "passed",
+        "criteria",
+        "evidence",
+        "digest",
+        "occurred_at"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "task_id": {
+          "type": "string"
+        },
+        "passed": {
+          "type": "boolean"
+        },
+        "criteria": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "occurred_at": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

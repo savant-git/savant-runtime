@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1"
+>
+<title>Coalesce</title>
+<link rel="stylesheet" href="./coalesce.css">
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <div class="eyebrow">SAVANT / MODUS / COALESCE</div>
+    <h1 id="title">Coalesce</h1>
+  </div>
+
+  <div class="actions">
+    <button id="focus-search">Search</button>
+    <button id="density">Density</button>
+    <button id="export">Export</button>
+  </div>
+</header>
+
+<section class="toolbar">
+  <select id="recipe"></select>
+
+  <input
+    id="query"
+    type="search"
+    placeholder="Search records"
+  >
+
+  <select id="kind">
+    <option value="">All kinds</option>
+  </select>
+
+  <select id="status">
+    <option value="">All statuses</option>
+  </select>
+</section>
+
+<section
+  id="summary"
+  class="summary"
+></section>
+
+<main class="layout">
+  <aside class="rail">
+    <div class="sticky">
+      <div class="label">Current group</div>
+      <div id="current-group">—</div>
+      <div id="current-meta"></div>
+    </div>
+  </aside>
+
+  <section
+    id="records"
+    class="records"
+  ></section>
+
+  <aside class="intel">
+    <div class="sticky">
+      <div class="label">Selection</div>
+      <div id="intel"></div>
+    </div>
+  </aside>
+</main>
+
+<div
+  id="drawer"
+  class="drawer"
+  aria-hidden="true"
+>
+  <button
+    id="drawer-close"
+    aria-label="Close"
+  >×</button>
+
+  <div id="drawer-content"></div>
+</div>
+
+<input
+  id="dataset-file"
+  type="file"
+  accept=".json,application/json"
+  hidden
+>
+
+<button
+  id="dataset-load"
+  class="load"
+>
+  Load dataset
+</button>
+
+<script
+  type="module"
+  src="./coalesce.js"
+></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+{
+  "authority": {
+    "accepted_at": "2026-08-01T22:03:54-04:00",
+    "accepted_by": "project-owner",
+    "authority_class": "project-owner-directed",
+    "confidence": 1.0,
+    "source": "docs/SAVANT_MASTER_TASKS.md",
+    "state": "accepted",
+    "tier": 1
+  },
+  "condition_mode": "all",
+  "conditions": [
+    {
+      "fact": "task.has_passing_attestation",
+      "operator": "truthy"
+    }
+  ],
+  "description": "Task completion requires a passing criterion-level attestation.",
+  "effect": "require",
+  "extensions": {},
+  "failure": {
+    "code": "masterplan.policy.completion_attestation_missing",
+    "message": "Task completion has no passing attestation."
+  },
+  "id": "policy.masterplan.completion-attestation-required",
+  "kind": "attestation",
+  "operations": [
+    "task.complete"
+  ],
+  "provenance": {
+    "contract_version": "1.0.0",
+    "generated_at": "2026-08-02T09:37:00-04:00",
+    "generated_by": "prodigal.niche.masterplan.masterplan_policy_runtime",
+    "sources": [
+      {
+        "authority_state": "accepted",
+        "source_id": "docs/SAVANT_MASTER_TASKS.md",
+        "source_kind": "accepted-masterplan-specification",
+        "source_path": "docs/SAVANT_MASTER_TASKS.md"
+      }
+    ],
+    "transformations": [
+      "masterplan_law_to_policy_record"
+    ]
+  },
+  "schema": "savant://niche/masterplan/policy/1.0.0",
+  "semantic_digest": "197c87491dff52f00b5304d8209467bbe1b8d4d029451ef7ccb312a5a4cb4fb0",
+  "title": "Completion Attestation Required",
+  "version": "1.0.0"
+}

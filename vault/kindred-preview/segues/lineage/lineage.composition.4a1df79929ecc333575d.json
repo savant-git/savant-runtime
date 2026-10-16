@@ -1,0 +1,66 @@
+{
+  "authoritative": false,
+  "child_profile": "daughter",
+  "deterministic_hash": "d7ae24070bb451f25204297e4fbc88845c96e0859a295a6bafb3788e06821d8a",
+  "domain": "filesystem",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "lineage.composition.4a1df79929ecc333575d",
+  "impeti": [],
+  "namespace": "preview.kindred",
+  "parent_profile": "parent",
+  "plane": "lineage",
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "role": "composition",
+  "schema": "savant.kindred.preview.lineage_segue.v2",
+  "source": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/graph",
+  "source_record": {
+    "axis": "containment",
+    "canonical_source": "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/graph",
+    "canonical_target": "fs:ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/graph/projections",
+    "continuation": "preserving",
+    "id": "lineage.composition.4a1df79929ecc333575d",
+    "inheritance": {
+      "conflict_policy": "child_wins",
+      "exclude": [],
+      "fields": [],
+      "mode": "reference"
+    },
+    "inverse": "component",
+    "kind": "contains",
+    "metadata": {
+      "legacy_edge_kind": "contains",
+      "projection": "filesystem_edifice"
+    },
+    "order": 0,
+    "propagation": {
+      "channels": [
+        "validation",
+        "projection",
+        "regeneration"
+      ],
+      "enabled": true
+    },
+    "provenance": {
+      "created_by": "filesystem_adapter",
+      "source_files": [
+        "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/graph/projections"
+      ]
+    },
+    "role": "composition",
+    "scope": "filesystem",
+    "source": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/graph",
+    "status": "active",
+    "symbolic_child_alias": "daughter",
+    "symbolic_parent_alias": "parent",
+    "target": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/graph/projections",
+    "weight": 2
+  },
+  "state": "active",
+  "synthetic": false,
+  "target": "ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/segue/prodigals/graph/projections"
+}

@@ -1,0 +1,81 @@
+{
+  "id": "carbon.exports",
+  "owner": "carbon",
+  "type": "composition_exports",
+  "status": "active",
+  "exports": [
+    {
+      "id": "simulation_definition",
+      "kind": "primitive_reference"
+    },
+    {
+      "id": "simulation_instance",
+      "kind": "instance_reference"
+    },
+    {
+      "id": "simulation_state",
+      "kind": "derived_projection"
+    },
+    {
+      "id": "simulation_branch",
+      "kind": "derived_instance"
+    },
+    {
+      "id": "simulation_checkpoint",
+      "kind": "immutable_reference"
+    },
+    {
+      "id": "simulation_execution",
+      "kind": "derived_projection"
+    },
+    {
+      "id": "simulation_comparison",
+      "kind": "derived_projection"
+    },
+    {
+      "id": "causal_trace",
+      "kind": "derived_projection"
+    },
+    {
+      "id": "uncertainty_projection",
+      "kind": "derived_projection"
+    },
+    {
+      "id": "simulation_receipt",
+      "kind": "execution_evidence"
+    },
+    {
+      "id": "simulation_lineage",
+      "kind": "lineage_projection"
+    },
+    {
+      "id": "simulation_provenance",
+      "kind": "provenance_projection"
+    },
+    {
+      "id": "oriel_specialization",
+      "kind": "simulation_specialization_reference"
+    },
+    {
+      "id": "oriel_capability_surface",
+      "kind": "derived_projection"
+    },
+    {
+      "id": "oriel_projection_packet",
+      "kind": "derived_projection"
+    },
+    {
+      "id": "avatar_forge",
+      "kind": "simulation_application"
+    }
+  ],
+  "rules": {
+    "exports_create_authority": false,
+    "exports_transfer_authority": false,
+    "derived_exports_remain_derived": true,
+    "references_preferred_over_duplication": true,
+    "oriel_capabilities_are_derived_from_runtime_providers": true,
+    "oriel_projection_is_applied_by_filament": true,
+    "oriel_projection_does_not_transfer_ownership": true
+  }
+}

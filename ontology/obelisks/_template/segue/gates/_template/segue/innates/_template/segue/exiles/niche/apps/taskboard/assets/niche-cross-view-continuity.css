@@ -1,0 +1,141 @@
+/*
+savant niche cross-view continuity
+interface-only task identity continuity
+authority_effect: none
+*/
+
+:root {
+  --niche-continuity-edge:
+    color-mix(
+      in srgb,
+      var(--savant-primary, #7fe7ff) 32%,
+      transparent
+    );
+  --niche-continuity-focus:
+    var(--savant-primary, #7fe7ff);
+}
+
+[data-task-id].niche-continuity-current {
+  position: relative;
+}
+
+[data-task-id].niche-continuity-current::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  z-index: 4;
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--niche-continuity-focus) 64%,
+      transparent
+    );
+  pointer-events: none;
+}
+
+.niche-continuity-beacon {
+  position: fixed;
+  inset-inline-start: 50%;
+  inset-block-start:
+    max(
+      4.35rem,
+      calc(
+        env(safe-area-inset-top) +
+        3.5rem
+      )
+    );
+  z-index: 54;
+  inline-size:
+    min(
+      34rem,
+      calc(100vw - 1.4rem)
+    );
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr) auto;
+  gap: 0.6rem;
+  align-items: center;
+  padding: 0.45rem 0.58rem;
+  border:
+    1px solid
+    var(--niche-continuity-edge);
+  background:
+    color-mix(
+      in srgb,
+      var(--savant-background, #050708) 95%,
+      transparent
+    );
+  transform:
+    translateX(-50%);
+  pointer-events: none;
+}
+
+.niche-continuity-beacon[hidden] {
+  display: none !important;
+}
+
+.niche-continuity-copy,
+.niche-continuity-count {
+  font-family:
+    ui-monospace,
+    "SFMono-Regular",
+    Consolas,
+    monospace;
+}
+
+.niche-continuity-copy {
+  min-inline-size: 0;
+  overflow: hidden;
+  color:
+    var(--savant-text, #eef7f8);
+  font-size: 0.58rem;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.niche-continuity-copy::before {
+  content: "FOCUS ";
+  color:
+    var(--savant-text-muted, #879397);
+  letter-spacing: 0.1em;
+}
+
+.niche-continuity-count {
+  color:
+    var(--savant-text-muted, #879397);
+  font-size: 0.5rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 430px) {
+  .niche-continuity-beacon {
+    inset-block-start:
+      max(
+        3.8rem,
+        calc(
+          env(safe-area-inset-top) +
+          3rem
+        )
+      );
+  }
+
+  .niche-continuity-count {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-task-id].niche-continuity-current::after {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  [data-task-id].niche-continuity-current::after,
+  .niche-continuity-beacon {
+    border-color: CanvasText;
+  }
+}

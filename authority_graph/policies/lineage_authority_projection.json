@@ -1,0 +1,80 @@
+{
+  "id": "policy.lineage_authority_projection",
+  "kind": "projection_policy",
+  "status": "active",
+  "authority": "FOUNDATION-008",
+  "version": "1.0.0",
+  "description": "Projects authority from explicit node authority and role-bearing functional-lineage segues.",
+  "incoming_role_weights": {
+    "authority": 100,
+    "constraint": 80,
+    "pattern": 55,
+    "source": 50,
+    "provenance": 35,
+    "ownership": 30,
+    "implementation": 25,
+    "classification": 20,
+    "dependency": 10,
+    "composition": 5,
+    "generic": 1
+  },
+  "outgoing_role_weights": {
+    "authority": 45,
+    "constraint": 38,
+    "pattern": 25,
+    "source": 22,
+    "provenance": 16,
+    "ownership": 14,
+    "implementation": 12,
+    "classification": 10,
+    "dependency": 4,
+    "composition": 2,
+    "generic": 1
+  },
+  "explicit_authority_weight": 150,
+  "authority_kinds": [
+    "authority",
+    "archetype",
+    "canon",
+    "contract",
+    "meta_archetype",
+    "ontology",
+    "policy",
+    "schema",
+    "template"
+  ],
+  "authority_kind_weight": 75,
+  "placeholder_penalty": 200,
+  "governing_roles": [
+    "authority",
+    "constraint",
+    "pattern",
+    "source",
+    "provenance",
+    "ownership"
+  ],
+  "tiers": [
+    {
+      "id": "constitutional",
+      "minimum_score": 250
+    },
+    {
+      "id": "governing",
+      "minimum_score": 150
+    },
+    {
+      "id": "authoritative",
+      "minimum_score": 75
+    },
+    {
+      "id": "structural",
+      "minimum_score": 1
+    },
+    {
+      "id": "derivative",
+      "minimum_score": 0
+    }
+  ],
+  "extensions": {},
+  "future_extensions": {}
+}

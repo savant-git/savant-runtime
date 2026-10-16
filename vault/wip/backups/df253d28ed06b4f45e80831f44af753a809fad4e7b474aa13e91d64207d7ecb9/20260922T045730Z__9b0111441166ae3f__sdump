@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+INSTALL_ROOT="/root/savant-runtime/tools/sdump-enterprise"
+export PYTHONPATH="$INSTALL_ROOT/vendor:$INSTALL_ROOT${PYTHONPATH:+:$PYTHONPATH}"
+exec python3 -m sdump_enterprise "$@"

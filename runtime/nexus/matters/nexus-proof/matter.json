@@ -1,0 +1,478 @@
+{
+  "assertions": [
+    {
+      "assertion": {
+        "asserted_at": null,
+        "asserted_by": [
+          "source.nexus-proof.document-001"
+        ],
+        "confidence": null,
+        "evidentiary_state": "reported",
+        "presentation_state": "pink",
+        "proposition": "the proof source states that nexus preserves source provenance.",
+        "source_ids": [
+          "source.nexus-proof.document-001"
+        ],
+        "source_ranges": [
+          "proof-source.txt:1"
+        ]
+      },
+      "authoritative": false,
+      "authority": {
+        "effect": "none",
+        "source": "nexus-assertion",
+        "state": "unreviewed"
+      },
+      "authority_effect": "none",
+      "dependencies": [
+        "source.nexus-proof.document-001"
+      ],
+      "digest": "62578395bc09398d6cd23c474324dbb8658021362f0fed7e9b9d9bed9673fb10",
+      "extensions": {},
+      "future_extensions": [
+        "corroboration",
+        "authentication",
+        "authority-review",
+        "ai-analysis"
+      ],
+      "id": "assertion.nexus-proof.001",
+      "kind": "assertion",
+      "lineage": [
+        "matter.nexus-proof"
+      ],
+      "metadata": {},
+      "owner": "application:nexus",
+      "projections": [],
+      "provenance": [
+        "proof:nexus-bootstrap"
+      ],
+      "relationships": [],
+      "schema": "savant://nexus/instance/1.0.0",
+      "segues": [],
+      "status": "active",
+      "title": "the proof source states that nexus preserves source provenance.",
+      "type": "proposition"
+    }
+  ],
+  "authoritative": false,
+  "authority_effect": "none",
+  "digest": "29cffad64020d37a3b455fe027b49676b7ebfba56ab804fa39ddead3e0082ea0",
+  "instances": [
+    {
+      "authoritative": false,
+      "authority": {
+        "effect": "none",
+        "source": "nexus-record",
+        "state": "unreviewed"
+      },
+      "authority_effect": "none",
+      "dependencies": [
+        "assertion.nexus-proof.001"
+      ],
+      "digest": "c309b85b28e543ebc681ffd24bcecb8531cb48d34520f1fc0b85332c68b8dc3e",
+      "extensions": {},
+      "future_extensions": [
+        "annotations",
+        "ai-analysis",
+        "projection-metadata"
+      ],
+      "id": "claim.nexus-proof.001",
+      "kind": "claim",
+      "lineage": [
+        "matter.nexus-proof"
+      ],
+      "metadata": {},
+      "owner": "application:nexus",
+      "projections": [],
+      "provenance": [
+        "proof:nexus-bootstrap"
+      ],
+      "relationships": [],
+      "schema": "savant://nexus/instance/1.0.0",
+      "segues": [],
+      "status": "active",
+      "title": "nexus preserves provenance",
+      "type": "analytical-proposition"
+    },
+    {
+      "authoritative": false,
+      "authority": {
+        "effect": "none",
+        "source": "nexus-record",
+        "state": "unreviewed"
+      },
+      "authority_effect": "none",
+      "dependencies": [
+        "assertion.nexus-proof.001"
+      ],
+      "digest": "27721a9bea6b9bfb0b86ac2da97bd2c5f34ae6d1e6e1d629e655088514c1e352",
+      "extensions": {},
+      "future_extensions": [
+        "annotations",
+        "ai-analysis",
+        "projection-metadata"
+      ],
+      "id": "event.nexus-proof.001",
+      "kind": "event",
+      "lineage": [
+        "matter.nexus-proof"
+      ],
+      "metadata": {
+        "date": null,
+        "date_precision": "unknown"
+      },
+      "owner": "application:nexus",
+      "projections": [],
+      "provenance": [
+        "proof:nexus-bootstrap"
+      ],
+      "relationships": [],
+      "schema": "savant://nexus/instance/1.0.0",
+      "segues": [],
+      "status": "active",
+      "title": "proof event",
+      "type": "investigative-event"
+    },
+    {
+      "authoritative": false,
+      "authority": {
+        "effect": "none",
+        "source": "nexus-record",
+        "state": "unreviewed"
+      },
+      "authority_effect": "none",
+      "dependencies": [
+        "source.nexus-proof.document-001",
+        "assertion.nexus-proof.001"
+      ],
+      "digest": "034dfaff16136d95f522aed04a472f1fb30f3f61e0fb1d4beb6e56af061da32e",
+      "extensions": {},
+      "future_extensions": [
+        "annotations",
+        "ai-analysis",
+        "projection-metadata"
+      ],
+      "id": "evidence.nexus-proof.001",
+      "kind": "evidence",
+      "lineage": [
+        "matter.nexus-proof"
+      ],
+      "metadata": {},
+      "owner": "application:nexus",
+      "projections": [],
+      "provenance": [
+        "proof:nexus-bootstrap"
+      ],
+      "relationships": [],
+      "schema": "savant://nexus/instance/1.0.0",
+      "segues": [],
+      "status": "active",
+      "title": "proof evidence use",
+      "type": "documentary-use"
+    },
+    {
+      "authoritative": false,
+      "authority": {
+        "effect": "matter-identity",
+        "source": "current-user-directive",
+        "state": "provisional"
+      },
+      "authority_effect": "none",
+      "dependencies": [],
+      "digest": "73deca9e5af36ee74745db5228d274f4ab3bc5df013227aa2837c564ef383f82",
+      "extensions": {},
+      "future_extensions": [
+        "matter-adapters",
+        "matter-views",
+        "matter-ai-policies"
+      ],
+      "id": "matter.nexus-proof",
+      "kind": "matter",
+      "lineage": [],
+      "metadata": {
+        "application": "nexus",
+        "dataset_agnostic": true
+      },
+      "owner": "application:nexus",
+      "projections": [],
+      "provenance": [
+        "current-user-directive:nexus-savant-conversion",
+        "savant:program-edifice",
+        "savant:universal-instance-structure"
+      ],
+      "relationships": [],
+      "schema": "savant://nexus/instance/1.0.0",
+      "segues": [],
+      "status": "active",
+      "title": "nexus savant-native proof matter",
+      "type": "generic"
+    }
+  ],
+  "matter": {
+    "id": "matter.nexus-proof",
+    "matter_type": "generic",
+    "title": "nexus savant-native proof matter"
+  },
+  "mutation_authorized": false,
+  "owner": "application:nexus",
+  "provenance": [
+    "current-user-directive:nexus-savant-conversion",
+    "savant:program-edifice",
+    "savant:universal-instance-structure"
+  ],
+  "rebuildable": true,
+  "schema": "savant://nexus/matter-runtime/1.0.0",
+  "segues": [
+    {
+      "authoritative": false,
+      "authority": {
+        "effect": "composition",
+        "source": "matter-composition",
+        "state": "accepted"
+      },
+      "authority_effect": "none",
+      "digest": "aa4c55086f1b4f25dfa909c3f2999af3984702a776ba3333e531491dd85bbb5e",
+      "extensions": {},
+      "id": "nexus.segue.267e2420194aeeb164a2392b",
+      "kind": "segue",
+      "metadata": {},
+      "provenance": [
+        "application:nexus",
+        "matter.nexus-proof"
+      ],
+      "schema": "savant://nexus/segue/1.0.0",
+      "source": "matter.nexus-proof",
+      "target": "event.nexus-proof.001",
+      "type": "composition"
+    },
+    {
+      "authoritative": false,
+      "authority": {
+        "effect": "none",
+        "source": null,
+        "state": "none"
+      },
+      "authority_effect": "none",
+      "digest": "73937e016dc83262f3925dcb60164cf90deb3270d7f73344f170375857a47bee",
+      "extensions": {},
+      "id": "nexus.segue.3a1bb2e70198b929950337ad",
+      "kind": "segue",
+      "metadata": {},
+      "provenance": [
+        "proof:nexus-bootstrap"
+      ],
+      "schema": "savant://nexus/segue/1.0.0",
+      "source": "source.nexus-proof.document-001",
+      "target": "evidence.nexus-proof.001",
+      "type": "used_in"
+    },
+    {
+      "authoritative": false,
+      "authority": {
+        "effect": "composition",
+        "source": "matter-composition",
+        "state": "accepted"
+      },
+      "authority_effect": "none",
+      "digest": "a2a9fc5bacd6ce4ff42aa9842914bc7535a323b0ef2cf6eb950ea6cca11c48d5",
+      "extensions": {},
+      "id": "nexus.segue.515705b0cb8bae42e3e58a7b",
+      "kind": "segue",
+      "metadata": {},
+      "provenance": [
+        "application:nexus",
+        "matter.nexus-proof"
+      ],
+      "schema": "savant://nexus/segue/1.0.0",
+      "source": "matter.nexus-proof",
+      "target": "assertion.nexus-proof.001",
+      "type": "composition"
+    },
+    {
+      "authoritative": false,
+      "authority": {
+        "effect": "composition",
+        "source": "matter-composition",
+        "state": "accepted"
+      },
+      "authority_effect": "none",
+      "digest": "8672f456906a2355822d199a7b294650b13ceeb7ea7aa3e57d7ccc85fc1cf3af",
+      "extensions": {},
+      "id": "nexus.segue.580febac7b4782c784b3fdec",
+      "kind": "segue",
+      "metadata": {},
+      "provenance": [
+        "application:nexus",
+        "matter.nexus-proof"
+      ],
+      "schema": "savant://nexus/segue/1.0.0",
+      "source": "matter.nexus-proof",
+      "target": "claim.nexus-proof.001",
+      "type": "composition"
+    },
+    {
+      "authoritative": false,
+      "authority": {
+        "effect": "composition",
+        "source": "matter-composition",
+        "state": "accepted"
+      },
+      "authority_effect": "none",
+      "digest": "73bb098dadd93633c3f7be84f92985fcd3a05599b4f73083a5964aeb586b3c6e",
+      "extensions": {},
+      "id": "nexus.segue.65daa3f7ec8a223be7a847c7",
+      "kind": "segue",
+      "metadata": {},
+      "provenance": [
+        "application:nexus",
+        "matter.nexus-proof"
+      ],
+      "schema": "savant://nexus/segue/1.0.0",
+      "source": "matter.nexus-proof",
+      "target": "evidence.nexus-proof.001",
+      "type": "composition"
+    },
+    {
+      "authoritative": false,
+      "authority": {
+        "effect": "none",
+        "source": "nexus-evidence-link",
+        "state": "unreviewed"
+      },
+      "authority_effect": "none",
+      "digest": "9a332f021d01ee39f48551a13bdaff41220b2367d3e362f98fc742580fe800ff",
+      "extensions": {},
+      "id": "nexus.segue.945b704ab840eaad36f9fc78",
+      "kind": "segue",
+      "metadata": {},
+      "provenance": [
+        "proof:nexus-bootstrap"
+      ],
+      "schema": "savant://nexus/segue/1.0.0",
+      "source": "source.nexus-proof.document-001",
+      "target": "assertion.nexus-proof.001",
+      "type": "substantiates"
+    },
+    {
+      "authoritative": false,
+      "authority": {
+        "effect": "composition",
+        "source": "matter-composition",
+        "state": "accepted"
+      },
+      "authority_effect": "none",
+      "digest": "411829a68273f20d01cd6bfef998e3eede47540232b456efad7775d2e5943886",
+      "extensions": {},
+      "id": "nexus.segue.a00460de206a6966bebd354e",
+      "kind": "segue",
+      "metadata": {},
+      "provenance": [
+        "application:nexus",
+        "matter.nexus-proof"
+      ],
+      "schema": "savant://nexus/segue/1.0.0",
+      "source": "matter.nexus-proof",
+      "target": "source.nexus-proof.document-001",
+      "type": "composition"
+    },
+    {
+      "authoritative": false,
+      "authority": {
+        "effect": "none",
+        "source": null,
+        "state": "none"
+      },
+      "authority_effect": "none",
+      "digest": "011bddc008afec8cc897f693a0ef6eda058b084fb0f57165f76b51e32d23e478",
+      "extensions": {},
+      "id": "nexus.segue.ab64dc210baed7dfe3eda2cf",
+      "kind": "segue",
+      "metadata": {},
+      "provenance": [
+        "proof:nexus-bootstrap"
+      ],
+      "schema": "savant://nexus/segue/1.0.0",
+      "source": "assertion.nexus-proof.001",
+      "target": "event.nexus-proof.001",
+      "type": "locates"
+    },
+    {
+      "authoritative": false,
+      "authority": {
+        "effect": "none",
+        "source": null,
+        "state": "none"
+      },
+      "authority_effect": "none",
+      "digest": "e5ac0f45c4728734bc98c210ed661321f9f70f3af550c6474924a5d1778a3119",
+      "extensions": {},
+      "id": "nexus.segue.ebbf3c8a4ba9bcdec8ac43b7",
+      "kind": "segue",
+      "metadata": {},
+      "provenance": [
+        "proof:nexus-bootstrap"
+      ],
+      "schema": "savant://nexus/segue/1.0.0",
+      "source": "assertion.nexus-proof.001",
+      "target": "claim.nexus-proof.001",
+      "type": "supports"
+    }
+  ],
+  "sources": [
+    {
+      "authoritative": false,
+      "authority": {
+        "effect": "provenance-only",
+        "source": "source-ingestion",
+        "state": "unreviewed"
+      },
+      "authority_effect": "none",
+      "dependencies": [],
+      "digest": "17251ed9aff5d838b4a74ccff946d8f8f04253ed1bec3294b7781618f9b69bf4",
+      "extensions": {},
+      "future_extensions": [
+        "authentication",
+        "custody",
+        "attachments",
+        "normalization"
+      ],
+      "id": "source.nexus-proof.document-001",
+      "kind": "source",
+      "lineage": [
+        "matter.nexus-proof"
+      ],
+      "metadata": {},
+      "owner": "application:nexus",
+      "projections": [],
+      "provenance": [
+        "proof:nexus-bootstrap"
+      ],
+      "relationships": [],
+      "schema": "savant://nexus/instance/1.0.0",
+      "segues": [],
+      "source": {
+        "attachments": [],
+        "custodian": "external",
+        "ingestion_time": null,
+        "mime_type": "text/plain",
+        "original_content_reference": "external://proof-source.txt",
+        "original_location": "external://proof-source.txt",
+        "original_name": "proof-source.txt",
+        "provider": "proof",
+        "source_digest": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+        "source_kind": "document",
+        "source_time": null,
+        "transformations": []
+      },
+      "status": "active",
+      "title": "proof source document",
+      "type": "document"
+    }
+  ],
+  "validation": {
+    "errors": [],
+    "instance_count": 6,
+    "segue_count": 9,
+    "valid": true
+  }
+}

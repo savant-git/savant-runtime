@@ -1,0 +1,1471 @@
+nano /root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/niche/apps/taskboard/assets/niche-navigation.js
+
+"use strict";
+(() => {
+  const BUILD = "atlas-r13.1-navigation-activation";
+  const base = "/assets/atlas/";
+  const url = `${base}application.js?v=${encodeURIComponent(BUILD)}`;
+  const boot = async () => {
+    try {
+      const mod = await import(url);
+      const {api,install} = mod.createAtlasApplication();
+      window.NicheAtlas = api;
+      window.NicheNavigation = api;
+      install();
+    } catch (error) {
+      document.documentElement.dataset.atlasBuild = `${BUILD}-failed`;
+      window.dispatchEvent(new CustomEvent("niche:atlas:error", {detail:{stage:"module-bootstrap",message:String(error?.message||error),authority_effect:"none",projection_only:true}}));
+      console.error("SAVANT Atlas module bootstrap failed", error);
+    }
+  };
+  document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", boot, {once:true}) : boot();
+})();
+
+
+nano /root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/niche/apps/taskboard/assets/niche-bootstrap.js
+
+"use strict";
+
+/*
+ * savant / niche / bootstrap
+ *
+ * owner: exile:niche
+ * semantic_role: frontend capability coordinator
+ * authority_effect: none
+ * projection_only: true
+ *
+ * savant substantive projection programming
+ *
+ * principles:
+ * - declarative capabilities
+ * - one semantic owner
+ * - deterministic projection
+ * - explicit optionality
+ * - idempotent realization
+ * - failure isolation
+ * - no authoritative mutation
+ * - no duplicate boot ownership
+ */
+
+(() => {
+    "use strict";
+
+    const ROOT =
+        document.documentElement;
+
+    const EVENT_PREFIX =
+        "niche:";
+
+    const STATUS = Object.freeze({
+        DORMANT:
+            "dormant",
+
+        REQUESTED:
+            "requested",
+
+        AVAILABLE:
+            "available",
+
+        DEGRADED:
+            "degraded",
+
+        UNAVAILABLE:
+            "unavailable"
+    });
+
+    const KIND = Object.freeze({
+        STYLESHEET:
+            "stylesheet",
+
+        SCRIPT:
+            "script"
+    });
+
+    /*
+     * This registry is intentionally declarative.
+     *
+     * It describes optional frontend projections.
+     * It does not own their behavior.
+     *
+     * command.html may already load any of these
+     * explicitly. In that case bootstrap observes
+     * and accepts that existing realization rather
+     * than creating a duplicate.
+     */
+    const CAPABILITIES =
+        Object.freeze([
+            Object.freeze({
+                id:
+                    "graphics-style",
+
+                owner:
+                    "niche:graphics",
+
+                kind:
+                    KIND.STYLESHEET,
+
+                href:
+                    "/assets/niche-graphics.css",
+
+                optional:
+                    true
+            }),
+
+            Object.freeze({
+                id:
+                    "themes-style",
+
+                owner:
+                    "niche:themes",
+
+                kind:
+                    KIND.STYLESHEET,
+
+                href:
+                    "/assets/niche-themes.css",
+
+                optional:
+                    true
+            }),
+
+            Object.freeze({
+                id:
+                    "navigation-style",
+
+                owner:
+                    "niche:navigation",
+
+                kind:
+                    KIND.STYLESHEET,
+
+                href:
+                    "/assets/niche-navigation.css?v=atlas-r13.1-navigation-activation",
+
+                optional:
+                    true
+            }),
+
+            Object.freeze({
+                id:
+                    "graphics-controller",
+
+                owner:
+                    "niche:graphics",
+
+                kind:
+                    KIND.SCRIPT,
+
+                href:
+                    "/assets/niche-graphics.js",
+
+                optional:
+                    true
+            }),
+
+            Object.freeze({
+                id:
+                    "themes-controller",
+
+                owner:
+                    "niche:themes",
+
+                kind:
+                    KIND.SCRIPT,
+
+                href:
+                    "/assets/niche-themes.js",
+
+                optional:
+                    true
+            }),
+
+            Object.freeze({
+                id:
+                    "navigation-controller",
+
+                owner:
+                    "niche:navigation",
+
+                kind:
+                    KIND.SCRIPT,
+
+                href:
+                    "/assets/niche-navigation.js?v=atlas-r13.1-navigation-activation",
+
+                optional:
+                    true
+            })
+        ]);
+
+    const runtime =
+        new Map(
+            CAPABILITIES.map(
+                capability => [
+                    capability.id,
+
+                    {
+                        definition:
+                            capability,
+
+                        status:
+                            STATUS.DORMANT,
+
+                        element:
+                            null,
+
+                        requestedAt:
+                            null,
+
+                        settledAt:
+                            null,
+
+                        error:
+                            null
+                    }
+                ]
+            )
+        );
+
+    const state = {
+        initialized:
+            false,
+
+        initializedAt:
+            null,
+
+        realizationStarted:
+            false,
+
+        realizationSettled:
+            false,
+
+        frontendReadyDispatched:
+            false
+    };
+
+    function timestamp() {
+        return new Date()
+            .toISOString();
+    }
+
+    function emit(
+        name,
+        detail = {}
+    ) {
+        window.dispatchEvent(
+            new CustomEvent(
+                `${EVENT_PREFIX}${name}`,
+                {
+                    detail: Object.freeze({
+                        authority_effect:
+                            "none",
+
+                        projection_only:
+                            true,
+
+                        ...detail
+                    })
+                }
+            )
+        );
+    }
+
+    function selectorFor(
+        capability
+    ) {
+        const escaped =
+            CSS.escape(
+                capability.href
+            );
+
+        if (
+            capability.kind ===
+            KIND.STYLESHEET
+        ) {
+            return (
+                `link[rel="stylesheet"]` +
+                `[href="${escaped}"]`
+            );
+        }
+
+        return (
+            `script[src="${escaped}"]`
+        );
+    }
+
+    function findExisting(
+        capability
+    ) {
+        /*
+         * Attribute values here are fixed internal
+         * constants. Avoiding broad URL matching keeps
+         * capability identity deterministic.
+         */
+        if (
+            capability.kind ===
+            KIND.STYLESHEET
+        ) {
+            return Array.from(
+                document.querySelectorAll(
+                    'link[rel="stylesheet"]'
+                )
+            ).find(
+                element =>
+                    element.getAttribute(
+                        "href"
+                    ) ===
+                    capability.href
+            ) || null;
+        }
+
+        return Array.from(
+            document.querySelectorAll(
+                "script[src]"
+            )
+        ).find(
+            element =>
+                element.getAttribute(
+                    "src"
+                ) ===
+                    capability.href
+            ) || null;
+    }
+
+    function statusRecord(
+        id
+    ) {
+        const record =
+            runtime.get(id);
+
+        if (!record) {
+            throw new Error(
+                `unknown frontend capability: ${id}`
+            );
+        }
+
+        return record;
+    }
+
+    function mark(
+        id,
+        status,
+        {
+            element = null,
+            error = null
+        } = {}
+    ) {
+        const record =
+            statusRecord(id);
+
+        record.status =
+            status;
+
+        if (element) {
+            record.element =
+                element;
+        }
+
+        if (
+            status ===
+            STATUS.REQUESTED
+        ) {
+            record.requestedAt =
+                timestamp();
+        }
+
+        if (
+            status ===
+                STATUS.AVAILABLE ||
+            status ===
+                STATUS.DEGRADED ||
+            status ===
+                STATUS.UNAVAILABLE
+        ) {
+            record.settledAt =
+                timestamp();
+        }
+
+        record.error =
+            error
+                ? String(
+                    error.message ||
+                    error
+                )
+                : null;
+
+        emit(
+            "capability-state",
+            {
+                capability:
+                    id,
+
+                owner:
+                    record
+                        .definition
+                        .owner,
+
+                status:
+                    record.status,
+
+                optional:
+                    record
+                        .definition
+                        .optional,
+
+                href:
+                    record
+                        .definition
+                        .href,
+
+                error:
+                    record.error
+            }
+        );
+    }
+
+    function buildElement(
+        capability
+    ) {
+        if (
+            capability.kind ===
+            KIND.STYLESHEET
+        ) {
+            const element =
+                document.createElement(
+                    "link"
+                );
+
+            element.rel =
+                "stylesheet";
+
+            element.href =
+                capability.href;
+
+            element.dataset
+                .savantCapability =
+                capability.id;
+
+            return element;
+        }
+
+        const element =
+            document.createElement(
+                "script"
+            );
+
+        element.src =
+            capability.href;
+
+        element.defer =
+            true;
+
+        element.async =
+            false;
+
+        element.dataset
+            .savantCapability =
+            capability.id;
+
+        return element;
+    }
+
+    function observeSettlement(
+        capability,
+        element,
+        preexisting
+    ) {
+        return new Promise(
+            resolve => {
+                const record =
+                    statusRecord(
+                        capability.id
+                    );
+
+                if (
+                    preexisting
+                ) {
+                    /*
+                     * Existing parser-loaded assets are
+                     * considered realized by this
+                     * coordinator. Their own modules remain
+                     * responsible for semantic readiness.
+                     */
+                    mark(
+                        capability.id,
+                        STATUS.AVAILABLE,
+                        {
+                            element
+                        }
+                    );
+
+                    resolve(
+                        record.status
+                    );
+
+                    return;
+                }
+
+                let settled =
+                    false;
+
+                const settle =
+                    (
+                        status,
+                        error = null
+                    ) => {
+                        if (
+                            settled
+                        ) {
+                            return;
+                        }
+
+                        settled =
+                            true;
+
+                        mark(
+                            capability.id,
+                            status,
+                            {
+                                element,
+                                error
+                            }
+                        );
+
+                        resolve(
+                            status
+                        );
+                    };
+
+                element.addEventListener(
+                    "load",
+                    () => {
+                        settle(
+                            STATUS.AVAILABLE
+                        );
+                    },
+                    {
+                        once: true
+                    }
+                );
+
+                element.addEventListener(
+                    "error",
+                    () => {
+                        settle(
+                            capability.optional
+                                ? STATUS.DEGRADED
+                                : STATUS.UNAVAILABLE,
+
+                            new Error(
+                                `failed to load ${capability.href}`
+                            )
+                        );
+                    },
+                    {
+                        once: true
+                    }
+                );
+            }
+        );
+    }
+
+    async function realize(
+        capability
+    ) {
+        const record =
+            statusRecord(
+                capability.id
+            );
+
+        if (
+            record.status !==
+            STATUS.DORMANT
+        ) {
+            return record.status;
+        }
+
+        const existing =
+            findExisting(
+                capability
+            );
+
+        mark(
+            capability.id,
+            STATUS.REQUESTED,
+            {
+                element:
+                    existing
+            }
+        );
+
+        if (existing) {
+            return observeSettlement(
+                capability,
+                existing,
+                true
+            );
+        }
+
+        const element =
+            buildElement(
+                capability
+            );
+
+        record.element =
+            element;
+
+        const settlement =
+            observeSettlement(
+                capability,
+                element,
+                false
+            );
+
+        document.head.append(
+            element
+        );
+
+        return settlement;
+    }
+
+    async function realizeCapabilities() {
+        if (
+            state.realizationStarted
+        ) {
+            return;
+        }
+
+        state.realizationStarted =
+            true;
+
+        ROOT.dataset
+            .nicheCapabilities =
+            "realizing";
+
+        /*
+         * Styles are realized before controllers.
+         * Controllers are realized in registry order.
+         *
+         * This creates deterministic optional capability
+         * ordering without turning those capabilities
+         * into core boot requirements.
+         */
+        const styles =
+            CAPABILITIES.filter(
+                capability =>
+                    capability.kind ===
+                    KIND.STYLESHEET
+            );
+
+        const scripts =
+            CAPABILITIES.filter(
+                capability =>
+                    capability.kind ===
+                    KIND.SCRIPT
+            );
+
+        await Promise.all(
+            styles.map(
+                realize
+            )
+        );
+
+        for (
+            const capability
+            of scripts
+        ) {
+            await realize(
+                capability
+            );
+        }
+
+        state.realizationSettled =
+            true;
+
+        ROOT.dataset
+            .nicheCapabilities =
+            summarizeCapabilityHealth();
+
+        emit(
+            "capabilities-settled",
+            {
+                status:
+                    summarizeCapabilityHealth(),
+
+                capabilities:
+                    snapshotCapabilities()
+            }
+        );
+    }
+
+    function summarizeCapabilityHealth() {
+        const records =
+            Array.from(
+                runtime.values()
+            );
+
+        if (
+            records.some(
+                record =>
+                    record.status ===
+                    STATUS.UNAVAILABLE &&
+                    !record
+                        .definition
+                        .optional
+            )
+        ) {
+            return "unavailable";
+        }
+
+        if (
+            records.some(
+                record =>
+                    record.status ===
+                        STATUS.DEGRADED ||
+                    record.status ===
+                        STATUS.UNAVAILABLE
+            )
+        ) {
+            return "degraded";
+        }
+
+        if (
+            records.every(
+                record =>
+                    record.status ===
+                    STATUS.AVAILABLE
+            )
+        ) {
+            return "available";
+        }
+
+        return "realizing";
+    }
+
+    function snapshotCapabilities() {
+        return Array.from(
+            runtime.entries(),
+            (
+                [
+                    id,
+                    record
+                ]
+            ) =>
+                Object.freeze({
+                    id,
+
+                    owner:
+                        record
+                            .definition
+                            .owner,
+
+                    kind:
+                        record
+                            .definition
+                            .kind,
+
+                    href:
+                        record
+                            .definition
+                            .href,
+
+                    optional:
+                        record
+                            .definition
+                            .optional,
+
+                    status:
+                        record.status,
+
+                    requestedAt:
+                        record
+                            .requestedAt,
+
+                    settledAt:
+                        record
+                            .settledAt,
+
+                    error:
+                        record.error
+                })
+        );
+    }
+
+    function dispatchFrontendReady() {
+        if (
+            state.frontendReadyDispatched
+        ) {
+            return;
+        }
+
+        state.frontendReadyDispatched =
+            true;
+
+        ROOT.dataset
+            .nicheFrontend =
+            "ready";
+
+        emit(
+            "frontend-ready",
+            {
+                initialized_at:
+                    state.initializedAt,
+
+                owner:
+                    "exile:niche"
+            }
+        );
+    }
+
+    function initialize() {
+        if (
+            state.initialized
+        ) {
+            return;
+        }
+
+        state.initialized =
+            true;
+
+        state.initializedAt =
+            timestamp();
+
+        ROOT.dataset
+            .nicheBootstrap =
+            "ready";
+
+        /*
+         * Core frontend readiness is independent of
+         * optional presentation capabilities.
+         *
+         * Execute must not wait on graphics, themes or
+         * Navigation to become available.
+         */
+        dispatchFrontendReady();
+
+        void realizeCapabilities()
+            .catch(
+                error => {
+                    ROOT.dataset
+                        .nicheCapabilities =
+                        "degraded";
+
+                    emit(
+                        "capabilities-settled",
+                        {
+                            status:
+                                "degraded",
+
+                            error:
+                                String(
+                                    error.message ||
+                                    error
+                                ),
+
+                            capabilities:
+                                snapshotCapabilities()
+                        }
+                    );
+                }
+            );
+    }
+
+    if (
+        document.readyState ===
+        "loading"
+    ) {
+        document.addEventListener(
+            "DOMContentLoaded",
+            initialize,
+            {
+                once: true
+            }
+        );
+    } else {
+        initialize();
+    }
+
+    window.NicheBootstrap =
+        Object.freeze({
+            state() {
+                return Object.freeze({
+                    initialized:
+                        state.initialized,
+
+                    initializedAt:
+                        state.initializedAt,
+
+                    realizationStarted:
+                        state.realizationStarted,
+
+                    realizationSettled:
+                        state.realizationSettled,
+
+                    capabilityHealth:
+                        summarizeCapabilityHealth(),
+
+                    authorityEffect:
+                        "none",
+
+                    projectionOnly:
+                        true
+                });
+            },
+
+            capabilities() {
+                return snapshotCapabilities();
+            }
+        });
+})();
+
+nano /root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/niche/apps/taskboard/assets/atlas/application.js
+
+import { createAtlasContext } from "./core.js?v=atlas-r13.1-navigation-activation";
+import { installComposition } from "./composition.js?v=atlas-r13.1-navigation-activation";
+import { installGeometry } from "./geometry.js?v=atlas-r13.1-navigation-activation";
+import { installShell } from "./shell.js?v=atlas-r13.1-navigation-activation";
+import { installRenderer } from "./renderer.js?v=atlas-r13.1-navigation-activation";
+import { installLifecycle } from "./lifecycle.js?v=atlas-r13.1-navigation-activation";
+
+export const build = "atlas-r13.1-navigation-activation";
+
+export function createAtlasApplication() {
+  const ctx = createAtlasContext();
+  installComposition(ctx);
+  installGeometry(ctx);
+  installShell(ctx);
+  installRenderer(ctx);
+  installLifecycle(ctx);
+
+  const {state,dom,BUILD,emit,restore,ensureSurface,ensureNav,cache,defs,applyPrefs,bindControls,bindCore,resize,sync,open,select,fitWorld,fitTerritory,frontier,goBack,goForward,txt} = ctx;
+  const install = () => {
+    if (state.installed) return true;
+    restore();
+    ensureSurface();
+    ensureNav();
+    cache();
+    if (!dom.surface || !dom.viewport || !dom.world) return false;
+    defs();
+    applyPrefs();
+    bindControls();
+    bindCore();
+    resize();
+    state.installed = true;
+    document.documentElement.dataset.atlasBuild = build;
+    sync();
+    emit("installed", {build});
+    return true;
+  };
+
+  const api = Object.freeze({
+    open: () => { install(); return open(); },
+    select: (id, options={}) => { install(); return select(txt(id), Boolean(options.focus), txt(options.source,"api")); },
+    fit: () => { install(); return fitWorld(); },
+    fitTerritory: id => { install(); return fitTerritory(txt(id)); },
+    frontier: () => { install(); return frontier(); },
+    back: () => { install(); return goBack(); },
+    forward: () => { install(); return goForward(); },
+    sync: () => { install(); return sync(); },
+    dispose: () => ctx.dispose(),
+    state: () => Object.freeze({
+      build, legacyBuild: BUILD, architecture: "modular-instance-segue",
+      installed: state.installed, active: state.active, ready: state.ready, selectedTaskId: state.selected,
+      focusedTerritoryId: state.focusTerritory, semanticLevel: state.level, delimiter: state.semantic.delimiter,
+      representedTaskCount: state.semantic.tasks.length, representedTerritoryCount: state.semantic.territories.length,
+      lens: state.lens, priorityFilter: state.priority, forwardHistoryCount: state.forward.length, effectsMode: state.effects,
+      recentLocations: Object.freeze(state.recent.slice()), viewport: Object.freeze({...state.viewport}), projectionGeneration: state.generation,
+      mood: ctx.moods.current().name, modus: Object.freeze({...ctx.modus.forLevel(state.level)}),
+      layoutLibrary: Object.freeze({name:"elkjs",version:"0.12.0",status:state.elkStatus,authorityEffect:"none"}),
+      modules: Object.freeze(["core","composition","geometry","shell","renderer","lifecycle"]),
+      authorityEffect:"none", projectionOnly:true
+    })
+  });
+
+  return {ctx,api,install};
+}
+
+
+nano /root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/niche/apps/taskboard/assets/atlas/core.js
+
+export function createAtlasContext() {
+  const SVG = "http://www.w3.org/2000/svg";
+  const VIEW = "navigation";
+  const BUILD = "atlas-r13.1-navigation-activation";
+  const VISUAL_SYSTEM = "atlas-facility-r13";
+  const STORE = "savant.niche.atlas.v1";
+  const LEVEL = Object.freeze({world:"world",district:"district",locality:"locality",detail:"detail"});
+  const Z = Object.freeze({min:.16,max:4.8,world:.54,district:1,locality:1.85,step:1.2});
+  const G = Object.freeze({pad:34,gap:10,head:84,inner:22,taskW:176,taskH:48,taskGapX:12,taskGapY:12,minW:420,minH:270});
+  const ELK_PROVENANCE = Object.freeze({name:"elkjs",version:"0.12.0",license:"EPL-2.0 OR GPL-3.0-or-later",source:"https://cdn.jsdelivr.net/npm/elkjs@0.12.0/lib/elk.bundled.js",purpose:"optional internal directed task layout and orthogonal topology refinement",authority_effect:"none"});
+  const palette = Object.freeze([
+    [188,92,58],[213,94,62],[267,88,66],[319,86,62],[8,88,59],[36,94,59],
+    [67,80,56],[143,82,52],[166,86,54],[235,86,68],[287,78,65],[343,84,62]
+  ]);
+
+  const state = {
+    installed:false, active:false, ready:false, generation:-1, renderQueued:false, transformQueued:false,
+    level:LEVEL.world, selected:null, focusTerritory:null, query:"", status:"all", priority:"all", lens:"domains",
+    completed:"show", effects:"full", railOpen:false, route:[], back:[], forward:[], recent:[], detail:null, filterTouched:false, viewportAnimation:null,
+    viewport:{x:0,y:0,scale:1}, size:{w:1,h:1},
+    semantic:{delimiter:"objective",tasks:[],taskById:new Map(),dependents:new Map(),territories:[],territoryById:new Map(),taskToTerritory:new Map(),aggregateEdges:[]},
+    geometry:{fingerprint:"",territory:new Map(),task:new Map(),ports:new Map(),edges:[],w:1,h:1},
+    pointer:{active:new Map(),mode:"",sx:0,sy:0,ox:0,oy:0,pinch:1,scale:1,cx:0,cy:0},
+    resizeObserver:null, firstFit:false, suppressClick:false, secondaryQueued:false, secondaryToken:0, renderStageToken:0, gestureMoved:false, railMode:"more", elk:null, elkStatus:"idle", elkPromise:null, elkLayouts:new Map(), elkAppliedFingerprint:""
+  };
+  const dom = Object.create(null);
+
+  const $ = (s,r=document) => r.querySelector(s);
+  const $$ = (s,r=document) => Array.from(r.querySelectorAll(s));
+  const txt = (v,f="") => v == null ? f : (String(v).trim() || f);
+  const low = v => txt(v).toLocaleLowerCase();
+  const arr = v => Array.isArray(v) ? v : [];
+  const clamp = (v,a,b) => Math.min(b,Math.max(a,v));
+  const hash = input => {
+    let h = 2166136261;
+    for (const ch of txt(input)) { h ^= ch.charCodeAt(0); h = Math.imul(h,16777619); }
+    return h >>> 0;
+  };
+  const sread = () => { try { const x=localStorage.getItem(STORE); return x?JSON.parse(x):null; } catch { return null; } };
+  const swrite = () => { try { localStorage.setItem(STORE,JSON.stringify({
+    viewport:state.viewport,query:state.query,status:state.status,priority:state.priority,lens:state.lens,
+    completed:state.completed,effects:state.effects,focusTerritory:state.focusTerritory,filterTouched:state.filterTouched
+  })); } catch {} };
+  const emit = (type,detail={}) => window.dispatchEvent(new CustomEvent(`niche:atlas:${type}`,{detail:{...detail,authority_effect:"none",projection_only:true}}));
+
+  function coreProjection() {
+    try { return window.Niche?.projection?.() ?? null; } catch { return null; }
+  }
+  function coreState() {
+    try { return window.Niche?.state?.() ?? {}; } catch { return {}; }
+  }
+  const taskId = t => txt(t?.id ?? t?.task_id ?? t?.identity ?? t?.key);
+  const taskTitle = t => txt(t?.title ?? t?.name ?? t?.action ?? t?.summary ?? taskId(t),"untitled task");
+  const taskObjective = t => txt(t?.objective ?? t?.objective_id ?? t?.root_objective ?? t?.ancestry?.objective,"unknown objective");
+  const taskDomain = t => txt(t?.domain ?? t?.domain_id ?? t?.area ?? t?.scope?.domain);
+  const taskOwner = t => txt(t?.owner ?? t?.owner_id ?? t?.task_owner ?? t?.assignee);
+  const taskRubric = t => txt(t?.rubric ?? t?.rubric_id ?? t?.program_surface ?? t?.surface);
+  const taskCabal = t => txt(t?.cabal ?? t?.cabal_id ?? t?.shared_scope);
+  const taskPriority = t => txt(t?.priority ?? t?.authoritative_priority ?? t?.rank,"unknown");
+  const taskParent = t => txt(t?.parent ?? t?.parent_id ?? t?.parent_task_id ?? t?.ancestry?.parent);
+  const taskDependencies = t => arr(t?.dependencies ?? t?.depends_on ?? t?.prerequisites ?? t?.requires)
+    .map(x => typeof x === "string" ? x.trim() : txt(x?.id ?? x?.task_id ?? x?.key)).filter(Boolean);
+  function taskState(t) {
+    const r=low(t?.state ?? t?.status ?? t?.lifecycle_state);
+    if (r.includes("complete")||r==="done"||r==="closed") return "complete";
+    if (r.includes("block")||r==="failed") return "blocked";
+    if (r.includes("active")||r.includes("progress")||r==="started"||r==="leased") return "active";
+    if (r.includes("review")||r.includes("verify")||r.includes("evidence")) return "review";
+    if (r.includes("wait")||r.includes("pending")||r.includes("defer")) return "waiting";
+    if (t?.ready===true||t?.is_ready===true||low(t?.readiness)==="ready") return "ready";
+    return r||"unknown";
+  }
+  function taskAuthority(t) {
+    const r=low(t?.authority_effect ?? t?.authority ?? t?.authority_owner ?? t?.task_authority_owner);
+    if (r.includes("authoritative")||r==="authority") return "authoritative";
+    if (r.includes("derived")) return "derived";
+    if (r.includes("projection")||r==="none") return "projected";
+    return "unknown";
+  }
+  const critical = t => t?.critical_path===true||t?.on_critical_path===true||t?.critical===true||low(t?.path_class)==="critical";
+
+  function recommendationId(p) {
+    return txt(p?.normalized?.recommendedTaskId ?? coreState()?.recommendedTaskId) || null;
+  }
+  function normalized(p) {
+    const tasks=arr(p?.source?.tasks).filter(t=>taskId(t)).slice().sort((a,b)=>taskId(a).localeCompare(taskId(b)));
+    const tm=p?.normalized?.taskById instanceof Map ? new Map(p.normalized.taskById) : new Map(tasks.map(t=>[taskId(t),t]));
+    let dep;
+    if (p?.normalized?.dependents instanceof Map) dep=new Map(Array.from(p.normalized.dependents.entries(),([k,v])=>[k,arr(v).slice()]));
+    else {
+      dep=new Map(tasks.map(t=>[taskId(t),[]]));
+      for (const t of tasks) for (const d of taskDependencies(t)) dep.get(d)?.push(taskId(t));
+      for (const x of dep.values()) x.sort();
+    }
+    return {tasks,taskById:tm,dependents:dep,selected:txt(p?.normalized?.selectedTaskId)||null,recommended:recommendationId(p),generation:Number(p?.requestGeneration)};
+  }
+
+  const delimiters = [
+    ["domain",taskDomain,5],["rubric",taskRubric,4],["cabal",taskCabal,3],["objective",taskObjective,2],["owner",taskOwner,1]
+  ];
+  function chooseDelimiter(tasks) {
+    const max=Math.max(18,Math.ceil(Math.sqrt(Math.max(1,tasks.length))*2.4));
+    const scored=delimiters.map(([id,get,pref])=>{
+      const vals=tasks.map(get).filter(Boolean), n=new Set(vals).size, coverage=vals.length/Math.max(1,tasks.length);
+      const cq=n>=2&&n<=max?1:n===1?.25:.55;
+      return {id,get,pref,n,coverage,score:coverage*.6+cq*.3+pref*.02};
+    }).filter(x=>x.coverage>=.72&&x.n>=2).sort((a,b)=>b.score-a.score||b.pref-a.pref||a.id.localeCompare(b.id));
+    return scored[0] ?? {id:"objective",get:taskObjective,pref:2};
+  }
+  function stats(tasks) {
+    const s={total:tasks.length,complete:0,ready:0,active:0,review:0,waiting:0,blocked:0,unknown:0};
+    for (const t of tasks) { const k=taskState(t); (k in s?s[k]++:s.unknown++); }
+    s.completionRatio=s.total?s.complete/s.total:0;
+    return s;
+  }
+  function buildSemantic(n) {
+    const d=chooseDelimiter(n.tasks), groups=new Map();
+    for (const t of n.tasks) {
+      const label=d.get(t)||`unknown ${d.id}`, id=`${d.id}:${label}`;
+      if(!groups.has(id)) groups.set(id,{id,label,delimiter:d.id,tasks:[]});
+      groups.get(id).tasks.push(t);
+    }
+    const territories=Array.from(groups.values()).map(x=>({
+      ...x,tasks:x.tasks.slice().sort((a,b)=>taskObjective(a).localeCompare(taskObjective(b))||taskTitle(a).localeCompare(taskTitle(b))||taskId(a).localeCompare(taskId(b))),
+      statistics:stats(x.tasks),
+      objectives:Array.from(new Set(x.tasks.map(taskObjective).filter(Boolean))).sort()
+    })).sort((a,b)=>b.tasks.length-a.tasks.length||a.label.localeCompare(b.label));
+    const territoryById=new Map(territories.map(x=>[x.id,x])), taskToTerritory=new Map();
+    for (const x of territories) for (const t of x.tasks) taskToTerritory.set(taskId(t),x.id);
+    const agg=new Map();
+    for (const t of n.tasks) {
+      const target=taskId(t), tt=taskToTerritory.get(target);
+      for (const source of taskDependencies(t)) {
+        const st=taskToTerritory.get(source); if(!st||!tt||st===tt) continue;
+        const key=`${st}→${tt}`;
+        if(!agg.has(key)) agg.set(key,{id:key,source:st,target:tt,count:0,taskEdges:[]});
+        const r=agg.get(key); r.count++; r.taskEdges.push({source,target});
+      }
+    }
+    return {delimiter:d.id,tasks:n.tasks,taskById:n.taskById,dependents:n.dependents,territories,territoryById,taskToTerritory,aggregateEdges:Array.from(agg.values()).sort((a,b)=>b.count-a.count||a.id.localeCompare(b.id))};
+  }
+
+  const shapes=["rect","wide","tall","l-right","l-left","step-right","step-left","u","offset","inverted-l","t-bay","dual-wing","corner-cut","double-chamfer","spine-wing","hook-left","hook-right","triple-bay","courtyard","fork","long-concourse"];
+  const lifecycle = new Set();
+  const masks = Object.freeze({
+    world: Object.freeze({territory:true,task:false,edges:false,labels:false}),
+    district: Object.freeze({territory:true,task:true,edges:false,labels:false}),
+    locality: Object.freeze({territory:true,task:true,edges:true,labels:true}),
+    detail: Object.freeze({territory:true,task:true,edges:true,labels:true})
+  });
+  const moods = Object.freeze({
+    restrained: Object.freeze({effects:"reduced"}),
+    focused: Object.freeze({focus:true}),
+    degraded: Object.freeze({degraded:true}),
+    mobile: Object.freeze({mobile:true})
+  });
+  const onDispose = fn => { if (typeof fn === "function") lifecycle.add(fn); return fn; };
+  const dispose = () => { for (const fn of Array.from(lifecycle)) { try { fn(); } catch {} } lifecycle.clear(); };
+  return {SVG,VIEW,BUILD,VISUAL_SYSTEM,STORE,LEVEL,Z,G,ELK_PROVENANCE,palette,state,dom,$,$$,txt,low,arr,clamp,hash,sread,swrite,emit,coreProjection,coreState,taskId,taskTitle,taskObjective,taskDomain,taskOwner,taskRubric,taskCabal,taskPriority,taskParent,taskDependencies,taskState,taskAuthority,critical,recommendationId,normalized,chooseDelimiter,stats,buildSemantic,masks,moods,onDispose,dispose};
+}
+
+
+nano /root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/niche/apps/taskboard/assets/atlas/lifecycle.js
+
+export function installLifecycle(ctx) {
+  const {state,dom,$,$$,txt,low,clamp,VIEW,VISUAL_SYSTEM,BUILD,Z,sread,swrite,emit,coreProjection,normalized,buildSemantic,ensureGeometry,queueRender,renderSecondary,renderAll,renderState,measure,fitWorld,fitTerritory,focusTask,zoomAt,zoomCenter,hideTooltip,showTooltip,applyTransform,queueTransform,setViewport,select,goBack,goForward,frontier,routeInput,resolveTask,taskId,levelFor,svg,cache,defs,ensureSurface,ensureNav} = ctx;
+  function sync() {
+    const p=coreProjection();if(!p){state.ready=false;show("degraded","Atlas unavailable","The shared Niche projection is unavailable. Execute remains independent.");dom.footerStatus.textContent="ATLAS R13 · DEGRADED";return}
+    const transition=ctx.segues.projectionToSemantic(p),n=transition.normalized;if(Number.isFinite(n.generation)&&n.generation<state.generation)return;if(Number.isFinite(n.generation))state.generation=n.generation;
+    state.selected=n.selected;state.semantic=transition.semantic;state.ready=true;ensureGeometry();queueRender();
+    if(state.active&&!state.firstFit&&state.geometry.w>1&&state.geometry.h>1&&measure()){state.firstFit=true;requestAnimationFrame(fitWorld)}
+  }
+  function activateFallback(){
+    for(const s of $$(".surface")){
+      const active=s===dom.surface;
+      s.classList.toggle("active",active);
+      if(active)s.hidden=false;
+    }
+    for(const b of $$(".nav [data-view]")){
+      const active=b.dataset.view===VIEW;
+      b.classList.toggle("active",active);
+      if(active)b.setAttribute("aria-current","page");
+      else b.removeAttribute("aria-current");
+    }
+    document.documentElement.dataset.nicheView=VIEW;
+  }
+
+  function atlasIsVisiblyActive(){
+    return Boolean(
+      dom.surface &&
+      !dom.surface.hidden &&
+      dom.surface.classList.contains("active") &&
+      document.documentElement.dataset.nicheView===VIEW
+    );
+  }
+
+  function open(){
+    install();
+    state.active=true;
+
+    let delegated=false;
+    try{
+      if(window.Niche&&typeof window.Niche.view==="function"){
+        window.Niche.view(VIEW);
+        delegated=true;
+      }
+    }catch(error){
+      emit("error",{stage:"view-delegation",message:txt(error?.message,"Atlas view delegation failed.")});
+    }
+
+    /* Atlas is a dynamically attached projection surface. The core view registry may
+       not know the Atlas view name, so direct surface activation is the deterministic
+       compatibility boundary. Core delegation remains advisory for installations that
+       have learned the view. */
+    activateFallback();
+    dom.surface.hidden=false;
+    dom.surface.dataset.visualSystem=VISUAL_SYSTEM;
+
+    requestAnimationFrame(()=>{
+      if(!atlasIsVisiblyActive())activateFallback();
+      onActivate();
+      emit("focus",{source:delegated?"core-view+atlas-activation":"atlas-activation"});
+    });
+    return true;
+  }
+  function onActivate(){state.active=true;if(!measure())return requestAnimationFrame(onActivate);sync();if(state.firstFit)applyTransform();emit("activated")}
+  function onDeactivate(){state.active=false;if(state.viewportAnimation)cancelAnimationFrame(state.viewportAnimation);state.viewportAnimation=null;hideTooltip();swrite();emit("deactivated")}
+  function onResize(){const old=state.size.w<640?"n":state.size.w<1100?"m":"w";if(!measure())return;const now=state.size.w<640?"n":state.size.w<1100?"m":"w";if(old!==now){state.geometry.fingerprint="";ensureGeometry();queueRender()}else queueTransform()}
+
+  function bindMap() {
+    const interactiveControl=target=>Boolean(target?.closest?.("button,input,select,textarea,a"));
+    const point=e=>({x:e.clientX,y:e.clientY});
+
+    const begin=e=>{
+      if(interactiveControl(e.target)||e.button>0||!state.active)return;
+      e.preventDefault();
+      hideTooltip();
+      if(state.viewportAnimation)cancelAnimationFrame(state.viewportAnimation);
+      state.viewportAnimation=null;
+      state.pointer.active.set(e.pointerId,point(e));
+      state.gestureMoved=false;
+      state.suppressClick=false;
+      try{dom.viewport.setPointerCapture?.(e.pointerId)}catch{}
+
+      if(state.pointer.active.size===1){
+        state.pointer.mode="candidate";
+        state.pointer.sx=e.clientX;
+        state.pointer.sy=e.clientY;
+        state.pointer.ox=state.viewport.x;
+        state.pointer.oy=state.viewport.y;
+      }else if(state.pointer.active.size===2){
+        const p=Array.from(state.pointer.active.values());
+        state.pointer.mode="pinch";
+        state.pointer.pinch=Math.max(1,Math.hypot(p[1].x-p[0].x,p[1].y-p[0].y));
+        state.pointer.scale=state.viewport.scale;
+        state.pointer.cx=(p[0].x+p[1].x)/2;
+        state.pointer.cy=(p[0].y+p[1].y)/2;
+        state.suppressClick=true;
+        state.gestureMoved=true;
+      }
+    };
+
+    const move=e=>{
+      if(!state.pointer.active.has(e.pointerId))return;
+      state.pointer.active.set(e.pointerId,point(e));
+
+      if(state.pointer.active.size===2){
+        const p=Array.from(state.pointer.active.values());
+        const d=Math.max(1,Math.hypot(p[1].x-p[0].x,p[1].y-p[0].y));
+        const cx=(p[0].x+p[1].x)/2;
+        const cy=(p[0].y+p[1].y)/2;
+        state.pointer.mode="pinch";
+        state.suppressClick=true;
+        state.gestureMoved=true;
+        e.preventDefault();
+        zoomAt((state.pointer.scale*(d/state.pointer.pinch))/state.viewport.scale,cx,cy,false);
+        return;
+      }
+
+      if(state.pointer.active.size!==1)return;
+      const dx=e.clientX-state.pointer.sx;
+      const dy=e.clientY-state.pointer.sy;
+
+      if(state.pointer.mode==="candidate"&&Math.hypot(dx,dy)>=5){
+        state.pointer.mode="pan";
+        state.suppressClick=true;
+        state.gestureMoved=true;
+      }
+
+      if(state.pointer.mode!=="pan")return;
+      e.preventDefault();
+      setViewport({
+        x:state.pointer.ox+dx,
+        y:state.pointer.oy+dy,
+        scale:state.viewport.scale
+      },false);
+    };
+
+    const done=e=>{
+      if(!state.pointer.active.has(e.pointerId))return;
+      state.pointer.active.delete(e.pointerId);
+      try{dom.viewport.releasePointerCapture?.(e.pointerId)}catch{}
+
+      if(state.pointer.active.size===1){
+        const [p]=state.pointer.active.values();
+        state.pointer.mode="candidate";
+        state.pointer.sx=p.x;
+        state.pointer.sy=p.y;
+        state.pointer.ox=state.viewport.x;
+        state.pointer.oy=state.viewport.y;
+        state.pointer.scale=state.viewport.scale;
+        return;
+      }
+
+      if(!state.pointer.active.size){
+        const moved=state.gestureMoved;
+        state.pointer.mode="";
+        state.gestureMoved=false;
+        swrite();
+        if(moved)requestAnimationFrame(()=>requestAnimationFrame(()=>{state.suppressClick=false}));
+        else state.suppressClick=false;
+      }
+    };
+
+    dom.viewport.addEventListener("pointerdown",begin,{capture:true,passive:false});
+    window.addEventListener("pointermove",move,{capture:true,passive:false});
+    window.addEventListener("pointerup",done,{capture:true,passive:true});
+    window.addEventListener("pointercancel",done,{capture:true,passive:true});
+
+    dom.viewport.addEventListener("pointerover",e=>{
+      if(state.pointer.mode)return;
+      const target=e.target.closest?.("[data-task-id],[data-territory-id]");
+      if(target)showTooltip(e,target);
+    });
+    dom.viewport.addEventListener("pointerout",e=>{
+      if(e.target.closest?.("[data-task-id],[data-territory-id]"))hideTooltip();
+    });
+
+    dom.viewport.addEventListener("wheel",e=>{
+      e.preventDefault();
+      hideTooltip();
+      zoomAt(Math.exp(-e.deltaY*.00125),e.clientX,e.clientY,false);
+      swrite();
+    },{passive:false});
+
+    dom.viewport.addEventListener("click",e=>{
+      if(state.suppressClick||state.gestureMoved)return;
+      const t=e.target.closest?.("[data-task-id]");
+      if(t?.dataset.taskId)return select(t.dataset.taskId,false,"map");
+
+      const port=e.target.closest?.("[data-port-direction]");
+      if(port){
+        const source=state.semantic.territoryById.get(port.dataset.edgeSource);
+        const target=state.semantic.territoryById.get(port.dataset.edgeTarget);
+        state.detail={
+          type:"port",
+          direction:port.dataset.portDirection,
+          count:Number(port.dataset.count)||0,
+          sourceLabel:source?.label??port.dataset.edgeSource,
+          targetLabel:target?.label??port.dataset.edgeTarget
+        };
+        renderSecondary();
+        return;
+      }
+
+      const x=e.target.closest?.("[data-territory-id]");
+      if(x?.dataset.territoryId&&state.semantic.territoryById.has(x.dataset.territoryId)){
+        state.focusTerritory=x.dataset.territoryId;
+        state.selected=null;
+        state.detail=null;
+        fitTerritory(x.dataset.territoryId);
+        queueRender();
+      }
+    });
+
+    dom.viewport.addEventListener("dblclick",e=>{
+      if(state.suppressClick)return;
+      const t=e.target.closest?.("[data-task-id]");
+      if(t?.dataset.taskId)select(t.dataset.taskId,true,"double-click");
+    });
+
+    dom.viewport.addEventListener("keydown",e=>{
+      if(e.key==="0"){e.preventDefault();fitWorld()}
+      else if(e.key==="+"){e.preventDefault();zoomCenter(Z.step)}
+      else if(e.key==="-"){e.preventDefault();zoomCenter(1/Z.step)}
+      else if(e.key==="/"){e.preventDefault();dom.search.focus()}
+      else if(e.key==="Escape"){
+        e.preventDefault();
+        if(state.selected){state.selected=null;queueRender()}
+        else if(state.focusTerritory){state.focusTerritory=null;fitWorld();queueRender()}
+      }
+    });
+  }
+  function setRailMode(mode="more",open=true) {
+    state.railMode=["view","filter","more"].includes(mode)?mode:"more";
+    state.railOpen=Boolean(open);
+    dom.rail?.classList.toggle("open",state.railOpen);
+    if(dom.rail)dom.rail.dataset.railMode=state.railMode;
+    dom.railToggle?.setAttribute("aria-expanded",state.railOpen?"true":"false");
+    dom.viewToggle?.setAttribute("aria-expanded",state.railOpen&&state.railMode==="view"?"true":"false");
+    dom.filterToggle?.setAttribute("aria-expanded",state.railOpen&&state.railMode==="filter"?"true":"false");
+    document.documentElement.classList.toggle("atlas-rail-open",state.railOpen);
+    if(state.railOpen){renderSecondary();queueRender()}
+  }
+  function setRailOpen(open){setRailMode(state.railMode,open)}
+
+  function bindControls() {
+    dom.railToggle?.addEventListener("click",()=>setRailMode("more",!(state.railOpen&&state.railMode==="more")));
+    dom.viewToggle?.addEventListener("click",()=>setRailMode("view",!(state.railOpen&&state.railMode==="view")));
+    dom.filterToggle?.addEventListener("click",()=>setRailMode("filter",!(state.railOpen&&state.railMode==="filter")));
+    dom.fit.onclick=fitWorld;
+    dom.plus.onclick=()=>zoomCenter(Z.step);dom.minus.onclick=()=>zoomCenter(1/Z.step);dom.theme?.addEventListener("change",()=>window.NicheThemes?.apply?.(dom.theme.value));dom.back.onclick=goBack;dom.forward.onclick=goForward;dom.frontier.onclick=frontier;dom.focusTask.onclick=()=>state.selected&&focusTask(state.selected);dom.openTask.onclick=()=>state.selected&&window.Niche?.task?.(state.selected);
+    dom.search.addEventListener("input",()=>{state.filterTouched=true;state.query=dom.search.value.trim();swrite();queueRender()});
+    dom.search.addEventListener("keydown",e=>{if(e.key!=="Enter")return;const t=resolveTask(dom.search.value);if(t){e.preventDefault();return select(taskId(t),true,"search")}const terr=state.semantic.territories.find(x=>low(x.label).includes(low(dom.search.value)));if(terr){e.preventDefault();state.focusTerritory=terr.id;fitTerritory(terr.id);queueRender()}});
+    dom.status.onchange=()=>{state.filterTouched=true;state.status=dom.status.value;swrite();queueRender()};dom.priority.onchange=()=>{state.filterTouched=true;state.priority=dom.priority.value;swrite();queueRender()};dom.completed.onchange=()=>{state.filterTouched=true;state.completed=dom.completed.value;swrite();queueRender()};dom.effects.onchange=()=>{state.effects=dom.effects.value;swrite();queueRender()};
+    dom.reset.onclick=()=>{state.query="";state.status="all";state.priority="all";state.completed="show";state.filterTouched=false;state.focusTerritory=null;dom.search.value="";dom.status.value="all";dom.priority.value="all";dom.completed.value="show";swrite();queueRender()};
+    dom.lenses.addEventListener("click",e=>{const b=e.target.closest?.("[data-lens]");if(!b)return;state.lens=b.dataset.lens;for(const x of $$("[data-lens]",dom.lenses))x.classList.toggle("active",x===b);swrite();queueRender()});
+    dom.routeGo.onclick=routeInput;dom.routeInput.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();routeInput()}});
+    let miniDrag=false;
+    const miniMove=e=>{const r=dom.minimap.getBoundingClientRect();if(!r.width||!r.height)return;const x=(e.clientX-r.left)/r.width*state.geometry.w,y=(e.clientY-r.top)/r.height*state.geometry.h;setViewport({x:state.size.w/2-x*state.viewport.scale,y:state.size.h/2-y*state.viewport.scale,scale:state.viewport.scale})};
+    dom.minimap.addEventListener("pointerdown",e=>{miniDrag=true;dom.minimap.setPointerCapture?.(e.pointerId);miniMove(e)});
+    dom.minimap.addEventListener("pointermove",e=>{if(miniDrag)miniMove(e)});
+    dom.minimap.addEventListener("pointerup",()=>{miniDrag=false});
+    dom.minimap.addEventListener("pointercancel",()=>{miniDrag=false});
+    dom.minimap.addEventListener("click",miniMove);
+    bindMap();
+  }
+  function restore() {
+    const x=sread();
+    if(x?.viewport&&Number.isFinite(x.viewport.x)&&Number.isFinite(x.viewport.y)&&Number.isFinite(x.viewport.scale)){
+      state.viewport={x:x.viewport.x,y:x.viewport.y,scale:clamp(x.viewport.scale,Z.min,Z.max)};
+      state.level=levelFor(state.viewport.scale);
+    }
+    state.query="";
+    state.status="all";
+    state.priority="all";
+    state.completed="show";
+    state.filterTouched=false;
+    state.focusTerritory=null;
+    state.lens=["domains","heatmap","dependencies","authority"].includes(x?.lens)?x.lens:"domains";
+    state.effects=["full","reduced"].includes(x?.effects)?x.effects:"full";
+  }
+  function populateThemeControl(){
+    if(!dom.theme)return;
+    const themes=window.NicheThemes?.themes?.()??[];
+    const f=document.createDocumentFragment();
+    for(const item of themes){const o=document.createElement("option");o.value=item.value;o.textContent=item.label;f.append(o)}
+    dom.theme.replaceChildren(f);
+    const current=window.NicheThemes?.current?.()??document.documentElement.dataset.nicheTheme;
+    if(current)dom.theme.value=current;
+  }
+  function applyPrefs(){dom.search.value=state.query;dom.status.value=state.status;dom.priority.value=state.priority;dom.completed.value=state.completed;dom.effects.value=state.effects;for(const b of $$("[data-lens]",dom.lenses))b.classList.toggle("active",b.dataset.lens===state.lens);populateThemeControl()}
+  function bindCore(){
+    for(const n of ["niche:projection","niche:task-selected"])window.addEventListener(n,sync);window.addEventListener("niche:theme-will-change",hideTooltip);window.addEventListener("niche:theme-change",()=>{if(state.installed){if(dom.theme)dom.theme.value=window.NicheThemes?.current?.()??document.documentElement.dataset.nicheTheme;queueRender();queueTransform();emit("theme",{theme:document.documentElement.dataset.nicheTheme})}});
+    window.addEventListener("niche:view",e=>{
+      const v=txt(e.detail?.view);
+      if(v===VIEW){
+        state.active=true;
+        dom.surface.hidden=false;
+        requestAnimationFrame(()=>{
+          if(!atlasIsVisiblyActive())activateFallback();
+          onActivate();
+        });
+      }else if(state.active){
+        onDeactivate();
+      }
+    });
+
+    document.addEventListener("click",event=>{
+      const button=event.target.closest?.('.nav [data-view="navigation"]');
+      if(!button)return;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      dom.nav=button;
+      open();
+    },true);
+  }
+  function resize(){if(state.resizeObserver||!dom.viewport)return;if("ResizeObserver"in window){state.resizeObserver=new ResizeObserver(()=>requestAnimationFrame(onResize));state.resizeObserver.observe(dom.viewport)}else window.addEventListener("resize",onResize,{passive:true})}
+  Object.assign(ctx,{sync,activateFallback,atlasIsVisiblyActive,open,onActivate,onDeactivate,onResize,bindMap,setRailMode,setRailOpen,bindControls,restore,populateThemeControl,applyPrefs,bindCore,resize});
+  return ctx;
+}
+

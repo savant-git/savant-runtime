@@ -1,0 +1,302 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+
+from pathlib import Path
+from typing import Any
+
+
+runtime_root = Path(
+    "/root/savant-runtime/"
+    "ontology/obelisks/_template/"
+    "segue/gates/_template/segue/"
+    "innates/_template/segue/"
+    "exiles/carbon/runtime"
+)
+
+if str(
+    runtime_root
+) not in sys.path:
+    sys.path.insert(
+        0,
+        str(
+            runtime_root
+        ),
+    )
+
+
+from oriel_capabilities import (  # noqa: E402
+    collect,
+    closure,
+    oriel_capabilities_error,
+    projection_packet,
+    selftest,
+    status,
+)
+
+
+def read_json(
+    path: str,
+) -> Any:
+    if path == "-":
+        return json.load(
+            sys.stdin
+        )
+
+    return json.loads(
+        Path(
+            path
+        ).read_text(
+            encoding="utf-8"
+        )
+    )
+
+
+def read_object(
+    path: str,
+) -> dict[str, Any]:
+    value = read_json(
+        path
+    )
+
+    if not isinstance(
+        value,
+        dict,
+    ):
+        raise ValueError(
+            "input must be a JSON object"
+        )
+
+    return value
+
+
+def csv_values(
+    value: str | None,
+) -> list[str]:
+    if value is None:
+        return []
+
+    return [
+        item.strip()
+        for item
+        in value.split(
+            ","
+        )
+        if item.strip()
+    ]
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="carbon-oriel-capabilities",
+        description=(
+            "Derived Carbon Oriel capability "
+            "surface and projection packets"
+        ),
+    )
+
+    subparsers = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    subparsers.add_parser(
+        "status"
+    )
+
+    subparsers.add_parser(
+        "selftest"
+    )
+
+    subparsers.add_parser(
+        "list"
+    )
+
+    closure_parser = (
+        subparsers.add_parser(
+            "closure"
+        )
+    )
+
+    closure_parser.add_argument(
+        "--capabilities",
+        required=True,
+    )
+
+    packet_parser = (
+        subparsers.add_parser(
+            "packet"
+        )
+    )
+
+    packet_parser.add_argument(
+        "--target-exile",
+        required=True,
+    )
+
+    packet_parser.add_argument(
+        "--allow-ids"
+    )
+
+    packet_parser.add_argument(
+        "--deny-ids"
+    )
+
+    packet_parser.add_argument(
+        "--allow-components"
+    )
+
+    packet_parser.add_argument(
+        "--allow-operations"
+    )
+
+    packet_parser.add_argument(
+        "--allow-status"
+    )
+
+    packet_parser.add_argument(
+        "--mask"
+    )
+
+    packet_parser.add_argument(
+        "--no-dependencies",
+        action="store_true",
+    )
+
+    return parser
+
+
+def main() -> int:
+    parser = build_parser()
+
+    args = parser.parse_args()
+
+    try:
+        if args.command == "status":
+            output = status()
+
+        elif args.command == "selftest":
+            output = selftest()
+
+        elif args.command == "list":
+            output = collect()
+
+        elif args.command == "closure":
+            output = closure(
+                collect(),
+                csv_values(
+                    args.capabilities
+                ),
+            )
+
+        elif args.command == "packet":
+            mask = (
+                read_object(
+                    args.mask
+                )
+                if args.mask
+                else {}
+            )
+
+            for key, value in (
+                (
+                    "allow_ids",
+                    args.allow_ids,
+                ),
+                (
+                    "deny_ids",
+                    args.deny_ids,
+                ),
+                (
+                    "allow_components",
+                    args.allow_components,
+                ),
+                (
+                    "allow_operations",
+                    args.allow_operations,
+                ),
+                (
+                    "allow_status",
+                    args.allow_status,
+                ),
+            ):
+                if value is not None:
+                    mask[
+                        key
+                    ] = csv_values(
+                        value
+                    )
+
+            output = projection_packet(
+                collect(),
+                target_exile=
+                    args.target_exile,
+                mask=
+                    mask,
+                include_dependencies=(
+                    not args.no_dependencies
+                ),
+            )
+
+        else:
+            parser.error(
+                "unknown command"
+            )
+
+            return 2
+
+    except (
+        OSError,
+        ValueError,
+        json.JSONDecodeError,
+        oriel_capabilities_error,
+    ) as exc:
+        print(
+            json.dumps(
+                {
+                    "ok":
+                        False,
+
+                    "error":
+                        str(
+                            exc
+                        ),
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+
+        return 1
+
+    print(
+        json.dumps(
+            output,
+            indent=2,
+            ensure_ascii=False,
+            sort_keys=True,
+        )
+    )
+
+    if (
+        isinstance(
+            output,
+            dict,
+        )
+        and output.get(
+            "ok"
+        )
+        is False
+    ):
+        return 1
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

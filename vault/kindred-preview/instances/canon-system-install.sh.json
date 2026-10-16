@@ -1,0 +1,83 @@
+{
+  "authoritative": false,
+  "authority_tier": "delegated",
+  "canonical_id": "fs:canon-system/install.sh",
+  "deterministic_hash": "35978f0c2eb636f1b5e8c986773571facbfb68801e1cf0e3d0cf84cd1f3084e5",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "canon-system/install.sh",
+  "kind": "file",
+  "label": "install.sh",
+  "namespace": "preview.kindred",
+  "path": "canon-system/install.sh",
+  "placement": {
+    "domain": "filesystem",
+    "node": "canon-system/install.sh",
+    "parent": "canon-system",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.765dfc09e0250b1f36dc",
+    "rank": 40,
+    "slot": "20_authority",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.765dfc09e0250b1f36dc"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "record",
+  "source_record": {
+    "authority": false,
+    "canonical_id": "fs:canon-system/install.sh",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "canon-system/install.sh",
+    "kind": "file",
+    "label": "install.sh",
+    "legacy_id": "canon-system/install.sh",
+    "lineage": [
+      "canon-system"
+    ],
+    "metadata": {
+      "canonical_id": "fs:canon-system/install.sh",
+      "child_modes": {},
+      "child_roles": {},
+      "is_directory": false,
+      "is_file": true,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:canon-system"
+        ]
+      },
+      "projected_id": "canon-system/install.sh",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "canon-system"
+    ],
+    "path": "canon-system/install.sh",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "canon-system/install.sh",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.765dfc09e0250b1f36dc"
+    ],
+    "size": 7,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

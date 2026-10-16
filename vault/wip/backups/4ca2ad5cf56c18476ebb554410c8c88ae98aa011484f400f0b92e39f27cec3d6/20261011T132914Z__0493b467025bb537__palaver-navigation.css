@@ -1,0 +1,12 @@
+/* Mechanical aperture navigation: visual motion never blocks navigation. */
+.palaver-aperture-nav { display:flex; align-items:center; gap:clamp(4px, .65vw, 12px); min-width:0; }
+.palaver-aperture-nav button { position:relative; display:inline-flex; align-items:center; gap:7px; min-height:38px; padding:5px 10px; border:1px solid rgba(154,191,193,.23); border-radius:8px; background:rgba(12,23,27,.68); color:inherit; cursor:pointer; isolation:isolate; overflow:hidden; transition:border-color .24s ease, background .24s ease; }
+.palaver-aperture-nav button:hover,.palaver-aperture-nav button:focus-visible,.palaver-aperture-nav .aperture-active { border-color:rgba(181,225,222,.8); background:rgba(33,62,67,.8); }
+.palaver-aperture-nav button:focus-visible { outline:2px solid currentColor; outline-offset:2px; }
+.palaver-aperture-nav .aperture-ring { position:absolute; width:29px; height:29px; left:3px; top:50%; margin-top:-14.5px; border:1px dashed rgba(155,203,201,.65); border-radius:50%; transform:rotate(0); opacity:.35; pointer-events:none; transition:transform .65s cubic-bezier(.2,.8,.2,1),opacity .2s ease; }
+.palaver-aperture-nav button:hover .aperture-ring,.palaver-aperture-nav .aperture-active .aperture-ring { transform:rotate(105deg); opacity:.9; }
+.palaver-aperture-nav svg { position:relative; flex:none; }
+.palaver-aperture-nav .aperture-label { position:relative; font-size:11px; letter-spacing:.05em; }
+@media(max-width:1080px) { .palaver-aperture-nav .aperture-label { display:none; } .palaver-aperture-nav button { padding:7px; } }
+@media(max-width:640px) { .palaver-aperture-nav { gap:3px; } .palaver-aperture-nav button { min-height:34px; padding:5px; } }
+@media(prefers-reduced-motion:reduce) { .palaver-aperture-nav button,.palaver-aperture-nav .aperture-ring { transition:none; } }

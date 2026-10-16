@@ -1,0 +1,66 @@
+{
+  "authoritative": false,
+  "child_profile": "son",
+  "deterministic_hash": "9b7563fe3ad7795c4453b11e86a43ddea4d3a4a96cd498ad528581b746f9168c",
+  "domain": "filesystem",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "lineage.composition.7eac8ef0b0f0d61fe91b",
+  "impeti": [],
+  "namespace": "preview.kindred",
+  "parent_profile": "parent",
+  "plane": "lineage",
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "role": "composition",
+  "schema": "savant.kindred.preview.lineage_segue.v2",
+  "source": "tools/authority_graph",
+  "source_record": {
+    "axis": "containment",
+    "canonical_source": "fs:tools/authority_graph",
+    "canonical_target": "fs:tools/authority_graph/compile_authority_graph.py",
+    "continuation": "projecting",
+    "id": "lineage.composition.7eac8ef0b0f0d61fe91b",
+    "inheritance": {
+      "conflict_policy": "child_wins",
+      "exclude": [],
+      "fields": [],
+      "mode": "reference"
+    },
+    "inverse": "component",
+    "kind": "contains",
+    "metadata": {
+      "legacy_edge_kind": "contains",
+      "projection": "filesystem_edifice"
+    },
+    "order": 0,
+    "propagation": {
+      "channels": [
+        "validation",
+        "projection",
+        "regeneration"
+      ],
+      "enabled": true
+    },
+    "provenance": {
+      "created_by": "filesystem_adapter",
+      "source_files": [
+        "/root/savant-runtime/tools/authority_graph/compile_authority_graph.py"
+      ]
+    },
+    "role": "composition",
+    "scope": "filesystem",
+    "source": "tools/authority_graph",
+    "status": "active",
+    "symbolic_child_alias": "son",
+    "symbolic_parent_alias": "parent",
+    "target": "tools/authority_graph/compile_authority_graph.py",
+    "weight": 2
+  },
+  "state": "active",
+  "synthetic": false,
+  "target": "tools/authority_graph/compile_authority_graph.py"
+}

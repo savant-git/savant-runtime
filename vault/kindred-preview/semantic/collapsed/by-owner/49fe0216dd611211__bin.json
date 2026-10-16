@@ -1,0 +1,61 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "0843f074375e76b5675198d86ec27ab809c9bd8d1b3488488ee062419902a766",
+  "generated_at": "2026-07-17T11:47:04+00:00",
+  "members": [
+    {
+      "authority_tier": "delegated",
+      "canonical_id": "fs:bin/savant",
+      "collapse_reason": "file_attachment",
+      "extension": null,
+      "id": "bin/savant",
+      "instance_hash": "aad4c9c37a779dbf303d39477c4b9ed76e94f48684ffd09f6c71a202506d9559",
+      "instance_record": "instances/bin-savant.json",
+      "kind": "file",
+      "label": "savant",
+      "normalized_path": "bin/savant",
+      "original_lineage_to_owner": [
+        "bin/savant",
+        "bin"
+      ],
+      "original_parent": "bin",
+      "path": "bin/savant",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.8390ccbaef30bb6629e3"
+      ],
+      "semantic_owner": "bin",
+      "shard_level": "record",
+      "state": "active",
+      "synthetic": false
+    }
+  ],
+  "owner": "bin",
+  "owner_label": "bin",
+  "projection_only": true,
+  "provenance": {
+    "generator": "kindred.semantic_view_builder.v1",
+    "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+  },
+  "schema": "savant.kindred.semantic_projection.v1.collapsed_owner",
+  "summary": {
+    "by_extension": {
+      "none": 1
+    },
+    "by_kind": {
+      "file": 1
+    },
+    "by_reason": {
+      "file_attachment": 1
+    },
+    "by_state": {
+      "active": 1
+    },
+    "direct": 1,
+    "nested": 0,
+    "total": 1
+  }
+}

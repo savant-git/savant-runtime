@@ -1,0 +1,36 @@
+.savant-persistent-shell{position:relative;min-height:100%;isolation:isolate}
+.savant-persistent-content{opacity:0;visibility:hidden;transition:opacity .7s ease,visibility 0s linear .7s}
+.savant-persistent-shell[data-docked="true"] .savant-persistent-content{opacity:1;visibility:visible;transition:opacity .7s ease .12s}
+.savant-persistent-veil{position:fixed;inset:0;z-index:900;pointer-events:none;background:radial-gradient(ellipse at 50% 46%,#17242b 0%,#090e15 55%,#05070b 100%);opacity:1;visibility:visible;transition:opacity .9s ease .12s,visibility 0s linear 1.02s}
+.savant-persistent-shell[data-docked="true"] .savant-persistent-veil{opacity:0;visibility:hidden}
+.savant-persistent-mark{position:fixed;z-index:1000;left:calc(50vw - 160px);top:calc(50dvh - 160px);width:320px;height:320px;transition:left 1.85s cubic-bezier(.16,1,.22,1),top 1.85s cubic-bezier(.16,1,.22,1),width 1.85s cubic-bezier(.16,1,.22,1),height 1.85s cubic-bezier(.16,1,.22,1);pointer-events:auto;will-change:left,top,width,height}
+.savant-persistent-mark .savant-mark,.savant-persistent-mark .savant-mark__viewport{width:100%;height:100%}
+.savant-persistent-shell[data-docked="true"] .savant-persistent-mark{will-change:auto}
+.savant-persistent-status{position:fixed;bottom:max(5vh,22px);left:0;right:0;z-index:1001;color:#a7c8c8;text-align:center;font:500 11px/1.5 system-ui,sans-serif;letter-spacing:.24em;text-transform:uppercase}
+@media(prefers-reduced-motion:reduce){.savant-persistent-mark,.savant-persistent-content,.savant-persistent-veil{transition-duration:.01ms!important;transition-delay:0ms!important}}
+
+/* The loader is the only mounted logo; keep its WebGL canvas alive. */
+.savant-persistent-mark { display: grid; place-items: center; overflow: visible; }
+.savant-persistent-mark > .savant-mark { width: 100%; height: 100%; min-width: 0; min-height: 0; }
+.savant-persistent-mark .savant-mark__material-control,
+.savant-persistent-mark .savant-mark__preloader-copy { display: none; }
+.savant-persistent-shell:not([data-docked="true"]) .savant-persistent-content { pointer-events: none; }
+.savant-persistent-shell:not([data-docked="true"]) .savant-persistent-veil { visibility: visible; }
+
+.savant-persistent-gate{position:fixed;inset:auto 0 max(8vh,36px);z-index:1002;display:flex;justify-content:center;align-items:center;pointer-events:none}
+.savant-persistent-gate>*{pointer-events:auto}
+.savant-persistent-enter{appearance:none;cursor:pointer;border:1px solid rgba(139,220,215,.65);border-radius:999px;padding:15px 38px;color:#e8fffd;background:linear-gradient(125deg,rgba(17,65,72,.9),rgba(39,31,60,.88));box-shadow:0 0 32px rgba(85,218,213,.2),inset 0 1px 0 rgba(255,255,255,.16);font:600 12px/1.2 system-ui,sans-serif;letter-spacing:.19em;text-transform:uppercase;transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease}
+.savant-persistent-enter:hover{transform:translateY(-3px);border-color:#bafff5;box-shadow:0 0 42px rgba(85,218,213,.38)}
+.savant-persistent-enter:focus-visible{outline:2px solid #bafff5;outline-offset:5px}
+.savant-persistent-shell[data-entered="true"] .savant-persistent-gate{display:none}
+@media(prefers-reduced-motion:reduce){.savant-persistent-enter{transition:none}}
+
+/* Keep the application entirely occluded until the logo has docked. */
+.savant-persistent-shell:not([data-docked="true"]) .savant-persistent-content {
+  opacity: 0 !important; visibility: hidden !important; pointer-events: none !important;
+}
+.savant-persistent-shell:not([data-docked="true"]) .savant-persistent-veil {
+  opacity: 1 !important; visibility: visible !important;
+}
+.savant-persistent-mark { transform: translateZ(0); }
+.savant-persistent-gate { z-index: 1002; }

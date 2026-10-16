@@ -1,0 +1,59 @@
+{
+  "id": "carbon.segue.contracts",
+  "owner": "carbon",
+  "type": "segue_contract_registry",
+  "status": "active",
+  "contracts": [
+    {
+      "id": "simulation_source_reference",
+      "source": "source:instance",
+      "target": "exile:carbon",
+      "relation": "provides_simulation_primitive_to",
+      "binding": "reference",
+      "authority_transfer": false
+    },
+    {
+      "id": "simulation_evidence_reference",
+      "source": "evidence:admitted",
+      "target": "exile:carbon",
+      "relation": "may_ground_initial_condition_of",
+      "binding": "reference",
+      "optional": true,
+      "authority_transfer": false
+    },
+    {
+      "id": "simulation_constraint_reference",
+      "source": "decision:accepted",
+      "target": "exile:carbon",
+      "relation": "may_constrain_simulation",
+      "binding": "reference",
+      "optional": true,
+      "authority_transfer": false
+    },
+    {
+      "id": "simulation_engine_attachment",
+      "source": "exile:carbon",
+      "target": "engine:attached",
+      "relation": "delegates_specialized_execution_to",
+      "binding": "replaceable_attachment",
+      "optional": true,
+      "authority_transfer": false
+    },
+    {
+      "id": "simulation_composition",
+      "source": "exile:carbon",
+      "target": "consumer:declared",
+      "relation": "exports_simulation_projection_to",
+      "binding": "reference",
+      "authority_transfer": false
+    }
+  ],
+  "rules": {
+    "contracts_create_authority": false,
+    "composition_implies_inheritance": false,
+    "execution_delegation_implies_authority_transfer": false,
+    "source_authority_remains_with_source": true,
+    "simulation_authority_remains_with_carbon": true,
+    "external_engine_authority_remains_with_engine": true
+  }
+}

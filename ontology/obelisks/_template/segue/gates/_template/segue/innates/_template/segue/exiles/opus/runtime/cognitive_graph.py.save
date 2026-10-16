@@ -1,0 +1,424 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import hashlib
+import json
+import time
+import uuid
+from dataclasses import asdict, dataclass, field
+from enum import Enum
+from typing import Any, Iterable, Mapping, Sequence
+
+
+schema = "savant://opus/cognitive-graph/1.0.0"
+owner = "opus"
+
+
+class shade_kind(str, Enum):
+    request = "request"
+    requirement = "requirement"
+    facet = "facet"
+    capability = "capability"
+    provider = "provider"
+    trait = "trait"
+    function = "function"
+    evidence = "evidence"
+    contradiction = "contradiction"
+    uncertainty = "uncertainty"
+    synthesis = "synthesis"
+    projection = "projection"
+    constraint = "constraint"
+
+
+class segue_kind(str, Enum):
+    requires = "requires"
+    provides = "provides"
+    consumes = "consumes"
+    produces = "produces"
+    depends_on = "depends_on"
+    challenges = "challenges"
+    contradicts = "contradicts"
+    supports = "supports"
+    constrains = "constrains"
+    reviewed_by = "reviewed_by"
+    specializes = "specializes"
+    projects = "projects"
+    supersedes = "supersedes"
+    invalidates = "invalidates"
+    derived_from = "derived_from"
+
+
+@dataclass(frozen=True)
+class cognitive_shade:
+    shade_id: str
+    kind: shade_kind
+    owner: str
+    semantic_identity: str
+    payload: Mapping[str, Any] = field(default_factory=dict)
+    provenance: tuple[str, ...] = ()
+    dependencies: tuple[str, ...] = ()
+    authoritative: bool = False
+    ephemeral: bool = True
+
+    def as_dict(self) -> dict[str, Any]:
+        value = asdict(self)
+        value["kind"] = self.kind.value
+        return value
+
+
+@dataclass(frozen=True)
+class cognitive_segue:
+    segue_id: str
+    kind: segue_kind
+    source_shade_id: str
+    target_shade_id: str
+    owner: str
+    provenance: tuple[str, ...] = ()
+    authoritative: bool = False
+    ephemeral: bool = True
+    metadata: Mapping[str, Any] = field(default_factory=dict)
+
+    def as_dict(self) -> dict[str, Any]:
+        value = asdict(self)
+        value["kind"] = self.kind.value
+        return value
+
+
+@dataclass(frozen=True)
+class graph_event:
+    sequence: int
+    event_type: str
+    data: Mapping[str, Any]
+    timestamp_ns: int
+
+    def as_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+class graph_error(RuntimeError):
+    pass
+
+
+class duplicate_identity(graph_error):
+    pass
+
+
+class missing_endpoint(graph_error):
+    pass
+
+
+class invalid_authority_transition(graph_error):
+    pass
+
+
+class cycle_error(graph_error):
+    pass
+
+
+def canonical_json(value: Any) -> str:
+    return json.dumps(
+        value,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+        default=str,
+    )
+
+
+def stable_digest(value: Any) -> str:
+    return hashlib.sha256(
+        canonical_json(value).encode("utf-8")
+    ).hexdigest()
+
+
+def stable_id(
+    prefix: str,
+    *parts: Any,
+) -> str:
+    digest = stable_digest(parts)[:24]
+    return f"{prefix}:{digest}"
+
+
+def runtime_id(prefix: str) -> str:
+    return f"{prefix}:{uuid.uuid4().hex}"
+
+
+class cognitive_graph:
+    def __init__(
+        self,
+        *,
+        graph_id: str | None = None,
+        graph_owner: str = owner,
+    ) -> None:
+        self.graph_id = graph_id or runtime_id("cognitive-graph")
+        self.owner = graph_owner
+        self._shades: dict[str, cognitive_shade] = {}
+        self._segues: dict[str, cognitive_segue] = {}
+        self._outgoing: dict[str, set[str]] = {}
+        self._incoming: dict[str, set[str]] = {}
+        self._events: list[graph_event] = []
+        self._sequence = 0
+
+    def _event(
+        self,
+        event_type: str,
+        data: Mapping[str, Any],
+    ) -> None:
+        self._sequence += 1
+        self._events.append(
+            graph_event(
+                sequence=self._sequence,
+                event_type=event_type,
+                data=dict(data),
+                timestamp_ns=time.time_ns(),
+            )
+        )
+
+    def add_shade(
+        self,
+        shade: cognitive_shade,
+    ) -> cognitive_shade:
+        existing = self._shades.get(shade.shade_id)
+
+        if existing is not None:
+            if existing == shade:
+                return existing
+            raise duplicate_identity(
+                f"shade identity collision: {shade.shade_id}"
+            )
+
+        self._shades[shade.shade_id] = shade
+        self._outgoing.setdefault(shade.shade_id, set())
+        self._incoming.setdefault(shade.shade_id, set())
+
+        self._event(
+            "shade.admitted",
+            {
+                "shade_id": shade.shade_id,
+                "kind": shade.kind.value,
+                "owner": shade.owner,
+                "authoritative": shade.authoritative,
+                "ephemeral": shade.ephemeral,
+            },
+        )
+
+        return shade
+
+    def add_segue(
+        self,
+        segue: cognitive_segue,
+    ) -> cognitive_segue:
+        if segue.source_shade_id not in self._shades:
+            raise missing_endpoint(
+                f"missing source shade: {segue.source_shade_id}"
+            )
+
+        if segue.target_shade_id not in self._shades:
+            raise missing_endpoint(
+                f"missing target shade: {segue.target_shade_id}"
+            )
+
+        existing = self._segues.get(segue.segue_id)
+
+        if existing is not None:
+            if existing == segue:
+                return existing
+            raise duplicate_identity(
+                f"segue identity collision: {segue.segue_id}"
+            )
+
+        source = self._shades[segue.source_shade_id]
+        target = self._shades[segue.target_shade_id]
+
+        if (
+            segue.authoritative
+            and not source.authoritative
+            and not target.authoritative
+        ):
+            raise invalid_authority_transition(
+                "runtime-derived endpoints cannot manufacture "
+                "an authoritative segue"
+            )
+
+        self._segues[segue.segue_id] = segue
+        self._outgoing[segue.source_shade_id].add(
+            segue.segue_id
+        )
+        self._incoming[segue.target_shade_id].add(
+            segue.segue_id
+        )
+
+        self._event(
+            "segue.admitted",
+            {
+                "segue_id": segue.segue_id,
+                "kind": segue.kind.value,
+                "source": segue.source_shade_id,
+                "target": segue.target_shade_id,
+                "authoritative": segue.authoritative,
+                "ephemeral": segue.ephemeral,
+            },
+        )
+
+        return segue
+
+    def create_shade(
+        self,
+        *,
+        kind: shade_kind,
+        semantic_identity: str,
+        payload: Mapping[str, Any] | None = None,
+        shade_owner: str = owner,
+        provenance: Iterable[str] = (),
+        dependencies: Iterable[str] = (),
+        authoritative: bool = False,
+        ephemeral: bool = True,
+        identity_seed: Any | None = None,
+    ) -> cognitive_shade:
+        identity_material = (
+            identity_seed
+            if identity_seed is not None
+            else {
+                "kind": kind.value,
+                "semantic_identity": semantic_identity,
+                "owner": shade_owner,
+                "payload": dict(payload or {}),
+                "provenance": sorted(set(provenance)),
+                "dependencies": sorted(set(dependencies)),
+                "authoritative": authoritative,
+                "ephemeral": ephemeral,
+            }
+        )
+
+        shade = cognitive_shade(
+            shade_id=stable_id(
+                f"shade:{kind.value}",
+                identity_material,
+            ),
+            kind=kind,
+            owner=shade_owner,
+            semantic_identity=semantic_identity,
+            payload=dict(payload or {}),
+            provenance=tuple(sorted(set(provenance))),
+            dependencies=tuple(sorted(set(dependencies))),
+            authoritative=authoritative,
+            ephemeral=ephemeral,
+        )
+
+        return self.add_shade(shade)
+
+    def connect(
+        self,
+        *,
+        kind: segue_kind,
+        source_shade_id: str,
+        target_shade_id: str,
+        segue_owner: str = owner,
+        provenance: Iterable[str] = (),
+        authoritative: bool = False,
+        ephemeral: bool = True,
+        metadata: Mapping[str, Any] | None = None,
+    ) -> cognitive_segue:
+        segue = cognitive_segue(
+            segue_id=stable_id(
+                f"segue:{kind.value}",
+                source_shade_id,
+                target_shade_id,
+                segue_owner,
+                dict(metadata or {}),
+            ),
+            kind=kind,
+            source_shade_id=source_shade_id,
+            target_shade_id=target_shade_id,
+            owner=segue_owner,
+            provenance=tuple(sorted(set(provenance))),
+            authoritative=authoritative,
+            ephemeral=ephemeral,
+            metadata=dict(metadata or {}),
+        )
+
+        return self.add_segue(segue)
+
+    def shade(
+        self,
+        shade_id: str,
+    ) -> cognitive_shade:
+        try:
+            return self._shades[shade_id]
+        except KeyError as exc:
+            raise missing_endpoint(shade_id) from exc
+
+    def segue(
+        self,
+        segue_id: str,
+    ) -> cognitive_segue:
+        try:
+            return self._segues[segue_id]
+        except KeyError as exc:
+            raise missing_endpoint(segue_id) from exc
+
+    def shades(
+        self,
+        *,
+        kind: shade_kind | None = None,
+    ) -> tuple[cognitive_shade, ...]:
+        values = self._shades.values()
+
+        if kind is not None:
+            values = (
+                item
+                for item in values
+                if item.kind == kind
+            )
+
+        return tuple(
+            sorted(
+                values,
+                key=lambda item: item.shade_id,
+            )
+        )
+
+    def segues(
+        self,
+        *,
+        kind: segue_kind | None = None,
+    ) -> tuple[cognitive_segue, ...]:
+        values = self._segues.values()
+
+        if kind is not None:
+            values = (
+                item
+                for item in values
+                if item.kind == kind
+            )
+
+        return tuple(
+            sorted(
+                values,
+                key=lambda item: item.segue_id,
+            )
+        )
+
+    def outgoing(
+        self,
+        shade_id: str,
+    ) -> tuple[cognitive_segue, ...]:
+        self.shade(shade_id)
+
+        return tuple(
+            sorted(
+                (
+                    self._segues[segue_id]
+                    for segue_id
+                    in self._outgoing.get(shade_id, ())
+                ),
+                key=lambda item: item.segue_id,
+            )
+        )
+
+    def incoming(
+        self,
+        shade_id: str,
+    ) -> tuple[cognitive_segue, ...]:
+        self.shade

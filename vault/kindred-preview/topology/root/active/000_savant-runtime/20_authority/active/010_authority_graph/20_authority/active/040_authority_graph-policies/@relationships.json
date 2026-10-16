@@ -1,0 +1,259 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "3616cacc5f819a4543b34e6f768ff401a858b184fe8be88f9d8fbd765d755871",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "namespace": "preview.kindred",
+  "node": "authority_graph/policies",
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationships": [
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.3620fcff1735ce2fb7c0",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "authority_graph/policies",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:authority_graph/policies",
+        "canonical_target": "fs:authority_graph/policies/functional_lineage.json",
+        "continuation": "projecting",
+        "id": "lineage.composition.3620fcff1735ce2fb7c0",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/authority_graph/policies/functional_lineage.json"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "authority_graph/policies",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "authority_graph/policies/functional_lineage.json",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "authority_graph/policies/functional_lineage.json"
+    },
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.9baa75c54a6c20690e41",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "authority_graph/policies",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:authority_graph/policies",
+        "canonical_target": "fs:authority_graph/policies/projection.json",
+        "continuation": "projecting",
+        "id": "lineage.composition.9baa75c54a6c20690e41",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/authority_graph/policies/projection.json"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "authority_graph/policies",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "authority_graph/policies/projection.json",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "authority_graph/policies/projection.json"
+    },
+    {
+      "child_profile": "daughter",
+      "domain": "filesystem",
+      "id": "lineage.composition.b5bed69d9ddfe5402ee8",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "authority_graph",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:authority_graph",
+        "canonical_target": "fs:authority_graph/policies",
+        "continuation": "preserving",
+        "id": "lineage.composition.b5bed69d9ddfe5402ee8",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/authority_graph/policies"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "authority_graph",
+        "status": "active",
+        "symbolic_child_alias": "daughter",
+        "symbolic_parent_alias": "parent",
+        "target": "authority_graph/policies",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "authority_graph/policies"
+    },
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.db80adb00e923d993cd5",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "authority_graph/policies",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:authority_graph/policies",
+        "canonical_target": "fs:authority_graph/policies/emergence.json",
+        "continuation": "projecting",
+        "id": "lineage.composition.db80adb00e923d993cd5",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/authority_graph/policies/emergence.json"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "authority_graph/policies",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "authority_graph/policies/emergence.json",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "authority_graph/policies/emergence.json"
+    }
+  ],
+  "schema": "savant.kindred.preview.relationship_projection.v2"
+}

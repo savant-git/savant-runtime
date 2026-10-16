@@ -1,0 +1,135 @@
+{
+  "id": "carbon.capabilities",
+  "owner": "carbon",
+  "type": "capability_registry",
+  "status": "active",
+  "singular_purpose": "advanced proprietary simulation",
+  "capabilities": [
+    {
+      "id": "simulation_definition",
+      "kind": "primitive",
+      "description": "Define graph-addressable simulations from referenced entities, parameters, constraints, relationships, events, temporal conditions, dependencies, and simulation rules."
+    },
+    {
+      "id": "simulation_instantiation",
+      "kind": "primitive",
+      "description": "Instantiate an immutable-identity simulation execution context from a simulation definition."
+    },
+    {
+      "id": "simulation_execution",
+      "kind": "runtime",
+      "description": "Advance simulation state through declared execution semantics."
+    },
+    {
+      "id": "simulation_state_management",
+      "kind": "runtime",
+      "description": "Maintain addressable simulation state without mutating authoritative source primitives."
+    },
+    {
+      "id": "simulation_composition",
+      "kind": "composition",
+      "description": "Compose simulations and reusable source instances by reference."
+    },
+    {
+      "id": "simulation_branching",
+      "kind": "evolution",
+      "description": "Fork simulation state while preserving immutable ancestry."
+    },
+    {
+      "id": "counterfactual_branching",
+      "kind": "projection",
+      "description": "Execute explicit alternative scenarios without confusing them with observed history."
+    },
+    {
+      "id": "simulation_checkpointing",
+      "kind": "persistence",
+      "description": "Capture immutable simulation reference points for replay, branching, comparison, recovery, and inspection."
+    },
+    {
+      "id": "deterministic_replay",
+      "kind": "replay",
+      "description": "Reconstruct execution from preserved state, inputs, parameters, dependencies, events, and execution semantics."
+    },
+    {
+      "id": "simulation_comparison",
+      "kind": "projection",
+      "description": "Compare simulations, branches, checkpoints, parameters, and outcomes without mutating them."
+    },
+    {
+      "id": "simulation_interrogation",
+      "kind": "query",
+      "description": "Query simulation state, history, ancestry, dependencies, constraints, causal paths, uncertainty, divergence, provenance, and outcomes."
+    },
+    {
+      "id": "parameter_sweeps",
+      "kind": "exploration",
+      "description": "Execute bounded families of simulations over declared parameter spaces."
+    },
+    {
+      "id": "temporal_progression",
+      "kind": "runtime",
+      "description": "Advance simulation state through explicit temporal semantics."
+    },
+    {
+      "id": "event_injection",
+      "kind": "runtime",
+      "description": "Inject declared events into an execution branch with provenance."
+    },
+    {
+      "id": "constraint_projection",
+      "kind": "projection",
+      "description": "Expose active simulation constraints as inspectable derived structure."
+    },
+    {
+      "id": "causal_trace_projection",
+      "kind": "projection",
+      "description": "Project traceable paths between declared simulation inputs, transitions, and outcomes."
+    },
+    {
+      "id": "uncertainty_projection",
+      "kind": "projection",
+      "description": "Preserve and expose uncertainty rather than silently converting it into certainty."
+    },
+    {
+      "id": "simulation_receipts",
+      "kind": "evidence",
+      "description": "Emit execution receipts proving simulation operations without asserting simulated results as external fact."
+    },
+    {
+      "id": "simulation_provenance",
+      "kind": "provenance",
+      "description": "Preserve sources and transformations participating in simulation derivation."
+    },
+    {
+      "id": "simulation_lineage",
+      "kind": "lineage",
+      "description": "Preserve ancestry across simulation evolution, checkpoints, and branches."
+    },
+    {
+      "id": "oriel",
+      "kind": "specialization",
+      "description": "Provide Carbon's chronology and logistics intelligence specialization, including reality-bound temporal feasibility, inverse chronology, reachability, worldlines, and logistical causal projections, without defining Carbon's generalized purpose."
+    },
+    {
+      "id": "guise",
+      "kind": "specialization",
+      "description": "Provide Carbon's generalized character-intelligence specialization for evidence-grounded or deliberately generated character substantiation, psychology, physicality, behavior, knowledge, belief, memory, relationships, chronology, development, state, contradiction, continuity, counterfactual simulation, comparison, and deterministic character projection without embedding any demonstration character into Carbon."
+    },
+    {
+      "id": "avatar_forge",
+      "kind": "application",
+      "description": "Provide Carbon's embodied simulation specialization without defining Carbon's generalized purpose."
+    }
+  ],
+  "invariants": {
+    "source_authority_preserved": true,
+    "simulation_output_is_derived": true,
+    "simulation_output_creates_authority": false,
+    "composition_by_reference": true,
+    "lineage_preserved": true,
+    "provenance_preserved": true,
+    "specializations_do_not_define_carbon": true,
+    "character_data_does_not_define_guise": true,
+    "authority_transfer": false
+  }
+}

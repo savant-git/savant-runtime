@@ -1,0 +1,62 @@
+{
+  "id": "carbon.lineage.oriel_specialization",
+  "owner": "carbon",
+  "type": "specialization_lineage",
+  "status": "active",
+  "historical_ancestor": {
+    "id": "oriel",
+    "record": "oriel.json",
+    "relationship": "conceptual_ancestor_of_carbon",
+    "role": "originating_simulation_concept"
+  },
+  "current_specialization": {
+    "id": "carbon.oriel",
+    "graph_id": "exile:carbon/specialization:oriel",
+    "display_name": "oriel",
+    "owner": "carbon",
+    "relationship": "carbon_specialization_named_for_ancestor",
+    "role": "chronometric_logistics_simulation",
+    "manifest": "registry/manifests/oriel.json",
+    "capability_provider": "runtime/oriel_capabilities.py"
+  },
+  "evolution": {
+    "historical_transition": "oriel_evolved_into_carbon",
+    "current_transition": "oriel_name_reused_for_carbon_specialization",
+    "preserved_concepts": [
+      "chronometric_simulation",
+      "stateful_modeled_entities",
+      "interactive_simulation",
+      "simulation_derived_behavior"
+    ],
+    "specialized_concepts": [
+      "chronology",
+      "logistics",
+      "historical_reality_binding",
+      "spacetime_feasibility",
+      "inverse_chronology",
+      "reachability",
+      "worldlines",
+      "logistical_causality"
+    ]
+  },
+  "identity_distinctions": {
+    "historical_oriel_identity_preserved": true,
+    "historical_oriel_is_current_specialization": false,
+    "standalone_oriel_runtime_restored": false,
+    "current_oriel_specialization_is_carbon_owned": true,
+    "carbon_remains_general_simulation_owner": true,
+    "current_specialization_may_supersede_carbon": false
+  },
+  "lineage_rules": {
+    "ancestor_erased": false,
+    "ancestor_runtime_reactivated": false,
+    "specialization_duplicates_ancestor_identity": false,
+    "specialization_defines_carbon": false,
+    "specialization_owns_general_quantum": false,
+    "specialization_owns_general_causal_simulation": false,
+    "lineage_preserved": true,
+    "provenance_preserved": true,
+    "authority_transfer": false
+  },
+  "authority_effect": "none"
+}

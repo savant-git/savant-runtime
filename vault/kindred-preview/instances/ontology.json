@@ -1,0 +1,97 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:ontology",
+  "deterministic_hash": "936ce7f0cbae0081a707435bd39b79dc53f48daf4519612c6cd701a78382c821",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "ontology",
+  "kind": "directory",
+  "label": "ontology",
+  "namespace": "preview.kindred",
+  "path": "ontology",
+  "placement": {
+    "domain": "filesystem",
+    "node": "ontology",
+    "parent": "savant-runtime",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.7e3bee30abbdd56b0e4f",
+    "rank": 130,
+    "slot": "30_ontology",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.7e3bee30abbdd56b0e4f",
+    "lineage.composition.7efd3ca96656f59ce2a9"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:ontology",
+    "children": [
+      "ontology/obelisks"
+    ],
+    "daughters": [
+      "ontology/obelisks"
+    ],
+    "dependencies": [],
+    "fathers": [],
+    "id": "ontology",
+    "kind": "directory",
+    "label": "ontology",
+    "legacy_id": "ontology",
+    "lineage": [
+      "savant-runtime"
+    ],
+    "metadata": {
+      "canonical_id": "fs:ontology",
+      "child_modes": {
+        "preserving": [
+          "fs:ontology/obelisks"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:ontology/obelisks"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:."
+        ]
+      },
+      "projected_id": "ontology",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "savant-runtime"
+    ],
+    "path": "ontology",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "ontology",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.7e3bee30abbdd56b0e4f",
+      "lineage.composition.7efd3ca96656f59ce2a9"
+    ],
+    "size": 12,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

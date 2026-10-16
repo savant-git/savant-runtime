@@ -1,0 +1,141 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import subprocess
+import sys
+from pathlib import Path
+
+LEXICON_ROOT = Path(__file__).resolve().parents[1]
+
+ENGINE = (
+    LEXICON_ROOT
+    / "runtime"
+    / "lexicon_engine.py"
+)
+
+VALIDATOR = (
+    LEXICON_ROOT
+    / "validators"
+    / "lexicon_validator.py"
+)
+
+
+def run(script: Path, args: list[str]) -> int:
+    if not script.exists():
+        print(
+            f"Missing file: {script}",
+            file=sys.stderr,
+        )
+        return 1
+
+    return subprocess.run(
+        [sys.executable, str(script), *args],
+        cwd=str(LEXICON_ROOT),
+    ).returncode
+
+
+def usage() -> None:
+    print(
+        """Usage:
+
+lexiconctl validate
+lexiconctl project
+lexiconctl resolve <reference>
+lexiconctl canonicalize <reference>
+lexiconctl describe <reference>
+lexiconctl search <query>
+lexiconctl dependencies <reference> [--recursive]
+lexiconctl dependents <reference> [--recursive]
+lexiconctl ancestors <reference> [--direct]
+lexiconctl descendants <reference> [--direct]
+lexiconctl reserved <spelling>
+lexiconctl graph <graph> [--reverse]
+lexiconctl export
+lexiconctl snapshot
+lexiconctl compile
+lexiconctl integrity
+"""
+    )
+
+
+def main() -> int:
+    if len(sys.argv) < 2:
+        usage()
+        return 1
+
+    command = sys.argv[1]
+    args = sys.argv[2:]
+
+    if command in (
+        "help",
+        "--help",
+        "-h",
+    ):
+        usage()
+        return 0
+
+    if command == "validate":
+        return run(VALIDATOR, args)
+
+    if command == "compile":
+        rc = run(VALIDATOR, [])
+        if rc:
+            return rc
+        return run(ENGINE, ["project"])
+
+    if command == "integrity":
+        rc = run(VALIDATOR, [])
+        if rc:
+            return rc
+
+        rc = run(ENGINE, ["project"])
+        if rc:
+            return rc
+
+        return run(
+            ENGINE,
+            [
+                "snapshot",
+                "--output",
+                str(
+                    LEXICON_ROOT
+                    / "runtime"
+                    / "integrity_snapshot.json"
+                ),
+            ],
+        )
+
+    engine_commands = {
+        "project",
+        "resolve",
+        "canonicalize",
+        "describe",
+        "search",
+        "dependencies",
+        "dependents",
+        "ancestors",
+        "descendants",
+        "reserved",
+        "graph",
+        "export",
+        "snapshot",
+    }
+
+    if command in engine_commands:
+        return run(
+            ENGINE,
+            [command, *args],
+        )
+
+    print(
+        f"Unknown command: {command}",
+        file=sys.stderr,
+    )
+
+    usage()
+    return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

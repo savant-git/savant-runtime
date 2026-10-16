@@ -1,0 +1,55 @@
+{
+  "authority": {
+    "accepted_at": "2026-08-01T22:03:54-04:00",
+    "accepted_by": "project-owner",
+    "authority_class": "project-owner-directed",
+    "confidence": 1.0,
+    "source": "docs/SAVANT_MASTER_TASKS.md",
+    "state": "accepted",
+    "tier": 1
+  },
+  "condition_mode": "all",
+  "conditions": [
+    {
+      "fact": "graph.schema_version",
+      "operator": "exists"
+    }
+  ],
+  "description": "Policy-governed operations require an explicit graph schema version.",
+  "effect": "require",
+  "extensions": {},
+  "failure": {
+    "code": "masterplan.policy.graph_schema_missing",
+    "message": "Graph schema version is missing."
+  },
+  "id": "policy.masterplan.graph-schema-required",
+  "kind": "security",
+  "operations": [
+    "task.activate",
+    "task.complete",
+    "task.mutate",
+    "task.execute",
+    "graph.project",
+    "graph.replay"
+  ],
+  "provenance": {
+    "contract_version": "1.0.0",
+    "generated_at": "2026-08-02T09:37:00-04:00",
+    "generated_by": "prodigal.niche.masterplan.masterplan_policy_runtime",
+    "sources": [
+      {
+        "authority_state": "accepted",
+        "source_id": "docs/SAVANT_MASTER_TASKS.md",
+        "source_kind": "accepted-masterplan-specification",
+        "source_path": "docs/SAVANT_MASTER_TASKS.md"
+      }
+    ],
+    "transformations": [
+      "masterplan_law_to_policy_record"
+    ]
+  },
+  "schema": "savant://niche/masterplan/policy/1.0.0",
+  "semantic_digest": "bb03d5a0eb9b78462e8d392a63d6c0528123d4ae3d98bf697c9a0398e227b128",
+  "title": "Graph Schema Version Required",
+  "version": "1.0.0"
+}

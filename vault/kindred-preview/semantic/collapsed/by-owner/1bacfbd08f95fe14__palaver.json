@@ -1,0 +1,756 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "d44f856bcd3071177c5a58a5d9aedc305dadc7d904a6479641ef1adae4abf7c8",
+  "generated_at": "2026-07-17T11:47:04+00:00",
+  "members": [
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/palaver/authority",
+      "collapse_reason": "generic_directory_attachment",
+      "extension": null,
+      "id": "runtime/palaver/authority",
+      "instance_hash": "673b66540cee4b6b43edb7b3ecefef6ed34009453c9f97b290b69877928f75e5",
+      "instance_record": "instances/runtime-palaver-authority.json",
+      "kind": "directory",
+      "label": "authority",
+      "normalized_path": "runtime/palaver/authority",
+      "original_lineage_to_owner": [
+        "runtime/palaver/authority",
+        "runtime/palaver"
+      ],
+      "original_parent": "runtime/palaver",
+      "path": "runtime/palaver/authority",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.8f50d036d4d493e543dd",
+        "lineage.composition.b3429ece682b932aae2a"
+      ],
+      "semantic_owner": "runtime/palaver",
+      "shard_level": "instance",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/palaver/authority/authority_engine.py",
+      "collapse_reason": "file_attachment",
+      "extension": ".py",
+      "id": "runtime/palaver/authority/authority_engine.py",
+      "instance_hash": "31859ecb679f08d51ad45e5bbf4b6a5a84d4c517f5b79f880834965f01cec904",
+      "instance_record": "instances/runtime-palaver-authority-authority_engine.py.json",
+      "kind": "file",
+      "label": "authority_engine.py",
+      "normalized_path": "runtime/palaver/authority/authority_engine.py",
+      "original_lineage_to_owner": [
+        "runtime/palaver/authority/authority_engine.py",
+        "runtime/palaver/authority",
+        "runtime/palaver"
+      ],
+      "original_parent": "runtime/palaver/authority",
+      "path": "runtime/palaver/authority/authority_engine.py",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.8f50d036d4d493e543dd"
+      ],
+      "semantic_owner": "runtime/palaver",
+      "shard_level": "record",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/palaver/contracts",
+      "collapse_reason": "generic_directory_attachment",
+      "extension": null,
+      "id": "runtime/palaver/contracts",
+      "instance_hash": "4b03a607388dc1eda104455dba5ffb6e93bfe72f2048254363b59b25bc81140a",
+      "instance_record": "instances/runtime-palaver-contracts.json",
+      "kind": "directory",
+      "label": "contracts",
+      "normalized_path": "runtime/palaver/contracts",
+      "original_lineage_to_owner": [
+        "runtime/palaver/contracts",
+        "runtime/palaver"
+      ],
+      "original_parent": "runtime/palaver",
+      "path": "runtime/palaver/contracts",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.8cd584c4ec2ab136af5f",
+        "lineage.composition.8fd6b90f94ec49b8f6a9"
+      ],
+      "semantic_owner": "runtime/palaver",
+      "shard_level": "instance",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/palaver/contracts/investigation_contract.py",
+      "collapse_reason": "file_attachment",
+      "extension": ".py",
+      "id": "runtime/palaver/contracts/investigation_contract.py",
+      "instance_hash": "29ec51b8c84f423150e8de3b9adce403469991e51b9c9a5c2e19bd867cb626af",
+      "instance_record": "instances/runtime-palaver-contracts-investigation_contract.py.json",
+      "kind": "file",
+      "label": "investigation_contract.py",
+      "normalized_path": "runtime/palaver/contracts/investigation_contract.py",
+      "original_lineage_to_owner": [
+        "runtime/palaver/contracts/investigation_contract.py",
+        "runtime/palaver/contracts",
+        "runtime/palaver"
+      ],
+      "original_parent": "runtime/palaver/contracts",
+      "path": "runtime/palaver/contracts/investigation_contract.py",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.8cd584c4ec2ab136af5f"
+      ],
+      "semantic_owner": "runtime/palaver",
+      "shard_level": "record",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/palaver/fields",
+      "collapse_reason": "generic_directory_attachment",
+      "extension": null,
+      "id": "runtime/palaver/fields",
+      "instance_hash": "5bf288d01f2de3db20c465ee3a069f1866be01f0e9aa00bc076121340714cb82",
+      "instance_record": "instances/runtime-palaver-fields.json",
+      "kind": "directory",
+      "label": "fields",
+      "normalized_path": "runtime/palaver/fields",
+      "original_lineage_to_owner": [
+        "runtime/palaver/fields",
+        "runtime/palaver"
+      ],
+      "original_parent": "runtime/palaver",
+      "path": "runtime/palaver/fields",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.a8e39971e1e22f4a5eac",
+        "lineage.composition.df7b1bd1383dc351b7cd"
+      ],
+      "semantic_owner": "runtime/palaver",
+      "shard_level": "instance",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/palaver/fields/structural_fields.py",
+      "collapse_reason": "file_attachment",
+      "extension": ".py",
+      "id": "runtime/palaver/fields/structural_fields.py",
+      "instance_hash": "2948e03f8e5023cb6faa333bb05f7d4e86ac56c89cc1fe00389e89e636421b7f",
+      "instance_record": "instances/runtime-palaver-fields-structural_fields.py.json",
+      "kind": "file",
+      "label": "structural_fields.py",
+      "normalized_path": "runtime/palaver/fields/structural_fields.py",
+      "original_lineage_to_owner": [
+        "runtime/palaver/fields/structural_fields.py",
+        "runtime/palaver/fields",
+        "runtime/palaver"
+      ],
+      "original_parent": "runtime/palaver/fields",
+      "path": "runtime/palaver/fields/structural_fields.py",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.df7b1bd1383dc351b7cd"
+      ],
+      "semantic_owner": "runtime/palaver",
+      "shard_level": "record",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/palaver/graph",
+      "collapse_reason": "generic_directory_attachment",
+      "extension": null,
+      "id": "runtime/palaver/graph",
+      "instance_hash": "8c33b37ace6d4683e0af73c4c61f10251112ca28d917c67c57541e134cc23c2f",
+      "instance_record": "instances/runtime-palaver-graph.json",
+      "kind": "directory",
+      "label": "graph",
+      "normalized_path": "runtime/palaver/graph",
+      "original_lineage_to_owner": [
+        "runtime/palaver/graph",
+        "runtime/palaver"
+      ],
+      "original_parent": "runtime/palaver",
+      "path": "runtime/palaver/graph",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.309264d5a8c079ed9a75",
+        "lineage.composition.8a1e85aaa10a68e500d0",
+        "lineage.composition.e639b95ce86f6941cd89"
+      ],
+      "semantic_owner": "runtime/palaver",
+      "shard_level": "instance",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/palaver/graph/runtime_graph_engine.py",
+      "collapse_reason": "file_attachment",
+      "extension": ".py",
+      "id": "runtime/palaver/graph/runtime_graph_engine.py",
+      "instance_hash": "7efb23b874f8011eb2387c2ce5676a46e3763bb899fef3dc6e35b7e08013a2f1",
+      "instance_record": "instances/runtime-palaver-graph-runtime_graph_engine.py.json",
+      "kind": "file",
+      "label": "runtime_graph_engine.py",
+      "normalized_path": "runtime/palaver/graph/runtime_graph_engine.py",
+      "original_lineage_to_owner": [
+        "runtime/palaver/graph/runtime_graph_engine.py",
+        "runtime/palaver/graph",
+        "runtime/palaver"
+      ],
+      "original_parent": "runtime/palaver/graph",
+      "path": "runtime/palaver/graph/runtime_graph_engine.py",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.e639b95ce86f6941cd89"
+      ],
+      "semantic_owner": "runtime/palaver",
+      "shard_level": "record",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/palaver/graph/runtime_graph_index.py",
+      "collapse_reason": "file_attachment",
+      "extension": ".py",
+      "id": "runtime/palaver/graph/runtime_graph_index.py",
+      "instance_hash": "8eda81236363e3b12c20b0bb4bc5e624b0913277df959b0b66e0afe76374435d",
+      "instance_record": "instances/runtime-palaver-graph-runtime_graph_index.py.json",
+      "kind": "file",
+      "label": "runtime_graph_index.py",
+      "normalized_path": "runtime/palaver/graph/runtime_graph_index.py",
+      "original_lineage_to_owner": [
+        "runtime/palaver/graph/runtime_graph_index.py",
+        "runtime/palaver/graph",
+        "runtime/palaver"
+      ],
+      "original_parent": "runtime/palaver/graph",
+      "path": "runtime/palaver/graph/runtime_graph_index.py",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.309264d5a8c079ed9a75"
+      ],
+      "semantic_owner": "runtime/palaver",
+      "shard_level": "record",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/palaver/health",
+      "collapse_reason": "generic_directory_attachment",
+      "extension": null,
+      "id": "runtime/palaver/health",
+      "instance_hash": "24372f62315a2d3b988fee0d201f6125a9a4f8017488da2886f7600a184f25b1",
+      "instance_record": "instances/runtime-palaver-health.json",
+      "kind": "directory",
+      "label": "health",
+      "normalized_path": "runtime/palaver/health",
+      "original_lineage_to_owner": [
+        "runtime/palaver/health",
+        "runtime/palaver"
+      ],
+      "original_parent": "runtime/palaver",
+      "path": "runtime/palaver/health",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.27ee18502e5a31835bec",
+        "lineage.composition.56795908ba3f361873f5"
+      ],
+      "semantic_owner": "runtime/palaver",
+      "shard_level": "instance",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/palaver/health/health_snapshot.py",
+      "collapse_reason": "file_attachment",
+      "extension": ".py",
+      "id": "runtime/palaver/health/health_snapshot.py",
+      "instance_hash": "29b02edfef3f854a7df53469ee0d1c4e36344f81ac20cf8ffe056ff36a6f3e94",
+      "instance_record": "instances/runtime-palaver-health-health_snapshot.py.json",
+      "kind": "file",
+      "label": "health_snapshot.py",
+      "normalized_path": "runtime/palaver/health/health_snapshot.py",
+      "original_lineage_to_owner": [
+        "runtime/palaver/health/health_snapshot.py",
+        "runtime/palaver/health",
+        "runtime/palaver"
+      ],
+      "original_parent": "runtime/palaver/health",
+      "path": "runtime/palaver/health/health_snapshot.py",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.56795908ba3f361873f5"
+      ],
+      "semantic_owner": "runtime/palaver",
+      "shard_level": "record",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/palaver/investigation",
+      "collapse_reason": "generic_directory_attachment",
+      "extension": null,
+      "id": "runtime/palaver/investigation",
+      "instance_hash": "ae536d1d1ce3b3b5bf29c1f69967eb162aa2c331113bd2c63b6b35ffc2691e0e",
+      "instance_record": "instances/runtime-palaver-investigation.json",
+      "kind": "directory",
+      "label": "investigation",
+      "normalized_path": "runtime/palaver/investigation",
+      "original_lineage_to_owner": [
+        "runtime/palaver/investigation",
+        "runtime/palaver"
+      ],
+      "original_parent": "runtime/palaver",
+      "path": "runtime/palaver/investigation",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.7086480a27f1ba5ec43e",
+        "lineage.composition.82a5fda8dc0481f0701b"
+      ],
+      "semantic_owner": "runtime/palaver",
+      "shard_level": "instance",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/palaver/investigation/investigation_packet_builder.py",
+      "collapse_reason": "file_attachment",
+      "extension": ".py",
+      "id": "runtime/palaver/investigation/investigation_packet_builder.py",
+      "instance_hash": "7236aa442521f4cb48bdea4c433ba97996c564ffd4a7ff866087a3c6e5b32676",
+      "instance_record": "instances/runtime-palaver-investigation-investigation_packet_builder.py.json",
+      "kind": "file",
+      "label": "investigation_packet_builder.py",
+      "normalized_path": "runtime/palaver/investigation/investigation_packet_builder.py",
+      "original_lineage_to_owner": [
+        "runtime/palaver/investigation/investigation_packet_builder.py",
+        "runtime/palaver/investigation",
+        "runtime/palaver"
+      ],
+      "original_parent": "runtime/palaver/investigation",
+      "path": "runtime/palaver/investigation/investigation_packet_builder.py",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.7086480a27f1ba5ec43e"
+      ],
+      "semantic_owner": "runtime/palaver",
+      "shard_level": "record",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/palaver/lineage",
+      "collapse_reason": "generic_directory_attachment",
+      "extension": null,
+      "id": "runtime/palaver/lineage",
+      "instance_hash": "526c20ee39d92274ae7db10208556920a7bab69bf2f4ed49b227d393ed63f7fe",
+      "instance_record": "instances/runtime-palaver-lineage.json",
+      "kind": "directory",
+      "label": "lineage",
+      "normalized_path": "runtime/palaver/lineage",
+      "original_lineage_to_owner": [
+        "runtime/palaver/lineage",
+        "runtime/palaver"
+      ],
+      "original_parent": "runtime/palaver",
+      "path": "runtime/palaver/lineage",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.172bfd71693bd2268b39",
+        "lineage.composition.454c60eb3465071000a8"
+      ],
+      "semantic_owner": "runtime/palaver",
+      "shard_level": "instance",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/palaver/lineage/lineage_engine.py",
+      "collapse_reason": "file_attachment",
+      "extension": ".py",
+      "id": "runtime/palaver/lineage/lineage_engine.py",
+      "instance_hash": "d92333fa319bc31d70da1f044a43f1808724dfb166368680e4ad349b9e4baffe",
+      "instance_record": "instances/runtime-palaver-lineage-lineage_engine.py.json",
+      "kind": "file",
+      "label": "lineage_engine.py",
+      "normalized_path": "runtime/palaver/lineage/lineage_engine.py",
+      "original_lineage_to_owner": [
+        "runtime/palaver/lineage/lineage_engine.py",
+        "runtime/palaver/lineage",
+        "runtime/palaver"
+      ],
+      "original_parent": "runtime/palaver/lineage",
+      "path": "runtime/palaver/lineage/lineage_engine.py",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.172bfd71693bd2268b39"
+      ],
+      "semantic_owner": "runtime/palaver",
+      "shard_level": "record",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/palaver/observatories",
+      "collapse_reason": "generic_directory_attachment",
+      "extension": null,
+      "id": "runtime/palaver/observatories",
+      "instance_hash": "d6d5257584f475bc53f5ee9a421987b7d49fa04ee35949e66a8bc29f14a107dc",
+      "instance_record": "instances/runtime-palaver-observatories.json",
+      "kind": "directory",
+      "label": "observatories",
+      "normalized_path": "runtime/palaver/observatories",
+      "original_lineage_to_owner": [
+        "runtime/palaver/observatories",
+        "runtime/palaver"
+      ],
+      "original_parent": "runtime/palaver",
+      "path": "runtime/palaver/observatories",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.6630becab7af56bc4c28"
+      ],
+      "semantic_owner": "runtime/palaver",
+      "shard_level": "instance",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/palaver/registry",
+      "collapse_reason": "generic_directory_attachment",
+      "extension": null,
+      "id": "runtime/palaver/registry",
+      "instance_hash": "45ee5ce340ace782e517545dbe51c1cf86b50cdf6265a3ce366d8f8324675fee",
+      "instance_record": "instances/runtime-palaver-registry.json",
+      "kind": "directory",
+      "label": "registry",
+      "normalized_path": "runtime/palaver/registry",
+      "original_lineage_to_owner": [
+        "runtime/palaver/registry",
+        "runtime/palaver"
+      ],
+      "original_parent": "runtime/palaver",
+      "path": "runtime/palaver/registry",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.0dc381163ea298d50d0e",
+        "lineage.composition.9c0e5b80dda76bd9de2c"
+      ],
+      "semantic_owner": "runtime/palaver",
+      "shard_level": "instance",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/palaver/registry/observatory_registry.py",
+      "collapse_reason": "file_attachment",
+      "extension": ".py",
+      "id": "runtime/palaver/registry/observatory_registry.py",
+      "instance_hash": "760348cf9a5c96c8ac9da67700c1964d0cc049abff4f444a6aace99710232d46",
+      "instance_record": "instances/runtime-palaver-registry-observatory_registry.py.json",
+      "kind": "file",
+      "label": "observatory_registry.py",
+      "normalized_path": "runtime/palaver/registry/observatory_registry.py",
+      "original_lineage_to_owner": [
+        "runtime/palaver/registry/observatory_registry.py",
+        "runtime/palaver/registry",
+        "runtime/palaver"
+      ],
+      "original_parent": "runtime/palaver/registry",
+      "path": "runtime/palaver/registry/observatory_registry.py",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.0dc381163ea298d50d0e"
+      ],
+      "semantic_owner": "runtime/palaver",
+      "shard_level": "record",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/palaver/schema",
+      "collapse_reason": "generic_directory_attachment",
+      "extension": null,
+      "id": "runtime/palaver/schema",
+      "instance_hash": "49c6272a9bfe7af208a463afe2e0799cb4882fed0a4877bf318a36b4e12f8b9a",
+      "instance_record": "instances/runtime-palaver-schema.json",
+      "kind": "directory",
+      "label": "schema",
+      "normalized_path": "runtime/palaver/schema",
+      "original_lineage_to_owner": [
+        "runtime/palaver/schema",
+        "runtime/palaver"
+      ],
+      "original_parent": "runtime/palaver",
+      "path": "runtime/palaver/schema",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.30a518401eb43bdec5f3",
+        "lineage.composition.8d38b6f6d1ae49080883"
+      ],
+      "semantic_owner": "runtime/palaver",
+      "shard_level": "instance",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/palaver/schema/graph_schema.json",
+      "collapse_reason": "file_attachment",
+      "extension": ".json",
+      "id": "runtime/palaver/schema/graph_schema.json",
+      "instance_hash": "f9ca4fc76c2e8bf588ff424682fc8e49f23407f278bbcbd4ab512064edea1c4f",
+      "instance_record": "instances/runtime-palaver-schema-graph_schema.json.json",
+      "kind": "file",
+      "label": "graph_schema.json",
+      "normalized_path": "runtime/palaver/schema/graph_schema.json",
+      "original_lineage_to_owner": [
+        "runtime/palaver/schema/graph_schema.json",
+        "runtime/palaver/schema",
+        "runtime/palaver"
+      ],
+      "original_parent": "runtime/palaver/schema",
+      "path": "runtime/palaver/schema/graph_schema.json",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.30a518401eb43bdec5f3"
+      ],
+      "semantic_owner": "runtime/palaver",
+      "shard_level": "record",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/palaver/search",
+      "collapse_reason": "generic_directory_attachment",
+      "extension": null,
+      "id": "runtime/palaver/search",
+      "instance_hash": "74b6f9fd73cf2adfe50be6b047e7367eed3a31aea0a454d32b1f763b802db172",
+      "instance_record": "instances/runtime-palaver-search.json",
+      "kind": "directory",
+      "label": "search",
+      "normalized_path": "runtime/palaver/search",
+      "original_lineage_to_owner": [
+        "runtime/palaver/search",
+        "runtime/palaver"
+      ],
+      "original_parent": "runtime/palaver",
+      "path": "runtime/palaver/search",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.9c56282e0955e2a7d904",
+        "lineage.composition.ac8d7913aeaff06a0f06"
+      ],
+      "semantic_owner": "runtime/palaver",
+      "shard_level": "instance",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/palaver/search/search_fabric.py",
+      "collapse_reason": "file_attachment",
+      "extension": ".py",
+      "id": "runtime/palaver/search/search_fabric.py",
+      "instance_hash": "512843d0f57cd8e7e05e1d84b73ccadd85127d7ab2b18369aead0df5b8d46ac1",
+      "instance_record": "instances/runtime-palaver-search-search_fabric.py.json",
+      "kind": "file",
+      "label": "search_fabric.py",
+      "normalized_path": "runtime/palaver/search/search_fabric.py",
+      "original_lineage_to_owner": [
+        "runtime/palaver/search/search_fabric.py",
+        "runtime/palaver/search",
+        "runtime/palaver"
+      ],
+      "original_parent": "runtime/palaver/search",
+      "path": "runtime/palaver/search/search_fabric.py",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.ac8d7913aeaff06a0f06"
+      ],
+      "semantic_owner": "runtime/palaver",
+      "shard_level": "record",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/palaver/topology",
+      "collapse_reason": "generic_directory_attachment",
+      "extension": null,
+      "id": "runtime/palaver/topology",
+      "instance_hash": "eebc67ef28d6c142c9fddcf32efd48a1ab20033f2b2296666e4c96498c2107e7",
+      "instance_record": "instances/runtime-palaver-topology.json",
+      "kind": "directory",
+      "label": "topology",
+      "normalized_path": "runtime/palaver/topology",
+      "original_lineage_to_owner": [
+        "runtime/palaver/topology",
+        "runtime/palaver"
+      ],
+      "original_parent": "runtime/palaver",
+      "path": "runtime/palaver/topology",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.6af5c8e19762c4a8a2a8",
+        "lineage.composition.b5bd9aaced303250cb82"
+      ],
+      "semantic_owner": "runtime/palaver",
+      "shard_level": "instance",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "authoritative",
+      "canonical_id": "fs:runtime/palaver/topology/topology_compiler.py",
+      "collapse_reason": "file_attachment",
+      "extension": ".py",
+      "id": "runtime/palaver/topology/topology_compiler.py",
+      "instance_hash": "973b684928851d7e69312db1791fafaa7fca507876c5411d0b57b435c14c311c",
+      "instance_record": "instances/runtime-palaver-topology-topology_compiler.py.json",
+      "kind": "file",
+      "label": "topology_compiler.py",
+      "normalized_path": "runtime/palaver/topology/topology_compiler.py",
+      "original_lineage_to_owner": [
+        "runtime/palaver/topology/topology_compiler.py",
+        "runtime/palaver/topology",
+        "runtime/palaver"
+      ],
+      "original_parent": "runtime/palaver/topology",
+      "path": "runtime/palaver/topology/topology_compiler.py",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.b5bd9aaced303250cb82"
+      ],
+      "semantic_owner": "runtime/palaver",
+      "shard_level": "record",
+      "state": "active",
+      "synthetic": false
+    }
+  ],
+  "owner": "runtime/palaver",
+  "owner_label": "palaver",
+  "projection_only": true,
+  "provenance": {
+    "generator": "kindred.semantic_view_builder.v1",
+    "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+  },
+  "schema": "savant.kindred.semantic_projection.v1.collapsed_owner",
+  "summary": {
+    "by_extension": {
+      ".json": 1,
+      ".py": 11,
+      "none": 12
+    },
+    "by_kind": {
+      "directory": 12,
+      "file": 12
+    },
+    "by_reason": {
+      "file_attachment": 12,
+      "generic_directory_attachment": 12
+    },
+    "by_state": {
+      "active": 24
+    },
+    "direct": 12,
+    "nested": 12,
+    "total": 24
+  }
+}

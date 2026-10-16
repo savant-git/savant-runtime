@@ -1,0 +1,56 @@
+{
+  "authority_mutation_performed": false,
+  "evidence": [
+    {
+      "authority_class": "authority",
+      "candidate_id": "exile:underscore",
+      "candidate_role": "implementation-owner",
+      "candidate_tier": "exile",
+      "evidence_kind": "explicit-relationship",
+      "path": "/root/savant-runtime/canon-system/authority/constitution/catalog.json",
+      "relation": "implemented_through",
+      "sha256": "58fd0612894306ed9cc0a81aab94104fe56e1450b18cc26fd35097822e5593e3",
+      "target": "service:runtime-graph"
+    },
+    {
+      "authority_class": "verified-implementation",
+      "candidate_id": null,
+      "candidate_role": "non-owner-reference",
+      "candidate_tier": null,
+      "evidence_kind": "target-reference-only",
+      "path": "/root/savant-runtime/runtime/palaver/graph/constitutional.py",
+      "relation": null,
+      "sha256": "c70431756bfe1804b2359a3333bb76101faa40130d721c7657e4386a13617f9a",
+      "target": "service:runtime-graph"
+    }
+  ],
+  "explicit_governance_evidence_count": 0,
+  "explicit_implementation_evidence_count": 1,
+  "files_scanned": 2649,
+  "governance_owner_candidates": [],
+  "governance_owner_is_distinct": true,
+  "implementation_owner_candidates": [
+    {
+      "authority_classes": [
+        "authority"
+      ],
+      "candidate_id": "exile:underscore",
+      "candidate_tier": "exile",
+      "evidence_count": 1,
+      "highest_authority_weight": 500,
+      "relations": [
+        "implemented_through"
+      ]
+    }
+  ],
+  "inference_used": false,
+  "owner_basis": "explicit implementation identity",
+  "physical_mutation_performed": false,
+  "reference_count": 2,
+  "resolution": "explicit-owner-found",
+  "schema": "savant://assurance/scyon-owner-resolution/1.1.0",
+  "scyon_owner_id": "exile:underscore",
+  "scyon_owner_tier": "exile",
+  "semantic_similarity_used": false,
+  "target": "service:runtime-graph"
+}

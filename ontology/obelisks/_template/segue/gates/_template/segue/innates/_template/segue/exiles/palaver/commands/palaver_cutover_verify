@@ -1,0 +1,212 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="/root/savant-runtime"
+PALAVER="$ROOT/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver"
+
+BACKEND_SERVICE="palaver.service"
+FRONTEND_SERVICE="palaver-frontend.service"
+
+BACKEND_URL="http://127.0.0.1:8787"
+FRONTEND_URL="http://127.0.0.1:5173"
+
+SERVER="$PALAVER/commands/palaver_server"
+ENTERPRISE="$PALAVER/commands/palaver_enterprise"
+DIST="$PALAVER/apps/webui-nextgen/dist/index.html"
+FRONTEND_RUNTIME="$PALAVER/runtime/frontend_server.py"
+
+fail() {
+    printf 'FAIL: %s\n' "$*" >&2
+    exit 1
+}
+
+pass() {
+    printf 'PASS: %s\n' "$*"
+}
+
+printf '%s\n' '=== palaver production cutover verification ==='
+
+test -x "$SERVER" \
+    || fail "canonical server launcher unavailable"
+
+pass "canonical server launcher executable"
+
+test -x "$ENTERPRISE" \
+    || fail "enterprise launcher unavailable"
+
+pass "enterprise launcher executable"
+
+test -f "$DIST" \
+    || fail "production frontend build missing"
+
+pass "production frontend build present"
+
+test -x "$FRONTEND_RUNTIME" \
+    || fail "production frontend runtime unavailable"
+
+pass "production frontend runtime executable"
+
+systemctl is-enabled --quiet "$BACKEND_SERVICE" \
+    || fail "$BACKEND_SERVICE is not enabled"
+
+pass "$BACKEND_SERVICE enabled"
+
+systemctl is-active --quiet "$BACKEND_SERVICE" \
+    || fail "$BACKEND_SERVICE is not active"
+
+pass "$BACKEND_SERVICE active"
+
+systemctl is-enabled --quiet "$FRONTEND_SERVICE" \
+    || fail "$FRONTEND_SERVICE is not enabled"
+
+pass "$FRONTEND_SERVICE enabled"
+
+systemctl is-active --quiet "$FRONTEND_SERVICE" \
+    || fail "$FRONTEND_SERVICE is not active"
+
+pass "$FRONTEND_SERVICE active"
+
+if systemctl cat "$FRONTEND_SERVICE" \
+    | grep -Eq 'npx[[:space:]]+vite|vite[[:space:]]+--host'
+then
+    fail "frontend service still uses Vite development server"
+fi
+
+pass "Vite development server absent from production service"
+
+systemctl cat "$FRONTEND_SERVICE" \
+    | grep -Fq "$FRONTEND_RUNTIME" \
+    || fail "frontend service does not use production frontend runtime"
+
+pass "production frontend runtime bound to service"
+
+PALAVER_BOOTSTRAP_INSPECT=1 \
+"$SERVER" \
+>/dev/null \
+    || fail "enterprise backend bootstrap failed"
+
+pass "enterprise backend bootstrap valid"
+
+curl \
+    --fail \
+    --silent \
+    --show-error \
+    "$BACKEND_URL/api/health" \
+    >/dev/null \
+    || fail "backend health endpoint failed"
+
+pass "backend health endpoint reachable"
+
+curl \
+    --fail \
+    --silent \
+    --show-error \
+    "$FRONTEND_URL/__palaver_frontend_health" \
+    >/dev/null \
+    || fail "frontend health endpoint failed"
+
+pass "frontend health endpoint reachable"
+
+BACKEND_HEALTH="$(
+    curl \
+        --fail \
+        --silent \
+        --show-error \
+        "$BACKEND_URL/api/health"
+)"
+
+FRONTEND_API_HEALTH="$(
+    curl \
+        --fail \
+        --silent \
+        --show-error \
+        "$FRONTEND_URL/api/health"
+)"
+
+python3 -c '
+import json
+import sys
+
+backend = json.loads(sys.argv[1])
+frontend = json.loads(sys.argv[2])
+
+if backend != frontend:
+    raise SystemExit(
+        "frontend API projection differs from backend health response"
+    )
+
+if backend.get("ok") is not True:
+    raise SystemExit(
+        "backend health does not report ok=true"
+    )
+' \
+"$BACKEND_HEALTH" \
+"$FRONTEND_API_HEALTH" \
+    || fail "same-origin API projection invalid"
+
+pass "same-origin API projection valid"
+
+ROOT_HTML="$(
+    curl \
+        --fail \
+        --silent \
+        --show-error \
+        "$FRONTEND_URL/"
+)"
+
+printf '%s' "$ROOT_HTML" \
+    | grep -Eqi '<html|<!doctype html' \
+    || fail "frontend root is not an HTML application"
+
+pass "frontend application root reachable"
+
+ASSET_PATH="$(
+    printf '%s' "$ROOT_HTML" \
+        | grep -oE '/assets/[^"'"'"']+\.(js|css)' \
+        | head -n 1 \
+        || true
+)"
+
+if [ -n "$ASSET_PATH" ]; then
+    curl \
+        --fail \
+        --silent \
+        --show-error \
+        "$FRONTEND_URL$ASSET_PATH" \
+        >/dev/null \
+        || fail "frontend compiled asset unavailable"
+
+    pass "compiled frontend asset reachable"
+fi
+
+BACKEND_LISTENER="$(
+    ss -ltnp \
+        | grep -E '127\.0\.0\.1:8787[[:space:]]' \
+        || true
+)"
+
+test -n "$BACKEND_LISTENER" \
+    || fail "backend is not bound to localhost:8787"
+
+pass "backend remains localhost-bound"
+
+FRONTEND_LISTENER="$(
+    ss -ltnp \
+        | grep -E '(:|\*)5173[[:space:]]' \
+        || true
+)"
+
+test -n "$FRONTEND_LISTENER" \
+    || fail "frontend listener unavailable on port 5173"
+
+pass "frontend production listener active"
+
+if systemctl is-active --quiet palaver-tunnel.service; then
+    pass "Palaver tunnel active"
+else
+    printf '%s\n' \
+        'INFO: Palaver tunnel is not active; this does not invalidate local production cutover.'
+fi
+
+printf '%s\n' '=== result ==='
+printf '%s\n' 'PALAVER PRODUCTION CUTOVER: valid'

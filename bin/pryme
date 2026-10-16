@@ -1,0 +1,152 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+
+ROOT = Path(
+    "/root/savant-runtime"
+)
+
+if str(ROOT) not in sys.path:
+    sys.path.insert(
+        0,
+        str(ROOT),
+    )
+
+
+from runtime.pryme import Pryme  # noqa: E402
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Pryme — Savant living "
+            "authority substrate"
+        )
+    )
+
+    commands = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    commands.add_parser(
+        "profile"
+    )
+
+    commands.add_parser(
+        "validate"
+    )
+
+    commands.add_parser(
+        "health"
+    )
+
+    commands.add_parser(
+        "precedence"
+    )
+
+    discover = commands.add_parser(
+        "discover"
+    )
+
+    discover.add_argument(
+        "--limit",
+        type=int,
+        default=18,
+    )
+
+    record = commands.add_parser(
+        "record"
+    )
+
+    record.add_argument(
+        "path"
+    )
+
+    arguments = parser.parse_args()
+
+    pryme = Pryme()
+
+    if arguments.command == "profile":
+        result = pryme.profile()
+
+    elif arguments.command == "validate":
+        result = pryme.validate()
+
+    elif arguments.command == "health":
+        result = pryme.health()
+
+    elif arguments.command == "precedence":
+        result = (
+            pryme.explain_precedence()
+        )
+
+    elif arguments.command == "discover":
+        records = pryme.discover()
+
+        result = {
+            "count": len(records),
+            "records": [
+                record.projection()
+                for record
+                in records[
+                    :arguments.limit
+                ]
+            ],
+            "authoritative": False,
+        }
+
+    elif arguments.command == "record":
+        path = Path(
+            arguments.path
+        )
+
+        if not path.is_absolute():
+            raise SystemExit(
+                "record path must be absolute"
+            )
+
+        result = (
+            pryme
+            .load_record(
+                path
+            )
+            .projection()
+        )
+
+    else:
+        raise RuntimeError(
+            "unsupported command"
+        )
+
+    print(
+        json.dumps(
+            result,
+            indent=2,
+            sort_keys=True,
+            default=str,
+        )
+    )
+
+    if (
+        arguments.command
+        == "validate"
+        and not result[
+            "valid"
+        ]
+    ):
+        return 1
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

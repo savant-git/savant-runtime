@@ -1,0 +1,20 @@
+{
+  "id": "venice_uncensored_text",
+  "type": "text_inference_provider",
+  "status": "active",
+  "owner": "opus",
+  "provider_profile": "venice_uncensored",
+  "protocol": "openai_chat",
+  "env_key": "VENICE_API_KEY",
+  "model_env": "SAVANT_VENICE_UNCENSORED_MODEL",
+  "model_default": "venice-uncensored-1-2",
+  "capabilities": [
+    "text_inference",
+    "system_instructions",
+    "context",
+    "usage_reporting"
+  ],
+  "inference_latitude": "maximum_provider_permitted",
+  "credential_values_exposed": false,
+  "authority_effect": "none"
+}

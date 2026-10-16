@@ -1,0 +1,52 @@
+{
+  "authority": {
+    "accepted_at": "2026-08-01T22:03:54-04:00",
+    "accepted_by": "project-owner",
+    "authority_class": "project-owner-directed",
+    "confidence": 1.0,
+    "source": "docs/SAVANT_MASTER_TASKS.md",
+    "state": "accepted",
+    "tier": 1
+  },
+  "condition_mode": "all",
+  "conditions": [
+    {
+      "fact": "task.dependency_ready",
+      "operator": "truthy"
+    }
+  ],
+  "description": "Task activation and execution require all declared dependencies to be terminal.",
+  "effect": "require",
+  "extensions": {},
+  "failure": {
+    "code": "masterplan.policy.dependencies_incomplete",
+    "message": "Task has unresolved dependencies."
+  },
+  "id": "policy.masterplan.dependencies-complete",
+  "kind": "selection",
+  "operations": [
+    "task.activate",
+    "task.execute",
+    "task.complete"
+  ],
+  "provenance": {
+    "contract_version": "1.0.0",
+    "generated_at": "2026-08-02T09:37:00-04:00",
+    "generated_by": "prodigal.niche.masterplan.masterplan_policy_runtime",
+    "sources": [
+      {
+        "authority_state": "accepted",
+        "source_id": "docs/SAVANT_MASTER_TASKS.md",
+        "source_kind": "accepted-masterplan-specification",
+        "source_path": "docs/SAVANT_MASTER_TASKS.md"
+      }
+    ],
+    "transformations": [
+      "masterplan_law_to_policy_record"
+    ]
+  },
+  "schema": "savant://niche/masterplan/policy/1.0.0",
+  "semantic_digest": "37f822e1a6c5781836ddaa69aa8971c6ecde9bf5399ca67a50e70110322b6ee7",
+  "title": "Dependencies Must Be Complete",
+  "version": "1.0.0"
+}

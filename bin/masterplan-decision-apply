@@ -1,0 +1,178 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import subprocess
+import sys
+from pathlib import Path
+
+
+ROOT = Path("/root/savant-runtime")
+
+PYTHON = (
+    ROOT
+    / "bin"
+    / "identity-quality-python"
+)
+
+APPLIER = (
+    ROOT
+    / "tools"
+    / "niche"
+    / "masterplan"
+    / "apply_masterplan_decision.py"
+)
+
+PROJECT = (
+    ROOT
+    / "bin"
+    / "masterplan-project"
+)
+
+GATE = (
+    ROOT
+    / "bin"
+    / "masterplan-gate"
+)
+
+AUDIT = (
+    ROOT
+    / "bin"
+    / "masterplan-audit"
+)
+
+
+def execute(
+    command: list[str],
+) -> int:
+    return subprocess.run(
+        command,
+        cwd=str(ROOT),
+        check=False,
+    ).returncode
+
+
+def usage() -> int:
+    print(
+        """
+masterplan-decision-apply plan DECISION_ID
+masterplan-decision-apply apply DECISION_ID
+masterplan-decision-apply apply-strict DECISION_ID
+"""
+    )
+
+    return 0
+
+
+def apply(
+    decision_id: str,
+    *,
+    plan: bool,
+    strict: bool,
+) -> int:
+    command = [
+        str(PYTHON),
+        str(APPLIER),
+        decision_id,
+    ]
+
+    if plan:
+        command.append(
+            "--plan"
+        )
+
+    if strict:
+        command.append(
+            "--strict"
+        )
+
+    status = execute(
+        command
+    )
+
+    if status or plan:
+        return status
+
+    for stage in (
+        [
+            str(PROJECT),
+            "strict",
+        ],
+        [
+            str(GATE),
+            "context",
+        ],
+        [
+            str(AUDIT),
+            (
+                "strict"
+                if strict
+                else "audit"
+            ),
+        ],
+    ):
+        status = execute(
+            stage
+        )
+
+        if status:
+            return status
+
+    return 0
+
+
+def main() -> int:
+    arguments = sys.argv[1:]
+
+    if not arguments:
+        return usage()
+
+    command = arguments[0]
+
+    if command in {
+        "help",
+        "--help",
+        "-h",
+    }:
+        return usage()
+
+    if len(arguments) != 2:
+        print(
+            "ERROR: decision identifier is required.",
+            file=sys.stderr,
+        )
+
+        return 2
+
+    decision_id = arguments[1]
+
+    if command == "plan":
+        return apply(
+            decision_id,
+            plan=True,
+            strict=False,
+        )
+
+    if command == "apply":
+        return apply(
+            decision_id,
+            plan=False,
+            strict=False,
+        )
+
+    if command == "apply-strict":
+        return apply(
+            decision_id,
+            plan=False,
+            strict=True,
+        )
+
+    print(
+        f"ERROR: unknown command: {command}",
+        file=sys.stderr,
+    )
+
+    return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

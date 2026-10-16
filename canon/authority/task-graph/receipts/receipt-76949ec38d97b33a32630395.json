@@ -1,0 +1,44 @@
+{
+  "evidence": [
+    "event-c6a8ddc9fce8db731fe9c7d6"
+  ],
+  "extensions": {
+    "event_id": "event-c6a8ddc9fce8db731fe9c7d6",
+    "graph_digest_after": "5014cb7db1f62c101541fea5865068ccfb30c4b3e01503472e74876889629460",
+    "graph_digest_before": "74a17bc73056af91ddaf4e45b4a1cd3f7e0c6bf8e720cee6d8766380d6e0be94",
+    "next_state": "completed",
+    "passed": true,
+    "previous_state": "active",
+    "task_id": "SAV-P0-001"
+  },
+  "id": "receipt-76949ec38d97b33a32630395",
+  "occurred_at": "2026-08-25T19:43:49+00:00",
+  "operation": "task.status.transition",
+  "outputs": [
+    "authority/task-graph/masterplan.json",
+    "authority/task-graph/events/event-c6a8ddc9fce8db731fe9c7d6.json"
+  ],
+  "passed": true,
+  "provenance": {
+    "contract_version": "1.0.0",
+    "generated_at": "2026-08-25T19:43:49+00:00",
+    "generated_by": "prodigal.niche.masterplan.apply_masterplan_transition",
+    "sources": [
+      {
+        "authority_state": "authoritative",
+        "captured_at": "2026-08-25T19:43:49+00:00",
+        "source_id": "authority/task-graph/masterplan.json",
+        "source_kind": "authoritative-task-graph",
+        "source_path": "authority/task-graph/masterplan.json",
+        "source_sha256": "0734b5dcc36286319a80b02389e8932651617ad5ae4d622c25dac4225204df38"
+      }
+    ],
+    "transformations": [
+      "validate_legal_transition",
+      "validate_dependency_state",
+      "validate_completion_attestation",
+      "append_immutable_task_event"
+    ]
+  },
+  "task_id": "SAV-P0-001"
+}

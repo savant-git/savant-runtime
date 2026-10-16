@@ -1,0 +1,967 @@
+PALAVER — COMPLETE FUTURE WORKSTATION UI EVOLUTION
+
+OBJECTIVE
+
+Massively upgrade, update, idealize, enhance, evolve, refine, optimize, and professionalize Palaver’s existing web UI into an extraordinarily sophisticated Savant-native cognitive development workstation.
+
+This is not a redesign for appearance alone.
+
+Palaver must become the primary human interface through which Savant is conversed with, understood, inspected, directed, developed, and operated.
+
+The result should feel substantially beyond a conventional chatbot interface and closer to a new category combining:
+
+- an elite AI conversation environment
+- an IDE
+- an investigative workstation
+- a command operating environment
+- an authority/provenance inspector
+- a live system observatory
+- a development cockpit
+- a knowledge workspace
+
+The UI must be futuristic without becoming ornamental, theatrical, illegible, cluttered, gimmicky, cyberpunk, or visually exhausting.
+
+Its sophistication must emerge primarily from interaction design, information edifice, context sensitivity, spatial organization, state visibility, typography, subtle motion, progressive disclosure, and extremely intelligent workflow design.
+
+Perform deep internal design refinement before implementation, considering up to 100 candidate refinements, but execute one coherent implementation pass followed by only mandatory validation.
+
+AUTHORITY AND PRESERVATION
+
+Before modifying any Palaver UI file, inspect its current implementation.
+
+Use the current verified Palaver implementation as baseline.
+
+Do not rebuild Palaver from memory.
+Do not create a parallel frontend when the existing canonical frontend can be extended.
+Do not remove existing functional surfaces, routes, API contracts, observatories, runtime controls, workspace state, command handling, voice capability, or backend integration.
+
+Known current Palaver frontend concepts include webui-nextgen, API client/hooks, CognitiveShell, workspace/layout stores, CommandCenter, RuntimeControlPanel, observatories, and authority/repository/runtime/memory/ontology surfaces. Preserve and evolve these rather than duplicating them.
+
+Preserve all current Savant ownership boundaries:
+
+conversation owner: palaver
+persona/cognitive composition owner: envoy
+provider/model execution owner: opus
+task governance owner: niche
+durable filesystem mutation owner: coda
+
+The UI is a projection and control surface. It must never silently acquire authority owned by another Savant component.
+
+AI output is not authority.
+Filesystem presence is not authority.
+Visual prominence must never imply authority.
+
+Any authority, lineage, provenance, mutation, model, task, persona, or runtime information shown in the UI must come from real existing runtime data or explicitly identified projections.
+
+Do not invent unavailable APIs or fabricate live state.
+
+DESIGN PHILOSOPHY
+
+Create a distinctive Savant-native visual language rather than imitating ChatGPT, Claude, VS Code, Linear, Arc, Raycast, Notion, GitHub, or any single existing product.
+
+Use those products only as interaction-quality benchmarks.
+
+The desired aesthetic is:
+
+dark, restrained, architectural, technical, intelligent, premium, precise, spatial, dense when useful, quiet when idle, highly legible, and deeply interactive.
+
+Avoid:
+- generic AI gradients
+- excessive glassmorphism
+- random glowing borders
+- gratuitous neon
+- giant empty hero areas
+- decorative particle systems
+- constant animation
+- excessive pills
+- rounded-card-everything design
+- dashboard tile spam
+- information hidden merely for minimalism
+- fake terminals
+- visualizations without actual data
+- arbitrary graphs
+- animations that delay work
+- novelty at the expense of clarity
+
+Use subtle depth, controlled translucency, texture, layered surfaces, restrained luminous accents, strong typography, disciplined spacing, and state-dependent visual emphasis.
+
+The interface should look expensive because every pixel communicates edifice and purpose, not because effects are everywhere.
+
+CORE SPATIAL MODEL
+
+Evolve Palaver into a persistent multi-surface cognitive workspace.
+
+The default desktop composition should support:
+
+LEFT RAIL
+Persistent global Palaver navigation and workspace/session controls.
+
+PRIMARY WORKSPACE
+Conversation, active artifact, task, file, or working surface.
+
+RIGHT CONTEXT RAIL
+Contextual inspector that changes intelligently according to selected content.
+
+BOTTOM ACTIVITY / EXECUTION DRAWER
+Optional collapsible live operational layer for task execution, Coda mutation receipts, provider/model lineage, runtime events, terminal-like development output, and system activity.
+
+TOP CONTEXT STRIP
+Compact representation of current workspace identity, Niche task when applicable, active persona, authority context, repository scope, and relevant runtime state.
+
+All major panels must be collapsible/resizable where appropriate and persist their layout without changing semantic ownership.
+
+Do not force every pane to remain visible.
+
+Support distraction-free conversation mode, development mode, investigation mode, observatory mode, and compact mobile/tablet arrangements by projecting the same primitives into different layouts rather than building disconnected applications.
+
+DEPENDENCY POLICY
+
+Do not install libraries merely because they are contemporary.
+
+Inspect existing package.json and frontend stack first.
+
+Reuse existing compatible dependencies.
+
+Any new dependency must:
+1. solve a real Palaver problem,
+2. be actively maintained,
+3. be compatible with the current stack,
+4. not duplicate an existing capability,
+5. not take ownership of Savant state or semantics,
+6. degrade safely,
+7. not introduce an external hosted dependency for core operation.
+
+Strong candidates, when absent and genuinely useful:
+
+- @radix-ui primitives:
+  accessible dialog, dropdown, tooltip, popover, tabs, context menu, select, scroll-area and related interaction primitives.
+
+- motion:
+  restrained layout transitions, contextual pane transitions, progressive disclosure, message arrival, navigation continuity, presence transitions, and gesture feedback.
+  Respect prefers-reduced-motion everywhere.
+
+- cmdk:
+  universal command palette and searchable action launcher.
+
+- @tanstack/react-virtual:
+  virtualize very large conversation histories, logs, evidence lists, repository results, and other long-running Palaver views.
+
+- react-resizable-panels:
+  persistent keyboard-accessible IDE/workstation pane resizing.
+
+- lucide-react or the existing icon family:
+  one coherent semantic icon language.
+  Do not mix icon families arbitrarily.
+
+- shiki:
+  high-quality static/read-only code rendering where Monaco is unnecessary.
+
+- monaco-editor:
+  only for genuine editable file/code surfaces requiring editor behaviors.
+  Lazy-load it.
+  Do not use Monaco merely to display snippets.
+
+Prefer lightweight native React/CSS implementations when a library would provide little benefit.
+
+Do not introduce a large UI framework that imposes its own visual identity over Savant.
+
+EXTERNAL RESEARCH POLICY
+
+Do not browse for libraries merely to collect possibilities.
+
+Only research an external dependency when the current implementation demonstrates a concrete need not already satisfied by the existing stack.
+
+Prefer official documentation and canonical public repositories.
+
+Do not import code snippets, design systems, component libraries, templates, or repositories wholesale.
+
+Any external code or dependency must remain subordinate to Palaver's existing architecture and Savant authority boundaries.
+
+Never permit an external package to become authoritative storage, task governance, conversation ownership, persona ownership, model/provider ownership, or mutation ownership.
+
+REQUIRED ADVANCED ENHANCEMENTS
+
+Implement at least the following improvements where compatible with current implementation.
+
+01 — UNIVERSAL COMMAND PALETTE
+
+Create an ultra-fast keyboard-first command palette.
+
+It should expose actual Palaver actions dynamically rather than maintain a duplicate hardcoded command universe.
+
+Support:
+- fuzzy action search
+- recent actions
+- context-aware actions
+- keyboard shortcuts
+- navigation
+- session actions
+- observatory navigation
+- repository actions
+- task actions
+- development commands
+- layout commands
+- theme/density commands
+- voice actions when available
+
+Use progressive disclosure so advanced commands do not overwhelm ordinary conversation.
+
+02 — CONTEXTUAL OMNIBOX
+
+Evolve the composer beyond a text box.
+
+The composer should intelligently accommodate:
+- normal conversation
+- slash/command invocation
+- file/path references
+- task references
+- quoted selections
+- attached context
+- development instructions
+- voice input when available
+
+Display what context will be submitted before execution.
+
+Never silently add authority-bearing context.
+
+03 — COMPOSER CONTEXT CAPSULES
+
+Represent attached files, selected Niche task, repository scope, persona, active artifact, referenced messages, and other submitted context as removable inspectable tokens immediately above the composer.
+
+Each capsule must reveal provenance/source on inspection.
+
+04 — MESSAGE ACTION LAYER
+
+On hover/focus/selection expose restrained actions:
+- copy
+- quote
+- branch
+- inspect context
+- inspect lineage
+- pin
+- reference
+- retry where supported
+- open related artifact
+- send selected content into a development task
+
+Do not litter every message with always-visible buttons.
+
+05 — BRANCHABLE CONVERSATION NAVIGATION
+
+Where runtime semantics support it, represent alternate conversational continuations without flattening them into unrelated sessions.
+
+Provide a compact branch navigator.
+
+Do not fabricate branching if backend conversation identity does not support it.
+
+06 — SESSION WORKSPACE
+
+Create a high-quality session browser with:
+- search
+- recency
+- pinned sessions
+- meaningful derived preview
+- task association
+- workspace association
+- active status
+- lightweight grouping
+
+Virtualize large session collections.
+
+07 — NICHE TASK STRIP
+
+When Palaver operates under a Niche-selected task, show a precise persistent task strip containing only real state:
+- task ID
+- title
+- status
+- priority
+- authority state
+- completion condition when available
+- blockers/dependencies when available
+
+The model must not be allowed to visually substitute another task.
+
+08 — AUTHORITY LENS
+
+Create an optional authority inspector that can explain the authority status of the currently selected item.
+
+Visually distinguish:
+- accepted authority
+- proposed authority
+- projection
+- evidence
+- implementation
+- inference/model output
+- unknown
+
+Never reduce these categories to vague “confidence” styling.
+
+09 — LINEAGE LENS
+
+Expose lineage/provenance for relevant objects through a compact inspector:
+source → transformation/projection → current representation.
+
+Prefer textual/structural lineage over graph visualization unless a graph materially clarifies the actual data.
+
+10 — EXECUTION LINEAGE INDICATOR
+
+For model responses, expose compact real execution lineage when available:
+Palaver → Envoy projection → Opus route/provider/model.
+
+Keep it unobtrusive by default and expandable on demand.
+
+11 — CODA MUTATION RECEIPT UI
+
+Any durable filesystem mutation performed through Coda should have a first-class receipt surface showing real data such as:
+- operation
+- path
+- expected digest
+- resulting digest
+- success/failure/conflict
+- timestamp/identity where supplied
+
+Never make filesystem writes look like ordinary assistant prose.
+
+12 — DEVELOPMENT MODE
+
+Create a specialized workspace mode for self-hosted Savant development.
+
+Recommended composition:
+left: repository/navigation/context
+center: Palaver conversation/development reasoning
+right: task/authority/file inspector
+bottom: execution/mutation activity
+
+The same Palaver session remains active; this is a layout projection, not a different assistant.
+
+13 — FILE INSPECTOR
+
+Provide a polished repository/file viewer for files already exposed through authorized Palaver repository APIs.
+
+Features:
+- path breadcrumb
+- syntax-aware rendering
+- line numbers
+- copy path
+- copy selection
+- inspect digest/metadata
+- attach selection to composer
+- compare when actual comparison data exists
+
+Do not bypass existing repository security/context limits.
+
+14 — OPTIONAL MONACO EDITOR
+
+If Palaver already possesses an authorized editable-file workflow, integrate Monaco lazily for genuine editing.
+
+Edits must still flow through existing mutation authority.
+Monaco must never write directly to the filesystem.
+
+15 — HIGH-FIDELITY CODE PRESENTATION
+
+Use Shiki or an equivalent existing capability for assistant-produced and repository code blocks.
+
+Support:
+- language label
+- copy
+- wrap toggle
+- line highlighting
+- selection
+- open-in-workspace when meaningful
+
+Avoid embedding a full editor for every code block.
+
+16 — LIVE ACTIVITY STREAM
+
+Create a low-noise event/activity view for real Palaver runtime events.
+
+Group/coalesce noisy repeated events.
+
+Differentiate:
+- informational runtime activity
+- model execution
+- task selection
+- Coda mutation
+- warnings
+- failures
+
+Never animate an artificial “thinking process.”
+
+Do not expose hidden chain-of-thought.
+
+17 — STREAMING RESPONSE UX
+
+Upgrade response streaming so it is stable rather than visually jittery.
+
+Use content-aware scroll anchoring:
+- remain pinned only if user is already near the bottom
+- never yank the viewport when the user scrolls upward
+- reveal a “new output” affordance instead
+
+18 — LARGE-HISTORY VIRTUALIZATION
+
+Virtualize long conversations and logs using TanStack Virtual or an equivalent existing library.
+
+Preserve accurate scroll restoration and anchor navigation.
+
+19 — RESIZABLE PERSISTENT WORKSPACE
+
+Implement keyboard-accessible resizable panel groups.
+
+Persist only presentation/layout preferences.
+
+Do not persist derived authority state into layout storage.
+
+20 — SMART CONTEXT RAIL
+
+The right rail should change according to current selection:
+message → message metadata/lineage
+task → Niche task details
+file → repository metadata
+mutation → Coda receipt
+authority item → authority evidence
+runtime event → runtime metadata
+
+Avoid a static “everything panel.”
+
+21 — MULTI-INSPECT / PEEK SYSTEM
+
+Support temporary peek panels or popovers for linked objects without forcing navigation away from the primary work.
+
+Examples:
+- peek referenced file
+- peek task
+- peek provenance source
+- peek mutation receipt
+- peek related conversation
+
+22 — KEYBOARD-FIRST NAVIGATION
+
+Create a coherent shortcut system.
+
+At minimum:
+- command palette
+- focus composer
+- toggle navigation
+- toggle inspector
+- toggle activity drawer
+- next/previous conversation
+- navigate searchable results
+- close transient surfaces
+- switch workspace modes
+
+Expose shortcuts contextually rather than requiring memorization.
+
+23 — COMMAND DISCOVERABILITY
+
+Any hidden keyboard action must remain discoverable through:
+- tooltips
+- command palette
+- shortcut reference
+
+Do not make keyboard-first mean keyboard-only.
+
+24 — CONTEXT MENUS
+
+Use restrained context menus on messages, files, tasks, panels, and applicable objects.
+
+Actions must be generated from capabilities currently permitted for the object.
+
+25 — SAVANT-NATIVE SEARCH
+
+Create one coherent search interaction capable of routing queries to available search domains:
+- conversations
+- repository
+- tasks
+- runtime
+- memory/canon where authorized
+
+Do not pretend one index contains domains that are actually separate.
+
+Clearly label source/domain of results.
+
+26 — SEARCH PREVIEW
+
+Selecting a search result should preview it before navigation wherever possible.
+
+Highlight matching context without destroying original content.
+
+27 — OBSERVATORY REFINEMENT
+
+Evolve existing Runtime, Repository, Memory, Ontology, Relationship, Timeline, Authority and other observatories into coherent specialized lenses sharing a common shell.
+
+Do not turn them into identical dashboard cards.
+
+Each observatory must use the visualization most appropriate to its real semantics.
+
+28 — TEMPORAL ACTIVITY VIEW
+
+Where timestamps genuinely exist, create a navigable chronological activity view combining relevant task, runtime, mutation, conversation, or authority events.
+
+Do not infer timestamps that do not exist.
+
+29 — STATE-AWARE VISUAL LANGUAGE
+
+Develop a formal UI vocabulary for state:
+active
+idle
+streaming
+queued
+blocked
+failed
+completed
+proposed
+accepted
+projected
+mutated
+read-only
+offline/degraded
+
+The state system must be consistent across Palaver.
+
+30 — MICROINTERACTION SYSTEM
+
+Use Motion selectively for:
+- pane transitions
+- message entry
+- disclosure
+- tab continuity
+- button state
+- contextual selection
+- command palette
+- inspector changes
+
+Motion should generally confirm causality rather than decorate the interface.
+
+Use transforms/opacity where possible.
+Avoid animation that changes layout unpredictably.
+Respect reduced-motion.
+
+31 — ZERO-JANK SCROLLING
+
+Prioritize scroll performance.
+
+Avoid expensive blur layers across large scrolling surfaces.
+Avoid unbounded box shadows.
+Avoid layout thrashing.
+Use virtualization where warranted.
+Keep animation separate from message layout where possible.
+
+32 — RESPONSIVE WORKSPACE MORPHING
+
+Do not merely shrink desktop panels.
+
+Desktop:
+multi-pane workstation.
+
+Tablet:
+primary workspace plus slide-over inspectors.
+
+Mobile:
+single primary surface with bottom-sheet/contextual navigation and composer optimized for touch.
+
+Preserve capability parity wherever practical.
+
+33 — DENSITY MODES
+
+Support at least:
+comfortable
+compact
+
+Potentially support a third high-density engineering mode only if genuinely useful.
+
+Density changes presentation only.
+
+34 — ACCESSIBILITY AS ARCHITECTURE
+
+Use semantic HTML and accessible primitives.
+
+Require:
+- keyboard navigation
+- visible focus
+- logical focus restoration
+- correct ARIA semantics
+- screen-reader labels for icon controls
+- sufficient contrast
+- reduced-motion behavior
+- pointer and touch support
+
+Use Radix primitives where they eliminate bespoke accessibility risk.
+
+35 — TOOLTIP DISCIPLINE
+
+Every icon-only action requires an accessible label and useful tooltip where meaning is not obvious.
+
+Do not put essential information exclusively inside tooltips.
+
+36 — EMPTY / LOADING / ERROR STATES
+
+Design intentional states for:
+- no session
+- no selected task
+- offline API
+- provider failure
+- Coda conflict
+- unavailable observatory
+- empty search
+- permission/authority restriction
+
+Errors should expose actionable technical detail without overwhelming ordinary use.
+
+37 — CONNECTION HEALTH
+
+Create a small real connection/runtime health indicator using existing status data.
+
+Do not simulate “online” from frontend state alone.
+
+38 — PROVIDER FAILURE UX
+
+When Opus reports a provider/model failure, display it as execution lineage failure rather than generic Palaver failure.
+
+Preserve the distinction between conversation, cognition, execution, and mutation failures.
+
+39 — VOICE UX REFINEMENT
+
+If the current Palaver voice backend is functional in canonical implementation, integrate voice cleanly into the composer.
+
+Use clear states:
+idle
+listening
+processing
+error
+
+Do not add decorative waveforms unless driven by actual audio data.
+
+40 — SELECTION-TO-CONTEXT
+
+Allow text selected in conversation/code/file viewers to be attached explicitly to the next Palaver instruction.
+
+Make the attachment visible before submission.
+
+41 — WORKSPACE TABS / STACK
+
+Support opening a small number of active work objects such as:
+conversation
+file
+task
+observatory
+artifact
+
+Do not reproduce browser-tab chaos.
+
+Preserve identity and unsaved state appropriately.
+
+42 — COMMAND CENTER EVOLUTION
+
+Evolve the existing CommandCenter into an actual capability-driven command surface rather than a static collection.
+
+Commands should expose:
+name
+scope
+shortcut
+availability
+danger level where applicable
+owner when meaningful
+
+43 — DESTRUCTIVE ACTION GATES
+
+Mutation/destructive UI actions must visually and behaviorally distinguish themselves from projections/reads.
+
+Use existing Coda confirmation/safety semantics.
+
+Do not invent a second confirmation policy in the frontend.
+
+44 — CONTEXT BUDGET VISIBILITY
+
+If Palaver exposes actual grounded-context size or selected-file/context metadata, provide a compact context inspector.
+
+Show what is included.
+Do not fabricate token counts when unavailable.
+
+45 — RESPONSE ARTIFACT EXTRACTION
+
+Where structured artifacts are returned, allow them to open into dedicated workspace surfaces rather than living permanently as giant chat bubbles.
+
+Conversation remains the lineage anchor.
+
+46 — FOCUS MODE
+
+Provide an instant distraction-free Palaver conversation/development mode that hides secondary surfaces but preserves active context.
+
+47 — SESSION RESTORATION
+
+Restore the user’s last workspace layout and active presentation state safely.
+
+Do not automatically resume unfinished mutations.
+
+48 — URL / DEEP-LINKABLE PRESENTATION STATE
+
+Where routing architecture supports it, make meaningful UI locations addressable:
+session
+observatory
+task
+file/viewer
+
+Never encode secrets, credentials, or huge context payloads in URLs.
+
+49 — VISUAL TOKEN SYSTEM
+
+Centralize design tokens for:
+background layers
+surface layers
+borders
+text edifice
+semantic states
+spacing
+radius
+shadow
+motion duration
+easing
+z-index
+density
+
+Do not scatter arbitrary CSS values throughout components.
+
+50 — COMPONENT PRIMITIVES
+
+Build Savant-specific primitives on top of accessible foundations:
+SavantSurface
+SavantPanel
+SavantInspector
+SavantStatus
+SavantBadge
+SavantCommand
+SavantDisclosure
+SavantTooltip
+SavantEmptyState
+SavantActivityItem
+SavantAuthorityState
+SavantLineage
+SavantReceipt
+
+Do not create abstractions merely for naming consistency; each primitive must remove meaningful duplication.
+
+51 — VISUAL DIFFERENTIATION OF HUMAN / PALAVER / SYSTEM
+
+Messages and system events must remain distinguishable without giant avatars or colored chat bubbles.
+
+Use typography, alignment, subtle structural markers, metadata positioning, and spacing.
+
+52 — TYPOGRAPHIC SYSTEM
+
+Use a highly legible contemporary UI sans for prose and a suitable monospace family already installed/available for technical metadata/code.
+
+Use typography to communicate edifice more than boxes.
+
+53 — PRECISION SPACING
+
+Adopt a small deterministic spacing scale.
+
+Dense operational panels should remain compact.
+Conversation prose should breathe.
+Do not apply one density everywhere.
+
+54 — MINIMIZED CHROME
+
+Controls should surface when contextually relevant.
+
+Permanent chrome should be reserved for permanent concepts.
+
+55 — INTELLIGENT STATUS BAR
+
+Consider a very compact lower status region for:
+Palaver connection
+current task ID
+persona
+repository scope
+execution state
+
+Only show data that actually exists.
+
+56 — PERFORMANCE BUDGET
+
+Do not sacrifice responsiveness for visual sophistication.
+
+Lazy-load:
+Monaco
+heavy observatories
+large visualization engines
+infrequently used workspace modules
+
+Code-split appropriately.
+
+Do not load every Savant workstation feature at initial boot.
+
+57 — SAFE CSS EFFECTS
+
+Use backdrop blur only on small stationary surfaces when beneficial.
+
+Avoid full-screen GPU-expensive blur.
+
+Prefer subtle borders, layered opaque/translucent fills, controlled highlights, and localized shadow.
+
+58 — MOTION BUDGET
+
+Create centralized motion durations/easings.
+
+No component invents arbitrary animation timing.
+
+Examples:
+instant feedback: ~80–120ms
+small transition: ~140–180ms
+surface transition: ~180–240ms
+
+These are design guidance, not authority; tune according to existing UX.
+
+59 — DESIGN FOR HOURS OF USE
+
+Palaver is a professional workstation, not a marketing page.
+
+Optimize for:
+low eye fatigue
+scanability
+stable layouts
+fast targeting
+predictable interaction
+dense technical use
+long conversation sessions
+
+60 — EXTENSIBLE SURFACE REGISTRY
+
+If Palaver already has a surface/observatory registry, extend it so future Savant modules can project their UI through registered surfaces without modifying the entire shell.
+
+Do not create a second registry if one already exists.
+
+IMPLEMENTATION DISCIPLINE
+
+Inspect current implementation first.
+
+Identify only the files necessary for this UI evolution.
+
+Preserve existing backend/API compatibility.
+
+Prefer additive component extraction and evolution over wholesale rewrites.
+
+Do not rewrite functioning Palaver runtime code merely to accommodate visual changes.
+
+Do not move authority into React state.
+
+Frontend state may contain:
+- current selection
+- open surfaces
+- pane dimensions
+- navigation
+- temporary composer state
+- presentation preferences
+- cached projections
+
+Frontend state must not become authoritative storage for:
+- accepted canon
+- Niche task truth
+- mutation truth
+- provider lineage truth
+- persona authority
+- filesystem truth
+
+All Savant-owned identifiers, new directories, filenames, component-owned semantic IDs, and terminology should remain lowercase unless external ecosystem conventions or compatibility require otherwise.
+
+Do not rename existing public interfaces simply for aesthetic consistency.
+
+DO NOT ADD GRAPH UI MERELY BECAUSE GRAPH DATA EXISTS
+
+Relational and lineage semantics may be represented through:
+- breadcrumbs
+- compact trees
+- dependency stacks
+- lineage chains
+- relation lists
+- expandable relationships
+
+Use an actual graph visualization only when it materially improves a specific real workflow.
+
+Do not resurrect deprecated/removed graph-heavy UX direction merely because an old component exists.
+
+IMPLEMENTATION ORDER
+
+Perform this in one bounded UI evolution task.
+
+First:
+inspect current canonical webui-nextgen files, package manifest, shell, workspace stores, API layer, design styles, observatories, current commands, and runtime integration needed for the requested change.
+
+Then:
+implement the upgraded design directly.
+
+Do not conduct a broad Savant audit.
+
+Do not modify unrelated owners.
+
+Integrate libraries only after verifying they are absent and necessary.
+
+Favor a small coherent dependency set.
+
+MANDATORY COMPLETION CONDITIONS
+
+The task is complete only when:
+
+1. existing Palaver conversation behavior survives;
+2. existing API integration survives;
+3. existing runtime/observatory functionality survives;
+4. ownership boundaries remain unchanged;
+5. Palaver visibly operates as a sophisticated multi-surface Savant workstation;
+6. at least 20 of the advanced enhancements above are implemented completely, not merely scaffolded;
+7. command palette is functional;
+8. workspace is responsive and keyboard accessible;
+9. conversation history remains performant at large size;
+10. context/authority/task lineage is shown only from real data;
+11. Niche-selected task state remains distinguishable from model output;
+12. Coda mutation state remains distinguishable from ordinary conversation;
+13. model/provider lineage remains owned by Opus;
+14. persona/cognitive state remains owned by Envoy;
+15. no hidden authority transfer occurs through frontend state;
+16. no unnecessary duplicate application or alternate Palaver frontend is created;
+17. reduced-motion behavior works;
+18. mobile/tablet layout remains usable;
+19. package/build state is valid;
+20. existing startup path still functions.
+
+VALIDATION LIMIT
+
+Do only mandatory validation:
+
+1. frontend syntax/type/build validation;
+2. one focused browser/UI functional check covering conversation + workspace interactions;
+3. one integration check demonstrating the existing Palaver backend still communicates correctly with the evolved frontend.
+
+Do not turn this task into an audit or exhaustive test program.
+
+PRODUCTION OUTPUT
+
+Do not return a design essay.
+
+Implement the upgrade.
+
+For every file that must be created or replaced, provide:
+
+nano /absolute/path/to/file
+
+followed by the complete file.
+
+No fragments.
+No patches.
+No ellipses.
+No placeholders.
+No manual line edits.
+No heredocs.
+
+Use as few files as practical while maintaining clean modularity.
+
+If a dependency must be installed, provide the exact package-manager command only after confirming which package manager and package manifest the current Palaver application actually uses.
+
+At completion, state only:
+- files changed
+- dependencies added, if any
+- enhancements actually completed
+- focused validation results
+- any genuine remaining blocker
+
+Do not claim an enhancement exists unless implementation evidence supports it.

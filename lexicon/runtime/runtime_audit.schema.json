@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schema:runtime:audit:report",
+  "title": "Savant Runtime Audit Report",
+  "type": "object",
+  "required": [
+    "report_id",
+    "operation",
+    "passed",
+    "timestamp",
+    "preflight",
+    "matrix",
+    "source_inventory",
+    "artifacts",
+    "dependencies",
+    "provenance",
+    "lineage",
+    "audit_event",
+    "digest"
+  ],
+  "properties": {
+    "report_id": {
+      "const": "runtime:audit:report"
+    },
+    "operation": {
+      "const": "audit"
+    },
+    "passed": {
+      "type": "boolean"
+    },
+    "timestamp": {
+      "type": "string"
+    },
+    "preflight": {
+      "type": "object"
+    },
+    "matrix": {
+      "type": "object"
+    },
+    "source_inventory": {
+      "type": "object",
+      "required": [
+        "count",
+        "digest",
+        "records"
+      ],
+      "properties": {
+        "count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "records": {
+          "type": "array"
+        }
+      },
+      "additionalProperties": true
+    },
+    "artifacts": {
+      "type": "object"
+    },
+    "dependencies": {
+      "type": "object"
+    },
+    "provenance": {
+      "type": "object"
+    },
+    "lineage": {
+      "type": "object"
+    },
+    "audit_event": {
+      "type": "object",
+      "required": [
+        "event_id",
+        "sequence",
+        "timestamp",
+        "report_digest",
+        "previous_digest",
+        "digest"
+      ],
+      "properties": {
+        "event_id": {
+          "type": "string",
+          "pattern": "^runtime:audit:event:[0-9]{12}$"
+        },
+        "sequence": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "timestamp": {
+          "type": "string"
+        },
+        "report_digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "previous_digest": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "additionalProperties": true
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,687 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0a1013">
+<title>savant / urge / identity evolution</title>
+<style>
+:root{
+--bg:#090e11;--surface:#121b1f;--surface2:#19262b;
+--line:#314147;--text:#edf2ef;--muted:#91a4a7;
+--accent:#9ed9ca;--warm:#d3b38b;--danger:#e8a09b;
+--ease:cubic-bezier(.22,1,.36,1)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:13px/1.5 system-ui,-apple-system,sans-serif}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+button:disabled{opacity:.4;cursor:not-allowed}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+a{color:var(--accent);text-decoration:none}
+.shell{display:grid;grid-template-columns:220px minmax(0,1fr);min-height:100vh}
+aside{background:#10171b;border-right:1px solid var(--line);padding:25px 14px;display:flex;flex-direction:column;gap:28px}
+.brand{font-size:27px;letter-spacing:-1.5px;font-weight:650;color:var(--text)}
+.brand small{display:block;font-size:9px;letter-spacing:2px;color:var(--muted);font-weight:500}
+nav{display:grid;gap:6px}
+nav a{padding:12px;border-radius:9px;color:var(--muted)}
+nav a.active{background:#26433a;color:var(--accent)}
+.note{margin-top:auto;border:1px solid var(--line);padding:13px;border-radius:10px;color:var(--muted);font-size:11px}
+.note strong{display:block;color:var(--accent)}
+main{min-width:0;padding:26px clamp(14px,2.5vw,42px)}
+header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:22px}
+.kicker{font-size:10px;letter-spacing:1.8px;color:var(--accent);text-transform:uppercase;font-weight:750}
+h1{font-size:clamp(29px,3.1vw,46px);font-weight:580;letter-spacing:-1.9px;line-height:1.1;margin:8px 0}
+h2{font-size:16px;letter-spacing:-.4px;font-weight:600;margin:0}
+p{color:var(--muted);margin:7px 0}
+.status{padding:7px 12px;border:1px solid #52766b;border-radius:30px;color:var(--accent);font-size:10px;white-space:nowrap}
+.layout{display:grid;grid-template-columns:minmax(290px,350px) minmax(0,1fr);gap:16px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:19px;min-width:0}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:17px}
+.field{display:grid;gap:7px;margin-bottom:15px}
+label{font-size:11px;font-weight:650;color:#cbd7d4}
+input,textarea,select{width:100%;background:#0c1519;color:var(--text);border:1px solid #42555b;border-radius:8px;padding:10px}
+textarea{min-height:90px;resize:vertical}
+input[type=range]{padding:0;accent-color:var(--accent)}
+input[type=file]{font-size:11px}
+input[type=checkbox]{width:auto;accent-color:var(--accent)}
+.hint{font-size:10px;color:var(--muted)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mode{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.btn{background:#223138;border:1px solid #41565a;color:var(--text);border-radius:9px;padding:10px 13px;font-size:11px;font-weight:650;transition:background .2s,border-color .2s,transform .2s var(--ease)}
+.btn:hover:not(:disabled){background:#31484e;transform:translateY(-1px)}
+.btn.primary{background:var(--accent);color:#0b211c;border-color:var(--accent)}
+.btn.active{background:#28473e;color:var(--accent);border-color:#679f91}
+.btn.danger{color:var(--danger)}
+.actions{display:flex;flex-wrap:wrap;gap:8px}
+.upload{padding:13px;border:1px dashed #638178;border-radius:10px;margin-bottom:15px}
+.upload[hidden]{display:none}
+.range-label{display:flex;justify-content:space-between}
+.intensity-track{display:flex;justify-content:space-between;font-size:10px;color:var(--muted)}
+.progress{height:4px;background:#26373c;border-radius:9px;overflow:hidden;margin:15px 0}
+.progress div{height:100%;width:0;background:var(--accent);transition:width .35s var(--ease)}
+.viewer{position:relative;min-height:480px;display:grid;place-items:center;overflow:hidden;border:1px solid #3c5556;border-radius:12px;background:radial-gradient(ellipse at center,#28453e 0%,#0d171b 70%)}
+.viewer.grid:before{content:"";position:absolute;inset:0;background-image:linear-gradient(#ffffff0e 1px,transparent 1px),linear-gradient(90deg,#ffffff0e 1px,transparent 1px);background-size:26px 26px;pointer-events:none}
+.stage{position:relative;width:min(76%,470px);aspect-ratio:1;z-index:1}
+.stage canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.stage canvas.enter{animation:appear .6s var(--ease) both}
+@keyframes appear{from{opacity:0;transform:scale(.94) rotate(-2deg);filter:blur(8px)}to{opacity:1;transform:scale(1) rotate(0);filter:blur(0)}}
+.overlay{position:absolute;top:16px;left:16px;font-size:10px;color:#d0e2dc;z-index:2}
+.viewer-info{position:absolute;top:15px;right:15px;border:1px solid #5a8175;background:#10231fdc;padding:7px 11px;border-radius:8px;font-size:10px;color:var(--accent);z-index:2}
+.viewer-tools{display:flex;gap:15px;flex-wrap:wrap;margin:12px 0}
+.viewer-tools label{display:flex;align-items:center;gap:6px}
+.comparison{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.compare-cell{background:#0b1418;border:1px solid var(--line);border-radius:9px;overflow:hidden;text-align:center}
+.compare-cell canvas{display:block;width:100%;max-height:220px;aspect-ratio:1;object-fit:contain}
+.compare-cell span{display:block;padding:8px;color:var(--muted);font-size:10px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:15px}
+.stat{background:#10191e;border:1px solid var(--line);padding:12px;border-radius:9px}
+.stat small{display:block;color:var(--muted);font-size:10px}
+.stat strong{font-size:20px;font-weight:600}
+.history{grid-column:1/-1}
+.timeline{display:flex;gap:11px;overflow-x:auto;padding:4px 0 12px}
+.thumb{flex:0 0 144px;padding:8px;background:#10191d;border:1px solid var(--line);border-radius:10px;text-align:left;color:var(--text);transition:transform .2s,border-color .2s}
+.thumb:hover{transform:translateY(-3px)}
+.thumb.active{border-color:var(--accent);background:#203b34}
+.thumb canvas{display:block;width:100%;aspect-ratio:1;background:#18252a;border-radius:7px}
+.thumb strong,.thumb small{display:block;margin-top:5px}
+.thumb small{font-size:10px;color:var(--muted)}
+.bottom{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.log{max-height:220px;overflow:auto;color:var(--muted);font-size:11px}
+.log div{padding:8px 0;border-bottom:1px solid var(--line)}
+.inspector{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.inspector div{background:#10191d;border:1px solid var(--line);border-radius:9px;padding:11px}
+.inspector small{display:block;color:var(--muted);font-size:10px}
+.inspector strong{font-size:12px;overflow-wrap:anywhere}
+footer{font-size:10px;color:var(--muted);margin-top:20px}
+@media(max-width:1100px){.layout{grid-template-columns:1fr}.viewer{min-height:380px}}
+@media(max-width:720px){
+.shell{display:block}aside{padding:14px;gap:12px}
+nav{display:flex;overflow:auto}.note{display:none}
+main{padding:17px 12px}header{flex-wrap:wrap}
+.viewer{min-height:320px}.stage{width:82%}
+.bottom{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside>
+<a class="brand" href="./urge-demo.html">savant<small>INTELLIGENCE COMPOSITION</small></a>
+<nav aria-label="Navigation">
+<a href="./urge-demo.html">Overview</a>
+<a href="./urge-logo-studio.html">Identity studio</a>
+<a href="./urge-logo-studio-v2.html">Identity laboratory v2</a>
+<a href="./urge-logo-studio-v3.html" class="active" aria-current="page">Evolution studio v3</a>
+</nav>
+<div class="note">
+<strong>Baseline-aware iteration</strong>
+Each local transformation uses the preceding candidate as its source. No external AI provider is invoked.
+</div>
+</aside>
+
+<main>
+<header>
+<div>
+<div class="kicker">urge / identity / iterative transformation</div>
+<h1>Evolution, with continuity.</h1>
+<p>Start with your own artwork, control the magnitude of change, and inspect every generation.</p>
+</div>
+<span class="status" id="status">READY / LOCAL</span>
+</header>
+
+<div class="layout">
+<section class="panel">
+<div class="panel-head"><h2>01 / Creative direction</h2><span class="kicker">Configuration</span></div>
+<div class="mode">
+<button class="btn active" id="scratch" aria-pressed="true">Create new</button>
+<button class="btn" id="import" aria-pressed="false">Import baseline</button>
+</div>
+<div class="upload" id="upload" hidden>
+<label for="file">Upload baseline artwork</label>
+<input id="file" type="file" accept=".png,.jpg,.jpeg,.webp,.svg,image/png,image/jpeg,image/webp,image/svg+xml">
+<div class="hint">PNG, JPEG, WebP or simple SVG. Maximum 5 MB.</div>
+</div>
+<div class="field">
+<label for="brand">Identity name</label>
+<input id="brand" maxlength="64" value="savant">
+</div>
+<div class="field">
+<label for="prompt">Creative iteration prompt</label>
+<textarea id="prompt" maxlength="2000">Refine the geometry, improve the balance, and explore stronger negative space while preserving the identity.</textarea>
+<div class="hint">Recorded as creative intent. Semantic AI interpretation is not yet connected.</div>
+</div>
+<div class="two">
+<div class="field">
+<label for="grammar">Starting geometry</label>
+<select id="grammar">
+<option value="monogram">Monogram</option>
+<option value="orbit">Orbital</option>
+<option value="fold">Folded</option>
+<option value="lattice">Lattice</option>
+<option value="signal">Signal</option>
+</select>
+</div>
+<div class="field">
+<label for="palette">Color system</label>
+<select id="palette">
+<option value="mineral">Mineral / jade</option>
+<option value="copper">Oxidized copper</option>
+<option value="mono">Monochrome</option>
+<option value="indigo">Indigo / platinum</option>
+<option value="ember">Warm graphite</option>
+</select>
+</div>
+</div>
+<div class="two">
+<div class="field">
+<label for="count">Number of iterations</label>
+<input type="number" id="count" min="1" max="100" step="1" value="12">
+</div>
+<div class="field">
+<label for="interval">Iteration interval (seconds)</label>
+<input type="number" id="interval" min="0.1" max="60" step="0.1" value="1.5">
+</div>
+</div>
+<div class="field">
+<label class="range-label" for="intensity">Intensity of Change <output id="intensity-value">35%</output></label>
+<input type="range" id="intensity" min="0" max="100" value="35" step="1">
+<div class="intensity-track"><span>Subtle refinement</span><span>Major transformation</span></div>
+</div>
+<div class="field">
+<label class="range-label" for="weight">Visual weight <output id="weight-value">6</output></label>
+<input type="range" id="weight" min="1" max="10" value="6">
+</div>
+<div class="actions">
+<button class="btn primary" id="start">Start evolution</button>
+<button class="btn" id="pause" disabled>Pause</button>
+<button class="btn danger" id="cancel" disabled>Cancel</button>
+<button class="btn" id="reset">Reset</button>
+</div>
+<div class="progress" id="progress" role="progressbar" aria-label="Iteration progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="progress-fill"></div></div>
+<p class="hint" id="feedback" role="status" aria-live="polite">Ready to evolve.</p>
+</section>
+
+<section class="panel">
+<div class="panel-head"><h2>02 / Live evolution viewer</h2><span class="kicker">Current candidate</span></div>
+<div class="viewer grid" id="viewer">
+<div class="overlay" id="viewer-label">BASELINE / 00</div>
+<div class="viewer-info" id="viewer-info">SOURCE</div>
+<div class="stage" id="stage"></div>
+</div>
+<div class="viewer-tools">
+<label><input type="checkbox" id="grid" checked> Grid</label>
+<label><input type="checkbox" id="light"> Light backdrop</label>
+<label><input type="checkbox" id="compare"> Compare to baseline</label>
+</div>
+<div class="comparison" id="comparison" hidden>
+<div class="compare-cell"><canvas id="before"></canvas><span>Original baseline</span></div>
+<div class="compare-cell"><canvas id="after"></canvas><span>Current iteration</span></div>
+</div>
+<div class="actions">
+<button class="btn" id="prev" disabled>Previous</button>
+<button class="btn" id="next" disabled>Next</button>
+<button class="btn" id="select" disabled>Select candidate</button>
+<button class="btn" id="branch" disabled>Branch from candidate</button>
+<button class="btn" id="export-png" disabled>Export PNG</button>
+<button class="btn" id="export-json">Export history</button>
+</div>
+<div class="stats">
+<div class="stat"><small>ITERATION</small><strong id="iteration">0 / 12</strong></div>
+<div class="stat"><small>CANDIDATES</small><strong id="total">0</strong></div>
+<div class="stat"><small>CHANGE LEVEL</small><strong id="change">35%</strong></div>
+<div class="stat"><small>SELECTED</small><strong id="selected">—</strong></div>
+</div>
+</section>
+
+<section class="panel history">
+<div class="panel-head"><h2>03 / Evolution timeline</h2><span class="hint">Each candidate derives from the previous image</span></div>
+<div class="timeline" id="timeline"></div>
+</section>
+</div>
+
+<div class="bottom">
+<section class="panel">
+<div class="panel-head"><h2>Candidate provenance</h2><span class="kicker">Lineage</span></div>
+<div class="inspector">
+<div><small>Candidate ID</small><strong id="candidate-id">baseline</strong></div>
+<div><small>Parent</small><strong id="parent">origin</strong></div>
+<div><small>Transformation</small><strong id="transformation">none</strong></div>
+<div><small>Source type</small><strong id="source">local</strong></div>
+</div>
+</section>
+<section class="panel">
+<div class="panel-head"><h2>Iteration events</h2><span class="kicker">Session</span></div>
+<div class="log" id="log" role="log" aria-live="polite"></div>
+</section>
+</div>
+<footer>
+Local image transformations preserve the actual uploaded baseline and candidate ancestry. They are not AI-generated redesigns or Opus orchestration. Higher intensity increases transformation magnitude, but cannot guarantee better logo quality.
+</footer>
+</main>
+</div>
+
+<script>
+"use strict";
+(()=>{
+const $=id=>document.getElementById(id);
+const size=512;
+const palettes={
+mineral:["#9bd6c8","#385c53","#d4c5a7"],
+copper:["#cba483","#55786d","#ead6bb"],
+mono:["#edf2ef","#66767a","#c4cccb"],
+indigo:["#adb7dc","#465982","#d9dce9"],
+ember:["#dda980","#77584e","#ead7c4"]
+};
+const state={
+mode:"scratch",baseline:null,baselineName:null,
+items:[],view:-1,selected:null,status:"ready",
+timer:null,events:[],config:null,run:0,
+branchSource:null,branchParent:null
+};
+function canvas(){
+const c=document.createElement("canvas");
+c.width=size;c.height=size;return c;
+}
+function clone(source){
+const c=canvas();
+c.getContext("2d").drawImage(source,0,0,size,size);
+return c;
+}
+function hash(text){
+let h=2166136261;
+for(const c of text){h^=c.charCodeAt(0);h=Math.imul(h,16777619);}
+return h>>>0;
+}
+function random(seed,n){
+let x=(seed+Math.imul(n+1,0x9e3779b1))>>>0;
+x^=x>>>16;x=Math.imul(x,0x7feb352d);
+x^=x>>>15;x=Math.imul(x,0x846ca68b);
+return ((x^(x>>>16))>>>0)/4294967296;
+}
+function config(){
+return {
+brand:$("brand").value.trim()||"untitled",
+prompt:$("prompt").value.trim(),
+grammar:$("grammar").value,
+palette:$("palette").value,
+count:Number($("count").value),
+interval:Number($("interval").value),
+intensity:Number($("intensity").value),
+weight:Number($("weight").value),
+mode:state.mode
+};
+}
+function validate(c){
+if(!Number.isInteger(c.count)||c.count<1||c.count>100)throw Error("Iteration count must be an integer from 1 to 100.");
+if(!Number.isFinite(c.interval)||c.interval<.1||c.interval>60)throw Error("Interval must be between 0.1 and 60 seconds.");
+if(!Number.isFinite(c.intensity)||c.intensity<0||c.intensity>100)throw Error("Invalid change intensity.");
+}
+function origin(c){
+const out=canvas(),ctx=out.getContext("2d");
+const [a,b,d]=palettes[c.palette];
+ctx.fillStyle="#111b1e";ctx.fillRect(0,0,size,size);
+ctx.save();ctx.translate(256,256);
+ctx.strokeStyle=b;ctx.lineWidth=2;
+ctx.beginPath();ctx.arc(0,0,207,0,Math.PI*2);ctx.stroke();
+ctx.lineJoin="round";ctx.lineCap="round";
+const w=6+c.weight*2;
+if(c.grammar==="monogram"){
+ctx.font="700 280px Arial,sans-serif";
+ctx.textAlign="center";ctx.textBaseline="middle";
+ctx.fillStyle=a;ctx.fillText([...c.brand][0]?.toUpperCase()||"S",0,12);
+ctx.strokeStyle=d;ctx.lineWidth=w;
+ctx.beginPath();ctx.moveTo(-130,110);ctx.lineTo(130,-110);ctx.stroke();
+}else if(c.grammar==="orbit"){
+for(let i=0;i<5;i++){
+ctx.save();ctx.rotate(i*.57);ctx.strokeStyle=i%2?a:d;
+ctx.lineWidth=w*.55;ctx.beginPath();
+ctx.ellipse(0,0,145-i*15,75+i*7,0,0,Math.PI*2);
+ctx.stroke();ctx.restore();
+}
+ctx.fillStyle=a;ctx.beginPath();ctx.arc(0,0,42,0,Math.PI*2);ctx.fill();
+}else if(c.grammar==="fold"){
+ctx.fillStyle=a;ctx.beginPath();
+ctx.moveTo(-140,95);ctx.lineTo(-12,-160);
+ctx.lineTo(148,95);ctx.lineTo(60,95);
+ctx.lineTo(-12,-30);ctx.lineTo(-60,95);
+ctx.closePath();ctx.fill();
+ctx.strokeStyle=d;ctx.lineWidth=w;ctx.stroke();
+}else if(c.grammar==="lattice"){
+for(let y=-2;y<=2;y++)for(let x=-2;x<=2;x++){
+ctx.fillStyle=(x+y)%2?a:d;
+ctx.fillRect(x*54-10,y*54-10,20,20);
+ctx.strokeStyle=b;ctx.lineWidth=3;
+if(x<2){ctx.beginPath();ctx.moveTo(x*54+10,y*54);ctx.lineTo((x+1)*54-10,y*54);ctx.stroke();}
+}
+}else{
+for(let i=0;i<8;i++){
+const angle=i*Math.PI/4;
+const x=Math.cos(angle)*145,y=Math.sin(angle)*145;
+ctx.strokeStyle=i%2?a:d;ctx.lineWidth=w;
+ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(x,y);ctx.stroke();
+ctx.fillStyle=a;ctx.beginPath();ctx.arc(x,y,12,0,Math.PI*2);ctx.fill();
+}
+ctx.fillStyle=d;ctx.beginPath();ctx.arc(0,0,28,0,Math.PI*2);ctx.fill();
+}
+ctx.restore();return out;
+}
+function transform(source,c,index,seed){
+const out=canvas(),ctx=out.getContext("2d");
+const t=c.intensity/100;
+const angle=(random(seed,1)*2-1)*Math.PI*(.015+t*.38);
+const scale=1+(random(seed,2)*2-1)*(.012+t*.32);
+const shift=(.5+t*55);
+const dx=(random(seed,3)*2-1)*shift;
+const dy=(random(seed,4)*2-1)*shift;
+const contrast=1+(random(seed,5)*2-1)*t*.35;
+const hue=(random(seed,6)*2-1)*t*85;
+const saturation=1+(random(seed,7)*2-1)*t*.48;
+ctx.fillStyle="#111b1e";ctx.fillRect(0,0,size,size);
+ctx.save();
+ctx.translate(256+dx,256+dy);
+ctx.rotate(angle);ctx.scale(scale,scale);
+ctx.translate(-256,-256);
+ctx.filter="contrast("+contrast+") saturate("+saturation+") hue-rotate("+hue+"deg)";
+ctx.drawImage(source,0,0,size,size);
+ctx.restore();ctx.filter="none";
+if(t>.12){
+const count=Math.floor(t*7);
+const layer=canvas(),lc=layer.getContext("2d");
+lc.drawImage(out,0,0);
+for(let i=0;i<count;i++){
+const y=Math.floor(random(seed,i+20)*size);
+const h=Math.max(1,Math.floor(t*random(seed,i+40)*24));
+const offset=(random(seed,i+60)*2-1)*t*95;
+ctx.save();
+ctx.beginPath();ctx.rect(0,y,size,h);ctx.clip();
+ctx.globalAlpha=Math.min(.85,t*.8);
+ctx.drawImage(layer,offset,0);ctx.restore();
+}
+}
+if(t>.42){
+const count=Math.floor((t-.4)*12);
+ctx.save();ctx.globalCompositeOperation="screen";
+for(let i=0;i<count;i++){
+const x=random(seed,i+90)*size,y=random(seed,i+110)*size;
+const radius=2+random(seed,i+130)*t*18;
+ctx.fillStyle=i%2?"#5c8d83":"#9c7d61";
+ctx.globalAlpha=t*.15;
+ctx.beginPath();ctx.arc(x,y,radius,0,Math.PI*2);ctx.fill();
+}
+ctx.restore();
+}
+return {
+image:out,
+operations:{
+rotationDegrees:Number((angle*180/Math.PI).toFixed(3)),
+scale:Number(scale.toFixed(4)),
+offsetX:Number(dx.toFixed(2)),
+offsetY:Number(dy.toFixed(2)),
+hueDegrees:Number(hue.toFixed(2)),
+contrast:Number(contrast.toFixed(3)),
+saturation:Number(saturation.toFixed(3)),
+intensity:c.intensity
+}
+};
+}
+function emit(message){
+state.events.unshift(message);state.events=state.events.slice(0,100);
+$("log").replaceChildren();
+for(const text of state.events){
+const row=document.createElement("div");row.textContent=text;$("log").append(row);
+}
+}
+function current(){return state.items[state.view]||null;}
+function sourceCanvas(){
+return state.branchSource||state.baseline||origin(state.config||config());
+}
+function displayCanvas(target,source){
+target.width=size;target.height=size;
+target.getContext("2d").drawImage(source,0,0);
+}
+function render(){
+const item=current(),base=sourceCanvas();
+const currentImage=item?.image||base;
+$("status").textContent=state.status.toUpperCase()+" / LOCAL";
+$("iteration").textContent=state.items.length+" / "+(state.config?.count||$("count").value);
+$("total").textContent=state.items.length;
+$("change").textContent=(state.config?.intensity??Number($("intensity").value))+"%";
+$("selected").textContent=state.selected===null?"—":state.items.find(x=>x.id===state.selected)?.index||"—";
+$("candidate-id").textContent=item?.id||"baseline";
+$("parent").textContent=item?.parent||state.branchParent||"origin";
+$("transformation").textContent=item?"affine / color / spatial":"none";
+$("source").textContent=state.mode==="import"?"imported artwork":"procedural origin";
+$("viewer-label").textContent=item?"ITERATION / "+String(item.index).padStart(2,"0"):"BASELINE / 00";
+$("viewer-info").textContent=item?"INTENSITY "+item.operations.intensity+"%":"SOURCE";
+const stage=$("stage");stage.replaceChildren();
+const shown=clone(currentImage);
+shown.className="enter";
+stage.append(shown);
+displayCanvas($("before"),base);
+displayCanvas($("after"),currentImage);
+$("viewer").classList.toggle("grid",$("grid").checked);
+$("viewer").style.background=$("light").checked?"#e9eeeb":"";
+$("comparison").hidden=!$("compare").checked;
+const running=state.status==="running",paused=state.status==="paused";
+$("start").disabled=running||paused;
+$("pause").disabled=!running&&!paused;
+$("cancel").disabled=!running&&!paused;
+$("pause").textContent=paused?"Resume":"Pause";
+$("prev").disabled=state.view<=-1;
+$("next").disabled=state.view>=state.items.length-1;
+$("select").disabled=!item;
+$("branch").disabled=!item||running||paused;
+$("export-png").disabled=!item;
+const total=state.config?.count||Number($("count").value);
+const percent=Math.round(state.items.length/total*100)||0;
+$("progress-fill").style.width=percent+"%";
+$("progress").setAttribute("aria-valuenow",String(percent));
+$("feedback").textContent=running?"Evolving from the preceding image…":paused?"Paused.":state.status==="completed"?"Evolution sequence complete.":"Ready to evolve.";
+$("timeline").replaceChildren();
+const entries=[null,...state.items];
+entries.forEach((entry,index)=>{
+const button=document.createElement("button");
+button.className="thumb"+(state.view===index-1?" active":"");
+const preview=clone(entry?.image||base);
+const title=document.createElement("strong");
+title.textContent=entry?"Iteration "+entry.index:"Baseline";
+const note=document.createElement("small");
+note.textContent=entry?(entry.id===state.selected?"Selected":"Change "+entry.operations.intensity+"%"):(state.mode==="import"?"Imported source":"Generated source");
+button.append(preview,title,note);
+button.onclick=()=>{state.view=index-1;render();};
+$("timeline").append(button);
+});
+}
+function stop(){
+if(state.timer!==null){clearTimeout(state.timer);state.timer=null;}
+}
+function finish(){
+stop();state.status="completed";
+emit("Sequence complete · "+state.items.length+" transformations");
+render();
+}
+function tick(){
+if(state.status!=="running")return;
+if(state.items.length>=state.config.count){finish();return;}
+const index=state.items.length;
+const parent=index?state.items[index-1]:null;
+const source=parent?.image||sourceCanvas();
+const seed=hash(JSON.stringify(state.config)+":"+state.run+":"+index+":"+(state.branchParent||"origin"));
+const result=transform(source,state.config,index,seed);
+const id="run-"+state.run+"-candidate-"+String(index+1).padStart(3,"0");
+const entry={
+id,index:index+1,
+parent:parent?.id||state.branchParent||(state.mode==="import"?"imported-baseline":"generated-baseline"),
+image:result.image,seed,operations:result.operations,
+prompt:state.config.prompt,sourceType:"local-image-transformation"
+};
+state.items.push(entry);
+state.view=index;
+emit(entry.id+" ← "+entry.parent+" · intensity "+entry.operations.intensity+"%");
+if(state.items.length>=state.config.count)finish();
+else{
+render();
+state.timer=setTimeout(tick,state.config.interval*1000);
+}
+}
+function start(){
+let c=config();
+try{validate(c);}catch(error){alert(error.message);return;}
+if(state.mode==="import"&&!state.baseline&&!state.branchSource){
+alert("Import a baseline first.");return;
+}
+stop();
+state.config=c;state.items=[];state.view=-1;
+state.selected=null;state.status="running";state.run++;
+emit("Run "+state.run+" started · "+c.count+" iterations · "+c.interval+" seconds");
+render();
+state.timer=setTimeout(tick,c.interval*1000);
+}
+function reset(){
+stop();state.items=[];state.view=-1;
+state.selected=null;state.status="ready";
+state.config=null;state.branchSource=null;state.branchParent=null;
+state.events=[];$("log").replaceChildren();render();
+}
+function setMode(mode){
+if(state.status==="running"||state.status==="paused")return;
+state.mode=mode;
+state.baseline=null;state.baselineName=null;
+$("file").value="";
+$("upload").hidden=mode!=="import";
+$("scratch").classList.toggle("active",mode==="scratch");
+$("import").classList.toggle("active",mode==="import");
+$("scratch").setAttribute("aria-pressed",String(mode==="scratch"));
+$("import").setAttribute("aria-pressed",String(mode==="import"));
+reset();
+}
+function safeSvg(text){
+const doc=new DOMParser().parseFromString(text,"image/svg+xml");
+if(doc.querySelector("parsererror")||doc.documentElement.localName!=="svg")throw Error("Invalid SVG.");
+const allowed=new Set(["svg","g","path","rect","circle","ellipse","line","polyline","polygon","defs","linearGradient","radialGradient","stop","text","tspan","clipPath"]);
+const nodes=[...doc.documentElement.querySelectorAll("*")];
+if(nodes.length>2000)throw Error("SVG is too complex.");
+for(const node of nodes){
+if(!allowed.has(node.localName))throw Error("Unsupported or unsafe SVG element: "+node.localName);
+}
+for(const node of [doc.documentElement,...nodes]){
+for(const attr of [...node.attributes]){
+const key=attr.name.toLowerCase(),value=attr.value;
+if(key.startsWith("on")||key==="style"||key==="href"||key==="xlink:href"||/url\s*\(|javascript:|data:|https?:|@import/i.test(value)){
+throw Error("SVG contains unsupported external or active content.");
+}
+}
+}
+return new XMLSerializer().serializeToString(doc);
+}
+function imageFromUrl(url){
+return new Promise((resolve,reject)=>{
+const img=new Image();
+img.onload=()=>resolve(img);
+img.onerror=()=>reject(Error("Image decoding failed."));
+img.src=url;
+});
+}
+$("file").onchange=async e=>{
+const file=e.target.files?.[0];if(!file)return;
+const types=["image/png","image/jpeg","image/webp","image/svg+xml"];
+if(!types.includes(file.type)||file.size>5*1024*1024){
+alert("Choose a supported image under 5 MB.");e.target.value="";return;
+}
+let url=null;
+try{
+let blob=file;
+if(file.type==="image/svg+xml"){
+const sanitized=safeSvg(await file.text());
+blob=new Blob([sanitized],{type:"image/svg+xml"});
+}
+url=URL.createObjectURL(blob);
+const image=await imageFromUrl(url);
+const out=canvas(),ctx=out.getContext("2d");
+ctx.fillStyle="#111b1e";ctx.fillRect(0,0,size,size);
+const scale=Math.min(size/image.width,size/image.height);
+const w=image.width*scale,h=image.height*scale;
+ctx.drawImage(image,(size-w)/2,(size-h)/2,w,h);
+reset();
+state.baseline=out;
+state.baselineName=file.name;
+emit("Imported baseline "+file.name+" · image data is the iteration source");
+render();
+}catch(error){alert(error.message||"Unable to import image.");}
+finally{if(url)URL.revokeObjectURL(url);}
+};
+$("scratch").onclick=()=>setMode("scratch");
+$("import").onclick=()=>setMode("import");
+$("intensity").oninput=e=>$("intensity-value").textContent=e.target.value+"%";
+$("weight").oninput=e=>$("weight-value").textContent=e.target.value;
+$("start").onclick=start;
+$("pause").onclick=()=>{
+if(state.status==="running"){
+stop();state.status="paused";emit("Paused");
+}else if(state.status==="paused"){
+state.status="running";
+state.timer=setTimeout(tick,state.config.interval*1000);
+emit("Resumed");
+}
+render();
+};
+$("cancel").onclick=()=>{
+stop();state.status="cancelled";emit("Cancelled");render();
+};
+$("reset").onclick=reset;
+$("prev").onclick=()=>{if(state.view>-1){state.view--;render();}};
+$("next").onclick=()=>{if(state.view<state.items.length-1){state.view++;render();}};
+$("select").onclick=()=>{
+const item=current();if(!item)return;
+state.selected=item.id;emit("Selected "+item.id);render();
+};
+$("branch").onclick=()=>{
+const item=current();if(!item)return;
+stop();
+state.branchSource=clone(item.image);
+state.branchParent=item.id;
+state.items=[];state.view=-1;state.selected=null;
+state.config=null;state.status="ready";
+emit("Branched from "+item.id+" · active timeline replaced; export previous history before branching");
+render();
+};
+$("export-png").onclick=()=>{
+const item=current();if(!item)return;
+item.image.toBlob(blob=>{
+if(!blob){alert("PNG export failed.");return;}
+const url=URL.createObjectURL(blob);
+const a=document.createElement("a");
+a.href=url;a.download="savant-"+item.id+".png";a.click();
+setTimeout(()=>URL.revokeObjectURL(url),2000);
+},"image/png");
+};
+$("export-json").onclick=()=>{
+const data={
+schema:3,
+kind:"savant-urge-local-image-evolution",
+execution:"procedural-browser",
+baselineName:state.baselineName,
+baselinePixelsIncluded:false,
+branchParent:state.branchParent,
+configuration:state.config||config(),
+status:state.status,
+selected:state.selected,
+candidates:state.items.map(({id,index,parent,seed,operations,prompt,sourceType})=>({
+id,index,parent,seed,operations,prompt,sourceType
+})),
+events:[...state.events]
+};
+const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+const url=URL.createObjectURL(blob),a=document.createElement("a");
+a.href=url;a.download="savant-evolution-history.json";a.click();
+setTimeout(()=>URL.revokeObjectURL(url),2000);
+};
+["grid","light","compare"].forEach(id=>$(id).onchange=render);
+render();
+})();
+</script>
+</body>
+</html>

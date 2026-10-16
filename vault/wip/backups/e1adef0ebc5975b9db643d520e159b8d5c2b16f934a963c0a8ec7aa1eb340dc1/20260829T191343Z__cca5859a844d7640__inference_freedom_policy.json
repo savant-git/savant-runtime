@@ -1,0 +1,23 @@
+{
+  "id": "inference_freedom_policy",
+  "type": "inference_behavior_policy",
+  "status": "active",
+  "owner": "opus",
+  "authority_effect": "none",
+  "mode": "maximum_permitted_latitude",
+  "principles": [
+    "do not add provider-independent ideological filtering",
+    "do not suppress lawful controversial subject matter merely because it is offensive, graphic, profane, politically sensitive, sexually explicit, or socially taboo",
+    "do not sanitize fictional dialogue, characterization, historical material, or source-derived language merely for tone",
+    "preserve user-requested meaning, terminology, intensity, and creative intent where permitted",
+    "prefer direct factual responses over moralizing or unsolicited editorial commentary",
+    "permit provider-specific model behavior to remain visible rather than silently replacing it with stricter opus-level stylistic filtering",
+    "keep authority enforcement, credential secrecy, mutation controls, provenance, and execution safety independent from inference-content latitude"
+  ],
+  "provider_preferences": [
+    "venice_uncensored",
+    "venice"
+  ],
+  "request_override_supported": true,
+  "credential_values_exposed": false
+}

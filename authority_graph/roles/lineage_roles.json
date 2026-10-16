@@ -1,0 +1,245 @@
+{
+  "id": "registry.lineage_roles",
+  "kind": "registry",
+  "status": "active",
+  "authority": "FOUNDATION-008",
+  "version": "1.0.0",
+  "roles": {
+    "generic": {
+      "axis": "unspecified",
+      "inverse": "generic_child",
+      "aliases": [
+        "parent"
+      ],
+      "precedence": 0,
+      "acyclic": true,
+      "cycle_domain": "generic_edifice",
+      "propagates_changes": true,
+      "default_inheritance": {
+        "mode": "reference",
+        "fields": [],
+        "conflict_policy": "child_wins"
+      }
+    },
+    "source": {
+      "axis": "substance",
+      "inverse": "derived",
+      "aliases": [
+        "mother",
+        "maternal",
+        "origin_source"
+      ],
+      "symbolic_parent_alias": "mother",
+      "precedence": 100,
+      "acyclic": true,
+      "cycle_domain": "origin",
+      "propagates_changes": true,
+      "default_inheritance": {
+        "mode": "merge",
+        "fields": [
+          "dna",
+          "content",
+          "data",
+          "capabilities",
+          "metadata"
+        ],
+        "conflict_policy": "child_wins"
+      }
+    },
+    "pattern": {
+      "axis": "form",
+      "inverse": "realization",
+      "aliases": [
+        "father",
+        "paternal",
+        "schema_parent",
+        "template_parent"
+      ],
+      "symbolic_parent_alias": "father",
+      "precedence": 200,
+      "acyclic": true,
+      "cycle_domain": "form",
+      "propagates_changes": true,
+      "default_inheritance": {
+        "mode": "merge",
+        "fields": [
+          "schema",
+          "structure",
+          "interfaces",
+          "policies",
+          "constraints",
+          "metadata"
+        ],
+        "conflict_policy": "child_wins"
+      }
+    },
+    "context": {
+      "axis": "environment",
+      "inverse": "participant",
+      "aliases": [
+        "environment",
+        "scope",
+        "local_context"
+      ],
+      "precedence": 300,
+      "acyclic": false,
+      "cycle_domain": "context",
+      "propagates_changes": true,
+      "default_inheritance": {
+        "mode": "merge",
+        "fields": [
+          "context",
+          "environment",
+          "metadata"
+        ],
+        "conflict_policy": "collect"
+      }
+    },
+    "catalyst": {
+      "axis": "activation",
+      "inverse": "product",
+      "aliases": [
+        "trigger",
+        "cause",
+        "initiator"
+      ],
+      "precedence": 400,
+      "acyclic": true,
+      "cycle_domain": "causality",
+      "propagates_changes": true,
+      "default_inheritance": {
+        "mode": "reference",
+        "fields": [],
+        "conflict_policy": "child_wins"
+      }
+    },
+    "constraint": {
+      "axis": "boundary",
+      "inverse": "constrained",
+      "aliases": [
+        "rule",
+        "brace",
+        "limit"
+      ],
+      "precedence": 500,
+      "acyclic": true,
+      "cycle_domain": "governance",
+      "propagates_changes": true,
+      "default_inheritance": {
+        "mode": "merge",
+        "fields": [
+          "constraints",
+          "policies"
+        ],
+        "conflict_policy": "error"
+      }
+    },
+    "authority": {
+      "axis": "governance",
+      "inverse": "governed",
+      "aliases": [
+        "authority_parent",
+        "governor"
+      ],
+      "precedence": 600,
+      "acyclic": true,
+      "cycle_domain": "governance",
+      "propagates_changes": true,
+      "default_inheritance": {
+        "mode": "merge",
+        "fields": [
+          "authority",
+          "canon",
+          "policies"
+        ],
+        "conflict_policy": "parent_wins"
+      }
+    },
+    "ownership": {
+      "axis": "custody",
+      "inverse": "owned",
+      "aliases": [
+        "owner",
+        "custodian"
+      ],
+      "precedence": 700,
+      "acyclic": true,
+      "cycle_domain": "ownership",
+      "propagates_changes": true,
+      "default_inheritance": {
+        "mode": "reference",
+        "fields": [],
+        "conflict_policy": "child_wins"
+      }
+    },
+    "composition": {
+      "axis": "containment",
+      "inverse": "component",
+      "aliases": [
+        "contains",
+        "container",
+        "composes"
+      ],
+      "precedence": 800,
+      "acyclic": true,
+      "cycle_domain": "composition",
+      "propagates_changes": true,
+      "default_inheritance": {
+        "mode": "reference",
+        "fields": [],
+        "conflict_policy": "child_wins"
+      }
+    },
+    "provenance": {
+      "axis": "evidence",
+      "inverse": "evidences",
+      "aliases": [
+        "origin",
+        "derived_from",
+        "generated_from"
+      ],
+      "precedence": 900,
+      "acyclic": true,
+      "cycle_domain": "provenance",
+      "propagates_changes": true,
+      "default_inheritance": {
+        "mode": "reference",
+        "fields": [],
+        "conflict_policy": "child_wins"
+      }
+    },
+    "projection": {
+      "axis": "representation",
+      "inverse": "projects",
+      "aliases": [
+        "projected_from",
+        "view_of"
+      ],
+      "precedence": 1000,
+      "acyclic": true,
+      "cycle_domain": "projection",
+      "propagates_changes": true,
+      "default_inheritance": {
+        "mode": "reference",
+        "fields": [],
+        "conflict_policy": "child_wins"
+      }
+    }
+  },
+  "continuation_modes": {
+    "neutral": {
+      "symbolic_child_alias": "child"
+    },
+    "preserving": {
+      "symbolic_child_alias": "daughter"
+    },
+    "projecting": {
+      "symbolic_child_alias": "son"
+    },
+    "transforming": {
+      "symbolic_child_alias": "descendant"
+    }
+  },
+  "extensions": {},
+  "future_extensions": {}
+}

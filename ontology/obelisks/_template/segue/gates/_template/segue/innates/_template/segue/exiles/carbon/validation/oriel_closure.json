@@ -1,0 +1,46 @@
+{
+  "id": "carbon.validation.oriel_closure",
+  "owner": "carbon",
+  "type": "derived_closure_gate",
+  "status": "active",
+  "specialization": "carbon.oriel",
+  "authority_effect": "none",
+  "validator": {
+    "policy": "validation/oriel.json",
+    "test": "tests/oriel_integration.py"
+  },
+  "required_true": [
+    "ok",
+    "reality_bound_simulation_operational",
+    "authority_boundary_valid",
+    "canon_boundary_valid",
+    "observatory_ready",
+    "capability_surface_resolved",
+    "historical_oriel_not_restored",
+    "quantum_remains_carbon_owned",
+    "causal_simulation_remains_carbon_owned",
+    "historical_reality_remains_external"
+  ],
+  "required_zero": [
+    "unavailable_module_count",
+    "unmanifested_module_count",
+    "provider_error_count"
+  ],
+  "required_false": [
+    "source_state_mutated",
+    "authority_transfer"
+  ],
+  "allowed_observed_states": [
+    "healthy",
+    "degraded"
+  ],
+  "rules": {
+    "closure_is_derived": true,
+    "closure_is_persistent_authority": false,
+    "closure_may_be_claimed_without_current_validation": false,
+    "closure_may_hide_validator_failure": false,
+    "closure_may_mutate_source": false,
+    "closure_may_promote_simulation_output": false,
+    "authority_transfer": false
+  }
+}

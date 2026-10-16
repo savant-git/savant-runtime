@@ -1,0 +1,496 @@
+.scene-overlay {
+  position: absolute;
+  z-index: 18;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  color: rgba(255, 255, 255, 0.92);
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.scene-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.24;
+  background:
+    linear-gradient(
+      90deg,
+      transparent 49.92%,
+      rgba(255, 255, 255, 0.08) 50%,
+      transparent 50.08%
+    ),
+    linear-gradient(
+      transparent 49.92%,
+      rgba(255, 255, 255, 0.06) 50%,
+      transparent 50.08%
+    );
+  mask-image:
+    radial-gradient(
+      circle at center,
+      black,
+      transparent 62%
+    );
+}
+
+.scene-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(2, 4, 6, 0.35),
+      transparent 15%,
+      transparent 76%,
+      rgba(2, 4, 6, 0.52)
+    );
+}
+
+.scene-overlay-corners i {
+  position: absolute;
+  z-index: 3;
+  width: 24px;
+  height: 24px;
+  opacity: 0.4;
+}
+
+.scene-overlay-corners i:nth-child(1) {
+  left: 22px;
+  top: 22px;
+  border-left:
+    1px solid rgba(255, 255, 255, 0.5);
+  border-top:
+    1px solid rgba(255, 255, 255, 0.5);
+}
+
+.scene-overlay-corners i:nth-child(2) {
+  right: 22px;
+  top: 22px;
+  border-right:
+    1px solid rgba(255, 255, 255, 0.5);
+  border-top:
+    1px solid rgba(255, 255, 255, 0.5);
+}
+
+.scene-overlay-corners i:nth-child(3) {
+  right: 22px;
+  bottom: 22px;
+  border-right:
+    1px solid rgba(255, 255, 255, 0.5);
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.5);
+}
+
+.scene-overlay-corners i:nth-child(4) {
+  left: 22px;
+  bottom: 22px;
+  border-left:
+    1px solid rgba(255, 255, 255, 0.5);
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.5);
+}
+
+.scene-overlay-top {
+  position: absolute;
+  z-index: 4;
+  left: 42px;
+  right: 42px;
+  top: 34px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.scene-overlay-top > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.scene-overlay-top > div:last-child {
+  text-align: right;
+}
+
+.scene-overlay-top span,
+.scene-overlay-top strong {
+  font-size: 6px;
+  letter-spacing: 0.19em;
+}
+
+.scene-overlay-top span {
+  color: rgba(255, 255, 255, 0.34);
+}
+
+.scene-overlay-top strong {
+  font-size: 7px;
+  font-weight: 500;
+}
+
+.scene-overlay-reticle {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  top: 50%;
+  width: 100px;
+  height: 100px;
+  transform: translate(-50%, -50%);
+}
+
+.scene-overlay-reticle::before,
+.scene-overlay-reticle::after {
+  content: "";
+  position: absolute;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.scene-overlay-reticle::before {
+  left: 50%;
+  top: -45px;
+  bottom: -45px;
+  width: 1px;
+}
+
+.scene-overlay-reticle::after {
+  top: 50%;
+  left: -45px;
+  right: -45px;
+  height: 1px;
+}
+
+.scene-overlay-reticle i {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+}
+
+.scene-overlay-reticle i:nth-child(1) {
+  left: 0;
+  top: 0;
+  border-left:
+    1px solid rgba(255, 255, 255, 0.34);
+  border-top:
+    1px solid rgba(255, 255, 255, 0.34);
+}
+
+.scene-overlay-reticle i:nth-child(2) {
+  right: 0;
+  top: 0;
+  border-right:
+    1px solid rgba(255, 255, 255, 0.34);
+  border-top:
+    1px solid rgba(255, 255, 255, 0.34);
+}
+
+.scene-overlay-reticle i:nth-child(3) {
+  right: 0;
+  bottom: 0;
+  border-right:
+    1px solid rgba(255, 255, 255, 0.34);
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.34);
+}
+
+.scene-overlay-reticle i:nth-child(4) {
+  left: 0;
+  bottom: 0;
+  border-left:
+    1px solid rgba(255, 255, 255, 0.34);
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.34);
+}
+
+.scene-overlay-reticle span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  color: rgba(255, 255, 255, 0.38);
+  font-size: 8px;
+  transform: translate(-50%, -50%);
+}
+
+.scene-mode-selector {
+  position: absolute;
+  z-index: 7;
+  right: 34px;
+  top: 50%;
+  width: 135px;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(-50%);
+  pointer-events: auto;
+}
+
+.scene-mode-selector button {
+  position: relative;
+  min-height: 58px;
+  padding: 9px 10px;
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  align-items: center;
+  gap: 7px;
+  border: 0;
+  border-top:
+    1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(3, 6, 8, 0.15);
+  color: rgba(255, 255, 255, 0.34);
+  cursor: pointer;
+  text-align: left;
+  backdrop-filter: blur(5px);
+  transition:
+    color 0.3s ease,
+    background 0.3s ease;
+}
+
+.scene-mode-selector button:last-child {
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.1);
+}
+
+.scene-mode-selector button::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: white;
+  transform: scaleY(0);
+  transition:
+    transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.scene-mode-selector button:hover,
+.scene-mode-selector button.active {
+  color: white;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.scene-mode-selector button.active::before {
+  transform: scaleY(1);
+}
+
+.scene-mode-selector button > span {
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 6px;
+  letter-spacing: 0.12em;
+}
+
+.scene-mode-selector button div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.scene-mode-selector strong,
+.scene-mode-selector small {
+  letter-spacing: 0.13em;
+}
+
+.scene-mode-selector strong {
+  font-size: 7px;
+  font-weight: 500;
+}
+
+.scene-mode-selector small {
+  color: rgba(255, 255, 255, 0.28);
+  font-size: 5px;
+}
+
+.scene-overlay-left {
+  position: absolute;
+  z-index: 4;
+  left: 34px;
+  top: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transform: translateY(-50%);
+}
+
+.scene-overlay-left span,
+.scene-overlay-left strong {
+  font-size: 6px;
+  letter-spacing: 0.18em;
+}
+
+.scene-overlay-left span {
+  color: rgba(255, 255, 255, 0.26);
+}
+
+.scene-overlay-left strong {
+  font-size: 7px;
+  line-height: 1.8;
+  font-weight: 500;
+}
+
+.scene-overlay-left i {
+  width: 1px;
+  height: 80px;
+  margin-top: 4px;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.32),
+      transparent
+    );
+}
+
+.scene-overlay-right {
+  position: absolute;
+  z-index: 4;
+  right: 34px;
+  bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.scene-overlay-right span {
+  color: rgba(255, 255, 255, 0.26);
+  font-size: 5px;
+  letter-spacing: 0.16em;
+}
+
+.scene-overlay-bottom {
+  position: absolute;
+  z-index: 4;
+  left: 42px;
+  right: 42px;
+  bottom: 34px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.scene-overlay-bottom > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.scene-overlay-bottom span,
+.scene-overlay-bottom strong {
+  font-size: 6px;
+  letter-spacing: 0.17em;
+}
+
+.scene-overlay-bottom > div:first-child span {
+  color: rgba(255, 255, 255, 0.28);
+}
+
+.scene-overlay-bottom strong {
+  font-size: 7px;
+  font-weight: 500;
+}
+
+.scene-signal {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.scene-signal i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(171, 228, 191, 0.9);
+  box-shadow:
+    0 0 12px rgba(171, 228, 191, 0.6);
+  animation:
+    scene-signal-pulse 2s ease-in-out infinite;
+}
+
+.scene-signal span {
+  color: rgba(255, 255, 255, 0.42);
+}
+
+@keyframes scene-signal-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.8);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@media (max-width: 800px) {
+  .scene-mode-selector {
+    left: 20px;
+    right: 20px;
+    top: auto;
+    bottom: 70px;
+    width: auto;
+    flex-direction: row;
+    transform: none;
+  }
+
+  .scene-mode-selector button {
+    flex: 1;
+    min-width: 0;
+    grid-template-columns: 1fr;
+  }
+
+  .scene-mode-selector button > span {
+    display: none;
+  }
+
+  .scene-overlay-left,
+  .scene-overlay-right {
+    display: none;
+  }
+
+  .scene-overlay-top {
+    left: 24px;
+    right: 24px;
+    top: 24px;
+  }
+
+  .scene-overlay-bottom {
+    left: 24px;
+    right: 24px;
+    bottom: 24px;
+  }
+
+  .scene-overlay-bottom > div:first-child {
+    display: none;
+  }
+
+  .scene-overlay-bottom {
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 520px) {
+  .scene-overlay-top > div:last-child {
+    display: none;
+  }
+
+  .scene-mode-selector {
+    bottom: 58px;
+  }
+
+  .scene-mode-selector button {
+    padding: 8px 5px;
+  }
+
+  .scene-mode-selector small {
+    display: none;
+  }
+
+  .scene-overlay-reticle {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene-signal i {
+    animation: none;
+  }
+}

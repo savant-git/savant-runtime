@@ -1,0 +1,198 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "490895662ffa2821fdaee41b0636effa603087053127b102939a456c0fea8eb1",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "namespace": "preview.kindred",
+  "node": "authority_graph/templates",
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationships": [
+    {
+      "child_profile": "daughter",
+      "domain": "filesystem",
+      "id": "lineage.composition.37905c32d9c9299a0345",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "authority_graph",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:authority_graph",
+        "canonical_target": "fs:authority_graph/templates",
+        "continuation": "preserving",
+        "id": "lineage.composition.37905c32d9c9299a0345",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/authority_graph/templates"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "authority_graph",
+        "status": "active",
+        "symbolic_child_alias": "daughter",
+        "symbolic_parent_alias": "parent",
+        "target": "authority_graph/templates",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "authority_graph/templates"
+    },
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.3e219a4b050529ec1f31",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "authority_graph/templates",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:authority_graph/templates",
+        "canonical_target": "fs:authority_graph/templates/base_instance.json",
+        "continuation": "projecting",
+        "id": "lineage.composition.3e219a4b050529ec1f31",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/authority_graph/templates/base_instance.json"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "authority_graph/templates",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "authority_graph/templates/base_instance.json",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "authority_graph/templates/base_instance.json"
+    },
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.42d402434b3198f20648",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "authority_graph/templates",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:authority_graph/templates",
+        "canonical_target": "fs:authority_graph/templates/lineage_segue.json",
+        "continuation": "projecting",
+        "id": "lineage.composition.42d402434b3198f20648",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/authority_graph/templates/lineage_segue.json"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "authority_graph/templates",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "authority_graph/templates/lineage_segue.json",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "authority_graph/templates/lineage_segue.json"
+    }
+  ],
+  "schema": "savant.kindred.preview.relationship_projection.v2"
+}

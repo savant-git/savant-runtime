@@ -1,0 +1,80 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "7780ebb49fb7f3e7038efc2fe73ad3a7e325483dc49a56670162baae1e9aa575",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "namespace": "preview.kindred",
+  "node": "exile:urge",
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationships": [
+    {
+      "child_profile": "child",
+      "domain": "global",
+      "id": "lineage.generic.fa6f2e999f864029d88a",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "functional",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "generic",
+      "source": "edifice:identity:4",
+      "source_record": {
+        "axis": "unspecified",
+        "canonical_source": "edifice:identity:4",
+        "canonical_target": "exile:urge",
+        "continuation": "neutral",
+        "id": "lineage.generic.fa6f2e999f864029d88a",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "generic_child",
+        "kind": "generic",
+        "metadata": {
+          "adapter": "authority",
+          "source_field": "lineage.parents",
+          "source_path": "/root/savant-runtime/canon-system/authority/exiles/urge.yaml"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "authority_adapter",
+          "created_from": [
+            "/root/savant-runtime/canon-system/authority/exiles/urge.yaml"
+          ],
+          "source_files": [
+            "/root/savant-runtime/canon-system/authority/exiles/urge.yaml"
+          ]
+        },
+        "role": "generic",
+        "scope": "global",
+        "source": "edifice:identity:4",
+        "status": "active",
+        "symbolic_child_alias": "child",
+        "symbolic_parent_alias": "parent",
+        "target": "exile:urge",
+        "weight": 1
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "exile:urge"
+    }
+  ],
+  "schema": "savant.kindred.preview.relationship_projection.v2"
+}

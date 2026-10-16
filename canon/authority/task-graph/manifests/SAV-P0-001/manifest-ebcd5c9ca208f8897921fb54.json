@@ -1,0 +1,54 @@
+{
+  "artifacts": [],
+  "attestations": [],
+  "content_digest": "ebcd5c9ca208f8897921fb549e6bd909a3906a60eba3832384738f6976cbb90a",
+  "decisions": [],
+  "events": [],
+  "evidence": [],
+  "generated_at": "2026-08-02T20:03:34+00:00",
+  "graph": {
+    "path": "authority/task-graph/masterplan.json",
+    "schema_version": "1.0.0",
+    "semantic_digest": "87b91e8fda784ff473d1e54e3a0f4cd1a2cab09118e1b601d34436730394ee52",
+    "sha256": "e7c0ef8575b770b17a3d874c0fbc97078ca10723da43296e45ffd5a91c47b2eb"
+  },
+  "manifest_id": "manifest-ebcd5c9ca208f8897921fb54",
+  "receipts": [],
+  "schema": "savant://niche/masterplan/artifact-manifest/1.0.0",
+  "segues": [],
+  "statistics": {
+    "attestation_count": 0,
+    "decision_count": 0,
+    "declared_output_count": 0,
+    "event_count": 0,
+    "evidence_count": 0,
+    "existing_output_count": 0,
+    "missing_output_count": 0,
+    "receipt_count": 0,
+    "segue_count": 0
+  },
+  "task": {
+    "acceptance": [
+      "Implementation satisfies the task purpose, preserves authority boundaries, exposes lineage and provenance, and passes all declared verification."
+    ],
+    "authority": {
+      "accepted_at": "2026-08-01T18:43:45-04:00",
+      "accepted_by": "project-owner",
+      "authority_class": "project-owner-directed",
+      "confidence": 1.0,
+      "source": "docs/SAVANT_MASTER_TASKS.md",
+      "state": "accepted",
+      "tier": 1
+    },
+    "priority": {
+      "authority_locked": true,
+      "band": "P0",
+      "ordinal": 1,
+      "rationale": "Inherited from the governing roadmap and reconciled project-owner direction."
+    },
+    "purpose": "Reconcile all canon authority",
+    "status": "active",
+    "title": "Reconcile all canon authority"
+  },
+  "task_id": "SAV-P0-001"
+}

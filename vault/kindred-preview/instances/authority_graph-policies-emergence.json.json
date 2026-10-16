@@ -1,0 +1,83 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:authority_graph/policies/emergence.json",
+  "deterministic_hash": "b758de374ee6892a3379e97edf016785c925b05e8f19a4110670863dec7ecc96",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "authority_graph/policies/emergence.json",
+  "kind": "file",
+  "label": "emergence.json",
+  "namespace": "preview.kindred",
+  "path": "authority_graph/policies/emergence.json",
+  "placement": {
+    "domain": "filesystem",
+    "node": "authority_graph/policies/emergence.json",
+    "parent": "authority_graph/policies",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.db80adb00e923d993cd5",
+    "rank": 10,
+    "slot": "20_authority",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.db80adb00e923d993cd5"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "record",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:authority_graph/policies/emergence.json",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "authority_graph/policies/emergence.json",
+    "kind": "file",
+    "label": "emergence.json",
+    "legacy_id": "authority_graph/policies/emergence.json",
+    "lineage": [
+      "authority_graph/policies"
+    ],
+    "metadata": {
+      "canonical_id": "fs:authority_graph/policies/emergence.json",
+      "child_modes": {},
+      "child_roles": {},
+      "is_directory": false,
+      "is_file": true,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:authority_graph/policies"
+        ]
+      },
+      "projected_id": "authority_graph/policies/emergence.json",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "authority_graph/policies"
+    ],
+    "path": "authority_graph/policies/emergence.json",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "authority_graph/policies/emergence.json",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.db80adb00e923d993cd5"
+    ],
+    "size": 7,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

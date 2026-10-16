@@ -1,0 +1,40 @@
+{
+  "authoritative": false,
+  "child_profile": "ward",
+  "deterministic_hash": "9b0e2a2aa9f285f80a42ac28f82b3cc59517f732f5cd60e9148bdfe4a5236270",
+  "domain": "preview",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "preview.synthetic.lineage.quarantined",
+  "impeti": [
+    {
+      "direction": "structural",
+      "epistemic_status": "declared_by_projection",
+      "phase": "sustaining",
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "reason": "isolated synthetic state demonstration",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "strength": 1.0,
+      "type": "containment"
+    }
+  ],
+  "namespace": "preview.kindred",
+  "parent_profile": "guardian",
+  "plane": "lineage",
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "reason": "isolated synthetic state demonstration",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "role": "composition",
+  "schema": "savant.kindred.preview.lineage_segue.v2",
+  "source": "preview.synthetic.kindred-demo",
+  "source_record": {},
+  "state": "active",
+  "synthetic": true,
+  "target": "preview.synthetic.quarantined-importer"
+}

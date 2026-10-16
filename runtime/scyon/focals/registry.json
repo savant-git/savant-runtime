@@ -1,0 +1,188 @@
+{
+  "authority_state": "projection",
+  "definition_validator": {
+    "path": "/root/savant-runtime/assurance/validators/validate_scyon_focal_definition.py",
+    "required_for_every_focal": true,
+    "service_binding_fail_closed": true,
+    "sha256": "36d4ec353bcb11e9e830349179f2b19babbfcc94b9c2a2741556b74dc625ea3d"
+  },
+  "discovery": {
+    "candidate_json_count": 3,
+    "focal_definition_count": 2,
+    "ignored": [
+      {
+        "path": "/root/savant-runtime/runtime/scyon/focals/registry.json",
+        "reason": "generated-registry"
+      }
+    ],
+    "root": "/root/savant-runtime/runtime/scyon/focals",
+    "schema_prefix": "savant://runtime/scyon/focal/"
+  },
+  "generated": true,
+  "generator": "/root/savant-runtime/runtime/scyon/compile_focal_registry.py",
+  "generator_sha256": "e2717ef7f2a9aafe8b37d6bc97e62f5b9242276f20ed40bd1c341e155158fbe6",
+  "instances": [
+    {
+      "aliases": [],
+      "archetype": "living-structure-engine",
+      "authority_state": "accepted",
+      "command_surface": {
+        "default_runtime": "/root/savant-runtime/runtime/scyon/living_structure_engine.py",
+        "passthrough_commands": [
+          "compile-proposal",
+          "cycle",
+          "full-cycle",
+          "ingest-latest",
+          "ingest-latest-proposal",
+          "ingest-proposal",
+          "ingest-report",
+          "proposal-cycle",
+          "self-test",
+          "status"
+        ],
+        "routes": {
+          "state": {
+            "command": "evaluate",
+            "runtime": "/root/savant-runtime/runtime/scyon/living_structure_state.py"
+          },
+          "state-test": {
+            "command": "self-test",
+            "runtime": "/root/savant-runtime/runtime/scyon/living_structure_state.py"
+          }
+        }
+      },
+      "composes": {
+        "living_template": "/root/savant-runtime/runtime/scyon/living_engine.py",
+        "migration_manifest_compiler": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/underscore/rubric/structure-intelligence/source/compile_migration_manifest.py",
+        "scyon_kernel": "/root/savant-runtime/runtime/scyon/scyon_kernel.py",
+        "structure_intelligence": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/underscore/rubric/structure-intelligence/source/compile_structure_intelligence_authority_v2.py"
+      },
+      "definition": "/root/savant-runtime/runtime/scyon/focals/living-structure.json",
+      "definition_sha256": "e2d68d6267272dababec7cf113c20c51fa6d045443e78b26664fc2aa64268e14",
+      "engine_id": "living-structure-engine",
+      "focal_id": "focal:living-structure",
+      "focal_kind": "living-structure",
+      "mutation": {
+        "authority_rewrite": false,
+        "filesystem_delete": false,
+        "filesystem_move": false,
+        "historical_rewrite": false,
+        "migration_proposal": true,
+        "observation": true,
+        "projection": true,
+        "simulation": true
+      },
+      "owner_id": "exile:underscore",
+      "owner_tier": "exile",
+      "projection": "/root/savant-runtime/runtime/scyon/projections/living-structure/latest.json",
+      "registration_digest": "68645589b2c29e137fc8792e44b4d6d48b0c45c79d529420dce3c75aef55a01e",
+      "runtime": "/root/savant-runtime/runtime/scyon/living_structure_engine.py",
+      "schema": "savant://runtime/scyon/focal/living-structure/1.2.0",
+      "scyon_id": "scyon:exile:underscore:living-structure",
+      "service_backed": false,
+      "service_binding": null,
+      "state": "/root/savant-runtime/runtime/scyon/state/living-structure.sqlite3",
+      "status": "implemented-successor",
+      "validation": {
+        "valid": true,
+        "validator": "/root/savant-runtime/assurance/validators/validate_scyon_focal_definition.py",
+        "validator_sha256": "36d4ec353bcb11e9e830349179f2b19babbfcc94b9c2a2741556b74dc625ea3d"
+      }
+    },
+    {
+      "aliases": [
+        "living-canon"
+      ],
+      "archetype": "knowledge-canon-jurisdiction",
+      "authority_state": "provisional",
+      "command_surface": {
+        "default_runtime": "/root/savant-runtime/runtime/scyon/living_canon_engine.py",
+        "passthrough_commands": [
+          "checkpoint",
+          "current",
+          "explain",
+          "historical",
+          "observe",
+          "project",
+          "self-test",
+          "status",
+          "validate"
+        ],
+        "routes": {}
+      },
+      "composes": {
+        "fluid_canon_engine": "/root/savant-runtime/runtime/fluid_canon/engine.py",
+        "living_template": "/root/savant-runtime/runtime/scyon/living_engine.py",
+        "scyon_kernel": "/root/savant-runtime/runtime/scyon/scyon_kernel.py"
+      },
+      "definition": "/root/savant-runtime/runtime/scyon/focals/lore.json",
+      "definition_sha256": "9d4aff771d760fd10255cd2daea5f0cc9ece581bf4601067c07cd12f6de75a21",
+      "engine_id": "living-canon-engine",
+      "focal_id": "focal:lore",
+      "focal_kind": "lore",
+      "mutation": {
+        "authority_rewrite": false,
+        "canonical_contribution": false,
+        "checkpoint": true,
+        "filesystem_delete": false,
+        "filesystem_move": false,
+        "historical_rewrite": false,
+        "observation": true,
+        "projection": true,
+        "simulation": true
+      },
+      "owner_id": "exile:lore",
+      "owner_tier": "exile",
+      "projection": "/root/savant-runtime/runtime/scyon/projections/living-canon/latest.json",
+      "registration_digest": "a0ea78ba04906021402d59e4918e3be8a9aa193c0435853bd85c2943c7567df4",
+      "runtime": "/root/savant-runtime/runtime/scyon/living_canon_engine.py",
+      "schema": "savant://runtime/scyon/focal/lore/1.0.0",
+      "scyon_id": "scyon:exile:lore",
+      "service_backed": false,
+      "service_binding": null,
+      "state": "/root/savant-runtime/runtime/scyon/state/living-canon.sqlite3",
+      "status": "provisional-implementation",
+      "validation": {
+        "valid": true,
+        "validator": "/root/savant-runtime/assurance/validators/validate_scyon_focal_definition.py",
+        "validator_sha256": "36d4ec353bcb11e9e830349179f2b19babbfcc94b9c2a2741556b74dc625ea3d"
+      }
+    }
+  ],
+  "kernel": {
+    "id": "scyon:kernel",
+    "path": "/root/savant-runtime/runtime/scyon/scyon_kernel.py",
+    "sha256": "269421df2e6091e98500bc2246091090e2468169fb71cb8e7a79a32616de82d8",
+    "shared": true,
+    "substantiated_once": true
+  },
+  "laws": {
+    "canonical_substance_may_not_be_duplicated": true,
+    "destructive_mutation_authorized": false,
+    "focal_is_specialization_not_replacement": true,
+    "focal_may_not_reimplement_kernel": true,
+    "history_must_be_preserved": true,
+    "lineage_must_be_preserved": true,
+    "metadata_is_not_automatically_authority": true,
+    "physical_migration_authorized": false,
+    "projection_is_not_authority": true,
+    "provenance_must_be_preserved": true,
+    "service_owner_requires_explicit_implemented_through": true,
+    "simulation_is_non_authoritative_by_default": true
+  },
+  "projection_digest": "feba96072a7276b21b4aebeb86a33a99b4577e0fc9e4c88efe7fcd9e0905dfe1",
+  "rebuildable": true,
+  "registry_id": "registry:scyon:focals",
+  "schema": "savant://runtime/scyon/focal-registry/1.4.0",
+  "source_set_digest": "41c55d37b566ebd1befd37691e62ab8975aacca98f3e82e7dd9bac8dcecbfe33",
+  "sources": [
+    {
+      "path": "/root/savant-runtime/runtime/scyon/focals/living-structure.json",
+      "sha256": "e2d68d6267272dababec7cf113c20c51fa6d045443e78b26664fc2aa64268e14"
+    },
+    {
+      "path": "/root/savant-runtime/runtime/scyon/focals/lore.json",
+      "sha256": "9d4aff771d760fd10255cd2daea5f0cc9ece581bf4601067c07cd12f6de75a21"
+    }
+  ]
+}

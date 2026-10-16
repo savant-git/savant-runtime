@@ -1,0 +1,26 @@
+schema: "savant://projection/identity/exile-instance/1.0.0"
+id: "exile:shatter"
+kind: "exile"
+name: "shatter"
+status: "accepted"
+authority_effect: "none"
+authority_ref: "canon-system/authority/exiles/shatter.yaml"
+authority_sha256: "4311a48da4ec18d7e01e36a56f1c160ab911c3880e0f1a4ea8cc14e840c3f133"
+purpose_projection:
+  source: "canon-system/authority/exiles/shatter.yaml"
+  current:
+    - "decomposition"
+    - "fault isolation"
+    - "controlled fragmentation"
+composition:
+  parent_edifice: "identity"
+  child_level: "prodigal"
+  transition: "segue"
+invariants:
+  filesystem_presence_establishes_authority: false
+  canonical_substance_duplicated: false
+  child_substance_by_reference: true
+  projections_are_authority: false
+lineage:
+  decision: "authority/accepted-decisions/ad-20261003-001-materialize-eighteen-exiles-and-segues.md"
+generated_by: "savant.identity-edifice-reconciler.v1"

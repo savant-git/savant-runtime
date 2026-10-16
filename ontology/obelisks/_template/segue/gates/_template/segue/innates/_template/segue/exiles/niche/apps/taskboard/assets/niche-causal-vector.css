@@ -1,0 +1,306 @@
+/*
+savant niche causal vector
+directional relationship projection
+authority_effect: none
+*/
+
+:root {
+  --niche-vector-edge:
+    color-mix(
+      in srgb,
+      var(--savant-primary, #7fe7ff) 28%,
+      transparent
+    );
+  --niche-vector-in:
+    var(--savant-blocked, #ff785f);
+  --niche-vector-origin:
+    var(--savant-primary, #7fe7ff);
+  --niche-vector-out:
+    var(--savant-ready, #8fffb0);
+  --niche-vector-unknown:
+    var(--savant-unknown, #9aa6aa);
+}
+
+.niche-causal-vector {
+  position: fixed;
+  inset-inline-start:
+    max(0.75rem, env(safe-area-inset-left));
+  inset-block-start:
+    max(5rem, env(safe-area-inset-top));
+  z-index: 59;
+  inline-size:
+    min(36rem, calc(100vw - 1.5rem));
+  max-block-size:
+    min(78dvh, 50rem);
+  display: grid;
+  grid-template-rows:
+    auto minmax(0, 1fr);
+  overflow: hidden;
+  border:
+    1px solid var(--niche-vector-edge);
+  background:
+    color-mix(
+      in srgb,
+      var(--savant-background, #050708) 97%,
+      transparent
+    );
+  box-shadow:
+    0 1.6rem 4.8rem rgb(0 0 0 / 0.45);
+}
+
+.niche-causal-vector[hidden] {
+  display: none !important;
+}
+
+.niche-causal-vector-head {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr) auto;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.72rem;
+  border-block-end:
+    1px solid var(--niche-vector-edge);
+}
+
+.niche-causal-vector-kicker,
+.niche-causal-vector-close,
+.niche-causal-vector-chip,
+.niche-causal-vector-stage,
+.niche-causal-vector-node,
+.niche-causal-vector-note {
+  font-family:
+    ui-monospace,
+    "SFMono-Regular",
+    Consolas,
+    monospace;
+}
+
+.niche-causal-vector-kicker {
+  margin: 0 0 0.2rem;
+  color:
+    var(--savant-primary, #7fe7ff);
+  font-size: 0.54rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.niche-causal-vector-title {
+  margin: 0;
+  color:
+    var(--savant-text, #eef7f8);
+  font:
+    730 0.95rem/1.1
+    system-ui,
+    sans-serif;
+}
+
+.niche-causal-vector-close {
+  min-inline-size: 2.75rem;
+  min-block-size: 2.75rem;
+  border:
+    1px solid var(--niche-vector-edge);
+  color:
+    var(--savant-text, #eef7f8);
+  background: transparent;
+  cursor: pointer;
+}
+
+.niche-causal-vector-close:hover,
+.niche-causal-vector-close:focus-visible {
+  outline: none;
+  border-color:
+    var(--savant-primary, #7fe7ff);
+}
+
+.niche-causal-vector-body {
+  min-block-size: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 0.75rem;
+}
+
+.niche-causal-vector-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-block-end: 0.7rem;
+}
+
+.niche-causal-vector-chip {
+  padding: 0.3rem 0.42rem;
+  border:
+    1px solid var(--niche-vector-edge);
+  color:
+    var(--savant-text-muted, #879397);
+  font-size: 0.51rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.niche-causal-vector-stage {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto
+    minmax(0, 1fr)
+    auto
+    minmax(0, 1fr);
+  gap: 0.45rem;
+  align-items: stretch;
+}
+
+.niche-causal-vector-column {
+  min-inline-size: 0;
+  border:
+    1px solid var(--niche-vector-edge);
+  background:
+    color-mix(
+      in srgb,
+      var(--savant-surface, #0b1113) 78%,
+      transparent
+    );
+}
+
+.niche-causal-vector-column[data-vector-zone="incoming"] {
+  box-shadow:
+    inset 2px 0 var(--niche-vector-in);
+}
+
+.niche-causal-vector-column[data-vector-zone="origin"] {
+  box-shadow:
+    inset 2px 0 var(--niche-vector-origin);
+}
+
+.niche-causal-vector-column[data-vector-zone="outgoing"] {
+  box-shadow:
+    inset 2px 0 var(--niche-vector-out);
+}
+
+.niche-causal-vector-column-head {
+  padding: 0.5rem;
+  border-block-end:
+    1px solid var(--niche-vector-edge);
+  color:
+    var(--savant-text-muted, #879397);
+  font-size: 0.49rem;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.niche-causal-vector-list {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.45rem;
+}
+
+.niche-causal-vector-node {
+  display: grid;
+  gap: 0.12rem;
+  inline-size: 100%;
+  min-block-size: 3rem;
+  padding: 0.45rem;
+  border:
+    1px solid var(--niche-vector-edge);
+  color:
+    var(--savant-text, #eef7f8);
+  background:
+    var(--savant-background, #050708);
+  text-align: start;
+  cursor: pointer;
+}
+
+.niche-causal-vector-node:hover,
+.niche-causal-vector-node:focus-visible {
+  outline: none;
+  border-color:
+    var(--savant-primary, #7fe7ff);
+}
+
+.niche-causal-vector-node-id {
+  color:
+    var(--savant-primary, #7fe7ff);
+  font-size: 0.52rem;
+  overflow-wrap: anywhere;
+}
+
+.niche-causal-vector-node-title {
+  color:
+    var(--savant-text-muted, #879397);
+  font-size: 0.56rem;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.niche-causal-vector-arrow {
+  align-self: center;
+  color:
+    var(--savant-primary, #7fe7ff);
+  font:
+    0.75rem/1
+    ui-monospace,
+    monospace;
+  letter-spacing: -0.08em;
+  user-select: none;
+}
+
+.niche-causal-vector-empty,
+.niche-causal-vector-note {
+  padding: 0.62rem;
+  border:
+    1px dashed var(--niche-vector-edge);
+  color:
+    var(--savant-text-muted, #879397);
+  font:
+    0.58rem/1.5
+    ui-monospace,
+    monospace;
+}
+
+.niche-causal-vector-note {
+  margin-block-start: 0.7rem;
+}
+
+@media (max-width: 760px) {
+  .niche-causal-vector {
+    inset-inline:
+      max(0.45rem, env(safe-area-inset-left))
+      max(0.45rem, env(safe-area-inset-right));
+    inset-block-start: auto;
+    inset-block-end:
+      max(0.45rem, env(safe-area-inset-bottom));
+    inline-size: auto;
+    max-block-size: 74dvh;
+  }
+
+  .niche-causal-vector-stage {
+    grid-template-columns: 1fr;
+  }
+
+  .niche-causal-vector-arrow {
+    transform: rotate(90deg);
+    justify-self: center;
+    padding: 0.1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .niche-causal-vector * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .niche-causal-vector,
+  .niche-causal-vector-close,
+  .niche-causal-vector-chip,
+  .niche-causal-vector-column,
+  .niche-causal-vector-node,
+  .niche-causal-vector-empty,
+  .niche-causal-vector-note {
+    border-color: CanvasText;
+  }
+}

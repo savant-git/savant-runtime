@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+RUNTIME_ROOT="/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/modus/segue/prodigals/coalesce/runtime"
+
+export PYTHONPATH="${RUNTIME_ROOT}${PYTHONPATH:+:${PYTHONPATH}}"
+
+exec python3 \
+  "${RUNTIME_ROOT}/coalesce_v2.py" \
+  "$@"

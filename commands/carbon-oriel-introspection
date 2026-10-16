@@ -1,0 +1,211 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+
+from pathlib import Path
+
+
+runtime_root = Path(
+    "/root/savant-runtime/"
+    "ontology/obelisks/_template/"
+    "segue/gates/_template/segue/"
+    "innates/_template/segue/"
+    "exiles/carbon/runtime"
+)
+
+if str(
+    runtime_root
+) not in sys.path:
+    sys.path.insert(
+        0,
+        str(
+            runtime_root
+        ),
+    )
+
+
+from oriel_capabilities import (  # noqa: E402
+    oriel_capabilities_error,
+)
+
+from oriel_introspection import (  # noqa: E402
+    oriel_introspection_error,
+    selftest,
+    snapshot,
+    status,
+)
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="carbon-oriel-introspection",
+        description=(
+            "derived Carbon Oriel health, "
+            "dependency and capability introspection"
+        ),
+    )
+
+    subparsers = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    subparsers.add_parser(
+        "status"
+    )
+
+    subparsers.add_parser(
+        "selftest"
+    )
+
+    subparsers.add_parser(
+        "snapshot"
+    )
+
+    subparsers.add_parser(
+        "providers"
+    )
+
+    subparsers.add_parser(
+        "dependencies"
+    )
+
+    return parser
+
+
+def main() -> int:
+    args = build_parser().parse_args()
+
+    try:
+        if args.command == "status":
+            output = status()
+
+        elif args.command == "selftest":
+            output = selftest()
+
+        else:
+            value = snapshot()
+
+            if args.command == "snapshot":
+                output = value
+
+            elif args.command == "providers":
+                output = {
+                    "schema":
+                        value[
+                            "schema"
+                        ],
+
+                    "kind":
+                        "oriel-provider-health",
+
+                    "owner":
+                        "carbon",
+
+                    "authority_effect":
+                        "none",
+
+                    "oriel_state":
+                        value[
+                            "oriel_state"
+                        ],
+
+                    "providers":
+                        value[
+                            "providers"
+                        ],
+
+                    "provider_errors":
+                        value[
+                            "provider_errors"
+                        ],
+                }
+
+            elif args.command == "dependencies":
+                output = {
+                    "schema":
+                        value[
+                            "schema"
+                        ],
+
+                    "kind":
+                        "oriel-dependency-health",
+
+                    "owner":
+                        "carbon",
+
+                    "authority_effect":
+                        "none",
+
+                    "oriel_state":
+                        value[
+                            "oriel_state"
+                        ],
+
+                    "dependency_resolution":
+                        value[
+                            "dependency_resolution"
+                        ],
+                }
+
+            else:
+                raise ValueError(
+                    "unknown command"
+                )
+
+    except (
+        OSError,
+        ValueError,
+        json.JSONDecodeError,
+        oriel_capabilities_error,
+        oriel_introspection_error,
+    ) as exc:
+        print(
+            json.dumps(
+                {
+                    "ok":
+                        False,
+
+                    "error":
+                        str(
+                            exc
+                        ),
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+
+        return 1
+
+    print(
+        json.dumps(
+            output,
+            indent=2,
+            ensure_ascii=False,
+            sort_keys=True,
+        )
+    )
+
+    if (
+        isinstance(
+            output,
+            dict,
+        )
+        and output.get(
+            "ok"
+        )
+        is False
+    ):
+        return 1
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

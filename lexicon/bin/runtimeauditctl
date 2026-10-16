@@ -1,0 +1,104 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import subprocess
+import sys
+from pathlib import Path
+
+
+LEXICON_ROOT = Path(
+    __file__
+).resolve().parents[1]
+
+ENGINE = (
+    LEXICON_ROOT
+    / "runtime"
+    / "runtime_audit.py"
+)
+
+COMMANDS = {
+    "preflight",
+    "audit",
+    "matrix",
+    "run",
+    "verify",
+    "status",
+}
+
+
+def usage() -> None:
+    print(
+        """
+runtimeauditctl preflight
+
+runtimeauditctl audit
+runtimeauditctl audit --action validate
+runtimeauditctl audit --action validate --action integrity
+runtimeauditctl audit --stop-on-failure
+
+runtimeauditctl matrix
+runtimeauditctl matrix --action validate
+runtimeauditctl matrix --stop-on-failure
+
+runtimeauditctl run SUBSYSTEM ACTION
+
+runtimeauditctl verify
+runtimeauditctl status
+"""
+    )
+
+
+def main() -> int:
+    if len(
+        sys.argv
+    ) < 2:
+        usage()
+        return 1
+
+    command = sys.argv[
+        1
+    ]
+
+    arguments = sys.argv[
+        2:
+    ]
+
+    if command in {
+        "help",
+        "--help",
+        "-h",
+    }:
+        usage()
+        return 0
+
+    if command not in COMMANDS:
+        print(
+            f"Unknown command: {command}",
+            file=sys.stderr,
+        )
+
+        usage()
+
+        return 1
+
+    return subprocess.run(
+        [
+            sys.executable,
+            str(
+                ENGINE
+            ),
+            command,
+            *arguments,
+        ],
+        cwd=str(
+            ENGINE.parent
+        ),
+        check=False,
+    ).returncode
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

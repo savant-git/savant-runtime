@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import sys
+from pathlib import Path
+
+RUNTIME = Path(
+    "/root/savant-runtime/canon-system/runtime"
+)
+
+if str(RUNTIME) not in sys.path:
+    sys.path.insert(
+        0,
+        str(RUNTIME),
+    )
+
+from authority_reconciliation import main
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

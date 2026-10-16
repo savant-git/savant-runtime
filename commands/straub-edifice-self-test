@@ -1,0 +1,207 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import json
+import sys
+import tempfile
+from pathlib import Path
+
+
+root = Path(
+    "/root/savant-runtime"
+)
+
+if str(root) not in sys.path:
+    sys.path.insert(
+        0,
+        str(root),
+    )
+
+
+from runtime.straub import (
+    DATRIX_COMPONENTS,
+    Straub,
+)
+
+
+def main() -> int:
+    with tempfile.TemporaryDirectory(
+        prefix="straub-edifice-test-"
+    ) as directory:
+        path = (
+            Path(directory)
+            / "edifice.datrix"
+        )
+
+        edifice = Straub.edifice()
+        health = Straub.health()
+
+        datrix = Straub.create_datrix(
+            path
+        )
+
+        datrix_health = datrix.health()
+
+        component_names = [
+            item["name"]
+            for item
+            in edifice[
+                "datrix_components"
+            ]
+        ]
+
+        expected_components = [
+            "dyad",
+            "umbra",
+            "membrane",
+            "isotope",
+        ]
+
+        passed = bool(
+            Straub.exile
+            == "carbon"
+            and Straub.name
+            == "straub"
+            and Straub.product
+            == "datrix"
+            and list(
+                DATRIX_COMPONENTS
+            )
+            == expected_components
+            and edifice[
+                "exile"
+            ]
+            == "carbon"
+            and edifice[
+                "module"
+            ]
+            == "straub"
+            and edifice[
+                "creates"
+            ]
+            == "datrix"
+            and component_names
+            == expected_components
+            and edifice[
+                "projection_primitive"
+            ]
+            == "isotope"
+            and edifice[
+                "straub_is_datrix"
+            ]
+            is False
+            and edifice[
+                "datrix_is_straub_module"
+            ]
+            is False
+            and health[
+                "status"
+            ]
+            == "ok"
+            and health[
+                "creates"
+            ]
+            == "datrix"
+            and datrix_health[
+                "kind"
+            ]
+            == "datrix"
+            and datrix_health[
+                "created_by"
+            ]
+            == "straub"
+            and datrix_health[
+                "owner_module"
+            ]
+            == "straub"
+            and datrix_health[
+                "owner_exile"
+            ]
+            == "carbon"
+            and datrix_health[
+                "projection_primitive"
+            ]
+            == "isotope"
+            and datrix_health[
+                "components"
+            ][
+                "isotope_meaning"
+            ]
+            == "deterministic projection"
+        )
+
+        output = {
+            "schema":
+                "savant.carbon.straub."
+                "edifice-self-test.v1",
+            "passed":
+                passed,
+            "exile":
+                edifice[
+                    "exile"
+                ],
+            "module":
+                edifice[
+                    "module"
+                ],
+            "creates":
+                edifice[
+                    "creates"
+                ],
+            "datrix_kind":
+                datrix_health[
+                    "kind"
+                ],
+            "owner_exile":
+                datrix_health[
+                    "owner_exile"
+                ],
+            "owner_module":
+                datrix_health[
+                    "owner_module"
+                ],
+            "created_by":
+                datrix_health[
+                    "created_by"
+                ],
+            "datrix_components":
+                component_names,
+            "projection_primitive":
+                edifice[
+                    "projection_primitive"
+                ],
+            "isotope_semantics":
+                "deterministic projection",
+            "straub_is_datrix":
+                edifice[
+                    "straub_is_datrix"
+                ],
+            "datrix_is_straub_module":
+                edifice[
+                    "datrix_is_straub_module"
+                ],
+            "authority_effect":
+                "none",
+        }
+
+        print(
+            json.dumps(
+                output,
+                indent=2,
+                sort_keys=True,
+                ensure_ascii=False,
+            )
+        )
+
+        return (
+            0
+            if passed
+            else 1
+        )
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

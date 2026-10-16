@@ -1,0 +1,196 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+
+from pathlib import Path
+from typing import Any
+
+
+runtime_root = Path(
+    "/root/savant-runtime/"
+    "ontology/obelisks/_template/"
+    "segue/gates/_template/segue/"
+    "innates/_template/segue/"
+    "exiles/carbon/runtime"
+)
+
+if str(
+    runtime_root
+) not in sys.path:
+    sys.path.insert(
+        0,
+        str(
+            runtime_root
+        ),
+    )
+
+
+from oriel_canon import (  # noqa: E402
+    canon_policy,
+    oriel_canon_error,
+    projection_guard,
+    selftest,
+    status,
+    validate_policy,
+)
+
+
+def read_json(
+    path: str,
+) -> Any:
+    if path == "-":
+        return json.load(
+            sys.stdin
+        )
+
+    return json.loads(
+        Path(
+            path
+        ).read_text(
+            encoding="utf-8"
+        )
+    )
+
+
+def read_object(
+    path: str,
+) -> dict[str, Any]:
+    value = read_json(
+        path
+    )
+
+    if not isinstance(
+        value,
+        dict,
+    ):
+        raise ValueError(
+            "input must be a JSON object"
+        )
+
+    return value
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="carbon-oriel-canon",
+        description=(
+            "carbon oriel canon boundary "
+            "and self-promotion guard"
+        ),
+    )
+
+    subparsers = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    subparsers.add_parser(
+        "status"
+    )
+
+    subparsers.add_parser(
+        "selftest"
+    )
+
+    subparsers.add_parser(
+        "policy"
+    )
+
+    subparsers.add_parser(
+        "validate-policy"
+    )
+
+    guard = subparsers.add_parser(
+        "guard"
+    )
+
+    guard.add_argument(
+        "packet"
+    )
+
+    return parser
+
+
+def main() -> int:
+    args = build_parser().parse_args()
+
+    try:
+        if args.command == "status":
+            output = status()
+
+        elif args.command == "selftest":
+            output = selftest()
+
+        elif args.command == "policy":
+            output = canon_policy()
+
+        elif args.command == "validate-policy":
+            output = validate_policy()
+
+        elif args.command == "guard":
+            output = projection_guard(
+                read_object(
+                    args.packet
+                )
+            )
+
+        else:
+            raise ValueError(
+                "unknown command"
+            )
+
+    except (
+        OSError,
+        ValueError,
+        json.JSONDecodeError,
+        oriel_canon_error,
+    ) as exc:
+        print(
+            json.dumps(
+                {
+                    "ok":
+                        False,
+
+                    "error":
+                        str(
+                            exc
+                        ),
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+
+        return 1
+
+    print(
+        json.dumps(
+            output,
+            indent=2,
+            ensure_ascii=False,
+            sort_keys=True,
+        )
+    )
+
+    if (
+        isinstance(
+            output,
+            dict,
+        )
+        and output.get(
+            "ok"
+        )
+        is False
+    ):
+        return 1
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

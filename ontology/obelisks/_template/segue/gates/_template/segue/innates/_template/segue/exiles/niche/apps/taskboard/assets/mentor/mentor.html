@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  >
+  <meta
+    name="color-scheme"
+    content="dark"
+  >
+  <meta
+    name="theme-color"
+    content="#090b0e"
+  >
+  <meta
+    name="description"
+    content="Mentor, Savant's interactive masterplan and structure projection surface."
+  >
+
+  <title>Savant / Niche / Mentor</title>
+
+  <link
+    rel="stylesheet"
+    href="/assets/mentor/mentor.css"
+  >
+</head>
+
+<body>
+  <a
+    class="skip-link"
+    href="#document"
+  >
+    Skip to document
+  </a>
+
+  <div class="mentor-shell">
+    <header class="mentor-topbar">
+      <a
+        class="brand"
+        href="/"
+        aria-label="Return to Niche"
+      >
+        <span
+          class="brand-mark"
+          aria-hidden="true"
+        >
+          <i></i>
+          <i></i>
+          <i></i>
+        </span>
+
+        <span>
+          <small>
+            SAVANT / NICHE
+          </small>
+
+          <strong>
+            MENTOR
+          </strong>
+        </span>
+      </a>
+
+      <div
+        class="document-switcher"
+        role="tablist"
+        aria-label="Mentor documents"
+      >
+        <button
+          class="doc-tab active"
+          data-document="masterplan"
+          role="tab"
+          aria-selected="true"
+        >
+          Masterplan
+        </button>
+
+        <button
+          class="doc-tab"
+          data-document="structure"
+          role="tab"
+          aria-selected="false"
+        >
+          Structure
+        </button>
+      </div>
+
+      <div class="top-actions">
+        <button
+          id="outlineToggle"
+          class="quiet"
+          type="button"
+          aria-label="Toggle outline"
+        >
+          Outline
+        </button>
+
+        <button
+          id="aiToggle"
+          class="quiet accent"
+          type="button"
+          aria-label="Toggle Mentor AI"
+        >
+          Ask Mentor
+        </button>
+
+        <a
+          class="quiet link-button"
+          href="/"
+        >
+          Niche
+        </a>
+      </div>
+    </header>
+
+    <section
+      class="context-strip"
+      aria-label="Document context"
+    >
+      <div>
+        <span>
+          projection
+        </span>
+
+        <strong id="projectionState">
+          non-authoritative
+        </strong>
+      </div>
+
+      <div>
+        <span>
+          document
+        </span>
+
+        <strong id="documentName">
+          masterplan
+        </strong>
+      </div>
+
+      <div>
+        <span>
+          revision
+        </span>
+
+        <strong id="revisionValue">
+          loading
+        </strong>
+      </div>
+
+      <div>
+        <span>
+          digest
+        </span>
+
+        <strong id="digestValue">
+          calculating
+        </strong>
+      </div>
+
+      <div class="context-grow">
+        <label for="searchInput">
+          Search
+        </label>
+
+        <input
+          id="searchInput"
+          type="search"
+          autocomplete="off"
+          placeholder="Find anything in Savant…"
+          aria-label="Search document"
+        >
+
+        <kbd>/</kbd>
+      </div>
+    </section>
+
+    <main class="mentor-grid">
+      <aside
+        id="outline"
+        class="outline-panel"
+        aria-label="Nested document outline"
+      >
+        <div class="panel-head">
+          <div>
+            <span class="eyebrow">
+              EMERGENT MAP
+            </span>
+
+            <strong id="sectionCount">
+              0 sections
+            </strong>
+          </div>
+
+          <button
+            id="collapseAll"
+            class="icon-button"
+            type="button"
+            title="Collapse outline"
+            aria-label="Collapse outline"
+          >
+            −
+          </button>
+        </div>
+
+        <nav
+          id="outlineTree"
+          class="outline-tree"
+        ></nav>
+      </aside>
+
+      <section class="reader-column">
+        <div
+          id="breadcrumb"
+          class="breadcrumb"
+          aria-label="Current section"
+        ></div>
+
+        <article
+          id="document"
+          class="document"
+          tabindex="-1"
+          aria-live="polite"
+        ></article>
+
+        <button
+          id="backToTop"
+          class="back-to-top"
+          type="button"
+          hidden
+        >
+          ↑ top
+        </button>
+      </section>
+
+      <aside
+        id="mentorPanel"
+        class="ai-panel"
+        aria-label="Mentor AI"
+        hidden
+      >
+        <div class="panel-head">
+          <div>
+            <span class="eyebrow">
+              OPUS ORCHESTRATION
+            </span>
+
+            <strong>
+              Mentor
+            </strong>
+          </div>
+
+          <button
+            id="closeAi"
+            class="icon-button"
+            type="button"
+            aria-label="Close Mentor"
+          >
+            ×
+          </button>
+        </div>
+
+        <div class="ai-context">
+          <span>
+            context
+          </span>
+
+          <strong id="aiContextLabel">
+            whole masterplan
+          </strong>
+
+          <button
+            id="clearContext"
+            type="button"
+          >
+            clear
+          </button>
+        </div>
+
+        <div
+          id="conversation"
+          class="conversation"
+          aria-live="polite"
+        >
+          <div class="message system">
+            <span>
+              mentor
+            </span>
+
+            <p>
+              Ask about the current masterplan or structure. Select a section first to constrain the question to that structural context.
+            </p>
+          </div>
+        </div>
+
+        <form
+          id="mentorForm"
+          class="mentor-form"
+        >
+          <textarea
+            id="mentorInput"
+            rows="3"
+            maxlength="12000"
+            placeholder="Ask Mentor about Savant…"
+            aria-label="Ask Mentor"
+          ></textarea>
+
+          <div class="mentor-form-row">
+            <span id="mentorStatus">
+              Palaver → Opus
+            </span>
+
+            <button
+              id="mentorSend"
+              type="submit"
+            >
+              Send
+            </button>
+          </div>
+        </form>
+      </aside>
+    </main>
+  </div>
+
+  <template id="loadingTemplate">
+    <div class="loading-state">
+      <span class="loading-orbit"></span>
+
+      <strong>
+        projecting document
+      </strong>
+    </div>
+  </template>
+
+  <script src="/assets/mentor/mentor.js"></script>
+</body>
+</html>

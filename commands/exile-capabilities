@@ -1,0 +1,431 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+
+from pathlib import Path
+from typing import Any
+
+
+runtime_root = Path(
+    "/root/savant-runtime/"
+    "ontology/obelisks/_template/"
+    "segue/gates/_template/segue/"
+    "innates/_template/segue/"
+    "exiles/segue/cabal/"
+    "capability_projection/runtime"
+)
+
+if str(
+    runtime_root
+) not in sys.path:
+    sys.path.insert(
+        0,
+        str(
+            runtime_root
+        ),
+    )
+
+
+from capability_fabric import (  # noqa: E402
+    accepted_exiles,
+    capabilities_for,
+    capability_fabric_error,
+    capability_matrix,
+    capability_schema,
+    create_projection,
+    dependency_closure,
+    effective_array,
+    graph_analysis,
+    manifest_status,
+    negotiate,
+    selftest,
+    status,
+)
+
+
+def json_object(
+    value: str | None,
+    *,
+    field: str,
+) -> dict[str, Any] | None:
+    if value is None:
+        return None
+
+    parsed = json.loads(
+        value
+    )
+
+    if not isinstance(
+        parsed,
+        dict,
+    ):
+        raise ValueError(
+            (
+                field
+                + " must decode to an object"
+            )
+        )
+
+    return parsed
+
+
+def load_projection(
+    path: str,
+) -> dict[str, Any]:
+    value = json.loads(
+        Path(
+            path
+        ).read_text(
+            encoding="utf-8"
+        )
+    )
+
+    if not isinstance(
+        value,
+        dict,
+    ):
+        raise ValueError(
+            (
+                "projection input must "
+                "be an object"
+            )
+        )
+
+    return value
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="exile-capabilities",
+        description=(
+            "owner-preserving capability "
+            "projection and negotiation "
+            "across accepted savant exiles"
+        ),
+    )
+
+    subparsers = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    subparsers.add_parser(
+        "status"
+    )
+
+    subparsers.add_parser(
+        "selftest"
+    )
+
+    subparsers.add_parser(
+        "schema"
+    )
+
+    subparsers.add_parser(
+        "manifests"
+    )
+
+    subparsers.add_parser(
+        "matrix"
+    )
+
+    subparsers.add_parser(
+        "graph"
+    )
+
+    list_parser = subparsers.add_parser(
+        "list"
+    )
+
+    list_parser.add_argument(
+        "exile",
+        choices=accepted_exiles,
+    )
+
+    closure_parser = subparsers.add_parser(
+        "closure"
+    )
+
+    closure_parser.add_argument(
+        "capability_ref"
+    )
+
+    project_parser = subparsers.add_parser(
+        "project"
+    )
+
+    project_parser.add_argument(
+        "--source",
+        required=True,
+        choices=accepted_exiles,
+    )
+
+    project_parser.add_argument(
+        "--capability",
+        required=True,
+    )
+
+    project_parser.add_argument(
+        "--destination",
+        required=True,
+        choices=accepted_exiles,
+    )
+
+    project_parser.add_argument(
+        "--mode",
+        choices=(
+            "reference",
+            "instance",
+            "composition",
+        ),
+        default="reference",
+    )
+
+    project_parser.add_argument(
+        "--parameters"
+    )
+
+    project_parser.add_argument(
+        "--mask"
+    )
+
+    project_parser.add_argument(
+        "--required-operation",
+        action="append",
+        default=[],
+    )
+
+    project_parser.add_argument(
+        "--required-version"
+    )
+
+    project_parser.add_argument(
+        "--context"
+    )
+
+    array_parser = subparsers.add_parser(
+        "array"
+    )
+
+    array_parser.add_argument(
+        "exile",
+        choices=accepted_exiles,
+    )
+
+    array_parser.add_argument(
+        "--projection",
+        action="append",
+        default=[],
+    )
+
+    negotiate_parser = subparsers.add_parser(
+        "negotiate"
+    )
+
+    negotiate_parser.add_argument(
+        "exile",
+        choices=accepted_exiles,
+    )
+
+    negotiate_parser.add_argument(
+        "--requirements",
+        required=True,
+    )
+
+    negotiate_parser.add_argument(
+        "--projection",
+        action="append",
+        default=[],
+    )
+
+    return parser
+
+
+def main() -> int:
+    parser = build_parser()
+
+    args = parser.parse_args()
+
+    try:
+        if args.command == "status":
+            output = status()
+
+        elif args.command == "selftest":
+            output = selftest()
+
+        elif args.command == "schema":
+            output = capability_schema()
+
+        elif args.command == "manifests":
+            output = {
+                "schema":
+                    (
+                        "savant.exile-capability-"
+                        "manifest-status.v1"
+                    ),
+
+                "manifests":
+                    manifest_status(),
+            }
+
+        elif args.command == "matrix":
+            output = capability_matrix()
+
+        elif args.command == "graph":
+            output = graph_analysis()
+
+        elif args.command == "list":
+            output = {
+                "schema":
+                    (
+                        "savant.exile-capability-"
+                        "list.v1"
+                    ),
+
+                "exile":
+                    args.exile,
+
+                "capabilities":
+                    capabilities_for(
+                        args.exile
+                    ),
+            }
+
+        elif args.command == "closure":
+            output = dependency_closure(
+                args.capability_ref
+            )
+
+        elif args.command == "project":
+            output = create_projection(
+                source_exile=
+                    args.source,
+                capability_id=
+                    args.capability,
+                destination_exile=
+                    args.destination,
+                mode=
+                    args.mode,
+                parameters=
+                    json_object(
+                        args.parameters,
+                        field="parameters",
+                    ),
+                mask=
+                    json_object(
+                        args.mask,
+                        field="mask",
+                    ),
+                required_operations=
+                    args.required_operation,
+                required_version=
+                    args.required_version,
+                request_context=
+                    json_object(
+                        args.context,
+                        field="context",
+                    ),
+            )
+
+        elif args.command == "array":
+            projections = [
+                load_projection(
+                    path
+                )
+                for path
+                in args.projection
+            ]
+
+            output = effective_array(
+                exile=args.exile,
+                projections=projections,
+            )
+
+        elif args.command == "negotiate":
+            projections = [
+                load_projection(
+                    path
+                )
+                for path
+                in args.projection
+            ]
+
+            requirements = json_object(
+                args.requirements,
+                field="requirements",
+            )
+
+            if requirements is None:
+                requirements = {}
+
+            output = negotiate(
+                exile=args.exile,
+                requirements=requirements,
+                projections=projections,
+            )
+
+        else:
+            parser.error(
+                "unknown command"
+            )
+
+            return 2
+
+    except (
+        OSError,
+        ValueError,
+        json.JSONDecodeError,
+        capability_fabric_error,
+    ) as exc:
+        print(
+            json.dumps(
+                {
+                    "ok":
+                        False,
+
+                    "error":
+                        str(
+                            exc
+                        ),
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+
+        return 1
+
+    print(
+        json.dumps(
+            output,
+            indent=2,
+            ensure_ascii=False,
+            sort_keys=True,
+        )
+    )
+
+    if isinstance(
+        output,
+        dict,
+    ):
+        if output.get(
+            "allowed"
+        ) is False:
+            return 1
+
+        if output.get(
+            "ok"
+        ) is False:
+            return 1
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

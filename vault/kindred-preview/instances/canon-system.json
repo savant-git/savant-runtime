@@ -1,0 +1,160 @@
+{
+  "authoritative": false,
+  "authority_tier": "delegated",
+  "canonical_id": "fs:canon-system",
+  "deterministic_hash": "dfdc8ada247ba4e248a42f375c351fae45d7c8345bbb37441e89c102a44aba42",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "canon-system",
+  "kind": "directory",
+  "label": "canon-system",
+  "namespace": "preview.kindred",
+  "path": "canon-system",
+  "placement": {
+    "domain": "filesystem",
+    "node": "canon-system",
+    "parent": "savant-runtime",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.47a6ef04fd0746f132b8",
+    "rank": 30,
+    "slot": "20_authority",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.02185aca1c7a9299e289",
+    "lineage.composition.07b036b4d993c72d71d7",
+    "lineage.composition.0950598e52953a73ba8e",
+    "lineage.composition.24c2f250dd40aa46879c",
+    "lineage.composition.33c6445d185d4f6bd30d",
+    "lineage.composition.4035fcc9654e517e5dfc",
+    "lineage.composition.47a6ef04fd0746f132b8",
+    "lineage.composition.4b3c2cb74b12a5ebf19f",
+    "lineage.composition.6b4b7652962632a32f11",
+    "lineage.composition.765dfc09e0250b1f36dc",
+    "lineage.composition.8c3fe1ca7a40a95afc1f",
+    "lineage.composition.faeeab89a779c72530a6"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": false,
+    "canonical_id": "fs:canon-system",
+    "children": [
+      "canon-system/README.md",
+      "canon-system/canon.yaml",
+      "canon-system/proposals",
+      "canon-system/history",
+      "canon-system/scripts",
+      "canon-system/projections",
+      "canon-system/schemas",
+      "canon-system/requirements.txt",
+      "canon-system/install.sh",
+      "canon-system/authority",
+      "canon-system/runtime"
+    ],
+    "daughters": [
+      "canon-system/proposals",
+      "canon-system/history",
+      "canon-system/scripts",
+      "canon-system/projections",
+      "canon-system/schemas",
+      "canon-system/authority",
+      "canon-system/runtime"
+    ],
+    "dependencies": [],
+    "fathers": [],
+    "id": "canon-system",
+    "kind": "directory",
+    "label": "canon-system",
+    "legacy_id": "canon-system",
+    "lineage": [
+      "savant-runtime"
+    ],
+    "metadata": {
+      "canonical_id": "fs:canon-system",
+      "child_modes": {
+        "preserving": [
+          "fs:canon-system/proposals",
+          "fs:canon-system/history",
+          "fs:canon-system/scripts",
+          "fs:canon-system/projections",
+          "fs:canon-system/schemas",
+          "fs:canon-system/authority",
+          "fs:canon-system/runtime"
+        ],
+        "projecting": [
+          "fs:canon-system/README.md",
+          "fs:canon-system/canon.yaml",
+          "fs:canon-system/requirements.txt",
+          "fs:canon-system/install.sh"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:canon-system/README.md",
+          "fs:canon-system/canon.yaml",
+          "fs:canon-system/proposals",
+          "fs:canon-system/history",
+          "fs:canon-system/scripts",
+          "fs:canon-system/projections",
+          "fs:canon-system/schemas",
+          "fs:canon-system/requirements.txt",
+          "fs:canon-system/install.sh",
+          "fs:canon-system/authority",
+          "fs:canon-system/runtime"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:."
+        ]
+      },
+      "projected_id": "canon-system",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "savant-runtime"
+    ],
+    "path": "canon-system",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "canon-system",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.02185aca1c7a9299e289",
+      "lineage.composition.07b036b4d993c72d71d7",
+      "lineage.composition.0950598e52953a73ba8e",
+      "lineage.composition.24c2f250dd40aa46879c",
+      "lineage.composition.33c6445d185d4f6bd30d",
+      "lineage.composition.4035fcc9654e517e5dfc",
+      "lineage.composition.47a6ef04fd0746f132b8",
+      "lineage.composition.4b3c2cb74b12a5ebf19f",
+      "lineage.composition.6b4b7652962632a32f11",
+      "lineage.composition.765dfc09e0250b1f36dc",
+      "lineage.composition.8c3fe1ca7a40a95afc1f",
+      "lineage.composition.faeeab89a779c72530a6"
+    ],
+    "size": 12,
+    "sons": [
+      "canon-system/README.md",
+      "canon-system/canon.yaml",
+      "canon-system/requirements.txt",
+      "canon-system/install.sh"
+    ]
+  },
+  "state": "active",
+  "synthetic": false
+}

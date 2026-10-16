@@ -1,0 +1,91 @@
+{
+  "constitution:auditability": [
+    "constitution:lineage-exposed",
+    "constitution:provenance-exposed"
+  ],
+  "constitution:authoritative-primitives-only": [
+    "constitution:authority-before-inference",
+    "constitution:projection-before-storage"
+  ],
+  "constitution:authority-before-projection": [
+    "constitution:authority-before-inference"
+  ],
+  "constitution:composability": [
+    "constitution:recursive-composition"
+  ],
+  "constitution:composition-before-duplication": [
+    "constitution:authority-before-inference"
+  ],
+  "constitution:dependencies-exposed": [
+    "constitution:lineage-exposed",
+    "constitution:provenance-exposed"
+  ],
+  "constitution:determinism": [
+    "constitution:deterministic-projection"
+  ],
+  "constitution:deterministic-projection": [
+    "constitution:authoritative-primitives-only"
+  ],
+  "constitution:emergence-before-hardcoding": [
+    "constitution:projection-before-storage"
+  ],
+  "constitution:extensibility": [
+    "constitution:future-extension"
+  ],
+  "constitution:future-attachment": [
+    "constitution:future-extension"
+  ],
+  "constitution:future-extension": [
+    "constitution:composition-before-duplication"
+  ],
+  "constitution:future-optionality": [
+    "constitution:future-attachment",
+    "constitution:future-extension"
+  ],
+  "constitution:graph-addressability": [
+    "constitution:dependencies-exposed",
+    "constitution:lineage-exposed",
+    "constitution:provenance-exposed",
+    "constitution:relationships-exposed"
+  ],
+  "constitution:instances-primary": [
+    "constitution:composition-before-duplication"
+  ],
+  "constitution:kindred-canonical": [
+    "constitution:relationships-exposed"
+  ],
+  "constitution:kindred-forbidden": [
+    "constitution:kindred-canonical"
+  ],
+  "constitution:lineage-exposed": [
+    "constitution:authoritative-primitives-only"
+  ],
+  "constitution:no-dead-end": [
+    "constitution:future-attachment",
+    "constitution:future-extension",
+    "constitution:graph-addressability",
+    "constitution:recursive-composition"
+  ],
+  "constitution:no-replacement-to-extend": [
+    "constitution:no-dead-end"
+  ],
+  "constitution:projection-before-storage": [
+    "constitution:authority-before-projection"
+  ],
+  "constitution:provenance-exposed": [
+    "constitution:authoritative-primitives-only"
+  ],
+  "constitution:recoverability": [
+    "constitution:auditability"
+  ],
+  "constitution:recursive-composition": [
+    "constitution:composition-before-duplication",
+    "constitution:relationships-exposed"
+  ],
+  "constitution:relationships-exposed": [
+    "constitution:dependencies-exposed"
+  ],
+  "constitution:segues-primary": [
+    "constitution:instances-primary"
+  ]
+}

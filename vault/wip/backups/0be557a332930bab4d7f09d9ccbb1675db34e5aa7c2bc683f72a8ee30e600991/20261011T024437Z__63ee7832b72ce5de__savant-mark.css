@@ -1,0 +1,205 @@
+.savant-mark {
+  --savant-mark-gold: #a77b54;
+  --savant-mark-hot: #95d6c7;
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  overflow: visible;
+  contain: layout style;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.savant-mark--header { width: clamp(150px, 21vw, 250px); height: clamp(180px, 24vw, 300px); }
+.savant-mark--preloader { width: min(86vw, 860px); aspect-ratio: 1; }
+.savant-mark__viewport { position: absolute; inset: -5%; right: calc(-5% - 50px); bottom: calc(-5% - 32px); z-index: 3; overflow: visible; pointer-events: none; clip-path: none; }
+.savant-mark__viewport canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  outline: none;
+  filter: none;
+}
+.savant-mark__fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #f4f6f8;
+  font-family: var(--savant-display, "Oxanium"), sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1;
+}
+.savant-mark__fallback--preloader { font-size: clamp(82px, 18vw, 150px); }
+.savant-mark__preloader-copy {
+  position: absolute;
+  z-index: 8;
+  top: calc(100% + 18px);
+  left: 50%;
+  width: min(78vw, 330px);
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 5px 18px;
+  color: rgba(211, 231, 227, 0.9);
+  font-family: var(--savant-display, "Oxanium"), sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.19em;
+  text-transform: uppercase;
+}
+.savant-mark__preloader-state { color: var(--savant-mark-gold); font-size: 8px; letter-spacing: 0.14em; }
+.savant-mark__progress {
+  grid-column: 1 / -1;
+  position: relative;
+  height: 1px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.055);
+}
+.savant-mark__progress > i {
+  position: absolute;
+  inset: 0;
+  display: block;
+  transform-origin: left center;
+  background: linear-gradient(90deg, var(--savant-mark-gold), var(--savant-mark-hot));
+  transition: transform 180ms ease-out;
+}
+.savant-mark--degraded { --savant-mark-gold: #a87842; --savant-mark-hot: #c69257; }
+.savant-mark--failure { --savant-mark-gold: #98594d; --savant-mark-hot: #bd7566; }
+@media (max-width: 640px) {
+  .savant-mark--header { width: 145px; height: 145px; }
+  .savant-mark--preloader { width: min(90vw, 450px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .savant-mark__progress > i { transition: none; }
+}
+
+/* Higher specificity than the instrument stylesheet's dark header. */
+.palaver-instrument.palaver-only header.workstation-topbar,
+.palaver-only header.workstation-topbar:has(.savant-mark),
+header.workstation-topbar:has(.savant-mark) {
+  background: #172329 !important;
+  background-image: none !important;
+  border-bottom: 1px solid #3d6967 !important;
+}
+
+.savant-mark__gleam {
+  position: absolute;
+  inset: -13%;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 44% 40%, rgba(138, 211, 201, .16), rgba(153, 105, 63, .085) 32%, rgba(86, 156, 152, .04) 52%, transparent 74%);
+  filter: blur(4px);
+  animation: savant-gleam-waver 7.3s ease-in-out infinite alternate;
+  transform-origin: 50% 50%;
+  box-shadow: inset 0 0 14px rgba(239, 246, 251, .035);
+}
+.savant-mark--preloader .savant-mark__gleam {
+  inset: -12%;
+  background:
+    radial-gradient(ellipse at 44% 40%, rgba(243, 248, 252, .12), rgba(216, 182, 111, .055) 43%, transparent 72%);
+}
+
+@keyframes savant-gleam-waver {
+  0% { opacity: .7; transform: translate(-2%, 1%) scale(.95, 1.03); }
+  45% { opacity: .95; transform: translate(1%, -2%) scale(1.04, .97); }
+  100% { opacity: .78; transform: translate(2%, 2%) scale(.99, 1.05); }
+}
+.savant-mark.is-resting .savant-mark__gleam { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .savant-mark__gleam { animation: none; }
+}
+
+.palaver-instrument.palaver-only header.workstation-topbar:has(.savant-mark) {
+  overflow: visible !important;
+  clip-path: none !important;
+}
+.savant-mark, .savant-mark__viewport { clip-path: none !important; }
+/* Keep header height derived from its content rather than a fixed old row. */
+.palaver-instrument.palaver-only header.workstation-topbar:has(.savant-mark--header),
+header.workstation-topbar:has(.savant-mark--header) {
+  box-sizing: border-box !important;
+  height: auto !important;
+  min-height: 170px !important;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  align-items: center !important;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  overflow: visible !important;
+  clip-path: none !important;
+}
+header.workstation-topbar:has(.savant-mark--header) .workstation-brand,
+header.workstation-topbar:has(.savant-mark--header) .topbar-brand {
+  height: auto !important;
+  overflow: visible !important;
+}
+.savant-mark__drag {
+  appearance: none; position: absolute; inset: 0; z-index: 6;
+  width: 100%; height: 100%; padding: 0; margin: 0;
+  border: 0 !important; border-radius: 8px;
+  background: transparent !important; box-shadow: none !important;
+  cursor: grab; touch-action: none;
+}
+.savant-mark__drag:active { cursor: grabbing; }
+.savant-mark__drag:focus-visible { outline: 2px solid #d6b45f; outline-offset: 3px; }
+@media (max-width: 640px) {
+  .palaver-instrument.palaver-only header.workstation-topbar:has(.savant-mark--header),
+  header.workstation-topbar:has(.savant-mark--header) { min-height: 165px !important; }
+}
+
+header.workstation-topbar:has(.savant-mark--header) .topbar-command-strip {
+  flex-wrap: wrap; min-width: 0; max-width: 100%;
+}
+header.workstation-topbar:has(.savant-mark--header) .workstation-brand,
+header.workstation-topbar:has(.savant-mark--header) .topbar-brand { margin-left: 0 !important; align-self: flex-start; }
+.savant-mark--header { justify-self: start; margin: 0; align-self: start; }
+
+/* Optical field: two independent, GPU-composited phases. This remains
+   presentation-only and does not alter the canvas or pointer controls. */
+.savant-mark__gleam {
+  will-change: transform, opacity;
+  background-blend-mode: screen;
+  box-shadow: inset 0 0 28px rgba(114, 185, 176, .065);
+}
+.savant-mark__gleam::before,
+.savant-mark__gleam::after {
+  content: "";
+  position: absolute;
+  inset: 5%;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.savant-mark__gleam::before {
+  background: radial-gradient(ellipse at 48% 52%, transparent 22%, rgba(94, 170, 159, .11) 35%, transparent 53%, rgba(160, 108, 64, .07) 63%, transparent 76%);
+  transform-origin: 52% 48%;
+  animation: savant-optical-ripple 8.2s cubic-bezier(.37,.08,.23,.96) infinite alternate;
+}
+.savant-mark__gleam::after {
+  inset: -5%;
+  background: conic-gradient(from 32deg at 50% 50%, transparent 0 26%, rgba(110, 208, 193, .075) 30%, transparent 38% 64%, rgba(185, 128, 81, .07) 69%, transparent 75%);
+  filter: blur(15px);
+  animation: savant-optical-throb 11.4s ease-in-out infinite alternate;
+}
+@keyframes savant-optical-ripple {
+  0% { transform: scale(.77, 1.08) rotate(-13deg); opacity: .35; }
+  45% { transform: scale(1.16, .88) rotate(8deg); opacity: .72; }
+  100% { transform: scale(.9, 1.19) rotate(-7deg); opacity: .43; }
+}
+@keyframes savant-optical-throb {
+  0% { transform: scale(.86) rotate(-18deg); opacity: .26; }
+  55% { transform: scale(1.2) rotate(11deg); opacity: .83; }
+  100% { transform: scale(.96) rotate(29deg); opacity: .42; }
+}
+.savant-mark.is-resting .savant-mark__gleam::before,
+.savant-mark.is-resting .savant-mark__gleam::after { animation-play-state: paused; }
+.savant-mark__drag:focus-visible { outline: 2px solid #9be0d0; outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  .savant-mark__gleam::before,
+  .savant-mark__gleam::after { animation: none; will-change: auto; }
+}

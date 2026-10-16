@@ -1,0 +1,371 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import json
+import subprocess
+import sys
+from pathlib import Path
+
+
+ROOT = Path("/root/savant-runtime")
+
+PYTHON = (
+    ROOT
+    / "bin"
+    / "identity-quality-python"
+)
+
+TOOL_ROOT = (
+    ROOT
+    / "tools"
+    / "identity_quality"
+)
+
+AUDITOR = (
+    TOOL_ROOT
+    / "audit_identity_quality.py"
+)
+
+UPGRADER = (
+    TOOL_ROOT
+    / "upgrade_identity_quality.py"
+)
+
+REPORT_ROOT = (
+    ROOT
+    / "reports"
+    / "identity_quality"
+)
+
+
+def execute(
+    command: list[str],
+) -> int:
+    completed = subprocess.run(
+        command,
+        cwd=str(ROOT),
+        check=False,
+    )
+
+    return completed.returncode
+
+
+def print_file(
+    path: Path,
+) -> int:
+    if not path.is_file():
+        print(
+            f"ERROR: report does not exist: {path}",
+            file=sys.stderr,
+        )
+        return 1
+
+    print(
+        path.read_text(
+            encoding="utf-8",
+        ),
+        end="",
+    )
+
+    return 0
+
+
+def usage() -> int:
+    print(
+        """
+identityqualityctl audit [arguments...]
+identityqualityctl validate [arguments...]
+identityqualityctl plan [arguments...]
+identityqualityctl apply [arguments...]
+identityqualityctl apply-strict [arguments...]
+identityqualityctl verify
+identityqualityctl report
+identityqualityctl failures
+identityqualityctl summary
+identityqualityctl upgrade-report
+identityqualityctl upgrade-changes
+identityqualityctl upgrade-failures
+identityqualityctl status
+"""
+    )
+
+    return 0
+
+
+def status() -> int:
+    paths = {
+        "audit_report": (
+            REPORT_ROOT
+            / "identity_quality_report.json"
+        ),
+        "audit_summary": (
+            REPORT_ROOT
+            / "identity_quality_summary.json"
+        ),
+        "audit_failures": (
+            REPORT_ROOT
+            / "identity_quality_failures.json"
+        ),
+        "upgrade_report": (
+            REPORT_ROOT
+            / "identity_quality_upgrade.json"
+        ),
+        "upgrade_changes": (
+            REPORT_ROOT
+            / "identity_quality_upgrade_changes.json"
+        ),
+        "upgrade_failures": (
+            REPORT_ROOT
+            / "identity_quality_upgrade_failures.json"
+        ),
+    }
+
+    result: dict[str, object] = {
+        "root": str(ROOT),
+        "python": str(PYTHON),
+        "python_exists": PYTHON.is_file(),
+        "auditor": str(AUDITOR),
+        "auditor_exists": AUDITOR.is_file(),
+        "upgrader": str(UPGRADER),
+        "upgrader_exists": UPGRADER.is_file(),
+        "reports": {},
+    }
+
+    reports: dict[str, object] = {}
+
+    for name, path in paths.items():
+        record: dict[str, object] = {
+            "path": str(path),
+            "exists": path.is_file(),
+        }
+
+        if path.is_file():
+            record["size"] = path.stat().st_size
+
+            try:
+                value = json.loads(
+                    path.read_text(
+                        encoding="utf-8",
+                    )
+                )
+
+                if isinstance(value, dict):
+                    for field in (
+                        "generated_at",
+                        "digest",
+                        "passed",
+                        "mode",
+                        "definition_count",
+                        "changed_count",
+                        "invalid_count",
+                        "statistics",
+                    ):
+                        if field in value:
+                            record[field] = value[field]
+
+            except (
+                OSError,
+                UnicodeDecodeError,
+                json.JSONDecodeError,
+            ) as exc:
+                record["read_error"] = repr(exc)
+
+        reports[name] = record
+
+    result["reports"] = reports
+
+    print(
+        json.dumps(
+            result,
+            ensure_ascii=False,
+            indent=2,
+            sort_keys=True,
+        )
+    )
+
+    return 0
+
+
+def verify() -> int:
+    stages = [
+        (
+            "plan",
+            [
+                str(PYTHON),
+                str(UPGRADER),
+                "--strict",
+            ],
+        ),
+        (
+            "audit",
+            [
+                str(PYTHON),
+                str(AUDITOR),
+            ],
+        ),
+        (
+            "validate",
+            [
+                str(PYTHON),
+                str(AUDITOR),
+                "--strict",
+            ],
+        ),
+    ]
+
+    results: list[dict[str, object]] = []
+    passed = True
+
+    for name, command in stages:
+        completed = subprocess.run(
+            command,
+            cwd=str(ROOT),
+            check=False,
+        )
+
+        stage_passed = (
+            completed.returncode == 0
+        )
+
+        if not stage_passed:
+            passed = False
+
+        results.append(
+            {
+                "stage": name,
+                "passed": stage_passed,
+                "returncode": completed.returncode,
+                "command": command,
+            }
+        )
+
+    print(
+        json.dumps(
+            {
+                "operation": "verify",
+                "passed": passed,
+                "results": results,
+            },
+            ensure_ascii=False,
+            indent=2,
+            sort_keys=True,
+        )
+    )
+
+    return 0 if passed else 1
+
+
+def main() -> int:
+    arguments = sys.argv[1:]
+
+    if not arguments:
+        return usage()
+
+    command = arguments[0]
+    remaining = arguments[1:]
+
+    if command in {
+        "help",
+        "--help",
+        "-h",
+    }:
+        return usage()
+
+    if command == "audit":
+        return execute(
+            [
+                str(PYTHON),
+                str(AUDITOR),
+                *remaining,
+            ]
+        )
+
+    if command == "validate":
+        return execute(
+            [
+                str(PYTHON),
+                str(AUDITOR),
+                "--strict",
+                *remaining,
+            ]
+        )
+
+    if command == "plan":
+        return execute(
+            [
+                str(PYTHON),
+                str(UPGRADER),
+                *remaining,
+            ]
+        )
+
+    if command == "apply":
+        return execute(
+            [
+                str(PYTHON),
+                str(UPGRADER),
+                "--apply",
+                *remaining,
+            ]
+        )
+
+    if command == "apply-strict":
+        return execute(
+            [
+                str(PYTHON),
+                str(UPGRADER),
+                "--apply",
+                "--strict",
+                *remaining,
+            ]
+        )
+
+    if command == "verify":
+        return verify()
+
+    if command == "status":
+        return status()
+
+    reports = {
+        "report": (
+            REPORT_ROOT
+            / "identity_quality_report.md"
+        ),
+        "failures": (
+            REPORT_ROOT
+            / "identity_quality_failures.json"
+        ),
+        "summary": (
+            REPORT_ROOT
+            / "identity_quality_summary.json"
+        ),
+        "upgrade-report": (
+            REPORT_ROOT
+            / "identity_quality_upgrade.json"
+        ),
+        "upgrade-changes": (
+            REPORT_ROOT
+            / "identity_quality_upgrade_changes.json"
+        ),
+        "upgrade-failures": (
+            REPORT_ROOT
+            / "identity_quality_upgrade_failures.json"
+        ),
+    }
+
+    path = reports.get(command)
+
+    if path is None:
+        print(
+            f"ERROR: unknown command: {command}",
+            file=sys.stderr,
+        )
+        return 2
+
+    return print_file(path)
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

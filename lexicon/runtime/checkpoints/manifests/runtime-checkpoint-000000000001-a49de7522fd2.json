@@ -1,0 +1,94 @@
+{
+  "checkpoint_id": "runtime-checkpoint-000000000001-a49de7522fd2",
+  "created_at": "2026-07-27T04:57:40Z",
+  "dependencies": {
+    "lexicon_root": "/root/savant-runtime/lexicon",
+    "object_store": "/root/savant-runtime/lexicon/runtime/checkpoints/objects"
+  },
+  "digest": "ecb255889b9cfb37d534aa6faf5ed0e18bd3bba36baf6c99aed487617511b98b",
+  "label": "initial-runtime-checkpoint",
+  "lexicon_root": "/root/savant-runtime/lexicon",
+  "lineage": {
+    "derived_from": [
+      "fb0c947c7358b87f330c67bb1dd01d1a7e88b62c80d69e4ddd62ed8bdac41b9b",
+      "278bd1adcdd5744320adc3c3d00b42cd6aa38f56186ab1b9243eee3a362b64aa",
+      "67148d0eb5918c5d6a0d552fe9abc12b77af4eebce6fee478bc3e0f50b5800eb",
+      "8f371c46e257fa4db58de1f682659aef5ee22ea0a1ef27829ada01f8357bdead",
+      "b90620677f751990222be067a8ebbae86a0952ee96297c20b2375761298d59ca",
+      "2f25c968eea364a968566c5ddac9755bbb3179c04dc95ac80ddae26de5765841",
+      "520852e4ff0ae877bca6f64255554f065d4e0b5cb88100f99d8955f37c59b8a0"
+    ],
+    "follows": []
+  },
+  "parent_checkpoint": null,
+  "provenance": {
+    "generator": "/root/savant-runtime/lexicon/runtime/runtime_checkpoint.py",
+    "transaction_head": "/root/savant-runtime/lexicon/runtime/transactions/transaction_head.json"
+  },
+  "record_count": 7,
+  "records": [
+    {
+      "mode": 420,
+      "object": "/root/savant-runtime/lexicon/runtime/checkpoints/objects/fb/0c947c7358b87f330c67bb1dd01d1a7e88b62c80d69e4ddd62ed8bdac41b9b",
+      "relative_path": "runtime/compiled/runtime_address_index.json",
+      "sha256": "fb0c947c7358b87f330c67bb1dd01d1a7e88b62c80d69e4ddd62ed8bdac41b9b",
+      "size": 13341,
+      "source_path": "/root/savant-runtime/lexicon/runtime/compiled/runtime_address_index.json"
+    },
+    {
+      "mode": 420,
+      "object": "/root/savant-runtime/lexicon/runtime/checkpoints/objects/27/8bd1adcdd5744320adc3c3d00b42cd6aa38f56186ab1b9243eee3a362b64aa",
+      "relative_path": "runtime/compiled/runtime_dependencies.json",
+      "sha256": "278bd1adcdd5744320adc3c3d00b42cd6aa38f56186ab1b9243eee3a362b64aa",
+      "size": 1640,
+      "source_path": "/root/savant-runtime/lexicon/runtime/compiled/runtime_dependencies.json"
+    },
+    {
+      "mode": 420,
+      "object": "/root/savant-runtime/lexicon/runtime/checkpoints/objects/67/148d0eb5918c5d6a0d552fe9abc12b77af4eebce6fee478bc3e0f50b5800eb",
+      "relative_path": "runtime/compiled/runtime_graph.json",
+      "sha256": "67148d0eb5918c5d6a0d552fe9abc12b77af4eebce6fee478bc3e0f50b5800eb",
+      "size": 7081,
+      "source_path": "/root/savant-runtime/lexicon/runtime/compiled/runtime_graph.json"
+    },
+    {
+      "mode": 420,
+      "object": "/root/savant-runtime/lexicon/runtime/checkpoints/objects/8f/371c46e257fa4db58de1f682659aef5ee22ea0a1ef27829ada01f8357bdead",
+      "relative_path": "runtime/compiled/runtime_graph_manifest.json",
+      "sha256": "8f371c46e257fa4db58de1f682659aef5ee22ea0a1ef27829ada01f8357bdead",
+      "size": 2869,
+      "source_path": "/root/savant-runtime/lexicon/runtime/compiled/runtime_graph_manifest.json"
+    },
+    {
+      "mode": 420,
+      "object": "/root/savant-runtime/lexicon/runtime/checkpoints/objects/b9/0620677f751990222be067a8ebbae86a0952ee96297c20b2375761298d59ca",
+      "relative_path": "runtime/compiled/runtime_lineage.json",
+      "sha256": "b90620677f751990222be067a8ebbae86a0952ee96297c20b2375761298d59ca",
+      "size": 568,
+      "source_path": "/root/savant-runtime/lexicon/runtime/compiled/runtime_lineage.json"
+    },
+    {
+      "mode": 420,
+      "object": "/root/savant-runtime/lexicon/runtime/checkpoints/objects/2f/25c968eea364a968566c5ddac9755bbb3179c04dc95ac80ddae26de5765841",
+      "relative_path": "runtime/compiled/runtime_provenance.json",
+      "sha256": "2f25c968eea364a968566c5ddac9755bbb3179c04dc95ac80ddae26de5765841",
+      "size": 414,
+      "source_path": "/root/savant-runtime/lexicon/runtime/compiled/runtime_provenance.json"
+    },
+    {
+      "mode": 420,
+      "object": "/root/savant-runtime/lexicon/runtime/checkpoints/objects/52/0852e4ff0ae877bca6f64255554f065d4e0b5cb88100f99d8955f37c59b8a0",
+      "relative_path": "runtime/compiled/runtime_snapshot.json",
+      "sha256": "520852e4ff0ae877bca6f64255554f065d4e0b5cb88100f99d8955f37c59b8a0",
+      "size": 2349,
+      "source_path": "/root/savant-runtime/lexicon/runtime/compiled/runtime_snapshot.json"
+    }
+  ],
+  "sequence": 1,
+  "targets": [
+    "runtime/compiled"
+  ],
+  "total_size": 28262,
+  "transaction": null,
+  "tree_digest": "9626f8f1bb438128d95cdee7d4d3ce078a0afada927bdda8228254a1ca12cbe2"
+}

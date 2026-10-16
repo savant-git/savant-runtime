@@ -1,0 +1,83 @@
+{
+  "authoritative": false,
+  "authority_tier": "delegated",
+  "canonical_id": "fs:canon-system/authority/edifices/authority.yaml",
+  "deterministic_hash": "01d35c0b24d4e56c38f71a3475fc4519bc20760716caf3407f08293378014482",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "canon-system/authority/edifices/authority.yaml",
+  "kind": "file",
+  "label": "authority.yaml",
+  "namespace": "preview.kindred",
+  "path": "canon-system/authority/edifices/authority.yaml",
+  "placement": {
+    "domain": "filesystem",
+    "node": "canon-system/authority/edifices/authority.yaml",
+    "parent": "canon-system/authority/edifices",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.28f701cf083e71180727",
+    "rank": 20,
+    "slot": "20_authority",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.28f701cf083e71180727"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "record",
+  "source_record": {
+    "authority": false,
+    "canonical_id": "fs:canon-system/authority/edifices/authority.yaml",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "canon-system/authority/edifices/authority.yaml",
+    "kind": "file",
+    "label": "authority.yaml",
+    "legacy_id": "canon-system/authority/edifices/authority.yaml",
+    "lineage": [
+      "canon-system/authority/edifices"
+    ],
+    "metadata": {
+      "canonical_id": "fs:canon-system/authority/edifices/authority.yaml",
+      "child_modes": {},
+      "child_roles": {},
+      "is_directory": false,
+      "is_file": true,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:canon-system/authority/edifices"
+        ]
+      },
+      "projected_id": "canon-system/authority/edifices/authority.yaml",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "canon-system/authority/edifices"
+    ],
+    "path": "canon-system/authority/edifices/authority.yaml",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "canon-system/authority/edifices/authority.yaml",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.28f701cf083e71180727"
+    ],
+    "size": 7,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

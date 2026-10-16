@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "savant://opus/integration-contract/1.0.0",
+  "title": "Savant Opus Integration Contract",
+  "type": "object",
+  "required": ["request_id", "requester", "capability", "authority", "inputs", "constraints", "evidence_contract"],
+  "properties": {
+    "request_id": {"type": "string", "minLength": 1},
+    "requester": {"type": "string", "minLength": 1},
+    "capability": {"type": "string", "minLength": 1},
+    "authority": {
+      "type": "object",
+      "required": ["state", "witness"],
+      "properties": {
+        "state": {"enum": ["accepted", "provisional", "proposal", "evidence"]},
+        "witness": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "inputs": {"type": "object"},
+    "constraints": {
+      "type": "object",
+      "properties": {
+        "providers": {"type": "array", "items": {"type": "string"}},
+        "models": {"type": "array", "items": {"type": "string"}},
+        "max_cost": {"type": "number", "minimum": 0},
+        "max_latency_ms": {"type": "integer", "minimum": 0},
+        "privacy_class": {"type": "string"},
+        "determinism_required": {"type": "boolean"}
+      },
+      "additionalProperties": true
+    },
+    "evidence_contract": {
+      "type": "object",
+      "required": ["notary_required", "citations_required", "lineage_required"],
+      "properties": {
+        "notary_required": {"type": "boolean"},
+        "citations_required": {"type": "boolean"},
+        "lineage_required": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

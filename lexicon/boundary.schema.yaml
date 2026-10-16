@@ -1,0 +1,17 @@
+schema: boundary
+
+version: 1
+
+fields:
+
+  word:
+    type: string
+
+  permitted:
+    type: array
+
+  forbidden:
+    type: array
+
+  notes:
+    type: string

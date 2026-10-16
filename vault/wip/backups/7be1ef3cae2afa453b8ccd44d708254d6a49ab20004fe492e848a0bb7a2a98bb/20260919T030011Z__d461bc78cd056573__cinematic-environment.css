@@ -1,0 +1,312 @@
+.space-scene-shell {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: #010205;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  isolation: isolate;
+}
+
+.space-scene-shell.is-camera-dragging {
+  cursor: grabbing;
+  touch-action: none;
+}
+
+.space-scene-shell .space-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.space-scene-shell canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.space-scene-shell::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  inset: -12%;
+  pointer-events: none;
+  opacity: 0.16;
+  background:
+    radial-gradient(
+      ellipse at 48% 44%,
+      rgba(104, 158, 194, 0.07),
+      transparent 30%
+    ),
+    radial-gradient(
+      ellipse at 28% 62%,
+      rgba(255, 172, 102, 0.04),
+      transparent 25%
+    );
+  mix-blend-mode: screen;
+}
+
+.space-scene-shell::after {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse at center,
+      transparent 38%,
+      rgba(0, 0, 0, 0.12) 68%,
+      rgba(0, 0, 0, 0.52) 118%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.2),
+      transparent 18%,
+      transparent 72%,
+      rgba(0, 0, 0, 0.34)
+    );
+}
+
+.cinematic-camera-affordance {
+  position: absolute;
+  z-index: 21;
+  left: 50%;
+  bottom: 74px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  pointer-events: none;
+  transform:
+    translateX(-50%);
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.34
+    );
+  font-family:
+    "Space Grotesk",
+    sans-serif;
+  font-size: 5px;
+  letter-spacing: 0.2em;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.cinematic-camera-affordance i {
+  position: relative;
+  width: 18px;
+  height: 12px;
+  border:
+    1px solid
+      rgba(
+        255,
+        255,
+        255,
+        0.26
+      );
+  border-radius: 8px;
+}
+
+.cinematic-camera-affordance i::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 2px;
+  width: 1px;
+  height: 4px;
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.42
+    );
+  transform:
+    translateX(-50%);
+}
+
+.space-scene-shell.is-camera-dragging
+  .cinematic-camera-affordance {
+  opacity: 0.2;
+  transform:
+    translateX(-50%)
+    translateY(5px);
+}
+
+.cinematic-object-label {
+  position: relative;
+  display: grid;
+  min-width: 118px;
+  gap: 4px;
+  padding:
+    8px 10px 8px 12px;
+  border-left:
+    1px solid
+      rgba(
+        127,
+        199,
+        241,
+        0.62
+      );
+  background:
+    linear-gradient(
+      90deg,
+      rgba(
+        5,
+        13,
+        22,
+        0.82
+      ),
+      rgba(
+        5,
+        13,
+        22,
+        0.25
+      )
+    );
+  box-shadow:
+    0 10px 30px
+      rgba(
+        0,
+        0,
+        0,
+        0.2
+      );
+  backdrop-filter:
+    blur(8px);
+  white-space: nowrap;
+  color: #fff;
+  font-family:
+    "Space Grotesk",
+    sans-serif;
+  text-transform: uppercase;
+}
+
+.cinematic-object-label::before {
+  content: "";
+  position: absolute;
+  left: -18px;
+  top: 50%;
+  width: 18px;
+  height: 1px;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(
+        127,
+        199,
+        241,
+        0.62
+      )
+    );
+}
+
+.cinematic-object-label span {
+  font-size: 7px;
+  line-height: 1;
+  letter-spacing: 0.16em;
+}
+
+.cinematic-object-label strong {
+  color:
+    rgba(
+      190,
+      224,
+      246,
+      0.64
+    );
+  font-size: 5px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.14em;
+}
+
+.space-scene-shell[data-scene-mode="earth"]::before {
+  background:
+    radial-gradient(
+      ellipse at 28% 57%,
+      rgba(65, 142, 199, 0.09),
+      transparent 34%
+    ),
+    radial-gradient(
+      ellipse at 43% 47%,
+      rgba(255, 183, 115, 0.045),
+      transparent 24%
+    );
+}
+
+.space-scene-shell[data-scene-mode="transit"]::before {
+  background:
+    radial-gradient(
+      ellipse at 51% 48%,
+      rgba(103, 162, 205, 0.065),
+      transparent 35%
+    ),
+    radial-gradient(
+      ellipse at 24% 38%,
+      rgba(239, 174, 116, 0.025),
+      transparent 26%
+    );
+}
+
+.space-scene-shell[data-scene-mode="moon"]::before {
+  background:
+    radial-gradient(
+      ellipse at 70% 46%,
+      rgba(205, 215, 224, 0.075),
+      transparent 31%
+    );
+}
+
+.space-scene-shell[data-scene-mode="gateway"]::before {
+  background:
+    radial-gradient(
+      ellipse at 64% 36%,
+      rgba(117, 165, 196, 0.08),
+      transparent 28%
+    );
+}
+
+@media (pointer: coarse) {
+  .cinematic-camera-affordance span {
+    font-size: 0;
+  }
+
+  .cinematic-camera-affordance span::after {
+    content: "DRAG TO LOOK";
+    font-size: 5px;
+  }
+}
+
+@media (max-width: 720px) {
+  .cinematic-camera-affordance {
+    bottom: 124px;
+  }
+
+  .cinematic-object-label {
+    min-width: 96px;
+    padding: 7px 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .space-scene-shell {
+    cursor: default;
+  }
+
+  .cinematic-camera-affordance {
+    display: none;
+  }
+
+  .cinematic-object-label {
+    backdrop-filter: none;
+  }
+}

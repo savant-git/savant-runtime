@@ -1,0 +1,13 @@
+.savant-entry-root{position:relative;min-height:100dvh;background:#06090d}
+.savant-entry-app{visibility:hidden!important;opacity:0;pointer-events:none!important;transition:opacity .65s ease}
+.savant-entry-root[data-docked="true"] .savant-entry-app{visibility:visible!important;opacity:1;pointer-events:auto!important}
+.savant-entry-curtain{position:fixed;inset:0;z-index:2147483000;background:radial-gradient(ellipse at 50% 44%,#1b2b32,#080e15 62%,#05080d);pointer-events:auto;opacity:1;transition:opacity .65s ease,visibility 0s linear .65s}
+.savant-entry-root[data-docked="true"] .savant-entry-curtain{opacity:0;visibility:hidden;pointer-events:none}
+.savant-entry-logo{position:fixed;z-index:2147483001;left:calc(50vw - 124px);top:calc(50dvh - 124px);width:248px;height:248px;transform-origin:top left;will-change:transform;pointer-events:none}
+.savant-entry-logo .savant-mark,.savant-entry-logo .savant-mark__viewport{width:100%;height:100%}
+.savant-entry-root[data-docked="true"] .savant-entry-logo{will-change:auto}
+.savant-entry-action{position:fixed;z-index:2147483002;left:0;right:0;bottom:max(7vh,32px);display:flex;justify-content:center;pointer-events:none;color:#e7c078;font:500 12px/1.4 system-ui;letter-spacing:.19em;text-transform:uppercase}
+.savant-entry-action button{pointer-events:auto;cursor:pointer;background:#111820;border:1px solid #d8a344;border-radius:4px;color:#f7d891;padding:16px 34px;font:inherit;letter-spacing:inherit;text-transform:uppercase;box-shadow:0 0 25px #d8a34455}
+.savant-entry-action button:focus-visible{outline:2px solid white;outline-offset:4px}
+@media(max-width:500px){.savant-entry-logo{left:calc(50vw - 90px);top:calc(50dvh - 90px);width:180px;height:180px}}
+@media(prefers-reduced-motion:reduce){.savant-entry-app,.savant-entry-curtain{transition-duration:.01ms!important}}

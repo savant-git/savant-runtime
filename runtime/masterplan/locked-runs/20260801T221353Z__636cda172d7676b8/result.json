@@ -1,0 +1,42 @@
+{
+  "command": [
+    "/root/savant-runtime/bin/masterplanctl",
+    "test"
+  ],
+  "command_shell": "/root/savant-runtime/bin/masterplanctl test",
+  "finished_at": "2026-08-01T22:13:54+00:00",
+  "generated_at": "2026-08-01T22:13:54+00:00",
+  "graph_change_policy": {
+    "failure_code": null,
+    "forbid_graph_change": true,
+    "passed": true,
+    "require_graph_change": false
+  },
+  "graph_changed": false,
+  "guarded_operation": "masterplan.verify",
+  "lock": {
+    "lock_id": "lock-a3599da14019410abbb7af38c6c2674d",
+    "operation": "masterplan.verify",
+    "owner": "project-owner",
+    "post_graph_digest": "d718b43b6334bba721885931b40a845f34dd527712545403523c41ca617a9e89",
+    "pre_graph_digest": "d718b43b6334bba721885931b40a845f34dd527712545403523c41ca617a9e89"
+  },
+  "operation": "run_masterplan_locked",
+  "owner": "project-owner",
+  "passed": true,
+  "returncode": 0,
+  "run_root": "runtime/masterplan/locked-runs/20260801T221353Z__636cda172d7676b8",
+  "schema": "savant://niche/masterplan/locked-run/1.0.0",
+  "semantic_digest": "c47467d1488417168453299c4015b50db4132012e55aeb6686d76e59a0d93d0f",
+  "started_at": "2026-08-01T22:13:53+00:00",
+  "stderr": {
+    "byte_count": 0,
+    "path": "runtime/masterplan/locked-runs/20260801T221353Z__636cda172d7676b8/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "byte_count": 99,
+    "path": "runtime/masterplan/locked-runs/20260801T221353Z__636cda172d7676b8/stdout.log",
+    "sha256": "d06da282a547631c4165d8042f0f92030f5f3f6c70330063256ec4e8076cdd46"
+  }
+}

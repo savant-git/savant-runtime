@@ -1,0 +1,97 @@
+{
+  "authoritative": false,
+  "authority_tier": "delegated",
+  "canonical_id": "fs:tools/savant_accelerator",
+  "deterministic_hash": "473d485cb2659e4cbf7ca555bec4401ce39d846b29154b575e6a8ba70857dec6",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "tools/savant_accelerator",
+  "kind": "directory",
+  "label": "savant_accelerator",
+  "namespace": "preview.kindred",
+  "path": "tools/savant_accelerator",
+  "placement": {
+    "domain": "filesystem",
+    "node": "tools/savant_accelerator",
+    "parent": "tools",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.7251d2d2f0977c724e81",
+    "rank": 50,
+    "slot": "60_tools",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.7251d2d2f0977c724e81",
+    "lineage.composition.fd531230785f577373e9"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": false,
+    "canonical_id": "fs:tools/savant_accelerator",
+    "children": [
+      "tools/savant_accelerator/savant_accelerator.py"
+    ],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "tools/savant_accelerator",
+    "kind": "directory",
+    "label": "savant_accelerator",
+    "legacy_id": "tools/savant_accelerator",
+    "lineage": [
+      "tools"
+    ],
+    "metadata": {
+      "canonical_id": "fs:tools/savant_accelerator",
+      "child_modes": {
+        "projecting": [
+          "fs:tools/savant_accelerator/savant_accelerator.py"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:tools/savant_accelerator/savant_accelerator.py"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:tools"
+        ]
+      },
+      "projected_id": "tools/savant_accelerator",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "tools"
+    ],
+    "path": "tools/savant_accelerator",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "tools/savant_accelerator",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.7251d2d2f0977c724e81",
+      "lineage.composition.fd531230785f577373e9"
+    ],
+    "size": 12,
+    "sons": [
+      "tools/savant_accelerator/savant_accelerator.py"
+    ]
+  },
+  "state": "active",
+  "synthetic": false
+}

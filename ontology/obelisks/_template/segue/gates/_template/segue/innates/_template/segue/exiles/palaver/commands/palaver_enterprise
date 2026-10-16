@@ -1,0 +1,147 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+PALAVER_ROOT="/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver"
+RUNTIME="$PALAVER_ROOT/runtime"
+
+OPUS_COMPAT="$RUNTIME/opus_router_package_compat.py"
+ENVOY_COMPAT="$RUNTIME/envoy_runtime_package_compat.py"
+PALAVER_OPUS_BRIDGE="$RUNTIME/opus_bridge.py"
+ENTRYPOINT="$RUNTIME/server_enterprise.py"
+
+if [ ! -f "$OPUS_COMPAT" ]; then
+    echo "[ERROR] Palaver Opus compatibility runtime missing: $OPUS_COMPAT" >&2
+    exit 1
+fi
+
+if [ ! -f "$ENVOY_COMPAT" ]; then
+    echo "[ERROR] Palaver Envoy compatibility runtime missing: $ENVOY_COMPAT" >&2
+    exit 1
+fi
+
+if [ ! -f "$PALAVER_OPUS_BRIDGE" ]; then
+    echo "[ERROR] Palaver Opus bridge missing: $PALAVER_OPUS_BRIDGE" >&2
+    exit 1
+fi
+
+if [ ! -f "$ENTRYPOINT" ]; then
+    echo "[ERROR] Palaver enterprise entrypoint missing: $ENTRYPOINT" >&2
+    exit 1
+fi
+
+exec python3 -c '
+import importlib.util
+import runpy
+import sys
+
+
+def load(name, path):
+    spec = importlib.util.spec_from_file_location(
+        name,
+        path,
+    )
+
+    if spec is None or spec.loader is None:
+        raise RuntimeError(
+            f"unable to construct runtime import: {path}"
+        )
+
+    module = importlib.util.module_from_spec(
+        spec
+    )
+
+    sys.modules[
+        name
+    ] = module
+
+    try:
+        spec.loader.exec_module(
+            module
+        )
+    except Exception:
+        if sys.modules.get(name) is module:
+            sys.modules.pop(
+                name,
+                None,
+            )
+        raise
+
+    return module
+
+
+opus_compat_path = sys.argv[1]
+envoy_compat_path = sys.argv[2]
+palaver_opus_bridge_path = sys.argv[3]
+entrypoint = sys.argv[4]
+
+
+opus = load(
+    "savant_palaver_opus_runtime_package_compat",
+    opus_compat_path,
+)
+
+opus_status = opus.install()
+
+if not opus_status.get("installed"):
+    raise RuntimeError(
+        "Palaver Opus runtime compatibility installation failed"
+    )
+
+
+palaver_opus_bridge = load(
+    "savant_palaver_opus_bridge",
+    palaver_opus_bridge_path,
+)
+
+if not callable(
+    getattr(
+        palaver_opus_bridge,
+        "infer",
+        None,
+    )
+):
+    raise RuntimeError(
+        "Palaver Opus bridge lacks infer()"
+    )
+
+sys.modules[
+    "opus_bridge"
+] = palaver_opus_bridge
+
+
+envoy = load(
+    "savant_palaver_envoy_runtime_package_compat",
+    envoy_compat_path,
+)
+
+envoy_status = envoy.install()
+
+if not envoy_status.get("installed"):
+    raise RuntimeError(
+        "Palaver Envoy runtime compatibility installation failed"
+    )
+
+
+if sys.modules.get(
+    "opus_bridge"
+) is not palaver_opus_bridge:
+    sys.modules[
+        "opus_bridge"
+    ] = palaver_opus_bridge
+
+
+sys.argv = [
+    entrypoint,
+    *sys.argv[5:],
+]
+
+runpy.run_path(
+    entrypoint,
+    run_name="__main__",
+)
+' \
+"$OPUS_COMPAT" \
+"$ENVOY_COMPAT" \
+"$PALAVER_OPUS_BRIDGE" \
+"$ENTRYPOINT" \
+"$@"

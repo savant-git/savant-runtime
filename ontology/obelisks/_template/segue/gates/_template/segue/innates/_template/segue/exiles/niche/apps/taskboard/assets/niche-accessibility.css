@@ -1,0 +1,79 @@
+/*
+ * savant / niche
+ * accessibility projection
+ * authority_effect: none
+ */
+
+.sr-only {
+    position: absolute !important;
+
+    width: 1px !important;
+    height: 1px !important;
+
+    padding: 0 !important;
+    margin: -1px !important;
+
+    overflow: hidden !important;
+
+    clip:
+        rect(
+            0,
+            0,
+            0,
+            0
+        ) !important;
+
+    white-space: nowrap !important;
+
+    border: 0 !important;
+}
+
+:focus-visible {
+    outline:
+        2px solid
+        currentColor;
+
+    outline-offset: 3px;
+}
+
+[data-task-id]:focus-visible {
+    position: relative;
+
+    z-index: 5;
+}
+
+button[aria-disabled="true"]:focus-visible {
+    outline-style: dashed;
+}
+
+@media (prefers-contrast: more) {
+    button,
+    [data-task-id],
+    .metric-panel,
+    .execution-core,
+    .oracle,
+    .inspector,
+    .niche-focus,
+    .niche-diagnostics {
+        border-width: 2px;
+    }
+
+    [data-niche-unknown="true"]::after {
+        opacity: .8;
+    }
+}
+
+@media (forced-colors: active) {
+    button,
+    [data-task-id],
+    .graph-node,
+    .metric-panel,
+    .execution-core,
+    .oracle {
+        forced-color-adjust: auto;
+    }
+
+    #niche-health-wave-line {
+        stroke: CanvasText;
+    }
+}

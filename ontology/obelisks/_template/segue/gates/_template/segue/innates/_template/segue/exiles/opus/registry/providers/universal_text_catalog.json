@@ -1,0 +1,204 @@
+{
+  "schema": "savant.opus.universal-provider-catalog.v1",
+  "authority_effect": "none",
+  "owner": "opus",
+  "profiles": {
+    "openai": {
+      "protocol": "openai_responses",
+      "api_base": "https://api.openai.com/v1",
+      "api_key_env": "OPENAI_API_KEY",
+      "model_env": "SAVANT_MODEL"
+    },
+    "openrouter": {
+      "protocol": "openai_chat",
+      "api_base": "https://openrouter.ai/api/v1",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "model_env": "SAVANT_OPENROUTER_MODEL"
+    },
+    "groq": {
+      "protocol": "openai_chat",
+      "api_base": "https://api.groq.com/openai/v1",
+      "api_key_env": "GROQ_API_KEY",
+      "model_env": "SAVANT_GROQ_MODEL"
+    },
+    "deepseek": {
+      "protocol": "openai_chat",
+      "api_base": "https://api.deepseek.com/v1",
+      "api_key_env": "DEEPSEEK_API_KEY",
+      "model_env": "SAVANT_DEEPSEEK_MODEL"
+    },
+    "fireworks": {
+      "protocol": "openai_chat",
+      "api_base": "https://api.fireworks.ai/inference/v1",
+      "api_key_env": "FIREWORKS_API_KEY",
+      "model_env": "SAVANT_FIREWORKS_MODEL"
+    },
+    "together": {
+      "protocol": "openai_chat",
+      "api_base": "https://api.together.xyz/v1",
+      "api_key_env": "TOGETHER_API_KEY",
+      "model_env": "SAVANT_TOGETHER_MODEL"
+    },
+    "xai": {
+      "protocol": "openai_chat",
+      "api_base": "https://api.x.ai/v1",
+      "api_key_env": "XAI_API_KEY",
+      "model_env": "SAVANT_XAI_MODEL"
+    },
+    "perplexity": {
+      "protocol": "openai_chat",
+      "api_base": "https://api.perplexity.ai",
+      "api_key_env": "PERPLEXITY_API_KEY",
+      "model_env": "SAVANT_PERPLEXITY_MODEL"
+    },
+    "cerebras": {
+      "protocol": "openai_chat",
+      "api_base": "https://api.cerebras.ai/v1",
+      "api_key_env": "CEREBRAS_API_KEY",
+      "model_env": "SAVANT_CEREBRAS_MODEL"
+    },
+    "deepinfra": {
+      "protocol": "openai_chat",
+      "api_base": "https://api.deepinfra.com/v1/openai",
+      "api_key_env": "DEEPINFRA_API_KEY",
+      "model_env": "SAVANT_DEEPINFRA_MODEL"
+    },
+    "nvidia_nim": {
+      "protocol": "openai_chat",
+      "api_base": "https://integrate.api.nvidia.com/v1",
+      "api_key_env": "NVIDIA_API_KEY",
+      "model_env": "SAVANT_NVIDIA_MODEL"
+    },
+    "sambanova": {
+      "protocol": "openai_chat",
+      "api_base": "https://api.sambanova.ai/v1",
+      "api_key_env": "SAMBANOVA_API_KEY",
+      "model_env": "SAVANT_SAMBANOVA_MODEL"
+    },
+    "siliconflow": {
+      "protocol": "openai_chat",
+      "api_base": "https://api.siliconflow.cn/v1",
+      "api_key_env": "SILICONFLOW_API_KEY",
+      "model_env": "SAVANT_SILICONFLOW_MODEL"
+    },
+    "hyperbolic": {
+      "protocol": "openai_chat",
+      "api_base": "https://api.hyperbolic.xyz/v1",
+      "api_key_env": "HYPERBOLIC_API_KEY",
+      "model_env": "SAVANT_HYPERBOLIC_MODEL"
+    },
+    "nebius": {
+      "protocol": "openai_chat",
+      "api_base": "https://api.studio.nebius.ai/v1",
+      "api_key_env": "NEBIUS_API_KEY",
+      "model_env": "SAVANT_NEBIUS_MODEL"
+    },
+    "github_models": {
+      "protocol": "openai_chat",
+      "api_base": "https://models.inference.ai.azure.com",
+      "api_key_env": "GITHUB_TOKEN",
+      "model_env": "SAVANT_GITHUB_MODEL"
+    },
+    "venice": {
+      "protocol": "openai_chat",
+      "api_base": "https://api.venice.ai/api/v1",
+      "api_key_env": "VENICE_API_KEY",
+      "model_env": "SAVANT_VENICE_MODEL"
+    },
+    "venice_uncensored": {
+      "protocol": "openai_chat",
+      "api_base": "https://api.venice.ai/api/v1",
+      "api_key_env": "VENICE_API_KEY",
+      "model_env": "SAVANT_VENICE_UNCENSORED_MODEL",
+      "model_default": "venice-uncensored-1-2"
+    },
+    "azure_openai": {
+      "protocol": "openai_chat",
+      "api_base_env": "AZURE_OPENAI_V1_BASE",
+      "api_key_optional": true,
+      "header_env": {
+        "api-key": "AZURE_OPENAI_API_KEY"
+      },
+      "model_env": "AZURE_OPENAI_MODEL"
+    },
+    "huggingface": {
+      "protocol": "openai_chat",
+      "api_base": "https://router.huggingface.co/v1",
+      "api_key_env": "HF_TOKEN",
+      "model_env": "SAVANT_HUGGINGFACE_MODEL"
+    },
+    "mistral": {
+      "protocol": "openai_chat",
+      "api_base": "https://api.mistral.ai/v1",
+      "api_key_env": "MISTRAL_API_KEY",
+      "model_env": "SAVANT_MISTRAL_MODEL"
+    },
+    "cohere": {
+      "protocol": "cohere_chat",
+      "api_base": "https://api.cohere.com",
+      "api_key_env": "COHERE_API_KEY",
+      "model_env": "SAVANT_COHERE_MODEL"
+    },
+    "google_gemini": {
+      "protocol": "gemini_generate_content",
+      "api_base": "https://generativelanguage.googleapis.com/v1beta",
+      "api_key_env": "GEMINI_API_KEY",
+      "api_key_env_fallback": "GOOGLE_API_KEY",
+      "model_env": "SAVANT_GEMINI_MODEL"
+    },
+    "aws_bedrock": {
+      "protocol": "bedrock_converse",
+      "model_env": "SAVANT_BEDROCK_MODEL",
+      "region_env": "AWS_REGION"
+    },
+    "replicate": {
+      "protocol": "replicate_prediction",
+      "api_base": "https://api.replicate.com/v1",
+      "api_key_env": "REPLICATE_API_TOKEN",
+      "model_env": "SAVANT_REPLICATE_MODEL"
+    },
+    "lm_studio": {
+      "protocol": "openai_chat",
+      "api_base": "http://127.0.0.1:1234/v1",
+      "api_key_optional": true,
+      "model_env": "SAVANT_LM_STUDIO_MODEL"
+    },
+    "vllm": {
+      "protocol": "openai_chat",
+      "api_base": "http://127.0.0.1:8000/v1",
+      "api_key_optional": true,
+      "model_env": "SAVANT_VLLM_MODEL"
+    },
+    "llama_cpp": {
+      "protocol": "openai_chat",
+      "api_base": "http://127.0.0.1:8080/v1",
+      "api_key_optional": true,
+      "model_env": "SAVANT_LLAMA_CPP_MODEL"
+    },
+    "ollama_openai": {
+      "protocol": "openai_chat",
+      "api_base": "http://127.0.0.1:11434/v1",
+      "api_key_optional": true,
+      "model_env": "SAVANT_OLLAMA_MODEL"
+    },
+    "ollama_native": {
+      "protocol": "ollama_chat",
+      "api_base": "http://127.0.0.1:11434",
+      "api_base_env": "OLLAMA_HOST",
+      "api_key_optional": true,
+      "model_env": "SAVANT_OLLAMA_MODEL"
+    },
+    "anthropic": {
+      "protocol": "anthropic_messages",
+      "api_base": "https://api.anthropic.com/v1",
+      "api_key_env": "ANTHROPIC_API_KEY",
+      "model_env": "SAVANT_ANTHROPIC_MODEL"
+    },
+    "custom": {
+      "protocol": "openai_chat",
+      "api_base_env": "OPUS_CUSTOM_API_BASE",
+      "api_key_env": "OPUS_CUSTOM_API_KEY",
+      "model_env": "OPUS_CUSTOM_MODEL"
+    }
+  }
+}

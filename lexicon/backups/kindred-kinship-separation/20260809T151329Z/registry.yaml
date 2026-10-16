@@ -1,0 +1,2927 @@
+registry_id: savant.lexicon
+version: 2
+authority:
+  source: user
+  revision: lexical-migration-20260809
+  timestamp: '2026-08-09'
+constitution: docs/LEXICON_CONSTITUTION.md
+schema: schemas/registry.schema.yaml
+policies:
+- policies/identity.yaml
+- policies/normalization.yaml
+- policies/supersession.yaml
+validators:
+- validators/validator_registry.yaml
+projections:
+- projections/projection_registry.yaml
+lexemes:
+- id: lex:composition:centra
+  canonical: Centra
+  concept: Specialization center for a reusable Tidal shade
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:focal
+    - lex:history:central
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:focal
+      successor: lex:composition:centra
+    - event: supersedes
+      predecessor: lex:history:central
+      successor: lex:composition:centra
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:composition:credenda
+  canonical: Credenda
+  concept: Governing policy
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:policy
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:policy
+      successor: lex:composition:credenda
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:composition:rut
+  canonical: Rut
+  concept: Extensible attachment position
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:slot
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:slot
+      successor: lex:composition:rut
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:composition:sidecar
+  canonical: Sidecar
+  concept: Attached extension
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:attachment
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:attachment
+      successor: lex:composition:sidecar
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:composition:substra
+  canonical: Substra
+  concept: Binding and attachment fabric
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:fabric
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:fabric
+      successor: lex:composition:substra
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:composition:veneer
+  canonical: Veneer
+  concept: Non-destructive specialization overlay
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:overlay
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:overlay
+      successor: lex:composition:veneer
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:composition:visage
+  canonical: Visage
+  concept: Compositional mask
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:mask
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:mask
+      successor: lex:composition:visage
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:core:authority
+  canonical: Authority
+  concept: Constitutional authority
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - user-retained-20260809
+    confidence: confirmed
+- id: lex:core:cert
+  canonical: Cert
+  concept: Integrity validation mechanism
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:validator
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:validator
+      successor: lex:core:cert
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:core:kindred
+  canonical: Kindred
+  concept: Canonical relationship methodology and typed relationship system
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - user-established-kindred
+    confidence: confirmed
+- id: lex:core:lexeme
+  canonical: Lexeme
+  concept: Canonical vocabulary unit
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - lexicon-constitution
+    confidence: confirmed
+- id: lex:core:lineage
+  canonical: Lineage
+  concept: Immutable evolution and succession history
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - user-retained-20260809
+    confidence: confirmed
+- id: lex:core:ontology
+  canonical: Ontology
+  concept: Constitutional knowledge organization
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - user-retained-20260809
+    confidence: confirmed
+- id: lex:core:provenance
+  canonical: Provenance
+  concept: Origin and source authority
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - user-retained-20260809
+    confidence: confirmed
+- id: lex:core:segue
+  canonical: Segue
+  concept: Directed transition
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - established-savant-lexicon
+    confidence: confirmed
+- id: lex:core:shade
+  canonical: Shade
+  concept: Concrete realization
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:instance
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:instance
+      successor: lex:core:shade
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:core:wavre
+  canonical: Wavre
+  concept: Deterministic derived artifact
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:projection
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:projection
+      successor: lex:core:wavre
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:identity:exile
+  canonical: Exile
+  concept: Identity edifice tier 6
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - recursive-identity-authority
+    confidence: confirmed
+- id: lex:identity:ink
+  canonical: Ink
+  concept: Identity edifice tier 3
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:trait
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:trait
+      successor: lex:identity:ink
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:identity:innate
+  canonical: Innate
+  concept: Identity edifice tier 7
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - recursive-identity-authority
+    confidence: confirmed
+- id: lex:identity:iota
+  canonical: Iota
+  concept: Identity edifice tier 1
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - recursive-identity-authority
+    confidence: confirmed
+- id: lex:identity:mote
+  canonical: Mote
+  concept: Identity edifice tier 2
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:shard-as-identity-tier-2
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:shard-as-identity-tier-2
+      successor: lex:identity:mote
+  provenance:
+    sources:
+    - identity-tier-specific-user-authority
+    confidence: confirmed
+- id: lex:identity:obelisk
+  canonical: Obelisk
+  concept: Identity edifice tier 9
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - recursive-identity-authority
+    confidence: confirmed
+- id: lex:identity:prodigal
+  canonical: Prodigal
+  concept: Identity edifice tier 5
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - recursive-identity-authority
+    confidence: confirmed
+- id: lex:identity:quirk
+  canonical: Quirk
+  concept: Identity edifice tier 4
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - recursive-identity-authority
+    confidence: confirmed
+- id: lex:identity:wyrmhole
+  canonical: Wyrmhole
+  concept: Identity edifice tier 8
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:gate
+    - lex:history:portal
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:gate
+      successor: lex:identity:wyrmhole
+    - event: supersedes
+      predecessor: lex:history:portal
+      successor: lex:identity:wyrmhole
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:implementation:almanac
+  canonical: Almanac
+  concept: Record
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:record
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:record
+      successor: lex:implementation:almanac
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:implementation:arkade
+  canonical: Arkade
+  concept: Sandbox
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:sandbox
+    - lex:history:nullix
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:sandbox
+      successor: lex:implementation:arkade
+    - event: supersedes
+      predecessor: lex:history:nullix
+      successor: lex:implementation:arkade
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:implementation:chaote
+  canonical: Chaote
+  concept: Chat
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:babel
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:babel
+      successor: lex:implementation:chaote
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:implementation:chatter
+  canonical: Chatter
+  concept: Channel
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:channel
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:channel
+      successor: lex:implementation:chatter
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:implementation:coinage
+  canonical: Coinage
+  concept: Token
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:token
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:token
+      successor: lex:implementation:coinage
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:implementation:doppelgangre
+  canonical: Doppelgangre
+  concept: Clone
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:clone
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:clone
+      successor: lex:implementation:doppelgangre
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:implementation:forma
+  canonical: Forma
+  concept: Object
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:object
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:object
+      successor: lex:implementation:forma
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:implementation:gridd
+  canonical: Gridd
+  concept: Graph
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:graph
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:graph
+      successor: lex:implementation:gridd
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:implementation:igneo
+  canonical: Igneo
+  concept: Runtime
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:runtime
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:runtime
+      successor: lex:implementation:igneo
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:implementation:inface
+  canonical: Inface
+  concept: Interface
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:interface
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:interface
+      successor: lex:implementation:inface
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:implementation:insend
+  canonical: Insend
+  concept: Import
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:import
+    - lex:history:florate
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:import
+      successor: lex:implementation:insend
+    - event: supersedes
+      predecessor: lex:history:florate
+      successor: lex:implementation:insend
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:implementation:linka
+  canonical: Linka
+  concept: Adapter
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:adapter
+    - lex:history:glove
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:adapter
+      successor: lex:implementation:linka
+    - event: supersedes
+      predecessor: lex:history:glove
+      successor: lex:implementation:linka
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:implementation:oblast
+  canonical: Oblast
+  concept: Function
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:function
+    - lex:history:frisk
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:function
+      successor: lex:implementation:oblast
+    - event: supersedes
+      predecessor: lex:history:frisk
+      successor: lex:implementation:oblast
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:implementation:outsend
+  canonical: Outsend
+  concept: Export
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:export
+    - lex:history:fascate
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:export
+      successor: lex:implementation:outsend
+    - event: supersedes
+      predecessor: lex:history:fascate
+      successor: lex:implementation:outsend
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:implementation:quarx
+  canonical: Quarx
+  concept: Query
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:query
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:query
+      successor: lex:implementation:quarx
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:implementation:riot
+  canonical: Riot
+  concept: Architectural aggregate
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:entity
+    - lex:history:form
+    - lex:history:swarm
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:entity
+      successor: lex:implementation:riot
+    - event: supersedes
+      predecessor: lex:history:form
+      successor: lex:implementation:riot
+    - event: supersedes
+      predecessor: lex:history:swarm
+      successor: lex:implementation:riot
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:implementation:sear
+  canonical: Sear
+  concept: Registry
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:registry
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:registry
+      successor: lex:implementation:sear
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:implementation:secton
+  canonical: Secton
+  concept: Component
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:component
+    - lex:history:exacto
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:component
+      successor: lex:implementation:secton
+    - event: supersedes
+      predecessor: lex:history:exacto
+      successor: lex:implementation:secton
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:implementation:slab
+  canonical: Slab
+  concept: Module
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:module
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:module
+      successor: lex:implementation:slab
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:implementation:tox
+  canonical: Tox
+  concept: Node
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:node
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:node
+      successor: lex:implementation:tox
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:implementation:tracery
+  canonical: Tracery
+  concept: Schema
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:schema
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:schema
+      successor: lex:implementation:tracery
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:implementation:variant
+  canonical: Variant
+  concept: Variable
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:variable
+    - lex:history:wanderer
+    - lex:history:unset
+    - lex:history:variate
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:variable
+      successor: lex:implementation:variant
+    - event: supersedes
+      predecessor: lex:history:wanderer
+      successor: lex:implementation:variant
+    - event: supersedes
+      predecessor: lex:history:unset
+      successor: lex:implementation:variant
+    - event: supersedes
+      predecessor: lex:history:variate
+      successor: lex:implementation:variant
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:implementation:vitae
+  canonical: Vitae
+  concept: State
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:state
+    - lex:history:moot
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:state
+      successor: lex:implementation:vitae
+    - event: supersedes
+      predecessor: lex:history:moot
+      successor: lex:implementation:vitae
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:primitive:admission
+  canonical: Admission
+  concept: Governed acceptance into authority
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - user-retained-20260809
+    confidence: confirmed
+- id: lex:primitive:attestation
+  canonical: Attestation
+  concept: Formal assertion or witness of verification
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - user-retained-20260809
+    confidence: confirmed
+- id: lex:primitive:canon
+  canonical: Canon
+  concept: Authoritative accepted knowledge
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - established-savant-lexicon
+    confidence: confirmed
+- id: lex:primitive:evidence
+  canonical: Evidence
+  concept: Admissible basis supporting or contradicting a claim
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - user-retained-20260809
+    confidence: confirmed
+- id: lex:primitive:lexicon
+  canonical: Lexicon
+  concept: Governed canonical vocabulary system
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:nomenclature
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:nomenclature
+      successor: lex:primitive:lexicon
+  provenance:
+    sources:
+    - user-terminology-authority
+    confidence: confirmed
+- id: lex:primitive:mutation
+  canonical: Mutation
+  concept: Governed change of mutable state or representation
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - user-retained-20260809
+    confidence: confirmed
+- id: lex:primitive:rebirth
+  canonical: Rebirth
+  concept: Recovery and restoration
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:recovery
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:recovery
+      successor: lex:primitive:rebirth
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:primitive:shard
+  canonical: Shard
+  concept: Foundational universal compositional and existential unit
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - constitutional-shard-authority
+    - user-preservation-20260809
+    confidence: confirmed
+- id: lex:semantic:anamnesis
+  canonical: Anamnesis
+  concept: Memory
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:memory
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:memory
+      successor: lex:semantic:anamnesis
+  provenance:
+    sources:
+    - historical-user-lexicon
+    confidence: confirmed
+- id: lex:semantic:anatomy
+  canonical: Anatomy
+  concept: Frame
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:frame
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:frame
+      successor: lex:semantic:anatomy
+  provenance:
+    sources:
+    - historical-user-lexicon
+    confidence: confirmed
+- id: lex:semantic:apotheosis
+  canonical: Apotheosis
+  concept: Embodiment
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:embodiment
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:embodiment
+      successor: lex:semantic:apotheosis
+  provenance:
+    sources:
+    - historical-user-lexicon
+    confidence: confirmed
+- id: lex:semantic:cerebral
+  canonical: Cerebral
+  concept: Cognitive
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:cognitive
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:cognitive
+      successor: lex:semantic:cerebral
+  provenance:
+    sources:
+    - historical-user-lexicon
+    confidence: confirmed
+- id: lex:semantic:chrysalis
+  canonical: Chrysalis
+  concept: Evolution
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:evolution
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:evolution
+      successor: lex:semantic:chrysalis
+  provenance:
+    sources:
+    - historical-user-lexicon
+    confidence: confirmed
+- id: lex:semantic:coalescence
+  canonical: Coalescence
+  concept: Orchestration
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:orchestration
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:orchestration
+      successor: lex:semantic:coalescence
+  provenance:
+    sources:
+    - historical-user-lexicon
+    confidence: confirmed
+- id: lex:semantic:echo
+  canonical: Echo
+  concept: Simulation
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:simulation
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:simulation
+      successor: lex:semantic:echo
+  provenance:
+    sources:
+    - historical-user-lexicon
+    confidence: confirmed
+- id: lex:semantic:ego
+  canonical: Ego
+  concept: Identity
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:identity
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:identity
+      successor: lex:semantic:ego
+  provenance:
+    sources:
+    - historical-user-lexicon
+    confidence: confirmed
+- id: lex:semantic:etiquette
+  canonical: Etiquette
+  concept: Behavior
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:behavior
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:behavior
+      successor: lex:semantic:etiquette
+  provenance:
+    sources:
+    - historical-user-lexicon
+    confidence: confirmed
+- id: lex:semantic:fjord
+  canonical: Fjord
+  concept: Chronicle snapshot delta lineage concept
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:chronicle
+    - lex:history:snapshot
+    - lex:history:delta
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:chronicle
+      successor: lex:semantic:fjord
+    - event: supersedes
+      predecessor: lex:history:snapshot
+      successor: lex:semantic:fjord
+    - event: supersedes
+      predecessor: lex:history:delta
+      successor: lex:semantic:fjord
+  provenance:
+    sources:
+    - historical-user-lexicon
+    confidence: confirmed
+- id: lex:semantic:inflection
+  canonical: Inflection
+  concept: Tone
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:tone
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:tone
+      successor: lex:semantic:inflection
+  provenance:
+    sources:
+    - historical-user-lexicon
+    confidence: confirmed
+- id: lex:semantic:locution
+  canonical: Locution
+  concept: Expression
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:expression
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:expression
+      successor: lex:semantic:locution
+  provenance:
+    sources:
+    - historical-user-lexicon
+    confidence: confirmed
+- id: lex:semantic:nostalgia
+  canonical: Nostalgia
+  concept: Narrative
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:narrative
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:narrative
+      successor: lex:semantic:nostalgia
+  provenance:
+    sources:
+    - historical-user-lexicon
+    confidence: confirmed
+- id: lex:semantic:onus
+  canonical: Onus
+  concept: Task
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:task
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:task
+      successor: lex:semantic:onus
+  provenance:
+    sources:
+    - historical-user-lexicon
+    confidence: confirmed
+- id: lex:service:kindred
+  canonical: Kindred
+  concept: Functional relationship-plane service
+  description: Active Savant service that compiles functional relationship planes from Kindred relationship
+    authority.
+  layer: shard00
+  status: active
+  dependencies:
+  - lex:core:kindred
+  relationships:
+  - type: depends_on
+    target: lex:core:kindred
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - service:kindred
+    - runtime/kindred/
+    - constitutional-bootstrap
+    authority: accepted
+    confidence: confirmed
+  metadata:
+    system_dependency: system:kindred
+    service_identity: service:kindred
+    implementation: runtime/kindred
+    implemented_through: exile:modus
+- id: lex:structure:caevas
+  canonical: Caevas
+  concept: Architectural concept historically named Caelus Chamberlain and Occam
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:caelus
+    - lex:history:chamberlain
+    - lex:history:occam
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:caelus
+      successor: lex:structure:caevas
+    - event: supersedes
+      predecessor: lex:history:chamberlain
+      successor: lex:structure:caevas
+    - event: supersedes
+      predecessor: lex:history:occam
+      successor: lex:structure:caevas
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:structure:convex
+  canonical: Convex
+  concept: Historical secondary-level concept formerly called Arc
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:arc
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:arc
+      successor: lex:structure:convex
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:structure:tomb
+  canonical: Tomb
+  concept: Vault
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:vault
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:vault
+      successor: lex:structure:tomb
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:tidal:cyphor
+  canonical: Cyphor
+  concept: Translation normalization and lexical-governance Tidal
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:cypher
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:cypher
+      successor: lex:tidal:cyphor
+  provenance:
+    sources:
+    - user-rename-20260809
+    confidence: confirmed
+- id: lex:tidal:dryve
+  canonical: Dryve
+  concept: Authorized action Tidal
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - living-tidal-family
+    confidence: confirmed
+- id: lex:tidal:lythe
+  canonical: Lythe
+  concept: Deterministic derivation Tidal
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - living-tidal-family
+    confidence: confirmed
+- id: lex:tidal:pryme
+  canonical: Pryme
+  concept: Authority interpretation Tidal
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - living-tidal-family
+    confidence: confirmed
+- id: lex:tidal:scrybe
+  canonical: Scrybe
+  concept: Memory Tidal
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - living-tidal-family
+    confidence: confirmed
+- id: lex:tidal:scyon
+  canonical: Scyon
+  concept: Substantiation Tidal
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - living-tidal-family
+    confidence: confirmed
+- id: lex:tidal:splyce
+  canonical: Splyce
+  concept: Presentation Tidal
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - living-tidal-family
+    confidence: confirmed
+- id: lex:tidal:spyral
+  canonical: Spyral
+  concept: Evolution Tidal
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - living-tidal-family
+    confidence: confirmed
+- id: lex:tidal:thryce
+  canonical: Thryce
+  concept: Assurance Tidal
+  layer: shard00
+  status: active
+  lineage:
+    supersedes: []
+    superseded_by: null
+    history: []
+  provenance:
+    sources:
+    - living-tidal-family
+    confidence: confirmed
+- id: lex:tidal:tidal
+  canonical: Tidal
+  concept: Member of the nine-element fluid modular family
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:living-substrate
+    - lex:history:fluid-template
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:living-substrate
+      successor: lex:tidal:tidal
+    - event: supersedes
+      predecessor: lex:history:fluid-template
+      successor: lex:tidal:tidal
+  provenance:
+    sources:
+    - user-family-name-20260808
+    confidence: confirmed
+- id: lex:vocabulary:atlos
+  canonical: Atlos
+  concept: Map
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:map
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:map
+      successor: lex:vocabulary:atlos
+  provenance:
+    sources:
+    - historical-user-lexicon
+    confidence: confirmed
+- id: lex:vocabulary:behold
+  canonical: Behold
+  concept: Full system UI
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:ui
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:ui
+      successor: lex:vocabulary:behold
+  provenance:
+    sources:
+    - historical-user-lexicon
+    confidence: confirmed
+- id: lex:vocabulary:chassia
+  canonical: Chassia
+  concept: Structure
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:structure
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:structure
+      successor: lex:vocabulary:chassia
+  provenance:
+    sources:
+    - historical-user-lexicon
+    confidence: confirmed
+- id: lex:vocabulary:cyphus
+  canonical: Cyphus
+  concept: Script
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:script
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:script
+      successor: lex:vocabulary:cyphus
+  provenance:
+    sources:
+    - historical-user-lexicon
+    confidence: confirmed
+- id: lex:vocabulary:datapluck
+  canonical: Datapluck
+  concept: Extraction
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:extraction
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:extraction
+      successor: lex:vocabulary:datapluck
+  provenance:
+    sources:
+    - historical-user-lexicon
+    confidence: confirmed
+- id: lex:vocabulary:envolia
+  canonical: Envolia
+  concept: Folders
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:folders
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:folders
+      successor: lex:vocabulary:envolia
+  provenance:
+    sources:
+    - historical-user-lexicon
+    confidence: confirmed
+- id: lex:vocabulary:envolio
+  canonical: Envolio
+  concept: Folder
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:folder
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:folder
+      successor: lex:vocabulary:envolio
+  provenance:
+    sources:
+    - historical-user-lexicon
+    confidence: confirmed
+- id: lex:vocabulary:temport
+  canonical: Temport
+  concept: Time
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:time
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:time
+      successor: lex:vocabulary:temport
+  provenance:
+    sources:
+    - historical-user-lexicon
+    confidence: confirmed
+- id: lex:vocabulary:xanto
+  canonical: Xanto
+  concept: Snippet
+  layer: shard00
+  status: active
+  lineage:
+    supersedes:
+    - lex:history:snippet
+    superseded_by: null
+    history:
+    - event: supersedes
+      predecessor: lex:history:snippet
+      successor: lex:vocabulary:xanto
+  provenance:
+    sources:
+    - historical-user-lexicon
+    confidence: confirmed
+- id: lex:history:adapter
+  canonical: Adapter
+  concept: Historical lexical predecessor Adapter of Linka
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:linka
+    history:
+    - event: superseded
+      successor: lex:implementation:linka
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:arc
+  canonical: Arc
+  concept: Historical lexical predecessor Arc of Convex
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:structure:convex
+    history:
+    - event: superseded
+      successor: lex:structure:convex
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:attachment
+  canonical: Attachment
+  concept: Historical lexical predecessor Attachment of Sidecar
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:composition:sidecar
+    history:
+    - event: superseded
+      successor: lex:composition:sidecar
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:babel
+  canonical: Babel
+  concept: Historical lexical predecessor Babel of Chaote
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:chaote
+    history:
+    - event: superseded
+      successor: lex:implementation:chaote
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:behavior
+  canonical: Behavior
+  concept: Historical lexical predecessor Behavior of Etiquette
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:semantic:etiquette
+    history:
+    - event: superseded
+      successor: lex:semantic:etiquette
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:caelus
+  canonical: Caelus
+  concept: Historical lexical predecessor Caelus of Caevas
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:structure:caevas
+    history:
+    - event: superseded
+      successor: lex:structure:caevas
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:central
+  canonical: Central
+  concept: Historical lexical predecessor Central of Centra
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:composition:centra
+    history:
+    - event: superseded
+      successor: lex:composition:centra
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:chamberlain
+  canonical: Chamberlain
+  concept: Historical lexical predecessor Chamberlain of Caevas
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:structure:caevas
+    history:
+    - event: superseded
+      successor: lex:structure:caevas
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:channel
+  canonical: Channel
+  concept: Historical lexical predecessor Channel of Chatter
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:chatter
+    history:
+    - event: superseded
+      successor: lex:implementation:chatter
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:chronicle
+  canonical: Chronicle
+  concept: Historical lexical predecessor Chronicle of Fjord
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:semantic:fjord
+    history:
+    - event: superseded
+      successor: lex:semantic:fjord
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:clone
+  canonical: Clone
+  concept: Historical lexical predecessor Clone of Doppelgangre
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:doppelgangre
+    history:
+    - event: superseded
+      successor: lex:implementation:doppelgangre
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:cognitive
+  canonical: Cognitive
+  concept: Historical lexical predecessor Cognitive of Cerebral
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:semantic:cerebral
+    history:
+    - event: superseded
+      successor: lex:semantic:cerebral
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:component
+  canonical: Component
+  concept: Historical lexical predecessor Component of Secton
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:secton
+    history:
+    - event: superseded
+      successor: lex:implementation:secton
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:cypher
+  canonical: Cypher
+  concept: Historical lexical predecessor Cypher of Cyphor
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:tidal:cyphor
+    history:
+    - event: superseded
+      successor: lex:tidal:cyphor
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:delta
+  canonical: Delta
+  concept: Historical lexical predecessor Delta of Fjord
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:semantic:fjord
+    history:
+    - event: superseded
+      successor: lex:semantic:fjord
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:embodiment
+  canonical: Embodiment
+  concept: Historical lexical predecessor Embodiment of Apotheosis
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:semantic:apotheosis
+    history:
+    - event: superseded
+      successor: lex:semantic:apotheosis
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:entity
+  canonical: Entity
+  concept: Historical lexical predecessor Entity of Riot
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:riot
+    history:
+    - event: superseded
+      successor: lex:implementation:riot
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:evolution
+  canonical: Evolution
+  concept: Historical lexical predecessor Evolution of Chrysalis
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:semantic:chrysalis
+    history:
+    - event: superseded
+      successor: lex:semantic:chrysalis
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:exacto
+  canonical: Exacto
+  concept: Historical lexical predecessor Exacto of Secton
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:secton
+    history:
+    - event: superseded
+      successor: lex:implementation:secton
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:export
+  canonical: Export
+  concept: Historical lexical predecessor Export of Outsend
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:outsend
+    history:
+    - event: superseded
+      successor: lex:implementation:outsend
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:expression
+  canonical: Expression
+  concept: Historical lexical predecessor Expression of Locution
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:semantic:locution
+    history:
+    - event: superseded
+      successor: lex:semantic:locution
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:extraction
+  canonical: Extraction
+  concept: Historical lexical predecessor Extraction of Datapluck
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:vocabulary:datapluck
+    history:
+    - event: superseded
+      successor: lex:vocabulary:datapluck
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:fabric
+  canonical: Fabric
+  concept: Historical lexical predecessor Fabric of Substra
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:composition:substra
+    history:
+    - event: superseded
+      successor: lex:composition:substra
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:fascate
+  canonical: Fascate
+  concept: Historical lexical predecessor Fascate of Outsend
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:outsend
+    history:
+    - event: superseded
+      successor: lex:implementation:outsend
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:florate
+  canonical: Florate
+  concept: Historical lexical predecessor Florate of Insend
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:insend
+    history:
+    - event: superseded
+      successor: lex:implementation:insend
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:fluid-template
+  canonical: Fluid-Template
+  concept: Historical lexical predecessor Fluid-Template of Tidal
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:tidal:tidal
+    history:
+    - event: superseded
+      successor: lex:tidal:tidal
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:focal
+  canonical: Focal
+  concept: Historical lexical predecessor Focal of Centra
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:composition:centra
+    history:
+    - event: superseded
+      successor: lex:composition:centra
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:folder
+  canonical: Folder
+  concept: Historical lexical predecessor Folder of Envolio
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:vocabulary:envolio
+    history:
+    - event: superseded
+      successor: lex:vocabulary:envolio
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:folders
+  canonical: Folders
+  concept: Historical lexical predecessor Folders of Envolia
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:vocabulary:envolia
+    history:
+    - event: superseded
+      successor: lex:vocabulary:envolia
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:form
+  canonical: Form
+  concept: Historical lexical predecessor Form of Riot
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:riot
+    history:
+    - event: superseded
+      successor: lex:implementation:riot
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:frame
+  canonical: Frame
+  concept: Historical lexical predecessor Frame of Anatomy
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:semantic:anatomy
+    history:
+    - event: superseded
+      successor: lex:semantic:anatomy
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:frisk
+  canonical: Frisk
+  concept: Historical lexical predecessor Frisk of Oblast
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:oblast
+    history:
+    - event: superseded
+      successor: lex:implementation:oblast
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:function
+  canonical: Function
+  concept: Historical lexical predecessor Function of Oblast
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:oblast
+    history:
+    - event: superseded
+      successor: lex:implementation:oblast
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:gate
+  canonical: Gate
+  concept: Historical lexical predecessor Gate of Wyrmhole
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:identity:wyrmhole
+    history:
+    - event: superseded
+      successor: lex:identity:wyrmhole
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:glove
+  canonical: Glove
+  concept: Historical lexical predecessor Glove of Linka
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:linka
+    history:
+    - event: superseded
+      successor: lex:implementation:linka
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:graph
+  canonical: Graph
+  concept: Historical lexical predecessor Graph of Gridd
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:gridd
+    history:
+    - event: superseded
+      successor: lex:implementation:gridd
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:identity
+  canonical: Identity
+  concept: Historical lexical predecessor Identity of Ego
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:semantic:ego
+    history:
+    - event: superseded
+      successor: lex:semantic:ego
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:import
+  canonical: Import
+  concept: Historical lexical predecessor Import of Insend
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:insend
+    history:
+    - event: superseded
+      successor: lex:implementation:insend
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:instance
+  canonical: Instance
+  concept: Historical lexical predecessor Instance of Shade
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:core:shade
+    history:
+    - event: superseded
+      successor: lex:core:shade
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:interface
+  canonical: Interface
+  concept: Historical lexical predecessor Interface of Inface
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:inface
+    history:
+    - event: superseded
+      successor: lex:implementation:inface
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:living-substrate
+  canonical: Living-Substrate
+  concept: Historical lexical predecessor Living-Substrate of Tidal
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:tidal:tidal
+    history:
+    - event: superseded
+      successor: lex:tidal:tidal
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:map
+  canonical: Map
+  concept: Historical lexical predecessor Map of Atlos
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:vocabulary:atlos
+    history:
+    - event: superseded
+      successor: lex:vocabulary:atlos
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:mask
+  canonical: Mask
+  concept: Historical lexical predecessor Mask of Visage
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:composition:visage
+    history:
+    - event: superseded
+      successor: lex:composition:visage
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:memory
+  canonical: Memory
+  concept: Historical lexical predecessor Memory of Anamnesis
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:semantic:anamnesis
+    history:
+    - event: superseded
+      successor: lex:semantic:anamnesis
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:module
+  canonical: Module
+  concept: Historical lexical predecessor Module of Slab
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:slab
+    history:
+    - event: superseded
+      successor: lex:implementation:slab
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:moot
+  canonical: Moot
+  concept: Historical lexical predecessor Moot of Vitae
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:vitae
+    history:
+    - event: superseded
+      successor: lex:implementation:vitae
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:narrative
+  canonical: Narrative
+  concept: Historical lexical predecessor Narrative of Nostalgia
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:semantic:nostalgia
+    history:
+    - event: superseded
+      successor: lex:semantic:nostalgia
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:node
+  canonical: Node
+  concept: Historical lexical predecessor Node of Tox
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:tox
+    history:
+    - event: superseded
+      successor: lex:implementation:tox
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:nomenclature
+  canonical: Nomenclature
+  concept: Historical lexical predecessor Nomenclature of Lexicon
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:primitive:lexicon
+    history:
+    - event: superseded
+      successor: lex:primitive:lexicon
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:nullix
+  canonical: Nullix
+  concept: Historical lexical predecessor Nullix of Arkade
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:arkade
+    history:
+    - event: superseded
+      successor: lex:implementation:arkade
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:object
+  canonical: Object
+  concept: Historical lexical predecessor Object of Forma
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:forma
+    history:
+    - event: superseded
+      successor: lex:implementation:forma
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:occam
+  canonical: Occam
+  concept: Historical lexical predecessor Occam of Caevas
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:structure:caevas
+    history:
+    - event: superseded
+      successor: lex:structure:caevas
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:orchestration
+  canonical: Orchestration
+  concept: Historical lexical predecessor Orchestration of Coalescence
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:semantic:coalescence
+    history:
+    - event: superseded
+      successor: lex:semantic:coalescence
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:overlay
+  canonical: Overlay
+  concept: Historical lexical predecessor Overlay of Veneer
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:composition:veneer
+    history:
+    - event: superseded
+      successor: lex:composition:veneer
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:policy
+  canonical: Policy
+  concept: Historical lexical predecessor Policy of Credenda
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:composition:credenda
+    history:
+    - event: superseded
+      successor: lex:composition:credenda
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:portal
+  canonical: Portal
+  concept: Historical lexical predecessor Portal of Wyrmhole
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:identity:wyrmhole
+    history:
+    - event: superseded
+      successor: lex:identity:wyrmhole
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:projection
+  canonical: Projection
+  concept: Historical lexical predecessor Projection of Wavre
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:core:wavre
+    history:
+    - event: superseded
+      successor: lex:core:wavre
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:query
+  canonical: Query
+  concept: Historical lexical predecessor Query of Quarx
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:quarx
+    history:
+    - event: superseded
+      successor: lex:implementation:quarx
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:record
+  canonical: Record
+  concept: Historical lexical predecessor Record of Almanac
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:almanac
+    history:
+    - event: superseded
+      successor: lex:implementation:almanac
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:recovery
+  canonical: Recovery
+  concept: Historical lexical predecessor Recovery of Rebirth
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:primitive:rebirth
+    history:
+    - event: superseded
+      successor: lex:primitive:rebirth
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:registry
+  canonical: Registry
+  concept: Historical lexical predecessor Registry of Sear
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:sear
+    history:
+    - event: superseded
+      successor: lex:implementation:sear
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:runtime
+  canonical: Runtime
+  concept: Historical lexical predecessor Runtime of Igneo
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:igneo
+    history:
+    - event: superseded
+      successor: lex:implementation:igneo
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:sandbox
+  canonical: Sandbox
+  concept: Historical lexical predecessor Sandbox of Arkade
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:arkade
+    history:
+    - event: superseded
+      successor: lex:implementation:arkade
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:schema
+  canonical: Schema
+  concept: Historical lexical predecessor Schema of Tracery
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:tracery
+    history:
+    - event: superseded
+      successor: lex:implementation:tracery
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:script
+  canonical: Script
+  concept: Historical lexical predecessor Script of Cyphus
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:vocabulary:cyphus
+    history:
+    - event: superseded
+      successor: lex:vocabulary:cyphus
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:shard-as-identity-tier-2
+  canonical: Shard-as-identity-tier-2
+  concept: Historical lexical predecessor Shard-as-identity-tier-2 of Mote
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:identity:mote
+    history:
+    - event: superseded
+      successor: lex:identity:mote
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:simulation
+  canonical: Simulation
+  concept: Historical lexical predecessor Simulation of Echo
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:semantic:echo
+    history:
+    - event: superseded
+      successor: lex:semantic:echo
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:slot
+  canonical: Slot
+  concept: Historical lexical predecessor Slot of Rut
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:composition:rut
+    history:
+    - event: superseded
+      successor: lex:composition:rut
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:snapshot
+  canonical: Snapshot
+  concept: Historical lexical predecessor Snapshot of Fjord
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:semantic:fjord
+    history:
+    - event: superseded
+      successor: lex:semantic:fjord
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:snippet
+  canonical: Snippet
+  concept: Historical lexical predecessor Snippet of Xanto
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:vocabulary:xanto
+    history:
+    - event: superseded
+      successor: lex:vocabulary:xanto
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:state
+  canonical: State
+  concept: Historical lexical predecessor State of Vitae
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:vitae
+    history:
+    - event: superseded
+      successor: lex:implementation:vitae
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:structure
+  canonical: Structure
+  concept: Historical lexical predecessor Structure of Chassia
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:vocabulary:chassia
+    history:
+    - event: superseded
+      successor: lex:vocabulary:chassia
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:swarm
+  canonical: Swarm
+  concept: Historical lexical predecessor Swarm of Riot
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:riot
+    history:
+    - event: superseded
+      successor: lex:implementation:riot
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:task
+  canonical: Task
+  concept: Historical lexical predecessor Task of Onus
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:semantic:onus
+    history:
+    - event: superseded
+      successor: lex:semantic:onus
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:time
+  canonical: Time
+  concept: Historical lexical predecessor Time of Temport
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:vocabulary:temport
+    history:
+    - event: superseded
+      successor: lex:vocabulary:temport
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:token
+  canonical: Token
+  concept: Historical lexical predecessor Token of Coinage
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:coinage
+    history:
+    - event: superseded
+      successor: lex:implementation:coinage
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:tone
+  canonical: Tone
+  concept: Historical lexical predecessor Tone of Inflection
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:semantic:inflection
+    history:
+    - event: superseded
+      successor: lex:semantic:inflection
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:trait
+  canonical: Trait
+  concept: Historical lexical predecessor Trait of Ink
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:identity:ink
+    history:
+    - event: superseded
+      successor: lex:identity:ink
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:ui
+  canonical: UI
+  concept: Historical lexical predecessor UI of Behold
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:vocabulary:behold
+    history:
+    - event: superseded
+      successor: lex:vocabulary:behold
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:unset
+  canonical: Unset
+  concept: Historical lexical predecessor Unset of Variant
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:variant
+    history:
+    - event: superseded
+      successor: lex:implementation:variant
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:validator
+  canonical: Validator
+  concept: Historical lexical predecessor Validator of Cert
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:core:cert
+    history:
+    - event: superseded
+      successor: lex:core:cert
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:variable
+  canonical: Variable
+  concept: Historical lexical predecessor Variable of Variant
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:variant
+    history:
+    - event: superseded
+      successor: lex:implementation:variant
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:variate
+  canonical: Variate
+  concept: Historical lexical predecessor Variate of Variant
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:variant
+    history:
+    - event: superseded
+      successor: lex:implementation:variant
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:vault
+  canonical: Vault
+  concept: Historical lexical predecessor Vault of Tomb
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:structure:tomb
+    history:
+    - event: superseded
+      successor: lex:structure:tomb
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+- id: lex:history:wanderer
+  canonical: Wanderer
+  concept: Historical lexical predecessor Wanderer of Variant
+  layer: shard00
+  status: superseded
+  lineage:
+    supersedes: []
+    superseded_by: lex:implementation:variant
+    history:
+    - event: superseded
+      successor: lex:implementation:variant
+  provenance:
+    sources:
+    - lexical-migration-20260809
+    confidence: confirmed
+reserved:
+- Instance
+- Projection
+- Validator
+- Trait
+- Gate
+- Portal
+- Cypher
+- Entity
+- Form
+- Swarm
+- Babel
+- Query
+- Channel
+- Clone
+- Registry
+- Runtime
+- Interface
+- Graph
+- State
+- Token
+- Function
+- Variable
+- Wanderer
+- Unset
+- Variate
+- Import
+- Florate
+- Export
+- Fascate
+- Adapter
+- Glove
+- Sandbox
+- Nullix
+- Component
+- Exacto
+- Module
+- Object
+- Record
+- Node
+- Schema
+- Policy
+- Overlay
+- Fabric
+- Slot
+- Mask
+- Attachment
+- Focal
+- Central
+- Recovery
+- Arc
+- Vault
+- Caelus
+- Chamberlain
+- Occam
+- Nomenclature
+- Omnistructure

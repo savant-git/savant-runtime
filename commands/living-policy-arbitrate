@@ -1,0 +1,227 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+
+from pathlib import Path
+from typing import Any
+
+
+runtime_root = Path(
+    "/root/savant-runtime/runtime"
+)
+
+if str(runtime_root) not in sys.path:
+    sys.path.insert(
+        0,
+        str(runtime_root),
+    )
+
+
+from living_policy_arbitration import (  # noqa: E402
+    arbitrate,
+    living_policy_arbitration_error,
+    selftest,
+    status,
+)
+
+
+def read_json(
+    path: str,
+) -> Any:
+    if path == "-":
+        return json.load(sys.stdin)
+
+    return json.loads(
+        Path(path).read_text(
+            encoding="utf-8"
+        )
+    )
+
+
+def read_records(
+    path: str,
+) -> list[dict[str, Any]]:
+    value = read_json(path)
+
+    if isinstance(value, dict):
+        for field in (
+            "records",
+            "policies",
+            "items",
+        ):
+            candidate = value.get(field)
+
+            if isinstance(
+                candidate,
+                list,
+            ):
+                value = candidate
+                break
+
+    if not isinstance(value, list):
+        raise ValueError(
+            (
+                "records must be a JSON array "
+                "or object containing "
+                "records/policies/items"
+            )
+        )
+
+    records = []
+
+    for item in value:
+        if not isinstance(item, dict):
+            raise ValueError(
+                (
+                    "every policy record "
+                    "must be an object"
+                )
+            )
+
+        records.append(item)
+
+    return records
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="living-policy-arbitrate",
+        description=(
+            "deterministic authority-aware "
+            "Living Governance policy "
+            "conflict arbitration"
+        ),
+    )
+
+    commands = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    commands.add_parser(
+        "status"
+    )
+
+    commands.add_parser(
+        "selftest"
+    )
+
+    evaluate = commands.add_parser(
+        "arbitrate"
+    )
+
+    evaluate.add_argument(
+        "--records",
+        required=True,
+    )
+
+    evaluate.add_argument(
+        "--as-of"
+    )
+
+    evaluate.add_argument(
+        "--sequence"
+    )
+
+    evaluate.add_argument(
+        "--timezone"
+    )
+
+    return parser
+
+
+def sequence_value(
+    value: str | None,
+) -> int | None:
+    if value is None:
+        return None
+
+    return int(value)
+
+
+def main() -> int:
+    args = build_parser().parse_args()
+
+    try:
+        if args.command == "status":
+            output = status()
+
+        elif args.command == "selftest":
+            output = selftest()
+
+        elif args.command == "arbitrate":
+            output = arbitrate(
+                read_records(
+                    args.records
+                ),
+                as_of=
+                    args.as_of,
+                sequence=
+                    sequence_value(
+                        args.sequence
+                    ),
+                default_timezone=
+                    args.timezone,
+            )
+
+        else:
+            raise ValueError(
+                "unknown command"
+            )
+
+    except (
+        OSError,
+        ValueError,
+        json.JSONDecodeError,
+        living_policy_arbitration_error,
+    ) as exc:
+        print(
+            json.dumps(
+                {
+                    "schema":
+                        (
+                            "savant.living-governance."
+                            "policy-arbitration.v1"
+                        ),
+
+                    "owner":
+                        "living-governance",
+
+                    "authority_effect":
+                        "none",
+
+                    "ok":
+                        False,
+
+                    "error":
+                        str(exc),
+
+                    "authority_transfer":
+                        False,
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+
+        return 1
+
+    print(
+        json.dumps(
+            output,
+            indent=2,
+            ensure_ascii=False,
+            sort_keys=True,
+        )
+    )
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main()
+    )

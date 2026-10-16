@@ -1,0 +1,394 @@
+/*
+ * savant / niche
+ * adaptive interaction layer
+ *
+ * authority_effect: none
+ *
+ * This layer augments niche.css without owning task semantics.
+ */
+
+:root {
+    --niche-vw: 100vw;
+    --niche-vh: 100vh;
+    --niche-layout-vh: 100vh;
+    --niche-header-live: var(--header-h);
+    --niche-status-live: var(--status-h);
+    --niche-nav-live: 0px;
+    --niche-keyboard-inset: 0px;
+}
+
+html,
+body {
+    max-width: 100%;
+}
+
+body {
+    min-height: var(--niche-vh);
+}
+
+main {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.surface,
+.execute-grid,
+.execution-core,
+.oracle,
+.peripheral,
+.metric-panel,
+.surface-heading,
+.flow-board,
+.graph-stage,
+.objective-grid,
+.evidence-grid,
+.living-grid,
+.living-summary,
+.timeline,
+.history-list {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.execution-core,
+.oracle,
+.metric-panel,
+.objective,
+.evidence-card,
+.living-surface,
+.task-card,
+.inspector,
+.dialog,
+.palette {
+    overflow-wrap: anywhere;
+}
+
+.execution-core {
+    isolation: isolate;
+}
+
+.frontier-heading,
+.execute-action,
+.panel-heading,
+.surface-heading,
+.task-meta,
+.objective-stats,
+.living-meta {
+    min-width: 0;
+}
+
+.frontier-heading > *,
+.execute-action > *,
+.panel-heading > *,
+.surface-heading > * {
+    min-width: 0;
+}
+
+.dialog-shell[hidden],
+.palette-shell[hidden],
+[hidden] {
+    display: none !important;
+}
+
+/*
+ * Fixed overlays are constrained to the browser's visual viewport rather
+ * than assuming layout viewport height equals usable screen height.
+ */
+
+.dialog-shell,
+.palette-shell {
+    width: var(--niche-vw);
+    height: var(--niche-vh);
+    max-width: 100vw;
+    max-height: var(--niche-vh);
+}
+
+.inspector {
+    max-height: var(--niche-vh);
+}
+
+/*
+ * Prevent scroll chaining from an overlay into the workspace.
+ */
+
+.dialog,
+.palette-results,
+.inspector,
+.flow-board,
+.statusrail,
+.nav {
+    overscroll-behavior: contain;
+}
+
+/*
+ * A transformed or open transient surface must not create horizontal
+ * document overflow.
+ */
+
+.inspector {
+    contain: layout paint;
+}
+
+body:has(.dialog-shell:not([hidden])),
+body:has(.palette-shell:not([hidden])) {
+    overflow: hidden;
+}
+
+/*
+ * Long task identifiers, receipts, hashes and filesystem-derived projected
+ * strings are legitimate Savant data. They must wrap rather than dictate
+ * interface geometry.
+ */
+
+.task-id,
+.fabric-meta,
+.kv dd,
+.inspector-section p,
+.oracle-explanation,
+.consequence-preview,
+.timeline-event p,
+.history-event p {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+/*
+ * Adaptive execution geometry.
+ */
+
+[data-niche-mode="desktop"] .execute-grid,
+[data-niche-mode="compact"] .execute-grid {
+    align-items: stretch;
+}
+
+[data-niche-mode="tablet"] .execute-grid,
+[data-niche-mode="phone"] .execute-grid,
+[data-niche-mode="phone-narrow"] .execute-grid,
+[data-niche-mode="phone-landscape"] .execute-grid {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+[data-niche-mode="phone"] .execution-core,
+[data-niche-mode="phone-narrow"] .execution-core,
+[data-niche-mode="phone-landscape"] .execution-core {
+    min-height: max(
+        390px,
+        calc(
+            var(--niche-vh) -
+            var(--niche-header-live) -
+            var(--niche-status-live) -
+            var(--niche-nav-live) -
+            24px
+        )
+    );
+}
+
+/*
+ * Mobile is execution-first. Secondary intelligence remains available but
+ * never competes spatially with the next executable action.
+ */
+
+[data-niche-mode="phone"] .execute-grid,
+[data-niche-mode="phone-narrow"] .execute-grid {
+    display: flex;
+    flex-direction: column;
+}
+
+[data-niche-mode="phone"] .execution-core,
+[data-niche-mode="phone-narrow"] .execution-core {
+    order: 0;
+}
+
+[data-niche-mode="phone"] .oracle,
+[data-niche-mode="phone-narrow"] .oracle {
+    order: 1;
+}
+
+[data-niche-mode="phone"] .peripheral,
+[data-niche-mode="phone-narrow"] .peripheral {
+    order: 2;
+}
+
+/*
+ * Horizontal task flow remains spatial instead of degenerating into a
+ * vertically stacked pseudo-board.
+ */
+
+[data-niche-mode="tablet"] .flow-board,
+[data-niche-mode="phone"] .flow-board,
+[data-niche-mode="phone-narrow"] .flow-board,
+[data-niche-mode="phone-landscape"] .flow-board {
+    display: grid;
+    grid-auto-flow: column;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+}
+
+[data-niche-mode="phone"] .lane,
+[data-niche-mode="phone-narrow"] .lane {
+    scroll-snap-align: center;
+}
+
+/*
+ * Mobile constellation is a bounded instrument surface. Graph geometry can
+ * remain larger internally without forcing the document itself wider.
+ */
+
+[data-niche-mode="phone"] .graph-stage,
+[data-niche-mode="phone-narrow"] .graph-stage,
+[data-niche-mode="phone-landscape"] .graph-stage {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+/*
+ * Touch targets.
+ */
+
+[data-niche-pointer="coarse"] button,
+[data-niche-pointer="coarse"] .task-card,
+[data-niche-pointer="coarse"] .compact-item,
+[data-niche-pointer="coarse"] .living-surface {
+    min-height: 44px;
+}
+
+[data-niche-pointer="coarse"] .graph-node {
+    min-height: 48px;
+}
+
+/*
+ * Hover semantics are disabled on environments that cannot actually hover.
+ */
+
+[data-niche-hover="false"] .task-card:hover {
+    transform: none;
+}
+
+[data-niche-hover="false"] button:hover {
+    background: transparent;
+}
+
+[data-niche-hover="false"] .start-next:hover {
+    background: var(--signal);
+}
+
+/*
+ * Software-keyboard-aware palette/dialog behavior.
+ */
+
+[data-niche-mode^="phone"] .palette-shell,
+[data-niche-mode^="phone"] .dialog-shell {
+    align-items: start;
+}
+
+[data-niche-mode^="phone"] .palette {
+    max-height: calc(
+        var(--niche-vh) -
+        var(--niche-keyboard-inset) -
+        20px
+    );
+}
+
+[data-niche-mode^="phone"] .dialog {
+    max-height: calc(
+        var(--niche-vh) -
+        var(--niche-keyboard-inset) -
+        var(--niche-nav-live) -
+        20px
+    );
+}
+
+/*
+ * Extreme text zoom and narrow-window fallback.
+ */
+
+@media (max-width: 320px) {
+    .topbar {
+        grid-template-columns: max-content minmax(0, 1fr);
+    }
+
+    .brand > div {
+        display: none;
+    }
+
+    .execute-secondary,
+    .dialog-actions,
+    .living-summary,
+    .metric-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .factor-row {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .factor-track {
+        min-height: 3px;
+    }
+}
+
+/*
+ * Landscape phones get a compact execution tunnel rather than a compressed
+ * portrait layout.
+ */
+
+[data-niche-mode="phone-landscape"] .execute-grid {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1.35fr)
+        minmax(220px, .65fr);
+}
+
+[data-niche-mode="phone-landscape"] .execution-core {
+    min-height: max(
+        330px,
+        calc(
+            var(--niche-vh) -
+            var(--niche-header-live) -
+            var(--niche-status-live) -
+            var(--niche-nav-live) -
+            16px
+        )
+    );
+
+    padding-top: 14px;
+    padding-bottom: 82px;
+}
+
+[data-niche-mode="phone-landscape"] .frontier-heading {
+    margin-top: 6px;
+}
+
+[data-niche-mode="phone-landscape"] .frontier-heading h1 {
+    font-size: clamp(24px, 8vh, 38px);
+}
+
+[data-niche-mode="phone-landscape"] .ancestry {
+    margin-block: 8px;
+}
+
+[data-niche-mode="phone-landscape"] .execute-action {
+    margin-top: 8px;
+}
+
+[data-niche-mode="phone-landscape"] .peripheral {
+    grid-column: 1 / -1;
+}
+
+/*
+ * Accessibility preference is authoritative for presentation behavior.
+ */
+
+[data-niche-reduced-motion="true"] *,
+[data-niche-reduced-motion="true"] *::before,
+[data-niche-reduced-motion="true"] *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .001ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    transition-delay: 0ms !important;
+}

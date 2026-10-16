@@ -1,0 +1,20 @@
+schema: history
+
+version: 1
+
+fields:
+
+  original:
+    type: string
+
+  replacement:
+    type: string
+
+  transformation:
+    type: string
+
+  preserved:
+    type: boolean
+
+  authority:
+    type: string

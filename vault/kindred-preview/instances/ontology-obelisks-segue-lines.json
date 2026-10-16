@@ -1,0 +1,83 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:ontology/obelisks/segue/lines",
+  "deterministic_hash": "83d770efe1ff768ad1aefc3bebd5c1092de5013a05b3b10d58b0b705c391d2f9",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "ontology/obelisks/segue/lines",
+  "kind": "directory",
+  "label": "lines",
+  "namespace": "preview.kindred",
+  "path": "ontology/obelisks/segue/lines",
+  "placement": {
+    "domain": "filesystem",
+    "node": "ontology/obelisks/segue/lines",
+    "parent": "ontology/obelisks/segue",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.a6fe4a445dc7742f7331",
+    "rank": 70,
+    "slot": "30_ontology",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.a6fe4a445dc7742f7331"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:ontology/obelisks/segue/lines",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "ontology/obelisks/segue/lines",
+    "kind": "directory",
+    "label": "lines",
+    "legacy_id": "ontology/obelisks/segue/lines",
+    "lineage": [
+      "ontology/obelisks/segue"
+    ],
+    "metadata": {
+      "canonical_id": "fs:ontology/obelisks/segue/lines",
+      "child_modes": {},
+      "child_roles": {},
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:ontology/obelisks/segue"
+        ]
+      },
+      "projected_id": "ontology/obelisks/segue/lines",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "ontology/obelisks/segue"
+    ],
+    "path": "ontology/obelisks/segue/lines",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "ontology/obelisks/segue/lines",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.a6fe4a445dc7742f7331"
+    ],
+    "size": 12,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

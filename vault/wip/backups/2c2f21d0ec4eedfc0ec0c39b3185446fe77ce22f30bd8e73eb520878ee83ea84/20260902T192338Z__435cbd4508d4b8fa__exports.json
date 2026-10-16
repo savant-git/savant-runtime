@@ -1,0 +1,66 @@
+{
+  "id": "carbon.exports",
+  "owner": "carbon",
+  "type": "composition_exports",
+  "status": "active",
+  "exports": [
+    {
+      "id": "simulation_definition",
+      "kind": "primitive_reference"
+    },
+    {
+      "id": "simulation_instance",
+      "kind": "instance_reference"
+    },
+    {
+      "id": "simulation_state",
+      "kind": "derived_projection"
+    },
+    {
+      "id": "simulation_branch",
+      "kind": "derived_instance"
+    },
+    {
+      "id": "simulation_checkpoint",
+      "kind": "immutable_reference"
+    },
+    {
+      "id": "simulation_execution",
+      "kind": "derived_projection"
+    },
+    {
+      "id": "simulation_comparison",
+      "kind": "derived_projection"
+    },
+    {
+      "id": "causal_trace",
+      "kind": "derived_projection"
+    },
+    {
+      "id": "uncertainty_projection",
+      "kind": "derived_projection"
+    },
+    {
+      "id": "simulation_receipt",
+      "kind": "execution_evidence"
+    },
+    {
+      "id": "simulation_lineage",
+      "kind": "lineage_projection"
+    },
+    {
+      "id": "simulation_provenance",
+      "kind": "provenance_projection"
+    },
+    {
+      "id": "avatar_forge",
+      "kind": "simulation_application"
+    }
+  ],
+  "rules": {
+    "exports_create_authority": false,
+    "exports_transfer_authority": false,
+    "derived_exports_remain_derived": true,
+    "references_preferred_over_duplication": true
+  }
+}

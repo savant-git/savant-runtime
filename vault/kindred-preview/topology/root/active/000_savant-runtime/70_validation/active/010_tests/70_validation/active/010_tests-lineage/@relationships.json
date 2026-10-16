@@ -1,0 +1,381 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "1c7b1caae3ca1612513d6101015b68ada116c3d7e6941a62f478b044f419cf26",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "namespace": "preview.kindred",
+  "node": "tests/lineage",
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationships": [
+    {
+      "child_profile": "daughter",
+      "domain": "filesystem",
+      "id": "lineage.composition.31f93e71d78fde62a33c",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "tests",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:tests",
+        "canonical_target": "fs:tests/lineage",
+        "continuation": "preserving",
+        "id": "lineage.composition.31f93e71d78fde62a33c",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/tests/lineage"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "tests",
+        "status": "active",
+        "symbolic_child_alias": "daughter",
+        "symbolic_parent_alias": "parent",
+        "target": "tests/lineage",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "tests/lineage"
+    },
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.35d342487cf92ab888bb",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "tests/lineage",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:tests/lineage",
+        "canonical_target": "fs:tests/lineage/test_functional_lineage.py",
+        "continuation": "projecting",
+        "id": "lineage.composition.35d342487cf92ab888bb",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/tests/lineage/test_functional_lineage.py"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "tests/lineage",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "tests/lineage/test_functional_lineage.py",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "tests/lineage/test_functional_lineage.py"
+    },
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.ab5cfcdf5507648f1271",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "tests/lineage",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:tests/lineage",
+        "canonical_target": "fs:tests/lineage/test_system_lineage_integration.py",
+        "continuation": "projecting",
+        "id": "lineage.composition.ab5cfcdf5507648f1271",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/tests/lineage/test_system_lineage_integration.py"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "tests/lineage",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "tests/lineage/test_system_lineage_integration.py",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "tests/lineage/test_system_lineage_integration.py"
+    },
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.ae32103616dc68daa116",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "tests/lineage",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:tests/lineage",
+        "canonical_target": "fs:tests/lineage/test_runtime_graph_projection.py",
+        "continuation": "projecting",
+        "id": "lineage.composition.ae32103616dc68daa116",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/tests/lineage/test_runtime_graph_projection.py"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "tests/lineage",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "tests/lineage/test_runtime_graph_projection.py",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "tests/lineage/test_runtime_graph_projection.py"
+    },
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.b17883ecd9c0f4fef3a5",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "tests/lineage",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:tests/lineage",
+        "canonical_target": "fs:tests/lineage/test_runtime_graph_consumers.py",
+        "continuation": "projecting",
+        "id": "lineage.composition.b17883ecd9c0f4fef3a5",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/tests/lineage/test_runtime_graph_consumers.py"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "tests/lineage",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "tests/lineage/test_runtime_graph_consumers.py",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "tests/lineage/test_runtime_graph_consumers.py"
+    },
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.d7081bc0e6882979c04a",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "tests/lineage",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:tests/lineage",
+        "canonical_target": "fs:tests/lineage/test_reference_normalization.py",
+        "continuation": "projecting",
+        "id": "lineage.composition.d7081bc0e6882979c04a",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/tests/lineage/test_reference_normalization.py"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "tests/lineage",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "tests/lineage/test_reference_normalization.py",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "tests/lineage/test_reference_normalization.py"
+    }
+  ],
+  "schema": "savant.kindred.preview.relationship_projection.v2"
+}

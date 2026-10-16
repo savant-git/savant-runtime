@@ -1,0 +1,83 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "fs:runtime/palaver/observatories",
+  "deterministic_hash": "d6d5257584f475bc53f5ee9a421987b7d49fa04ee35949e66a8bc29f14a107dc",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "runtime/palaver/observatories",
+  "kind": "directory",
+  "label": "observatories",
+  "namespace": "preview.kindred",
+  "path": "runtime/palaver/observatories",
+  "placement": {
+    "domain": "filesystem",
+    "node": "runtime/palaver/observatories",
+    "parent": "runtime/palaver",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.6630becab7af56bc4c28",
+    "rank": 80,
+    "slot": "40_runtime",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.6630becab7af56bc4c28"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "fs:runtime/palaver/observatories",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "runtime/palaver/observatories",
+    "kind": "directory",
+    "label": "observatories",
+    "legacy_id": "runtime/palaver/observatories",
+    "lineage": [
+      "runtime/palaver"
+    ],
+    "metadata": {
+      "canonical_id": "fs:runtime/palaver/observatories",
+      "child_modes": {},
+      "child_roles": {},
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:runtime/palaver"
+        ]
+      },
+      "projected_id": "runtime/palaver/observatories",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "runtime/palaver"
+    ],
+    "path": "runtime/palaver/observatories",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "runtime/palaver/observatories",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.6630becab7af56bc4c28"
+    ],
+    "size": 12,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

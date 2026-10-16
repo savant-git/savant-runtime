@@ -1,0 +1,275 @@
+{
+  "id": "carbon.guise",
+  "owner": "carbon",
+  "type": "simulation_specialization_manifest",
+  "status": "active",
+  "schema": "savant://carbon/guise/1",
+  "singular_purpose": "generalized character intelligence",
+  "domain_independent": true,
+  "demonstration_data_is_architecture": false,
+  "character_primitive": "character_instance",
+  "semantic_primitive": "character_category",
+  "evidence_primitive": "character_evidence",
+  "state_primitive": "character_state",
+  "relationship_primitive": "character_relationship",
+  "domains": {
+    "cognition": [
+      "intellect",
+      "association",
+      "abstraction",
+      "reasoning",
+      "metacognition"
+    ],
+    "attention": [
+      "focus",
+      "obsession",
+      "curiosity",
+      "persistence",
+      "flexibility"
+    ],
+    "judgment": [
+      "evidence",
+      "skepticism",
+      "certainty",
+      "bias",
+      "contrarianism"
+    ],
+    "regulation": [
+      "inhibition",
+      "impulse",
+      "restraint",
+      "coping",
+      "escalation"
+    ],
+    "affect": [
+      "anger",
+      "shame",
+      "guilt",
+      "fear",
+      "grief"
+    ],
+    "reward": [
+      "pleasure",
+      "novelty",
+      "boredom",
+      "sensation",
+      "excess"
+    ],
+    "defense": [
+      "humor",
+      "contempt",
+      "rationalization",
+      "performance",
+      "intellectualization"
+    ],
+    "identity": [
+      "selfimage",
+      "persona",
+      "authenticity",
+      "pride",
+      "insecurity"
+    ],
+    "autonomy": [
+      "control",
+      "freedom",
+      "authority",
+      "defiance",
+      "power"
+    ],
+    "morality": [
+      "justice",
+      "compassion",
+      "cruelty",
+      "hypocrisy",
+      "responsibility"
+    ],
+    "attachment": [
+      "love",
+      "loyalty",
+      "trust",
+      "dependency",
+      "betrayal"
+    ],
+    "intimacy": [
+      "affection",
+      "vulnerability",
+      "boundaries",
+      "permission",
+      "reciprocity"
+    ],
+    "sociality": [
+      "dominance",
+      "charisma",
+      "provocation",
+      "tribalism",
+      "perception"
+    ],
+    "aggression": [
+      "hostility",
+      "coercion",
+      "retaliation",
+      "violence",
+      "intimidation"
+    ],
+    "memory": [
+      "recollection",
+      "nostalgia",
+      "grievance",
+      "preservation",
+      "association"
+    ],
+    "order": [
+      "systems",
+      "ritual",
+      "collection",
+      "classification",
+      "chaos"
+    ],
+    "motivation": [
+      "meaning",
+      "purpose",
+      "ambition",
+      "recognition",
+      "agency"
+    ],
+    "risk": [
+      "danger",
+      "recklessness",
+      "consequence",
+      "survival",
+      "selfdestruction"
+    ],
+    "expression": [
+      "language",
+      "voice",
+      "tangent",
+      "artistry",
+      "theatricality"
+    ],
+    "development": [
+      "trauma",
+      "adaptation",
+      "contradiction",
+      "growth",
+      "regression"
+    ]
+  },
+  "epistemic_classes": [
+    "canon",
+    "observation",
+    "self_report",
+    "other_report",
+    "strong_inference",
+    "weak_inference",
+    "hypothesis",
+    "speculation",
+    "unknown",
+    "contradicted",
+    "superseded"
+  ],
+  "contradiction_classes": [
+    "continuity_contradiction",
+    "psychological_contradiction",
+    "hypocrisy",
+    "evolution",
+    "situational_exception",
+    "unreliable_recollection",
+    "deception",
+    "source_conflict",
+    "ambiguity"
+  ],
+  "behavior_classes": [
+    "highly_supported",
+    "plausible",
+    "productive_contradiction",
+    "requires_substantiation",
+    "continuity_conflict"
+  ],
+  "knowledge_states": [
+    "knows",
+    "believes",
+    "suspects",
+    "forgot",
+    "misremembers",
+    "false_belief",
+    "was_told",
+    "refuses_to_believe",
+    "reader_knows",
+    "others_know"
+  ],
+  "evidence_states": [
+    "observed",
+    "not_observed",
+    "observed_absent",
+    "unknown"
+  ],
+  "segue_types": [
+    "supports",
+    "challenges",
+    "contradicts",
+    "substantiates",
+    "manifests",
+    "activates",
+    "suppresses",
+    "amplifies",
+    "inhibits",
+    "qualifies",
+    "contextualizes",
+    "precedes",
+    "follows",
+    "evolves_into",
+    "remembers",
+    "believes",
+    "suspects",
+    "knows",
+    "misremembers",
+    "trusts",
+    "distrusts",
+    "depends_on",
+    "influences",
+    "reciprocates",
+    "projects",
+    "supersedes"
+  ],
+  "projection_types": [
+    "character_bible",
+    "forensic_profile",
+    "physical_profile",
+    "domain_profile",
+    "category_profile",
+    "relationship_profile",
+    "chronology",
+    "knowledge_ledger",
+    "belief_ledger",
+    "memory_ledger",
+    "contradiction_report",
+    "continuity_report",
+    "arc_graph",
+    "current_state",
+    "scene_state",
+    "behavioral_alternatives",
+    "counterfactual_comparison",
+    "provenance_explanation",
+    "unresolved_questions"
+  ],
+  "invariants": {
+    "general_character_engine": true,
+    "character_data_not_hardcoded": true,
+    "semantic_identity_separate_from_label": true,
+    "composition_by_reference": true,
+    "evidence_separate_from_conclusion": true,
+    "counterevidence_preserved": true,
+    "contradictions_preserved": true,
+    "state_separate_from_trait": true,
+    "truth_separate_from_belief": true,
+    "memory_separate_from_truth": true,
+    "unknown_is_first_class": true,
+    "simulation_remains_derived": true,
+    "generative_output_remains_derived": true,
+    "author_sovereignty": true,
+    "source_authority_preserved": true,
+    "lineage_preserved": true,
+    "provenance_preserved": true,
+    "authority_transfer": false
+  }
+}

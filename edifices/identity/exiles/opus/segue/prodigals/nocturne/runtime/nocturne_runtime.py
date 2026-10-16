@@ -1,0 +1,790 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import hashlib
+import importlib.util
+import json
+import sys
+import time
+from pathlib import Path
+from typing import Any, Callable
+
+
+NOCTURNE_ROOT = Path(__file__).resolve().parents[1]
+CONTRACTS_ROOT = NOCTURNE_ROOT / "contracts"
+QUIRKS_ROOT = NOCTURNE_ROOT / "quirks"
+
+if str(CONTRACTS_ROOT) not in sys.path:
+    sys.path.insert(
+        0,
+        str(CONTRACTS_ROOT),
+    )
+
+from nocturne_fusion_contracts import (  # noqa: E402
+    NocturneRequest,
+    NocturneResult,
+    ProvenanceEnvelope,
+    QuirkName,
+    StageResult,
+    StageState,
+)
+
+
+RUNTIME_ID = "prodigal.nocturne.runtime"
+RUNTIME_VERSION = "1.0.0"
+
+
+QUIRK_RUNTIME_PATHS = {
+    QuirkName.VEIL: (
+        QUIRKS_ROOT
+        / "veil"
+        / "runtime"
+        / "veil_runtime.py"
+    ),
+    QuirkName.LANTERN: (
+        QUIRKS_ROOT
+        / "lantern"
+        / "runtime"
+        / "lantern_runtime.py"
+    ),
+    QuirkName.SCRIBE: (
+        QUIRKS_ROOT
+        / "scribe"
+        / "runtime"
+        / "scribe_runtime.py"
+    ),
+    QuirkName.ECHO: (
+        QUIRKS_ROOT
+        / "echo"
+        / "runtime"
+        / "echo_runtime.py"
+    ),
+}
+
+
+QUIRK_REQUEST_MODELS = {
+    QuirkName.VEIL: "RouteRequest",
+    QuirkName.LANTERN: "DiscoveryRequest",
+    QuirkName.SCRIBE: "ExtractionRequest",
+    QuirkName.ECHO: "CorrelationRequest",
+}
+
+
+def canonical_bytes(
+    value: Any,
+) -> bytes:
+    if hasattr(value, "model_dump"):
+        value = value.model_dump(
+            mode="json",
+        )
+
+    return json.dumps(
+        value,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+
+
+def digest(
+    value: Any,
+) -> str:
+    return hashlib.sha256(
+        canonical_bytes(value)
+    ).hexdigest()
+
+
+VOLATILE_FIELDS = {
+    "duration_seconds",
+    "started_at",
+    "finished_at",
+    "elapsed_seconds",
+    "wall_clock_seconds",
+}
+
+
+def deterministic_projection(
+    value: Any,
+) -> Any:
+    """
+    Remove volatile observability values from authoritative
+    deterministic composition projections.
+
+    Telemetry may be emitted separately, but it must never alter
+    stage identity, composition identity, replay, or content hashes.
+    """
+    if hasattr(value, "model_dump"):
+        value = value.model_dump(
+            mode="json",
+        )
+
+    if isinstance(value, dict):
+        return {
+            key: deterministic_projection(child)
+            for key, child in sorted(
+                value.items(),
+                key=lambda item: item[0],
+            )
+            if key not in VOLATILE_FIELDS
+        }
+
+    if isinstance(value, list):
+        return [
+            deterministic_projection(child)
+            for child in value
+        ]
+
+    if isinstance(value, tuple):
+        return tuple(
+            deterministic_projection(child)
+            for child in value
+        )
+
+    return value
+
+
+def build_provenance(
+    request: NocturneRequest,
+    transformations: tuple[str, ...],
+) -> ProvenanceEnvelope:
+    return ProvenanceEnvelope(
+        sources=request.provenance.sources,
+        transformations=transformations,
+        generated_by=f"{RUNTIME_ID}@{RUNTIME_VERSION}",
+        generated_at=request.provenance.generated_at,
+    )
+
+
+def load_runtime_module(
+    quirk: QuirkName,
+) -> Any:
+    path = QUIRK_RUNTIME_PATHS[quirk]
+
+    if not path.is_file():
+        raise FileNotFoundError(
+            f"Quirk runtime is unavailable: {path}"
+        )
+
+    module_name = (
+        f"nocturne_{quirk.value}_runtime"
+    )
+
+    specification = (
+        importlib.util.spec_from_file_location(
+            module_name,
+            path,
+        )
+    )
+
+    if (
+        specification is None
+        or specification.loader is None
+    ):
+        raise ImportError(
+            f"Cannot load runtime module: {path}"
+        )
+
+    module = importlib.util.module_from_spec(
+        specification
+    )
+
+    specification.loader.exec_module(
+        module
+    )
+
+    return module
+
+
+def request_payload(
+    request: NocturneRequest,
+    quirk: QuirkName,
+) -> dict[str, Any] | None:
+    return {
+        QuirkName.VEIL: request.veil_request,
+        QuirkName.LANTERN: request.lantern_request,
+        QuirkName.SCRIBE: request.scribe_request,
+        QuirkName.ECHO: request.echo_request,
+    }[quirk]
+
+
+def execute_quirk(
+    request: NocturneRequest,
+    quirk: QuirkName,
+) -> StageResult:
+    required = (
+        quirk
+        in request.policy.required_quirks
+    )
+
+    payload = request_payload(
+        request,
+        quirk,
+    )
+
+    stage_id = (
+        f"nocturne-stage-{quirk.value}"
+    )
+
+    if payload is None:
+        state = (
+            StageState.FAILED
+            if required
+            else StageState.SKIPPED
+        )
+
+        return StageResult(
+            stage_id=stage_id,
+            quirk=quirk,
+            state=state,
+            passed=False,
+            required=required,
+            failure={
+                "code": "nocturne.input.missing",
+                "message": (
+                    f"No request payload supplied "
+                    f"for {quirk.value}."
+                ),
+            },
+            provenance=build_provenance(
+                request,
+                (
+                    f"admit_{quirk.value}",
+                    "detect_missing_payload",
+                ),
+            ),
+        )
+
+    try:
+        module = load_runtime_module(
+            quirk
+        )
+
+        model_name = (
+            QUIRK_REQUEST_MODELS[quirk]
+        )
+
+        request_model = getattr(
+            module,
+            model_name,
+        )
+
+        run_function: Callable[[Any], Any] = getattr(
+            module,
+            "run",
+        )
+
+        validated_request = (
+            request_model.model_validate(
+                payload
+            )
+        )
+
+        result = run_function(
+            validated_request
+        )
+
+        raw_result_value = result.model_dump(
+            mode="json",
+        )
+
+        result_value = deterministic_projection(
+            raw_result_value
+        )
+
+        passed = bool(
+            result_value.get(
+                "passed",
+                False,
+            )
+        )
+
+        return StageResult(
+            stage_id=stage_id,
+            quirk=quirk,
+            state=(
+                StageState.COMPLETED
+                if passed
+                else StageState.FAILED
+            ),
+            passed=passed,
+            required=required,
+            result=(
+                result_value
+                if passed
+                else None
+            ),
+            failure=(
+                result_value.get(
+                    "failure"
+                )
+                if not passed
+                else None
+            ),
+            result_digest=digest(
+                result_value
+            ),
+            provenance=build_provenance(
+                request,
+                (
+                    f"validate_{quirk.value}_request",
+                    f"execute_{quirk.value}",
+                    f"capture_{quirk.value}_result",
+                ),
+            ),
+        )
+
+    except Exception as exc:
+        return StageResult(
+            stage_id=stage_id,
+            quirk=quirk,
+            state=StageState.FAILED,
+            passed=False,
+            required=required,
+            failure={
+                "code": "nocturne.stage.failure",
+                "message": str(exc),
+                "exception_type": (
+                    type(exc).__name__
+                ),
+            },
+            result_digest=digest(
+                {
+                    "quirk": quirk.value,
+                    "exception_type": (
+                        type(exc).__name__
+                    ),
+                    "message": str(exc),
+                }
+            ),
+            provenance=build_provenance(
+                request,
+                (
+                    f"validate_{quirk.value}_request",
+                    f"capture_{quirk.value}_failure",
+                ),
+            ),
+        )
+
+
+def compose(
+    request: NocturneRequest,
+) -> NocturneResult:
+    started = time.perf_counter()
+
+    stages: list[StageResult] = []
+
+    enabled = tuple(
+        sorted(
+            set(
+                request.policy.enabled_quirks
+            ),
+            key=lambda value: value.value,
+        )
+    )
+
+    for quirk in enabled:
+        stage = execute_quirk(
+            request,
+            quirk,
+        )
+
+        stages.append(
+            stage
+        )
+
+        failed_count = sum(
+            stage_result.state
+            == StageState.FAILED
+            for stage_result in stages
+        )
+
+        if (
+            request.policy.fail_closed
+            and failed_count
+            > request.policy.maximum_stage_failures
+        ):
+            break
+
+        if (
+            stage.required
+            and not stage.passed
+            and request.policy.fail_closed
+        ):
+            break
+
+    executed = {
+        stage.quirk
+        for stage in stages
+    }
+
+    for quirk in enabled:
+        if quirk in executed:
+            continue
+
+        stages.append(
+            StageResult(
+                stage_id=(
+                    f"nocturne-stage-{quirk.value}"
+                ),
+                quirk=quirk,
+                state=StageState.SKIPPED,
+                passed=False,
+                required=(
+                    quirk
+                    in request.policy.required_quirks
+                ),
+                failure={
+                    "code": "nocturne.stage.halted",
+                    "message": (
+                        "Stage was not executed because "
+                        "composition halted earlier."
+                    ),
+                },
+                provenance=build_provenance(
+                    request,
+                    (
+                        f"skip_{quirk.value}",
+                        "composition_halted",
+                    ),
+                ),
+            )
+        )
+
+    stages = sorted(
+        stages,
+        key=lambda stage: stage.quirk.value,
+    )
+
+    completed = tuple(
+        stage.quirk
+        for stage in stages
+        if stage.state
+        == StageState.COMPLETED
+    )
+
+    failed = tuple(
+        stage.quirk
+        for stage in stages
+        if stage.state
+        == StageState.FAILED
+    )
+
+    skipped = tuple(
+        stage.quirk
+        for stage in stages
+        if stage.state
+        == StageState.SKIPPED
+    )
+
+    required_failures = [
+        stage
+        for stage in stages
+        if stage.required
+        and not stage.passed
+    ]
+
+    passed = not required_failures
+
+    if (
+        failed
+        and not request.policy.allow_partial_results
+    ):
+        passed = False
+
+    partial = bool(
+        completed
+        and (
+            failed
+            or skipped
+        )
+    )
+
+    composition_body = deterministic_projection(
+        {
+            "request_id": request.request_id,
+            "policy": request.policy.model_dump(
+                mode="json",
+            ),
+            "stages": [
+                stage.model_dump(
+                    mode="json",
+                )
+                for stage in stages
+            ],
+            "passed": passed,
+            "partial": partial,
+        }
+    )
+
+    composition_digest = digest(
+        composition_body
+    )
+
+    return NocturneResult(
+        operation="compose",
+        passed=passed,
+        partial=partial,
+        request_id=request.request_id,
+        stages=tuple(stages),
+        completed_quirks=completed,
+        failed_quirks=failed,
+        skipped_quirks=skipped,
+        composition_digest=composition_digest,
+        metrics={
+            "duration_seconds": (
+                time.perf_counter()
+                - started
+            ),
+            "enabled_count": len(enabled),
+            "completed_count": len(completed),
+            "failed_count": len(failed),
+            "skipped_count": len(skipped),
+            "partial": partial,
+            "passed": passed,
+        },
+        provenance=build_provenance(
+            request,
+            (
+                "admit_nocturne_request",
+                "resolve_fusion_policy",
+                "execute_enabled_quirks",
+                "normalize_stage_results",
+                "calculate_composition_state",
+                "emit_nocturne_result",
+            ),
+        ),
+    )
+
+
+def example_request() -> NocturneRequest:
+    generated_at = (
+        "2026-07-31T00:00:00+00:00"
+    )
+
+    return NocturneRequest(
+        request_id="nocturne-example-request",
+        purpose=(
+            "Demonstrate deterministic partial "
+            "composition using supplied quirk requests."
+        ),
+        policy={
+            "execution_mode": "plan",
+            "enabled_quirks": [
+                "veil"
+            ],
+            "required_quirks": [
+                "veil"
+            ],
+            "allow_partial_results": True,
+            "fail_closed": True,
+            "preserve_intermediate_results": True,
+            "maximum_stage_failures": 1,
+        },
+        veil_request={
+            "request_id": "nocturne-veil-example",
+            "destination": "example.invalid",
+            "purpose": (
+                "Generate a deterministic route plan."
+            ),
+            "execution_mode": "plan",
+            "required_hops": 3,
+            "maximum_latency_ms": None,
+            "avoid_jurisdictions": [],
+            "preferred_transports": [],
+            "timing_jitter_ms": [
+                100,
+                900
+            ],
+            "rotation_interval_seconds": 600,
+            "policy": {
+                "execution_mode": "plan",
+                "network_access": False,
+                "filesystem_read": False,
+                "filesystem_write": False,
+                "subprocess_access": False,
+                "secret_access": False,
+                "allowed_hosts": [],
+                "allowed_paths": [],
+                "allowed_commands": [],
+                "audit_required": True
+            },
+            "provenance": {
+                "sources": [],
+                "transformations": [],
+                "generated_by": "nocturne-example",
+                "generated_at": generated_at,
+                "contract_version": "1.0.0"
+            }
+        },
+        provenance={
+            "sources": [],
+            "transformations": [],
+            "generated_by": "nocturne-example",
+            "generated_at": generated_at,
+            "contract_version": "1.0.0"
+        },
+    )
+
+
+def load_request(
+    path: Path | None,
+) -> NocturneRequest:
+    if path is None:
+        raw = sys.stdin.read()
+    else:
+        raw = path.read_text(
+            encoding="utf-8"
+        )
+
+    return NocturneRequest.model_validate_json(
+        raw
+    )
+
+
+def write_result(
+    result: NocturneResult,
+    output: Path | None,
+) -> None:
+    rendered = json.dumps(
+        result.model_dump(
+            mode="json",
+        ),
+        ensure_ascii=False,
+        indent=2,
+        sort_keys=True,
+    ) + "\n"
+
+    if output is None:
+        print(
+            rendered,
+            end="",
+        )
+        return
+
+    output.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    output.write_text(
+        rendered,
+        encoding="utf-8",
+    )
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Nocturne deterministic quirk-composition runtime."
+        )
+    )
+
+    subparsers = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    run_parser = subparsers.add_parser(
+        "run"
+    )
+
+    run_parser.add_argument(
+        "--input",
+        type=Path,
+    )
+
+    run_parser.add_argument(
+        "--output",
+        type=Path,
+    )
+
+    example_parser = subparsers.add_parser(
+        "example"
+    )
+
+    example_parser.add_argument(
+        "--output",
+        type=Path,
+    )
+
+    subparsers.add_parser(
+        "schema"
+    )
+
+    args = parser.parse_args()
+
+    if args.command == "run":
+        result = compose(
+            load_request(
+                args.input
+            )
+        )
+
+        write_result(
+            result,
+            args.output,
+        )
+
+        return (
+            0
+            if result.passed
+            else 1
+        )
+
+    if args.command == "example":
+        request = example_request()
+
+        rendered = json.dumps(
+            request.model_dump(
+                mode="json",
+            ),
+            ensure_ascii=False,
+            indent=2,
+            sort_keys=True,
+        ) + "\n"
+
+        if args.output is None:
+            print(
+                rendered,
+                end="",
+            )
+        else:
+            args.output.parent.mkdir(
+                parents=True,
+                exist_ok=True,
+            )
+
+            args.output.write_text(
+                rendered,
+                encoding="utf-8",
+            )
+
+        return 0
+
+    if args.command == "schema":
+        print(
+            json.dumps(
+                {
+                    "nocturne_request": (
+                        NocturneRequest
+                        .model_json_schema()
+                    ),
+                    "nocturne_result": (
+                        NocturneResult
+                        .model_json_schema()
+                    ),
+                },
+                ensure_ascii=False,
+                indent=2,
+                sort_keys=True,
+            )
+        )
+
+        return 0
+
+    return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

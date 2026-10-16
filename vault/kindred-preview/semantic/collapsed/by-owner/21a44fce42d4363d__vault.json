@@ -1,0 +1,153 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "c4dac50275f7feab578d885907cabaab1784a47ff87c8b5ac7d43c18d3e329a6",
+  "generated_at": "2026-07-17T11:47:04+00:00",
+  "members": [
+    {
+      "authority_tier": "delegated",
+      "canonical_id": "fs:vault/fields",
+      "collapse_reason": "generic_directory_attachment",
+      "extension": null,
+      "id": "vault/fields",
+      "instance_hash": "245f4e3fae896be32a924d82b9a5b213005e7b1ae90f18338a10786320930bc7",
+      "instance_record": "instances/vault-fields.json",
+      "kind": "directory",
+      "label": "fields",
+      "normalized_path": "vault/fields",
+      "original_lineage_to_owner": [
+        "vault/fields",
+        "vault"
+      ],
+      "original_parent": "vault",
+      "path": "vault/fields",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.0fea298d095c9fe63d2a",
+        "lineage.composition.3fcd0fe8ba988b0c9215"
+      ],
+      "semantic_owner": "vault",
+      "shard_level": "instance",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "delegated",
+      "canonical_id": "fs:vault/fields/structural_fields.json",
+      "collapse_reason": "file_attachment",
+      "extension": ".json",
+      "id": "vault/fields/structural_fields.json",
+      "instance_hash": "8e4a5ef0baaaea935688f5451651169073eda80d10d01bc4c88d02a75f598827",
+      "instance_record": "instances/vault-fields-structural_fields.json.json",
+      "kind": "file",
+      "label": "structural_fields.json",
+      "normalized_path": "vault/fields/structural_fields.json",
+      "original_lineage_to_owner": [
+        "vault/fields/structural_fields.json",
+        "vault/fields",
+        "vault"
+      ],
+      "original_parent": "vault/fields",
+      "path": "vault/fields/structural_fields.json",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.3fcd0fe8ba988b0c9215"
+      ],
+      "semantic_owner": "vault",
+      "shard_level": "record",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "delegated",
+      "canonical_id": "fs:vault/graphs",
+      "collapse_reason": "generic_directory_attachment",
+      "extension": null,
+      "id": "vault/graphs",
+      "instance_hash": "a4c30d1daaaf07d200af78ddbe16a0f71dbe4a52199d0bd6a3db992559fbc164",
+      "instance_record": "instances/vault-graphs.json",
+      "kind": "directory",
+      "label": "graphs",
+      "normalized_path": "vault/graphs",
+      "original_lineage_to_owner": [
+        "vault/graphs",
+        "vault"
+      ],
+      "original_parent": "vault",
+      "path": "vault/graphs",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.ed1b6ebdccd2d080e6c4"
+      ],
+      "semantic_owner": "vault",
+      "shard_level": "instance",
+      "state": "active",
+      "synthetic": false
+    },
+    {
+      "authority_tier": "delegated",
+      "canonical_id": "fs:vault/lineage",
+      "collapse_reason": "generic_directory_attachment",
+      "extension": null,
+      "id": "vault/lineage",
+      "instance_hash": "b9a2839381fabaa7f387ff0dc3518c789cab8d1b8c7796a1fdcad1f0cf269c8d",
+      "instance_record": "instances/vault-lineage.json",
+      "kind": "directory",
+      "label": "lineage",
+      "normalized_path": "vault/lineage",
+      "original_lineage_to_owner": [
+        "vault/lineage",
+        "vault"
+      ],
+      "original_parent": "vault",
+      "path": "vault/lineage",
+      "provenance": {
+        "generator": "kindred.semantic_view_builder.v1",
+        "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+      },
+      "relationship_ids": [
+        "lineage.composition.c8e00e1464313d4d3873"
+      ],
+      "semantic_owner": "vault",
+      "shard_level": "instance",
+      "state": "active",
+      "synthetic": false
+    }
+  ],
+  "owner": "vault",
+  "owner_label": "vault",
+  "projection_only": true,
+  "provenance": {
+    "generator": "kindred.semantic_view_builder.v1",
+    "preview_hash": "7e15e0ca0919ec3f92dc640fb86abed1911072701e35707f338f82e008af9e49"
+  },
+  "schema": "savant.kindred.semantic_projection.v1.collapsed_owner",
+  "summary": {
+    "by_extension": {
+      ".json": 1,
+      "none": 3
+    },
+    "by_kind": {
+      "directory": 3,
+      "file": 1
+    },
+    "by_reason": {
+      "file_attachment": 1,
+      "generic_directory_attachment": 3
+    },
+    "by_state": {
+      "active": 4
+    },
+    "direct": 3,
+    "nested": 1,
+    "total": 4
+  }
+}

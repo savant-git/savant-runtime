@@ -1,0 +1,161 @@
+{
+  "id": "registry.lineage_roles.system",
+  "kind": "role_registry_extension",
+  "status": "active",
+  "authority": "FOUNDATION-008",
+  "version": "1.0.0",
+  "roles": {
+    "dependency": {
+      "axis": "prerequisite",
+      "inverse": "dependent",
+      "aliases": [
+        "depends_on",
+        "requires",
+        "prerequisite"
+      ],
+      "precedence": 1100,
+      "acyclic": true,
+      "cycle_domain": "dependency",
+      "propagates_changes": true,
+      "default_inheritance": {
+        "mode": "reference",
+        "fields": [],
+        "conflict_policy": "child_wins"
+      }
+    },
+    "classification": {
+      "axis": "taxonomy",
+      "inverse": "classified_instance",
+      "aliases": [
+        "classifies",
+        "classified_by",
+        "type_parent"
+      ],
+      "precedence": 1200,
+      "acyclic": true,
+      "cycle_domain": "classification",
+      "propagates_changes": true,
+      "default_inheritance": {
+        "mode": "reference",
+        "fields": [],
+        "conflict_policy": "child_wins"
+      }
+    },
+    "membership": {
+      "axis": "membership",
+      "inverse": "member",
+      "aliases": [
+        "member_of",
+        "includes",
+        "collection"
+      ],
+      "precedence": 1300,
+      "acyclic": true,
+      "cycle_domain": "membership",
+      "propagates_changes": true,
+      "default_inheritance": {
+        "mode": "reference",
+        "fields": [],
+        "conflict_policy": "child_wins"
+      }
+    },
+    "supersession": {
+      "axis": "authority_history",
+      "inverse": "superseded_by",
+      "aliases": [
+        "supersedes",
+        "replacement",
+        "revision_parent"
+      ],
+      "precedence": 1400,
+      "acyclic": true,
+      "cycle_domain": "supersession",
+      "propagates_changes": true,
+      "default_inheritance": {
+        "mode": "reference",
+        "fields": [],
+        "conflict_policy": "child_wins"
+      }
+    },
+    "sequence": {
+      "axis": "order",
+      "inverse": "successor",
+      "aliases": [
+        "precedes",
+        "previous",
+        "predecessor"
+      ],
+      "precedence": 1500,
+      "acyclic": true,
+      "cycle_domain": "sequence",
+      "propagates_changes": true,
+      "default_inheritance": {
+        "mode": "reference",
+        "fields": [],
+        "conflict_policy": "child_wins"
+      }
+    },
+    "attachment": {
+      "axis": "attachment",
+      "inverse": "attached",
+      "aliases": [
+        "attached_to",
+        "mount",
+        "mounted_on"
+      ],
+      "precedence": 1600,
+      "acyclic": true,
+      "cycle_domain": "attachment",
+      "propagates_changes": true,
+      "default_inheritance": {
+        "mode": "reference",
+        "fields": [],
+        "conflict_policy": "child_wins"
+      }
+    },
+    "implementation": {
+      "axis": "realization",
+      "inverse": "implemented_by",
+      "aliases": [
+        "implements",
+        "implementation_of",
+        "realizes"
+      ],
+      "precedence": 1700,
+      "acyclic": true,
+      "cycle_domain": "implementation",
+      "propagates_changes": true,
+      "default_inheritance": {
+        "mode": "merge",
+        "fields": [
+          "interfaces",
+          "contracts",
+          "constraints",
+          "metadata"
+        ],
+        "conflict_policy": "child_wins"
+      }
+    },
+    "exposure": {
+      "axis": "interface",
+      "inverse": "exposed_by",
+      "aliases": [
+        "exposes",
+        "public_interface",
+        "surface"
+      ],
+      "precedence": 1800,
+      "acyclic": true,
+      "cycle_domain": "exposure",
+      "propagates_changes": true,
+      "default_inheritance": {
+        "mode": "reference",
+        "fields": [],
+        "conflict_policy": "child_wins"
+      }
+    }
+  },
+  "continuation_modes": {},
+  "extensions": {},
+  "future_extensions": {}
+}

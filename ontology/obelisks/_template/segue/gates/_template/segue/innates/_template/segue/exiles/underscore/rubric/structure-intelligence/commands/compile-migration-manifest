@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+IFS=$'\n\t'
+umask 027
+
+readonly COMPILER="/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/underscore/rubric/structure-intelligence/source/compile_migration_manifest.py"
+
+if [[ ! -s "${COMPILER}" ]]; then
+    printf 'ERROR: compiler unavailable or empty: %s\n' \
+        "${COMPILER}" >&2
+    exit 1
+fi
+
+exec python3 "${COMPILER}" "$@"

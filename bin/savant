@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd /root/savant-runtime
+exec python3 "/root/savant-runtime/tools/savant_accelerator/savant_accelerator.py" "$@"

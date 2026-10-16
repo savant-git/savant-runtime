@@ -1,0 +1,74 @@
+{
+  "authoritative": false,
+  "authority_tier": "authoritative",
+  "canonical_id": "template.universal_instance",
+  "deterministic_hash": "e395ec2ac58aa6d771f8f105e9cc2edcbd943092a5b3073b8693574f2b30d145",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "template.universal_instance",
+  "kind": "instance",
+  "label": "template.universal_instance",
+  "namespace": "preview.kindred",
+  "path": null,
+  "placement": {
+    "domain": "unclassified",
+    "node": "template.universal_instance",
+    "parent": "savant-runtime",
+    "placement_basis": "orphan_attachment",
+    "primary_relationship_id": null,
+    "rank": 1780,
+    "slot": "80_children",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": true,
+    "canonical_id": "template.universal_instance",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "template.universal_instance",
+    "kind": "instance",
+    "label": "template.universal_instance",
+    "legacy_id": null,
+    "lineage": [],
+    "metadata": {
+      "authority_source_path": "/root/savant-runtime/ontology/obelisks/segue/authority_graph/projections/json/template__universal_instance.json",
+      "canonical_id": "template.universal_instance",
+      "child_modes": {},
+      "child_roles": {},
+      "lineage_placeholder": false,
+      "parent_roles": {},
+      "projected_id": "template.universal_instance",
+      "purpose": "Universal instance template projected from SQLite authority."
+    },
+    "mothers": [],
+    "parents": [],
+    "path": null,
+    "provenance": {
+      "adapter": "authority_document",
+      "created_at": "2026-06-28 19:12:47",
+      "database": "/root/savant-runtime/ontology/obelisks/segue/authority_db/savant_authority.sqlite",
+      "source": "sqlite",
+      "source_files": [
+        "/root/savant-runtime/ontology/obelisks/segue/authority_graph/projections/json/template__universal_instance.json"
+      ],
+      "updated_at": "2026-06-28 19:12:47"
+    },
+    "recovery_routes": [],
+    "relationships": [],
+    "size": 7,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

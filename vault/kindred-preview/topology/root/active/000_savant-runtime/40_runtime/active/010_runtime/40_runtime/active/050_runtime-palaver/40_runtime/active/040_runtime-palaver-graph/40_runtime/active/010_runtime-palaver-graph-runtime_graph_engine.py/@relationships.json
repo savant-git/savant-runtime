@@ -1,0 +1,76 @@
+{
+  "authoritative": false,
+  "deterministic_hash": "83db8d45385073db095058471b2464bf8d6fbd9385a725b890febe65b36e8529",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "namespace": "preview.kindred",
+  "node": "runtime/palaver/graph/runtime_graph_engine.py",
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationships": [
+    {
+      "child_profile": "son",
+      "domain": "filesystem",
+      "id": "lineage.composition.e639b95ce86f6941cd89",
+      "impeti": [],
+      "parent_profile": "parent",
+      "plane": "lineage",
+      "projection_only": true,
+      "provenance": {
+        "projection_namespace": "preview.kindred",
+        "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+        "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+      },
+      "role": "composition",
+      "source": "runtime/palaver/graph",
+      "source_record": {
+        "axis": "containment",
+        "canonical_source": "fs:runtime/palaver/graph",
+        "canonical_target": "fs:runtime/palaver/graph/runtime_graph_engine.py",
+        "continuation": "projecting",
+        "id": "lineage.composition.e639b95ce86f6941cd89",
+        "inheritance": {
+          "conflict_policy": "child_wins",
+          "exclude": [],
+          "fields": [],
+          "mode": "reference"
+        },
+        "inverse": "component",
+        "kind": "contains",
+        "metadata": {
+          "legacy_edge_kind": "contains",
+          "projection": "filesystem_edifice"
+        },
+        "order": 0,
+        "propagation": {
+          "channels": [
+            "validation",
+            "projection",
+            "regeneration"
+          ],
+          "enabled": true
+        },
+        "provenance": {
+          "created_by": "filesystem_adapter",
+          "source_files": [
+            "/root/savant-runtime/runtime/palaver/graph/runtime_graph_engine.py"
+          ]
+        },
+        "role": "composition",
+        "scope": "filesystem",
+        "source": "runtime/palaver/graph",
+        "status": "active",
+        "symbolic_child_alias": "son",
+        "symbolic_parent_alias": "parent",
+        "target": "runtime/palaver/graph/runtime_graph_engine.py",
+        "weight": 2
+      },
+      "state": "active",
+      "synthetic": false,
+      "target": "runtime/palaver/graph/runtime_graph_engine.py"
+    }
+  ],
+  "schema": "savant.kindred.preview.relationship_projection.v2"
+}

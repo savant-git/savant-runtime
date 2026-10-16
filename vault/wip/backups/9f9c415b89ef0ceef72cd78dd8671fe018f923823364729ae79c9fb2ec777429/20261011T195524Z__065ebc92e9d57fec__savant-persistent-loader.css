@@ -1,0 +1,10 @@
+.savant-persistent-shell { min-height: 100%; position: relative; }
+.savant-persistent-content { opacity: 0; visibility: hidden; transition: opacity .65s ease, visibility 0s linear .65s; }
+.savant-persistent-shell[data-loaded="true"] .savant-persistent-content { opacity: 1; visibility: visible; transition: opacity .65s ease .18s; }
+.savant-persistent-veil { position: fixed; inset: 0; z-index: 900; background: radial-gradient(ellipse at 50% 46%, #17242b 0%, #090e15 55%, #05070b 100%); pointer-events: none; animation: savant-veil-out .85s ease forwards; animation-play-state: paused; }
+.savant-persistent-shell[data-loaded="true"] .savant-persistent-veil { animation-play-state: running; }
+.savant-persistent-mark { position: fixed; z-index: 1000; left: calc(50vw - 160px); top: calc(50dvh - 160px); width: 320px; height: 320px; transition: left .9s cubic-bezier(.2,.8,.2,1), top .9s cubic-bezier(.2,.8,.2,1), width .9s cubic-bezier(.2,.8,.2,1), height .9s cubic-bezier(.2,.8,.2,1); pointer-events: auto; }
+.savant-persistent-mark .savant-mark, .savant-persistent-mark .savant-mark__viewport { width: 100%; height: 100%; }
+.savant-persistent-status { position: fixed; bottom: max(5vh, 22px); left: 0; right: 0; z-index: 1001; color: #a7c8c8; text-align: center; font: 500 11px/1.5 system-ui,sans-serif; letter-spacing: .24em; text-transform: uppercase; }
+@keyframes savant-veil-out { to { opacity: 0; visibility: hidden; } }
+@media (prefers-reduced-motion: reduce) { .savant-persistent-mark, .savant-persistent-content { transition-duration: .01ms !important; } .savant-persistent-veil { animation-duration: .01ms; } }

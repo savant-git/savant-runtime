@@ -1,0 +1,127 @@
+{
+  "authoritative": false,
+  "authority_tier": "delegated",
+  "canonical_id": "fs:tools/refactor_engine",
+  "deterministic_hash": "4e24e1f4c58a99677b86680ca3b165fedcf347b8b6bf0219ab78fe2a24381c1c",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "tools/refactor_engine",
+  "kind": "directory",
+  "label": "refactor_engine",
+  "namespace": "preview.kindred",
+  "path": "tools/refactor_engine",
+  "placement": {
+    "domain": "filesystem",
+    "node": "tools/refactor_engine",
+    "parent": "tools",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.555b0d7fe2f1e932a425",
+    "rank": 40,
+    "slot": "60_tools",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.0688fdb2283b81b5c78a",
+    "lineage.composition.0dbfef80e830f4e323d3",
+    "lineage.composition.53529c7e79611bd85fb2",
+    "lineage.composition.555b0d7fe2f1e932a425",
+    "lineage.composition.ac4c8581e7c9329a0ace",
+    "lineage.composition.b7420f39fbab367fe197",
+    "lineage.composition.f240bd25e70a4365721e"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "instance",
+  "source_record": {
+    "authority": false,
+    "canonical_id": "fs:tools/refactor_engine",
+    "children": [
+      "tools/refactor_engine/simulate_phase05_moves.py",
+      "tools/refactor_engine/compile_move_policy.py",
+      "tools/refactor_engine/report_rewrite_plan.py",
+      "tools/refactor_engine/refactor_engine.py",
+      "tools/refactor_engine/full_reference_rewrite_simulator.py",
+      "tools/refactor_engine/simulate_refactor.py"
+    ],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "tools/refactor_engine",
+    "kind": "directory",
+    "label": "refactor_engine",
+    "legacy_id": "tools/refactor_engine",
+    "lineage": [
+      "tools"
+    ],
+    "metadata": {
+      "canonical_id": "fs:tools/refactor_engine",
+      "child_modes": {
+        "projecting": [
+          "fs:tools/refactor_engine/simulate_phase05_moves.py",
+          "fs:tools/refactor_engine/compile_move_policy.py",
+          "fs:tools/refactor_engine/report_rewrite_plan.py",
+          "fs:tools/refactor_engine/refactor_engine.py",
+          "fs:tools/refactor_engine/full_reference_rewrite_simulator.py",
+          "fs:tools/refactor_engine/simulate_refactor.py"
+        ]
+      },
+      "child_roles": {
+        "composition": [
+          "fs:tools/refactor_engine/simulate_phase05_moves.py",
+          "fs:tools/refactor_engine/compile_move_policy.py",
+          "fs:tools/refactor_engine/report_rewrite_plan.py",
+          "fs:tools/refactor_engine/refactor_engine.py",
+          "fs:tools/refactor_engine/full_reference_rewrite_simulator.py",
+          "fs:tools/refactor_engine/simulate_refactor.py"
+        ]
+      },
+      "is_directory": true,
+      "is_file": false,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:tools"
+        ]
+      },
+      "projected_id": "tools/refactor_engine",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "tools"
+    ],
+    "path": "tools/refactor_engine",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "tools/refactor_engine",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.0688fdb2283b81b5c78a",
+      "lineage.composition.0dbfef80e830f4e323d3",
+      "lineage.composition.53529c7e79611bd85fb2",
+      "lineage.composition.555b0d7fe2f1e932a425",
+      "lineage.composition.ac4c8581e7c9329a0ace",
+      "lineage.composition.b7420f39fbab367fe197",
+      "lineage.composition.f240bd25e70a4365721e"
+    ],
+    "size": 12,
+    "sons": [
+      "tools/refactor_engine/simulate_phase05_moves.py",
+      "tools/refactor_engine/compile_move_policy.py",
+      "tools/refactor_engine/report_rewrite_plan.py",
+      "tools/refactor_engine/refactor_engine.py",
+      "tools/refactor_engine/full_reference_rewrite_simulator.py",
+      "tools/refactor_engine/simulate_refactor.py"
+    ]
+  },
+  "state": "active",
+  "synthetic": false
+}

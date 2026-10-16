@@ -1,0 +1,83 @@
+{
+  "authoritative": false,
+  "authority_tier": "delegated",
+  "canonical_id": "fs:tests/lineage/test_system_lineage_integration.py",
+  "deterministic_hash": "e2d33262c32a520344b8c3686fa54388ffa7e3d9f0a882fffd1cc0c7cb1dfbc1",
+  "generated_at": "2026-07-17T11:18:19+00:00",
+  "id": "tests/lineage/test_system_lineage_integration.py",
+  "kind": "file",
+  "label": "test_system_lineage_integration.py",
+  "namespace": "preview.kindred",
+  "path": "tests/lineage/test_system_lineage_integration.py",
+  "placement": {
+    "domain": "filesystem",
+    "node": "tests/lineage/test_system_lineage_integration.py",
+    "parent": "tests/lineage",
+    "placement_basis": "direct_lineage",
+    "primary_relationship_id": "lineage.composition.ab5cfcdf5507648f1271",
+    "rank": 50,
+    "slot": "70_validation",
+    "state": "active",
+    "synthetic": false
+  },
+  "projection_only": true,
+  "provenance": {
+    "projection_namespace": "preview.kindred",
+    "source": "/root/savant-runtime/vault/graphs/runtime_graph.json",
+    "source_graph_hash": "9106b5feb3668576659fa47eaec5b100dce7569f47d9a12f63c3906cb5890156"
+  },
+  "relationship_ids": [
+    "lineage.composition.ab5cfcdf5507648f1271"
+  ],
+  "schema": "savant.kindred.preview.instance.v2",
+  "shard_level": "record",
+  "source_record": {
+    "authority": false,
+    "canonical_id": "fs:tests/lineage/test_system_lineage_integration.py",
+    "children": [],
+    "daughters": [],
+    "dependencies": [],
+    "fathers": [],
+    "id": "tests/lineage/test_system_lineage_integration.py",
+    "kind": "file",
+    "label": "test_system_lineage_integration.py",
+    "legacy_id": "tests/lineage/test_system_lineage_integration.py",
+    "lineage": [
+      "tests/lineage"
+    ],
+    "metadata": {
+      "canonical_id": "fs:tests/lineage/test_system_lineage_integration.py",
+      "child_modes": {},
+      "child_roles": {},
+      "is_directory": false,
+      "is_file": true,
+      "is_symlink": false,
+      "lineage_placeholder": false,
+      "parent_roles": {
+        "composition": [
+          "fs:tests/lineage"
+        ]
+      },
+      "projected_id": "tests/lineage/test_system_lineage_integration.py",
+      "symlink_target": null
+    },
+    "mothers": [],
+    "parents": [
+      "tests/lineage"
+    ],
+    "path": "tests/lineage/test_system_lineage_integration.py",
+    "provenance": {
+      "adapter": "filesystem",
+      "path": "tests/lineage/test_system_lineage_integration.py",
+      "root": "/root/savant-runtime"
+    },
+    "recovery_routes": [],
+    "relationships": [
+      "lineage.composition.ab5cfcdf5507648f1271"
+    ],
+    "size": 7,
+    "sons": []
+  },
+  "state": "active",
+  "synthetic": false
+}

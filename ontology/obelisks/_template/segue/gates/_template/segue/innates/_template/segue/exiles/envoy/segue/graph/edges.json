@@ -1,0 +1,39 @@
+{
+  "id": "envoy.segue.edges",
+  "owner": "envoy",
+  "type": "segue_edge_registry",
+  "status": "active",
+  "edges": [
+    {
+      "source": "exile:palaver",
+      "target": "exile:envoy",
+      "relation": "delegates_persona_voice_resolution_to",
+      "routes": [
+        "persona_resolution_route",
+        "voice_resolution_route",
+        "voice_tts_route"
+      ],
+      "source_owner": "palaver",
+      "target_owner": "envoy",
+      "authority_transfer": false
+    },
+    {
+      "source": "exile:envoy",
+      "target": "exile:opus",
+      "relation": "delegates_provider_execution_to",
+      "routes": [
+        "text_inference_route",
+        "voice_tts_route"
+      ],
+      "source_owner": "envoy",
+      "target_owner": "opus",
+      "provider_selection_owner": "opus",
+      "provider_routing_owner": "opus",
+      "provider_credentials_owner": "opus",
+      "provider_execution_owner": "opus",
+      "provider_retry_policy_owner": "opus",
+      "provider_fallback_policy_owner": "opus",
+      "authority_transfer": false
+    }
+  ]
+}

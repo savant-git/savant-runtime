@@ -1,0 +1,60 @@
+{
+  "id": "carbon.oriel",
+  "owner": "carbon",
+  "type": "simulation_specialization_manifest",
+  "status": "active",
+  "schema": "savant://carbon/oriel/1",
+  "singular_purpose": "chronology and logistics intelligence inside carbon simulation",
+  "specialization": "chronometric_logistics_simulation",
+  "runtime": {
+    "chronology_logistics": "runtime/oriel.py",
+    "quantum_bridge": "runtime/oriel_quantum.py",
+    "inverse_chronology": "runtime/oriel_inverse.py",
+    "reality_binding": "runtime/oriel_reality.py",
+    "simulation_composition": "runtime/oriel_simulation.py",
+    "causal_logistics": "runtime/oriel_causality.py",
+    "quantum_consequence": "runtime/oriel_consequence.py",
+    "reachability_horizon": "runtime/oriel_horizon.py",
+    "worldline_projection": "runtime/oriel_worldline.py",
+    "capability_surface": "runtime/oriel_capabilities.py"
+  },
+  "capabilities": {
+    "registry": "registry/capabilities/oriel.json",
+    "provider": "runtime/oriel_capabilities.py",
+    "derivation": "provider_capability_manifests"
+  },
+  "composition": {
+    "simulation_owner": "carbon",
+    "chronology_logistics_component": "oriel",
+    "quantum_owner": "carbon",
+    "causal_simulation_owner": "carbon",
+    "historical_reality_owner": "external_source",
+    "projection_owner": "filament",
+    "transformation_owner": "modus"
+  },
+  "classification": {
+    "oriel_output": "derived_projection",
+    "quantum_branch": "derived_instance",
+    "inverse_solution": "derived_projection",
+    "reality_binding": "derived_constraint_projection",
+    "causal_projection": "derived_projection",
+    "worldline": "derived_projection",
+    "reachability_horizon": "derived_projection"
+  },
+  "invariants": {
+    "carbon_remains_simulation_owner": true,
+    "oriel_is_contained_by_carbon": true,
+    "oriel_does_not_create_authority": true,
+    "simulation_output_is_not_external_reality": true,
+    "historical_reality_remains_external_source_authority": true,
+    "verified_historical_constraints_are_immutable_in_simulation": true,
+    "absence_of_evidence_is_not_availability": true,
+    "co_location_is_not_interaction": true,
+    "quantum_collapse_is_not_canon_promotion": true,
+    "source_state_preserved": true,
+    "lineage_preserved": true,
+    "provenance_preserved": true,
+    "authority_transfer": false
+  },
+  "authority_effect": "none"
+}
