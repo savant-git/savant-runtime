@@ -1,10 +1,13 @@
+
 /*
- * palaver mobile interaction projection
+ * palaver interaction and industrial visual projection
  *
  * presentation-only compatibility layer.
- * does not own routing, workspace state, authority,
- * terminal behavior, or cinematic behavior.
+ * preserves routing, content, workspace state, authority,
+ * terminal behavior, logo behavior, and cinematic execution.
  */
+
+/* established mobile interaction compatibility */
 
 @media (hover: none), (pointer: coarse) {
   .palaver-workstation {
@@ -100,5 +103,401 @@
   .command-center [cmdk-list],
   .command-center [cmdk-item] {
     pointer-events: auto;
+  }
+}
+
+/* industrial-cinematic visual tokens */
+
+:root {
+  --palaver-industrial-void: #08090c;
+  --palaver-industrial-base: #101216;
+  --palaver-industrial-panel: #17191d;
+  --palaver-industrial-raised: #202126;
+  --palaver-industrial-metal: #34363a;
+  --palaver-industrial-line: rgba(191, 174, 161, 0.17);
+  --palaver-industrial-line-strong: rgba(202, 184, 166, 0.31);
+  --palaver-industrial-text: #e9e3dc;
+  --palaver-industrial-secondary: #b8b1ac;
+  --palaver-industrial-muted: #97908e;
+  --palaver-industrial-crimson: #a65a60;
+  --palaver-industrial-oxide: #986c58;
+  --palaver-industrial-amber: #c6a47a;
+  --palaver-industrial-violet: #746877;
+  --palaver-industrial-radius: 9px;
+  --palaver-industrial-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --palaver-industrial-shadow:
+    0 18px 48px rgba(0, 0, 0, 0.32);
+}
+
+/* global presentation */
+
+html,
+body,
+#root {
+  color: var(--palaver-industrial-text);
+  background-color: var(--palaver-industrial-void);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.palaver-workstation {
+  color: var(--palaver-industrial-text);
+  font-family:
+    Inter,
+    "Helvetica Neue",
+    ui-sans-serif,
+    system-ui,
+    sans-serif;
+  font-kerning: normal;
+  font-optical-sizing: auto;
+}
+
+.palaver-workstation :is(h1, h2, h3, h4) {
+  font-kerning: normal;
+  text-wrap: balance;
+}
+
+.palaver-workstation :is(p, li) {
+  text-wrap: pretty;
+}
+
+.palaver-workstation :is(
+  button,
+  input,
+  textarea,
+  select,
+  a,
+  [role="button"]
+) {
+  -webkit-tap-highlight-color: rgba(198, 164, 122, 0.14);
+}
+
+/* architectural surfaces */
+
+.palaver-workstation,
+.palaver-cinematic-runtime,
+.workstation-shell,
+.shell {
+  background-color: var(--palaver-industrial-void);
+}
+
+.palaver-workstation,
+.workstation-shell,
+.shell {
+  background-image:
+    radial-gradient(
+      ellipse at 76% 9%,
+      rgba(116, 104, 119, 0.12),
+      transparent 43%
+    ),
+    radial-gradient(
+      ellipse at 12% 87%,
+      rgba(152, 108, 88, 0.10),
+      transparent 38%
+    ),
+    linear-gradient(
+      155deg,
+      #111216 0%,
+      #0b0c0f 43%,
+      #08090c 100%
+    );
+}
+
+.palaver-left,
+.palaver-center,
+.palaver-right,
+.workstation-rail,
+.workspace-surface,
+.rail,
+.palaver-rail {
+  border-color: var(--palaver-industrial-line);
+}
+
+.palaver-left,
+.palaver-right,
+.workstation-rail,
+.rail,
+.palaver-rail {
+  background-color: rgba(16, 18, 22, 0.91);
+  background-image:
+    linear-gradient(
+      120deg,
+      rgba(207, 191, 171, 0.045),
+      transparent 39%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(33, 34, 39, 0.55),
+      rgba(10, 11, 14, 0.66)
+    );
+  box-shadow:
+    inset 0 1px rgba(255, 246, 227, 0.055),
+    12px 0 42px rgba(0, 0, 0, 0.12);
+}
+
+.palaver-center,
+.workspace-surface,
+.center-surface {
+  background-color: rgba(11, 12, 15, 0.42);
+}
+
+.workstation-topbar,
+.workstation-statusbar {
+  border-color: var(--palaver-industrial-line);
+  background-color: rgba(18, 19, 23, 0.94);
+  box-shadow: inset 0 1px rgba(255, 244, 222, 0.035);
+}
+
+/* restrained industrial surface treatment */
+
+.palaver-workstation :is(
+  .observatory-tile,
+  .command-center,
+  .context-panel,
+  .module-card,
+  .workspace-panel,
+  .panel-card
+) {
+  border-color: var(--palaver-industrial-line);
+  border-radius: var(--palaver-industrial-radius);
+  background-color: var(--palaver-industrial-panel);
+  background-image:
+    linear-gradient(
+      145deg,
+      rgba(218, 199, 174, 0.055),
+      transparent 48%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(39, 39, 43, 0.24),
+      rgba(11, 12, 15, 0.16)
+    );
+  box-shadow:
+    inset 0 1px rgba(248, 229, 204, 0.065),
+    var(--palaver-industrial-shadow);
+}
+
+/* navigation and command surfaces */
+
+.palaver-workstation :is(
+  .rail-item,
+  .rail-button,
+  .command-trigger,
+  .palaver-command-trigger
+) {
+  border-radius: 7px;
+  border-color: transparent;
+  color: var(--palaver-industrial-secondary);
+  transition:
+    color 180ms ease,
+    border-color 220ms ease,
+    background-color 220ms ease,
+    box-shadow 280ms var(--palaver-industrial-ease);
+}
+
+@media (hover: hover) {
+  .palaver-workstation :is(
+    .rail-item,
+    .rail-button,
+    .command-trigger,
+    .palaver-command-trigger
+  ):hover {
+    color: var(--palaver-industrial-text);
+    border-color: var(--palaver-industrial-line-strong);
+    background-color: rgba(171, 143, 128, 0.095);
+  }
+}
+
+.palaver-workstation :is(
+  .rail-item.active,
+  .rail-button.active,
+  .rail-item[aria-current="page"],
+  .rail-button[aria-current="page"],
+  .rail-item[aria-selected="true"]
+) {
+  color: var(--palaver-industrial-text);
+  border-color: rgba(198, 164, 122, 0.36);
+  background:
+    linear-gradient(
+      100deg,
+      rgba(152, 108, 88, 0.20),
+      rgba(33, 30, 33, 0.14)
+    );
+  box-shadow:
+    inset 2px 0 var(--palaver-industrial-amber),
+    inset 0 1px rgba(255, 240, 220, 0.07);
+}
+
+/* text and fine detail */
+
+.palaver-workstation :is(
+  .observatory-header p,
+  .workstation-statusbar,
+  .rail-file-section
+) {
+  letter-spacing: 0.045em;
+}
+
+.palaver-workstation :is(
+  .observatory-header h1,
+  .observatory-tile span
+) {
+  color: var(--palaver-industrial-text);
+}
+
+.palaver-workstation :is(
+  .observatory-header p,
+  .tile-meta,
+  .rail-file-section
+) {
+  color: var(--palaver-industrial-secondary);
+}
+
+.palaver-workstation .tile-line {
+  background: linear-gradient(
+    90deg,
+    rgba(198, 164, 122, 0.58),
+    rgba(166, 90, 96, 0.18) 58%,
+    transparent
+  );
+}
+
+/* form materials, preserving control semantics */
+
+.palaver-workstation :is(
+  input,
+  textarea,
+  select
+) {
+  border-color: var(--palaver-industrial-line-strong);
+  border-radius: 7px;
+  color: var(--palaver-industrial-text);
+  background-color: rgba(13, 14, 17, 0.88);
+  caret-color: var(--palaver-industrial-amber);
+}
+
+.palaver-workstation :is(
+  input,
+  textarea
+)::placeholder {
+  color: var(--palaver-industrial-muted);
+  opacity: 1;
+}
+
+.palaver-workstation :is(
+  input,
+  textarea,
+  select
+):focus-visible {
+  border-color: var(--palaver-industrial-amber);
+  outline: 2px solid rgba(198, 164, 122, 0.55);
+  outline-offset: 2px;
+}
+
+/* visible keyboard navigation */
+
+.palaver-workstation :is(
+  button,
+  a,
+  [role="button"],
+  [tabindex]
+):focus-visible {
+  outline: 2px solid var(--palaver-industrial-amber);
+  outline-offset: 3px;
+}
+
+.palaver-workstation :is(
+  button,
+  a,
+  [role="button"]
+):disabled,
+.palaver-workstation :is(
+  button,
+  a,
+  [role="button"]
+)[aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
+/* preserve original logo, particle, and loader implementations */
+
+/* resize affordances */
+
+[data-panel-resize-handle-id] {
+  background-color: var(--palaver-industrial-line);
+  transition:
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+[data-panel-resize-handle-id]:hover,
+[data-panel-resize-handle-id]:focus-visible {
+  background-color: var(--palaver-industrial-amber);
+  box-shadow: 0 0 0 2px rgba(198, 164, 122, 0.14);
+}
+
+/* scrollbar materials */
+
+.palaver-workstation * {
+  scrollbar-color:
+    rgba(166, 145, 131, 0.48)
+    rgba(15, 16, 19, 0.6);
+  scrollbar-width: thin;
+}
+
+/* responsive material budgets */
+
+@media (max-width: 768px) {
+  .palaver-workstation :is(
+    .observatory-tile,
+    .command-center,
+    .context-panel,
+    .module-card,
+    .workspace-panel,
+    .panel-card
+  ) {
+    box-shadow: inset 0 1px rgba(248, 229, 204, 0.045);
+  }
+
+  .palaver-left,
+  .palaver-right,
+  .workstation-rail,
+  .rail,
+  .palaver-rail {
+    backdrop-filter: none;
+  }
+}
+
+/* accessibility and performance */
+
+@media (prefers-reduced-motion: reduce) {
+  .palaver-workstation :is(
+    .rail-item,
+    .rail-button,
+    .command-trigger,
+    .palaver-command-trigger
+  ),
+  [data-panel-resize-handle-id] {
+    transition-duration: 0.01ms;
+  }
+}
+
+@media (forced-colors: active) {
+  .palaver-workstation :is(
+    .rail-item.active,
+    .rail-button.active,
+    .rail-item[aria-current="page"]
+  ) {
+    border: 1px solid Highlight;
+  }
+
+  .palaver-workstation :is(
+    button,
+    a,
+    input,
+    textarea,
+    select
+  ):focus-visible {
+    outline: 2px solid Highlight;
   }
 }
