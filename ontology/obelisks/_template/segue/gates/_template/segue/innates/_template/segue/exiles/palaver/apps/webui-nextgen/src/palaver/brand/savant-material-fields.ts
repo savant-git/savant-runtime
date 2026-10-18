@@ -6,8 +6,21 @@ varying vec3 vFieldPoint;
 float savantHash(vec3 p){return fract(sin(dot(p,vec3(127.1,311.7,74.7)))*43758.5453);}
 float savantRidge(float x,float w){return 1.0-smoothstep(w-fwidth(x),w+fwidth(x),abs(x));}
 vec4 surfaceField(vec3 p){
+ #ifdef SAVANT_HYBRID
+ float phase=p.x*12.0+p.y*8.0+sin(p.z*7.0)*1.4;
+ float attenuation=exp(-fwidth(phase)*fwidth(phase));
+ float oxide=.5+.18*sin(phase)*attenuation;
+ return vec4(oxide,.012*oxide,0.0,1.0);
+ #else
  float t=uSavantTime; float s=uSavantStyle; vec3 q=p;
  float pigment=0.0,relief=0.0,emission=0.0,coat=1.0;
+ // Smooth hybrid patina; no cell/floor noise or high-frequency normal steps.
+ if(s>19.5){
+  float phase=q.x*12.0+q.y*8.0+sin(q.z*7.0)*1.4;
+  float attenuation=exp(-fwidth(phase)*fwidth(phase));
+  float oxide=.5+.18*sin(phase)*attenuation;
+  return vec4(oxide,.012*oxide,0.0,1.0);
+ }
  if(s<0.5){
   float pattern=sin(q.x*11.0+sin(q.y*7.0))*sin(q.z*12.0);
   float grain=savantHash(floor(q*16.0));
@@ -169,5 +182,6 @@ vec4 surfaceField(vec3 p){
   coat=clamp(0.86+.2*pattern,0.1,1.0);
  }
  return vec4(pigment,relief,emission,coat);
+ #endif
 }
 `;

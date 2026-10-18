@@ -17,7 +17,7 @@ export function cleanLogoGeometry(source:BufferGeometry){
   const first=ids.length
   for(let i=start;i<end;i+=3){
    const a=index?index.getX(i):i,b=index?index.getX(i+1):i+1,c=index?index.getX(i+2):i+2
-   if([a,b,c].some(v=>!Number.isInteger(v)||v<0||v>=p.count))throw new Error("invalid savant logo index")
+   if(!Number.isInteger(a)||!Number.isInteger(b)||!Number.isInteger(c)||a<0||b<0||c<0||a>=p.count||b>=p.count||c>=p.count)throw new Error("invalid savant logo index")
    const ax=p.getX(a),ay=p.getY(a),az=p.getZ(a)
    const ux=p.getX(b)-ax,uy=p.getY(b)-ay,uz=p.getZ(b)-az
    const vx=p.getX(c)-ax,vy=p.getY(c)-ay,vz=p.getZ(c)-az

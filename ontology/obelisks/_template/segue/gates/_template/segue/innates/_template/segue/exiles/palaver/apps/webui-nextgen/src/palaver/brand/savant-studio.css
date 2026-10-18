@@ -1,0 +1,19 @@
+/* Only the logo: preserve its sizing, arrival carrier and page presentation. */
+html body .savant-mark .savant-mark__drag{
+ background:transparent!important;box-shadow:none!important;
+ backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+ filter:none!important;transform:none!important;transition:none!important;
+}
+html body .savant-mark .savant-mark__drag::before,
+html body .savant-mark .savant-mark__drag::after{
+ content:none!important;display:none!important;
+}
+html body .savant-mark .savant-mark__viewport,
+html body .savant-mark .savant-mark__viewport canvas{
+ filter:none!important;backdrop-filter:none!important;
+ -webkit-backdrop-filter:none!important;mix-blend-mode:normal!important;
+}
+html body .savant-mark .savant-mark__viewport canvas{
+ image-rendering:auto!important;
+}
+html body .savant-mark .savant-mark__gleam{display:none!important}

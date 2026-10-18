@@ -1,3 +1,4 @@
+import {useShallow} from "zustand/react/shallow"
 import {
   useEffect,
   useState
@@ -20,9 +21,10 @@ import {
   Separator
 } from "react-resizable-panels"
 
-import SavantMark from "../brand/savant-mark";
+import {SavantArrivalAnchor} from "../brand/savant-arrival";
 import "./palaver-instrument.css";
 import "./palaver-navigation.css";
+import "./palaver-industrial.css";
 
 import AmbientEnvironment
   from "../environment/AmbientEnvironment"
@@ -76,8 +78,7 @@ export default function CognitiveShell() {
     false,
   )
 
-  const {
-    active,
+  const {active,
     density,
     focusMode,
     workspaceMode,
@@ -96,7 +97,7 @@ export default function CognitiveShell() {
     restoreWorkspace,
     applyWorkspacePreset,
     setActive
-  } = useWorkspaceStore()
+  } = useWorkspaceStore(useShallow(state=>({active:state.active,density:state.density,focusMode:state.focusMode,workspaceMode:state.workspaceMode,workspacePreset:state.workspacePreset,leftPanelVisible:state.leftPanelVisible,rightPanelVisible:state.rightPanelVisible,statusbarVisible:state.statusbarVisible,lastActivity:state.lastActivity,setWorkspaceMode:state.setWorkspaceMode,setCommandOpen:state.setCommandOpen,toggleFocus:state.toggleFocus,cycleDensity:state.cycleDensity,toggleChatTerminalSplit:state.toggleChatTerminalSplit,toggleLeftPanel:state.toggleLeftPanel,toggleRightPanel:state.toggleRightPanel,restoreWorkspace:state.restoreWorkspace,applyWorkspacePreset:state.applyWorkspacePreset,setActive:state.setActive})))
 
 
   useEffect(
@@ -368,7 +369,7 @@ export default function CognitiveShell() {
         <div
           className="topbar-brand"
         >
-          <SavantMark mode="header" state="idle" label="savant" />
+          <SavantArrivalAnchor />
 
           <div>
             <strong>

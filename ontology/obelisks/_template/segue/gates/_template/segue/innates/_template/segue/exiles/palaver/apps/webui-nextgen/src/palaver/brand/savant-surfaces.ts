@@ -1,3 +1,4 @@
+import {installDynamicReflections} from "./savant-reflections"
 import {fieldDeclarations} from "./savant-material-fields"
 import {Color,DoubleSide,FrontSide,MeshDepthMaterial,MeshPhysicalMaterial} from "three"
 export type ParticleShape="sphere"|"drop"|"shard"|"ring"|"reticle"|"flame"|"leaf"|"flake"|"splinter"|"ribbon"|"spore"|"tile"
@@ -67,7 +68,7 @@ export const palaverHybrid: MaterialPreset = {
  accent: "#8fdbc1",
  accent2: "#b5cad3",
  particle: "#b1e3d5",
- roughness: .32,
+ roughness: .19,
  metalness: .92,
  relief: .024,
  textureScale: 1.3,
@@ -77,7 +78,7 @@ export const palaverHybrid: MaterialPreset = {
  particleStretch: 1.7,
  optics: {
   ...titanium.optics,
-  anisotropy: .82,
+  anisotropy: .38,
   coat: .48,
   iridescence: .12,
   transmission: 0,
@@ -103,15 +104,17 @@ export const materialPresets: MaterialPreset[] = [...baseMaterialPresets, palave
 export const legacyPresetIds:Record<string,string>={ivory:"crystal",opal:"bubble",blueprint:"cipher",rust:"blood",enamel:"stained-glass",eclipse:"obsidian",honeycomb:"ice",phosphor:"hologram",prism:"crystal"}
 export function applyAppearance(m:MeshPhysicalMaterial,p:MaterialPreset,particle=false){
  const o=p.optics
- const signature=[o.transmission>0,o.iridescence>0,o.sheen>0,o.anisotropy>0,o.coat>0,o.dispersion>0].join(":")
+ const hybrid=p.style===20
+ if(hybrid)m.defines.SAVANT_HYBRID=1;else delete m.defines.SAVANT_HYBRID
+ const signature=[hybrid,o.transmission>0,o.iridescence>0,o.sheen>0,o.anisotropy>0,o.coat>0,o.dispersion>0].join(":")
  m.color.set(particle?p.particle:p.color);m.roughness=p.roughness;m.metalness=p.metalness
  m.transmission=o.transmission;m.ior=o.ior;m.thickness=particle?o.thickness*.12:o.thickness
  m.attenuationColor.set(o.attenuation);m.attenuationDistance=1.2;m.dispersion=o.dispersion
  m.iridescence=o.iridescence;m.iridescenceIOR=1.3;m.iridescenceThicknessRange=[o.film,o.film]
  m.sheen=o.sheen;m.sheenColor.set(p.accent);m.sheenRoughness=.45;m.anisotropy=o.anisotropy
- m.clearcoat=o.coat;m.clearcoatRoughness=.025;m.specularIntensity=o.specular
+ m.clearcoat=o.coat;m.clearcoatRoughness=p.style===20?.09:.04;m.specularIntensity=o.specular
  m.opacity=1;m.transparent=false;m.depthWrite=true
- m.side=o.transmission>0?FrontSide:DoubleSide;m.envMapIntensity=p.scene.energy
+ m.side=FrontSide;m.envMapIntensity=p.scene.energy
  m.emissive.set(p.color);m.emissiveIntensity=o.emission
  // Explicitly remove inherited maps when reusing a material.
  m.map=null;m.normalMap=null;m.bumpMap=null;m.roughnessMap=null;m.metalnessMap=null
@@ -131,10 +134,12 @@ export function installSurface(material:MeshPhysicalMaterial|MeshDepthMaterial,u
     vFieldPoint=position/uSavantUnit;
     // Preserve the original GLB silhouette for every preset.
     // Material-specific detail remains in fragment shading only.
+    if(uSavantGlitch>.0001){
     float band=floor(position.y/uSavantUnit*64.0);
     float slice=sin(band*19.17+floor(uSavantTime*48.0)*2.4);
     transformed.x+=slice*uSavantGlitch*uSavantUnit*.017;
-    transformed.z+=sin(band*7.0+floor(uSavantTime*43.0))*uSavantGlitch*uSavantUnit*.009;`)
+    transformed.z+=sin(band*7.0+floor(uSavantTime*43.0))*uSavantGlitch*uSavantUnit*.009;
+    }`)
   if(material instanceof MeshPhysicalMaterial){
    shader.fragmentShader=shader.fragmentShader.replace("#include <common>",
     "#include <common>\nuniform float uInteraction;\n"+fieldDeclarations)
@@ -146,16 +151,16 @@ export function installSurface(material:MeshPhysicalMaterial|MeshDepthMaterial,u
       diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.72,.9,1.0),uEvent*.75);
     `)
     .replace("#include <roughnessmap_fragment>",`#include <roughnessmap_fragment>
-     roughnessFactor=clamp(roughnessFactor+surfaceField(vFieldPoint).y,.018,.85);
+     roughnessFactor=clamp(roughnessFactor+sf.y,.018,.85);
     `)
     .replace("#include <normal_fragment_begin>",`#include <normal_fragment_begin>
-     vec3 fieldDx=dFdx(vFieldPoint),fieldDy=dFdy(vFieldPoint);
-     float relief=surfaceField(vFieldPoint).x*.0008;
+     vec3 fieldDx=dFdx(-vViewPosition),fieldDy=dFdy(-vViewPosition);
+     float relief=sf.x*.00012;
      vec3 grad=cross(fieldDy,normal)*dFdx(relief)+cross(normal,fieldDx)*dFdy(relief);
      normal=normalize(normal-grad/max(abs(dot(fieldDx,cross(fieldDy,normal))),.00001));
     `)
     .replace("#include <emissivemap_fragment>",`#include <emissivemap_fragment>
-     totalEmissiveRadiance+=mix(uSavantAccent,uAccent2,surfaceField(vFieldPoint).x)*surfaceField(vFieldPoint).z;
+     totalEmissiveRadiance+=mix(uSavantAccent,uAccent2,sf.x)*sf.z;
      // Broad smooth volume-like glow during interaction; no edge mask or outline.
      float glowFacing=.3+.7*max(dot(normal,normalize(vViewPosition)),0.0);
      float heartbeat=.48+.32*sin(uSavantTime*3.4)+.2*sin(uSavantTime*6.8+.7);
@@ -163,5 +168,6 @@ export function installSurface(material:MeshPhysicalMaterial|MeshDepthMaterial,u
       uInteraction*max(heartbeat,.05)*glowFacing*.9;`)
   }
  }
- material.customProgramCacheKey=()=>material instanceof MeshPhysicalMaterial?"savant-cinematic-fields-068":"savant-cinematic-depth-068"
+ material.customProgramCacheKey=()=>material instanceof MeshPhysicalMaterial?"savant-smooth-copper-1":"savant-cinematic-depth-068"
+ if(material instanceof MeshPhysicalMaterial)installDynamicReflections(material,u.uSavantTime)
 }

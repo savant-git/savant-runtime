@@ -1,3 +1,4 @@
+import {installDynamicReflections} from "./savant-reflections"
 import React, { useEffect, useLayoutEffect, useMemo, useRef } from "react"
 import { useFrame, useThree } from "@react-three/fiber"
 import { AdditiveBlending, Color, InstancedMesh, Matrix4, MeshPhysicalMaterial, InstancedBufferAttribute, BufferAttribute, BufferGeometry } from "three"
@@ -85,6 +86,7 @@ export function CinematicParticles({mode,time,preset,reflection=false,moving,ang
      `)
   }
   m.customProgramCacheKey=()=>"savant-kinetic-heads-v4-artist"
+  installDynamicReflections(m,uniforms.uTime)
   return m
  },[uniforms])
  useEffect(()=>()=>material.dispose(),[material])
@@ -213,48 +215,4 @@ export function CinematicParticles({mode,time,preset,reflection=false,moving,ang
      `}/>
   </points>
  </>
-}
-
-
-/* Ten bounded GPU-driven meteors; no per-frame allocations or dynamic geometry. */
-function MeteorShower({time,mode}:{time:React.MutableRefObject<number>;mode:"header"|"preloader"}){
- const uniforms=useMemo(()=>({uTime:{value:0},uScale:{value:mode==="header"?.55:1}}),[mode])
- useFrame(()=>{uniforms.uTime.value=time.current},-2)
- const geometry=useMemo(()=>{
-  const g=new BufferGeometry(),positions=new Float32Array(10*20*3),ids=new Float32Array(10*20),lags=new Float32Array(10*20)
-  for(let i=0;i<10;i++)for(let j=0;j<20;j++){const k=i*20+j;ids[k]=i;lags[k]=j/19;}
-  g.setAttribute("position",new BufferAttribute(positions,3))
-  g.setAttribute("aMeteor",new BufferAttribute(ids,1))
-  g.setAttribute("aLag",new BufferAttribute(lags,1))
-  return g
- },[])
- useEffect(()=>()=>geometry.dispose(),[geometry])
- return <points geometry={geometry} frustumCulled={false} renderOrder={4}>
-  <shaderMaterial transparent depthWrite={false} blending={AdditiveBlending} toneMapped={false} uniforms={uniforms}
-   vertexShader={`uniform float uTime,uScale;attribute float aMeteor,aLag;varying float vAlpha,vHue;
-    float hash(float n){return fract(sin(n*127.1+311.7)*43758.5453);}
-    void main(){
-     float cycle=6.0+hash(aMeteor+9.0)*6.0;
-     float phase=mod(uTime+hash(aMeteor+1.0)*cycle,cycle);
-     float life=clamp((phase-.2)/.65,0.0,1.0);
-     float explosion=smoothstep(.69,.8,phase)*(1.0-smoothstep(1.08,1.5,phase));
-     float theta=hash(aMeteor*17.0)*6.2831853;
-     vec3 start=vec3(cos(theta)*2.0+(hash(aMeteor+3.0)-.5), (hash(aMeteor+7.0)-.5)*3.5,sin(theta)*1.2);
-     vec3 dir=normalize(vec3(-cos(theta),.35-hash(aMeteor+5.0),-sin(theta)*.3));
-     vec3 p=start+dir*(life*2.5-aLag*.95);
-     float burstAngle=hash(aMeteor*29.0+aLag*17.0)*6.2831853;
-     vec3 debris=normalize(vec3(cos(burstAngle),sin(burstAngle),hash(aMeteor+aLag*19.0)*2.0-1.0));
-     p=mix(p,start+dir*2.5+debris*max(0.0,phase-.8)*3.0,explosion);
-     vAlpha=(1.0-smoothstep(.8,1.5,phase))*smoothstep(0.0,.12,phase)*(1.0-aLag)*(.35+.65*explosion);
-     vHue=hash(aMeteor*11.0+aLag*9.0);
-     gl_Position=projectionMatrix*modelViewMatrix*vec4(p*uScale,1.0);
-     gl_PointSize=clamp((2.0+explosion*7.0)*(1.0-aLag)*uScale/max(.5,gl_Position.w)*3.0,1.0,18.0);
-    }`}
-   fragmentShader={`varying float vAlpha,vHue;void main(){
-     vec2 uv=gl_PointCoord-.5;float glow=exp(-dot(uv,uv)*18.0);
-     vec3 c=mix(vec3(1.0,.13,.07),vec3(.22,.68,1.0),vHue);
-     gl_FragColor=vec4(c*glow*2.2,glow*vAlpha);
-     #include <colorspace_fragment>
-    }`}/>
- </points>
 }

@@ -1,0 +1,97 @@
+
+.savant-demo__metric {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 12px 0;
+  border-top: 1px solid var(--demo-border);
+}
+
+.savant-demo__metric:first-of-type {
+  margin-top: 18px;
+}
+
+.savant-demo__metric strong {
+  color: var(--demo-text);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.savant-demo__timeline {
+  display: grid;
+  gap: 16px;
+  max-width: 900px;
+}
+
+.savant-demo__timeline > .savant-demo__panel {
+  position: relative;
+  margin-left: 24px;
+}
+
+.savant-demo__timeline > .savant-demo__panel::before {
+  position: absolute;
+  top: 28px;
+  left: -32px;
+  width: 13px;
+  height: 13px;
+  border: 2px solid var(--demo-accent);
+  border-radius: 50%;
+  background: var(--demo-background);
+  content: "";
+}
+
+.savant-demo__timeline > .savant-demo__panel:not(:last-child)::after {
+  position: absolute;
+  top: 45px;
+  bottom: -34px;
+  left: -26px;
+  width: 1px;
+  background: var(--demo-border);
+  content: "";
+}
+
+.savant-demo__panel h3 {
+  margin: 0 0 12px;
+  color: var(--demo-text);
+  font-size: 17px;
+  font-weight: 650;
+  letter-spacing: -0.025em;
+}
+
+.savant-demo__panel p {
+  margin: 0 0 16px;
+  color: var(--demo-muted);
+  line-height: 1.65;
+}
+
+.savant-demo__panel p:last-child {
+  margin-bottom: 0;
+}
+
+.savant-demo__panel > .savant-demo__label {
+  display: block;
+  margin-top: 12px;
+}
+
+.savant-demo__panel > .savant-demo__value {
+  margin: 8px 0;
+}
+
+@media (max-width: 600px) {
+  .savant-demo__panel {
+    padding: 18px;
+  }
+
+  .savant-demo__timeline > .savant-demo__panel {
+    margin-left: 18px;
+  }
+
+  .savant-demo__timeline > .savant-demo__panel::before {
+    left: -26px;
+  }
+
+  .savant-demo__timeline > .savant-demo__panel:not(:last-child)::after {
+    left: -20px;
+  }
+}

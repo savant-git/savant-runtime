@@ -11,7 +11,7 @@ import {
   Search,
   Server,
   SquareTerminal
-} from "lucide-react"
+} from "./savant-glyphs"
 
 import {
   useEffect,

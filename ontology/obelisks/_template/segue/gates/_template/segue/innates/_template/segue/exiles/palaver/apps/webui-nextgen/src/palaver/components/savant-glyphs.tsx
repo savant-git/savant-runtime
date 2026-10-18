@@ -1,36 +1,100 @@
-import type { SVGProps } from "react"
-
-type GlyphProps = SVGProps<SVGSVGElement> & { size?: number }
-
-function Glyph({ size = 20, children, ...props }: GlyphProps) {
-  return <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false" {...props}>{children}</svg>
+import {forwardRef,useId} from "react"
+import type {SVGProps} from "react"
+import {savantIconPaths} from "./savant-icon-paths"
+import type {SavantIconName} from "./savant-icon-paths"
+export type GlyphProps=Omit<SVGProps<SVGSVGElement>,"name">&{size?:number|string;title?:string;tone?:"single"|"duotone"}
+type IconProps=GlyphProps&{name:SavantIconName}
+/** Accessible inline SVG, no font dependency, remote requests or per-icon effects. */
+export const SavantIcon=forwardRef<SVGSVGElement,IconProps>(function SavantIcon(
+ {name,size=20,title,tone="duotone",className="",strokeWidth=1.8,children,...props},ref){
+ const titleId=useId()
+ const labelled=Boolean(title||props["aria-label"]||props["aria-labelledby"])
+ const [main,detail]=savantIconPaths[name]
+ return <svg xmlns="http://www.w3.org/2000/svg" ref={ref}
+  width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor"
+  strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round"
+  className={["savant-glyph",className].filter(Boolean).join(" ")}
+  focusable="false" role={labelled?"img":undefined}
+  aria-hidden={labelled?undefined:true} aria-labelledby={title?titleId:undefined} {...props}>
+  {title&&<title id={titleId}>{title}</title>}
+  <path d={main}/>
+  {detail&&<path d={detail} opacity={tone==="duotone"?.72:1}/>}
+  {children}
+ </svg>
+})
+function createGlyph(name:SavantIconName){
+ const Icon=forwardRef<SVGSVGElement,GlyphProps>((props,ref)=><SavantIcon name={name} ref={ref} {...props}/>)
+ Icon.displayName="savant-"+name
+ return Icon
 }
-
-export function BookOpen(props: GlyphProps) { return <Glyph {...props}><path d="M12 5v15M12 7 7 4 3 5v14l4-1 5 2 5-2 4 1V5l-4-1-5 3Z"/><path d="M6 8h3m6 0h3"/></Glyph> }
-export function BrainCircuit(props: GlyphProps) { return <Glyph {...props}><path d="M12 4 7 7v5l-3 3 4 5h8l4-5-3-3V7l-5-3Z"/><path d="M12 4v6m-5 2 5-2 5 2m-5-2v9M8 16h8"/></Glyph> }
-export function Braces(props: GlyphProps) { return <Glyph {...props}><path d="M10 4H8L6 7v3l-3 2 3 2v3l2 3h2m4-16h2l2 3v3l3 2-3 2v3l-2 3h-2"/><path d="M11 16l2-8"/></Glyph> }
-export function ClipboardList(props: GlyphProps) { return <Glyph {...props}><path d="M8 5H5v16h14V5h-3M9 3h6v4H9zM9 11h6m-6 4h6m-6 4h4"/></Glyph> }
-export function Columns2(props: GlyphProps) { return <Glyph {...props}><path d="M3 4h18v16H3zM12 4v16M6 8h3m6 8h3"/></Glyph> }
-export function Focus(props: GlyphProps) { return <Glyph {...props}><path d="M4 9V4h5m6 0h5v5m0 6v5h-5m-6 0H4v-5"/><circle cx="12" cy="12" r="3"/></Glyph> }
-export function Gauge(props: GlyphProps) { return <Glyph {...props}><path d="M4 17a9 9 0 1 1 16 0M12 13l5-5M7 18h10"/><circle cx="12" cy="13" r="1"/></Glyph> }
-export function Link2(props: GlyphProps) { return <Glyph {...props}><path d="M9 8 6 8 3 12l3 4h4m4-8h4l3 4-3 4h-4M8 12h8"/><circle cx="12" cy="12" r="1"/></Glyph> }
-export function MessageSquareText(props: GlyphProps) { return <Glyph {...props}><path d="M3 4h18v13H9l-5 4v-4H3zM7 9h10M7 13h7"/></Glyph> }
-export function PanelLeft(props: GlyphProps) { return <Glyph {...props}><path d="M3 4h18v16H3zM9 4v16M5 8h2m-2 4h2"/></Glyph> }
-export function PanelRight(props: GlyphProps) { return <Glyph {...props}><path d="M3 4h18v16H3zM15 4v16m2 4h2m-2 4h2"/></Glyph> }
-export function RotateCcw(props: GlyphProps) { return <Glyph {...props}><path d="M5 9a8 8 0 1 1 1 8M5 4v5h5"/><path d="M12 8v4l3 2"/></Glyph> }
-export function Search(props: GlyphProps) { return <Glyph {...props}><circle cx="10" cy="10" r="6"/><path d="m14.5 14.5 6 6M8 10h4m-2-2v4"/></Glyph> }
-export function Server(props: GlyphProps) { return <Glyph {...props}><path d="M4 4h16v7H4zM4 13h16v7H4zM8 8h2m-2 9h2m5-9h2m-2 9h2"/></Glyph> }
-export function SquareTerminal(props: GlyphProps) { return <Glyph {...props}><path d="M3 4h18v16H3zM7 9l3 3-3 3m6 0h4"/></Glyph> }
-
-export function Command(props: GlyphProps) { return <Glyph {...props}><path d="M7 4h10l3 3v10l-3 3H7l-3-3V7z"/><path d="m8 10 3 3-3 3m6 0h3"/></Glyph> }
-export function Rows3(props: GlyphProps) { return <Glyph {...props}><path d="M3 4h18v16H3zM3 9h18M3 15h18M7 6.5h3m-3 5h3m-3 6h3"/></Glyph> }
-export function HelpCircle(props: GlyphProps) { return <Glyph {...props}><path d="M12 2 20 7v10l-8 5-8-5V7z"/><path d="M9 9a3 3 0 0 1 6 0c0 2-3 2-3 5m0 3v.5"/></Glyph> }
-export { SquareTerminal as TerminalSquare }
-
-// Additional domain-specific pictograms share the same optical stroke system.
-export function MaterialPrism(props: GlyphProps) { return <Glyph {...props}><path d="M12 2 21 8v8l-9 6-9-6V8zM12 2v20M3 8l9 6 9-6"/><path d="m7 10 5-3 5 3"/></Glyph> }
-export function ParticleHelix(props: GlyphProps) { return <Glyph {...props}><path d="M7 2c13 3-3 7 10 10S4 19 17 22M17 2C4 5 20 9 7 12s13 7 0 10"/><path d="M8 6h8M7 12h10M8 18h8"/></Glyph> }
-export function ReflectionField(props: GlyphProps) { return <Glyph {...props}><path d="m12 2 8 8-8 8-8-8zM3 20c3-2 6-2 9 0s6 2 9 0M12 6v8M8 10h8"/></Glyph> }
-export function ElectricalArc(props: GlyphProps) { return <Glyph {...props}><path d="m14 2-9 11h7l-2 9 9-12h-7z"/><path d="m3 5 3 2m12 11 3 2"/></Glyph> }
-export function TopologyMesh(props: GlyphProps) { return <Glyph {...props}><path d="m12 2 9 6v9l-9 5-9-5V8zM12 2v9l9-3M12 11 3 8m9 3v11M3 17l9-6 9 6"/><circle cx="12" cy="11" r="1"/></Glyph> }
-export function ReplayTimeline(props: GlyphProps) { return <Glyph {...props}><path d="M4 8a9 9 0 1 1 0 8M4 3v5h5M12 6v6l4 2"/><path d="M3 21h6"/></Glyph> }
+export const BookOpen=createGlyph("book-open")
+export const BrainCircuit=createGlyph("brain-circuit")
+export const Braces=createGlyph("braces")
+export const ClipboardList=createGlyph("clipboard-list")
+export const Columns2=createGlyph("columns2")
+export const Focus=createGlyph("focus")
+export const Gauge=createGlyph("gauge")
+export const Link2=createGlyph("link2")
+export const MessageSquareText=createGlyph("message-square-text")
+export const PanelLeft=createGlyph("panel-left")
+export const PanelRight=createGlyph("panel-right")
+export const RotateCcw=createGlyph("rotate-ccw")
+export const Search=createGlyph("search")
+export const Server=createGlyph("server")
+export const SquareTerminal=createGlyph("square-terminal")
+export const Command=createGlyph("command")
+export const Rows3=createGlyph("rows3")
+export const HelpCircle=createGlyph("help-circle")
+export const MaterialPrism=createGlyph("material-prism")
+export const ParticleHelix=createGlyph("particle-helix")
+export const ReflectionField=createGlyph("reflection-field")
+export const ElectricalArc=createGlyph("electrical-arc")
+export const TopologyMesh=createGlyph("topology-mesh")
+export const ReplayTimeline=createGlyph("replay-timeline")
+export const Activity=createGlyph("activity")
+export const ArrowLeft=createGlyph("arrow-left")
+export const ArrowRight=createGlyph("arrow-right")
+export const Bot=createGlyph("bot")
+export const Check=createGlyph("check")
+export const ChevronDown=createGlyph("chevron-down")
+export const Clock3=createGlyph("clock3")
+export const GitBranch=createGlyph("git-branch")
+export const Layers3=createGlyph("layers3")
+export const Orbit=createGlyph("orbit")
+export const Pause=createGlyph("pause")
+export const Play=createGlyph("play")
+export const ScanEye=createGlyph("scan-eye")
+export const Sparkles=createGlyph("sparkles")
+export const X=createGlyph("x")
+export const Clipboard=createGlyph("clipboard")
+export const Code2=createGlyph("code2")
+export const CornerDownLeft=createGlyph("corner-down-left")
+export const Download=createGlyph("download")
+export const FilePlus2=createGlyph("file-plus2")
+export const FileText=createGlyph("file-text")
+export const Image=createGlyph("image")
+export const LoaderCircle=createGlyph("loader-circle")
+export const Pencil=createGlyph("pencil")
+export const Plus=createGlyph("plus")
+export const RefreshCw=createGlyph("refresh-cw")
+export const Send=createGlyph("send")
+export const Square=createGlyph("square")
+export const Trash2=createGlyph("trash2")
+export const UserRound=createGlyph("user-round")
+export const VolumeX=createGlyph("volume-x")
+export const Blocks=createGlyph("blocks")
+export const Camera=createGlyph("camera")
+export const FileSearch=createGlyph("file-search")
+export const Globe2=createGlyph("globe2")
+export const Library=createGlyph("library")
+export const Mic=createGlyph("mic")
+export const Paperclip=createGlyph("paperclip")
+export const WandSparkles=createGlyph("wand-sparkles")
+export const CircleDot=createGlyph("circle-dot")
+export const Database=createGlyph("database")
+export const ShieldCheck=createGlyph("shield-check")
+export const ChevronRight=createGlyph("chevron-right")
+export const File=createGlyph("file")
+export const Maximize2=createGlyph("maximize2")
+export const Minimize2=createGlyph("minimize2")
+export {SquareTerminal as TerminalSquare,HelpCircle as CircleHelp}

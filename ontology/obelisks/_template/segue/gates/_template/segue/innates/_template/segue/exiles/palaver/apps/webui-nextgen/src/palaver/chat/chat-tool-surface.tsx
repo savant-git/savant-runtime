@@ -20,7 +20,7 @@ import {
 
 import {
   Plus
-} from "lucide-react"
+} from "../components/savant-glyphs"
 
 
 type Props = {

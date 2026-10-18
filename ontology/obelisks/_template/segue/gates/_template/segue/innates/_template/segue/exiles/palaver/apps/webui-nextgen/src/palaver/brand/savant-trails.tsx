@@ -4,6 +4,7 @@ import type {IUniform} from "three"
 import {applyAppearance} from "./savant-surfaces"
 import type {MaterialPreset} from "./savant-surfaces"
 import {motion,trajectoryGLSL} from "./savant-motion"
+import {useThree} from "@react-three/fiber"
 
 /* Continuous physically lit trails with analytic motion and no per-frame buffer rebuilds. */
 export function PhysicalTrails({count,preset,uniforms,activeCount=count}:{
@@ -11,11 +12,14 @@ export function PhysicalTrails({count,preset,uniforms,activeCount=count}:{
 }){
  const mesh=useRef<InstancedMesh>(null)
  const visibleCount=Math.max(0,Math.min(count,Math.floor(activeCount)))
+ const {size}=useThree()
+ // Below one pixel in radius, four smooth-normal sides preserve the optical width.
+ const segments=size.height<260?24:40
  const geometry=useMemo(()=>{
-  const g=new CylinderGeometry(1,1,1,6,72,true)
+  const g=new CylinderGeometry(1,1,1,4,segments,true)
   g.setAttribute("aEmitter",new InstancedBufferAttribute(Float32Array.from({length:count},(_,i)=>i),1))
   return g
- },[count])
+ },[count,segments])
  const material=useMemo(()=>{
   const m=new MeshPhysicalMaterial()
   m.onBeforeCompile=shader=>{
@@ -56,7 +60,7 @@ export function PhysicalTrails({count,preset,uniforms,activeCount=count}:{
      diffuseColor.a*=vTrailAlpha;
      if(diffuseColor.a<.018)discard;`)
   }
-  m.customProgramCacheKey=()=>"savant-continuous-corkscrew-096"
+  m.customProgramCacheKey=()=>"savant-adaptive-corkscrew-2"
   return m
  },[uniforms])
  useLayoutEffect(()=>{
@@ -66,6 +70,7 @@ export function PhysicalTrails({count,preset,uniforms,activeCount=count}:{
   applyAppearance(material,preset,true)
   // Thin trails use the matching reflective coat, avoiding a second transmission pass.
   material.transmission=0;material.dispersion=0;material.transparent=true
+  material.anisotropy=0;material.iridescence=0;material.sheen=0
   material.depthWrite=false;material.opacity=.76
   material.emissive.set(preset.accent);material.emissiveIntensity=.06
   material.needsUpdate=true

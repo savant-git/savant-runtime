@@ -6,6 +6,7 @@ import argparse
 import http.client
 import json
 import mimetypes
+import ipaddress
 from pathlib import Path
 import posixpath
 from urllib.parse import urlsplit
@@ -39,6 +40,10 @@ dist_root = (
 
 backend_host = "127.0.0.1"
 backend_port = 8787
+terminal_host = "127.0.0.1"
+terminal_port = 8788
+terminal_body_limit = 1024 * 1024
+
 
 hop_by_hop_headers = {
     "connection",
@@ -182,11 +187,98 @@ class palaver_frontend_handler(
                     f"{backend_host}:{backend_port}",
                 "authority_effect":
                     authority_effect,
+                "terminal_backend": f"{terminal_host}:{terminal_port}",
+                "terminal_routing": "loopback-pty-v1",
             },
         )
 
+    def _terminal(self) -> None:
+        """Keep the existing loopback-only PTY boundary through this public frontend."""
+        try:
+            local_peer = ipaddress.ip_address(self.client_address[0]).is_loopback
+            host = urlsplit("http://" + self.headers.get("Host", "")).hostname
+            local_host = host == "localhost" or (
+                host is not None and ipaddress.ip_address(host).is_loopback
+            )
+        except ValueError:
+            local_peer = False
+            local_host = False
+
+        if not local_peer or not local_host:
+            self._send_json(403, {
+                "ok": False,
+                "error": "terminal_requires_loopback_or_ssh_tunnel",
+            })
+            return
+
+        origin = self.headers.get("Origin")
+        if origin:
+            try:
+                parsed_origin = urlsplit(origin)
+                origin_host = parsed_origin.hostname
+                allowed_origin = (
+                    parsed_origin.scheme in {"http", "https"}
+                    and not parsed_origin.username
+                    and not parsed_origin.password
+                    and parsed_origin.path in {"", "/"}
+                    and not parsed_origin.query
+                    and not parsed_origin.fragment
+                    and (origin_host == "localhost" or (
+                        origin_host is not None
+                        and ipaddress.ip_address(origin_host).is_loopback
+                    ))
+                )
+            except ValueError:
+                allowed_origin = False
+            if not allowed_origin:
+                self._send_json(403, {"ok": False, "error": "origin_rejected"})
+                return
+
+        if self.headers.get("Sec-Fetch-Site", "").lower() == "cross-site":
+            self._send_json(403, {"ok": False, "error": "cross_site_rejected"})
+            return
+
+        path = urlsplit(self.path).path
+        routes = {
+            "/api/terminal/health": {"GET"},
+            "/api/terminal/read": {"GET"},
+            "/api/terminal/session": {"POST"},
+            "/api/terminal/input": {"POST"},
+            "/api/terminal/resize": {"POST"},
+            "/api/terminal/close": {"POST"},
+        }
+        if path not in routes:
+            self._send_json(404, {"ok": False, "error": "terminal_route_not_found"})
+            return
+        if self.command not in routes[path] | {"OPTIONS"}:
+            self._send_json(405, {"ok": False, "error": "method_not_allowed"})
+            return
+        if self.headers.get("Transfer-Encoding"):
+            self._send_json(400, {"ok": False, "error": "transfer_encoding_not_supported"})
+            return
+        lengths = self.headers.get_all("Content-Length", [])
+        try:
+            if len(lengths) > 1:
+                raise ValueError("duplicate length")
+            length = int(lengths[0]) if lengths else 0
+            if length < 0 or length > terminal_body_limit:
+                raise ValueError("request too large")
+        except ValueError:
+            self._send_json(400, {"ok": False, "error": "invalid_terminal_request_size"})
+            return
+
+        self.connection.settimeout(15)
+        try:
+            self._proxy(target_host=terminal_host, target_port=terminal_port, timeout=15)
+        except (OSError, ValueError):
+            self._send_json(400, {"ok": False, "error": "incomplete_terminal_request"})
+
     def _proxy(
         self,
+        *,
+        target_host: str = backend_host,
+        target_port: int = backend_port,
+        timeout: float = 120,
     ) -> None:
         parsed = urlsplit(
             self.path
@@ -240,8 +332,8 @@ class palaver_frontend_handler(
         forwarded_headers[
             "Host"
         ] = (
-            f"{backend_host}:"
-            f"{backend_port}"
+            f"{target_host}:"
+            f"{target_port}"
         )
 
         forwarded_headers[
@@ -266,9 +358,9 @@ class palaver_frontend_handler(
 
         connection = (
             http.client.HTTPConnection(
-                backend_host,
-                backend_port,
-                timeout=120,
+                target_host,
+                target_port,
+                timeout=timeout,
             )
         )
 
@@ -333,7 +425,9 @@ class palaver_frontend_handler(
                 {
                     "ok": False,
                     "error":
-                        "palaver_backend_unavailable",
+                        ("palaver_terminal_bridge_unavailable"
+                         if target_port == terminal_port and target_host == terminal_host
+                         else "palaver_backend_unavailable"),
                     "diagnostic":
                         str(
                             exc
@@ -437,6 +531,10 @@ class palaver_frontend_handler(
         path = urlsplit(
             self.path
         ).path
+
+        if path == "/api/terminal" or path.startswith("/api/terminal/"):
+            self._terminal()
+            return
 
         if (
             path == "/api"

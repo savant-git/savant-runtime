@@ -1,0 +1,89 @@
+
+:root {
+  --savant-demo-bg: #080b11;
+  --savant-demo-sidebar: #0d121b;
+  --savant-demo-surface: #111824;
+  --savant-demo-raised: #182231;
+  --savant-demo-text: #eef3fa;
+  --savant-demo-muted: #8796ab;
+  --savant-demo-accent: #df5965;
+  --savant-demo-border: rgba(181, 199, 223, 0.12);
+  --savant-demo-radius: 14px;
+  --savant-demo-motion: 180ms;
+  --savant-demo-font: Inter, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+html[data-savant-demo] {
+  color-scheme: dark;
+  background: var(--savant-demo-bg);
+}
+
+html[data-savant-demo] body {
+  font-family: var(--savant-demo-font);
+}
+
+html[data-savant-demo] :is(
+  button,
+  a,
+  input,
+  select,
+  textarea
+):focus-visible {
+  outline: 2px solid var(--savant-demo-accent);
+  outline-offset: 3px;
+}
+
+html[data-savant-demo] [data-demo-shade] {
+  min-width: 0;
+}
+
+html[data-savant-demo] [data-demo-shade="surface"] {
+  background: var(--savant-demo-surface);
+  border: 1px solid var(--savant-demo-border);
+  border-radius: var(--savant-demo-radius);
+}
+
+html[data-savant-demo] [data-demo-shade="raised"] {
+  background: var(--savant-demo-raised);
+  border: 1px solid var(--savant-demo-border);
+  border-radius: var(--savant-demo-radius);
+}
+
+html[data-savant-demo] [data-demo-shade="muted"] {
+  color: var(--savant-demo-muted);
+}
+
+html[data-savant-demo] [data-demo-shade="accent"] {
+  color: var(--savant-demo-accent);
+}
+
+html[data-savant-demo] [data-demo-view] {
+  scroll-margin-top: 24px;
+}
+
+html[data-savant-demo] [data-demo-navigation] {
+  min-width: 0;
+}
+
+html[data-savant-demo] [data-demo-navigation] button {
+  transition:
+    background-color var(--savant-demo-motion) ease,
+    border-color var(--savant-demo-motion) ease,
+    color var(--savant-demo-motion) ease;
+}
+
+html[data-savant-demo] [data-demo-navigation]
+button[aria-current="page"] {
+  color: var(--savant-demo-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-savant-demo] *,
+  html[data-savant-demo] *::before,
+  html[data-savant-demo] *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

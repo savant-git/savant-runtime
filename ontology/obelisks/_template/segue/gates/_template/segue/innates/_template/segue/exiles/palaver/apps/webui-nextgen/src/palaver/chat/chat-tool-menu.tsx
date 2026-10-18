@@ -14,7 +14,7 @@ import {
   Sparkles,
   SquareTerminal,
   WandSparkles
-} from "lucide-react"
+} from "../components/savant-glyphs"
 
 import {
   useMemo,

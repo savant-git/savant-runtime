@@ -1,103 +1,39 @@
-import { useEffect, useRef } from "react"
-import { useFrame, useThree } from "@react-three/fiber"
-import { getEffectBudget, type EffectBudget } from "./savant-effect-budgets"
-
-export type SceneQualityTier = "economy" | "balanced" | "cinematic"
-
-export type SceneBudgetProps = {
-  active: boolean
-  onQualityChange?: (tier: SceneQualityTier) => void
-  onEffectBudgetChange?: (budget: EffectBudget) => void
-}
-
-const MIN_DPR = 0.75
-const MAX_DPR = 2
-const SAMPLE_SECONDS = 3
-const MIN_FRAMES = 45
-
-function clampDpr(value: number): number {
-  return Number.isFinite(value) ? Math.max(MIN_DPR, Math.min(MAX_DPR, value)) : 1
-}
-
-export function qualityTier(dpr: number, cap: number): SceneQualityTier {
-  const ratio = clampDpr(dpr) / clampDpr(cap)
-  return ratio < 0.7 ? "economy" : ratio < 0.9 ? "balanced" : "cinematic"
-}
-
-/** Presentation-only frame-time controller; never changes authoritative workspace state. */
-export function SceneBudget({ active, onQualityChange, onEffectBudgetChange }: SceneBudgetProps) {
-  const { gl, setDpr } = useThree()
-  const visible = useRef(true)
-  const reducedMotion = useRef(false)
-  const qualityCallback = useRef(onQualityChange)
-  const budgetCallback = useRef(onEffectBudgetChange)
-  const stats = useRef({
-    elapsed: 0, frames: 0, slow: 0, fast: 0, cooldown: 0,
-    cap: 1, tier: "cinematic" as SceneQualityTier
-  })
-
-  const publish = (tier: SceneQualityTier) => {
-    if (stats.current.tier === tier) return
-    stats.current.tier = tier
-    qualityCallback.current?.(tier)
-    budgetCallback.current?.(getEffectBudget(tier))
+import {useEffect,useRef} from "react"
+import {useFrame,useThree} from "@react-three/fiber"
+import {getEffectBudget,type EffectBudget} from "./savant-effect-budgets"
+import {evaluateQuality,pixelRatioCap} from "./savant-quality-policy"
+import type {SceneQualityTier,QualitySample} from "./savant-quality-policy"
+export {qualityTier} from "./savant-quality-policy"
+export type {SceneQualityTier} from "./savant-quality-policy"
+export type SceneBudgetProps={active:boolean;onQualityChange?:(tier:SceneQualityTier)=>void;onEffectBudgetChange?:(budget:EffectBudget)=>void}
+export function SceneBudget({active,onQualityChange,onEffectBudgetChange}:SceneBudgetProps){
+ const {gl,setDpr,size}=useThree()
+ const callbacks=useRef({onQualityChange,onEffectBudgetChange})
+ const state=useRef({cap:1,tier:"cinematic" as SceneQualityTier})
+ const stats=useRef<QualitySample>({elapsed:0,frames:0,slow:0,fast:0,cooldown:0})
+ const visible=useRef(true)
+ useEffect(()=>{callbacks.current={onQualityChange,onEffectBudgetChange}},[onQualityChange,onEffectBudgetChange])
+ useEffect(()=>{
+  const cap=pixelRatioCap(size.width,size.height,window.devicePixelRatio||1)
+  state.current.cap=cap
+  setDpr(Math.min(gl.getPixelRatio(),cap))
+  stats.current={elapsed:0,frames:0,slow:0,fast:0,cooldown:0}
+ },[gl,setDpr,size.width,size.height])
+ useEffect(()=>{
+  const update=()=>{visible.current=!document.hidden;stats.current={elapsed:0,frames:0,slow:0,fast:0,cooldown:0}}
+  update();document.addEventListener("visibilitychange",update)
+  return()=>document.removeEventListener("visibilitychange",update)
+ },[])
+ useFrame((_,delta)=>{
+  if(!active||!visible.current){stats.current.elapsed=0;stats.current.frames=0;return}
+  const next=evaluateQuality(stats.current,delta,state.current.tier,gl.getPixelRatio(),state.current.cap)
+  if(!next)return
+  if(Math.abs(next.dpr-gl.getPixelRatio())>.025)setDpr(next.dpr)
+  if(next.tier!==state.current.tier){
+   state.current.tier=next.tier
+   callbacks.current.onQualityChange?.(next.tier)
+   callbacks.current.onEffectBudgetChange?.(getEffectBudget(next.tier))
   }
-
-  useEffect(() => {
-    qualityCallback.current = onQualityChange
-    budgetCallback.current = onEffectBudgetChange
-    onQualityChange?.(stats.current.tier)
-    onEffectBudgetChange?.(getEffectBudget(stats.current.tier))
-  }, [onQualityChange, onEffectBudgetChange])
-
-  useEffect(() => {
-    const motion = window.matchMedia("(prefers-reduced-motion: reduce)")
-    const reset = () => {
-      const s = stats.current
-      s.elapsed = 0; s.frames = 0; s.slow = 0; s.fast = 0; s.cooldown = 0
-    }
-    const resolution = () => {
-      const s = stats.current
-      s.cap = clampDpr(window.devicePixelRatio || 1)
-      const current = gl.getPixelRatio()
-      const next = Math.min(current, s.cap)
-      if (next < current - 0.025) { setDpr(next); reset() }
-      publish(qualityTier(next, s.cap))
-    }
-    const visibility = () => { visible.current = !document.hidden; reset() }
-    const updateMotion = () => { reducedMotion.current = motion.matches; reset() }
-    resolution(); visibility(); updateMotion()
-    window.addEventListener("resize", resolution, { passive: true })
-    document.addEventListener("visibilitychange", visibility)
-    motion.addEventListener("change", updateMotion)
-    return () => {
-      window.removeEventListener("resize", resolution)
-      document.removeEventListener("visibilitychange", visibility)
-      motion.removeEventListener("change", updateMotion)
-    }
-  }, [gl, setDpr])
-
-  useFrame((_, delta) => {
-    const s = stats.current
-    if (!active || !visible.current || reducedMotion.current || !Number.isFinite(delta) || delta <= 0 || delta > 0.12) {
-      s.elapsed = 0; s.frames = 0; s.slow = 0; s.fast = 0; s.cooldown = 0
-      return
-    }
-    s.elapsed += delta; s.frames += 1; s.cooldown += delta
-    if (s.elapsed < SAMPLE_SECONDS || s.frames < MIN_FRAMES) return
-    const average = s.elapsed / s.frames
-    s.elapsed = 0; s.frames = 0
-    s.slow = average > 0.027 ? s.slow + 1 : 0
-    s.fast = average < 0.017 ? s.fast + 1 : 0
-    if (s.cooldown < 5) return
-    const current = gl.getPixelRatio()
-    let next = Math.min(current, s.cap)
-    if (s.slow >= 2) next = Math.max(MIN_DPR, next - 0.2)
-    else if (s.fast >= 4 && s.cooldown >= 12) next = Math.min(s.cap, next + 0.15)
-    next = clampDpr(next)
-    if (Math.abs(next - current) <= 0.025) return
-    setDpr(next); reset()
-    publish(qualityTier(next, s.cap))
-  }, -1)
-  return null
+ },-1)
+ return null
 }

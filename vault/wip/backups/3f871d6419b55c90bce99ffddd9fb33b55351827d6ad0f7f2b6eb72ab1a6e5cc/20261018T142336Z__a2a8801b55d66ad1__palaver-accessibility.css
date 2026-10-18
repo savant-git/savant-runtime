@@ -1,0 +1,36 @@
+/* Optical and input states; existing event handlers and layout remain upstream. */
+html .palaver-instrument.palaver-only :is(button,a,input,textarea,select,[role="tab"],[role="menuitem"]):focus-visible,
+.urge-next :is(button,a,input):focus-visible{
+ outline:2px solid var(--savant-focus)!important;outline-offset:3px;
+}
+html .palaver-instrument.palaver-only :is(input,textarea,select){min-width:0;max-width:100%}
+html .palaver-instrument.palaver-only :is(.chat-thread,pre,textarea)::-webkit-scrollbar{width:7px;height:7px}
+html .palaver-instrument.palaver-only :is(.chat-thread,pre,textarea)::-webkit-scrollbar-thumb{
+ background:#637b7b;border:2px solid var(--savant-inset);border-radius:5px;
+}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){
+ html .palaver-instrument.palaver-only :is(button,a,[role="tab"],[role="menuitem"]){
+  transition:color .16s ease,background-color .18s ease,border-color .18s ease;
+ }
+}
+@media(max-width:600px){
+ html .palaver-instrument.palaver-only :is(.chat-message-content,.rich-message-text){line-height:1.65}
+ html .palaver-instrument.palaver-only :is(button,a,[role="tab"]){touch-action:manipulation}
+ .urge-next .urge-footer{flex-wrap:wrap}
+}
+@media(prefers-reduced-motion:reduce){
+ html .palaver-instrument.palaver-only *,html .palaver-instrument.palaver-only *::before,
+ html .palaver-instrument.palaver-only *::after,.palaver-urge-panel *{
+  animation:none!important;transition:none!important;scroll-behavior:auto!important;
+ }
+}
+@media(prefers-reduced-transparency:reduce){
+ html .palaver-instrument.palaver-only :is([role="dialog"],.palaver-panel,.observatory-panel),.palaver-urge-panel{
+  backdrop-filter:none!important;background-color:#17262d!important;
+ }
+}
+@media(forced-colors:active){
+ html .palaver-instrument.palaver-only :is(button,input,textarea,select),.palaver-urge-panel{
+  border:1px solid ButtonText!important;
+ }
+}

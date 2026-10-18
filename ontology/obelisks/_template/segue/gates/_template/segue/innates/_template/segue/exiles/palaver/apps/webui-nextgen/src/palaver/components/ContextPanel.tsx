@@ -5,7 +5,7 @@ import {
   GitBranch,
   ShieldCheck,
   TerminalSquare
-} from "lucide-react"
+} from "./savant-glyphs"
 
 import {
   useWorkspaceStore

@@ -1,0 +1,10 @@
+/* Self-hosted variable Latin fonts. Run install-palaver-fonts.py before building.
+   System fallbacks cover other scripts and remain available while fonts load. */
+@font-face{
+ font-family:"Oxanium";font-style:normal;font-weight:400 700;font-display:swap;
+ src:url("/fonts/oxanium-latin.woff2") format("woff2");
+}
+@font-face{
+ font-family:"Exo 2";font-style:normal;font-weight:400 700;font-display:swap;
+ src:url("/fonts/exo2-latin.woff2") format("woff2");
+}

@@ -37,98 +37,7 @@ import {
 } from "../state/workspace-store"
 
 
-type ApiPayload = {
-  ok?: boolean
-  error?: string
-  [key: string]: any
-}
-
-
-async function decodeResponse(
-  response: Response
-): Promise<ApiPayload> {
-  const text =
-    await response.text()
-
-  if (!text.trim()) {
-    return {
-      ok: response.ok
-    }
-  }
-
-  try {
-    const value =
-      JSON.parse(
-        text
-      )
-
-    if (
-      value
-      && typeof value
-      === "object"
-    ) {
-      return value
-    }
-
-    return {
-      ok: response.ok,
-      value
-    }
-  } catch {
-    return {
-      ok: response.ok,
-      error: text.trim()
-    }
-  }
-}
-
-
-async function api(
-  path: string,
-  options: RequestInit = {}
-) {
-  let response: Response
-
-  try {
-    response =
-      await fetch(
-        path,
-        {
-          cache: "no-store",
-          ...options
-        }
-      )
-  } catch (
-    reason
-  ) {
-    throw new Error(
-      reason instanceof Error
-        ? reason.message
-        : String(reason)
-    )
-  }
-
-  const payload =
-    await decodeResponse(
-      response
-    )
-
-  if (
-    !response.ok
-    || payload.ok === false
-  ) {
-    throw new Error(
-      payload.error
-      || (
-        `terminal request failed: `
-        + response.status
-      )
-    )
-  }
-
-  return payload
-}
-
+import {terminalApi as api} from "./terminal-api"
 
 export default function TerminalObservatory() {
   const {
@@ -161,6 +70,8 @@ export default function TerminalObservatory() {
 
   const sessionRef =
     useRef("")
+
+  const generationRef = useRef(0)
 
   const cursorRef =
     useRef(0)
@@ -371,6 +282,7 @@ export default function TerminalObservatory() {
               )
             )
 
+          if(id !== sessionRef.current)return
           for (
             const chunk
             of payload.chunks
@@ -421,6 +333,7 @@ export default function TerminalObservatory() {
               70
             )
         } catch {
+          if(id !== sessionRef.current)return
           setStatus(
             "disconnected"
           )
@@ -439,6 +352,9 @@ export default function TerminalObservatory() {
   const closeSession =
     useCallback(
       async () => {
+        generationRef.current += 1
+        inputBufferRef.current = ""
+        if(inputTimerRef.current !== null){window.clearTimeout(inputTimerRef.current);inputTimerRef.current=null}
         const id =
           sessionRef.current
 
@@ -499,6 +415,7 @@ export default function TerminalObservatory() {
     useCallback(
       async () => {
         await closeSession()
+        const generation = ++generationRef.current
 
         const terminal =
           terminalRef.current
@@ -564,6 +481,10 @@ export default function TerminalObservatory() {
             )
           }
 
+          if(generation !== generationRef.current){
+            await api("/api/terminal/close",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({id:payload.id})})
+            return
+          }
           sessionRef.current =
             payload.id
 
@@ -597,6 +518,7 @@ export default function TerminalObservatory() {
         } catch (
           error
         ) {
+          if(generation !== generationRef.current)return
           terminal.writeln(
             (
               "\r\n\x1b[31m"
