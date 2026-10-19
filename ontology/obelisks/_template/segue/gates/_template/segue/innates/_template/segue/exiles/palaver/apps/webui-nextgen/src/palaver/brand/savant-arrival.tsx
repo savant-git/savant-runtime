@@ -1,8 +1,10 @@
 import React,{createContext,memo,useCallback,useContext,useEffect,useLayoutEffect,useRef,useState} from "react"
 import SavantMark from "./savant-mark"
-import {advanceExposure,arrivalTargets,canEnter,minimumDisplayMs,preloadRect,rectOf,rectTransform} from "./savant-arrival-motion"
+import {advanceExposure,arrivalEase,canEnter,flightDurationMs,minimumDisplayMs,preloadRect,rectOf,rectTransform} from "./savant-arrival-motion"
 import type {ArrivalPhase,ArrivalRect} from "./savant-arrival-motion"
 import "./savant-arrival.css"
+import {animateArrival} from "./savant-arrival-choreography"
+import {ArrowRight} from "../components/savant-glyphs"
 
 type AnchorContext={register:(node:HTMLDivElement|null)=>void}
 const ArrivalContext=createContext<AnchorContext|null>(null)
@@ -112,11 +114,11 @@ export default function SavantArrival({children}:{children:React.ReactNode}){
  useLayoutEffect(()=>{
   if(phase!=="entering"||!anchor||!host.current||!workspace.current||!boxRef.current)return
   const carrier=host.current,root=workspace.current,source=boxRef.current
-  const animations:Animation[]=[]
+  const entrance=animateArrival(root,reduced)
   let disposed=false,flight:Animation|null=null,token=0,watchdog=0
   let resolveFlight:()=>void=()=>{}
   const flightDone=new Promise<void>(resolve=>{resolveFlight=resolve})
-  const duration=reduced?160:1550,deadline=performance.now()+duration
+  const duration=reduced?160:flightDurationMs,deadline=performance.now()+duration
   const finish=()=>{
    if(disposed||phaseRef.current!=="entering")return
    const destination=rectOf(anchor)
@@ -134,36 +136,17 @@ export default function SavantArrival({children}:{children:React.ReactNode}){
    flight=carrier.animate([
     {transform:from==="none"?rectTransform(source,source):from},
     {transform:final},
-   ],{duration:Math.max(100,deadline-performance.now()),easing:"cubic-bezier(.22,1,.36,1)",fill:"both"})
+   ],{duration:Math.max(100,deadline-performance.now()),easing:arrivalEase,fill:"both"})
    flight.finished.then(()=>{if(mine===token&&!disposed)resolveFlight()}).catch(()=>{})
   }
   retarget.current=launch
-  const settled:Promise<unknown>[]=[]
-  if(typeof root.animate==="function"){
-   const targets=arrivalTargets(root)
-   targets.forEach((node,index)=>{
-    const delay=reduced?0:Math.min(index*65,390)
-    const distance=Math.min(150,Math.max(48,node.getBoundingClientRect().height*.18+40))
-    const frames:Keyframe[]=reduced?[
-     {opacity:0},{opacity:1},
-    ]:[
-     {opacity:0,transform:`perspective(1000px) translate3d(0,-${distance}px,0) rotateX(5deg) scale(.985)`,offset:0},
-     {opacity:1,transform:"perspective(1000px) translate3d(0,3px,0) rotateX(-.25deg) scale(1.001)",offset:.8},
-     {opacity:1,transform:"perspective(1000px) translate3d(0,0,0) rotateX(0deg) scale(1)",offset:1},
-    ]
-    const animation=node.animate(frames,{
-     duration:reduced?140:1050,delay,easing:"cubic-bezier(.16,1,.3,1)",fill:"both",
-    })
-    animations.push(animation);settled.push(animation.finished.catch(()=>{}))
-   })
-  }
   launch()
-  Promise.all([flightDone,...settled]).then(finish).catch(finish)
+  Promise.all([flightDone,entrance.finished]).then(finish).catch(finish)
   // A cancellation or browser animation failure must not strand the interface.
-  watchdog=window.setTimeout(finish,reduced?600:3000)
+  watchdog=window.setTimeout(finish,reduced?600:3600)
   return()=>{
    disposed=true;token++;window.clearTimeout(watchdog)
-   retarget.current=null;flight?.cancel();animations.forEach(animation=>animation.cancel())
+   retarget.current=null;flight?.cancel();entrance.cancel()
   }
  },[phase,anchor,place,changePhase,reduced])
 
@@ -204,14 +187,25 @@ export default function SavantArrival({children}:{children:React.ReactNode}){
   <section ref={gate} className="palaver-arrival-layer" data-arrival-phase={phase}
    role={locked?"dialog":undefined} aria-modal={locked?true:undefined}
    aria-labelledby={locked?"palaver-arrival-title":undefined} onKeyDown={trapKeys}>
-   {phase!=="entered"&&<div className="palaver-arrival-scrim" aria-hidden="true"/>}
+
+   {phase!=="entered"&&<div className="palaver-arrival-scrim" aria-hidden="true">
+    <div className="palaver-arrival-horizon"/>
+   </div>}
+   {phase!=="entered"&&box&&<div className="palaver-arrival-aperture" aria-hidden="true"
+    style={{left:box.left,top:box.top,width:box.width,height:box.height}}>
+    <svg viewBox="0 0 200 200">
+     <circle className="arrival-orbit arrival-orbit--outer" cx="100" cy="100" r="93"/>
+     <circle className="arrival-orbit arrival-orbit--inner" cx="100" cy="100" r="82"/>
+     <path className="arrival-crosshair" d="M100 1v9m0 180v9M1 100h9m180 0h9M34 34l6 6m120 120 6 6M34 166l6-6m120-120 6-6"/>
+    </svg>
+   </div>}
    <div ref={host} className="palaver-arrival-logo" style={{
     visibility:box?"visible":"hidden",
     width:box?.width||1,height:box?.height||1,
     transform:box?`translate3d(${box.left}px,${box.top}px,0)`:"none",
     "--savant-arrival-scale":frameScale,
    } as React.CSSProperties}>
-    <PersistentMark mode="header" state="idle" label="savant"
+    <PersistentMark mode="header" state="idle" label="savant" arrivalPhase={phase}
      controls={phase==="entered"} controlsTarget={anchor?.closest<HTMLElement>("header.workstation-topbar")||null}
      framingScale={frameScale}/>
    </div>
@@ -221,17 +215,17 @@ export default function SavantArrival({children}:{children:React.ReactNode}){
     <p className="palaver-arrival-eyebrow">savant / cognitive instrument</p>
     <h1 id="palaver-arrival-title" ref={heading} tabIndex={-1}>palaver</h1>
     <p className="palaver-arrival-instruction" role="status" aria-live="polite">
-     {phase==="waiting"?"A moment before the conversation.":phase==="ready"?"Your space is ready.":"Entering palaver."}
+     {phase==="waiting"?"A moment before the conversation.":phase==="ready"?"Choose when to begin.":"Entering palaver."}
     </p>
     <div className="palaver-arrival-meter" role="progressbar" aria-label="Minimum display time"
      aria-valuemin={0} aria-valuemax={10} aria-valuenow={seconds}>
      <span ref={meter}/>
     </div>
-    <div className="palaver-arrival-action">
+    <div className="palaver-arrival-action" aria-busy={phase==="entering"}>
      {phase==="waiting"&&<span aria-hidden="true">{Math.max(0,10-seconds)}s</span>}
-     {phase==="ready"&&<button ref={enterButton} type="button" onClick={enter}
+     {(phase==="ready"||phase==="entering")&&<button ref={enterButton} type="button" onClick={enter} disabled={phase==="entering"}
       className="palaver-arrival-enter">
-      enter palaver <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h18m-7-7 7 7-7 7"/></svg>
+      {phase==="entering"?"entering":"enter palaver"} <ArrowRight size={20}/>
      </button>}
     </div>
    </div>}

@@ -1,4 +1,3 @@
-
 /* One persistent logo canvas; only the carrier transform moves during entry. */
 .palaver-arrival-workspace{
  width:100%;height:100%;min-height:100dvh;min-width:0;
@@ -28,7 +27,7 @@
  animation:palaver-arrival-atmosphere 5.5s ease-in-out infinite alternate;
 }
 .palaver-arrival-layer[data-arrival-phase="entering"] .palaver-arrival-scrim{
- pointer-events:none;animation:palaver-arrival-curtain 1000ms cubic-bezier(.22,1,.36,1) forwards;
+ pointer-events:none;animation:palaver-arrival-curtain 1250ms cubic-bezier(.12,.86,.16,1) forwards;
 }
 .palaver-arrival-logo{
  position:absolute;top:0;left:0;transform-origin:0 0;pointer-events:auto;
@@ -52,7 +51,7 @@
 }
 .palaver-arrival-copy h1{
  font-family:var(--savant-display,system-ui,sans-serif);
- font-size:clamp(28px,5vw,46px);font-weight:550;letter-spacing:.14em;
+ font-size:clamp(28px,5vw,46px);font-weight:700;letter-spacing:.1em;
  line-height:1.1;margin:8px 0 12px;text-transform:lowercase;
  color:#ede6d9;outline:none;
 }
@@ -92,7 +91,7 @@
 }
 .palaver-arrival-enter:active{transform:translateY(1px)}
 .palaver-arrival-layer[data-arrival-phase="entering"] .palaver-arrival-copy{
- pointer-events:none;animation:palaver-arrival-copy-away 220ms ease-out forwards;
+ pointer-events:none;animation:palaver-arrival-copy-away 460ms cubic-bezier(.3,0,.15,1) forwards;
 }
 @media(hover:hover){
  .palaver-arrival-enter:hover{border-color:#d8b990;transform:translateY(-2px)}
@@ -116,3 +115,54 @@
 
 .palaver-arrival-layer[data-arrival-phase="waiting"],
 .palaver-arrival-layer[data-arrival-phase="ready"]{overflow-y:auto;overscroll-behavior:contain}
+
+
+/* v3 decoration outside the single persistent WebGL carrier. */
+.palaver-arrival-layer{--arrival-ease:cubic-bezier(.12,.86,.16,1)}
+.palaver-arrival-scrim{background:radial-gradient(ellipse at 50% 32%,#243340 0,#101922 43%,#060b10 82%)}
+.palaver-arrival-horizon{
+ position:absolute;inset:12% 8%;
+ background:linear-gradient(90deg,transparent,#b8d4db24,transparent) 50% 50%/100% 1px no-repeat;
+}
+.palaver-arrival-aperture{position:absolute;pointer-events:none;display:grid;place-items:center;opacity:.62}
+.palaver-arrival-aperture svg{width:106%;height:106%;overflow:visible;fill:none;stroke:#b1ccd1;stroke-width:.45}
+.arrival-orbit{transform-origin:100px 100px}
+.arrival-orbit--outer{stroke-dasharray:90 80 4 60;animation:arrival-orbit 24s linear infinite}
+.arrival-orbit--inner{stroke:#ddbd79;stroke-dasharray:24 120;animation:arrival-orbit 18s linear infinite reverse}
+.arrival-crosshair{stroke-width:.65;stroke:#e4cf9b;opacity:.7}
+.palaver-arrival-layer[data-arrival-phase="ready"] .palaver-arrival-aperture{opacity:.92;transition:opacity 700ms}
+.palaver-arrival-layer[data-arrival-phase="entering"] .palaver-arrival-aperture{animation:arrival-aperture-release 700ms var(--arrival-ease) forwards}
+.palaver-arrival-layer[data-arrival-phase="entering"] .palaver-arrival-aperture svg *{animation-play-state:paused}
+.palaver-arrival-copy h1{font-size:clamp(32px,5.8vw,56px);text-shadow:0 2px 24px #c5dce514}
+.palaver-arrival-eyebrow{letter-spacing:.24em;color:#c9b285;font-family:var(--savant-display,system-ui)}
+.palaver-arrival-instruction{color:#bdccd4;font-size:13px}
+.palaver-arrival-meter{width:160px;height:3px;border-radius:3px;background:#8ca3b324}
+.palaver-arrival-meter>span{background:linear-gradient(90deg,#ad8656,#eed6a2 65%,#bce2dd)}
+.palaver-arrival-enter{
+ min-width:210px;min-height:52px;border-radius:8px;
+ font-family:var(--savant-display,system-ui);font-weight:650;letter-spacing:.08em;
+ background:linear-gradient(120deg,#dac191,#aa895a);color:#111b23;border-color:#f0d6a4;
+ box-shadow:inset 0 1px #fff6,0 10px 36px #0006;
+ transition:translate 220ms var(--arrival-ease),box-shadow 220ms,border-color 220ms;
+}
+.palaver-arrival-enter svg{stroke-width:2.1;transition:translate 350ms var(--arrival-ease)}
+.palaver-arrival-enter:disabled{opacity:.9;cursor:wait}
+.palaver-arrival-enter:active{translate:0 1px}
+@media(hover:hover){
+ .palaver-arrival-enter:not(:disabled):hover{translate:0 -2px;box-shadow:inset 0 1px #fff6,0 16px 48px #0008}
+ .palaver-arrival-enter:not(:disabled):hover svg{translate:4px 0}
+}
+@keyframes arrival-orbit{to{transform:rotate(360deg)}}
+@keyframes arrival-aperture-release{to{opacity:0;scale:1.18}}
+@media(max-width:540px){.palaver-arrival-aperture svg{width:100%;height:100%}}
+@media(max-height:540px){.palaver-arrival-copy h1{font-size:28px}.palaver-arrival-enter{min-height:44px}}
+@media(prefers-reduced-motion:reduce){
+ .palaver-arrival-aperture,.palaver-arrival-aperture *{animation:none!important;transition:none!important}
+ .palaver-arrival-layer[data-arrival-phase="entering"] .palaver-arrival-aperture{opacity:0}
+}
+@media(forced-colors:active){
+ .palaver-arrival-enter{background:ButtonFace;color:ButtonText;border:2px solid ButtonText}
+ .palaver-arrival-meter{border:1px solid CanvasText}
+ .palaver-arrival-meter>span{background:Highlight}
+ .palaver-arrival-aperture{display:none}
+}
