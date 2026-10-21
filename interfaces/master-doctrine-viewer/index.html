@@ -2033,5 +2033,104 @@ body.focus .document{
   tryDefaultSource();
 })();
 </script>
+
+<style id="savant-viewer-extension-style">
+:root{--sv-font:17px;--sv-measure:78ch;--sv-leading:1.72}
+#sv-tools{position:fixed;z-index:120;right:16px;bottom:16px;width:min(410px,calc(100vw - 32px));max-height:min(75vh,720px);overflow:auto;background:#111215f5;border:1px solid #a18b5c77;border-radius:17px;box-shadow:0 20px 70px #000b;color:#eee;padding:14px;font:13px/1.5 system-ui,sans-serif;backdrop-filter:blur(20px)}
+#sv-tools[hidden]{display:none}#sv-tools button,#sv-tools select,#sv-tools input{background:#242529;color:#f2f2f2;border:1px solid #48484a;border-radius:8px;padding:7px 9px;font:inherit}
+#sv-tools button:hover{border-color:#bca478}#sv-tools button:focus-visible,#sv-tools input:focus-visible{outline:2px solid #e1bb76}
+#sv-tools .sv-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:9px 0}
+#sv-tools .sv-grid button{min-height:34px}#sv-tools .sv-wide{grid-column:span 3}
+#sv-tools .sv-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+#sv-tools .sv-muted{color:#b9b9b9}#sv-tools .sv-stat{font-variant-numeric:tabular-nums}
+#sv-tools .sv-range{display:flex;gap:8px;align-items:center;margin:8px 0}#sv-tools .sv-range input{flex:1;min-width:0}
+#sv-tools .sv-bookmarks{max-height:135px;overflow:auto}#sv-tools .sv-bookmarks button{display:block;width:100%;text-align:left;margin:4px 0}
+#sv-launch{position:fixed;z-index:121;right:18px;bottom:18px;border:1px solid #c6a66d;background:#151517;color:#ead1a3;padding:11px 17px;border-radius:999px;font:600 13px system-ui,sans-serif;box-shadow:0 6px 28px #0009}
+#sv-tools:not([hidden])~#sv-launch{display:none}
+#document{font-size:var(--sv-font);line-height:var(--sv-leading)}#document>*{max-width:var(--sv-measure)}
+body.sv-light #sv-tools{background:#f6f4f0;color:#171717;border-color:#99845b}
+body.sv-light #sv-tools button,body.sv-light #sv-tools select,body.sv-light #sv-tools input{background:#fff;color:#222;border-color:#b8b5af}
+body.sv-reduced-motion *,body.sv-reduced-motion *::before,body.sv-reduced-motion *::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+body.sv-high-contrast #document{filter:contrast(1.3)}body.sv-plain #document{font-family:system-ui,sans-serif!important}
+#sv-announcer{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+@media(max-width:650px){#sv-tools{right:8px;bottom:8px;width:calc(100vw - 16px)}}
+@media print{#sv-tools,#sv-launch{display:none!important}}
+</style>
+<div id="sv-tools" hidden role="region" aria-label="doctrine reading tools">
+  <div class="sv-head"><strong>doctrine tools</strong><button id="sv-close" aria-label="close tools">close ×</button></div>
+  <div class="sv-muted sv-stat" id="sv-stats">waiting for source</div>
+  <div class="sv-grid">
+    <button id="sv-top">↑ top</button><button id="sv-bottom">↓ bottom</button><button id="sv-focus">focus</button>
+    <button id="sv-prev">← heading</button><button id="sv-next">heading →</button><button id="sv-mark">bookmark</button>
+    <button id="sv-copy">copy link</button><button id="sv-export">export map</button><button id="sv-print">print</button>
+    <button id="sv-download">save text</button><button id="sv-digest">sha-256</button><button id="sv-palette">commands</button>
+    <button id="sv-motion">reduce motion</button><button id="sv-contrast">contrast</button><button id="sv-plain">plain font</button>
+    <button id="sv-outline">toggle outline</button><button id="sv-clear">clear marks</button><button id="sv-help">shortcuts</button>
+  </div>
+  <label class="sv-range">text size <input id="sv-font" type="range" min="13" max="24" value="17" aria-label="text size"><output id="sv-font-value">17px</output></label>
+  <label class="sv-range">line spacing <input id="sv-leading" type="range" min="13" max="23" value="17" aria-label="line spacing"><output id="sv-leading-value">1.7</output></label>
+  <label class="sv-range">line width <input id="sv-width" type="range" min="45" max="115" value="78" aria-label="line width"><output id="sv-width-value">78ch</output></label>
+  <div class="sv-muted">session bookmarks</div><div id="sv-marks" class="sv-bookmarks"></div>
+  <div class="sv-muted" id="sv-message" role="status" aria-live="polite"></div>
+</div>
+<button id="sv-launch" aria-label="open doctrine tools" aria-controls="sv-tools" aria-expanded="false">◈ tools</button>
+<div id="sv-announcer" role="status" aria-live="polite"></div>
+<script id="savant-viewer-extension">
+(()=>{
+"use strict";
+const by=id=>document.getElementById(id);
+const stage=by("stage"),documentNode=by("document"),panel=by("sv-tools"),launcher=by("sv-launch");
+if(!stage||!documentNode||!panel)return;
+const bookmarks=new Map();
+const state={outlineHidden:false,opened:false};
+const notify=s=>{by("sv-message").textContent=s;by("sv-announcer").textContent=s};
+const headings=()=>Array.from(documentNode.querySelectorAll("h1,h2,h3,h4,h5,h6")).filter(x=>x.id);
+const activeHeading=()=>{
+ const h=headings();if(!h.length)return null;
+ const top=stage.getBoundingClientRect().top+70;
+ let active=h[0];for(const item of h){if(item.getBoundingClientRect().top>top)break;active=item}return active;
+};
+const go=el=>{if(!el)return;el.scrollIntoView({block:"start",behavior:document.body.classList.contains("sv-reduced-motion")?"instant":"smooth"});history.replaceState(null,"","#"+encodeURIComponent(el.id));};
+const toggle=()=>{state.opened=!state.opened;panel.hidden=!state.opened;launcher.setAttribute("aria-expanded",String(state.opened));if(state.opened)by("sv-close").focus();else launcher.focus()};
+launcher.addEventListener("click",toggle);by("sv-close").addEventListener("click",toggle);
+by("sv-top").onclick=()=>stage.scrollTo({top:0,behavior:"smooth"});
+by("sv-bottom").onclick=()=>stage.scrollTo({top:stage.scrollHeight,behavior:"smooth"});
+by("sv-focus").onclick=()=>document.body.classList.toggle("focus");
+by("sv-palette").onclick=()=>by("command")?.click();
+by("sv-prev").onclick=()=>{const h=headings(),i=h.indexOf(activeHeading());go(h[Math.max(0,i-1)])};
+by("sv-next").onclick=()=>{const h=headings(),i=h.indexOf(activeHeading());go(h[Math.min(h.length-1,i+1)])};
+const renderMarks=()=>{const host=by("sv-marks");host.replaceChildren();for(const [id,title] of bookmarks){const b=document.createElement("button");b.textContent=title;b.onclick=()=>go(document.getElementById(id));host.append(b)}if(!bookmarks.size)host.textContent="no bookmarks yet"};
+by("sv-mark").onclick=()=>{const h=activeHeading();if(!h){notify("no heading available");return}bookmarks.set(h.id,h.textContent.trim());renderMarks();notify("bookmark saved for this session")};
+by("sv-clear").onclick=()=>{bookmarks.clear();renderMarks();notify("session bookmarks cleared")};
+by("sv-copy").onclick=async()=>{const h=activeHeading();const url=new URL(location.href);if(h)url.hash=h.id;try{await navigator.clipboard.writeText(url.href);notify("section link copied")}catch{notify("clipboard unavailable in this browser")}};
+by("sv-print").onclick=()=>window.print();
+by("sv-outline").onclick=()=>{state.outlineHidden=!state.outlineHidden;const el=by("outline");if(el)el.hidden=state.outlineHidden;notify(state.outlineHidden?"outline hidden":"outline visible")};
+by("sv-motion").onclick=()=>document.body.classList.toggle("sv-reduced-motion");
+by("sv-contrast").onclick=()=>document.body.classList.toggle("sv-high-contrast");
+by("sv-plain").onclick=()=>document.body.classList.toggle("sv-plain");
+const range=(id,css,fmt,transform)=>{const el=by(id);el.addEventListener("input",()=>{const v=transform(Number(el.value));document.documentElement.style.setProperty(css,fmt(v));by(id+"-value").textContent=fmt(v)});el.dispatchEvent(new Event("input"))};
+range("sv-font","--sv-font",v=>v+"px",v=>v);
+range("sv-leading","--sv-leading",v=>v.toFixed(1),v=>v/10);
+range("sv-width","--sv-measure",v=>v+"ch",v=>v);
+const download=(name,data,type="text/plain;charset=utf-8")=>{const blob=new Blob([data],{type});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
+by("sv-download").onclick=()=>{const text=documentNode.innerText;if(!text){notify("load doctrine first");return}download("savant_doctrine_readable.txt",text);notify("readable text exported; original source remains unchanged")};
+by("sv-export").onclick=()=>{const data=headings().map((h,i)=>({index:i+1,level:Number(h.tagName.slice(1)),title:h.textContent.trim(),id:h.id}));download("savant_doctrine_heading_projection.json",JSON.stringify(data,null,2),"application/json");notify("derived heading map exported")};
+by("sv-digest").onclick=async()=>{if(!crypto.subtle){notify("sha-256 requires a secure browser context");return}const source=documentNode.innerText;if(!source){notify("load doctrine first");return}notify("computing rendered-text sha-256");try{const bytes=new TextEncoder().encode(source);const digest=await crypto.subtle.digest("SHA-256",bytes);const hex=Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,"0")).join("");notify("rendered-text sha-256: "+hex)}catch{notify("digest unavailable; document may exceed browser memory")}};
+by("sv-help").onclick=()=>notify("shortcuts: alt+shift+d tools; alt+↑/↓ headings; / search; ctrl+k commands; esc close");
+window.addEventListener("keydown",e=>{
+ if(e.altKey&&e.shiftKey&&e.key.toLowerCase()==="d"){e.preventDefault();toggle()}
+ if(e.key==="Escape"&&state.opened){toggle();return}
+ if(/input|textarea|select/i.test(document.activeElement?.tagName||""))return;
+ if(e.altKey&&e.key==="ArrowUp"){e.preventDefault();by("sv-prev").click()}
+ if(e.altKey&&e.key==="ArrowDown"){e.preventDefault();by("sv-next").click()}
+});
+let pending=false;
+const stats=()=>{pending=false;const h=headings();const text=documentNode.textContent||"";const words=(text.match(/\S+/g)||[]).length;const minutes=Math.ceil(words/220);by("sv-stats").textContent=`${h.length.toLocaleString()} headings · ${words.toLocaleString()} words · ~${minutes.toLocaleString()} min reading`;};
+const observer=new MutationObserver(()=>{if(pending)return;pending=true;setTimeout(stats,300)});
+observer.observe(documentNode,{childList:true,subtree:false});
+stats();renderMarks();
+})();
+</script>
+
 </body>
 </html>

@@ -1,0 +1,35 @@
+{
+  "schema": "savant.urge.demo-deployment.v1",
+  "id": "urge-public-showcase",
+  "title": "savant / urge",
+  "mode": "static-showcase",
+  "entrypoint": "urge-demo.html",
+  "studio": "urge-logo-studio-v7.html",
+  "shade_configuration": "urge-demo-shades.js",
+  "execution": {
+    "enabled": false,
+    "backend_required": false,
+    "provider_credentials": false
+  },
+  "hosting": {
+    "bind": "127.0.0.1",
+    "port": 18766,
+    "public_access_requires_https_reverse_proxy": true
+  },
+  "required_files": [
+    "urge-demo-server.py",
+    "urge-demo.html",
+    "urge-demo-shades.js",
+    "urge-logo-studio-v7.html"
+  ],
+  "isolation": {
+    "allowlisted_static_files": true,
+    "backend_proxy": false,
+    "private_runtime_access": false,
+    "secrets_in_configuration": false
+  },
+  "claims": {
+    "local_transformations_are_ai_generated": false,
+    "live_provider_execution_available": false
+  }
+}

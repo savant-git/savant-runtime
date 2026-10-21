@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080e11">
+<title>savant / urge</title>
+
+<style>
+:root {
+  color-scheme: dark;
+  font-family: system-ui, sans-serif;
+  background: #080e11;
+  color: #e4efeb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+}
+
+header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 24px;
+  border-bottom: 1px solid #28423e;
+}
+
+h1 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: .08em;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+button,
+a.control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border: 1px solid #476e63;
+  border-radius: 8px;
+  background: #142522;
+  color: inherit;
+  font: inherit;
+  font-size: 13px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+button[aria-pressed="true"] {
+  background: #295448;
+  border-color: #9bd7be;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #9bd7be;
+  outline-offset: 3px;
+}
+
+#description,
+#notice {
+  padding: 10px 24px;
+  font-size: 13px;
+}
+
+#description {
+  color: #a6bdb5;
+}
+
+#notice {
+  color: #c3d5ce;
+}
+
+main {
+  width: 100%;
+}
+
+iframe {
+  display: block;
+  width: 100%;
+  height: calc(100dvh - 150px);
+  min-height: 480px;
+  border: 0;
+  background: #090e11;
+}
+
+footer {
+  padding: 12px 24px;
+  border-top: 1px solid #28423e;
+  color: #829a91;
+  font-size: 11px;
+}
+
+@media (max-width: 600px) {
+  header {
+    padding: 14px;
+  }
+
+  #description,
+  #notice,
+  footer {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  iframe {
+    height: calc(100dvh - 205px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+
+<script src="./urge-demo-shades.js" defer></script>
+
+<script defer>
+"use strict";
+
+document.addEventListener("DOMContentLoaded", () => {
+  const registry = window.SavantUrgeDemoShades;
+  const frame = document.getElementById("studio");
+  const nav = document.getElementById("shades");
+  const description = document.getElementById("description");
+  const notice = document.getElementById("notice");
+  const openLink = document.getElementById("open-studio");
+
+  if (!registry) {
+    notice.textContent =
+      "The demonstration configuration could not be loaded.";
+    return;
+  }
+
+  function activate(id) {
+    const shade = registry.resolve(id);
+
+    if (!shade) {
+      notice.textContent =
+        "This demonstration shade is unavailable.";
+      return;
+    }
+
+    const url = new URL(shade.source, document.baseURI);
+
+    if (url.origin !== location.origin) {
+      notice.textContent =
+        "External studio origins are not permitted.";
+      return;
+    }
+
+    frame.src = url.href;
+    frame.title = shade.title;
+    openLink.href = url.href;
+
+    description.textContent = shade.description;
+
+    notice.textContent =
+      shade.execution === "local"
+        ? "Local transformations are not AI-generated results."
+        : "Live execution requires an authorized Urge backend.";
+
+    for (const button of nav.querySelectorAll("button")) {
+      button.setAttribute(
+        "aria-pressed",
+        String(button.dataset.shade === id)
+      );
+    }
+  }
+
+  for (const shade of registry.list()) {
+    const button = document.createElement("button");
+
+    button.type = "button";
+    button.textContent = shade.title;
+    button.dataset.shade = shade.id;
+
+    button.setAttribute("aria-pressed", "false");
+
+    button.addEventListener("click", () => {
+      activate(shade.id);
+    });
+
+    nav.appendChild(button);
+  }
+
+  frame.addEventListener("error", () => {
+    notice.textContent =
+      "The studio could not be loaded.";
+  });
+
+  activate(registry.config.defaultShade);
+});
+</script>
+</head>
+
+<body>
+<header>
+  <h1>savant / urge</h1>
+
+  <nav id="shades" aria-label="Demonstration shades"></nav>
+
+  <a
+    id="open-studio"
+    class="control"
+    href="./urge-logo-studio-v7.html"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    open studio
+  </a>
+</header>
+
+<div id="description"></div>
+<div id="notice" role="status"></div>
+
+<main>
+  <iframe
+    id="studio"
+    title="urge demonstration"
+    loading="eager"
+    referrerpolicy="no-referrer"
+    sandbox="allow-scripts allow-downloads"
+  ></iframe>
+</main>
+
+<footer>
+  savant / urge · demonstration environment
+</footer>
+</body>
+</html>

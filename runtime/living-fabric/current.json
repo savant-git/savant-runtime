@@ -318,37 +318,35 @@
     }
   },
   "catalog_digest": "1611e061a7e60c583d8ae6d7e0e5eafd4f43c8b39bb28467756843bf52b68314",
-  "change_count": 12,
+  "change_count": 10,
   "changed_surfaces": [
     "change",
     "filesystem",
     "freshness",
     "history",
-    "network",
     "processes",
     "projection_integrity",
     "replay",
-    "services",
     "source_integrity",
     "staleness",
     "system"
   ],
-  "fabric_hash": "c5ed0b0eba0133f5e9db51ae8ce2b68a545519368c84cc75a16f27ccd6c09782",
+  "fabric_hash": "241481922a090e1bf9a917d43f07199ac52dff02b2a89e9fb82f1b091044c4d2",
   "filesystem_presence_establishes_authority": false,
-  "generated_at_unix_ns": 1791925477924610825,
+  "generated_at_unix_ns": 1792592962630884128,
   "id": "savant:living-fabric",
-  "previous_fabric_hash": "ad2545b52174fe6a0198d0dbd88943b734a3fb8a5cc9aed96613d7c7fa68db4e",
+  "previous_fabric_hash": "e047694f750f8dc35f4fad7016b653e1733982014271d70dae89ce6756e460ee",
   "projection_only": true,
   "schema": "savant.living-fabric.v1",
-  "sequence": 197585,
+  "sequence": 205748,
   "single_fabric": true,
   "source_authority_preserved": true,
   "sources": {
     "current.json:0eba5fc6164f": {
-      "mtime_ns": 1791925476186526705,
+      "mtime_ns": 1792592962484948781,
       "path": "/root/savant-runtime/runtime/living-state/current.json",
       "present": true,
-      "size": 4919253
+      "size": 4923205
     },
     "current.json:2412081df608": {
       "mtime_ns": 1789655440526720765,
@@ -369,10 +367,10 @@
       "size": 22579
     },
     "health.json:d09fc48ef31b": {
-      "mtime_ns": 1791925476191526700,
+      "mtime_ns": 1792592962488948777,
       "path": "/root/savant-runtime/runtime/living-state/health.json",
       "present": true,
-      "size": 262
+      "size": 261
     },
     "snapshot.json:dba2cd424d5f": {
       "mtime_ns": 1789655465231001866,
@@ -393,7 +391,7 @@
     "authority": "992b31daabda2b8e49cb9f0b17dd2e83e55a71a44cb4e15c42c90b914c265d95",
     "canon": "5cf5196348d7ab499027b0eed977027d6b63f3999a43a39f529083c45d36c9be",
     "capabilities": "1a44ce2df178be57127a3bc363b29c07450067f53f78f76588959847ddf7461a",
-    "change": "2c72f986317adcc4a00101fd514a22c123d77441a45ed9f92b0832fa32e6a4cd",
+    "change": "8542d5b025e8ea553964d4d7f3dcb4cd2ba9f41f0f42a0b5e39ce203bf65907e",
     "compatibility": "adcd35fe87ed6575231ba53042127164126c4e6c74f065f4cbfe1f980ebe4f63",
     "conflicts": "08ad1c5feffd7fd57739648178c6eeb0fdda038078cd47ac6b8bbe9ed9c9b3a3",
     "context": "fe00446e1ff5324d3a9e3bb86783dcf96cff1316afdb0ad5fefb03a586ba60b3",
@@ -405,17 +403,17 @@
     "environment": "c2b4e4f1adc2ef7809a0ccf1343a486ba846270b2b2e3426ec463c0a0b154aee",
     "evidence": "6f4ecf6d9555f5b0c80953d4ec78d09506ceb984a48927643a68eeaa47895d10",
     "evolution": "942aa3bbdc2c53546af7782fa1022a810cf119df9dd2be5d26cd2dc92158a9e3",
-    "filesystem": "8e59a9753a3e419358c712a612421652077e3e08014a4c89a445a2a39a001a83",
-    "freshness": "8ccef78e4d30a773827e00a6cc61a3549229086eea1d1d04c3a998ca850c6584",
+    "filesystem": "09866d410117b28d854e32fd04a8be8be86866c02372861408bc825a74bd90ba",
+    "freshness": "5de6a9077b635659a22e01c4266a7392d17072f6a4b95f48161321da0d5b29e5",
     "git": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
     "health": "a65755303fbe9786dadabdb1697ba48c1942498846b551d30c259fd1b7a8e004",
-    "history": "eff5f1ee8ab179cd60fd6ece7ce5a3392ada7051c601e8d5f8a76b2e10cd49fd",
+    "history": "ad7fb2235c887ed585620aeccf49aee9ece04965cd3a34ff68e8988a7391bcf7",
     "implementation": "51d7ce0bbca2cb35f709fff89aab619e6465aaffabd192f8d90726a3e3a61260",
     "invariants": "277ecd7487960b47fe27e6ee55b54a62fc6821895eac86218634377b631ebb6c",
     "lineage": "643faa817dab9ccda812a57ca3785582e8a0a59b8aaa8afb2618d301958977b3",
     "masterplan": "f0cfe0351d97d2d1d60edead2428935d90dbc83f2c34012a391ba7c100ca97d0",
-    "network": "f34445d0f008466ae789c751c183be8bb891585072d0b24b8103ce3a26be347c",
-    "packages": "ddeeafcbad461ad78a463a17fa7c928c11a751e62358df325573489fcbe93c8d",
+    "network": "cd2b60bc9ac84d547801746dab5008b9d17811838503970e83c156560827f81f",
+    "packages": "0694371554ed4d67f32b83213161950f90107abad4daa83fa96638d79a604445",
     "permissions": "0ff8298bbb2479717fc6c3bf0c8ab33c3cd0c46d7a0190d1879b7b2f8442a7ed",
     "persona": "e7507109efcfad1611aca69f942ece673c836a5d862b415003083544427268d8",
     "persona_trait_adjudication": "0293748b2fa7bd7cfd78976e80123fbf695562fc569dbbdc94192505e560001b",
@@ -426,21 +424,21 @@
     "persona_trait_history": "30e967719e435cae94e347c3cd0d3d88e36a9a5ecc78ecf00087514b527d951b",
     "persona_trait_state": "38d8c3688730b3cad03dd117f646bec08f1e06d9ff5dae5775d4fa54636ce838",
     "persona_traits": "eb23c11088713092f6a55513c41c3fa12bb1ea861c759b30374d48901b71bcc7",
-    "processes": "89ed1afadfb959311ff1fb2472f690367b88115b3f7f0b0b8d44d96079eb147e",
-    "projection_integrity": "09a8cefad592f33169addc14afff58673ac058265275048a47919391a77e347d",
+    "processes": "ef0e04c4c63ca3c26a4cec9503ae1ac4ccd25b1ab6eae66d008918e7d2efe362",
+    "projection_integrity": "6f633a066af3ce294b2651d3b8a3648f5dc0553f4e0823aa76ea9e16b315af36",
     "provenance": "6f271384d2b9c709471d3712ed84a206009609e985853568fb701728eb2cc8e9",
     "readiness": "dae90949f5a3cd6733ef7412a0d336e9ea6463fb5f4aed4c1146e90136b6f39d",
     "receipts": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
-    "replay": "5d9b164c5c292764b43806c86656025bc197572709da9d671af48c38eabb22c8",
+    "replay": "89c23e0c8ccebafa9aa26f0ca4dea2edd7625f1821b76b4ae6edaba5bc525796",
     "risks": "deeea62af6c309eee4201e26e6d03692a74a1169fa7d04d9ab975dbcc3d87d74",
     "rules": "c91f9bfcf187cfee21c31a6fee23e948a3ea18358d1b390581469aed651c7984",
     "sdump": "c5a5b6fc6136f091d891a469c849682c929e6ec079715802cd368d5a55395435",
-    "services": "cf22ed772cfe27044deaaa87f4b5848edd6813977496a615509df4dc80f731fd",
-    "source_integrity": "3ad3866c038eae8193ea3e2fc6d73a6133c679f55f73309606b97aec01f61667",
-    "staleness": "65e655de0324355c4882628b88d5192a176488395a0aeda3b6b2c94ba32b9961",
+    "services": "983c88b12ab13dac240f29e465bbdb3c8dfda37c2a4d6c96e467bd9fad5b771b",
+    "source_integrity": "64f85da975bea8f63cfcd8f3906d51d7e591bac4fa589c6083e11d9830635eab",
+    "staleness": "b3cd16098f4a1f9b830c2c5148bc4b19aa105746c5999115954f267ee3a974af",
     "structure": "bfd463ffa7315772f9d9f90e03823af4dc24d41362745bfb9b53a6449e673180",
     "supersession": "dd0a9dc7597a018018ff5d80047452d381903e27754210be25b70ce947c100d8",
-    "system": "178b20604ddf820811f02c91dc4197ab189a35ffe0ae34d795581b622d1709f3",
+    "system": "8057f10a529c721e544b43accf50c693418f6ce7430f671b457240173d3b1498",
     "terminology": "49e53aab3b64de7c4ad2c18d0c664c2305ca3076d856112264ffd46e9663df47",
     "unknowns": "67e482233bc1558327ac0e28e0766a4c0f643d0e246929d95d77f9f8aa8d3b6e"
   },
@@ -641,7 +639,7 @@
     "change": {
       "authority_effect": "none",
       "class": "temporal",
-      "digest": "2c72f986317adcc4a00101fd514a22c123d77441a45ed9f92b0832fa32e6a4cd",
+      "digest": "8542d5b025e8ea553964d4d7f3dcb4cd2ba9f41f0f42a0b5e39ce203bf65907e",
       "filesystem_presence_establishes_authority": false,
       "id": "living:change",
       "mode": "derived",
@@ -650,20 +648,18 @@
       "projection_only": true,
       "schema": "savant.living-surface.v1",
       "substance": {
-        "change_count": 7,
+        "change_count": 5,
         "changed_surfaces": [
           "filesystem",
           "freshness",
-          "network",
           "processes",
-          "services",
           "staleness",
           "system"
         ],
         "source_sequences": {
           "living_extensions": 1,
           "living_projection": 1,
-          "living_state": 223789
+          "living_state": 231934
         }
       }
     },
@@ -3359,7 +3355,7 @@
     "filesystem": {
       "authority_effect": "none",
       "class": "observation",
-      "digest": "8e59a9753a3e419358c712a612421652077e3e08014a4c89a445a2a39a001a83",
+      "digest": "09866d410117b28d854e32fd04a8be8be86866c02372861408bc825a74bd90ba",
       "filesystem_presence_establishes_authority": false,
       "id": "living:filesystem",
       "mode": "derived",
@@ -3368,16 +3364,16 @@
       "projection_only": true,
       "schema": "savant.living-surface.v1",
       "substance": {
-        "bytes": 38416697486,
+        "bytes": 46783383347,
         "evidence_classes": {
           "authority_candidate": 1203,
-          "backup_evidence": 1387,
-          "implementation_evidence": 34598,
+          "backup_evidence": 1526,
+          "implementation_evidence": 46967,
           "imported_or_historical_evidence": 48,
           "live_state_projection": 4,
           "migration_evidence": 491,
-          "runtime_projection_or_state": 11464,
-          "vault_evidence": 20268
+          "runtime_projection_or_state": 11545,
+          "vault_evidence": 20485
         },
         "extensions": {
           ".0": 3,
@@ -3477,7 +3473,7 @@
           ".corrupt-20261008-shm": 1,
           ".corrupt-20261008-wal": 1,
           ".csh": 7,
-          ".css": 239,
+          ".css": 266,
           ".csv": 2,
           ".dot": 2,
           ".env": 1,
@@ -3486,22 +3482,23 @@
           ".fish": 7,
           ".glb": 3,
           ".gz": 2819,
-          ".html": 92,
+          ".html": 118,
           ".htmly": 1,
           ".ico": 5,
           ".isotope": 1,
           ".jpeg": 11,
           ".jpg": 9,
-          ".js": 353,
-          ".json": 21915,
+          ".js": 374,
+          ".json": 22098,
           ".jsonl": 45,
           ".jsx": 108,
-          ".lock": 421,
+          ".lock": 483,
           ".log": 20,
           ".map": 10,
           ".markdown-it": 1,
-          ".md": 909,
+          ".md": 913,
           ".mit": 1,
+          ".mjs": 1,
           ".mmd": 2,
           ".mp3": 1,
           ".patch": 2,
@@ -3509,6 +3506,7 @@
           ".png": 97,
           ".pre-dependency-snapshot-repair": 1,
           ".pre-persona-ui": 2,
+          ".pre-restore-20261017": 3,
           ".pre-task-snapshot-repair": 1,
           ".pre-terminal-state-fix": 1,
           ".pre-wal-connect-repair": 1,
@@ -3518,7 +3516,7 @@
           ".pth": 1,
           ".pxd": 4,
           ".pxi": 1,
-          ".py": 13103,
+          ".py": 13185,
           ".pyi": 103,
           ".pyx": 6,
           ".real": 1,
@@ -3535,30 +3533,30 @@
           ".sqlite3-shm": 10,
           ".sqlite3-wal": 10,
           ".stderr": 1,
-          ".svg": 162,
+          ".svg": 164,
           ".swp": 2,
           ".test": 1,
           ".tmp": 2,
           ".tmpl": 2,
           ".toml": 3,
-          ".ts": 127,
+          ".ts": 183,
           ".tsbuildinfo": 2,
           ".tsv": 2,
-          ".tsx": 265,
-          ".txt": 26107,
+          ".tsx": 344,
+          ".txt": 38357,
           ".typed": 183,
           ".wav": 1,
           ".webp": 2,
-          ".woff2": 7,
+          ".woff2": 11,
           ".work": 1,
           ".xml": 1,
           ".yaml": 254,
-          ".zip": 1,
-          "[none]": 1382
+          ".zip": 2,
+          "[none]": 1387
         },
         "failures": [],
-        "files": 69463,
-        "source_candidates": 64632,
+        "files": 82269,
+        "source_candidates": 77424,
         "symlink_count": 3410,
         "symlinks": [
           {
@@ -17207,7 +17205,7 @@
     "freshness": {
       "authority_effect": "none",
       "class": "temporal",
-      "digest": "8ccef78e4d30a773827e00a6cc61a3549229086eea1d1d04c3a998ca850c6584",
+      "digest": "5de6a9077b635659a22e01c4266a7392d17072f6a4b95f48161321da0d5b29e5",
       "filesystem_presence_establishes_authority": false,
       "id": "living:freshness",
       "mode": "derived",
@@ -17217,31 +17215,31 @@
       "schema": "savant.living-surface.v1",
       "substance": {
         "current.json:0eba5fc6164f": {
-          "age_seconds": 1.700409645,
+          "age_seconds": 0.107105959,
           "state": "hot"
         },
         "current.json:2412081df608": {
-          "age_seconds": 2270037.360209997,
+          "age_seconds": 2937522.065328738,
           "state": "stale"
         },
         "extensions.json:f21587a9c4ad": {
-          "age_seconds": 2270037.360215004,
+          "age_seconds": 2937522.065333064,
           "state": "stale"
         },
         "graph.json:b80fa867c566": {
-          "age_seconds": 2270012.654936175,
+          "age_seconds": 2937497.360055256,
           "state": "stale"
         },
         "health.json:d09fc48ef31b": {
-          "age_seconds": 1.695410141,
+          "age_seconds": 0.103106634,
           "state": "hot"
         },
         "snapshot.json:dba2cd424d5f": {
-          "age_seconds": 2270012.655935716,
+          "age_seconds": 2937497.361054557,
           "state": "stale"
         },
         "status.json:f0ca65d52221": {
-          "age_seconds": 2270012.660935342,
+          "age_seconds": 2937497.366053973,
           "state": "stale"
         }
       }
@@ -17279,7 +17277,7 @@
     "history": {
       "authority_effect": "none",
       "class": "temporal",
-      "digest": "eff5f1ee8ab179cd60fd6ece7ce5a3392ada7051c601e8d5f8a76b2e10cd49fd",
+      "digest": "ad7fb2235c887ed585620aeccf49aee9ece04965cd3a34ff68e8988a7391bcf7",
       "filesystem_presence_establishes_authority": false,
       "id": "living:history",
       "mode": "derived",
@@ -17289,8 +17287,8 @@
       "schema": "savant.living-surface.v1",
       "substance": {
         "history_path": "/root/savant-runtime/runtime/living-fabric/history.jsonl",
-        "previous_fabric_hash": "ad2545b52174fe6a0198d0dbd88943b734a3fb8a5cc9aed96613d7c7fa68db4e",
-        "previous_sequence": 197584
+        "previous_fabric_hash": "e047694f750f8dc35f4fad7016b653e1733982014271d70dae89ce6756e460ee",
+        "previous_sequence": 205747
       }
     },
     "implementation": {
@@ -21001,7 +20999,7 @@
     "network": {
       "authority_effect": "none",
       "class": "runtime",
-      "digest": "f34445d0f008466ae789c751c183be8bb891585072d0b24b8103ce3a26be347c",
+      "digest": "cd2b60bc9ac84d547801746dab5008b9d17811838503970e83c156560827f81f",
       "filesystem_presence_establishes_authority": false,
       "id": "living:network",
       "mode": "derived",
@@ -21011,57 +21009,9 @@
       "schema": "savant.living-surface.v1",
       "substance": [
         {
-          "local": "0.0.0.0:22",
-          "peer": "0.0.0.0:*",
-          "process": "users:((\"sshd\",pid=766,fd=3),(\"systemd\",pid=1,fd=220))                         ",
-          "recv_q": "0",
-          "send_q": "4096",
-          "state": "LISTEN"
-        },
-        {
-          "local": "0.0.0.0:5173",
-          "peer": "0.0.0.0:*",
-          "process": "users:((\"python3\",pid=1823640,fd=3))                                           ",
-          "recv_q": "0",
-          "send_q": "5",
-          "state": "LISTEN"
-        },
-        {
-          "local": "0.0.0.0:80",
-          "peer": "0.0.0.0:*",
-          "process": "users:((\"nginx\",pid=763,fd=9),(\"nginx\",pid=761,fd=9),(\"nginx\",pid=758,fd=9))   ",
-          "recv_q": "0",
-          "send_q": "511",
-          "state": "LISTEN"
-        },
-        {
-          "local": "0.0.0.0:443",
-          "peer": "0.0.0.0:*",
-          "process": "users:((\"nginx\",pid=763,fd=11),(\"nginx\",pid=761,fd=11),(\"nginx\",pid=758,fd=11))",
-          "recv_q": "0",
-          "send_q": "511",
-          "state": "LISTEN"
-        },
-        {
-          "local": "0.0.0.0:8765",
-          "peer": "0.0.0.0:*",
-          "process": "users:((\"nginx\",pid=763,fd=13),(\"nginx\",pid=761,fd=13),(\"nginx\",pid=758,fd=13))",
-          "recv_q": "0",
-          "send_q": "511",
-          "state": "LISTEN"
-        },
-        {
-          "local": "0.0.0.0:8766",
-          "peer": "0.0.0.0:*",
-          "process": "users:((\"nginx\",pid=763,fd=15),(\"nginx\",pid=761,fd=15),(\"nginx\",pid=758,fd=15))",
-          "recv_q": "0",
-          "send_q": "511",
-          "state": "LISTEN"
-        },
-        {
           "local": "127.0.0.1:8791",
           "peer": "0.0.0.0:*",
-          "process": "users:((\"python3\",pid=693,fd=3))                                               ",
+          "process": "users:((\"python3\",pid=151906,fd=3))                                                                                            ",
           "recv_q": "0",
           "send_q": "5",
           "state": "LISTEN"
@@ -21069,55 +21019,103 @@
         {
           "local": "127.0.0.1:8787",
           "peer": "0.0.0.0:*",
-          "process": "users:((\"python\",pid=880342,fd=3))                                             ",
+          "process": "users:((\"python3\",pid=151909,fd=3))                                                                                            ",
           "recv_q": "0",
-          "send_q": "128",
-          "state": "LISTEN"
-        },
-        {
-          "local": "127.0.0.54:53",
-          "peer": "0.0.0.0:*",
-          "process": "users:((\"systemd-resolve\",pid=575,fd=17))                                      ",
-          "recv_q": "0",
-          "send_q": "4096",
+          "send_q": "5",
           "state": "LISTEN"
         },
         {
           "local": "127.0.0.53%lo:53",
           "peer": "0.0.0.0:*",
-          "process": "users:((\"systemd-resolve\",pid=575,fd=15))                                      ",
+          "process": "users:((\"systemd-resolve\",pid=151945,fd=15))                                                                                   ",
           "recv_q": "0",
           "send_q": "4096",
           "state": "LISTEN"
         },
         {
-          "local": "[::]:22",
-          "peer": "[::]:*",
-          "process": "users:((\"sshd\",pid=766,fd=4),(\"systemd\",pid=1,fd=223))                         ",
-          "recv_q": "0",
-          "send_q": "4096",
-          "state": "LISTEN"
-        },
-        {
-          "local": "[::]:80",
-          "peer": "[::]:*",
-          "process": "users:((\"nginx\",pid=763,fd=10),(\"nginx\",pid=761,fd=10),(\"nginx\",pid=758,fd=10))",
+          "local": "0.0.0.0:443",
+          "peer": "0.0.0.0:*",
+          "process": "users:((\"nginx\",pid=799,fd=11),(\"nginx\",pid=798,fd=11),(\"nginx\",pid=797,fd=11),(\"nginx\",pid=796,fd=11),(\"nginx\",pid=792,fd=11))",
           "recv_q": "0",
           "send_q": "511",
+          "state": "LISTEN"
+        },
+        {
+          "local": "0.0.0.0:80",
+          "peer": "0.0.0.0:*",
+          "process": "users:((\"nginx\",pid=799,fd=9),(\"nginx\",pid=798,fd=9),(\"nginx\",pid=797,fd=9),(\"nginx\",pid=796,fd=9),(\"nginx\",pid=792,fd=9))     ",
+          "recv_q": "0",
+          "send_q": "511",
+          "state": "LISTEN"
+        },
+        {
+          "local": "127.0.0.54:53",
+          "peer": "0.0.0.0:*",
+          "process": "users:((\"systemd-resolve\",pid=151945,fd=17))                                                                                   ",
+          "recv_q": "0",
+          "send_q": "4096",
+          "state": "LISTEN"
+        },
+        {
+          "local": "0.0.0.0:22",
+          "peer": "0.0.0.0:*",
+          "process": "users:((\"sshd\",pid=1387,fd=3),(\"systemd\",pid=1,fd=205))                                                                        ",
+          "recv_q": "0",
+          "send_q": "4096",
+          "state": "LISTEN"
+        },
+        {
+          "local": "0.0.0.0:8765",
+          "peer": "0.0.0.0:*",
+          "process": "users:((\"nginx\",pid=799,fd=13),(\"nginx\",pid=798,fd=13),(\"nginx\",pid=797,fd=13),(\"nginx\",pid=796,fd=13),(\"nginx\",pid=792,fd=13))",
+          "recv_q": "0",
+          "send_q": "511",
+          "state": "LISTEN"
+        },
+        {
+          "local": "0.0.0.0:8766",
+          "peer": "0.0.0.0:*",
+          "process": "users:((\"nginx\",pid=799,fd=15),(\"nginx\",pid=798,fd=15),(\"nginx\",pid=797,fd=15),(\"nginx\",pid=796,fd=15),(\"nginx\",pid=792,fd=15))",
+          "recv_q": "0",
+          "send_q": "511",
+          "state": "LISTEN"
+        },
+        {
+          "local": "0.0.0.0:5173",
+          "peer": "0.0.0.0:*",
+          "process": "users:((\"python3\",pid=151910,fd=3))                                                                                            ",
+          "recv_q": "0",
+          "send_q": "5",
           "state": "LISTEN"
         },
         {
           "local": "[::]:443",
           "peer": "[::]:*",
-          "process": "users:((\"nginx\",pid=763,fd=12),(\"nginx\",pid=761,fd=12),(\"nginx\",pid=758,fd=12))",
+          "process": "users:((\"nginx\",pid=799,fd=12),(\"nginx\",pid=798,fd=12),(\"nginx\",pid=797,fd=12),(\"nginx\",pid=796,fd=12),(\"nginx\",pid=792,fd=12))",
           "recv_q": "0",
           "send_q": "511",
           "state": "LISTEN"
         },
         {
+          "local": "[::]:80",
+          "peer": "[::]:*",
+          "process": "users:((\"nginx\",pid=799,fd=10),(\"nginx\",pid=798,fd=10),(\"nginx\",pid=797,fd=10),(\"nginx\",pid=796,fd=10),(\"nginx\",pid=792,fd=10))",
+          "recv_q": "0",
+          "send_q": "511",
+          "state": "LISTEN"
+        },
+        {
+          "local": "[::]:22",
+          "peer": "[::]:*",
+          "process": "users:((\"sshd\",pid=1387,fd=4),(\"systemd\",pid=1,fd=206))                                                                        ",
+          "recv_q": "0",
+          "send_q": "4096",
+          "state": "LISTEN"
+        },
+        {
           "local": "[::]:8765",
           "peer": "[::]:*",
-          "process": "users:((\"nginx\",pid=763,fd=14),(\"nginx\",pid=761,fd=14),(\"nginx\",pid=758,fd=14))",
+          "process": "users:((\"nginx\",pid=799,fd=14),(\"nginx\",pid=798,fd=14),(\"nginx\",pid=797,fd=14),(\"nginx\",pid=796,fd=14),(\"nginx\",pid=792,fd=14))",
           "recv_q": "0",
           "send_q": "511",
           "state": "LISTEN"
@@ -21125,7 +21123,7 @@
         {
           "local": "[::]:8766",
           "peer": "[::]:*",
-          "process": "users:((\"nginx\",pid=763,fd=16),(\"nginx\",pid=761,fd=16),(\"nginx\",pid=758,fd=16))",
+          "process": "users:((\"nginx\",pid=799,fd=16),(\"nginx\",pid=798,fd=16),(\"nginx\",pid=797,fd=16),(\"nginx\",pid=796,fd=16),(\"nginx\",pid=792,fd=16))",
           "recv_q": "0",
           "send_q": "511",
           "state": "LISTEN"
@@ -21135,7 +21133,7 @@
     "packages": {
       "authority_effect": "none",
       "class": "implementation",
-      "digest": "ddeeafcbad461ad78a463a17fa7c928c11a751e62358df325573489fcbe93c8d",
+      "digest": "0694371554ed4d67f32b83213161950f90107abad4daa83fa96638d79a604445",
       "filesystem_presence_establishes_authority": false,
       "id": "living:packages",
       "mode": "derived",
@@ -21148,6 +21146,16 @@
           "path": "canon-system/requirements.txt",
           "sha256": "c58e9fc28126b678b1ee49433690bd9c6bedc9db83df133326ea00a951f2b7ca",
           "size": 33
+        },
+        {
+          "path": "edifices/identity/exiles/cataxis/segue/package-lock.json",
+          "sha256": "1b51d3a6fb07c3beaf949643e3952952ad944c2b7b9e546dcc29229f0274b11b",
+          "size": 527
+        },
+        {
+          "path": "edifices/identity/exiles/cataxis/segue/package.json",
+          "sha256": "54a915dfb1e014a2bc6b966fd822ed7cdb54ede74aa61a67b48b4799a9fcae9b",
+          "size": 52
         },
         {
           "path": "frontend/package-lock.json",
@@ -22017,7 +22025,7 @@
     "processes": {
       "authority_effect": "none",
       "class": "runtime",
-      "digest": "89ed1afadfb959311ff1fb2472f690367b88115b3f7f0b0b8d44d96079eb147e",
+      "digest": "ef0e04c4c63ca3c26a4cec9503ae1ac4ccd25b1ab6eae66d008918e7d2efe362",
       "filesystem_presence_establishes_authority": false,
       "id": "living:processes",
       "mode": "derived",
@@ -22029,44 +22037,44 @@
         {
           "command": "/usr/bin/python3 -m runtime.attachment_api --host 127.0.0.1 --port 8791",
           "cwd": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver",
-          "pid": 693
+          "pid": 151906
         },
         {
-          "command": "/usr/bin/python3 /root/savant-runtime/runtime/living_fabric.py --interval 2",
+          "command": "python3 -c \nimport importlib.util\nimport runpy\nimport sys\n\n\ndef load(name, path):\n    spec = importlib.util.spec_from_file_location(\n        name,\n        path,\n    )\n\n    if spec is None or spec.loader is None:\n        raise RuntimeError(\n            f\"unable to construct runtime import: {path}\"\n        )\n\n    module = importlib.util.module_from_spec(\n        spec\n    )\n\n    sys.modules[\n        name\n    ] = module\n\n    try:\n        spec.loader.exec_module(\n            module\n        )\n    except Exception:\n        if sys.modules.get(name) is module:\n            sys.modules.pop(\n                name,\n                None,\n            )\n        raise\n\n    return module\n\n\nopus_compat_path = sys.argv[1]\nenvoy_compat_path = sys.argv[2]\npalaver_opus_bridge_path = sys.argv[3]\nentrypoint = sys.argv[4]\n\n\nopus = load(\n    \"savant_palaver_opus_runtime_package_compat\",\n    opus_compat_path,\n)\n\nopus_status = opus.install()\n\nif not opus_status.get(\"installed\"):\n    raise RuntimeError(\n        \"Palaver Opus runtime compatibility installation failed\"\n    )\n\n\npalaver_opus_bridge = load(\n    \"savant_palaver_opus_bridge\",\n    palaver_opus_bridge_path,\n)\n\nif not callable(\n    getattr(\n        palaver_opus_bridge,\n        \"infer\",\n        None,\n    )\n):\n    raise RuntimeError(\n        \"Palaver Opus bridge lacks infer()\"\n    )\n\nsys.modules[\n    \"opus_bridge\"\n] = palaver_opus_bridge\n\n\nenvoy = load(\n    \"savant_palaver_envoy_runtime_package_compat\",\n    envoy_compat_path,\n)\n\nenvoy_status = envoy.install()\n\nif not envoy_status.get(\"installed\"):\n    raise RuntimeError(\n        \"Palaver Envoy runtime compatibility installation failed\"\n    )\n\n\nif sys.modules.get(\n    \"opus_bridge\"\n) is not palaver_opus_bridge:\n    sys.modules[\n        \"opus_bridge\"\n    ] = palaver_opus_bridge\n\n\nsys.argv = [\n    entrypoint,\n    *sys.argv[5:],\n]\n\nrunpy.run_path(\n    entrypoint,\n    run_name=\"__main__\",\n)\n /root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/runtime/opus_router_package_compat.py /root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/runtime/envoy_runtime_package_compat.py /root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/runtime/opus_bridge.py /root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/runtime/server_enterprise.py",
           "cwd": "/root/savant-runtime",
-          "pid": 706
-        },
-        {
-          "command": "/root/savant-runtime/.venv_voice/bin/python /root/savant-runtime/palaver_voice_backend.py",
-          "cwd": "/root/savant-runtime",
-          "pid": 880342
+          "pid": 151909
         },
         {
           "command": "/usr/bin/python3 /root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/runtime/frontend_server.py --host 0.0.0.0 --port 5173",
           "cwd": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/apps/webui-nextgen",
-          "pid": 1823640
+          "pid": 151910
         },
         {
           "command": "/usr/bin/python3 /root/savant-runtime/runtime/living-state/engine.py --interval 15 --reconcile-interval 300",
           "cwd": "/root/savant-runtime",
-          "pid": 2052916
+          "pid": 152042
         },
         {
-          "command": "bash -c systemctl disable --now 'savant-living-state.service' >/dev/null",
-          "cwd": "/root",
-          "pid": 2053032
+          "command": "/usr/bin/python3 /root/savant-runtime/runtime/living_fabric.py --interval 2",
+          "cwd": "/root/savant-runtime",
+          "pid": 152044
         },
         {
-          "command": "systemctl disable --now savant-living-state.service",
-          "cwd": "/root",
-          "pid": 2053033
+          "command": "/usr/bin/python3 /root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/niche/apps/atlas/project_atlas_data.py",
+          "cwd": "/root/savant-runtime",
+          "pid": 243086
+        },
+        {
+          "command": "/usr/bin/python3 /root/savant-runtime/runtime/living-state/checkpoint.py",
+          "cwd": "/root/savant-runtime",
+          "pid": 243094
         }
       ]
     },
     "projection_integrity": {
       "authority_effect": "none",
       "class": "assurance",
-      "digest": "09a8cefad592f33169addc14afff58673ac058265275048a47919391a77e347d",
+      "digest": "6f633a066af3ce294b2651d3b8a3648f5dc0553f4e0823aa76ea9e16b315af36",
       "filesystem_presence_establishes_authority": false,
       "id": "living:projection_integrity",
       "mode": "derived",
@@ -22081,7 +22089,7 @@
         "extension_projection_present": true,
         "governance_digest": "d5e83c40da51256fa235a69e71ee6c74c2e762770cdd80a739e786c6d567e1d1",
         "governance_present": true,
-        "living_state_hash": "1732dfc138c07668a3d01773b2b59286ca15cf6afe236a0487bd28b66ab0f3dd",
+        "living_state_hash": "73bab3385fb4eef3971d8d50ba7ac96435314cf35302492910228b3164b4cfa6",
         "living_state_present": true
       }
     },
@@ -22144,7 +22152,7 @@
     "replay": {
       "authority_effect": "none",
       "class": "temporal",
-      "digest": "5d9b164c5c292764b43806c86656025bc197572709da9d671af48c38eabb22c8",
+      "digest": "89c23e0c8ccebafa9aa26f0ca4dea2edd7625f1821b76b4ae6edaba5bc525796",
       "filesystem_presence_establishes_authority": false,
       "id": "living:replay",
       "mode": "derived",
@@ -22163,7 +22171,7 @@
           "/root/savant-runtime/canon-system/projections/living/snapshot.json",
           "/root/savant-runtime/canon-system/projections/living/graph.json"
         ],
-        "source_digest": "033713aecd571b3213adcdbdc578da5df3464cc972ef93f456dfdc05847e5295"
+        "source_digest": "e5380b5313baa4334caba998c51615e20cded4eb2d59ce5755582ebb7e7f5b92"
       }
     },
     "risks": {
@@ -23596,7 +23604,7 @@
     "services": {
       "authority_effect": "none",
       "class": "runtime",
-      "digest": "cf22ed772cfe27044deaaa87f4b5848edd6813977496a615509df4dc80f731fd",
+      "digest": "983c88b12ab13dac240f29e465bbdb3c8dfda37c2a4d6c96e467bd9fad5b771b",
       "filesystem_presence_establishes_authority": false,
       "id": "living:services",
       "mode": "derived",
@@ -23606,36 +23614,36 @@
       "schema": "savant.living-surface.v1",
       "substance": [
         {
-          "active_since": "Mon 2026-10-12 20:43:10 UTC",
-          "active_state": "failed",
-          "exec_start": "{ path=/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/commands/palaver_server ; argv[]=/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/commands/palaver_server ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+          "active_since": "Wed 2026-10-21 06:08:22 UTC",
+          "active_state": "active",
+          "exec_start": "{ path=/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/commands/palaver_server ; argv[]=/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/commands/palaver_server ; ignore_errors=no ; start_time=[Wed 2026-10-21 06:08:22 UTC] ; stop_time=[n/a] ; pid=151909 ; code=(null) ; status=0/0 }",
           "fragment_path": "/etc/systemd/system/palaver.service",
           "load_state": "loaded",
-          "main_pid": "0",
+          "main_pid": "151909",
           "name": "palaver.service",
           "query_ok": true,
-          "sub_state": "failed",
+          "sub_state": "running",
           "working_directory": "/root/savant-runtime"
         },
         {
-          "active_since": "Sun 2026-10-04 23:31:59 UTC",
+          "active_since": "Wed 2026-10-21 06:08:22 UTC",
           "active_state": "active",
-          "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 -m runtime.attachment_api --host 127.0.0.1 --port 8791 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+          "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 -m runtime.attachment_api --host 127.0.0.1 --port 8791 ; ignore_errors=no ; start_time=[Wed 2026-10-21 06:08:22 UTC] ; stop_time=[n/a] ; pid=151906 ; code=(null) ; status=0/0 }",
           "fragment_path": "/etc/systemd/system/palaver-attachment.service",
           "load_state": "loaded",
-          "main_pid": "693",
+          "main_pid": "151906",
           "name": "palaver-attachment.service",
           "query_ok": true,
           "sub_state": "running",
           "working_directory": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver"
         },
         {
-          "active_since": "Mon 2026-10-12 20:43:05 UTC",
+          "active_since": "Wed 2026-10-21 06:08:22 UTC",
           "active_state": "active",
-          "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/runtime/frontend_server.py --host 0.0.0.0 --port 5173 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+          "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/runtime/frontend_server.py --host 0.0.0.0 --port 5173 ; ignore_errors=no ; start_time=[Wed 2026-10-21 06:08:22 UTC] ; stop_time=[n/a] ; pid=151910 ; code=(null) ; status=0/0 }",
           "fragment_path": "/etc/systemd/system/palaver-frontend.service",
           "load_state": "loaded",
-          "main_pid": "1823640",
+          "main_pid": "151910",
           "name": "palaver-frontend.service",
           "query_ok": true,
           "sub_state": "running",
@@ -23654,15 +23662,15 @@
           "working_directory": ""
         },
         {
-          "active_since": "Tue 2026-10-13 21:04:27 UTC",
-          "active_state": "deactivating",
-          "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /root/savant-runtime/runtime/living-state/engine.py --interval 15 --reconcile-interval 300 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+          "active_since": "Wed 2026-10-21 06:08:26 UTC",
+          "active_state": "active",
+          "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /root/savant-runtime/runtime/living-state/engine.py --interval 15 --reconcile-interval 300 ; ignore_errors=no ; start_time=[Wed 2026-10-21 06:08:26 UTC] ; stop_time=[n/a] ; pid=152042 ; code=(null) ; status=0/0 }",
           "fragment_path": "/etc/systemd/system/savant-living-state.service",
           "load_state": "loaded",
-          "main_pid": "2052916",
+          "main_pid": "152042",
           "name": "savant-living-state.service",
           "query_ok": true,
-          "sub_state": "stop-sigterm",
+          "sub_state": "running",
           "working_directory": "/root/savant-runtime"
         }
       ]
@@ -23670,7 +23678,7 @@
     "source_integrity": {
       "authority_effect": "none",
       "class": "assurance",
-      "digest": "3ad3866c038eae8193ea3e2fc6d73a6133c679f55f73309606b97aec01f61667",
+      "digest": "64f85da975bea8f63cfcd8f3906d51d7e591bac4fa589c6083e11d9830635eab",
       "filesystem_presence_establishes_authority": false,
       "id": "living:source_integrity",
       "mode": "derived",
@@ -23680,13 +23688,13 @@
       "schema": "savant.living-surface.v1",
       "substance": {
         "all_required_present": true,
-        "source_digest": "033713aecd571b3213adcdbdc578da5df3464cc972ef93f456dfdc05847e5295",
+        "source_digest": "e5380b5313baa4334caba998c51615e20cded4eb2d59ce5755582ebb7e7f5b92",
         "sources": {
           "current.json:0eba5fc6164f": {
-            "mtime_ns": 1791925476186526705,
+            "mtime_ns": 1792592962484948781,
             "path": "/root/savant-runtime/runtime/living-state/current.json",
             "present": true,
-            "size": 4919253
+            "size": 4923205
           },
           "current.json:2412081df608": {
             "mtime_ns": 1789655440526720765,
@@ -23707,10 +23715,10 @@
             "size": 22579
           },
           "health.json:d09fc48ef31b": {
-            "mtime_ns": 1791925476191526700,
+            "mtime_ns": 1792592962488948777,
             "path": "/root/savant-runtime/runtime/living-state/health.json",
             "present": true,
-            "size": 262
+            "size": 261
           },
           "snapshot.json:dba2cd424d5f": {
             "mtime_ns": 1789655465231001866,
@@ -23730,7 +23738,7 @@
     "staleness": {
       "authority_effect": "none",
       "class": "temporal",
-      "digest": "65e655de0324355c4882628b88d5192a176488395a0aeda3b6b2c94ba32b9961",
+      "digest": "b3cd16098f4a1f9b830c2c5148bc4b19aa105746c5999115954f267ee3a974af",
       "filesystem_presence_establishes_authority": false,
       "id": "living:staleness",
       "mode": "derived",
@@ -23740,23 +23748,23 @@
       "schema": "savant.living-surface.v1",
       "substance": {
         "current.json:2412081df608": {
-          "age_seconds": 2270037.360209997,
+          "age_seconds": 2937522.065328738,
           "state": "stale"
         },
         "extensions.json:f21587a9c4ad": {
-          "age_seconds": 2270037.360215004,
+          "age_seconds": 2937522.065333064,
           "state": "stale"
         },
         "graph.json:b80fa867c566": {
-          "age_seconds": 2270012.654936175,
+          "age_seconds": 2937497.360055256,
           "state": "stale"
         },
         "snapshot.json:dba2cd424d5f": {
-          "age_seconds": 2270012.655935716,
+          "age_seconds": 2937497.361054557,
           "state": "stale"
         },
         "status.json:f0ca65d52221": {
-          "age_seconds": 2270012.660935342,
+          "age_seconds": 2937497.366053973,
           "state": "stale"
         }
       }
@@ -24102,7 +24110,7 @@
     "system": {
       "authority_effect": "none",
       "class": "runtime",
-      "digest": "178b20604ddf820811f02c91dc4197ab189a35ffe0ae34d795581b622d1709f3",
+      "digest": "8057f10a529c721e544b43accf50c693418f6ce7430f671b457240173d3b1498",
       "filesystem_presence_establishes_authority": false,
       "id": "living:system",
       "mode": "derived",
@@ -24112,30 +24120,30 @@
       "schema": "savant.living-surface.v1",
       "substance": {
         "disk": {
-          "free": 8549007360,
-          "total": 82086711296,
-          "used": 73520926720
+          "free": 166790303744,
+          "total": 248505155584,
+          "used": 81698074624
         },
         "load_average": {
-          "15m": 0.9130859375,
-          "1m": 0.96484375,
-          "5m": 0.90673828125
+          "15m": 1.5576171875,
+          "1m": 1.810546875,
+          "5m": 1.5859375
         },
         "memory": {
-          "Active": 3631693824,
-          "Active(anon)": 347131904,
-          "Active(file)": 3284561920,
+          "Active": 1706700800,
+          "Active(anon)": 934174720,
+          "Active(file)": 772526080,
           "AnonHugePages": 0,
-          "AnonPages": 371269632,
+          "AnonPages": 951635968,
           "Bounce": 0,
-          "Buffers": 312131584,
-          "Cached": 4653002752,
-          "CommitLimit": 8488792064,
-          "Committed_AS": 1207644160,
-          "DirectMap1G": 6442450944,
-          "DirectMap2M": 1981808640,
-          "DirectMap4k": 165523456,
-          "Dirty": 1732608,
+          "Buffers": 358105088,
+          "Cached": 2335535104,
+          "CommitLimit": 8422232064,
+          "Committed_AS": 1698238464,
+          "DirectMap1G": 4294967296,
+          "DirectMap2M": 6268387328,
+          "DirectMap4k": 173912064,
+          "Dirty": 1003520,
           "FileHugePages": 0,
           "FilePmdMapped": 0,
           "HardwareCorrupted": 0,
@@ -24145,40 +24153,40 @@
           "HugePages_Total": 0,
           "Hugepagesize": 2097152,
           "Hugetlb": 0,
-          "Inactive": 1675780096,
-          "Inactive(anon)": 8683520,
-          "Inactive(file)": 1667096576,
-          "KReclaimable": 763203584,
-          "KernelStack": 4931584,
-          "Mapped": 171552768,
-          "MemAvailable": 5897650176,
-          "MemFree": 739708928,
-          "MemTotal": 8387657728,
-          "Mlocked": 27947008,
+          "Inactive": 1906794496,
+          "Inactive(anon)": 0,
+          "Inactive(file)": 1906794496,
+          "KReclaimable": 380039168,
+          "KernelStack": 6373376,
+          "Mapped": 314437632,
+          "MemAvailable": 6309920768,
+          "MemFree": 3563028480,
+          "MemTotal": 8254541824,
+          "Mlocked": 27811840,
           "NFS_Unstable": 0,
-          "PageTables": 6209536,
-          "Percpu": 1165492224,
-          "SReclaimable": 763203584,
-          "SUnreclaim": 185835520,
+          "PageTables": 7315456,
+          "Percpu": 492306432,
+          "SReclaimable": 380039168,
+          "SUnreclaim": 136679424,
           "SecPageTables": 0,
-          "Shmem": 4505600,
+          "Shmem": 5349376,
           "ShmemHugePages": 0,
           "ShmemPmdMapped": 0,
-          "Slab": 949039104,
-          "SwapCached": 26058752,
-          "SwapFree": 4197801984,
+          "Slab": 516718592,
+          "SwapCached": 0,
+          "SwapFree": 4294963200,
           "SwapTotal": 4294963200,
           "Unaccepted": 0,
-          "Unevictable": 32043008,
+          "Unevictable": 31907840,
           "VmallocChunk": 0,
           "VmallocTotal": 35184372087808,
-          "VmallocUsed": 62488576,
+          "VmallocUsed": 29347840,
           "Writeback": 0,
           "WritebackTmp": 0,
           "Zswap": 0,
           "Zswapped": 0
         },
-        "uptime_seconds": 768035.14
+        "uptime_seconds": 85562.34
       }
     },
     "terminology": {
@@ -24475,6 +24483,7 @@
     "invariants",
     "lineage",
     "masterplan",
+    "network",
     "packages",
     "permissions",
     "persona",
@@ -24492,6 +24501,7 @@
     "risks",
     "rules",
     "sdump",
+    "services",
     "structure",
     "supersession",
     "terminology",

@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>savant | urge</title>
+  <link rel="stylesheet" href="./urge-demo.css">
+  <script src="./urge-demo.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#workspace">Skip to workspace</a>
+
+  <div class="shell">
+    <aside class="sidebar" aria-label="Primary navigation">
+      <a class="brand" href="#overview" aria-label="savant overview">
+        <span class="brand-symbol">s</span>
+        <span>
+          <strong>savant</strong>
+          <small>intelligence composition</small>
+        </span>
+      </a>
+
+      <div class="sidebar-label">WORKSPACE</div>
+
+      <nav class="navigation" aria-label="Demo sections">
+        <button class="nav-item active" data-view="overview">
+          <span class="nav-icon" data-icon="orbit"></span>
+          <span>Overview</span>
+        </button>
+        <button class="nav-item" data-view="session">
+          <span class="nav-icon" data-icon="play"></span>
+          <span>Session</span>
+        </button>
+        <button class="nav-item" data-view="evolution">
+          <span class="nav-icon" data-icon="git"></span>
+          <span>Evolution</span>
+        </button>
+        <button class="nav-item" data-view="comparison">
+          <span class="nav-icon" data-icon="layers"></span>
+          <span>Comparison</span>
+        </button>
+        <button class="nav-item" data-view="lineage">
+          <span class="nav-icon" data-icon="network"></span>
+          <span>Lineage</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="sidebar-label">DEMONSTRATION</div>
+        <div class="demo-notice">
+          <span class="status-light"></span>
+          <div>
+            <strong>Illustrative workspace</strong>
+            <small>Local visual simulation</small>
+          </div>
+        </div>
+        <div class="sidebar-foot">urge · opus · palaver</div>
+      </div>
+    </aside>
+
+    <div class="main-column">
+      <header class="topbar">
+        <div class="breadcrumb">
+          <span>savant</span>
+          <span class="separator">/</span>
+          <strong>urge</strong>
+          <span class="separator">/</span>
+          <span id="breadcrumb-view">overview</span>
+        </div>
+
+        <div class="topbar-actions">
+          <span class="environment-label">
+            <span class="status-light"></span>
+            demonstration
+          </span>
+          <button class="icon-button" id="motion-toggle"
+                  aria-label="Reduce animations"
+                  aria-pressed="false"
+                  title="Toggle animation">
+            <span data-icon="activity"></span>
+          </button>
+          <button class="icon-button" id="help-toggle"
+                  aria-label="About this demonstration"
+                  title="About this demonstration">
+            <span data-icon="info"></span>
+          </button>
+          <div class="avatar" aria-label="Savant">s</div>
+        </div>
+      </header>
+
+      <main id="workspace">
+        <div class="page-heading">
+          <div>
+            <div class="eyebrow">ITERATIVE INTELLIGENCE</div>
+            <h1 id="view-title">Intelligence in motion<span>.</span></h1>
+            <p id="view-description">
+              Explore how an objective becomes a sequence of
+              evaluated, traceable improvements.
+            </p>
+          </div>
+          <div class="heading-actions">
+            <button class="button secondary" id="reset-button">
+              <span data-icon="refresh"></span>
+              Reset
+            </button>
+            <button class="button primary" id="start-button">
+              <span data-icon="play"></span>
+              Begin demonstration
+            </button>
+          </div>
+        </div>
+
+        <div class="status-strip" aria-label="Demonstration status">
+          <div>
+            <span class="strip-label">STATE</span>
+            <strong id="session-status">Ready</strong>
+          </div>
+          <div>
+            <span class="strip-label">CURRENT ITERATION</span>
+            <strong id="iteration-number">00 / 08</strong>
+          </div>
+          <div>
+            <span class="strip-label">SELECTED SCORE</span>
+            <strong id="selected-score">Not evaluated</strong>
+          </div>
+          <div>
+            <span class="strip-label">EXECUTION</span>
+            <strong>Simulated</strong>
+          </div>
+        </div>
+
+        <section class="view active" id="view-overview"
+                 aria-label="Overview">
+          <div class="overview-grid">
+            <article class="panel composition-panel">
+              <div class="panel-heading">
+                <div>
+                  <div class="eyebrow">COMPOSITION MODEL</div>
+                  <h2>One objective. Three capabilities.</h2>
+                </div>
+                <span class="panel-tag">Conceptual</span>
+              </div>
+
+              <div class="composition-stage">
+                <svg class="composition-lines"
+                     viewBox="0 0 900 430"
+                     preserveAspectRatio="xMidYMid meet"
+                     aria-hidden="true">
+                  <defs>
+                    <linearGradient id="link-gradient">
+                      <stop offset="0" stop-color="#78c7c2"/>
+                      <stop offset=".5" stop-color="#c8b08b"/>
+                      <stop offset="1" stop-color="#8e9ed0"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M185 220 Q450 50 715 220"
+                        class="composition-path"/>
+                  <path d="M185 220 Q450 390 715 220"
+                        class="composition-path"/>
+                  <path d="M185 220 L715 220"
+                        class="composition-path faint"/>
+                  <circle cx="450" cy="135" r="4" class="moving-dot"/>
+                  <circle cx="450" cy="305" r="4" class="moving-dot"/>
+                </svg>
+
+                <div class="composition-node urge-node">
+                  <div class="node-art">
+                    <span data-icon="orbit"></span>
+                  </div>
+                  <strong>urge</strong>
+                  <small>iterate · evaluate · select</small>
+                </div>
+
+                <div class="composition-node opus-node">
+                  <div class="node-art">
+                    <span data-icon="hexagon"></span>
+                  </div>
+                  <strong>opus</strong>
+                  <small>provider orchestration</small>
+                </div>
+
+                <div class="composition-node palaver-node">
+                  <div class="node-art">
+                    <span data-icon="messages"></span>
+                  </div>
+                  <strong>palaver</strong>
+                  <small>conversation · interaction</small>
+                </div>
+
+                <div class="composition-caption">
+                  <span class="caption-dot"></span>
+                  Distinct ownership. Composable execution.
+                </div>
+              </div>
+            </article>
+
+            <article class="panel brief-panel">
+              <div class="panel-heading">
+                <div>
+                  <div class="eyebrow">THE OBJECTIVE</div>
+                  <h2>Define what improves.</h2>
+                </div>
+              </div>
+
+              <label for="objective">Objective</label>
+              <textarea id="objective" rows="4"
+                maxlength="1200">Improve an authentication workflow while preserving compatibility, security, and maintainability.</textarea>
+
+              <label for="scenario">Demonstration scenario</label>
+              <select id="scenario">
+                <option value="authentication">
+                  Authentication workflow
+                </option>
+                <option value="interface">
+                  Interface accessibility
+                </option>
+                <option value="architecture">
+                  Software architecture
+                </option>
+              </select>
+
+              <div class="criteria-heading">
+                <span>Evaluation dimensions</span>
+                <span>Illustrative weights</span>
+              </div>
+
+              <div class="criteria-rows" id="criteria-rows"></div>
+
+              <div class="brief-bottom">
+                <span data-icon="shield"></span>
+                No source files are modified by this demo.
+              </div>
+            </article>
+          </div>
+
+          <div class="insight-grid">
+            <article class="insight">
+              <span class="insight-icon" data-icon="git"></span>
+              <div>
+                <strong>Traceable evolution</strong>
+                <p>Every simulated candidate has a visible predecessor.</p>
+              </div>
+            </article>
+            <article class="insight">
+              <span class="insight-icon" data-icon="target"></span>
+              <div>
+                <strong>Criterion-driven</strong>
+                <p>Evaluation dimensions stay explicit.</p>
+              </div>
+            </article>
+            <article class="insight">
+              <span class="insight-icon" data-icon="shield"></span>
+              <div>
+                <strong>Authority preserved</strong>
+                <p>Improvement does not establish new authority.</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="view" id="view-session"
+                 aria-label="Session controls">
+          <div class="two-column">
+            <article class="panel">
+              <div class="panel-heading">
+                <div>
+                  <div class="eyebrow">SESSION CONTROL</div>
+                  <h2>Direct the evolution.</h2>
+                </div>
+                <span class="panel-tag" id="session-badge">Ready</span>
+              </div>
+
+              <div class="session-visual">
+                <div class="session-rings">
+                  <div class="ring ring-one"></div>
+                  <div class="ring ring-two"></div>
+                  <div class="ring ring-three"></div>
+                  <div class="session-core">
+                    <span data-icon="orbit"></span>
+                    <strong id="core-iteration">00</strong>
+                    <small>ITERATION</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="control-row">
+                <button class="button primary" id="run-control">
+                  <span data-icon="play"></span>
+                  Start
+                </button>
+                <button class="button secondary" id="pause-control" disabled>
+                  <span data-icon="pause"></span>
+                  Pause
+                </button>
+                <button class="button danger" id="cancel-control" disabled>
+                  <span data-icon="stop"></span>
+                  Cancel
+                </button>
+              </div>
+
+              <div class="progress-track"
+                   role="progressbar"
+                   aria-label="Simulation progress"
+                   aria-valuemin="0"
+                   aria-valuemax="8"
+                   aria-valuenow="0"
+                   id="progress-track">
+                <div id="progress-fill"></div>
+              </div>
+
+              <p class="panel-note">
+                These controls operate the local visual simulation.
+                They do not start a server-side Urge job.
+              </p>
+            </article>
+
+            <article class="panel">
+              <div class="panel-heading">
+                <div>
+                  <div class="eyebrow">EXECUTION EVENTS</div>
+                  <h2>What changed, and when.</h2>
+                </div>
+                <button class="text-button" id="clear-events">
+                  Clear view
+                </button>
+              </div>
+
+              <div class="event-list" id="event-list"
+                   role="log"
+                   aria-live="polite"
+                   aria-relevant="additions">
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="view" id="view-evolution"
+                 aria-label="Evolution">
+          <article class="panel">
+            <div class="panel-heading">
+              <div>
+                <div class="eyebrow">ITERATION TOPOGRAPHY</div>
+                <h2>A visible path through improvement.</h2>
+              </div>
+              <span class="panel-tag">Illustrative scores</span>
+            </div>
+
+            <div class="topography">
+              <svg id="evolution-chart"
+                   viewBox="0 0 1000 420"
+                   role="img"
+                   aria-label="Illustrative iteration score progression">
+              </svg>
+            </div>
+
+            <div class="evolution-footer">
+              <div>
+                <span class="strip-label">CURRENT</span>
+                <strong id="evolution-current">No iteration</strong>
+              </div>
+              <div>
+                <span class="strip-label">BEST</span>
+                <strong id="evolution-best">Not evaluated</strong>
+              </div>
+              <div>
+                <span class="strip-label">SELECTION</span>
+                <strong id="evolution-selection">None</strong>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section class="view" id="view-comparison"
+                 aria-label="Candidate comparison">
+          <article class="panel">
+            <div class="panel-heading">
+              <div>
+                <div class="eyebrow">CANDIDATE DISCRIMINATION</div>
+                <h2>Compare before selecting.</h2>
+              </div>
+              <span class="panel-tag">Demonstration data</span>
+            </div>
+
+            <div class="candidate-grid" id="candidate-grid"></div>
+
+            <div class="selection-note" id="selection-note">
+              Run the demonstration to reveal candidates.
+            </div>
+          </article>
+        </section>
+
+        <section class="view" id="view-lineage"
+                 aria-label="Lineage">
+          <div class="two-column">
+            <article class="panel">
+              <div class="panel-heading">
+                <div>
+                  <div class="eyebrow">DERIVATION</div>
+                  <h2>From origin to selected candidate.</h2>
+                </div>
+              </div>
+              <div class="lineage-tree" id="lineage-tree"></div>
+            </article>
+
+            <article class="panel">
+              <div class="panel-heading">
+                <div>
+                  <div class="eyebrow">OWNERSHIP</div>
+                  <h2>Clear system boundaries.</h2>
+                </div>
+              </div>
+              <div class="ownership-list">
+                <div>
+                  <span class="ownership-icon" data-icon="orbit"></span>
+                  <span><strong>urge</strong><small>Iteration and session control</small></span>
+                </div>
+                <div>
+                  <span class="ownership-icon" data-icon="hexagon"></span>
+                  <span><strong>opus</strong><small>Provider orchestration boundary</small></span>
+                </div>
+                <div>
+                  <span class="ownership-icon" data-icon="messages"></span>
+                  <span><strong>palaver</strong><small>Conversational interaction</small></span>
+                </div>
+              </div>
+              <p class="panel-note">
+                This view describes architectural roles.
+                It does not assert that external providers are connected.
+              </p>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <span>savant / urge demonstration</span>
+        <span>illustrative data · no external execution</span>
+      </footer>
+    </div>
+  </div>
+
+  <dialog id="about-dialog">
+    <div class="dialog-content">
+      <div class="eyebrow">ABOUT THE DEMONSTRATION</div>
+      <h2>See the process before running the system.</h2>
+      <p>
+        This standalone interface demonstrates session interaction,
+        iteration progression, candidate comparison, and lineage.
+        Its scores and events are generated locally from a fixed
+        illustrative sequence. No AI providers, filesystem changes,
+        or production Urge sessions are invoked.
+      </p>
+      <button class="button primary" id="close-dialog">Understood</button>
+    </div>
+  </dialog>
+</body>
+</html>

@@ -185,16 +185,16 @@
     "values_included": false
   },
   "filesystem": {
-    "bytes": 38416697486,
+    "bytes": 46783383347,
     "evidence_classes": {
       "authority_candidate": 1203,
-      "backup_evidence": 1387,
-      "implementation_evidence": 34598,
+      "backup_evidence": 1526,
+      "implementation_evidence": 46967,
       "imported_or_historical_evidence": 48,
       "live_state_projection": 4,
       "migration_evidence": 491,
-      "runtime_projection_or_state": 11464,
-      "vault_evidence": 20268
+      "runtime_projection_or_state": 11545,
+      "vault_evidence": 20485
     },
     "extensions": {
       ".0": 3,
@@ -294,7 +294,7 @@
       ".corrupt-20261008-shm": 1,
       ".corrupt-20261008-wal": 1,
       ".csh": 7,
-      ".css": 239,
+      ".css": 266,
       ".csv": 2,
       ".dot": 2,
       ".env": 1,
@@ -303,22 +303,23 @@
       ".fish": 7,
       ".glb": 3,
       ".gz": 2819,
-      ".html": 92,
+      ".html": 118,
       ".htmly": 1,
       ".ico": 5,
       ".isotope": 1,
       ".jpeg": 11,
       ".jpg": 9,
-      ".js": 353,
-      ".json": 21915,
+      ".js": 374,
+      ".json": 22098,
       ".jsonl": 45,
       ".jsx": 108,
-      ".lock": 421,
+      ".lock": 483,
       ".log": 20,
       ".map": 10,
       ".markdown-it": 1,
-      ".md": 909,
+      ".md": 913,
       ".mit": 1,
+      ".mjs": 1,
       ".mmd": 2,
       ".mp3": 1,
       ".patch": 2,
@@ -326,6 +327,7 @@
       ".png": 97,
       ".pre-dependency-snapshot-repair": 1,
       ".pre-persona-ui": 2,
+      ".pre-restore-20261017": 3,
       ".pre-task-snapshot-repair": 1,
       ".pre-terminal-state-fix": 1,
       ".pre-wal-connect-repair": 1,
@@ -335,7 +337,7 @@
       ".pth": 1,
       ".pxd": 4,
       ".pxi": 1,
-      ".py": 13103,
+      ".py": 13185,
       ".pyi": 103,
       ".pyx": 6,
       ".real": 1,
@@ -352,30 +354,30 @@
       ".sqlite3-shm": 10,
       ".sqlite3-wal": 10,
       ".stderr": 1,
-      ".svg": 162,
+      ".svg": 164,
       ".swp": 2,
       ".test": 1,
       ".tmp": 2,
       ".tmpl": 2,
       ".toml": 3,
-      ".ts": 127,
+      ".ts": 183,
       ".tsbuildinfo": 2,
       ".tsv": 2,
-      ".tsx": 265,
-      ".txt": 26107,
+      ".tsx": 344,
+      ".txt": 38357,
       ".typed": 183,
       ".wav": 1,
       ".webp": 2,
-      ".woff2": 7,
+      ".woff2": 11,
       ".work": 1,
       ".xml": 1,
       ".yaml": 254,
-      ".zip": 1,
-      "[none]": 1382
+      ".zip": 2,
+      "[none]": 1387
     },
     "failures": [],
-    "files": 69463,
-    "source_candidates": 64632,
+    "files": 82269,
+    "source_candidates": 77424,
     "symlink_count": 3410,
     "symlinks": [
       {
@@ -14021,7 +14023,7 @@
     ]
   },
   "filesystem_presence_establishes_authority": false,
-  "generated_at_unix_ns": 1791925473272196917,
+  "generated_at_unix_ns": 1792592959386649777,
   "git": null,
   "latest_sdump": {
     "mtime_ns": 1789655596444500342,
@@ -14031,57 +14033,9 @@
   },
   "listening_tcp": [
     {
-      "local": "0.0.0.0:22",
-      "peer": "0.0.0.0:*",
-      "process": "users:((\"sshd\",pid=766,fd=3),(\"systemd\",pid=1,fd=220))                         ",
-      "recv_q": "0",
-      "send_q": "4096",
-      "state": "LISTEN"
-    },
-    {
-      "local": "0.0.0.0:5173",
-      "peer": "0.0.0.0:*",
-      "process": "users:((\"python3\",pid=1823640,fd=3))                                           ",
-      "recv_q": "0",
-      "send_q": "5",
-      "state": "LISTEN"
-    },
-    {
-      "local": "0.0.0.0:80",
-      "peer": "0.0.0.0:*",
-      "process": "users:((\"nginx\",pid=763,fd=9),(\"nginx\",pid=761,fd=9),(\"nginx\",pid=758,fd=9))   ",
-      "recv_q": "0",
-      "send_q": "511",
-      "state": "LISTEN"
-    },
-    {
-      "local": "0.0.0.0:443",
-      "peer": "0.0.0.0:*",
-      "process": "users:((\"nginx\",pid=763,fd=11),(\"nginx\",pid=761,fd=11),(\"nginx\",pid=758,fd=11))",
-      "recv_q": "0",
-      "send_q": "511",
-      "state": "LISTEN"
-    },
-    {
-      "local": "0.0.0.0:8765",
-      "peer": "0.0.0.0:*",
-      "process": "users:((\"nginx\",pid=763,fd=13),(\"nginx\",pid=761,fd=13),(\"nginx\",pid=758,fd=13))",
-      "recv_q": "0",
-      "send_q": "511",
-      "state": "LISTEN"
-    },
-    {
-      "local": "0.0.0.0:8766",
-      "peer": "0.0.0.0:*",
-      "process": "users:((\"nginx\",pid=763,fd=15),(\"nginx\",pid=761,fd=15),(\"nginx\",pid=758,fd=15))",
-      "recv_q": "0",
-      "send_q": "511",
-      "state": "LISTEN"
-    },
-    {
       "local": "127.0.0.1:8791",
       "peer": "0.0.0.0:*",
-      "process": "users:((\"python3\",pid=693,fd=3))                                               ",
+      "process": "users:((\"python3\",pid=151906,fd=3))                                                                                            ",
       "recv_q": "0",
       "send_q": "5",
       "state": "LISTEN"
@@ -14089,55 +14043,103 @@
     {
       "local": "127.0.0.1:8787",
       "peer": "0.0.0.0:*",
-      "process": "users:((\"python\",pid=880342,fd=3))                                             ",
+      "process": "users:((\"python3\",pid=151909,fd=3))                                                                                            ",
       "recv_q": "0",
-      "send_q": "128",
-      "state": "LISTEN"
-    },
-    {
-      "local": "127.0.0.54:53",
-      "peer": "0.0.0.0:*",
-      "process": "users:((\"systemd-resolve\",pid=575,fd=17))                                      ",
-      "recv_q": "0",
-      "send_q": "4096",
+      "send_q": "5",
       "state": "LISTEN"
     },
     {
       "local": "127.0.0.53%lo:53",
       "peer": "0.0.0.0:*",
-      "process": "users:((\"systemd-resolve\",pid=575,fd=15))                                      ",
+      "process": "users:((\"systemd-resolve\",pid=151945,fd=15))                                                                                   ",
       "recv_q": "0",
       "send_q": "4096",
       "state": "LISTEN"
     },
     {
-      "local": "[::]:22",
-      "peer": "[::]:*",
-      "process": "users:((\"sshd\",pid=766,fd=4),(\"systemd\",pid=1,fd=223))                         ",
-      "recv_q": "0",
-      "send_q": "4096",
-      "state": "LISTEN"
-    },
-    {
-      "local": "[::]:80",
-      "peer": "[::]:*",
-      "process": "users:((\"nginx\",pid=763,fd=10),(\"nginx\",pid=761,fd=10),(\"nginx\",pid=758,fd=10))",
+      "local": "0.0.0.0:443",
+      "peer": "0.0.0.0:*",
+      "process": "users:((\"nginx\",pid=799,fd=11),(\"nginx\",pid=798,fd=11),(\"nginx\",pid=797,fd=11),(\"nginx\",pid=796,fd=11),(\"nginx\",pid=792,fd=11))",
       "recv_q": "0",
       "send_q": "511",
+      "state": "LISTEN"
+    },
+    {
+      "local": "0.0.0.0:80",
+      "peer": "0.0.0.0:*",
+      "process": "users:((\"nginx\",pid=799,fd=9),(\"nginx\",pid=798,fd=9),(\"nginx\",pid=797,fd=9),(\"nginx\",pid=796,fd=9),(\"nginx\",pid=792,fd=9))     ",
+      "recv_q": "0",
+      "send_q": "511",
+      "state": "LISTEN"
+    },
+    {
+      "local": "127.0.0.54:53",
+      "peer": "0.0.0.0:*",
+      "process": "users:((\"systemd-resolve\",pid=151945,fd=17))                                                                                   ",
+      "recv_q": "0",
+      "send_q": "4096",
+      "state": "LISTEN"
+    },
+    {
+      "local": "0.0.0.0:22",
+      "peer": "0.0.0.0:*",
+      "process": "users:((\"sshd\",pid=1387,fd=3),(\"systemd\",pid=1,fd=205))                                                                        ",
+      "recv_q": "0",
+      "send_q": "4096",
+      "state": "LISTEN"
+    },
+    {
+      "local": "0.0.0.0:8765",
+      "peer": "0.0.0.0:*",
+      "process": "users:((\"nginx\",pid=799,fd=13),(\"nginx\",pid=798,fd=13),(\"nginx\",pid=797,fd=13),(\"nginx\",pid=796,fd=13),(\"nginx\",pid=792,fd=13))",
+      "recv_q": "0",
+      "send_q": "511",
+      "state": "LISTEN"
+    },
+    {
+      "local": "0.0.0.0:8766",
+      "peer": "0.0.0.0:*",
+      "process": "users:((\"nginx\",pid=799,fd=15),(\"nginx\",pid=798,fd=15),(\"nginx\",pid=797,fd=15),(\"nginx\",pid=796,fd=15),(\"nginx\",pid=792,fd=15))",
+      "recv_q": "0",
+      "send_q": "511",
+      "state": "LISTEN"
+    },
+    {
+      "local": "0.0.0.0:5173",
+      "peer": "0.0.0.0:*",
+      "process": "users:((\"python3\",pid=151910,fd=3))                                                                                            ",
+      "recv_q": "0",
+      "send_q": "5",
       "state": "LISTEN"
     },
     {
       "local": "[::]:443",
       "peer": "[::]:*",
-      "process": "users:((\"nginx\",pid=763,fd=12),(\"nginx\",pid=761,fd=12),(\"nginx\",pid=758,fd=12))",
+      "process": "users:((\"nginx\",pid=799,fd=12),(\"nginx\",pid=798,fd=12),(\"nginx\",pid=797,fd=12),(\"nginx\",pid=796,fd=12),(\"nginx\",pid=792,fd=12))",
       "recv_q": "0",
       "send_q": "511",
       "state": "LISTEN"
     },
     {
+      "local": "[::]:80",
+      "peer": "[::]:*",
+      "process": "users:((\"nginx\",pid=799,fd=10),(\"nginx\",pid=798,fd=10),(\"nginx\",pid=797,fd=10),(\"nginx\",pid=796,fd=10),(\"nginx\",pid=792,fd=10))",
+      "recv_q": "0",
+      "send_q": "511",
+      "state": "LISTEN"
+    },
+    {
+      "local": "[::]:22",
+      "peer": "[::]:*",
+      "process": "users:((\"sshd\",pid=1387,fd=4),(\"systemd\",pid=1,fd=206))                                                                        ",
+      "recv_q": "0",
+      "send_q": "4096",
+      "state": "LISTEN"
+    },
+    {
       "local": "[::]:8765",
       "peer": "[::]:*",
-      "process": "users:((\"nginx\",pid=763,fd=14),(\"nginx\",pid=761,fd=14),(\"nginx\",pid=758,fd=14))",
+      "process": "users:((\"nginx\",pid=799,fd=14),(\"nginx\",pid=798,fd=14),(\"nginx\",pid=797,fd=14),(\"nginx\",pid=796,fd=14),(\"nginx\",pid=792,fd=14))",
       "recv_q": "0",
       "send_q": "511",
       "state": "LISTEN"
@@ -14145,7 +14147,7 @@
     {
       "local": "[::]:8766",
       "peer": "[::]:*",
-      "process": "users:((\"nginx\",pid=763,fd=16),(\"nginx\",pid=761,fd=16),(\"nginx\",pid=758,fd=16))",
+      "process": "users:((\"nginx\",pid=799,fd=16),(\"nginx\",pid=798,fd=16),(\"nginx\",pid=797,fd=16),(\"nginx\",pid=796,fd=16),(\"nginx\",pid=792,fd=16))",
       "recv_q": "0",
       "send_q": "511",
       "state": "LISTEN"
@@ -14197,6 +14199,16 @@
       "path": "canon-system/requirements.txt",
       "sha256": "c58e9fc28126b678b1ee49433690bd9c6bedc9db83df133326ea00a951f2b7ca",
       "size": 33
+    },
+    {
+      "path": "edifices/identity/exiles/cataxis/segue/package-lock.json",
+      "sha256": "1b51d3a6fb07c3beaf949643e3952952ad944c2b7b9e546dcc29229f0274b11b",
+      "size": 527
+    },
+    {
+      "path": "edifices/identity/exiles/cataxis/segue/package.json",
+      "sha256": "54a915dfb1e014a2bc6b966fd822ed7cdb54ede74aa61a67b48b4799a9fcae9b",
+      "size": 52
     },
     {
       "path": "frontend/package-lock.json",
@@ -14274,80 +14286,80 @@
       "size": 274
     }
   ],
-  "previous_snapshot_hash": "1345e1a966b74a83abaec6fe8548c2f4c1e57129ffb71bb86843f7b06a52b5d8",
+  "previous_snapshot_hash": "032088174cf5a8ad2db9e8b5623513a775ea8bfadbf793baa997457d94060576",
   "processes": [
     {
       "command": "/usr/bin/python3 -m runtime.attachment_api --host 127.0.0.1 --port 8791",
       "cwd": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver",
-      "pid": 693
+      "pid": 151906
     },
     {
-      "command": "/usr/bin/python3 /root/savant-runtime/runtime/living_fabric.py --interval 2",
+      "command": "python3 -c \nimport importlib.util\nimport runpy\nimport sys\n\n\ndef load(name, path):\n    spec = importlib.util.spec_from_file_location(\n        name,\n        path,\n    )\n\n    if spec is None or spec.loader is None:\n        raise RuntimeError(\n            f\"unable to construct runtime import: {path}\"\n        )\n\n    module = importlib.util.module_from_spec(\n        spec\n    )\n\n    sys.modules[\n        name\n    ] = module\n\n    try:\n        spec.loader.exec_module(\n            module\n        )\n    except Exception:\n        if sys.modules.get(name) is module:\n            sys.modules.pop(\n                name,\n                None,\n            )\n        raise\n\n    return module\n\n\nopus_compat_path = sys.argv[1]\nenvoy_compat_path = sys.argv[2]\npalaver_opus_bridge_path = sys.argv[3]\nentrypoint = sys.argv[4]\n\n\nopus = load(\n    \"savant_palaver_opus_runtime_package_compat\",\n    opus_compat_path,\n)\n\nopus_status = opus.install()\n\nif not opus_status.get(\"installed\"):\n    raise RuntimeError(\n        \"Palaver Opus runtime compatibility installation failed\"\n    )\n\n\npalaver_opus_bridge = load(\n    \"savant_palaver_opus_bridge\",\n    palaver_opus_bridge_path,\n)\n\nif not callable(\n    getattr(\n        palaver_opus_bridge,\n        \"infer\",\n        None,\n    )\n):\n    raise RuntimeError(\n        \"Palaver Opus bridge lacks infer()\"\n    )\n\nsys.modules[\n    \"opus_bridge\"\n] = palaver_opus_bridge\n\n\nenvoy = load(\n    \"savant_palaver_envoy_runtime_package_compat\",\n    envoy_compat_path,\n)\n\nenvoy_status = envoy.install()\n\nif not envoy_status.get(\"installed\"):\n    raise RuntimeError(\n        \"Palaver Envoy runtime compatibility installation failed\"\n    )\n\n\nif sys.modules.get(\n    \"opus_bridge\"\n) is not palaver_opus_bridge:\n    sys.modules[\n        \"opus_bridge\"\n    ] = palaver_opus_bridge\n\n\nsys.argv = [\n    entrypoint,\n    *sys.argv[5:],\n]\n\nrunpy.run_path(\n    entrypoint,\n    run_name=\"__main__\",\n)\n /root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/runtime/opus_router_package_compat.py /root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/runtime/envoy_runtime_package_compat.py /root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/runtime/opus_bridge.py /root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/runtime/server_enterprise.py",
       "cwd": "/root/savant-runtime",
-      "pid": 706
-    },
-    {
-      "command": "/root/savant-runtime/.venv_voice/bin/python /root/savant-runtime/palaver_voice_backend.py",
-      "cwd": "/root/savant-runtime",
-      "pid": 880342
+      "pid": 151909
     },
     {
       "command": "/usr/bin/python3 /root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/runtime/frontend_server.py --host 0.0.0.0 --port 5173",
       "cwd": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/apps/webui-nextgen",
-      "pid": 1823640
+      "pid": 151910
     },
     {
       "command": "/usr/bin/python3 /root/savant-runtime/runtime/living-state/engine.py --interval 15 --reconcile-interval 300",
       "cwd": "/root/savant-runtime",
-      "pid": 2052916
+      "pid": 152042
     },
     {
-      "command": "bash -c systemctl disable --now 'savant-living-state.service' >/dev/null",
-      "cwd": "/root",
-      "pid": 2053032
+      "command": "/usr/bin/python3 /root/savant-runtime/runtime/living_fabric.py --interval 2",
+      "cwd": "/root/savant-runtime",
+      "pid": 152044
     },
     {
-      "command": "systemctl disable --now savant-living-state.service",
-      "cwd": "/root",
-      "pid": 2053033
+      "command": "/usr/bin/python3 /root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/niche/apps/atlas/project_atlas_data.py",
+      "cwd": "/root/savant-runtime",
+      "pid": 243086
+    },
+    {
+      "command": "/usr/bin/python3 /root/savant-runtime/runtime/living-state/checkpoint.py",
+      "cwd": "/root/savant-runtime",
+      "pid": 243094
     }
   ],
   "projection_only": true,
   "runtime_root": "/root/savant-runtime",
   "schema": "savant.living-state.v1",
-  "sequence": 223789,
+  "sequence": 231934,
   "services": [
     {
-      "active_since": "Mon 2026-10-12 20:43:10 UTC",
-      "active_state": "failed",
-      "exec_start": "{ path=/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/commands/palaver_server ; argv[]=/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/commands/palaver_server ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "active_since": "Wed 2026-10-21 06:08:22 UTC",
+      "active_state": "active",
+      "exec_start": "{ path=/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/commands/palaver_server ; argv[]=/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/commands/palaver_server ; ignore_errors=no ; start_time=[Wed 2026-10-21 06:08:22 UTC] ; stop_time=[n/a] ; pid=151909 ; code=(null) ; status=0/0 }",
       "fragment_path": "/etc/systemd/system/palaver.service",
       "load_state": "loaded",
-      "main_pid": "0",
+      "main_pid": "151909",
       "name": "palaver.service",
       "query_ok": true,
-      "sub_state": "failed",
+      "sub_state": "running",
       "working_directory": "/root/savant-runtime"
     },
     {
-      "active_since": "Sun 2026-10-04 23:31:59 UTC",
+      "active_since": "Wed 2026-10-21 06:08:22 UTC",
       "active_state": "active",
-      "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 -m runtime.attachment_api --host 127.0.0.1 --port 8791 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 -m runtime.attachment_api --host 127.0.0.1 --port 8791 ; ignore_errors=no ; start_time=[Wed 2026-10-21 06:08:22 UTC] ; stop_time=[n/a] ; pid=151906 ; code=(null) ; status=0/0 }",
       "fragment_path": "/etc/systemd/system/palaver-attachment.service",
       "load_state": "loaded",
-      "main_pid": "693",
+      "main_pid": "151906",
       "name": "palaver-attachment.service",
       "query_ok": true,
       "sub_state": "running",
       "working_directory": "/root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver"
     },
     {
-      "active_since": "Mon 2026-10-12 20:43:05 UTC",
+      "active_since": "Wed 2026-10-21 06:08:22 UTC",
       "active_state": "active",
-      "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/runtime/frontend_server.py --host 0.0.0.0 --port 5173 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /root/savant-runtime/ontology/obelisks/_template/segue/gates/_template/segue/innates/_template/segue/exiles/palaver/runtime/frontend_server.py --host 0.0.0.0 --port 5173 ; ignore_errors=no ; start_time=[Wed 2026-10-21 06:08:22 UTC] ; stop_time=[n/a] ; pid=151910 ; code=(null) ; status=0/0 }",
       "fragment_path": "/etc/systemd/system/palaver-frontend.service",
       "load_state": "loaded",
-      "main_pid": "1823640",
+      "main_pid": "151910",
       "name": "palaver-frontend.service",
       "query_ok": true,
       "sub_state": "running",
@@ -14366,19 +14378,19 @@
       "working_directory": ""
     },
     {
-      "active_since": "Tue 2026-10-13 21:04:27 UTC",
-      "active_state": "deactivating",
-      "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /root/savant-runtime/runtime/living-state/engine.py --interval 15 --reconcile-interval 300 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "active_since": "Wed 2026-10-21 06:08:26 UTC",
+      "active_state": "active",
+      "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /root/savant-runtime/runtime/living-state/engine.py --interval 15 --reconcile-interval 300 ; ignore_errors=no ; start_time=[Wed 2026-10-21 06:08:26 UTC] ; stop_time=[n/a] ; pid=152042 ; code=(null) ; status=0/0 }",
       "fragment_path": "/etc/systemd/system/savant-living-state.service",
       "load_state": "loaded",
-      "main_pid": "2052916",
+      "main_pid": "152042",
       "name": "savant-living-state.service",
       "query_ok": true,
-      "sub_state": "stop-sigterm",
+      "sub_state": "running",
       "working_directory": "/root/savant-runtime"
     }
   ],
-  "snapshot_hash": "1732dfc138c07668a3d01773b2b59286ca15cf6afe236a0487bd28b66ab0f3dd",
+  "snapshot_hash": "73bab3385fb4eef3971d8d50ba7ac96435314cf35302492910228b3164b4cfa6",
   "sqlite": [
     {
       "authority_effect": "none",
@@ -14613,30 +14625,30 @@
   ],
   "system": {
     "disk": {
-      "free": 8549007360,
-      "total": 82086711296,
-      "used": 73520926720
+      "free": 166790303744,
+      "total": 248505155584,
+      "used": 81698074624
     },
     "load_average": {
-      "15m": 0.9130859375,
-      "1m": 0.96484375,
-      "5m": 0.90673828125
+      "15m": 1.5576171875,
+      "1m": 1.810546875,
+      "5m": 1.5859375
     },
     "memory": {
-      "Active": 3631693824,
-      "Active(anon)": 347131904,
-      "Active(file)": 3284561920,
+      "Active": 1706700800,
+      "Active(anon)": 934174720,
+      "Active(file)": 772526080,
       "AnonHugePages": 0,
-      "AnonPages": 371269632,
+      "AnonPages": 951635968,
       "Bounce": 0,
-      "Buffers": 312131584,
-      "Cached": 4653002752,
-      "CommitLimit": 8488792064,
-      "Committed_AS": 1207644160,
-      "DirectMap1G": 6442450944,
-      "DirectMap2M": 1981808640,
-      "DirectMap4k": 165523456,
-      "Dirty": 1732608,
+      "Buffers": 358105088,
+      "Cached": 2335535104,
+      "CommitLimit": 8422232064,
+      "Committed_AS": 1698238464,
+      "DirectMap1G": 4294967296,
+      "DirectMap2M": 6268387328,
+      "DirectMap4k": 173912064,
+      "Dirty": 1003520,
       "FileHugePages": 0,
       "FilePmdMapped": 0,
       "HardwareCorrupted": 0,
@@ -14646,39 +14658,39 @@
       "HugePages_Total": 0,
       "Hugepagesize": 2097152,
       "Hugetlb": 0,
-      "Inactive": 1675780096,
-      "Inactive(anon)": 8683520,
-      "Inactive(file)": 1667096576,
-      "KReclaimable": 763203584,
-      "KernelStack": 4931584,
-      "Mapped": 171552768,
-      "MemAvailable": 5897650176,
-      "MemFree": 739708928,
-      "MemTotal": 8387657728,
-      "Mlocked": 27947008,
+      "Inactive": 1906794496,
+      "Inactive(anon)": 0,
+      "Inactive(file)": 1906794496,
+      "KReclaimable": 380039168,
+      "KernelStack": 6373376,
+      "Mapped": 314437632,
+      "MemAvailable": 6309920768,
+      "MemFree": 3563028480,
+      "MemTotal": 8254541824,
+      "Mlocked": 27811840,
       "NFS_Unstable": 0,
-      "PageTables": 6209536,
-      "Percpu": 1165492224,
-      "SReclaimable": 763203584,
-      "SUnreclaim": 185835520,
+      "PageTables": 7315456,
+      "Percpu": 492306432,
+      "SReclaimable": 380039168,
+      "SUnreclaim": 136679424,
       "SecPageTables": 0,
-      "Shmem": 4505600,
+      "Shmem": 5349376,
       "ShmemHugePages": 0,
       "ShmemPmdMapped": 0,
-      "Slab": 949039104,
-      "SwapCached": 26058752,
-      "SwapFree": 4197801984,
+      "Slab": 516718592,
+      "SwapCached": 0,
+      "SwapFree": 4294963200,
       "SwapTotal": 4294963200,
       "Unaccepted": 0,
-      "Unevictable": 32043008,
+      "Unevictable": 31907840,
       "VmallocChunk": 0,
       "VmallocTotal": 35184372087808,
-      "VmallocUsed": 62488576,
+      "VmallocUsed": 29347840,
       "Writeback": 0,
       "WritebackTmp": 0,
       "Zswap": 0,
       "Zswapped": 0
     },
-    "uptime_seconds": 768035.14
+    "uptime_seconds": 85562.34
   }
 }

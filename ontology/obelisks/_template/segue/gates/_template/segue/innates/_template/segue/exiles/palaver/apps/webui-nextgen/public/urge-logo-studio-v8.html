@@ -1,0 +1,1044 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0a1013">
+<title>savant / urge / atelier</title>
+<style>
+:root{
+--bg:#090e11;--surface:#121b1f;--surface2:#19262b;
+--line:#314147;--text:#edf2ef;--muted:#91a4a7;
+--accent:#9ed9ca;--warm:#d3b38b;--danger:#e8a09b;
+--ease:cubic-bezier(.22,1,.36,1)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:13px/1.5 system-ui,-apple-system,sans-serif}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+button:disabled{opacity:.4;cursor:not-allowed}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+a{color:var(--accent);text-decoration:none}
+.shell{display:grid;grid-template-columns:220px minmax(0,1fr);min-height:100vh}
+aside{background:#10171b;border-right:1px solid var(--line);padding:25px 14px;display:flex;flex-direction:column;gap:28px}
+.brand{font-size:27px;letter-spacing:-1.5px;font-weight:650;color:var(--text)}
+.brand small{display:block;font-size:9px;letter-spacing:2px;color:var(--muted);font-weight:500}
+nav{display:grid;gap:6px}
+nav a{padding:12px;border-radius:9px;color:var(--muted)}
+nav a.active{background:#26433a;color:var(--accent)}
+.note{margin-top:auto;border:1px solid var(--line);padding:13px;border-radius:10px;color:var(--muted);font-size:11px}
+.note strong{display:block;color:var(--accent)}
+main{min-width:0;padding:26px clamp(14px,2.5vw,42px)}
+header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:22px}
+.kicker{font-size:10px;letter-spacing:1.8px;color:var(--accent);text-transform:uppercase;font-weight:750}
+h1{font-size:clamp(29px,3.1vw,46px);font-weight:580;letter-spacing:-1.9px;line-height:1.1;margin:8px 0}
+h2{font-size:16px;letter-spacing:-.4px;font-weight:600;margin:0}
+p{color:var(--muted);margin:7px 0}
+.status{padding:7px 12px;border:1px solid #52766b;border-radius:30px;color:var(--accent);font-size:10px;white-space:nowrap}
+.layout{display:grid;grid-template-columns:minmax(290px,350px) minmax(0,1fr);gap:16px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:19px;min-width:0}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:17px}
+.field{display:grid;gap:7px;margin-bottom:15px}
+label{font-size:11px;font-weight:650;color:#cbd7d4}
+input,textarea,select{width:100%;background:#0c1519;color:var(--text);border:1px solid #42555b;border-radius:8px;padding:10px}
+textarea{min-height:90px;resize:vertical}
+input[type=range]{padding:0;accent-color:var(--accent)}
+input[type=file]{font-size:11px}
+input[type=checkbox]{width:auto;accent-color:var(--accent)}
+.hint{font-size:10px;color:var(--muted)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mode{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.btn{background:#223138;border:1px solid #41565a;color:var(--text);border-radius:9px;padding:10px 13px;font-size:11px;font-weight:650;transition:background .2s,border-color .2s,transform .2s var(--ease)}
+.btn:hover:not(:disabled){background:#31484e;transform:translateY(-1px)}
+.btn.primary{background:var(--accent);color:#0b211c;border-color:var(--accent)}
+.btn.active{background:#28473e;color:var(--accent);border-color:#679f91}
+.btn.danger{color:var(--danger)}
+.actions{display:flex;flex-wrap:wrap;gap:8px}
+.upload{padding:13px;border:1px dashed #638178;border-radius:10px;margin-bottom:15px}
+.upload[hidden]{display:none}
+.range-label{display:flex;justify-content:space-between}
+.intensity-track{display:flex;justify-content:space-between;font-size:10px;color:var(--muted)}
+.progress{height:4px;background:#26373c;border-radius:9px;overflow:hidden;margin:15px 0}
+.progress div{height:100%;width:0;background:var(--accent);transition:width .35s var(--ease)}
+.viewer{position:relative;min-height:480px;display:grid;place-items:center;overflow:hidden;border:1px solid #3c5556;border-radius:12px;background:radial-gradient(ellipse at center,#28453e 0%,#0d171b 70%)}
+.viewer.grid:before{content:"";position:absolute;inset:0;background-image:linear-gradient(#ffffff0e 1px,transparent 1px),linear-gradient(90deg,#ffffff0e 1px,transparent 1px);background-size:26px 26px;pointer-events:none}
+.stage{position:relative;width:min(76%,470px);aspect-ratio:1;z-index:1}
+.stage canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.stage canvas.enter{animation:appear .6s var(--ease) both}
+@keyframes appear{from{opacity:0;transform:scale(.94) rotate(-2deg);filter:blur(8px)}to{opacity:1;transform:scale(1) rotate(0);filter:blur(0)}}
+.overlay{position:absolute;top:16px;left:16px;font-size:10px;color:#d0e2dc;z-index:2}
+.viewer-info{position:absolute;top:15px;right:15px;border:1px solid #5a8175;background:#10231fdc;padding:7px 11px;border-radius:8px;font-size:10px;color:var(--accent);z-index:2}
+.viewer-tools{display:flex;gap:15px;flex-wrap:wrap;margin:12px 0}
+.viewer-tools label{display:flex;align-items:center;gap:6px}
+.comparison{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.compare-cell{background:#0b1418;border:1px solid var(--line);border-radius:9px;overflow:hidden;text-align:center}
+.compare-cell canvas{display:block;width:100%;max-height:220px;aspect-ratio:1;object-fit:contain}
+.compare-cell span{display:block;padding:8px;color:var(--muted);font-size:10px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:15px}
+.stat{background:#10191e;border:1px solid var(--line);padding:12px;border-radius:9px}
+.stat small{display:block;color:var(--muted);font-size:10px}
+.stat strong{font-size:20px;font-weight:600}
+.history{grid-column:1/-1}
+.timeline{display:flex;gap:11px;overflow-x:auto;padding:4px 0 12px}
+.thumb{flex:0 0 144px;padding:8px;background:#10191d;border:1px solid var(--line);border-radius:10px;text-align:left;color:var(--text);transition:transform .2s,border-color .2s}
+.thumb:hover{transform:translateY(-3px)}
+.thumb.active{border-color:var(--accent);background:#203b34}
+.thumb canvas{display:block;width:100%;aspect-ratio:1;background:#18252a;border-radius:7px}
+.thumb strong,.thumb small{display:block;margin-top:5px}
+.thumb small{font-size:10px;color:var(--muted)}
+.bottom{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.log{max-height:220px;overflow:auto;color:var(--muted);font-size:11px}
+.log div{padding:8px 0;border-bottom:1px solid var(--line)}
+.inspector{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.inspector div{background:#10191d;border:1px solid var(--line);border-radius:9px;padding:11px}
+.inspector small{display:block;color:var(--muted);font-size:10px}
+.inspector strong{font-size:12px;overflow-wrap:anywhere}
+footer{font-size:10px;color:var(--muted);margin-top:20px}
+@media(max-width:1100px){.layout{grid-template-columns:1fr}.viewer{min-height:380px}}
+@media(max-width:720px){
+.shell{display:block}aside{padding:14px;gap:12px}
+nav{display:flex;overflow:auto}.note{display:none}
+main{padding:17px 12px}header{flex-wrap:wrap}
+.viewer{min-height:320px}.stage{width:82%}
+.bottom{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* palaver-derived cinematic identity projection */
+:root{--copper:#b88765;--titanium:#b4c2c9;--mist:#6ca89c}
+.brand{display:flex;align-items:center;gap:12px;font-size:22px;letter-spacing:-.8px}
+.brand-glyph{width:36px;height:36px;display:grid;place-items:center;border:1px solid #7baea276;border-radius:10px;background:radial-gradient(circle at 30% 20%,#537d73,#122326 68%);box-shadow:0 0 22px #4ba78a26;color:#d7ece5;font-size:24px;font-weight:800;transform:rotate(-8deg)}
+.brand-word small{font-size:8px;letter-spacing:1.7px}
+.identity-hero{position:relative;isolation:isolate;overflow:hidden;min-height:clamp(350px,42vw,535px);margin-bottom:19px;border:1px solid #3c5856;border-radius:19px;background:radial-gradient(ellipse at 70% 55%,#254940 0%,#102126 43%,#080f14 83%);display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr)}
+.identity-hero::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 38px,#a3ddd00b 39px 40px),repeating-linear-gradient(90deg,transparent 0 38px,#a3ddd00b 39px 40px);mask-image:linear-gradient(90deg,transparent 8%,black 80%);pointer-events:none;z-index:0}
+.identity-hero::after{content:"";position:absolute;inset:-45%;background:conic-gradient(from 0deg at 65% 45%,transparent 0 25%,#b7895221 32%,transparent 42% 65%,#80d5c51c 72%,transparent 82%);animation:hero-atmosphere 22s linear infinite;pointer-events:none;z-index:0}
+@keyframes hero-atmosphere{to{transform:rotate(360deg)}}
+.hero-copy{z-index:2;align-self:center;padding:clamp(24px,4vw,55px)}
+.hero-copy h2{font-size:clamp(29px,4.5vw,58px);font-weight:560;letter-spacing:-2px;line-height:1.02;margin:14px 0 17px;max-width:560px}
+.hero-copy p{font-size:13px;max-width:430px;line-height:1.75}
+.hero-kicker{display:flex;align-items:center;gap:9px;color:#a9dfd1;font-size:10px;letter-spacing:2px;text-transform:uppercase}
+.hero-kicker::before{content:"";width:7px;height:7px;border-radius:50%;background:#9ce7cb;box-shadow:0 0 13px #9ce7cb}
+.hero-tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:23px}
+.hero-tags span{border:1px solid #7db0a34f;border-radius:50px;padding:6px 10px;color:#b2c8c4;font-size:10px;background:#0b1c1c8c}
+.hero-mark{position:relative;z-index:1;min-height:360px;overflow:hidden;touch-action:pan-y}
+.hero-mark canvas{display:block;width:100%;height:100%;position:absolute;inset:0;outline:0}
+.hero-mark .mark-fallback{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+.mark-fallback svg{width:min(62%,300px);filter:drop-shadow(0 14px 24px #0008) drop-shadow(0 0 22px #75bdad55);animation:mark-float 8s ease-in-out infinite}
+@keyframes mark-float{0%,100%{transform:perspective(600px) rotateY(-18deg) rotateZ(-6deg) translateY(0)}50%{transform:perspective(600px) rotateY(18deg) rotateZ(5deg) translateY(-13px)}}
+.mark-caption{position:absolute;bottom:16px;right:18px;z-index:3;font-size:9px;color:#aec8c2;letter-spacing:1.5px;text-transform:uppercase;max-width:60%;text-align:right}
+.hero-controls{position:absolute;bottom:18px;left:18px;display:flex;gap:6px;z-index:4}
+.hero-controls button{border:1px solid #63877e8a;border-radius:7px;background:#0c201ee8;color:#bce4d9;font-size:10px;padding:8px 10px}
+.hero-controls button[aria-pressed=true]{background:#345e51}
+.hero-controls button:focus-visible{outline:2px solid #9ed9ca;outline-offset:2px}
+.hero-mark::before{content:"";position:absolute;left:12%;top:10%;width:60%;height:60%;border:1px solid #a6cfc12b;border-radius:50%;transform:rotateX(65deg);box-shadow:0 0 80px #68d5b222;pointer-events:none}
+@media(max-width:850px){.identity-hero{grid-template-columns:1fr}.hero-copy{padding:27px 26px 4px}.hero-mark{min-height:340px}.hero-copy h2{font-size:clamp(30px,7vw,46px)}}
+@media(max-width:520px){.hero-mark{min-height:280px}.hero-controls{bottom:12px;left:12px}.mark-caption{right:12px;bottom:58px}.hero-copy{padding:23px 20px 0}}
+@media(prefers-reduced-motion:reduce){.identity-hero::after,.mark-fallback svg{animation:none}}
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080d11;--surface:#10191d;--surface2:#17252a;--line:#30484a;--text:#f0f3ed;--muted:#91a7a5;--accent:#b6e2cc;--warm:#c9a582;--danger:#e3a49f;--ease:cubic-bezier(.2,.85,.2,1)}
+body{font-family:'DM Sans',system-ui,sans-serif;background:radial-gradient(ellipse 1100px 850px at 78% -14%,#1b403c 0%,transparent 72%),radial-gradient(ellipse 800px 900px at 5% 88%,#25302c 0%,transparent 70%),#080d11;color:var(--text)}
+.shell{grid-template-columns:236px minmax(0,1fr)}
+aside{background:linear-gradient(160deg,#101c20f7,#0a1115f7);border-right:1px solid #6b9d9133;position:sticky;top:0;height:100vh;overflow-y:auto;gap:33px;padding:29px 18px}
+.brand{display:flex;align-items:center;gap:12px;font-family:Manrope,sans-serif;font-weight:800;font-size:26px;letter-spacing:-1.6px}
+.brand-glyph{display:grid;place-items:center;width:44px;height:44px;flex:0 0 44px;border:1px solid #9cdbca88;border-radius:14px;background:radial-gradient(circle at 35% 20%,#4b8274,#19342f 65%,#0e1a1c);box-shadow:inset 0 1px #d7fff24d,0 9px 25px #0008;color:#dcf6e8;font-size:30px;transform:rotate(-7deg)}
+.brand small{font-family:'DM Sans',sans-serif;letter-spacing:1.8px;font-size:8px;margin-top:1px}
+nav a{border:1px solid transparent;border-radius:11px;padding:13px 14px;transition:background .25s,border-color .25s,transform .25s}
+nav a:hover{background:#1d3534;transform:translateX(3px)}
+nav a.active{border-color:#92d6bf48;background:linear-gradient(110deg,#294e44,#19332f);box-shadow:inset 3px 0 #b1e1cd;color:#d8f7e9}
+main{padding:32px clamp(18px,3vw,52px);max-width:1900px}
+h1,h2,.hero-copy h2{font-family:Manrope,system-ui,sans-serif}
+h1{font-weight:700;letter-spacing:-2px}h2{font-weight:700}
+.kicker{letter-spacing:2.1px;color:#acd6c5}
+.status{background:#12312899;box-shadow:0 0 25px #8bd9bd18;border-color:#8acdb480}
+.panel{background:linear-gradient(145deg,#162328eb,#0d171beb);border:1px solid #72958c38;border-radius:20px;box-shadow:0 18px 55px #0003,inset 0 1px #d4fff20c;padding:22px}
+.panel-head{border-bottom:1px solid #a1c6b21c;padding-bottom:15px;margin-bottom:20px}
+.btn{border-radius:10px;background:linear-gradient(135deg,#253b3d,#1a2b31);border-color:#65878063;padding:11px 15px;transition:transform .28s var(--ease),background .28s,box-shadow .28s}
+.btn:hover:not(:disabled){background:#33504e;box-shadow:0 7px 23px #0005;transform:translateY(-2px)}
+.btn.primary{background:linear-gradient(125deg,#d2f0de,#85c8b2);border-color:#d0f5e5;color:#102821;box-shadow:0 8px 28px #79d5b02a}
+input,textarea,select{background:#0a1419;border-color:#57736f73;border-radius:10px;padding:12px;transition:border-color .2s,box-shadow .2s}
+input:focus,textarea:focus,select:focus{border-color:#b6e2cc;box-shadow:0 0 0 3px #b6e2cc20;outline:none}
+.viewer{background:radial-gradient(circle at 50% 36%,#3c685b 0%,#18312d 30%,#0b171b 76%);border-color:#779e8a66;border-radius:16px;box-shadow:inset 0 0 95px #0008;isolation:isolate}
+.viewer:after{content:'';position:absolute;inset:-60%;background:conic-gradient(from 0deg,transparent 0 20%,#9dd8c412 24%,transparent 29% 58%,#d1a17a12 64%,transparent 72%);animation:studio-halo 28s linear infinite;pointer-events:none;z-index:0}
+@keyframes studio-halo{to{transform:rotate(360deg)}}
+.stage{z-index:1;filter:drop-shadow(0 24px 26px #0007)}
+.identity-hero{border-radius:26px;border:1px solid #96c6b04d;background:radial-gradient(ellipse at 77% 38%,#325e52 0%,#1c3535 35%,#0c171b 80%);box-shadow:0 24px 85px #0007,inset 0 1px #e6fff51c;margin-bottom:23px;min-height:450px}
+.hero-copy h2{font-weight:800;font-size:clamp(36px,4.6vw,72px);letter-spacing:-3.8px;line-height:1.02}
+.hero-copy p{font-size:14px;max-width:480px;color:#b8cfc8}
+.hero-tags span{background:#24473a80;border-color:#a3e3ca44;color:#d6e9dd;padding:8px 12px}
+.hero-mark{min-height:430px}
+.hero-controls button{backdrop-filter:blur(18px);border-radius:10px;padding:10px 12px}
+.thumb{border-radius:13px;background:#111f23}.thumb.active{background:#27483e;box-shadow:0 0 0 1px #a3ddc45c}
+.stat{background:#0d1a1e;border-radius:12px}.stat strong{font-family:Manrope,sans-serif}
+.svg-workspace{grid-column:1/-1}
+.svg-intro{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+.svg-grid{display:grid;grid-template-columns:minmax(0,1fr) 240px;gap:18px}
+.svg-canvas{position:relative;min-height:420px;border-radius:16px;overflow:hidden;border:1px solid #74968a77;background:radial-gradient(circle at 50% 50%,#273e3a,#101a1e 72%);touch-action:none}
+.svg-canvas svg{display:block;width:100%;height:100%;min-height:420px;touch-action:none}
+.svg-controls{display:flex;flex-direction:column;gap:12px}
+.svg-controls .field{margin-bottom:0}
+.svg-controls .actions{display:grid;grid-template-columns:1fr 1fr}
+.svg-controls .actions .btn{padding:10px 6px}
+.svg-hint{font-size:11px;color:#a8c3b8;line-height:1.6}
+.svg-selection{font-size:11px;color:#c4ead9;min-height:20px}
+@media(max-width:1100px){.shell{grid-template-columns:190px minmax(0,1fr)}.hero-mark{min-height:350px}}
+@media(max-width:850px){aside{position:static;height:auto}.shell{display:block}.svg-grid{grid-template-columns:1fr}.svg-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.svg-controls .actions{grid-column:1/-1}}
+@media(max-width:520px){.hero-copy h2{letter-spacing:-2px}.svg-controls{grid-template-columns:1fr}.svg-canvas,.svg-canvas svg{min-height:320px}}
+@media(prefers-reduced-motion:reduce){.viewer:after{animation:none}}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside>
+<a class="brand" href="./urge-demo.html"><span class="brand-glyph" aria-hidden="true">s</span><span class="brand-word">savant<small>INTELLIGENCE COMPOSITION</small></span></a>
+<nav aria-label="Navigation">
+<a href="./urge-demo.html">Overview</a>
+<a href="./urge-logo-studio.html">Identity studio</a>
+<a href="./urge-logo-studio-v2.html">Identity laboratory v2</a>
+<a href="./urge-logo-studio-v3.html">Evolution studio v3</a>
+<a href="./urge-logo-studio-v5.html" class="active" aria-current="page">Atelier / v5</a>
+</nav>
+<div class="note">
+<strong>Baseline-aware iteration</strong>
+Each local transformation uses the preceding candidate as its source. No external AI provider is invoked.
+</div>
+</aside>
+
+<main>
+<header>
+<div>
+<div class="kicker">urge / identity / iterative transformation</div>
+<h1>Shape what comes next.</h1>
+<p>Start with your own artwork, control the magnitude of change, and inspect every generation.</p>
+</div>
+<span class="status" id="status">READY / LOCAL</span>
+</header>
+
+
+<section class="identity-hero" aria-label="Savant cinematic identity">
+  <div class="hero-copy">
+    <div class="hero-kicker">savant / creative intelligence / atelier</div>
+    <h2>Ideas deserve<br>new dimensions.</h2>
+    <p>A living design environment for exploration, evolution, and precise creation. The Palaver 3D mark anchors the experience, while your work stays in your hands.</p>
+    <div class="hero-tags"><span>original geometry</span><span>adaptive 3d</span><span>interactive motion</span><span>local evolution</span></div>
+  </div>
+  <div class="hero-mark" id="savant-hero-mark" aria-label="Animated Savant logo, drag to rotate" role="img">
+    <div class="mark-fallback" id="mark-fallback" aria-hidden="true"><svg viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M138 26H62L27 66L106 91L52 117H24L45 154H120L155 113L75 88L127 63H155L138 26Z" fill="#9acbbb" stroke="#d1e7df" stroke-width="3"/><path d="M138 26H62L27 66L106 91" stroke="#e3c19c" stroke-width="7" opacity=".7"/></svg></div>
+    <div class="hero-controls" aria-label="Logo controls"><button type="button" id="mark-motion" aria-pressed="true">Motion on</button><button type="button" id="mark-material" aria-pressed="false">Copper / titanium</button><button type="button" id="mark-reset">Reset view</button></div>
+    <div class="mark-caption" id="mark-caption" aria-live="polite">3D asset loading · visual fallback active</div>
+  </div>
+</section>
+
+<div class="layout">
+<section class="panel">
+<div class="panel-head"><h2>01 / Creative direction</h2><span class="kicker">Configuration</span></div>
+<div class="mode">
+<button class="btn active" id="scratch" aria-pressed="true">Create new</button>
+<button class="btn" id="import" aria-pressed="false">Import baseline</button>
+</div>
+<div class="upload" id="upload" hidden>
+<label for="file">Upload baseline artwork</label>
+<input id="file" type="file" accept=".png,.jpg,.jpeg,.webp,.svg,image/png,image/jpeg,image/webp,image/svg+xml">
+<div class="hint">PNG, JPEG, WebP or simple SVG. Maximum 5 MB.</div>
+</div>
+<div class="field">
+<label for="brand">Identity name</label>
+<input id="brand" maxlength="64" value="savant">
+</div>
+<div class="field">
+<label for="prompt">Creative iteration prompt</label>
+<textarea id="prompt" maxlength="2000">Refine the geometry, improve the balance, and explore stronger negative space while preserving the identity.</textarea>
+<div class="hint">Recorded as creative intent. Semantic AI interpretation is not yet connected.</div>
+</div>
+<div class="two">
+<div class="field">
+<label for="grammar">Starting geometry</label>
+<select id="grammar">
+<option value="monogram">Monogram</option>
+<option value="orbit">Orbital</option>
+<option value="fold">Folded</option>
+<option value="lattice">Lattice</option>
+<option value="signal">Signal</option>
+</select>
+</div>
+<div class="field">
+<label for="palette">Color system</label>
+<select id="palette">
+<option value="mineral">Mineral / jade</option>
+<option value="copper">Oxidized copper</option>
+<option value="mono">Monochrome</option>
+<option value="indigo">Indigo / platinum</option>
+<option value="ember">Warm graphite</option>
+</select>
+</div>
+</div>
+<div class="two">
+<div class="field">
+<label for="count">Number of iterations</label>
+<input type="number" id="count" min="1" max="100" step="1" value="12">
+</div>
+<div class="field">
+<label for="interval">Iteration interval (seconds)</label>
+<input type="number" id="interval" min="0.1" max="60" step="0.1" value="1.5">
+</div>
+</div>
+<div class="field">
+<label class="range-label" for="intensity">Intensity of Change <output id="intensity-value">35%</output></label>
+<input type="range" id="intensity" min="0" max="100" value="35" step="1">
+<div class="intensity-track"><span>Subtle refinement</span><span>Major transformation</span></div>
+</div>
+<div class="field">
+<label class="range-label" for="weight">Visual weight <output id="weight-value">6</output></label>
+<input type="range" id="weight" min="1" max="10" value="6">
+</div>
+<div class="actions">
+<button class="btn primary" id="start">Start evolution</button>
+<button class="btn" id="pause" disabled>Pause</button>
+<button class="btn danger" id="cancel" disabled>Cancel</button>
+<button class="btn" id="reset">Reset</button>
+</div>
+<div class="progress" id="progress" role="progressbar" aria-label="Iteration progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="progress-fill"></div></div>
+<p class="hint" id="feedback" role="status" aria-live="polite">Ready to evolve.</p>
+</section>
+
+<section class="panel">
+<div class="panel-head"><h2>02 / Live evolution viewer</h2><span class="kicker">Current candidate</span></div>
+<div class="viewer grid" id="viewer">
+<div class="overlay" id="viewer-label">BASELINE / 00</div>
+<div class="viewer-info" id="viewer-info">SOURCE</div>
+<div class="stage" id="stage"></div>
+</div>
+<div class="viewer-tools">
+<label><input type="checkbox" id="grid" checked> Grid</label>
+<label><input type="checkbox" id="light"> Light backdrop</label>
+<label><input type="checkbox" id="compare"> Compare to baseline</label>
+</div>
+<div class="comparison" id="comparison" hidden>
+<div class="compare-cell"><canvas id="before"></canvas><span>Original baseline</span></div>
+<div class="compare-cell"><canvas id="after"></canvas><span>Current iteration</span></div>
+</div>
+<div class="actions">
+<button class="btn" id="prev" disabled>Previous</button>
+<button class="btn" id="next" disabled>Next</button>
+<button class="btn" id="select" disabled>Select candidate</button>
+<button class="btn" id="branch" disabled>Branch from candidate</button>
+<button class="btn" id="export-png" disabled>Export PNG</button>
+<button class="btn" id="export-json">Export history</button>
+</div>
+<div class="stats">
+<div class="stat"><small>ITERATION</small><strong id="iteration">0 / 12</strong></div>
+<div class="stat"><small>CANDIDATES</small><strong id="total">0</strong></div>
+<div class="stat"><small>CHANGE LEVEL</small><strong id="change">35%</strong></div>
+<div class="stat"><small>SELECTED</small><strong id="selected">—</strong></div>
+</div>
+</section>
+
+<section class="panel history">
+<div class="panel-head"><h2>03 / Evolution timeline</h2><span class="hint">Each candidate derives from the previous image</span></div>
+<div class="timeline" id="timeline"></div>
+</section>
+
+<section class="panel svg-workspace" aria-label="Interactive vector atelier">
+  <div class="svg-intro"><div><div class="kicker">04 / vector atelier</div><h2>Direct-form editor</h2><p>Edit actual vector objects, not pixels. Drag, recolor, add forms, undo, and export SVG.</p></div><span class="status" id="svg-status">VECTOR / LOCAL</span></div>
+  <div class="svg-grid">
+    <div class="svg-canvas" id="svg-canvas" aria-label="Interactive vector editing canvas"></div>
+    <div class="svg-controls">
+      <div class="field"><label for="svg-fill">Selected fill</label><input type="color" id="svg-fill" value="#a5d6c1"></div>
+      <div class="field"><label for="svg-size">Selected size <output id="svg-size-value">100%</output></label><input type="range" id="svg-size" min="30" max="220" value="100"></div>
+      <div class="actions"><button class="btn" id="svg-rect">+ Rectangle</button><button class="btn" id="svg-circle">+ Circle</button><button class="btn" id="svg-text">+ Text</button><button class="btn" id="svg-remove">Remove</button><button class="btn" id="svg-undo">Undo</button><button class="btn" id="svg-clear">Reset</button></div>
+      <button class="btn primary" id="svg-export">Export SVG</button>
+      <div class="svg-selection" id="svg-selection" role="status">Select a shape to edit.</div>
+      <div class="svg-hint">This is a local SVG.js editing surface. It is not blot., a semantic AI editor, or an authoritative Savant document. Export to retain your work.</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="bottom">
+<section class="panel">
+<div class="panel-head"><h2>Candidate provenance</h2><span class="kicker">Lineage</span></div>
+<div class="inspector">
+<div><small>Candidate ID</small><strong id="candidate-id">baseline</strong></div>
+<div><small>Parent</small><strong id="parent">origin</strong></div>
+<div><small>Transformation</small><strong id="transformation">none</strong></div>
+<div><small>Source type</small><strong id="source">local</strong></div>
+</div>
+</section>
+<section class="panel">
+<div class="panel-head"><h2>Iteration events</h2><span class="kicker">Session</span></div>
+<div class="log" id="log" role="log" aria-live="polite"></div>
+</section>
+</div>
+<footer>
+Local image transformations preserve the actual uploaded baseline and candidate ancestry. They are not AI-generated redesigns or Opus orchestration. Higher intensity increases transformation magnitude, but cannot guarantee better logo quality.
+</footer>
+</main>
+</div>
+
+<script>
+"use strict";
+(()=>{
+const $=id=>document.getElementById(id);
+const size=512;
+const palettes={
+mineral:["#9bd6c8","#385c53","#d4c5a7"],
+copper:["#cba483","#55786d","#ead6bb"],
+mono:["#edf2ef","#66767a","#c4cccb"],
+indigo:["#adb7dc","#465982","#d9dce9"],
+ember:["#dda980","#77584e","#ead7c4"]
+};
+const state={
+mode:"scratch",baseline:null,baselineName:null,
+items:[],view:-1,selected:null,status:"ready",
+timer:null,events:[],config:null,run:0,
+branchSource:null,branchParent:null
+};
+function canvas(){
+const c=document.createElement("canvas");
+c.width=size;c.height=size;return c;
+}
+function clone(source){
+const c=canvas();
+c.getContext("2d").drawImage(source,0,0,size,size);
+return c;
+}
+function hash(text){
+let h=2166136261;
+for(const c of text){h^=c.charCodeAt(0);h=Math.imul(h,16777619);}
+return h>>>0;
+}
+function random(seed,n){
+let x=(seed+Math.imul(n+1,0x9e3779b1))>>>0;
+x^=x>>>16;x=Math.imul(x,0x7feb352d);
+x^=x>>>15;x=Math.imul(x,0x846ca68b);
+return ((x^(x>>>16))>>>0)/4294967296;
+}
+function config(){
+return {
+brand:$("brand").value.trim()||"untitled",
+prompt:$("prompt").value.trim(),
+grammar:$("grammar").value,
+palette:$("palette").value,
+count:Number($("count").value),
+interval:Number($("interval").value),
+intensity:Number($("intensity").value),
+weight:Number($("weight").value),
+mode:state.mode
+};
+}
+function validate(c){
+if(!Number.isInteger(c.count)||c.count<1||c.count>100)throw Error("Iteration count must be an integer from 1 to 100.");
+if(!Number.isFinite(c.interval)||c.interval<.1||c.interval>60)throw Error("Interval must be between 0.1 and 60 seconds.");
+if(!Number.isFinite(c.intensity)||c.intensity<0||c.intensity>100)throw Error("Invalid change intensity.");
+}
+function origin(c){
+const out=canvas(),ctx=out.getContext("2d");
+const [a,b,d]=palettes[c.palette];
+ctx.fillStyle="#111b1e";ctx.fillRect(0,0,size,size);
+ctx.save();ctx.translate(256,256);
+ctx.strokeStyle=b;ctx.lineWidth=2;
+ctx.beginPath();ctx.arc(0,0,207,0,Math.PI*2);ctx.stroke();
+ctx.lineJoin="round";ctx.lineCap="round";
+const w=6+c.weight*2;
+if(c.grammar==="monogram"){
+ctx.font="700 280px Arial,sans-serif";
+ctx.textAlign="center";ctx.textBaseline="middle";
+ctx.fillStyle=a;ctx.fillText([...c.brand][0]?.toUpperCase()||"S",0,12);
+ctx.strokeStyle=d;ctx.lineWidth=w;
+ctx.beginPath();ctx.moveTo(-130,110);ctx.lineTo(130,-110);ctx.stroke();
+}else if(c.grammar==="orbit"){
+for(let i=0;i<5;i++){
+ctx.save();ctx.rotate(i*.57);ctx.strokeStyle=i%2?a:d;
+ctx.lineWidth=w*.55;ctx.beginPath();
+ctx.ellipse(0,0,145-i*15,75+i*7,0,0,Math.PI*2);
+ctx.stroke();ctx.restore();
+}
+ctx.fillStyle=a;ctx.beginPath();ctx.arc(0,0,42,0,Math.PI*2);ctx.fill();
+}else if(c.grammar==="fold"){
+ctx.fillStyle=a;ctx.beginPath();
+ctx.moveTo(-140,95);ctx.lineTo(-12,-160);
+ctx.lineTo(148,95);ctx.lineTo(60,95);
+ctx.lineTo(-12,-30);ctx.lineTo(-60,95);
+ctx.closePath();ctx.fill();
+ctx.strokeStyle=d;ctx.lineWidth=w;ctx.stroke();
+}else if(c.grammar==="lattice"){
+for(let y=-2;y<=2;y++)for(let x=-2;x<=2;x++){
+ctx.fillStyle=(x+y)%2?a:d;
+ctx.fillRect(x*54-10,y*54-10,20,20);
+ctx.strokeStyle=b;ctx.lineWidth=3;
+if(x<2){ctx.beginPath();ctx.moveTo(x*54+10,y*54);ctx.lineTo((x+1)*54-10,y*54);ctx.stroke();}
+}
+}else{
+for(let i=0;i<8;i++){
+const angle=i*Math.PI/4;
+const x=Math.cos(angle)*145,y=Math.sin(angle)*145;
+ctx.strokeStyle=i%2?a:d;ctx.lineWidth=w;
+ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(x,y);ctx.stroke();
+ctx.fillStyle=a;ctx.beginPath();ctx.arc(x,y,12,0,Math.PI*2);ctx.fill();
+}
+ctx.fillStyle=d;ctx.beginPath();ctx.arc(0,0,28,0,Math.PI*2);ctx.fill();
+}
+ctx.restore();return out;
+}
+function transform(source,c,index,seed){
+const out=canvas(),ctx=out.getContext("2d");
+const t=c.intensity/100;
+const angle=(random(seed,1)*2-1)*Math.PI*(.015+t*.38);
+const scale=1+(random(seed,2)*2-1)*(.012+t*.32);
+const shift=(.5+t*55);
+const dx=(random(seed,3)*2-1)*shift;
+const dy=(random(seed,4)*2-1)*shift;
+const contrast=1+(random(seed,5)*2-1)*t*.35;
+const hue=(random(seed,6)*2-1)*t*85;
+const saturation=1+(random(seed,7)*2-1)*t*.48;
+ctx.fillStyle="#111b1e";ctx.fillRect(0,0,size,size);
+ctx.save();
+ctx.translate(256+dx,256+dy);
+ctx.rotate(angle);ctx.scale(scale,scale);
+ctx.translate(-256,-256);
+ctx.filter="contrast("+contrast+") saturate("+saturation+") hue-rotate("+hue+"deg)";
+ctx.drawImage(source,0,0,size,size);
+ctx.restore();ctx.filter="none";
+if(t>.12){
+const count=Math.floor(t*7);
+const layer=canvas(),lc=layer.getContext("2d");
+lc.drawImage(out,0,0);
+for(let i=0;i<count;i++){
+const y=Math.floor(random(seed,i+20)*size);
+const h=Math.max(1,Math.floor(t*random(seed,i+40)*24));
+const offset=(random(seed,i+60)*2-1)*t*95;
+ctx.save();
+ctx.beginPath();ctx.rect(0,y,size,h);ctx.clip();
+ctx.globalAlpha=Math.min(.85,t*.8);
+ctx.drawImage(layer,offset,0);ctx.restore();
+}
+}
+if(t>.42){
+const count=Math.floor((t-.4)*12);
+ctx.save();ctx.globalCompositeOperation="screen";
+for(let i=0;i<count;i++){
+const x=random(seed,i+90)*size,y=random(seed,i+110)*size;
+const radius=2+random(seed,i+130)*t*18;
+ctx.fillStyle=i%2?"#5c8d83":"#9c7d61";
+ctx.globalAlpha=t*.15;
+ctx.beginPath();ctx.arc(x,y,radius,0,Math.PI*2);ctx.fill();
+}
+ctx.restore();
+}
+return {
+image:out,
+operations:{
+rotationDegrees:Number((angle*180/Math.PI).toFixed(3)),
+scale:Number(scale.toFixed(4)),
+offsetX:Number(dx.toFixed(2)),
+offsetY:Number(dy.toFixed(2)),
+hueDegrees:Number(hue.toFixed(2)),
+contrast:Number(contrast.toFixed(3)),
+saturation:Number(saturation.toFixed(3)),
+intensity:c.intensity
+}
+};
+}
+function emit(message){
+state.events.unshift(message);state.events=state.events.slice(0,100);
+$("log").replaceChildren();
+for(const text of state.events){
+const row=document.createElement("div");row.textContent=text;$("log").append(row);
+}
+}
+function current(){return state.items[state.view]||null;}
+function sourceCanvas(){
+return state.branchSource||state.baseline||origin(state.config||config());
+}
+function displayCanvas(target,source){
+target.width=size;target.height=size;
+target.getContext("2d").drawImage(source,0,0);
+}
+function render(){
+const item=current(),base=sourceCanvas();
+const currentImage=item?.image||base;
+$("status").textContent=state.status.toUpperCase()+" / LOCAL";
+$("iteration").textContent=state.items.length+" / "+(state.config?.count||$("count").value);
+$("total").textContent=state.items.length;
+$("change").textContent=(state.config?.intensity??Number($("intensity").value))+"%";
+$("selected").textContent=state.selected===null?"—":state.items.find(x=>x.id===state.selected)?.index||"—";
+$("candidate-id").textContent=item?.id||"baseline";
+$("parent").textContent=item?.parent||state.branchParent||"origin";
+$("transformation").textContent=item?"affine / color / spatial":"none";
+$("source").textContent=state.mode==="import"?"imported artwork":"procedural origin";
+$("viewer-label").textContent=item?"ITERATION / "+String(item.index).padStart(2,"0"):"BASELINE / 00";
+$("viewer-info").textContent=item?"INTENSITY "+item.operations.intensity+"%":"SOURCE";
+const stage=$("stage");stage.replaceChildren();
+const shown=clone(currentImage);
+shown.className="enter";
+stage.append(shown);
+displayCanvas($("before"),base);
+displayCanvas($("after"),currentImage);
+$("viewer").classList.toggle("grid",$("grid").checked);
+$("viewer").style.background=$("light").checked?"#e9eeeb":"";
+$("comparison").hidden=!$("compare").checked;
+const running=state.status==="running",paused=state.status==="paused";
+$("start").disabled=running||paused;
+$("pause").disabled=!running&&!paused;
+$("cancel").disabled=!running&&!paused;
+$("pause").textContent=paused?"Resume":"Pause";
+$("prev").disabled=state.view<=-1;
+$("next").disabled=state.view>=state.items.length-1;
+$("select").disabled=!item;
+$("branch").disabled=!item||running||paused;
+$("export-png").disabled=!item;
+const total=state.config?.count||Number($("count").value);
+const percent=Math.round(state.items.length/total*100)||0;
+$("progress-fill").style.width=percent+"%";
+$("progress").setAttribute("aria-valuenow",String(percent));
+$("feedback").textContent=running?"Evolving from the preceding image…":paused?"Paused.":state.status==="completed"?"Evolution sequence complete.":"Ready to evolve.";
+$("timeline").replaceChildren();
+const entries=[null,...state.items];
+entries.forEach((entry,index)=>{
+const button=document.createElement("button");
+button.className="thumb"+(state.view===index-1?" active":"");
+const preview=clone(entry?.image||base);
+const title=document.createElement("strong");
+title.textContent=entry?"Iteration "+entry.index:"Baseline";
+const note=document.createElement("small");
+note.textContent=entry?(entry.id===state.selected?"Selected":"Change "+entry.operations.intensity+"%"):(state.mode==="import"?"Imported source":"Generated source");
+button.append(preview,title,note);
+button.onclick=()=>{state.view=index-1;render();};
+$("timeline").append(button);
+});
+}
+function stop(){
+if(state.timer!==null){clearTimeout(state.timer);state.timer=null;}
+}
+function finish(){
+stop();state.status="completed";
+emit("Sequence complete · "+state.items.length+" transformations");
+render();
+}
+function tick(){
+if(state.status!=="running")return;
+if(state.items.length>=state.config.count){finish();return;}
+const index=state.items.length;
+const parent=index?state.items[index-1]:null;
+const source=parent?.image||sourceCanvas();
+const seed=hash(JSON.stringify(state.config)+":"+state.run+":"+index+":"+(state.branchParent||"origin"));
+const result=transform(source,state.config,index,seed);
+const id="run-"+state.run+"-candidate-"+String(index+1).padStart(3,"0");
+const entry={
+id,index:index+1,
+parent:parent?.id||state.branchParent||(state.mode==="import"?"imported-baseline":"generated-baseline"),
+image:result.image,seed,operations:result.operations,
+prompt:state.config.prompt,sourceType:"local-image-transformation"
+};
+state.items.push(entry);
+state.view=index;
+emit(entry.id+" ← "+entry.parent+" · intensity "+entry.operations.intensity+"%");
+if(state.items.length>=state.config.count)finish();
+else{
+render();
+state.timer=setTimeout(tick,state.config.interval*1000);
+}
+}
+function start(){
+let c=config();
+try{validate(c);}catch(error){alert(error.message);return;}
+if(state.mode==="import"&&!state.baseline&&!state.branchSource){
+alert("Import a baseline first.");return;
+}
+stop();
+state.config=c;state.items=[];state.view=-1;
+state.selected=null;state.status="running";state.run++;
+emit("Run "+state.run+" started · "+c.count+" iterations · "+c.interval+" seconds");
+render();
+state.timer=setTimeout(tick,c.interval*1000);
+}
+function reset(){
+stop();state.items=[];state.view=-1;
+state.selected=null;state.status="ready";
+state.config=null;state.branchSource=null;state.branchParent=null;
+state.events=[];$("log").replaceChildren();render();
+}
+function setMode(mode){
+if(state.status==="running"||state.status==="paused")return;
+state.mode=mode;
+state.baseline=null;state.baselineName=null;
+$("file").value="";
+$("upload").hidden=mode!=="import";
+$("scratch").classList.toggle("active",mode==="scratch");
+$("import").classList.toggle("active",mode==="import");
+$("scratch").setAttribute("aria-pressed",String(mode==="scratch"));
+$("import").setAttribute("aria-pressed",String(mode==="import"));
+reset();
+}
+function safeSvg(text){
+const doc=new DOMParser().parseFromString(text,"image/svg+xml");
+if(doc.querySelector("parsererror")||doc.documentElement.localName!=="svg")throw Error("Invalid SVG.");
+const allowed=new Set(["svg","g","path","rect","circle","ellipse","line","polyline","polygon","defs","linearGradient","radialGradient","stop","text","tspan","clipPath"]);
+const nodes=[...doc.documentElement.querySelectorAll("*")];
+if(nodes.length>2000)throw Error("SVG is too complex.");
+for(const node of nodes){
+if(!allowed.has(node.localName))throw Error("Unsupported or unsafe SVG element: "+node.localName);
+}
+for(const node of [doc.documentElement,...nodes]){
+for(const attr of [...node.attributes]){
+const key=attr.name.toLowerCase(),value=attr.value;
+if(key.startsWith("on")||key==="style"||key==="href"||key==="xlink:href"||/url\s*\(|javascript:|data:|https?:|@import/i.test(value)){
+throw Error("SVG contains unsupported external or active content.");
+}
+}
+}
+return new XMLSerializer().serializeToString(doc);
+}
+function imageFromUrl(url){
+return new Promise((resolve,reject)=>{
+const img=new Image();
+img.onload=()=>resolve(img);
+img.onerror=()=>reject(Error("Image decoding failed."));
+img.src=url;
+});
+}
+$("file").onchange=async e=>{
+const file=e.target.files?.[0];if(!file)return;
+const types=["image/png","image/jpeg","image/webp","image/svg+xml"];
+if(!types.includes(file.type)||file.size>5*1024*1024){
+alert("Choose a supported image under 5 MB.");e.target.value="";return;
+}
+let url=null;
+try{
+let blob=file;
+if(file.type==="image/svg+xml"){
+const sanitized=safeSvg(await file.text());
+blob=new Blob([sanitized],{type:"image/svg+xml"});
+}
+url=URL.createObjectURL(blob);
+const image=await imageFromUrl(url);
+const out=canvas(),ctx=out.getContext("2d");
+ctx.fillStyle="#111b1e";ctx.fillRect(0,0,size,size);
+const scale=Math.min(size/image.width,size/image.height);
+const w=image.width*scale,h=image.height*scale;
+ctx.drawImage(image,(size-w)/2,(size-h)/2,w,h);
+reset();
+state.baseline=out;
+state.baselineName=file.name;
+emit("Imported baseline "+file.name+" · image data is the iteration source");
+render();
+}catch(error){alert(error.message||"Unable to import image.");}
+finally{if(url)URL.revokeObjectURL(url);}
+};
+$("scratch").onclick=()=>setMode("scratch");
+$("import").onclick=()=>setMode("import");
+$("intensity").oninput=e=>$("intensity-value").textContent=e.target.value+"%";
+$("weight").oninput=e=>$("weight-value").textContent=e.target.value;
+$("start").onclick=start;
+$("pause").onclick=()=>{
+if(state.status==="running"){
+stop();state.status="paused";emit("Paused");
+}else if(state.status==="paused"){
+state.status="running";
+state.timer=setTimeout(tick,state.config.interval*1000);
+emit("Resumed");
+}
+render();
+};
+$("cancel").onclick=()=>{
+stop();state.status="cancelled";emit("Cancelled");render();
+};
+$("reset").onclick=reset;
+$("prev").onclick=()=>{if(state.view>-1){state.view--;render();}};
+$("next").onclick=()=>{if(state.view<state.items.length-1){state.view++;render();}};
+$("select").onclick=()=>{
+const item=current();if(!item)return;
+state.selected=item.id;emit("Selected "+item.id);render();
+};
+$("branch").onclick=()=>{
+const item=current();if(!item)return;
+stop();
+state.branchSource=clone(item.image);
+state.branchParent=item.id;
+state.items=[];state.view=-1;state.selected=null;
+state.config=null;state.status="ready";
+emit("Branched from "+item.id+" · active timeline replaced; export previous history before branching");
+render();
+};
+$("export-png").onclick=()=>{
+const item=current();if(!item)return;
+item.image.toBlob(blob=>{
+if(!blob){alert("PNG export failed.");return;}
+const url=URL.createObjectURL(blob);
+const a=document.createElement("a");
+a.href=url;a.download="savant-"+item.id+".png";a.click();
+setTimeout(()=>URL.revokeObjectURL(url),2000);
+},"image/png");
+};
+$("export-json").onclick=()=>{
+const data={
+schema:3,
+kind:"savant-urge-local-image-evolution",
+execution:"procedural-browser",
+baselineName:state.baselineName,
+baselinePixelsIncluded:false,
+branchParent:state.branchParent,
+configuration:state.config||config(),
+status:state.status,
+selected:state.selected,
+candidates:state.items.map(({id,index,parent,seed,operations,prompt,sourceType})=>({
+id,index,parent,seed,operations,prompt,sourceType
+})),
+events:[...state.events]
+};
+const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+const url=URL.createObjectURL(blob),a=document.createElement("a");
+a.href=url;a.download="savant-evolution-history.json";a.click();
+setTimeout(()=>URL.revokeObjectURL(url),2000);
+};
+["grid","light","compare"].forEach(id=>$(id).onchange=render);
+render();
+})();
+</script>
+
+<script type="module">
+// Isolated presentation: no writes to Urge's evolution engine.
+const host=document.getElementById('savant-hero-mark');
+const caption=document.getElementById('mark-caption');
+const fallback=document.getElementById('mark-fallback');
+const motion=document.getElementById('mark-motion');
+const material=document.getElementById('mark-material');
+const reset=document.getElementById('mark-reset');
+const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+let running=!reduced.matches, metallic=false, yaw=0, pitch=0, drag=null, renderer, scene, camera, logo, frame=0, disposed=false, visible=true;
+function setMotion(value){running=value;motion.textContent=value?'Motion on':'Motion off';motion.setAttribute('aria-pressed',String(value));}
+setMotion(running);
+motion.onclick=()=>setMotion(!running);
+material.onclick=()=>{metallic=!metallic;material.setAttribute('aria-pressed',String(metallic));if(logo)applyMaterial();};
+reset.onclick=()=>{yaw=0;pitch=0;if(logo)logo.rotation.set(0,0,0);};
+const intersection=new IntersectionObserver(entries=>{visible=entries[0]?.isIntersecting??false;},{threshold:.05});intersection.observe(host);
+const resizeObserver=new ResizeObserver(()=>resize());resizeObserver.observe(host);
+function resize(){if(!renderer||!camera)return;const w=Math.max(1,host.clientWidth),h=Math.max(1,host.clientHeight);renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
+function applyMaterial(){logo.traverse(node=>{if(!node.isMesh)return;node.material=node.material.clone();node.material.metalness=metallic?.86:.64;node.material.roughness=metallic?.27:.36;node.material.envMapIntensity=metallic?1.7:1.2;if(metallic){node.material.color.set('#b9c8ca');}else{node.material.color.set('#a4c6bd');}});}
+async function init(){
+try{
+const [THREE,{GLTFLoader}]=await Promise.all([
+ import('https://esm.sh/three@0.185.0'),
+ import('https://esm.sh/three@0.185.0/examples/jsm/loaders/GLTFLoader.js')
+]);
+if(disposed)return;
+const asset='/cinematic/savant_logo.glb';
+const gltf=await new Promise((resolve,reject)=>new GLTFLoader().load(asset,resolve,undefined,reject));
+if(disposed)return;
+scene=new THREE.Scene();camera=new THREE.PerspectiveCamera(32,1,.1,100);camera.position.set(0,.25,7);
+renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:'low-power'});
+renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.75));renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.3;
+renderer.domElement.setAttribute('aria-hidden','true');host.insertBefore(renderer.domElement,fallback);resize();
+scene.add(new THREE.AmbientLight('#b8c9d0',1.1));
+const key=new THREE.DirectionalLight('#d7f8ee',4);key.position.set(-3,4,6);scene.add(key);
+const rim=new THREE.PointLight('#bc7f54',60,20);rim.position.set(3,-1,3);scene.add(rim);
+const fill=new THREE.PointLight('#6cc2c1',30,20);fill.position.set(-4,-2,-2);scene.add(fill);
+logo=gltf.scene;const bounds=new THREE.Box3().setFromObject(logo);const dimensions=bounds.getSize(new THREE.Vector3());const center=bounds.getCenter(new THREE.Vector3());logo.position.sub(center);
+const scale=3.35/Math.max(dimensions.x,dimensions.y,dimensions.z,1e-6);logo.scale.setScalar(scale);
+const group=new THREE.Group();group.add(logo);scene.add(group);logo=group;
+applyMaterial();fallback.hidden=true;caption.textContent='original savant 3d model · drag to rotate';
+let previous=performance.now();
+function draw(now){if(disposed)return;frame=requestAnimationFrame(draw);if(!visible)return;const delta=Math.min(.05,(now-previous)/1000);previous=now;
+if(running&&!drag){yaw+=delta*.27;pitch=Math.sin(now*.00031)*.08;}
+logo.rotation.y=THREE.MathUtils.damp(logo.rotation.y,yaw,4,delta);logo.rotation.x=THREE.MathUtils.damp(logo.rotation.x,pitch,4,delta);
+renderer.render(scene,camera);
+}
+frame=requestAnimationFrame(draw);
+const down=e=>{drag={x:e.clientX,y:e.clientY,yaw,pitch};host.setPointerCapture(e.pointerId);};
+const move=e=>{if(!drag)return;yaw=drag.yaw+(e.clientX-drag.x)*.008;pitch=Math.max(-.65,Math.min(.65,drag.pitch+(e.clientY-drag.y)*.006));};
+const up=()=>{drag=null;};
+renderer.domElement.addEventListener('pointerdown',down);renderer.domElement.addEventListener('pointermove',move);renderer.domElement.addEventListener('pointerup',up);renderer.domElement.addEventListener('pointercancel',up);
+}catch(error){caption.textContent='animated fallback · 3d model unavailable';console.warn('savant 3d projection unavailable:',error);}
+}
+init();
+window.addEventListener('pagehide',()=>{disposed=true;cancelAnimationFrame(frame);intersection.disconnect();resizeObserver.disconnect();renderer?.dispose();},{once:true});
+</script>
+
+
+<script type="module">
+// Isolated SVG.js editing surface. Does not mutate Urge sessions or Palaver assets.
+const $=id=>document.getElementById(id);
+try{
+ const {SVG}=await import('https://cdn.jsdelivr.net/npm/@svgdotjs/svg.js@3.2.5/+esm');
+ const mount=$('svg-canvas');
+ const draw=SVG().addTo(mount).size('100%','100%').viewbox(0,0,800,440);
+ const background=draw.rect(800,440).fill('#102022');background.attr({'pointer-events':'none'});
+ const grid=draw.group().attr({'pointer-events':'none'});
+ for(let x=0;x<=800;x+=40)grid.line(x,0,x,440).stroke({color:'#b4d7c0',opacity:.07,width:1});
+ for(let y=0;y<=440;y+=40)grid.line(0,y,800,y).stroke({color:'#b4d7c0',opacity:.07,width:1});
+ const art=draw.group();let selected=null,drag=null,history=[],serial=0;
+ const save=()=>{history.push(art.svg());if(history.length>40)history.shift();};
+ function update(){
+   $('svg-selection').textContent=selected?'Selected: '+selected.type+' · drag to reposition':'Select a shape to edit';
+   for(const child of art.children())child.stroke({color:child===selected?'#f2d4a3':'none',width:child===selected?2:0});
+   if(selected){$('svg-fill').value=selected.attr('fill')?.match(/^#[0-9a-f]{6}$/i)?.[0]||'#a5d6c1';}
+ }
+ function attach(node){node.attr({'data-object':String(++serial)});node.on('pointerdown',e=>{e.preventDefault();selected=node;update();const p=point(e);drag={id:e.pointerId,x:p.x,y:p.y,ox:node.x(),oy:node.y()};save();mount.setPointerCapture(e.pointerId);});selected=node;update();return node;}
+ function point(e){const p=draw.node.createSVGPoint();p.x=e.clientX;p.y=e.clientY;const m=draw.node.getScreenCTM();return m?p.matrixTransform(m.inverse()):{x:0,y:0};}
+ mount.addEventListener('pointermove',e=>{if(!drag||!selected)return;const p=point(e);selected.move(drag.ox+p.x-drag.x,drag.oy+p.y-drag.y);});
+ mount.addEventListener('pointerup',()=>{drag=null;});mount.addEventListener('pointercancel',()=>{drag=null;});
+ function add(kind){save();const n=kind==='circle'?art.circle(105).fill('#a5d6c1').move(320,155):kind==='text'?art.text('savant').font({family:'Manrope, sans-serif',size:52,weight:700}).fill('#a5d6c1').move(290,185):art.rect(155,105).radius(16).fill('#a5d6c1').move(320,165);attach(n);}
+ $('svg-rect').onclick=()=>add('rect');$('svg-circle').onclick=()=>add('circle');$('svg-text').onclick=()=>add('text');
+ $('svg-remove').onclick=()=>{if(!selected)return;save();selected.remove();selected=null;update();};
+ $('svg-fill').oninput=e=>{if(selected)selected.fill(e.target.value);};
+ $('svg-fill').onchange=()=>{if(selected)save();};
+ $('svg-size').oninput=e=>{$('svg-size-value').textContent=e.target.value+'%';if(selected){const factor=Number(e.target.value)/100;selected.transform({scale:factor,origin:'center'});}};
+ $('svg-size').onchange=save;
+ $('svg-undo').onclick=()=>{if(!history.length)return;art.clear();art.svg(history.pop());selected=null;for(const child of art.children()){child.on('pointerdown',e=>{e.preventDefault();selected=child;update();const p=point(e);drag={id:e.pointerId,x:p.x,y:p.y,ox:child.x(),oy:child.y()};save();mount.setPointerCapture(e.pointerId);});}update();};
+ $('svg-clear').onclick=()=>{save();art.clear();selected=null;update();};
+ $('svg-export').onclick=()=>{const payload=art.svg();const output='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 440">'+payload+'</svg>';const blob=new Blob([output],{type:'image/svg+xml'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='savant-atelier.svg';a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);};
+ add('rect');add('circle');$('svg-status').textContent='VECTOR / READY';
+}catch(error){$('svg-status').textContent='VECTOR / UNAVAILABLE';$('svg-selection').textContent='SVG.js could not load. Evolution studio remains available.';console.warn(error);}
+</script>
+
+<style>
+/* Additive live-control surface. Original studio remains intact. */
+.urge-live{margin:24px auto;max-width:1440px;padding:24px;border:1px solid #47635c;border-radius:20px;background:linear-gradient(145deg,#122522,#0c1818);color:#dcebe4;font:14px/1.5 system-ui,sans-serif}
+.urge-live h2{font-size:20px;margin:0 0 8px}.urge-live p{color:#b7c9c2}.urge-live-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin:18px 0}.urge-live label{display:block;font-size:12px;color:#bbd0c6}.urge-live input,.urge-live select,.urge-live textarea{display:block;width:100%;margin-top:6px;background:#0b1615;border:1px solid #547067;border-radius:9px;padding:10px;color:#e8f5ed;box-sizing:border-box}.urge-live textarea{min-height:72px}.urge-live-actions{display:flex;flex-wrap:wrap;gap:8px}.urge-live button{border:1px solid #6b9683;background:#1c3932;color:#f2fff8;border-radius:9px;padding:10px 14px;cursor:pointer}.urge-live button:disabled{opacity:.45;cursor:not-allowed}.urge-live output{display:block;white-space:pre-wrap;overflow-wrap:anywhere;max-height:300px;overflow:auto;padding:12px;margin-top:12px;background:#091411;border:1px solid #365149;border-radius:9px;font:12px/1.6 ui-monospace,monospace}.urge-live .urge-note{font-size:12px}
+.urge-live strong{display:block;margin-top:5px;font-size:13px;overflow-wrap:anywhere;color:#e5f4ec}
+.urge-live button:focus-visible,.urge-live input:focus-visible,.urge-live select:focus-visible,.urge-live textarea:focus-visible{outline:2px solid #a8e3c7;outline-offset:3px}
+@media(max-width:640px){.urge-live{padding:16px;margin:12px}.urge-live-grid{grid-template-columns:1fr 1fr;gap:10px}.urge-live-actions button{flex:1 1 45%}}
+@media(prefers-reduced-motion:reduce){.urge-live *{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+</style>
+<section class="urge-live" aria-labelledby="urge-live-title">
+<h2 id="urge-live-title">urge / live session control</h2>
+<p>Separate from the original local transformation studio. This panel calls the existing Urge session HTTP contract and never presents local transformations as provider-generated results.</p>
+<div class="urge-live-grid">
+<label>Session ID<input id="urge-session-id" maxlength="120" autocomplete="off" value="savant-logo-session"></label>
+<label>Iteration count<input id="urge-iteration-count" type="number" min="1" max="100" value="12"></label>
+<label>Iteration interval (seconds)<input id="urge-iteration-interval" type="number" min="0.1" max="3600" step="0.1" value="1.5"></label>
+<label>Envoy persona<select id="urge-persona"><option value="">Server default / no override</option></select></label>
+<label>Transport<select id="urge-transport"><option value="/api/urge/session">Savant session HTTP contract</option></select></label>
+<label>Refresh interval (seconds)<input id="urge-refresh" type="number" min="1" max="60" value="3"></label>
+</div>
+<label>Objective<textarea id="urge-objective" maxlength="2000">Improve the savant logo while preserving approved identity and baseline lineage.</textarea></label>
+<div class="urge-live-actions" style="margin-top:14px">
+<button type="button" data-urge-action="start">Start live session</button>
+<button type="button" data-urge-action="snapshot">Snapshot</button>
+<button type="button" data-urge-action="pause">Pause</button>
+<button type="button" data-urge-action="resume">Resume</button>
+<button type="button" data-urge-action="cancel">Cancel</button>
+<button type="button" id="urge-auto">Auto-refresh off</button>
+<button type="button" id="urge-copy">Copy snapshot</button>
+<button type="button" id="urge-export">Export session evidence</button>
+<button type="button" id="urge-clear">Clear local response view</button>
+</div>
+<p class="urge-note" id="urge-connection" role="status" aria-live="polite">No server connection established. Live actions require the actual Urge backend.</p>
+<div class="urge-live-grid" aria-label="Session evidence summary">
+<div><label>Connection</label><strong id="urge-evidence-connection">Unverified</strong></div>
+<div><label>Recorded responses</label><strong id="urge-evidence-count">0</strong></div>
+<div><label>Latest action</label><strong id="urge-evidence-action">None</strong></div>
+<div><label>Latest response time</label><strong id="urge-evidence-time">None</strong></div>
+</div>
+<output id="urge-response" aria-label="Live session response">No live response received.</output>
+</section>
+<script>
+(()=>{
+'use strict';
+const el=id=>document.getElementById(id), status=el('urge-connection'), out=el('urge-response');
+let busy=false, timer=null, last=null;
+const evidence=[];
+function record(action,id,httpStatus,data){
+const entry={action,session_id:id,http_status:httpStatus,received_at:new Date().toISOString(),response:data};
+evidence.push(entry);
+if(evidence.length>100)evidence.shift();
+el('urge-evidence-count').textContent=String(evidence.length);
+el('urge-evidence-action').textContent=action;
+el('urge-evidence-time').textContent=entry.received_at;
+el('urge-evidence-connection').textContent=httpStatus>=200&&httpStatus<300?'HTTP verified':'HTTP rejected';
+}
+function exportEvidence(){
+if(!evidence.length){setStatus('No server responses to export.');return;}
+const blob=new Blob([JSON.stringify({format:'savant.urge.session-evidence.v1',exported_at:new Date().toISOString(),entries:evidence},null,2)],{type:'application/json'});
+const url=URL.createObjectURL(blob),a=document.createElement('a');
+a.href=url;a.download='urge-session-evidence.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+setStatus('Downloaded '+evidence.length+' received server responses. This export is evidence, not proof of AI iteration.');
+}
+const setStatus=t=>{status.textContent=t};
+const canonical=()=>{const v=el('urge-session-id').value.trim();if(!/^[a-z0-9][a-z0-9._:-]{0,119}$/.test(v))throw Error('Session ID must be lowercase and contain only letters, numbers, dot, underscore, colon or hyphen.');return v};
+const settings=()=>{const count=Number(el('urge-iteration-count').value),interval=Number(el('urge-iteration-interval').value);if(!Number.isInteger(count)||count<1||count>100)throw Error('Iteration count must be between 1 and 100.');if(!Number.isFinite(interval)||interval<.1||interval>3600)throw Error('Interval must be between 0.1 and 3600 seconds.');return {count,interval_seconds:interval}};
+async function request(action){
+if(busy)return;let id,payload;
+try{id=canonical();payload={session_id:id};if(action==='start'){const c=settings();payload.initial_payload={objective:el('urge-objective').value.trim(),iteration_count:c.count,iteration_interval_seconds:c.interval_seconds};const persona=el('urge-persona').value;if(persona)payload.initial_payload.persona_id=persona;}}
+catch(e){setStatus(e.message);return;}
+busy=true;document.querySelectorAll('[data-urge-action]').forEach(b=>b.disabled=true);
+const controller=new AbortController(), timeout=setTimeout(()=>controller.abort(),20000);
+try{
+const response=await fetch('/api/urge/session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action,payload}),signal:controller.signal,credentials:'same-origin',cache:'no-store'});
+const contentType=response.headers.get('content-type')||'';
+if(!contentType.includes('application/json'))throw Error('Server returned non-JSON response (HTTP '+response.status+').');
+const data=await response.json();last=data;record(action,id,response.status,data);out.textContent=JSON.stringify(data,null,2);
+setStatus(response.ok&&data.ok?'Live response verified: '+action+' / '+id:'Server rejected '+action+' (HTTP '+response.status+'): '+(data.error?.message||'See response'));
+if(action==='cancel'||action==='release')stop();
+}catch(e){setStatus('Live request failed: '+e.message+'. No iteration result has been inferred.');}
+finally{clearTimeout(timeout);busy=false;document.querySelectorAll('[data-urge-action]').forEach(b=>b.disabled=false);}
+}
+function stop(){if(timer!==null)clearInterval(timer);timer=null;el('urge-auto').textContent='Auto-refresh off'}
+document.querySelectorAll('[data-urge-action]').forEach(b=>b.addEventListener('click',()=>request(b.dataset.urgeAction)));
+el('urge-auto').addEventListener('click',()=>{if(timer!==null){stop();return}const n=Number(el('urge-refresh').value);if(!Number.isInteger(n)||n<1||n>60){setStatus('Refresh interval must be an integer between 1 and 60 seconds.');return}timer=setInterval(()=>{if(!document.hidden)request('snapshot')},n*1000);el('urge-auto').textContent='Auto-refresh on ('+n+'s)'});
+el('urge-export').addEventListener('click',exportEvidence);
+el('urge-clear').addEventListener('click',()=>{last=null;out.textContent='Local response view cleared. Recorded session evidence is preserved.';setStatus('Response view cleared.');});
+el('urge-copy').addEventListener('click',async()=>{if(!last){setStatus('No verified response to copy.');return}try{await navigator.clipboard.writeText(JSON.stringify(last,null,2));setStatus('Verified response copied.')}catch(e){setStatus('Clipboard unavailable: '+e.message)}});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stop()});window.addEventListener('pagehide',stop,{once:true});
+})();
+</script>
+<style>
+/* additive savant version projection: no mutation of studio history */
+.savant-version{position:sticky;top:0;z-index:80;background:linear-gradient(110deg,#101e22f5,#142c2bf2);border-bottom:1px solid #8bb8a455;box-shadow:0 12px 32px #0006;padding:10px clamp(12px,3vw,32px);font-family:inherit;color:#dcece6}
+.savant-version .sv-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.savant-version .sv-brand{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.15em;text-transform:uppercase}
+.savant-version .sv-versions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.savant-version .sv-tag{display:flex;align-items:center;gap:3px;padding:5px 9px;background:#071315;border:1px solid #3b645c;border-radius:9px}
+.savant-version .sv-symbol{width:23px;height:23px;display:inline-flex;align-items:center;justify-content:center}
+.savant-version .sv-symbol svg{width:21px;height:21px}
+.savant-version button{background:#182d2e;border:1px solid #557a70;border-radius:7px;color:#dcece6;padding:8px 10px;cursor:pointer;font:inherit;font-size:12px}
+.savant-version button:focus-visible{outline:2px solid #c3e9d6;outline-offset:3px}
+.savant-version .sv-detail{display:none;margin-top:10px;padding:12px;border:1px solid #42645d;border-radius:12px;background:#0c1b1e}
+.savant-version .sv-detail[aria-hidden="false"]{display:block}
+.savant-version .sv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:7px;margin-top:10px}
+.savant-version .sv-cell{display:flex;flex-direction:column;align-items:center;gap:4px;min-height:92px;padding:9px 5px;border:1px solid #38564f;border-radius:8px;background:#142427;color:#dcece6;font-size:11px}
+.savant-version .sv-cell svg{width:47px;height:47px}
+.savant-version .sv-cell[aria-pressed="true"]{border-color:#c8e6d5;background:#25443d}
+.savant-version .sv-note{color:#9cb8af;font-size:11px;line-height:1.5;margin-top:8px}
+.savant-version .sv-state{color:#b8d6c7;font-size:11px}
+@media(max-width:600px){.savant-version .sv-brand{font-size:10px}.savant-version .sv-symbol{width:19px;height:19px}.savant-version .sv-symbol svg{width:18px;height:18px}}
+@media(prefers-reduced-motion:reduce){.savant-version *{transition:none!important}}
+</style>
+<script>
+(function(){'use strict';
+// UI-only projection of the supplied alphabet reference; not a canonical glyph registry.
+const names=['open','spine','jaw','cross','long spine','close jaw','hook','hook spine','barb','step','step spine','step jaw','twin spine','twin jaw','fork','fork spine','fork jaw','chisel','chisel spine','chisel jaw','split tip','split spine','split jaw','echo','echo spine','cross fork'];
+const alphabet='abcdefghijklmnopqrstuvwxyz';
+function segments(i){
+const family=i===3||i===25?3:i===23||i===24?4:i%3;
+const variants=[
+ [[-24,-24,-8,-8],[-24,24,-8,8]],
+ [[-24,-24,-9,-9],[-9,-9,-9,9],[-9,9,-24,24]],
+ [[-24,-24,-10,-10],[-10,-10,10,-10],[-24,24,-10,10],[-10,10,10,10]],
+ [[-24,-24,24,24],[-24,24,24,-24]],
+ [[-24,-24,-12,-12],[-12,-12,-8,-8],[-24,24,-12,12],[-12,12,-8,8]]
+];
+let left=variants[family].map(v=>v.slice());
+if([6,7,8,14,15,16,20,21,22,25].includes(i))left=left.map((v,j)=>j===0?[v[0],v[1],v[2]-5,v[3]]:v);
+if([9,10,11,17,18,19].includes(i))left.push([-9,-9,-9,9]);
+if([12,13,23,24].includes(i))left.push([-4,-7,-4,7]);
+const mirror=left.map(([x,y,X,Y])=>[-x,y,-X,Y]);
+return [...left,...mirror];
+}
+function icon(i){const lines=segments(i).map(([x,y,X,Y])=>'<line x1="'+(x+32)+'" y1="'+(y+32)+'" x2="'+(X+32)+'" y2="'+(Y+32)+'"/>').join('');return '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="square" aria-hidden="true">'+lines+'</svg>'}
+const panel=document.createElement('section');panel.className='savant-version';panel.setAttribute('aria-label','savant versioning and glyph reference');
+panel.innerHTML='<div class="sv-head"><div class="sv-brand"><span aria-hidden="true">◈</span><strong>savant / urge</strong><span class="sv-state">local studio · no verified ai session</span></div><div class="sv-versions"><span class="sv-tag" id="sv-version-icons" aria-label="selected a b c version glyphs"></span><button type="button" id="sv-expand" aria-expanded="false" aria-controls="sv-detail">alphabet / versioning</button></div></div><div class="sv-detail" id="sv-detail" aria-hidden="true"><div class="sv-state">savant / talon alphabet · 26 reference forms</div><div class="sv-grid" id="sv-grid"></div><div class="sv-note">a, b, c are the selected version symbols. Other letters are alphabet members, not new version states. Shapes here are reconstructed visual references from the supplied screenshot, not authoritative vector masters. Selecting a glyph changes only this preview.</div></div>';
+document.body.insertBefore(panel,document.body.firstChild);
+const icons=panel.querySelector('#sv-version-icons');for(const i of [0,1,2]){const span=document.createElement('span');span.className='sv-symbol';span.innerHTML=icon(i);span.title='version glyph '+alphabet[i];icons.append(span)}
+const detail=panel.querySelector('#sv-detail'), toggle=panel.querySelector('#sv-expand');toggle.addEventListener('click',()=>{const open=toggle.getAttribute('aria-expanded')!=='true';toggle.setAttribute('aria-expanded',String(open));detail.setAttribute('aria-hidden',String(!open))});
+const grid=panel.querySelector('#sv-grid');for(let i=0;i<26;i++){const b=document.createElement('button');b.type='button';b.className='sv-cell';b.setAttribute('aria-pressed',String(i<3));b.innerHTML='<span>'+alphabet[i]+' · '+names[i]+'</span>'+icon(i);b.addEventListener('click',()=>{grid.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');panel.querySelector('.sv-state').textContent='reference glyph selected: '+alphabet[i]+' · '+names[i]+' (preview only)'});grid.append(b)}
+})();
+</script>
+</body>
+</html>
+

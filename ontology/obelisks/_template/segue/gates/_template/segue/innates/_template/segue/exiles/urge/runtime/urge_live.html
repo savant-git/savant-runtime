@@ -1,0 +1,299 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>savant / urge live</title>
+<style>
+:root {
+  color-scheme: dark;
+  font-family: Inter, system-ui, sans-serif;
+  background: #090b10;
+  color: #edf1f8;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+main {
+  max-width: 1060px;
+  margin: auto;
+  padding: 28px 20px 80px;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 1px solid #293040;
+  padding-bottom: 24px;
+}
+h1 { font-size: 28px; margin: 0; }
+h2 { font-size: 17px; margin: 0 0 16px; }
+small, .muted { color: #9ca9bd; }
+section {
+  background: #121720;
+  border: 1px solid #2b3546;
+  border-radius: 16px;
+  padding: 22px;
+  margin-top: 22px;
+}
+label {
+  display: block;
+  font-size: 13px;
+  color: #b7c3d6;
+  margin: 16px 0 8px;
+}
+textarea, input, select {
+  width: 100%;
+  background: #0b1018;
+  border: 1px solid #39465b;
+  border-radius: 9px;
+  color: #edf1f8;
+  font: inherit;
+  padding: 12px;
+}
+textarea { min-height: 170px; resize: vertical; }
+button {
+  border: 1px solid #6479a0;
+  border-radius: 9px;
+  background: #253955;
+  color: white;
+  padding: 12px 18px;
+  font: inherit;
+  cursor: pointer;
+}
+button:disabled { opacity: .45; cursor: not-allowed; }
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+.columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #b9c8dd;
+}
+article {
+  padding: 16px;
+  border: 1px solid #354259;
+  border-radius: 10px;
+  margin-top: 12px;
+  background: #0d121b;
+}
+strong { color: #d9e7ff; }
+#error { color: #ff9e9e; }
+#session { font-family: monospace; }
+@media (max-width: 700px) {
+  .columns { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div>
+    <small>savant / creative execution</small>
+    <h1>urge live</h1>
+  </div>
+  <div id="connection" class="muted">connecting</div>
+</header>
+
+<section>
+  <h2>Logo evolution session</h2>
+  <p class="muted">
+    Actual Urge iterations through Opus orchestration,
+    with optional Envoy persona selection.
+    No simulated scores or fabricated artifacts.
+  </p>
+
+  <label for="goal">Creative objective</label>
+  <textarea id="goal">Refine the savant lowercase "s" identity into a substantially stronger, distinctive, precisely balanced mark. Preserve its recognizable identity, favor mirrored symmetry, solid silhouettes, reproducible vector geometry, and sophisticated negative space. Produce a concrete SVG logo proposal with complete SVG source and an explicit comparison against the baseline. Do not claim visual improvement without evidence.</textarea>
+
+  <div class="columns">
+    <div>
+      <label for="iterations">Iterations</label>
+      <input id="iterations" type="number" min="1" max="20" value="3">
+    </div>
+    <div>
+      <label for="method">Opus method</label>
+      <select id="method">
+        <option value="combine">combine</option>
+        <option value="sequential">sequential</option>
+      </select>
+    </div>
+  </div>
+
+  <label for="persona">Primary Envoy persona (optional)</label>
+  <input id="persona" placeholder="Leave empty to use default orchestration">
+
+  <div class="actions">
+    <button id="create">Create and run</button>
+    <button id="pause" disabled>Pause</button>
+    <button id="resume" disabled>Resume</button>
+    <button id="refresh" disabled>Refresh</button>
+  </div>
+  <p id="error" role="alert"></p>
+</section>
+
+<section>
+  <h2>Execution</h2>
+  <p>Session: <span id="session">none</span></p>
+  <p>State: <strong id="state">idle</strong></p>
+  <p>Iterations recorded: <strong id="count">0</strong></p>
+  <div id="history"></div>
+</section>
+
+<section>
+  <h2>Raw execution evidence</h2>
+  <pre id="evidence">No execution yet.</pre>
+</section>
+</main>
+<script>
+"use strict";
+
+const $ = id => document.getElementById(id);
+let sessionId = null;
+let timer = null;
+
+async function request(path, options = {}) {
+  const response = await fetch(path, {
+    cache: "no-store",
+    ...options,
+    headers: {
+      "Content-Type": "application/json",
+      ...(options.headers || {})
+    }
+  });
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.error || "Request failed");
+  }
+  return data;
+}
+
+function showError(error) {
+  $("error").textContent = String(error.message || error);
+}
+
+function renderHistory(history) {
+  const root = $("history");
+  root.replaceChildren();
+
+  for (const entry of history) {
+    const article = document.createElement("article");
+    const heading = document.createElement("strong");
+    heading.textContent =
+      "Iteration " + (entry.iteration ?? "?");
+    const detail = document.createElement("pre");
+    detail.textContent = JSON.stringify(entry, null, 2);
+    article.append(heading, detail);
+    root.append(article);
+  }
+}
+
+async function refresh() {
+  if (!sessionId) return;
+
+  try {
+    const status = await request(
+      "/sessions/" + encodeURIComponent(sessionId)
+    );
+    const history = await request(
+      "/sessions/" + encodeURIComponent(sessionId) +
+      "/history"
+    );
+
+    $("state").textContent = status.state || "unknown";
+    $("count").textContent = Array.isArray(history)
+      ? history.length : "?";
+    $("evidence").textContent =
+      JSON.stringify(status, null, 2);
+
+    if (Array.isArray(history)) renderHistory(history);
+
+    const running = status.state === "running";
+    const paused = status.state === "paused";
+    $("pause").disabled = !running;
+    $("resume").disabled = !paused;
+
+    if (["completed", "failed"].includes(status.state)) {
+      clearInterval(timer);
+      timer = null;
+    }
+  } catch (error) {
+    showError(error);
+  }
+}
+
+async function control(action) {
+  if (!sessionId) return;
+  try {
+    await request(
+      "/sessions/" + encodeURIComponent(sessionId) +
+      "/" + action,
+      { method: "POST", body: "{}" }
+    );
+    await refresh();
+  } catch (error) {
+    showError(error);
+  }
+}
+
+$("create").addEventListener("click", async () => {
+  $("error").textContent = "";
+  $("create").disabled = true;
+
+  try {
+    const settings = { method: $("method").value };
+    const persona = $("persona").value.trim();
+
+    if (persona) settings.primary_persona = persona;
+
+    const created = await request("/sessions", {
+      method: "POST",
+      body: JSON.stringify({
+        goal: $("goal").value,
+        iteration_limit: Number($("iterations").value),
+        interval_seconds: 1,
+        settings
+      })
+    });
+
+    sessionId = created.session_id;
+    $("session").textContent = sessionId;
+    $("refresh").disabled = false;
+
+    await control("start");
+    clearInterval(timer);
+    timer = setInterval(refresh, 1500);
+    await refresh();
+  } catch (error) {
+    showError(error);
+  } finally {
+    $("create").disabled = false;
+  }
+});
+
+$("pause").onclick = () => control("pause");
+$("resume").onclick = () => control("resume");
+$("refresh").onclick = refresh;
+
+request("/health")
+  .then(() => {
+    $("connection").textContent = "engine available";
+  })
+  .catch(error => {
+    $("connection").textContent = "engine unavailable";
+    showError(error);
+  });
+</script>
+</body>
+</html>
